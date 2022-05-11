@@ -1,8 +1,8 @@
-import { NextPage } from 'next';
+import type { NextPage } from 'next';
 import Layout from '@/components/Shared/Layout';
-import seo from '@/data/seo';
+import seo from '../data/seo';
 
-const Collection: NextPage = () => {
+const Sell: NextPage = () => {
   return (
     <Layout title={seo.title}>
       <div>test</div>
@@ -10,4 +10,4 @@ const Collection: NextPage = () => {
   );
 };
 
-export default Collection;
+export default Sell;

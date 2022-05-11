@@ -1,21 +1,23 @@
 import type { NextPage } from 'next';
 import Layout from '@/components/Shared/Layout';
 import seo from '../data/seo';
-import LandingHero from '@/components/Hero/LandingHero';
-import Collection from '@/components/Collection/Collection';
+import Hero from '@/components/Shared/Hero';
 import { testData } from '@/data/test';
+import CollectionRow from '@/components/Shared/CollectionRow';
 
 const Home: NextPage = () => {
   return (
     <Layout title={seo.title}>
-      <LandingHero />
-      <Collection
-        title="Recently Added"
-        collections={testData.recentlyAddedCollections}
+      <Hero
+        heroTitle={testData.landingHeroTitle}
+        heroSubtitle={testData.landingHeroSubtitle}
+        heroButtons={testData.landingHeroButtons}
+        heroBackground={testData.landingHeroBackground}
+        heroLogo={testData.landingHeroLogo}
       />
-      <Collection
-        title="Continue Exploring"
-        collections={testData.personalisedCollections}
+      <CollectionRow
+        heading={'Recently Added'}
+        collections={testData.recentlyAddedCollections}
       />
     </Layout>
   );

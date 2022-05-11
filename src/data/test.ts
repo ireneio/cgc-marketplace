@@ -8,7 +8,7 @@ const collections = [
     videoSrc: 'https://fractal-game.imgix.net/seoulstars/stars.mp4',
     name: 'Seoul Stars',
     description:
-      ' Creating the metaverses first ever virtual K-Pop idol with a play-to-earn karaoke and rhythm game.',
+      'Creating the metaverses first ever virtual K-Pop idol with a play-to-earn karaoke and rhythm game.',
     tags: ['Solana', 'NFT', '$SSTAR'],
   },
   {

@@ -1,18 +1,17 @@
-import { ReactNode } from 'react';
-import { NextPage } from 'next';
 import Head from 'next/head';
 import seo from '../../data/seo';
-import Navbar from '@/components/Navbar/Navbar';
+import Navbar from '@/components/Shared/Navbar';
 import Footer from './Footer';
 
-interface Props {
-  children: ReactNode;
+export default function Layout({
+  children,
+  title,
+}: {
+  children: JSX.Element | JSX.Element[];
   title: string;
-}
-
-const Layout: NextPage<Props> = ({ children, title }) => {
+}) {
   return (
-    <div className="flex flex-col min-h-screen bg-[#141414]">
+    <div className="min-h-screen bg-[#141414]">
       <Head>
         <title>{title ? title : seo.title}</title>
         <meta charSet="utf-8" />
@@ -44,6 +43,4 @@ const Layout: NextPage<Props> = ({ children, title }) => {
       <Footer />
     </div>
   );
-};
-
-export default Layout;
+}

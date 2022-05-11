@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  /*noinspection ALL*/
+  @font-face {
+    font-family: 'CircularStd-Bold';
+    src: url(/fonts/CircularStd-Bold.woff2) format('woff2');
+  }
+  /*noinspection ALL*/
+  @font-face {
+    font-family: 'CircularStd-Medium';
+    src: url(/fonts/CircularStd-Medium.woff2) format('woff2');
+  }
+  /*noinspection ALL*/
+  @font-face {
+    font-family: 'CircularStd-Book';
+    src: url(/fonts/CircularStd-Book.woff2) format('woff2');
+  }
+}
+
+.connect-solana-wallet-button .wallet-adapter-button {
+  color: white !important;
+  font-weight: normal;
+  font-family: 'CircularStd-Bold', sans-serif;
+  font-size: 14px;
+  border-radius: 6px;
+  line-height: 20px;
+  height: 40px;
+  margin: 0 !important;
+}
+
+.connect-solana-wallet-button .wallet-adapter-button:hover {
+  color: white !important;
+  background-color: rgb(55 65 81) !important;
+}
+
+html {
+  padding-right: 0 !important;
+}

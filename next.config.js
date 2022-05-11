@@ -7,6 +7,7 @@ module.exports = {
     }
     return config;
   },
+  autoprefixer: {},
   images: {
     domains: ['ipfs.io'],
   },

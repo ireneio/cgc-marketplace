@@ -38,9 +38,9 @@ const navigation = [
   },
 ];
 
-export default function Example() {
+export default function Footer() {
   return (
-    <footer className="bg-black">
+    <footer className="bg-[#141414]">
       <div className="max-w-8xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
         <div className="flex justify-center space-x-6 md:order-2">
           {navigation.map((item) => (
@@ -55,7 +55,7 @@ export default function Example() {
           ))}
         </div>
         <div className="mt-8 md:mt-0 md:order-1">
-          <p className="text-center text-base text-gray-400">
+          <p className="text-center text-base text-gray-400 font-circularstdbook">
             &copy; {new Date().getFullYear()} Catheon Gaming. All rights
             reserved.
           </p>
