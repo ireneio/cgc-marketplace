@@ -2,6 +2,7 @@ import Button from '@/components/Shared/Button';
 import ButtonLink from '@/components/Shared/ButtonLink';
 import LoadingNetflixCard from '@/components/Shared/LoadingNetflixCard';
 import NetflixCard from '@/components/Shared/NetflixCard';
+import Pagination from '@/components/Shared/Pagination';
 import SalesCard from '@/components/Shared/SalesCard';
 import SelectGroup from '@/components/Shared/SelectGroup';
 import Skeleton from '@/components/Shared/Skeleton';
@@ -9,6 +10,7 @@ import { useState } from 'react';
 
 const UiKit = () => {
   const [currentItemSelectGroup, setCurrentItemSelectGroup] = useState('m');
+  const [currentPage, setCurrentPage] = useState(0);
 
   return (
     <div className="bg-[#13002B] text-[#ffffff] min-h-[100vh] px-[16px] mx-auto max-w-[1080px] pb-[120px]">
@@ -84,6 +86,18 @@ const UiKit = () => {
         <h2>Skeleton</h2>
         <div className="mt-2">
           <Skeleton />
+        </div>
+      </section>
+      <section className="mt-4">
+        <h2>Pagination</h2>
+        <div className="mt-2">
+          <Pagination
+            totalPages={15}
+            currentPage={currentPage}
+            onPageChange={(val) => setCurrentPage(val)}
+            onPreviousPage={() => setCurrentPage((prev) => prev - 1)}
+            onNextPage={() => setCurrentPage((prev) => prev + 1)}
+          />
         </div>
       </section>
     </div>
