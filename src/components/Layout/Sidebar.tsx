@@ -13,10 +13,7 @@ interface Props {
 
 const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
   return (
-    <div
-      className="h-[70vh] overflow-auto px-[25px] py-[20px] bg-[#13002B] shadow-xl"
-      id="sidebar"
-    >
+    <div className="h-[70vh] overflow-auto px-[25px] py-[20px] bg-[#13002B] shadow-xl hide-scrollbar">
       {items.map((item) => {
         const isSelectedParent = currentValue.split('/')[0] === item.value;
         return (

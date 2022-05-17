@@ -12,7 +12,7 @@ const AllGames = () => {
       <div className="flex justify-between items-center">
         <SectionTitle>all games</SectionTitle>
       </div>
-      <div className="mt-[24px] overflow-y-visible mr-[-24px] floating-card-wrapper">
+      <div className="mt-[24px] overflow-y-visible mr-[-24px] floating-card-wrapper hide-scrollbar">
         {items.map((game, index) => {
           return (
             <div key={index}>

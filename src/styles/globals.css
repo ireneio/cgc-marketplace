@@ -56,12 +56,12 @@ html {
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-#sidebar::-webkit-scrollbar {
+.hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
-#sidebar {
+.hide-scrollbar {
   -ms-overflow-style: none;
   /* IE and Edge */
   scrollbar-width: none;
@@ -73,15 +73,6 @@ html {
   /* width: 5000px; */
   display: flex;
   overflow-x: auto;
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.floating-card-wrapper::-webkit-scrollbar {
-  display: none;
 }
 
 .floating-card-wrapper .bg-img {
@@ -102,13 +93,15 @@ html {
   vertical-align: middle;
   display: inline-block;
   background-color: black;
-  transition-duration: .5s;
+  /* transition-duration: .5s; */
+  transition-duration: .3s;
   overflow: hidden;
   cursor: pointer;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, .75);
 }
 
 .floating-card-wrapper li:hover {
-  transition-delay: .5s;
+  /* transition-delay: .5s; */
   width: 450px;
   height: 400px;
   transform: translateY(-20%) translateX(-0%);
@@ -116,7 +109,7 @@ html {
 
 .floating-card-wrapper li:hover .content {
   transform: translateY(-0%) translateX(-50%);
-  transition-delay: .1s;
+  /* transition-delay: .1s; */
   opacity: 1;
 }
 

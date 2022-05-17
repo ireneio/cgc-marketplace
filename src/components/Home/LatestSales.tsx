@@ -11,7 +11,7 @@ const LatestSales = () => {
       <div className="flex justify-between items-center">
         <SectionTitle>latest sales</SectionTitle>
       </div>
-      <div className="mt-[24px] flex overflow-auto" id="game-slider">
+      <div className="mt-[24px] flex overflow-auto hide-scrollbar">
         {items.map((game, index) => {
           return (
             <div key={index} className="mr-[28px]">

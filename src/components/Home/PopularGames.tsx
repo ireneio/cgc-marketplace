@@ -24,7 +24,7 @@ const PopularGames = () => {
           onItemClick={(value) => setCurrentSelection(value)}
         />
       </div>
-      <div className="mt-[24px] overflow-y-visible mr-[-24px] flex floating-card-wrapper">
+      <div className="mt-[24px] overflow-y-visible mr-[-24px] flex floating-card-wrapper hide-scrollbar">
         {items.map((game, index) => {
           return (
             <div key={index}>
