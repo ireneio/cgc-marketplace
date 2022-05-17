@@ -46,3 +46,9 @@ html {
 .wallet-adapter-button-trigger {
   background-color: transparent !important;
 }
+
+.carousel .control-dots {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

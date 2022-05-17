@@ -1,6 +1,7 @@
 import BreadCrumb from '@/components/Shared/Breadcrumb';
 import Button from '@/components/Shared/Button';
 import ButtonLink from '@/components/Shared/ButtonLink';
+import LandingCarousel from '@/components/Shared/LandingCarousel';
 import LoadingNetflixCard from '@/components/Shared/LoadingNetflixCard';
 import NetflixCard from '@/components/Shared/NetflixCard';
 import Pagination from '@/components/Shared/Pagination';
@@ -14,7 +15,7 @@ const UiKit = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   return (
-    <div className="bg-[#13002B] text-[#ffffff] min-h-[100vh] px-[16px] mx-auto max-w-[1080px] pb-[120px]">
+    <div className="bg-[#13002B] text-[#ffffff] min-h-[100vh] px-[16px] mx-auto max-w-[1920px] pb-[120px]">
       <h1>Ui Kit</h1>
       <section className="mt-4">
         <h2>Netflix Card</h2>
@@ -113,6 +114,12 @@ const UiKit = () => {
             onPreviousPage={() => setCurrentPage((prev) => prev - 1)}
             onNextPage={() => setCurrentPage((prev) => prev + 1)}
           />
+        </div>
+      </section>
+      <section className="mt-4">
+        <h2>Landing Carousel</h2>
+        <div className="mt-2">
+          <LandingCarousel />
         </div>
       </section>
     </div>
