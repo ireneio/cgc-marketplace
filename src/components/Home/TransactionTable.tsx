@@ -2,7 +2,9 @@ import { getNumberWithCommas, getTrimmedAddress } from '@/utils/formatters';
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
 import DefaultTable from '../Shared/DefaultTable';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
+dayjs.extend(relativeTime);
 interface Props {
   rows:
     | React.ReactNode[][]
@@ -19,7 +21,7 @@ const TransactionTable = ({ rows, headers }: Props) => {
       return (
         <div
           key={index}
-          className="uppercase px-[10px] py-[10px] text-[12px] text-left"
+          className="uppercase px-[10px] py-[10px] text-[12px] text-left text-[#FFFFFF]"
         >
           {header}
         </div>
@@ -45,7 +47,7 @@ const TransactionTable = ({ rows, headers }: Props) => {
                   />
                 )}
               </div>
-              <div className="uppercase">${col.text}</div>
+              <div className="uppercase text-[#FFFFFF]">${col.text}</div>
             </div>
           );
         } else if (colIndex === 1) {

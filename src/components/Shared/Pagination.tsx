@@ -61,7 +61,7 @@ const Pagination = ({
         return (
           <div key={item}>
             <button
-              className="w-[38px] h-[38px] flex items-center justify-center border-solid border-[1px] border-[#FC1F8E] hover:bg-[#FC1F8E]"
+              className="text-[#FFFFFF] w-[38px] h-[38px] flex items-center justify-center border-solid border-[1px] border-[#FC1F8E] hover:bg-[#FC1F8E]"
               style={{
                 backgroundColor:
                   currentPage === item ? '#FC1F8E' : 'transparent',

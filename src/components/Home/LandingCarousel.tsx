@@ -7,10 +7,10 @@ import Button from '../Shared/Button';
 const LandingCarousel = () => {
   const [carouselItems, setCarouselItems] = useState([
     {
-      id: 'store_carousel_example_1',
-      imageUrl: '/img/angrymals-cover.png',
-      name: 'store_carousel_example_1',
-      href: 'https://www.angrymals.io/',
+      id: 'store_carousel_example_2',
+      imageUrl: '/img/ss_1.webp',
+      name: 'store_carousel_example_2',
+      href: 'https://seoulstars.io/',
       logo: '/img/ss_logo.png',
       title: 'The metaverses first virtual K-Pop idol.',
       description:
@@ -21,10 +21,10 @@ const LandingCarousel = () => {
       owners: 1500,
     },
     {
-      id: 'store_carousel_example_2',
-      imageUrl: '/img/ss_1.webp',
-      name: 'store_carousel_example_2',
-      href: 'https://seoulstars.io/',
+      id: 'store_carousel_example_1',
+      imageUrl: '/img/angrymals-cover.png',
+      name: 'store_carousel_example_1',
+      href: 'https://www.angrymals.io/',
       logo: '/img/ss_logo.png',
       title: 'The metaverses first virtual K-Pop idol.',
       description:
@@ -126,13 +126,13 @@ const LandingCarousel = () => {
                     alt={name}
                   />
                 </div>
-                <div className="absolute bottom-[35%] left-[50px] font-bold text-[32px]">
+                <div className="absolute bottom-[35%] left-[50px] font-bold text-[32px] text-[#FFFFFF]">
                   {title}
                 </div>
-                <div className="absolute bottom-[30%] left-[50px]">
+                <div className="absolute bottom-[30%] left-[50px] text-[#FFFFFF]">
                   {description}
                 </div>
-                <div className="absolute bottom-[10%] left-[50px]">
+                <div className="absolute bottom-[10%] left-[50px] text-[#FFFFFF]">
                   <Button
                     className="px-[48px]"
                     onClick={() => handlePlay(name)}
@@ -141,13 +141,13 @@ const LandingCarousel = () => {
                   </Button>
                   <Button
                     link
-                    className="ml-[16px] px-[48px]"
+                    className="ml-[16px] px-[48px] text-[#FFFFFF]"
                     onClick={() => handleMoreInfo(name)}
                   >
                     More Info
                   </Button>
                 </div>
-                <div className="absolute bottom-[10%] right-[50px] flex">
+                <div className="absolute bottom-[10%] right-[50px] flex text-[#FFFFFF]">
                   <div>
                     <div className="font-bold text-[20px]">
                       {getNumberWithUnits(items)}
@@ -156,7 +156,7 @@ const LandingCarousel = () => {
                       items
                     </div>
                   </div>
-                  <div className="ml-[24px]">
+                  <div className="ml-[24px] text-[#FFFFFF]">
                     <div className="font-bold text-[20px]">
                       {getNumberWithUnits(owners)}
                     </div>
@@ -164,7 +164,7 @@ const LandingCarousel = () => {
                       owners
                     </div>
                   </div>
-                  <div className="ml-[24px]">
+                  <div className="ml-[24px] text-[#FFFFFF]">
                     <div className="font-bold text-[20px] flex items-center">
                       <div>{getNumberWithUnits(floor)}</div>
                       <div className="ml-[8px] flex items-center">
@@ -179,7 +179,7 @@ const LandingCarousel = () => {
                       floor price
                     </div>
                   </div>
-                  <div className="ml-[24px]">
+                  <div className="ml-[24px] text-[#FFFFFF]">
                     <div className="font-bold text-[20px] flex items-center">
                       <div>{getNumberWithUnits(vol)}</div>
                       <div className="ml-[8px] flex items-center">
