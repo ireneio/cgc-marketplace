@@ -1,14 +1,16 @@
 import BreadCrumb from '@/components/Shared/Breadcrumb';
 import Button from '@/components/Shared/Button';
 import ButtonLink from '@/components/Shared/ButtonLink';
-import LandingCarousel from '@/components/Shared/LandingCarousel';
+import LandingCarousel from '@/components/Home/LandingCarousel';
 import LoadingNetflixCard from '@/components/Shared/LoadingNetflixCard';
 import NetflixCard from '@/components/Shared/NetflixCard';
 import Pagination from '@/components/Shared/Pagination';
 import SalesCard from '@/components/Shared/SalesCard';
 import SelectGroup from '@/components/Shared/SelectGroup';
 import Skeleton from '@/components/Shared/Skeleton';
+import DefaultTable from '@/components/Shared/DefaultTable';
 import { useState } from 'react';
+import TransactionTable from '@/components/Home/TransactionTable';
 
 const UiKit = () => {
   const [currentItemSelectGroup, setCurrentItemSelectGroup] = useState('m');
@@ -105,6 +107,94 @@ const UiKit = () => {
         </div>
       </section>
       <section className="mt-4">
+        <h2>Landing Carousel</h2>
+        <div className="mt-2">
+          <LandingCarousel />
+        </div>
+      </section>
+      <section className="mt-4">
+        <h2>Table</h2>
+        <div className="mt-2">
+          <DefaultTable
+            rows={[
+              [
+                'shards',
+                'AC95124da74ca921wdpk1134',
+                new Date().toISOString(),
+                'AC95124da74ca921wdpk1134',
+                'AC95124da74ca921wdpk1134',
+                '123.45678',
+              ],
+              [
+                'shards',
+                'AC95124da74ca921wdpk1134',
+                new Date().toISOString(),
+                'AC95124da74ca921wdpk1134',
+                'AC95124da74ca921wdpk1134',
+                '12345678.45678',
+              ],
+              [
+                'shards',
+                'AC95124da74ca921wdpk1134',
+                new Date().toISOString(),
+                'AC95124da74ca921wdpk1134',
+                'AC95124da74ca921wdpk1134',
+                '12399999999.45678',
+              ],
+            ]}
+            headers={[
+              'item',
+              'signature',
+              'time',
+              'from',
+              'to',
+              'amount($USD)',
+            ]}
+          />
+        </div>
+      </section>
+      <section className="mt-4">
+        <h2>Transaction Table</h2>
+        <div className="mt-2">
+          <TransactionTable
+            rows={[
+              [
+                { icon: '/img/icon_shards.png', text: 'shards' },
+                'AC95124da74ca921wdpk1134',
+                new Date().toISOString(),
+                'AC95124da74ca921wdpk1134',
+                'AC95124da74ca921wdpk1134',
+                '123.45678',
+              ],
+              [
+                { icon: '/img/icon_chicks.png', text: 'chicks' },
+                'AC95124da74ca921wdpk1134',
+                new Date().toISOString(),
+                'AC95124da74ca921wdpk1134',
+                'AC95124da74ca921wdpk1134',
+                '12345678.45678',
+              ],
+              [
+                { icon: '/img/icon_sol.png', text: 'chicks' },
+                'AC95124da74ca921wdpk1134',
+                new Date().toISOString(),
+                'AC95124da74ca921wdpk1134',
+                'AC95124da74ca921wdpk1134',
+                '12399999999.45678',
+              ],
+            ]}
+            headers={[
+              'item',
+              'signature',
+              'time',
+              'from',
+              'to',
+              'amount($USD)',
+            ]}
+          />
+        </div>
+      </section>
+      <section className="mt-4">
         <h2>Pagination</h2>
         <div className="mt-2">
           <Pagination
@@ -114,12 +204,6 @@ const UiKit = () => {
             onPreviousPage={() => setCurrentPage((prev) => prev - 1)}
             onNextPage={() => setCurrentPage((prev) => prev + 1)}
           />
-        </div>
-      </section>
-      <section className="mt-4">
-        <h2>Landing Carousel</h2>
-        <div className="mt-2">
-          <LandingCarousel />
         </div>
       </section>
     </div>

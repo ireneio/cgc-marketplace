@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import Button from './Button';
+import Button from '../Shared/Button';
 
 const LandingCarousel = () => {
   const [carouselItems, setCarouselItems] = useState([
