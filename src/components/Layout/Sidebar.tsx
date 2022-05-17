@@ -41,8 +41,8 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
                 cursor: isSelectedParent
                   ? 'default'
                   : item.disabled
-                  ? 'not-allowed'
-                  : 'pointer',
+                    ? 'not-allowed'
+                    : 'pointer',
               }}
             >
               {/* TODO add icon */}
@@ -50,7 +50,7 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
               <div className="ml-[18px]">{item.text}</div>
             </div>
             {isSelectedParent && (
-              <div className="px-[42px]">
+              <div className="px-[38px]">
                 {item.children?.map((child) => {
                   const isSelectedChild =
                     currentValue.split('/')[1] === child.value;
@@ -62,8 +62,8 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
                         cursor: isSelectedChild
                           ? 'default'
                           : child.disabled
-                          ? 'not-allowed'
-                          : 'pointer',
+                            ? 'not-allowed'
+                            : 'pointer',
                       }}
                       onClick={(e) => {
                         e.stopPropagation();
