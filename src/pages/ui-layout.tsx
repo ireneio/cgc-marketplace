@@ -1,3 +1,4 @@
+import Header from '@/components/Layout/Header';
 import Sidebar from '@/components/Layout/Sidebar';
 import { useState } from 'react';
 
@@ -5,6 +6,7 @@ const UiLayout = () => {
   const [currentSideBarValue, setCurrentSideBarValue] = useState('d');
   return (
     <div className="bg-[#13002B] min-h-[100vh]">
+      <Header />
       <Sidebar
         items={[
           { text: 'Home', value: 'd', icon: '' },

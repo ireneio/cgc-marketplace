@@ -3,16 +3,19 @@
 @tailwind utilities;
 
 @layer base {
+
   /*noinspection ALL*/
   @font-face {
     font-family: 'CircularStd-Bold';
     src: url(/fonts/CircularStd-Bold.woff2) format('woff2');
   }
+
   /*noinspection ALL*/
   @font-face {
     font-family: 'CircularStd-Medium';
     src: url(/fonts/CircularStd-Medium.woff2) format('woff2');
   }
+
   /*noinspection ALL*/
   @font-face {
     font-family: 'CircularStd-Book';
@@ -38,4 +41,8 @@
 
 html {
   padding-right: 0 !important;
+}
+
+.wallet-adapter-button-trigger {
+  background-color: transparent !important;
 }

@@ -29,6 +29,7 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
               style={{
                 background:
                   currentValue === item.value ? 'rgba(148, 151, 170, .15)' : '',
+                color: item.disabled ? '#AAAAAA' : '#FFFFFF',
                 cursor:
                   currentValue === item.value
                     ? 'default'
