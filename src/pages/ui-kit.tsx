@@ -1,3 +1,4 @@
+import BreadCrumb from '@/components/Shared/Breadcrumb';
 import Button from '@/components/Shared/Button';
 import ButtonLink from '@/components/Shared/ButtonLink';
 import LoadingNetflixCard from '@/components/Shared/LoadingNetflixCard';
@@ -51,6 +52,20 @@ const UiKit = () => {
           <ButtonLink disabled className="ml-2">
             disabled
           </ButtonLink>
+        </div>
+      </section>
+      <section className="mt-4">
+        <h2>Breadcrumb</h2>
+        <div className="mt-2">
+          <BreadCrumb
+            items={[
+              { text: 'Home', value: 'd' },
+              { text: 'Explore', value: 'm', disabled: true },
+              { text: 'All', value: 'h' },
+            ]}
+            currentValue={currentItemSelectGroup}
+            onItemClick={(value) => setCurrentItemSelectGroup(value)}
+          />
         </div>
       </section>
       <section className="mt-4">
