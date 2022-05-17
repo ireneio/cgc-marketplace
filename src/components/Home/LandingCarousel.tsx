@@ -1,3 +1,4 @@
+import { getNumberWithUnits } from '@/utils/formatters';
 import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -14,6 +15,10 @@ const LandingCarousel = () => {
       title: 'The metaverses first virtual K-Pop idol.',
       description:
         'Sing-to-earn in this exciting rhythm action and karaoke game!',
+      items: 1000,
+      floor: 1.85,
+      vol: 20000,
+      owners: 1500,
     },
     {
       id: 'store_carousel_example_2',
@@ -24,6 +29,10 @@ const LandingCarousel = () => {
       title: 'The metaverses first virtual K-Pop idol.',
       description:
         'Sing-to-earn in this exciting rhythm action and karaoke game!',
+      items: 1000,
+      floor: 1.85,
+      vol: 20000,
+      owners: 1500,
     },
     {
       id: 'store_carousel_example_4',
@@ -34,6 +43,10 @@ const LandingCarousel = () => {
       title: 'Play the Mini Game Now',
       description:
         'Collect, breed, and train your own unique SolChicks in a revolutionary gaming ecosystem.',
+      items: 1000,
+      floor: 1.85,
+      vol: 20000,
+      owners: 1500,
     },
   ]);
 
@@ -82,7 +95,19 @@ const LandingCarousel = () => {
         }}
       >
         {carouselItems.map(
-          ({ id, imageUrl, name, href, description, title, logo }) => {
+          ({
+            id,
+            imageUrl,
+            name,
+            href,
+            description,
+            title,
+            logo,
+            vol,
+            floor,
+            items,
+            owners,
+          }) => {
             return (
               <div
                 key={id}
@@ -121,6 +146,54 @@ const LandingCarousel = () => {
                   >
                     More Info
                   </Button>
+                </div>
+                <div className="absolute bottom-[10%] right-[50px] flex">
+                  <div>
+                    <div className="font-bold text-[20px]">
+                      {getNumberWithUnits(items)}
+                    </div>
+                    <div className="capitalize text-[12px] font-light">
+                      items
+                    </div>
+                  </div>
+                  <div className="ml-[24px]">
+                    <div className="font-bold text-[20px]">
+                      {getNumberWithUnits(owners)}
+                    </div>
+                    <div className="capitalize text-[12px] font-light">
+                      owners
+                    </div>
+                  </div>
+                  <div className="ml-[24px]">
+                    <div className="font-bold text-[20px] flex items-center">
+                      <div>{getNumberWithUnits(floor)}</div>
+                      <div className="ml-[8px] flex items-center">
+                        <img
+                          src={'/img/icon_sol_white.png'}
+                          className="h-[10px] w-[10px] bg-transparent aspect-w-1 aspect-h-1 rounded-md overflow-hidden transform transition duration-500 lg:aspect-none hover:cursor-pointer"
+                          alt={'solana icon'}
+                        />
+                      </div>
+                    </div>
+                    <div className="capitalize text-[12px] font-light">
+                      floor price
+                    </div>
+                  </div>
+                  <div className="ml-[24px]">
+                    <div className="font-bold text-[20px] flex items-center">
+                      <div>{getNumberWithUnits(vol)}</div>
+                      <div className="ml-[8px] flex items-center">
+                        <img
+                          src={'/img/icon_sol_white.png'}
+                          className="h-[10px] w-[10px] bg-transparent aspect-w-1 aspect-h-1 rounded-md overflow-hidden transform transition duration-500 lg:aspect-none hover:cursor-pointer"
+                          alt={'solana icon'}
+                        />
+                      </div>
+                    </div>
+                    <div className="capitalize text-[12px] font-light">
+                      volume
+                    </div>
+                  </div>
                 </div>
               </div>
             );
