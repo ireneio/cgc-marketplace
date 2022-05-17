@@ -41,8 +41,8 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
                 cursor: isSelectedParent
                   ? 'default'
                   : item.disabled
-                  ? 'not-allowed'
-                  : 'pointer',
+                    ? 'not-allowed'
+                    : 'pointer',
               }}
             >
               {/* TODO add icon */}
@@ -57,13 +57,13 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
                   return (
                     <div
                       key={child.value}
-                      className="flex items-center transition-all"
+                      className="flex items-center transition-all py-[6px]"
                       style={{
                         cursor: isSelectedChild
                           ? 'default'
                           : child.disabled
-                          ? 'not-allowed'
-                          : 'pointer',
+                            ? 'not-allowed'
+                            : 'pointer',
                       }}
                       onClick={(e) => {
                         e.stopPropagation();
