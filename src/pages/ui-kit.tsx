@@ -1,3 +1,4 @@
+import Button from '@/components/Shared/Button';
 import NetflixCard from '@/components/Shared/NetflixCard';
 
 const UiKit = () => {
@@ -16,6 +17,15 @@ const UiKit = () => {
             coinSupply={'100000000000'}
             onPlay={() => console.log('onPlay')}
           />
+        </div>
+      </section>
+      <section className="mt-4">
+        <h2>Button</h2>
+        <div className="mt-2">
+          <Button>button</Button>
+          <Button disabled className="ml-2">
+            disabled
+          </Button>
         </div>
       </section>
     </div>
