@@ -1,5 +1,6 @@
 import Button from '@/components/Shared/Button';
 import ButtonLink from '@/components/Shared/ButtonLink';
+import LoadingNetflixCard from '@/components/Shared/LoadingNetflixCard';
 import NetflixCard from '@/components/Shared/NetflixCard';
 import SalesCard from '@/components/Shared/SalesCard';
 import SelectGroup from '@/components/Shared/SelectGroup';
@@ -24,6 +25,12 @@ const UiKit = () => {
             coinSupply={'100000000000'}
             onPlay={() => console.log('onPlay')}
           />
+        </div>
+      </section>
+      <section className="mt-4">
+        <h2>Loading Netflix Card</h2>
+        <div className="mt-2">
+          <LoadingNetflixCard />
         </div>
       </section>
       <section className="mt-4">
