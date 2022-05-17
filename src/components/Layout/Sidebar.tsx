@@ -1,32 +1,34 @@
-interface BreadcrumbItem {
+interface SidebarItem {
   text: string;
   value: string;
   disabled?: boolean;
+  icon: string;
 }
 interface Props {
-  items: BreadcrumbItem[];
+  items: SidebarItem[];
   currentValue: string;
   onItemClick?: (value: string) => void | Promise<void>;
 }
 
-const BreadCrumb = ({ items, onItemClick, currentValue }: Props) => {
+const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
   return (
-    <div className="flex items-center">
-      {items.map((item, index, array) => {
+    <div className="fixed top-[75px] left-0 h-[70vh] overflow-auto px-[25px] py-[20px] bg-[#13002B] shadow-xl">
+      {items.map((item) => {
         return (
           <div
             key={item.value}
+            className="mb-[8px]"
             onClick={() => {
               if (!item.disabled) {
                 onItemClick && onItemClick(item.value);
               }
             }}
-            className="mr-[8px]"
           >
-            <button
-              className="font-normal text-[14px] hover:underline"
+            <div
+              className="rounded-[5px] text-[#FFFFFF] flex items-center px-[18px] py-[8px]"
               style={{
-                color: currentValue === item.value ? '#FC1F8E' : '#AAAAAA',
+                background:
+                  currentValue === item.value ? 'rgba(148, 151, 170, .15)' : '',
                 cursor:
                   currentValue === item.value
                     ? 'default'
@@ -34,13 +36,11 @@ const BreadCrumb = ({ items, onItemClick, currentValue }: Props) => {
                     ? 'not-allowed'
                     : 'pointer',
               }}
-              disabled={item.disabled}
             >
-              {item.text}
-            </button>
-            {index !== array.length - 1 && (
-              <span className="ml-[8px] text-[#AAAAAA]">/</span>
-            )}
+              {/* TODO add icon */}
+              <div></div>
+              <div className="ml-[18px]">{item.text}</div>
+            </div>
           </div>
         );
       })}
@@ -48,4 +48,4 @@ const BreadCrumb = ({ items, onItemClick, currentValue }: Props) => {
   );
 };
 
-export default BreadCrumb;
+export default Sidebar;
