@@ -1,9 +1,14 @@
 import Header from '@/components/Layout/Header';
 import Sidebar from '@/components/Layout/Sidebar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const UiLayout = () => {
   const [currentSideBarValue, setCurrentSideBarValue] = useState('d');
+
+  useEffect(() => {
+    console.log(currentSideBarValue);
+  }, [currentSideBarValue]);
+
   return (
     <div className="bg-[#13002B] min-h-[100vh]">
       <Header />
@@ -12,7 +17,15 @@ const UiLayout = () => {
           { text: 'Home', value: 'd', icon: '' },
           { text: 'Launchpad', value: 'm', icon: '' },
           { text: 'Collections', value: 'h', disabled: true, icon: '' },
-          { text: 'Swap', value: 's', icon: '' },
+          {
+            text: 'Explore',
+            value: 's',
+            icon: '',
+            children: [
+              { text: 'Child', value: 'c1' },
+              { text: 'Child2', value: 'c2' },
+            ],
+          },
           { text: 'Streamflow', value: 'st', icon: '' },
           { text: 'Staking', value: 'stk', icon: '' },
           { text: 'Mint', value: 'mt', icon: '' },
