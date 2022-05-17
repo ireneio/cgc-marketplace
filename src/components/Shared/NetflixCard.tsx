@@ -12,7 +12,8 @@ interface Props {
   network: string;
   marketCap: string;
   coinSupply: string;
-  onPlay: any;
+  onPlay?: any;
+  playDisabled?: boolean;
 }
 
 type ViewMode = `default` | `enlarged`;
@@ -31,6 +32,7 @@ const NetflixCard = ({
   marketCap,
   coinSupply,
   onPlay,
+  playDisabled,
 }: Props) => {
   const [viewMode, setViewMode] = useState<ViewMode>('default');
   const [tid, setTid] = useState<NodeJS.Timeout | null>(null);
@@ -111,7 +113,11 @@ const NetflixCard = ({
                 })}
               </div>
               <div>
-                <Button className="capitalize" onClick={() => onPlay()}>
+                <Button
+                  className="capitalize"
+                  onClick={() => onPlay()}
+                  disabled={playDisabled}
+                >
                   play
                 </Button>
               </div>
