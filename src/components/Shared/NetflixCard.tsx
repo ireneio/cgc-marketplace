@@ -54,7 +54,7 @@ const NetflixCard = ({
 
   return (
     <motion.div
-      className="w-[380px] h-[235.42px] relative"
+      className="w-[380px] h-[235.42px] relative shadow-lg"
       onMouseEnter={() => handleMouseEnter()}
       onMouseLeave={() => handleMouseLeave()}
       whileHover={{
