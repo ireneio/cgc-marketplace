@@ -1,6 +1,7 @@
 import LandingCarousel from '@/components/Home/LandingCarousel';
 import TransactionTable from '@/components/Home/TransactionTable';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
+import BreadCrumb from '@/components/Shared/Breadcrumb';
 import ButtonLink from '@/components/Shared/ButtonLink';
 import NetflixCard from '@/components/Shared/NetflixCard';
 import Pagination from '@/components/Shared/Pagination';
@@ -19,6 +20,12 @@ const Index = () => {
   return (
     <DefaultLayout>
       <div>
+        <div className="mb-[12px]">
+          <BreadCrumb
+            items={[{ text: 'Home', value: 'home' }]}
+            currentValue="home"
+          />
+        </div>
         <LandingCarousel />
         <div className="mt-[50px]">
           <div className="flex justify-between items-center">

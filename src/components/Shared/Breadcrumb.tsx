@@ -24,9 +24,8 @@ const BreadCrumb = ({ items, onItemClick, currentValue }: Props) => {
             className="mr-[8px]"
           >
             <button
-              className="font-normal text-[14px] hover:underline"
+              className="font-normal text-[14px] hover:underline text-[#AAAAAA] hover:text-[#FC1F8E]"
               style={{
-                color: currentValue === item.value ? '#FC1F8E' : '#AAAAAA',
                 cursor:
                   currentValue === item.value
                     ? 'default'
