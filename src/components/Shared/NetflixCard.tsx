@@ -52,11 +52,19 @@ const NetflixCard = ({
     setViewMode(`default`);
   };
 
+  const handleBlur = () => {
+    console.log('blur');
+  };
+
   return (
     <motion.div
       className="w-[380px] h-[235.42px] relative shadow-lg"
       onMouseOver={() => handleMouseEnter()}
       onMouseOut={() => handleMouseLeave()}
+      onBlur={() => handleBlur()}
+      onFocus={() => console.log('focus')}
+      onHoverStart={() => console.log('hover:start')}
+      onHoverEnd={() => console.log('hover:end')}
       whileHover={{
         scale: 1.2,
         transition: { duration: DURATION_TRANSITION, delay: DURATION_DELAY },

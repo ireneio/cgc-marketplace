@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ButtonLink from '../Shared/ButtonLink';
+import FloatingCard from '../Shared/FloatingCard';
 import NetflixCard from '../Shared/NetflixCard';
 import SectionTitle from '../Shared/SectionTitle';
 
@@ -11,14 +12,11 @@ const AllGames = () => {
       <div className="flex justify-between items-center">
         <SectionTitle>all games</SectionTitle>
       </div>
-      <div
-        className="mt-[24px] overflow-y-visible mr-[-24px] flex"
-        id="game-slider"
-      >
+      <div className="mt-[24px] overflow-y-visible mr-[-24px] floating-card-wrapper">
         {items.map((game, index) => {
           return (
-            <div key={index} className="mr-[24px]">
-              <NetflixCard
+            <div key={index}>
+              <FloatingCard
                 bg={'/img/ss_1.webp'}
                 title={'Sing-to-earn rhythm action and karaoke game!'}
                 categories={['virtual idol', 'metaverse', 'nft']}
