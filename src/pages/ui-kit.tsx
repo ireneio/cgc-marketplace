@@ -3,6 +3,7 @@ import ButtonLink from '@/components/Shared/ButtonLink';
 import NetflixCard from '@/components/Shared/NetflixCard';
 import SalesCard from '@/components/Shared/SalesCard';
 import SelectGroup from '@/components/Shared/SelectGroup';
+import Skeleton from '@/components/Shared/Skeleton';
 import { useState } from 'react';
 
 const UiKit = () => {
@@ -70,6 +71,12 @@ const UiKit = () => {
             from={'AC95124da74c130920980834'}
             amount={'123.45678'}
           />
+        </div>
+      </section>
+      <section className="mt-4">
+        <h2>Skeleton</h2>
+        <div className="mt-2">
+          <Skeleton />
         </div>
       </section>
     </div>
