@@ -12,7 +12,7 @@ const Header = () => {
   };
   return (
     <div className="flex justify-between w-[100vw] h-[75px] items-center px-[25px] mx-auto max-w-[3840px] z-[3]">
-      <div className="mr-[12px]">
+      <div className="mr-[12px] cursor-pointer">
         <Link href={'/'} passHref>
           <img
             className="block h-8 w-auto"
