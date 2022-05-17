@@ -1,5 +1,6 @@
 import Button from '@/components/Shared/Button';
 import NetflixCard from '@/components/Shared/NetflixCard';
+import SelectGroup from '@/components/Shared/SelectGroup';
 
 const UiKit = () => {
   return (
@@ -26,6 +27,12 @@ const UiKit = () => {
           <Button disabled className="ml-2">
             disabled
           </Button>
+        </div>
+      </section>
+      <section className="mt-4">
+        <h2>Select Group</h2>
+        <div className="mt-2">
+          <SelectGroup />
         </div>
       </section>
     </div>

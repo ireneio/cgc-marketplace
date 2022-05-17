@@ -89,7 +89,7 @@ const NetflixCard = ({
         </>
       )}
       {viewMode === 'enlarged' && (
-        <div className="border-solid border-[2px] border-[#FC1F8E] rounded-[4px]">
+        <div className="border-solid border-[2px] border-[#FC1F8E] rounded-[4px] bg-[#13002B]">
           <div
             className="h-[235.42px] w-full bg-no-repeat bg-center bg-cover"
             style={{ backgroundImage: `url(${bgOnHover || bg})` }}
