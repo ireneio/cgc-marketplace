@@ -1,26 +1,11 @@
-import type { NextPage } from 'next';
-import Layout from '@/components/Shared/Layout';
-import seo from '../data/seo';
-import Hero from '@/components/Shared/Hero';
-import { testData } from '@/data/test';
-import CollectionRow from '@/components/Shared/CollectionRow';
+import DefaultLayout from '@/components/Layout/DefaultLayout';
 
-const Home: NextPage = () => {
+const Index = () => {
   return (
-    <Layout title={seo.title}>
-      <Hero
-        heroTitle={testData.landingHeroTitle}
-        heroSubtitle={testData.landingHeroSubtitle}
-        heroButtons={testData.landingHeroButtons}
-        heroBackground={testData.landingHeroBackground}
-        heroLogo={testData.landingHeroLogo}
-      />
-      <CollectionRow
-        heading={'Recently Added'}
-        collections={testData.recentlyAddedCollections}
-      />
-    </Layout>
+    <DefaultLayout>
+      <div>index</div>
+    </DefaultLayout>
   );
 };
 
-export default Home;
+export default Index;
