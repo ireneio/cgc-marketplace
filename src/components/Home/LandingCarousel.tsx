@@ -112,27 +112,33 @@ const LandingCarousel = () => {
               <div
                 key={id}
                 onClick={() => handleCarouselItemClick({ href })}
-                className="relative"
+                className="relative rounded-[5px]"
               >
+                <div
+                  className="absolute w-full h-full z-[2] opacity-[.62] rounded-[5px]"
+                  style={{
+                    background: `radial-gradient(61.02% 182.1% at 82.63% 36.94%, rgba(253, 32, 142, 0.075) 0%, rgba(167, 16, 124, 0.75) 61.36%, rgba(83, 1, 106, 0.75) 100%)`,
+                  }}
+                ></div>
                 <img
                   src={imageUrl}
-                  className="w-full min-h-80 bg-[#181818] aspect-w-1 aspect-h-1 rounded-md overflow-hidden transform transition duration-500 hover:cursor-pointer"
+                  className="w-full min-h-80 bg-[#181818] aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 hover:cursor-pointer"
                   alt={name}
                 />
-                <div className="absolute bottom-[45%] left-[50px] font-bold text-[32px]">
+                <div className="z-[3] absolute bottom-[45%] left-[50px] font-bold text-[32px]">
                   <img
                     src={logo}
                     className="h-[84px] w-[400px] bg-transparent aspect-w-1 aspect-h-1 rounded-md overflow-hidden transform transition duration-500 lg:aspect-none hover:cursor-pointer"
                     alt={name}
                   />
                 </div>
-                <div className="absolute bottom-[35%] left-[50px] font-bold text-[32px] text-[#FFFFFF]">
+                <div className="z-[3] absolute bottom-[35%] left-[50px] font-bold text-[32px] text-[#FFFFFF]">
                   {title}
                 </div>
-                <div className="absolute bottom-[30%] left-[50px] text-[#FFFFFF]">
+                <div className="z-[3] absolute bottom-[30%] left-[50px] text-[#FFFFFF]">
                   {description}
                 </div>
-                <div className="absolute bottom-[10%] left-[50px] text-[#FFFFFF]">
+                <div className="z-[3] absolute bottom-[10%] left-[50px] text-[#FFFFFF]">
                   <Button
                     className="px-[48px]"
                     onClick={() => handlePlay(name)}
@@ -147,7 +153,7 @@ const LandingCarousel = () => {
                     More Info
                   </Button>
                 </div>
-                <div className="absolute bottom-[10%] right-[50px] flex text-[#FFFFFF]">
+                {/* <div className="absolute bottom-[10%] right-[50px] flex text-[#FFFFFF]">
                   <div>
                     <div className="font-bold text-[20px]">
                       {getNumberWithUnits(items)}
@@ -194,7 +200,7 @@ const LandingCarousel = () => {
                       volume
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             );
           },

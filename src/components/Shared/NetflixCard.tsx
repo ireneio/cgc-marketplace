@@ -55,8 +55,8 @@ const NetflixCard = ({
   return (
     <motion.div
       className="w-[380px] h-[235.42px] relative shadow-lg"
-      onMouseEnter={() => handleMouseEnter()}
-      onMouseLeave={() => handleMouseLeave()}
+      onMouseOver={() => handleMouseEnter()}
+      onMouseOut={() => handleMouseLeave()}
       whileHover={{
         scale: 1.2,
         transition: { duration: DURATION_TRANSITION, delay: DURATION_DELAY },
@@ -92,7 +92,9 @@ const NetflixCard = ({
         <div className="border-solid border-[2px] border-[#FC1F8E] rounded-[4px] bg-[#13002B] absolute z-[4]">
           <div
             className="h-[235.42px] w-full bg-no-repeat bg-center bg-cover"
-            style={{ backgroundImage: `url(${bgOnHover || bg})` }}
+            style={{
+              backgroundImage: `url(${bgOnHover || bg})`,
+            }}
           ></div>
           <div className="px-[12px] py-[12px]">
             <div className="font-bold text-[#FFFFFF] text-[18px]">{title}</div>

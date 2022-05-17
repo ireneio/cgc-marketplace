@@ -10,8 +10,9 @@ const Header = () => {
   const handleSearchInput = (val: string) => {
     setSearch(val);
   };
+
   return (
-    <div className="bg-[#0C001C] fixed top-0 left-0 flex justify-between w-[100vw] h-[75px] items-center px-[25px] mx-auto max-w-[3840px] z-[3]">
+    <div className="shadow-lg bg-[#0C001C] fixed top-0 left-0 flex justify-between w-[100vw] h-[75px] items-center px-[25px] mx-auto max-w-[3840px] z-[3]">
       <div className="mr-[12px] cursor-pointer">
         <Link href={'/'} passHref>
           <img
@@ -37,11 +38,11 @@ const Header = () => {
           />
         </div>
       </div>
-      <div className="flex items-center ml-[12px]">
+      <div className="flex items-center ml-[18px]">
         <div className="text-[#FFFFFF] cursor-pointer font-semibold mt-[-2px]">
           {account}
         </div>
-        <div className="ml-[12px] hidden lg:block">
+        <div className="ml-[18px] hidden lg:block">
           <WalletMultiButton />
         </div>
         <div className="ml-[12px] hidden lg:block">

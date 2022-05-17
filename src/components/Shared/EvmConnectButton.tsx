@@ -1,4 +1,5 @@
 import { useEthereumProvider } from '@/contexts/EthereumWalletProvider';
+import Button from './Button';
 
 export default function MetamaskConnectButton() {
   const { connect, disconnect, signerAddress } = useEthereumProvider();
@@ -6,25 +7,22 @@ export default function MetamaskConnectButton() {
   return (
     <div className="hidden lg:flex pr-3 pl-2">
       {!signerAddress && (
-        <button
+        <Button
           onClick={connect}
-          // bg-[#F6861C]
-          className="block w-full text-left px-4 py-2 text-sm bg-transparent text-white hover:bg-gray-700
-           font-circularstdbold rounded-md"
+          className="block w-full text-left px-4 py-2 text-sm bg-transparent text-white"
         >
           Connect MetaMask
-        </button>
+        </Button>
       )}
       {signerAddress && (
-        <button
+        <Button
           onClick={disconnect}
-          className="block w-full text-left px-4 py-2 text-sm bg-transparent text-white hover:bg-gray-700
-           font-circularstdbold rounded-md"
+          className="block w-full text-left px-4 py-2 text-sm bg-transparent text-white"
         >
           Disconnect{` `}
           {signerAddress.substring(0, signerAddress.startsWith(`0x`) ? 6 : 3)}
           ...
-        </button>
+        </Button>
       )}
     </div>
   );

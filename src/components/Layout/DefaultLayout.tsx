@@ -12,7 +12,7 @@ interface Props {
 }
 
 const DefaultLayout = ({ children, title }: Props) => {
-  const [currentSideBarValue, setCurrentSideBarValue] = useState('d');
+  const [currentSideBarValue, setCurrentSideBarValue] = useState('Explore');
 
   return (
     <>
@@ -51,13 +51,31 @@ const DefaultLayout = ({ children, title }: Props) => {
           <div style={{ flexBasis: '20%' }}>
             <Sidebar
               items={[
-                { text: 'Explore', value: 'd', icon: '' },
-                { text: 'Sell', value: 'm', icon: '' },
-                { text: 'Launchpad', value: 'h', icon: '' },
+                {
+                  text: 'Explore',
+                  value: 'Explore',
+                  icon: '/img/icon_home.png',
+                },
+                { text: 'Sell', value: 'Sell', icon: '/img/icon_sell.png' },
+                {
+                  text: 'Launchpad',
+                  value: 'Launchpad',
+                  icon: '/img/icon_rocket.png',
+                },
                 {
                   text: 'Cart',
-                  value: 's',
-                  icon: '',
+                  value: 'Cart',
+                  icon: '/img/icon_cart.png',
+                },
+                {
+                  text: 'Transactions',
+                  value: 'Transactions',
+                  icon: '/img/icon_bar.png',
+                },
+                {
+                  text: 'Latest Sales',
+                  value: 'Latest Sales',
+                  icon: '/img/icon_dollar.png',
                 },
               ]}
               currentValue={currentSideBarValue}

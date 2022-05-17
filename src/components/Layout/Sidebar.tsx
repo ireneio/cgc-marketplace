@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 interface SidebarItem {
   text: string;
   value: string;
@@ -47,8 +45,14 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
                   : 'pointer',
               }}
             >
-              {/* TODO add icon */}
-              <div></div>
+              <div>
+                <img
+                  src={item.icon}
+                  alt={item.text}
+                  width="14px"
+                  height="14px"
+                />
+              </div>
               <div className="ml-[18px]">{item.text}</div>
             </div>
             {isSelectedParent && (
