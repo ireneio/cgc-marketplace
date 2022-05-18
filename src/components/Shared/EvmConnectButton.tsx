@@ -1,5 +1,8 @@
 import { useEthereumProvider } from '@/contexts/EthereumWalletProvider';
-import { getTrimmedAddress } from '@/utils/formatters';
+import {
+  getTrimmedAddress,
+  getTrimmedAddressEllipsisMiddle,
+} from '@/utils/formatters';
 import Button from './Button';
 
 export default function MetamaskConnectButton() {
@@ -26,8 +29,8 @@ export default function MetamaskConnectButton() {
           onClick={disconnect}
           className="block w-full text-left px-4 py-2 text-sm bg-transparent text-white"
         >
-          Disconnect{` `}
-          {getTrimmedAddress(signerAddress, { length: 5 })}
+          {/* Disconnect{` `} */}
+          {getTrimmedAddressEllipsisMiddle(signerAddress, { length: 6 })}
         </Button>
       )}
     </div>
