@@ -118,14 +118,14 @@ const DefaultLayout = ({ children, title }: Props) => {
         </Head>
         <Header />
         <div className="flex mt-[75px]">
-          <div style={{ flexBasis: '20%' }}>
+          <div style={{ flexBasis: '15%' }}>
             <Sidebar
               items={SIDE_BAR_ITEMS}
               currentValue={sideBarPath}
               onItemClick={(value) => handleSideBarPathUpdate(value)}
             />
           </div>
-          <div style={{ flexBasis: '80%' }}>
+          <div style={{ flexBasis: '85%' }}>
             <div className="px-[24px] pb-[24px] max-w-[80vw]">{children}</div>
           </div>
         </div>
