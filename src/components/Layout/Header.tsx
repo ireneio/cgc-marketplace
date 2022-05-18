@@ -6,7 +6,6 @@ import CathenConnectButton from '../Shared/CathenConnectButton';
 
 const Header = () => {
   const [search, setSearch] = useState('');
-  const [account, setAccount] = useState('Account');
 
   const handleSearchInput = (val: string) => {
     setSearch(val);

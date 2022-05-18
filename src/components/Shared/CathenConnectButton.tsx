@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import Button from './Button';
 
 const CathenConnectButton = () => {
+  const [account, setAccount] = useState('Account');
+
   const handleConnect = async () => {
     console.log('handleConnect');
   };

@@ -1,11 +1,21 @@
-import { getNumberWithUnits } from '@/utils/formatters';
+import { testData } from '@/data/test';
 import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Button from '../Shared/Button';
 
+const PREFILL_DATA = {
+  id: 'testData',
+  imageUrl: testData.landingHeroBackground,
+  name: 'testData',
+  href: 'https://seoulstars.io/',
+  logo: testData.landingHeroLogo,
+  title: testData.landingHeroTitle,
+  description: testData.landingHeroSubtitle,
+};
+
 const LandingCarousel = () => {
-  const [carouselItems, setCarouselItems] = useState([
+  const [carouselItems] = useState([
     {
       id: 'store_carousel_example_2',
       imageUrl: '/img/ss_1.webp',
@@ -15,39 +25,36 @@ const LandingCarousel = () => {
       title: 'The metaverses first virtual K-Pop idol.',
       description:
         'Sing-to-earn in this exciting rhythm action and karaoke game!',
-      items: 1000,
-      floor: 1.85,
-      vol: 20000,
-      owners: 1500,
     },
-    {
-      id: 'store_carousel_example_1',
-      imageUrl: '/img/angrymals-cover.png',
-      name: 'store_carousel_example_1',
-      href: 'https://www.angrymals.io/',
-      logo: '/img/ss_logo.png',
-      title: 'The metaverses first virtual K-Pop idol.',
-      description:
-        'Sing-to-earn in this exciting rhythm action and karaoke game!',
-      items: 1000,
-      floor: 1.85,
-      vol: 20000,
-      owners: 1500,
-    },
-    {
-      id: 'store_carousel_example_4',
-      imageUrl: '/img/solchicks_1.png',
-      name: 'store_carousel_example_4',
-      href: 'https://www.solchicks.io/',
-      logo: '/img/sc_logo.png',
-      title: 'Play the Mini Game Now',
-      description:
-        'Collect, breed, and train your own unique SolChicks in a revolutionary gaming ecosystem.',
-      items: 1000,
-      floor: 1.85,
-      vol: 20000,
-      owners: 1500,
-    },
+    PREFILL_DATA,
+    // {
+    //   id: 'store_carousel_example_1',
+    //   imageUrl: '/img/angrymals-cover.png',
+    //   name: 'store_carousel_example_1',
+    //   href: 'https://www.angrymals.io/',
+    //   logo: '/img/ss_logo.png',
+    //   title: 'The metaverses first virtual K-Pop idol.',
+    //   description:
+    //     'Sing-to-earn in this exciting rhythm action and karaoke game!',
+    //   items: 1000,
+    //   floor: 1.85,
+    //   vol: 20000,
+    //   owners: 1500,
+    // },
+    // {
+    //   id: 'store_carousel_example_4',
+    //   imageUrl: '/img/solchicks_1.png',
+    //   name: 'store_carousel_example_4',
+    //   href: 'https://www.solchicks.io/',
+    //   logo: '/img/sc_logo.png',
+    //   title: 'Play the Mini Game Now',
+    //   description:
+    //     'Collect, breed, and train your own unique SolChicks in a revolutionary gaming ecosystem.',
+    //   items: 1000,
+    //   floor: 1.85,
+    //   vol: 20000,
+    //   owners: 1500,
+    // },
   ]);
 
   const handleCarouselItemClick = ({ href }: { href: string }) => {
@@ -95,19 +102,7 @@ const LandingCarousel = () => {
         }}
       >
         {carouselItems.map(
-          ({
-            id,
-            imageUrl,
-            name,
-            href,
-            description,
-            title,
-            logo,
-            vol,
-            floor,
-            items,
-            owners,
-          }) => {
+          ({ id, imageUrl, name, href, description, title, logo }) => {
             return (
               <div
                 key={id}

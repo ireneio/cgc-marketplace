@@ -1,3 +1,4 @@
+import { testData } from '@/data/test';
 import { useEffect, useState } from 'react';
 import ButtonLink from '../Shared/ButtonLink';
 import FloatingCard from '../Shared/FloatingCard';
@@ -5,7 +6,7 @@ import LoadingNetflixCard from '../Shared/LoadingNetflixCard';
 import SectionTitle from '../Shared/SectionTitle';
 
 const AllGames = () => {
-  const [items, setitems] = useState([1, 2, 3, 4, 5]);
+  const [items, setItems] = useState(testData.recentlyAddedCollections);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,13 +26,13 @@ const AllGames = () => {
       </div>
       <div className="mt-[24px] overflow-y-visible mr-[-24px] floating-card-wrapper hide-scrollbar">
         {!loading &&
-          items.map((game, index) => {
+          items.map((item, index) => {
             return (
               <div key={index}>
                 <FloatingCard
-                  bg={'/img/ss_1.webp'}
-                  title={'Sing-to-earn rhythm action and karaoke game!'}
-                  categories={['virtual idol', 'metaverse', 'nft']}
+                  bg={item.splashSrc}
+                  title={item.description}
+                  categories={item.tags}
                   network={'SOL'}
                   marketCap={'10000'}
                   coinSupply={'100000000000'}
