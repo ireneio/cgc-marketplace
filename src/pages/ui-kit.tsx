@@ -11,6 +11,7 @@ import Skeleton from '@/components/Shared/Skeleton';
 import DefaultTable from '@/components/Shared/DefaultTable';
 import { useState } from 'react';
 import TransactionTable from '@/components/Home/TransactionTable';
+import FloatingCard from '@/components/Shared/FloatingCard';
 
 const UiKit = () => {
   const [currentItemSelectGroup, setCurrentItemSelectGroup] = useState('m');
@@ -19,6 +20,20 @@ const UiKit = () => {
   return (
     <div className="bg-[#13002B] text-[#ffffff] min-h-[100vh] px-[16px] mx-auto max-w-[1920px] pb-[120px]">
       <h1>Ui Kit</h1>
+      <section className="mt-4">
+        <h2>Floating Card</h2>
+        <div className="mt-2 mx-auto w-[600px] floating-card-wrapper">
+          <FloatingCard
+            bg={'/img/ss_1.webp'}
+            title={'Sing-to-earn rhythm action and karaoke game!'}
+            categories={['virtual idol', 'metaverse', 'nft']}
+            network={'SOL'}
+            marketCap={'10000'}
+            coinSupply={'100000000000'}
+            onPlay={() => console.log('onPlay')}
+          />
+        </div>
+      </section>
       <section className="mt-4">
         <h2>Netflix Card</h2>
         <div className="mt-2 mx-auto w-[600px]">

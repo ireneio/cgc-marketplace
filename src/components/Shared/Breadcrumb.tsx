@@ -1,7 +1,11 @@
+import { useAppDispatch } from '@/store';
+import { useEffect } from 'react';
+
 interface BreadcrumbItem {
   text: string;
   value: string;
   disabled?: boolean;
+  route?: string;
 }
 interface Props {
   items: BreadcrumbItem[];
@@ -10,12 +14,18 @@ interface Props {
 }
 
 const BreadCrumb = ({ items, onItemClick, currentValue }: Props) => {
+  const dispatch = useAppDispatch();
+
+  const handleSideBarPathUpdate = (val: string) => {
+    dispatch({ type: 'SET_NAVIGATION_PATH', payload: val });
+  };
+
   return (
     <div className="flex items-center">
       {items.map((item, index, array) => {
         return (
           <div
-            key={item.value}
+            key={index}
             onClick={() => {
               if (!item.disabled) {
                 onItemClick && onItemClick(item.value);
@@ -34,6 +44,11 @@ const BreadCrumb = ({ items, onItemClick, currentValue }: Props) => {
                     : 'pointer',
               }}
               disabled={item.disabled}
+              onClick={() => {
+                if (!item.disabled) {
+                  handleSideBarPathUpdate(item.value);
+                }
+              }}
             >
               {item.text}
             </button>

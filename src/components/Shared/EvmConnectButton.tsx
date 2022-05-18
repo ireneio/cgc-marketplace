@@ -1,4 +1,5 @@
 import { useEthereumProvider } from '@/contexts/EthereumWalletProvider';
+import { getTrimmedAddress } from '@/utils/formatters';
 import Button from './Button';
 
 export default function MetamaskConnectButton() {
@@ -9,9 +10,15 @@ export default function MetamaskConnectButton() {
       {!signerAddress && (
         <Button
           onClick={connect}
-          className="block w-full text-left px-4 py-2 text-sm bg-transparent text-white"
+          className="flex w-full text-left px-4 py-2 text-sm bg-transparent text-white"
         >
-          Connect MetaMask
+          <img
+            src="/img/icon_metamask.svg"
+            width={18}
+            height={18}
+            alt="metamask"
+          />
+          <span className="ml-[10px]">Connect</span>
         </Button>
       )}
       {signerAddress && (
@@ -20,8 +27,7 @@ export default function MetamaskConnectButton() {
           className="block w-full text-left px-4 py-2 text-sm bg-transparent text-white"
         >
           Disconnect{` `}
-          {signerAddress.substring(0, signerAddress.startsWith(`0x`) ? 6 : 3)}
-          ...
+          {getTrimmedAddress(signerAddress, { length: 5 })}
         </Button>
       )}
     </div>

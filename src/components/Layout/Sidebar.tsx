@@ -24,7 +24,7 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
               if (!item.disabled) {
                 const child =
                   !item.children || !item.children.length
-                    ? item.value + '/'
+                    ? item.value
                     : item.value + '/' + item.children[0].value;
                 onItemClick && onItemClick(child);
               }
