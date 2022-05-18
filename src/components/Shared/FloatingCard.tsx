@@ -53,7 +53,7 @@ const FloatingCard = ({
       )}
       {isMouseOver && bgOnHover && (
         <div className="bg-img flex items-start justify-center">
-          <video autoPlay width="450px" height="100px">
+          <video autoPlay width="450px" height="100px" muted>
             <source src={bgOnHover} type="video/mp4"></source>
           </video>
         </div>
