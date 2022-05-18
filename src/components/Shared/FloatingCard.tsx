@@ -1,6 +1,7 @@
 import { getNumberWithCommas } from '@/utils/formatters';
 import { useState } from 'react';
 import Button from './Button';
+import Chip from './Chip';
 
 interface Props {
   bg: string;
@@ -68,22 +69,33 @@ const FloatingCard = ({
         <div className="content">
           <div className="px-[12px] py-[0px]">
             <div className="font-bold text-[#FFFFFF] text-[16px]">{title}</div>
-            <div className="mt-[12px] flex justify-between">
+            <div className="mt-[12px] flex justify-between items-center">
               <div
                 className="text-[#FFFFFF] text-[12px] uppercase flex items-center"
                 style={{ flexBasis: '80%' }}
               >
                 {categories.map((category, index) => {
                   return (
+                    // <div key={index}>
+                    //   {category}
+                    //   {index !== categories.length - 1 && (
+                    //     <span className="ml-[2px] mr-[2px]">•</span>
+                    //   )}
+                    // </div>
                     <div key={index}>
-                      {category}
-                      {index !== categories.length - 1 && (
-                        <span className="ml-[2px] mr-[2px]">•</span>
-                      )}
+                      <Chip small className="mr-[8px]">
+                        {category}
+                      </Chip>
                     </div>
                   );
                 })}
               </div>
+              {showCatheonLogo && (
+                <div
+                  className="ml-[12px] mr-[12px] w-[38px] h-[38px] bg-no-repeat bg-center bg-contain"
+                  style={{ backgroundImage: `url(/img/cgc-logo-no-text.png)` }}
+                ></div>
+              )}
               <div>
                 <Button
                   className="capitalize"

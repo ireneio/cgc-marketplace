@@ -119,7 +119,7 @@ html {
 
 .floating-card-wrapper a {
   text-decoration: none;
-  cursor: pointer;
+  cursor: default;
   width: 100%;
   height: 100%;
   display: block;

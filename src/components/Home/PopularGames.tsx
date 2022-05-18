@@ -38,7 +38,7 @@ const PopularGames = () => {
           onItemClick={(value) => setCurrentSelection(value)}
         />
       </div>
-      <div className="mt-[24px] overflow-y-visible mr-[-24px] flex floating-card-wrapper hide-scrollbar">
+      <div className="mt-[24px] pt-[24px] overflow-y-visible mr-[-24px] flex floating-card-wrapper hide-scrollbar">
         {!loading &&
           items.map((item, index) => {
             return (
