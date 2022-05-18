@@ -43,6 +43,7 @@ const LatestGames = () => {
               <div key={index}>
                 <FloatingCard
                   bg={item.splashSrc}
+                  bgOnHover={item.videoSrc}
                   title={item.description}
                   categories={item.tags}
                   network={'SOL'}

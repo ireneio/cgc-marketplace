@@ -103,12 +103,12 @@ html {
 .floating-card-wrapper li:hover {
   /* transition-delay: .5s; */
   width: 450px;
-  height: 400px;
+  height: 450px;
   transform: translateY(-20%) translateX(-0%);
 }
 
 .floating-card-wrapper li:hover .content {
-  transform: translateY(-0%) translateX(-50%);
+  transform: translateY(0%) translateX(-50%);
   /* transition-delay: .1s; */
   opacity: 1;
 }
@@ -118,7 +118,6 @@ html {
 }
 
 .floating-card-wrapper a {
-  color: white;
   text-decoration: none;
   cursor: pointer;
   width: 100%;
@@ -126,16 +125,17 @@ html {
   display: block;
   position: relative;
   z-index: 2;
+  bottom: 10px;
 }
 
 .floating-card-wrapper .content {
   width: 100%;
   position: absolute;
-  bottom: 0;
+  bottom: 0px;
   left: 50%;
   transform: translateY(100%) translateX(-50%);
   transition-duration: 1s;
   opacity: 0;
-  padding: 40px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
   background-color: #13002B;
 }
