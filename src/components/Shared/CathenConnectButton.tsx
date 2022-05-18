@@ -1,11 +1,13 @@
 import { useState } from 'react';
+import { LoginModal } from '../Modals/LoginModal';
 import Button from './Button';
 
 const CathenConnectButton = () => {
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [account, setAccount] = useState('Account');
 
   const handleConnect = async () => {
-    console.log('handleConnect');
+    setLoginModalOpen(true);
   };
 
   return (
@@ -22,6 +24,7 @@ const CathenConnectButton = () => {
         />
         <span className="ml-[10px]">Connect</span>
       </Button>
+      <LoginModal isOpen={loginModalOpen} setIsOpen={setLoginModalOpen} />
     </div>
   );
 };

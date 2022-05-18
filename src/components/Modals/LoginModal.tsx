@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import consoleHelper from '@/utils/consoleHelper';
+import Button from '../Shared/Button';
 
 type LoginModalProps = {
   isOpen: boolean;
@@ -58,15 +59,31 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
           >
             <div
               className="inline-block w-full max-w-xl p-9 my-12 overflow-hidden text-left align-middle transition-all
-            transform bg-white shadow-xl rounded-2xl bg-[#2c2c2c]"
+            transform shadow-xl rounded-2xl bg-[#2c2c2c]"
             >
               <Dialog.Title
                 as="h3"
-                className="text-2xl font-bold leading-6 text-white pb-2 font-circularstdbold"
+                className="text-2xl font-bold leading-6 text-white pb-2 font-circularstdbold flex flex-col items-center"
               >
-                Sign in to your Catheon account
+                <div>
+                  <img
+                    src="/img/cgc-logo-no-text.png"
+                    width={48}
+                    height={48}
+                    alt="catheon"
+                  />
+                </div>
+                <div className="text-center mt-[12px]">
+                  Sign in to your cgPass account
+                </div>
+                <div className="text-[14px] text-[#AAAAAA] mt-[6px]">
+                  <span>New Here? </span>
+                  <span className="text-[#FC1F8E] cursor-pointer hover:underline">
+                    Create An Account
+                  </span>
+                </div>
               </Dialog.Title>
-              <div className="mt-2">
+              <div className="mt-0">
                 <div className="min-h-full w-full flex flex-col justify-center">
                   <div className="bg-[#2c2c2c] py-8">
                     <div className="space-y-6">
@@ -75,7 +92,7 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
                           htmlFor="email"
                           className="block text-sm font-medium text-white font-circularstdbook"
                         >
-                          Email
+                          Email Address
                         </label>
                         <div className="mt-1">
                           <input
@@ -118,20 +135,15 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
               </div>
               <div className="mt-3 flex justify-end">
                 <div>
-                  <button
-                    type="button"
-                    className="inline-flex justify-center px-4 py-2 justify-center border border-transparent text-base
-                              font-bold rounded-md mr-3 text-white bg-gray-500 hover:bg-gray-400 md:py-4 md:text-lg md:px-10 font-circularstdbold"
+                  <Button
                     onClick={() => {
                       setIsOpen(false);
                     }}
                   >
                     Cancel
-                  </button>
-                  <button
-                    type="button"
-                    className="inline-flex justify-center px-4 py-2 justify-center border border-transparent text-base
-                              font-bold rounded-md text-white bg-purple-700 hover:bg-purple-400 md:py-4 md:text-lg md:px-10 font-circularstdbold"
+                  </Button>
+                  <Button
+                    className="ml-[12px]"
                     onClick={async () => {
                       handleLoginButtonClick().then((outcome) => {
                         if (outcome) {
@@ -141,7 +153,7 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
                     }}
                   >
                     Login
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>

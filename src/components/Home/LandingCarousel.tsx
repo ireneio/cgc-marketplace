@@ -81,6 +81,7 @@ const LandingCarousel = () => {
         showIndicators={true}
         showThumbs={false}
         infiniteLoop
+        autoPlay
         // dynamicHeight
         width="100%"
         // centerMode
@@ -117,7 +118,7 @@ const LandingCarousel = () => {
                 ></div>
                 <img
                   src={imageUrl}
-                  className="w-full min-h-80 bg-[#181818] aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 hover:cursor-pointer"
+                  className="bg-cover w-full min-h-80 bg-[#181818] aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 hover:cursor-pointer"
                   alt={name}
                 />
                 <div className="z-[3] absolute bottom-[45%] left-[16px] md:left-[50px] font-bold text-[32px]">
