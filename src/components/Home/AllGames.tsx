@@ -1,4 +1,5 @@
 import { testData } from '@/data/test';
+import { useAppDispatch } from '@/store';
 import { useEffect, useState } from 'react';
 import ButtonLink from '../Shared/ButtonLink';
 import FloatingCard from '../Shared/FloatingCard';
@@ -6,6 +7,7 @@ import LoadingNetflixCard from '../Shared/LoadingNetflixCard';
 import SectionTitle from '../Shared/SectionTitle';
 
 const AllGames = () => {
+  const dispatch = useAppDispatch();
   const [items, setItems] = useState(testData.recentlyAddedCollections);
   const [loading, setLoading] = useState(true);
 
@@ -51,7 +53,17 @@ const AllGames = () => {
           })}
       </div>
       <div className="flex justify-end mt-[20px]">
-        <ButtonLink>see all</ButtonLink>
+        <ButtonLink
+          onClick={() => {
+            dispatch({
+              type: 'SET_NAVIGATION_PATH',
+              payload: 'Explore/All',
+            });
+            window.scroll(0, 0);
+          }}
+        >
+          see all
+        </ButtonLink>
       </div>
     </div>
   );

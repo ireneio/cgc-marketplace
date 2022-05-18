@@ -1,4 +1,5 @@
 import { testData } from '@/data/test';
+import { useAppDispatch } from '@/store';
 import { useEffect, useState } from 'react';
 import ButtonLink from '../Shared/ButtonLink';
 import FloatingCard from '../Shared/FloatingCard';
@@ -7,6 +8,7 @@ import SectionTitle from '../Shared/SectionTitle';
 import SelectGroup from '../Shared/SelectGroup';
 
 const PopularGames = () => {
+  const dispatch = useAppDispatch();
   const [items, setItems] = useState(testData.recentlyAddedCollections);
   const [currentSelection, setCurrentSelection] = useState('m');
   const [loading, setLoading] = useState(true);
@@ -63,7 +65,17 @@ const PopularGames = () => {
           })}
       </div>
       <div className="flex justify-end mt-[20px]">
-        <ButtonLink>see all</ButtonLink>
+        <ButtonLink
+          onClick={() => {
+            dispatch({
+              type: 'SET_NAVIGATION_PATH',
+              payload: 'Explore/Popular',
+            });
+            window.scroll(0, 0);
+          }}
+        >
+          see all
+        </ButtonLink>
       </div>
     </div>
   );
