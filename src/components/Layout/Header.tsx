@@ -2,6 +2,7 @@ import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import Link from 'next/link';
 import { useState } from 'react';
 import EvmConnectButton from '@/components/Shared/EvmConnectButton';
+import CathenConnectButton from '../Shared/CathenConnectButton';
 
 const Header = () => {
   const [search, setSearch] = useState('');
@@ -39,8 +40,8 @@ const Header = () => {
         </div>
       </div>
       <div className="flex items-center ml-[18px]">
-        <div className="text-[#FFFFFF] cursor-pointer font-semibold mt-[-2px]">
-          {account}
+        <div className="hidden lg:block">
+          <CathenConnectButton />
         </div>
         <div className="ml-[18px] hidden lg:block">
           <WalletMultiButton />

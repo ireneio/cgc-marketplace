@@ -125,20 +125,20 @@ const LandingCarousel = () => {
                   className="w-full min-h-80 bg-[#181818] aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 hover:cursor-pointer"
                   alt={name}
                 />
-                <div className="z-[3] absolute bottom-[45%] left-[50px] font-bold text-[32px]">
+                <div className="z-[3] absolute bottom-[45%] left-[16px] md:left-[50px] font-bold text-[32px]">
                   <img
                     src={logo}
-                    className="h-[84px] w-[400px] bg-transparent aspect-w-1 aspect-h-1 rounded-md overflow-hidden transform transition duration-500 lg:aspect-none hover:cursor-pointer"
+                    className="h-[84px] w-[400px] bg-transparent aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 aspect-none hover:cursor-pointer"
                     alt={name}
                   />
                 </div>
-                <div className="z-[3] absolute bottom-[35%] left-[50px] font-bold text-[32px] text-[#FFFFFF]">
+                <div className="text-left z-[3] absolute bottom-[37%] md:bottom-[35%] left-[16px] md:left-[50px] font-bold text-[16px] md:text-[26px] lg:text-[32px] text-[#FFFFFF]">
                   {title}
                 </div>
-                <div className="z-[3] absolute bottom-[30%] left-[50px] text-[#FFFFFF]">
+                <div className="hidden md:block text-left z-[3] absolute bottom-[30%] left-[16px] md:left-[50px] text-[#FFFFFF]">
                   {description}
                 </div>
-                <div className="z-[3] absolute bottom-[10%] left-[50px] text-[#FFFFFF]">
+                <div className="z-[3] absolute bottom-[10%] left-[16px] md:left-[50px] text-[#FFFFFF]">
                   <Button
                     className="px-[48px]"
                     onClick={() => handlePlay(name)}
