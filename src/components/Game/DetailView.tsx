@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import Divider from '../Shared/Divider';
 import Tag from '../Shared/Tag';
+import GameCarousel from './GameCarousel';
 import ItemCountPanel from './ItemCountPanel';
+import NftPricePanel from './NftPricePanel';
 import TokenPricePanel from './TokenPricePanel';
 
 const DetailView = () => {
@@ -31,6 +33,9 @@ const DetailView = () => {
 
   return (
     <div>
+      <div className="mb-[48px]">
+        <GameCarousel />
+      </div>
       <div className="mb-[30px]">
         <div className="text-[#FFFFFF] font-bold text-[20px]">{info.title}</div>
       </div>
@@ -159,9 +164,22 @@ const DetailView = () => {
         />
       </div>
       <div>
-        <Tag>
-          <div className="relative px-[24px] py-[24px]"></div>
-        </Tag>
+        <NftPricePanel
+          name={'SolChicks'}
+          volume={1234567.89}
+          volumePercentage={12}
+          change={124567}
+          changePercentage={4.5}
+          sales={6789123}
+          salesPercentage={6.1}
+          averagePrice={1233314}
+          averagePricePercentage={1.45}
+          totalVolume={124554.4}
+          totalSales={1243324345}
+          totalSupply={123456789}
+          owners={12345}
+          count={123456789}
+        />
       </div>
     </div>
   );

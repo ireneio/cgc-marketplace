@@ -3,6 +3,8 @@ import { useMemo, useState } from 'react';
 import Divider from '../Shared/Divider';
 import ProgressBar from '../Shared/ProgressBar';
 import Tag from '../Shared/Tag';
+import DateViewSelector from './DateViewSelector';
+import TickerText from './TickerText';
 
 interface Props {
   brandImg: string;
@@ -94,19 +96,37 @@ const TokenPricePanel = ({
         </div>
         <div className="flex items-center mb-[14px]">
           <div className="font-bold text-[36px] text-[#FFFFFF]">${price}</div>
-          <div className="ml-[14px]">{priceFluctuation}%</div>
+          <div className="ml-[14px]">
+            <TickerText
+              text={priceFluctuation}
+              direction={'up'}
+              fontSize={14}
+            />
+          </div>
         </div>
         <div className="flex items-center mb-[8px]">
           <div className="font-bold text-[14px] text-[#FFFFFF]">
             ${priceToBTC}
           </div>
-          <div className="ml-[14px] text-[12px]">{priceToBTCFluctuation}%</div>
+          <div className="ml-[14px] text-[12px]">
+            <TickerText
+              text={priceToBTCFluctuation}
+              direction={'down'}
+              fontSize={12}
+            />
+          </div>
         </div>
         <div className="flex items-center mb-[14px]">
           <div className="font-bold text-[14px] text-[#FFFFFF]">
             ${priceToETH}
           </div>
-          <div className="ml-[14px] text-[12px]">{priceToETHFluctuation}%</div>
+          <div className="ml-[14px] text-[12px]">
+            <TickerText
+              text={priceToETHFluctuation}
+              direction={'up'}
+              fontSize={12}
+            />
+          </div>
         </div>
         <div className="flex items-center mb-[24px]">
           <div className="text-[#FFFFFF] text-[14px] font-semibold">
@@ -118,26 +138,10 @@ const TokenPricePanel = ({
           <div className="text-[#FFFFFF] text-[14px] font-semibold ml-[12px]">
             High: ${high}
           </div>
-          <div className="ml-[24px] flex">
-            <div
-              className="text-[14px] text-[#9497AA] cursor-pointer hover:underline hover:text-[#FFFFFF]"
-              onClick={() => setCurrentView('day')}
-            >
-              1d
-            </div>
-            <div
-              className="text-[14px] text-[#9497AA] ml-[12px] cursor-pointer hover:underline hover:text-[#FFFFFF]"
-              onClick={() => setCurrentView('week')}
-            >
-              1w
-            </div>
-            <div
-              className="text-[14px] text-[#9497AA] ml-[12px] cursor-pointer hover:underline hover:text-[#FFFFFF]"
-              onClick={() => setCurrentView('month')}
-            >
-              1m
-            </div>
-          </div>
+          <DateViewSelector
+            className="ml-[24px]"
+            onViewChange={(val) => setCurrentView(val)}
+          />
         </div>
         <div className="mb-[24px]">
           <Divider />
