@@ -38,9 +38,10 @@ const SelectGroup = ({ items, currentValue, onItemClick }: Props) => {
                   : currentValue === item.value
                   ? 'default'
                   : 'pointer',
+                color: currentValue === item.value ? '#FFFFFF' : '#9497AA',
               }}
               disabled={item.disabled}
-              className="text-[#FFFFFF] border-solid border-[1px] border-[#290030] px-[16px] py-[8px] disabled:bg-[#181818] disabled:text-[#AAA]"
+              className="text-[#FFFFFF] border-solid border-[1px] border-[#290030] px-[12px] py-[6px] disabled:bg-[#181818] disabled:text-[#AAA] text-[14px]"
             >
               {item.text}
             </button>

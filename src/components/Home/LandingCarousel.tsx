@@ -135,18 +135,9 @@ const LandingCarousel = () => {
                   {description}
                 </div>
                 <div className="z-[3] absolute bottom-[10%] left-[16px] md:left-[50px] text-[#FFFFFF] flex">
-                  <Button
-                    className="px-[48px]"
-                    onClick={() => handlePlay(name)}
-                  >
-                    Play
-                  </Button>
+                  <Button onClick={() => handlePlay(name)}>Play</Button>
                   <div className="ml-[16px]">
-                    <Button
-                      link
-                      className="ml-[16px] px-[48px] text-[#FFFFFF]"
-                      onClick={() => handleMoreInfo(name)}
-                    >
+                    <Button link onClick={() => handleMoreInfo(name)}>
                       More Info
                     </Button>
                   </div>

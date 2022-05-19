@@ -5,6 +5,7 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import seo from '../../data/seo';
 import { useAppDispatch, useAppSelector } from '@/store';
+import { useRouter } from 'next/router';
 
 interface Props {
   children?: React.ReactNode;
@@ -56,9 +57,13 @@ const SIDE_BAR_ITEMS = [
 const DefaultLayout = ({ children, title }: Props) => {
   const dispatch = useAppDispatch();
   const sideBarPath = useAppSelector((state) => state.layout.navigation.path);
+  const router = useRouter();
 
   const handleSideBarPathUpdate = (val: string) => {
     dispatch({ type: 'SET_NAVIGATION_PATH', payload: val });
+    if (val === 'Home' || val.includes('Explore')) {
+      router.push('/');
+    }
   };
 
   useLayoutEffect(() => {
@@ -80,7 +85,8 @@ const DefaultLayout = ({ children, title }: Props) => {
       }
     }
     if (isPathValid) {
-      handleSideBarPathUpdate(resultPath);
+      // TODO
+      // handleSideBarPathUpdate(resultPath);
     }
   }, []);
 

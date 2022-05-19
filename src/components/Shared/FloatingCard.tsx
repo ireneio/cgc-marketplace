@@ -105,7 +105,7 @@ const FloatingCard = ({
                   onClick={() => onPlay()}
                   disabled={playDisabled}
                 >
-                  play
+                  Play
                 </Button>
               </div>
             </div>
