@@ -18,7 +18,7 @@ const ItemCountPanel = ({ text, count, countUnit }: Props) => {
             </div>
           )}
         </div>
-        <div className="text-[14px] capitalize">{text}</div>
+        <div className="text-[14px] capitalize text-center">{text}</div>
       </div>
     </Tag>
   );

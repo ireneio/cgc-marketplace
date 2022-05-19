@@ -36,7 +36,7 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
                 background: isSelectedParent ? 'rgba(148, 151, 170, .15)' : '',
                 color: item.disabled ? '#AAAAAA' : '#FFFFFF',
                 cursor: isSelectedParent
-                  ? 'default'
+                  ? 'pointer'
                   : item.disabled
                   ? 'not-allowed'
                   : 'pointer',

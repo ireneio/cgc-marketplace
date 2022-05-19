@@ -1,5 +1,5 @@
 interface SelectGroupItem {
-  text: string;
+  text: string | React.ReactNode;
   value: string;
   disabled?: boolean;
 }
