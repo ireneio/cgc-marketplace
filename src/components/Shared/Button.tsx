@@ -26,25 +26,34 @@ const Button = ({
     'py-[8px] px-[32px] font-bold text-[#FFFFFF] bg-[#13002B] border-solid border-[2px] border-[#FC1F8E] rounded-[5px] cursor-pointer disabled:bg-[#181818] disabled:text-[#AAA] disabled:border-[#181818] transition ease-in';
 
   return (
-    <button
-      className={twMerge(
-        disableHoverEffect ? noHoverEffectClasses : defaultClasses,
-        className,
-      )}
+    <div
       style={{
-        cursor: disabled ? 'not-allowed' : 'pointer',
-        ...style,
-        borderColor: link
+        background: link
           ? 'transparent'
           : 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
-        // background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
-        // backgroundColor: link ? 'transparent' : '#13002B',
       }}
-      onClick={() => onClick && onClick()}
-      disabled={disabled}
+      className={twMerge('rounded-[5px]  px-[1px] py-[1px]')}
     >
-      {children}
-    </button>
+      <button
+        // className={twMerge(
+        //   disableHoverEffect ? noHoverEffectClasses : defaultClasses,
+        //   className,
+        // )}
+        className={twMerge(
+          'py-[8px] px-[32px] font-bold text-[#FFFFFF] cursor-pointer rounded-[5px] flex items-center w-full',
+          // className,
+        )}
+        style={{
+          cursor: disabled ? 'not-allowed' : 'pointer',
+          ...style,
+          background: link ? 'transparent' : '#13002B',
+        }}
+        onClick={() => onClick && onClick()}
+        disabled={disabled}
+      >
+        {children}
+      </button>
+    </div>
   );
 };
 

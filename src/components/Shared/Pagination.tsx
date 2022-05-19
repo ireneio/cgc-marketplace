@@ -69,8 +69,10 @@ const Pagination = ({
             <button
               className="text-[#FFFFFF] w-[38px] h-[38px] flex items-center justify-center border-solid border-[1px] border-[#290030] hover:bg-[#FC1F8E]"
               style={{
-                backgroundColor:
-                  currentPage === item ? '#FC1F8E' : 'transparent',
+                background:
+                  currentPage === item
+                    ? 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)'
+                    : 'transparent',
               }}
               onClick={() => {
                 if (item !== '...') {

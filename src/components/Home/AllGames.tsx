@@ -1,5 +1,6 @@
 import { testData } from '@/data/test';
 import { useAppDispatch } from '@/store';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import ButtonLink from '../Shared/ButtonLink';
 import FloatingCard from '../Shared/FloatingCard';
@@ -10,6 +11,7 @@ const AllGames = () => {
   const dispatch = useAppDispatch();
   const [items, setItems] = useState(testData.recentlyAddedCollections);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const _tid = setTimeout(() => {
@@ -20,6 +22,10 @@ const AllGames = () => {
       clearTimeout(_tid);
     };
   });
+
+  const handleOnPlay = (id: string | number) => {
+    router.push(`/game/${id}`);
+  };
 
   return (
     <div className="mt-[24px]">
@@ -39,7 +45,7 @@ const AllGames = () => {
                   network={'SOL'}
                   marketCap={'10000'}
                   coinSupply={'100000000000'}
-                  onPlay={() => console.log('onPlay')}
+                  onPlay={() => handleOnPlay(item.id)}
                 />
               </div>
             );

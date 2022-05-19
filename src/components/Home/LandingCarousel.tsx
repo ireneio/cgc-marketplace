@@ -134,20 +134,22 @@ const LandingCarousel = () => {
                 <div className="hidden md:block text-left z-[3] absolute bottom-[30%] left-[16px] md:left-[50px] text-[#FFFFFF]">
                   {description}
                 </div>
-                <div className="z-[3] absolute bottom-[10%] left-[16px] md:left-[50px] text-[#FFFFFF]">
+                <div className="z-[3] absolute bottom-[10%] left-[16px] md:left-[50px] text-[#FFFFFF] flex">
                   <Button
                     className="px-[48px]"
                     onClick={() => handlePlay(name)}
                   >
                     Play
                   </Button>
-                  <Button
-                    link
-                    className="ml-[16px] px-[48px] text-[#FFFFFF]"
-                    onClick={() => handleMoreInfo(name)}
-                  >
-                    More Info
-                  </Button>
+                  <div className="ml-[16px]">
+                    <Button
+                      link
+                      className="ml-[16px] px-[48px] text-[#FFFFFF]"
+                      onClick={() => handleMoreInfo(name)}
+                    >
+                      More Info
+                    </Button>
+                  </div>
                 </div>
                 {/* <div className="absolute bottom-[10%] right-[50px] flex text-[#FFFFFF]">
                   <div>

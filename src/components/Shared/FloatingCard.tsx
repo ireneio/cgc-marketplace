@@ -43,6 +43,9 @@ const FloatingCard = ({
       className="relative align-middle inline-block w-[380px] h-[235.42px] bg-[#181818] transition-all overflow-hidden cursor-pointer"
       onMouseOver={() => handleMouseOver()}
       onMouseOut={() => handleMouseOut()}
+      onClick={() => {
+        return true;
+      }}
     >
       {(!isMouseOver || !bgOnHover) && (
         <div
@@ -76,17 +79,17 @@ const FloatingCard = ({
               >
                 {categories.map((category, index) => {
                   return (
-                    // <div key={index}>
-                    //   {category}
-                    //   {index !== categories.length - 1 && (
-                    //     <span className="ml-[2px] mr-[2px]">•</span>
-                    //   )}
-                    // </div>
                     <div key={index}>
-                      <Chip small className="mr-[8px]">
-                        {category}
-                      </Chip>
+                      {category}
+                      {index !== categories.length - 1 && (
+                        <span className="ml-[2px] mr-[2px]">•</span>
+                      )}
                     </div>
+                    // <div key={index}>
+                    //   <Chip small className="mr-[8px]">
+                    //     {category}
+                    //   </Chip>
+                    // </div>
                   );
                 })}
               </div>

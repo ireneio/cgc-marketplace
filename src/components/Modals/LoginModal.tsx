@@ -137,16 +137,15 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
                 </div>
               </div>
               <div className="mt-3 flex justify-end">
-                <div>
+                <Button
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                >
+                  Cancel
+                </Button>
+                <div className="ml-[12px]">
                   <Button
-                    onClick={() => {
-                      setIsOpen(false);
-                    }}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    className="ml-[12px]"
                     onClick={async () => {
                       handleLoginButtonClick().then((outcome) => {
                         if (outcome) {
