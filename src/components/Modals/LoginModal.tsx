@@ -3,6 +3,7 @@ import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import consoleHelper from '@/utils/consoleHelper';
 import Button from '../Shared/Button';
+import { useAppDispatch } from '@/store';
 
 type LoginModalProps = {
   isOpen: boolean;
@@ -12,10 +13,12 @@ type LoginModalProps = {
 export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
   const [username, setUsername] = useState(``);
   const [password, setPassword] = useState(``);
+  const dispatch = useAppDispatch();
 
   const handleLoginButtonClick = async (): Promise<boolean | undefined> => {
     if (username && password) {
       consoleHelper(`to implement: ${username.trim()} ${password.trim()}`);
+      dispatch({ type: 'SET_USER_EMAIL', payload: username });
       return true;
     } else {
       return false;

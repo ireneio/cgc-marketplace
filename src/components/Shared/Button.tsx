@@ -34,7 +34,10 @@ const Button = ({
       style={{
         cursor: disabled ? 'not-allowed' : 'pointer',
         ...style,
-        borderColor: link ? 'transparent' : '',
+        borderColor: link
+          ? 'transparent'
+          : 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
+        // background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
         // backgroundColor: link ? 'transparent' : '#13002B',
       }}
       onClick={() => onClick && onClick()}

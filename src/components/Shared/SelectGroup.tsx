@@ -28,10 +28,10 @@ const SelectGroup = ({ items, currentValue, onItemClick }: Props) => {
                 borderBottomLeftRadius: index === 0 ? '4px' : 0,
                 borderTopRightRadius: index === items.length - 1 ? '4px' : 0,
                 borderBottomRightRadius: index === items.length - 1 ? '4px' : 0,
-                backgroundColor: item.disabled
+                background: item.disabled
                   ? '#181818'
                   : currentValue === item.value
-                  ? '#FC1F8E'
+                  ? 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)'
                   : '#13002B',
                 cursor: item.disabled
                   ? 'not-allowed'
@@ -40,7 +40,7 @@ const SelectGroup = ({ items, currentValue, onItemClick }: Props) => {
                   : 'pointer',
               }}
               disabled={item.disabled}
-              className="text-[#FFFFFF] border-solid border-[1px] border-[#FC1F8E] px-[16px] py-[8px] disabled:bg-[#181818] disabled:text-[#AAA]"
+              className="text-[#FFFFFF] border-solid border-[1px] border-[#290030] px-[16px] py-[8px] disabled:bg-[#181818] disabled:text-[#AAA]"
             >
               {item.text}
             </button>

@@ -47,13 +47,19 @@ const Pagination = ({
   return (
     <div className="flex items-center border-solid border-1px">
       <button
-        className="w-[38px] h-[38px] flex items-center justify-center  border-solid border-[1px] border-[#FC1F8E] hover:bg-[#FC1F8E] rounded-tl-[5px] rounded-bl-[5px] cursor-pointer disabled:cursor-not-allowed disabled:bg-[#181818]"
+        className="w-[38px] h-[38px] flex items-center justify-center  border-solid border-[1px] border-[#290030] hover:bg-[#FC1F8E] rounded-tl-[5px] rounded-bl-[5px] cursor-pointer disabled:cursor-not-allowed disabled:bg-[#181818]"
         onClick={() => {
           if (currentPage !== 0) {
             onPreviousPage && onPreviousPage();
           }
         }}
         disabled={currentPage === 0}
+        style={{
+          background:
+            currentPage === 0
+              ? '#181818'
+              : 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
+        }}
       >
         <img src="/img/chevron_left.png" alt="arrow left" />
       </button>
@@ -61,7 +67,7 @@ const Pagination = ({
         return (
           <div key={item}>
             <button
-              className="text-[#FFFFFF] w-[38px] h-[38px] flex items-center justify-center border-solid border-[1px] border-[#FC1F8E] hover:bg-[#FC1F8E]"
+              className="text-[#FFFFFF] w-[38px] h-[38px] flex items-center justify-center border-solid border-[1px] border-[#290030] hover:bg-[#FC1F8E]"
               style={{
                 backgroundColor:
                   currentPage === item ? '#FC1F8E' : 'transparent',
@@ -78,13 +84,19 @@ const Pagination = ({
         );
       })}
       <button
-        className="w-[38px] h-[38px] flex items-center justify-center  border-solid border-[1px] border-[#FC1F8E] hover:bg-[#FC1F8E] rounded-tr-[5px] rounded-br-[5px] cursor-pointer disabled:cursor-not-allowed disabled:bg-[#181818]"
+        className="w-[38px] h-[38px] flex items-center justify-center border-solid border-[1px] border-[#290030] hover:bg-[#FC1F8E] rounded-tr-[5px] rounded-br-[5px] cursor-pointer disabled:cursor-not-allowed disabled:bg-[#181818]"
         onClick={() => {
           if (currentPage !== totalPages - 1) {
             onNextPage && onNextPage();
           }
         }}
         disabled={currentPage === totalPages - 1}
+        style={{
+          background:
+            currentPage === totalPages - 1
+              ? '#181818'
+              : 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
+        }}
       >
         <img src="/img/chevron_right.png" alt="arrow right" />
       </button>

@@ -39,7 +39,7 @@ const Header = () => {
         </div>
       </div>
       <div className="flex items-center ml-[18px]">
-        <div className="hidden lg:block">
+        <div className="">
           <CathenConnectButton />
         </div>
         <div className="ml-[18px] hidden lg:block">

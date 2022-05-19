@@ -105,6 +105,10 @@ type Action =
         token: string;
         username: string;
       };
+    }
+  | {
+      type: 'SET_USER_EMAIL';
+      payload: string;
     };
 
 export default function userReducer(
@@ -125,6 +129,11 @@ export default function userReducer(
       return {
         ...state,
         userInfo: { ...action.payload },
+      };
+    case 'SET_USER_EMAIL':
+      return {
+        ...state,
+        userInfo: { ...state.userInfo, email: action.payload },
       };
     case 'SET_HIDDEN_USER_INFO':
       const {
