@@ -48,7 +48,10 @@ const ListCard = ({
         <Divider />
       </div>
       <div className="flex">
-        <div className="flex items-center justify-center cursor-pointer px-[18px] py-[18px] rounded-bl-[5px]">
+        <div
+          style={{ flexBasis: '30%' }}
+          className="flex items-center justify-center cursor-pointer px-[18px] py-[18px] rounded-bl-[5px]"
+        >
           <img
             src={'/img/icon_detail.png'}
             alt={'detail'}

@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { getNumberWithCommas } from '@/utils/formatters';
+import { useState, useEffect } from 'react';
 import SelectGroup from '../Shared/SelectGroup';
 import ListCard from './ListCard';
+import ListCardLoading from './ListCardLoading';
 import RowCard from './RowCard';
+import RowCardLoading from './RowCardLoading';
 
 type SelectionView = 'Row' | 'List';
 
@@ -11,9 +14,10 @@ const MarketView = () => {
   const [info, setInfo] = useState({
     count: 1234,
   });
-  const [currentView, setCurrentView] = useState<SelectionView>('Row');
+  const [currentView, setCurrentView] = useState<SelectionView>('List');
   const [currentFilter, setCurrentFilter] = useState<SelectionFilter>('');
   const [items, setItems] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  const [loading, setLoading] = useState(true);
 
   const handleSelectView = (value: SelectionView) => {
     setCurrentView(value);
@@ -27,11 +31,19 @@ const MarketView = () => {
     console.log('handleAddToCart', id);
   };
 
+  useEffect(() => {
+    setLoading(true);
+    const tid = setTimeout(() => {
+      setLoading(false);
+      clearTimeout(tid);
+    }, 1200);
+  }, [currentView]);
+
   return (
     <div>
       <div className="flex justify-between items-center mb-[40px]">
         <div className="flex items-center w-full">
-          <div>
+          <div className="cursor-pointer">
             <img
               src="/img/icon_refresh.png"
               alt="refresh"
@@ -40,7 +52,7 @@ const MarketView = () => {
             />
           </div>
           <div className="ml-[8px] text-[#FFFFFF] text-[14px]">
-            {info.count} Items
+            {getNumberWithCommas(info.count)} Items
           </div>
           <div className="ml-auto">
             <SelectGroup
@@ -126,6 +138,25 @@ const MarketView = () => {
       </div>
       <div className="flex flex-wrap">
         {currentView === 'List' &&
+          loading &&
+          [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index) => {
+            return (
+              <div key={index} className="mr-[34px] mb-[34px]">
+                <ListCardLoading />
+              </div>
+            );
+          })}
+        {currentView === 'Row' &&
+          loading &&
+          [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index) => {
+            return (
+              <div key={index} className="mr-[34px] mb-[34px]">
+                <RowCardLoading />
+              </div>
+            );
+          })}
+        {currentView === 'List' &&
+          !loading &&
           items.map((item, index) => {
             return (
               <div key={index} className="mr-[34px] mb-[34px]">
@@ -142,6 +173,7 @@ const MarketView = () => {
             );
           })}
         {currentView === 'Row' &&
+          !loading &&
           items.map((item, index) => {
             return (
               <div key={index} className="mr-[34px] mb-[34px]">
