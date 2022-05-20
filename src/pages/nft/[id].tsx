@@ -4,7 +4,6 @@ import AttributesPanel from '@/components/Nft/AttributesPanel';
 import CartSection from '@/components/Nft/CartSection';
 import DetailPanel from '@/components/Nft/DetailPanel';
 import InfoPanel from '@/components/Nft/InfoPanel';
-import { useAppSelector } from '@/store';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -26,7 +25,6 @@ export interface NftInfo {
 
 const Nft = () => {
   const router = useRouter();
-  const cartItems = useAppSelector((state) => state.cart.cartItems);
   const [info, setInfo] = useState<NftInfo>({
     id: '',
     name: '3670',
