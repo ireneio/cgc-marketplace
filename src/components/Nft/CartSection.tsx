@@ -1,0 +1,47 @@
+import { useAppSelector } from '@/store';
+import Cart from '../Game/Cart';
+import Button from '../Shared/Button';
+import DropdownMenu from '../Shared/DropdownMenu';
+
+const CartSection = ({
+  openCart,
+  onToggleCart,
+}: {
+  openCart: boolean;
+  onToggleCart: (val: boolean) => void;
+}) => {
+  const cartItems = useAppSelector((state) => state.cart.cartItems);
+
+  return (
+    <div className="relative">
+      {openCart && (
+        <DropdownMenu bottom={-505} left={-228}>
+          <Cart />
+        </DropdownMenu>
+      )}
+      <Button onClick={() => onToggleCart(!openCart)}>
+        <div className="flex items-center">
+          <div>
+            <img src="/img/icon_cart.png" alt="cart" width={12} height={12} />
+          </div>
+          <div className="text-[#FFFFFF] ml-[4px] text-[12px] flex items-center">
+            <div>Cart</div>
+            <div
+              className="ml-[4px]"
+              style={{
+                background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
+              [{cartItems.length}]
+            </div>
+          </div>
+        </div>
+      </Button>
+    </div>
+  );
+};
+
+export default CartSection;
