@@ -1,12 +1,9 @@
-import Cart from '@/components/Game/Cart';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
 import ActionPanel from '@/components/Nft/ActionPanel';
 import AttributesPanel from '@/components/Nft/AttributesPanel';
 import CartSection from '@/components/Nft/CartSection';
 import DetailPanel from '@/components/Nft/DetailPanel';
 import InfoPanel from '@/components/Nft/InfoPanel';
-import Button from '@/components/Shared/Button';
-import DropdownMenu from '@/components/Shared/DropdownMenu';
 import { useAppSelector } from '@/store';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
