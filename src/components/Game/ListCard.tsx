@@ -1,13 +1,18 @@
 import Divider from '../Shared/Divider';
+import Skeleton from '../Shared/Skeleton';
 
-interface Props {
+export interface Attr {
   image: string;
   name: string;
   brand: string;
   price: string | number;
   id: string | number;
   isAddedToCart: boolean;
-  onAddToCart: (id: string | number) => void | Promise<void>;
+}
+interface Props extends Attr {
+  onAddToCart: (params: Attr) => void | Promise<void>;
+  onMoreInfo: (id: string | number) => void | Promise<void>;
+  addToCartLoading: boolean;
 }
 
 const ListCard = ({
@@ -18,6 +23,8 @@ const ListCard = ({
   id,
   isAddedToCart,
   onAddToCart,
+  onMoreInfo,
+  addToCartLoading,
 }: Props) => {
   return (
     <div className="rounded-[5px] w-[205px] bg-[#13002B] border-[1px] border-solid border-[#290030]">
@@ -51,6 +58,7 @@ const ListCard = ({
         <div
           style={{ flexBasis: '30%' }}
           className="flex items-center justify-center cursor-pointer px-[18px] py-[18px] rounded-bl-[5px]"
+          onClick={() => onMoreInfo(id)}
         >
           <img
             src={'/img/icon_detail.png'}
@@ -59,30 +67,42 @@ const ListCard = ({
             height={16}
           />
         </div>
-        {!isAddedToCart && (
+        {(!isAddedToCart || addToCartLoading) && (
           <div
             style={{ flexBasis: '70%' }}
             className="flex items-center justify-center cursor-pointer px-[18px] py-[18px] border-l-[1px] border-l-[#290030] rounded-br-[5px]"
           >
-            <div>
-              <img
-                src={'/img/icon_plus.png'}
-                alt={'plus'}
-                width={16}
-                height={16}
-              />
-            </div>
+            {!addToCartLoading && (
+              <div>
+                <img
+                  src={'/img/icon_plus.png'}
+                  alt={'plus'}
+                  width={16}
+                  height={16}
+                />
+              </div>
+            )}
             <div
               className="ml-[8px] text-[#9497AA] text-[14px]"
-              onClick={() => onAddToCart(id)}
+              onClick={() =>
+                onAddToCart({
+                  image,
+                  name,
+                  brand,
+                  price,
+                  id,
+                  isAddedToCart,
+                })
+              }
             >
-              Add To Cart
+              {addToCartLoading && <Skeleton className="w-[64px] h-[14px]" />}
+              {!addToCartLoading && 'Add To Cart'}
             </div>
           </div>
         )}
-        {isAddedToCart && (
+        {isAddedToCart && !addToCartLoading && (
           <div
-            className="flex items-center justify-center cursor-default px-[18px] py-[18px] text-[#FFFFFF] rounded-br-[5px]"
+            className="text-[14px] flex items-center justify-center cursor-default px-[18px] py-[18px] text-[#FFFFFF] rounded-br-[5px]"
             style={{
               background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
               flexBasis: '70%',

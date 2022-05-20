@@ -11,7 +11,7 @@ interface Props {
 
 const SelectGroup = ({ items, currentValue, onItemClick }: Props) => {
   return (
-    <div className="flex">
+    <div className="flex items-stretch">
       {items.map((item, index) => {
         return (
           <div
@@ -24,6 +24,7 @@ const SelectGroup = ({ items, currentValue, onItemClick }: Props) => {
           >
             <button
               style={{
+                height: '100%',
                 borderTopLeftRadius: index === 0 ? '4px' : 0,
                 borderBottomLeftRadius: index === 0 ? '4px' : 0,
                 borderTopRightRadius: index === items.length - 1 ? '4px' : 0,

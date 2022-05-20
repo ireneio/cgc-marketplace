@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useAppDispatch } from '@/store';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import Divider from '../Shared/Divider';
 import Tag from '../Shared/Tag';
 import GameCarousel from './GameCarousel';
@@ -7,6 +9,8 @@ import NftPricePanel from './NftPricePanel';
 import TokenPricePanel from './TokenPricePanel';
 
 const DetailView = () => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   const [info, setInfo] = useState({
     name: 'SolChicks',
     id: '',
@@ -30,6 +34,20 @@ const DetailView = () => {
   const handleLinkOpen = (type: 'discord' | 'twitter' | 'link') => {
     window.open(info.socialMedia[type], '_blank');
   };
+
+  useEffect(() => {
+    if (router.query.id) {
+      setInfo((prev) => {
+        return {
+          ...prev,
+          id: String(router.query.id),
+        };
+      });
+    } else {
+      dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
+      router.replace('/');
+    }
+  }, [router.query]);
 
   return (
     <div>

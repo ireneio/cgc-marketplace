@@ -25,7 +25,7 @@ const Game = () => {
       case 'ABOUT':
         setInfo((prev) => ({
           ...prev,
-          header: 'Welcome to the SolChicks Metaverse Crypto NFT Game',
+          header: `Welcome to the ${info.name} Metaverse Crypto NFT Game`,
         }));
         return;
       case 'All Items':
