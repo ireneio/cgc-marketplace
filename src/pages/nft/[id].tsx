@@ -1,12 +1,19 @@
+import Cart from '@/components/Game/Cart';
+import { Attr } from '@/components/Game/ListCard';
+import DefaultLayout from '@/components/Layout/DefaultLayout';
 import Button from '@/components/Shared/Button';
+import DropdownMenu from '@/components/Shared/DropdownMenu';
 import Tag from '@/components/Shared/Tag';
+import { useAppDispatch, useAppSelector } from '@/store';
 import { getTrimmedAddress } from '@/utils/formatters';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const Nft = () => {
+  const dispatch = useAppDispatch();
   const router = useRouter();
+  const cartItems = useAppSelector((state) => state.cart.cartItems);
   const [info, setInfo] = useState({
     id: '',
     name: '3670',
@@ -30,6 +37,7 @@ const Nft = () => {
     mintAddress: 'wtS75q4ecvUjBkDesTbiEw3Y88c7eCh49nLzzuPy72t',
     owner: 'wtS75q4ecvUjBkDesTbiEw3Y88c7eCh49nLzzuPy72t',
   });
+  const [openCart, setOpenCart] = useState(true);
 
   useEffect(() => {
     if (router.query.id) {
@@ -44,27 +52,80 @@ const Nft = () => {
     }
   }, [router.query]);
 
+  const isItemAddedToCart = useMemo(() => {
+    return cartItems.find((item: Attr) => String(info.id) === String(item.id));
+  }, [cartItems]);
+
   const handleBuy = async () => {
     console.log('handleBuy');
   };
 
+  const handleAddToCart = () => {
+    dispatch({
+      type: 'ADD_CART_ITEM',
+      payload: { ...info, isAddedToCart: true },
+    });
+  };
+
   return (
-    <div>
+    <DefaultLayout>
       <div className="flex items-center justify-between">
-        <div className="cursor-pointer">
-          <img
-            src="/img/icon_refresh.png"
-            alt="refresh"
-            width={14}
-            height={14}
-          />
+        <div className="flex items-center">
+          <div className="cursor-pointer">
+            <img
+              src="/img/icon_refresh.png"
+              alt="refresh"
+              width={14}
+              height={14}
+            />
+          </div>
+          <div className="ml-[8px] text-[#FFFFFF] text-[14px]">1 Item</div>
         </div>
-        <div className="ml-[8px] text-[#FFFFFF] text-[14px]">1 Item</div>
+        <div className="relative">
+          {openCart && (
+            <DropdownMenu bottom={-505} left={-228}>
+              <Cart />
+            </DropdownMenu>
+          )}
+          <Button onClick={() => setOpenCart((prev) => !prev)}>
+            <div className="flex items-center">
+              <div>
+                <img
+                  src="/img/icon_cart.png"
+                  alt="cart"
+                  width={12}
+                  height={12}
+                />
+              </div>
+              <div className="text-[#FFFFFF] ml-[4px] text-[12px] flex items-center">
+                <div>Cart</div>
+                <div
+                  className="ml-[4px]"
+                  style={{
+                    background:
+                      'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
+                    backgroundClip: 'text',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                  }}
+                >
+                  [{cartItems.length}]
+                </div>
+              </div>
+            </div>
+          </Button>
+        </div>
       </div>
-      <div className="flex">
+      <div className="flex mt-[12px]">
         <div style={{ flexBasis: '50%' }}>
-          <div className="max-w-[552px] h-[552px]">
-            <img src={info.image} alt={info.name} />
+          <div className="max-w-[552px]">
+            <img
+              src={info.image}
+              alt={info.name}
+              width="552px"
+              height="552px"
+              className="rounded-[5px]"
+            />
           </div>
           <Tag className="mt-[30px] px-[28px] py-[24px]">
             <div>
@@ -107,7 +168,7 @@ const Nft = () => {
             </div>
           </Tag>
         </div>
-        <div style={{ flexBasis: '50%' }}>
+        <div style={{ flexBasis: '50%' }} className="pl-[12px]">
           <Tag className="px-[28px] py-[24px]">
             <div>
               <div className="text-[#FFFFFF] font-bold text-[36px]">
@@ -115,7 +176,7 @@ const Nft = () => {
               </div>
               <div className="mt-[4px] text-[14px] text-[#9497AA] flex items-start">
                 <div>{info.brand}</div>
-                <div className="mt-[-2px]">
+                <div className="mt-[3px] ml-[3px]">
                   <img
                     src="/img/icon_cr.png"
                     alt="copyright"
@@ -129,9 +190,9 @@ const Nft = () => {
               </div>
               <div className="mt-[16px] text-[#FFFFFF] text-[16px] flex">
                 <div>Sale Ends At</div>
-                <div className="ml-[4px]">
+                <div className="ml-[8px] font-semibold">
                   {dayjs(info.auctionEndDate || info.saleEndDate).format(
-                    'dd MMM YYYY hh:mm',
+                    'DD MMM YYYY hh:mm',
                   )}
                 </div>
               </div>
@@ -146,7 +207,7 @@ const Nft = () => {
                 <div className="text-[24px] font-semibold text-[#FFFFFF]">
                   {info.price}
                 </div>
-                <div className="mt-[6px] ml-[4px]">
+                <div className="mt-[6px] ml-[6px]">
                   <img
                     src={'/img/icon_unit_sol.png'}
                     alt={'sol'}
@@ -154,19 +215,29 @@ const Nft = () => {
                     height={16}
                   />
                 </div>
-                <div className="ml-[4px] self-end">(${info.price})</div>
+                <div className="ml-[8px] self-center mt-[6px] text-[#9497AA]">
+                  (${info.price})
+                </div>
               </div>
               <div className="mt-[34px] flex items-center">
                 <Button onClick={() => handleBuy()}>Buy Now</Button>
-                <Button className="ml-[8px]">
-                  <img
-                    src="/img/icon_cart.png"
-                    alt="cart"
-                    width={18}
-                    height={18}
-                  />
-                </Button>
-                <Button className="ml-[20px]">Make Offer</Button>
+                <div className="ml-[8px]">
+                  <Button
+                    disabled={isItemAddedToCart}
+                    onClick={() => handleAddToCart()}
+                    style={{ paddingLeft: 12, paddingRight: 12 }}
+                  >
+                    <img
+                      src="/img/icon_cart.png"
+                      alt="cart"
+                      width={21}
+                      height={21}
+                    />
+                  </Button>
+                </div>
+                <div className="ml-[20px]">
+                  <Button disabled={!info.auctionEndDate}>Make Offer</Button>
+                </div>
               </div>
               <div className="mt-[14px] text-[14px] font-light text-[#9497AA]">
                 By proceeding, you agree to our Terms and Privacy
@@ -174,14 +245,14 @@ const Nft = () => {
             </div>
           </Tag>
           <Tag className="px-[28px] py-[24px] mt-[30px]">
-            <div className="flex flex-wrap items-center">
+            <div className="grid grid-cols-3 gap-[12px]">
               {info.attributes.map((attr, index) => {
                 return (
-                  <div key={index} className="mr-[70px]">
-                    <div className="text-[#FFFFFF] font-normal text-[14px]">
+                  <div key={index}>
+                    <div className="text-[#FFFFFF] font-normal text-[14px] capitalize">
                       {attr.traitType}
                     </div>
-                    <div className="mt-[10px] text-[#FFFFFF] font-semibold text-[14px]">
+                    <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px]">
                       {attr.value}
                     </div>
                   </div>
@@ -191,7 +262,7 @@ const Nft = () => {
           </Tag>
         </div>
       </div>
-    </div>
+    </DefaultLayout>
   );
 };
 

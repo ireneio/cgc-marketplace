@@ -29,7 +29,7 @@ const Cart = () => {
 
   return (
     <div>
-      <Tag className="px-[28px] py-[28px] w-[354px]">
+      <Tag className="px-[28px] py-[28px] w-[354px] shadow-xl">
         <div>
           <div className="text-[#FFFFFF] font-semibold text-[16px] flex items-center">
             <div>

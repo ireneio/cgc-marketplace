@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/store';
 import { CART_STORAGE_KEY } from '@/store/reducers/cart';
 import { getNumberWithCommas } from '@/utils/formatters';
+import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import DropdownMenu from '../Shared/DropdownMenu';
 import SelectGroup from '../Shared/SelectGroup';
@@ -18,6 +19,7 @@ const LOADING_ARR = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const MarketView = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const cartItems = useAppSelector((state) => state.cart.cartItems);
   const [info, setInfo] = useState({
     listedItemCount: 1234,
@@ -54,6 +56,7 @@ const MarketView = () => {
 
   const handleMoreInfo = (id: string | number) => {
     console.log('handleMoreInfo', id);
+    router.push(`/nft/${id}`);
   };
 
   useEffect(() => {
@@ -113,8 +116,8 @@ const MarketView = () => {
                     <div className="flex items-center">
                       <div>
                         <img
-                          src="/img/icon_filter.png"
-                          alt="row"
+                          src="/img/icon_cart.png"
+                          alt="cart"
                           width={12}
                           height={12}
                         />
