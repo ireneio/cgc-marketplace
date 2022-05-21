@@ -44,8 +44,8 @@ const DetailView = () => {
         };
       });
     } else {
-      dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
-      router.replace('/');
+      // dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
+      // router.replace('/');
     }
   }, [router.query]);
 

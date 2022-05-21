@@ -55,7 +55,7 @@ const ActionPanel = ({
             (${info.price})
           </div>
         </div>
-        <div className="mt-[34px] flex items-center">
+        <div className="mt-[34px] flex items-center flex-wrap">
           <Button onClick={() => handleBuy()}>Buy Now</Button>
           <div className="ml-[8px]">
             <Button

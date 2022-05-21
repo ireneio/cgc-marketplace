@@ -4,6 +4,7 @@ import AttributesPanel from '@/components/Nft/AttributesPanel';
 import CartSection from '@/components/Nft/CartSection';
 import DetailPanel from '@/components/Nft/DetailPanel';
 import InfoPanel from '@/components/Nft/InfoPanel';
+import { useAppDispatch } from '@/store';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -24,6 +25,7 @@ export interface NftInfo {
 }
 
 const Nft = () => {
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const [info, setInfo] = useState<NftInfo>({
     id: '',
@@ -52,6 +54,7 @@ const Nft = () => {
 
   useEffect(() => {
     if (router.query.id) {
+      dispatch({ type: 'INIT_CART' });
       setInfo((prev) => {
         return {
           ...prev,
@@ -59,7 +62,7 @@ const Nft = () => {
         };
       });
     } else {
-      router.replace('/');
+      // router.replace('/');
     }
   }, [router]);
 
