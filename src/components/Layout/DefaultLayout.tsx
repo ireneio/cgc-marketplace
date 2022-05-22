@@ -6,11 +6,18 @@ import Sidebar from './Sidebar';
 import seo from '../../data/seo';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
+import Snackbar from '../Shared/Snackbar';
+import dynamic from 'next/dynamic';
 
 interface Props {
   children?: React.ReactNode;
   title?: string;
 }
+
+const DynamicSnackbar = dynamic(
+  () => import('../../components/Shared/Snackbar'),
+  { ssr: false },
+);
 
 export const BASE_SIDEBAR_PATH = 'Home';
 export const SIDEBAR_PATH_STORAGE_KEY = 'navigation_path';
@@ -57,6 +64,10 @@ const SIDE_BAR_ITEMS = [
 const DefaultLayout = ({ children, title }: Props) => {
   const dispatch = useAppDispatch();
   const sideBarPath = useAppSelector((state) => state.layout.navigation.path);
+  const snackbarShow = useAppSelector((state) => state.layout.snackbar.show);
+  const snackbarText = useAppSelector((state) => state.layout.snackbar.text);
+  const snackbarTitle = useAppSelector((state) => state.layout.snackbar.title);
+
   const router = useRouter();
 
   const handleSideBarPathUpdate = (val: string) => {
@@ -122,6 +133,11 @@ const DefaultLayout = ({ children, title }: Props) => {
           <link rel="icon" href={seo.linkIcon192x192} sizes="192x192" />
           <link rel="apple-touch-icon" href={seo.linkIconAppleTouchIcon} />
         </Head>
+        <DynamicSnackbar
+          text={snackbarText}
+          show={snackbarShow}
+          title={snackbarTitle}
+        />
         <Header />
         <div className="flex mt-[75px]">
           <div style={{ flexBasis: '15%' }}>
@@ -136,7 +152,7 @@ const DefaultLayout = ({ children, title }: Props) => {
           </div>
         </div>
       </div>
-      <div className="w-full relative z-[4]">
+      <div className="w-full relative z-[4] overflow-x-hidden">
         <Footer />
       </div>
     </>

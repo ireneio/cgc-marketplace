@@ -1,5 +1,10 @@
 import { NftInfo } from '@/pages/nft/[id]';
-import { getTrimmedAddress } from '@/utils/formatters';
+import {
+  getTrimmedAddress,
+  getTrimmedAddressEllipsisMiddle,
+} from '@/utils/formatters';
+import ClipboardText from '../Shared/ClipboardText';
+import PrimaryGradientText from '../Shared/PrimaryGradientText';
 import Tag from '../Shared/Tag';
 
 const InfoPanel = ({ info }: { info: NftInfo }) => {
@@ -8,32 +13,22 @@ const InfoPanel = ({ info }: { info: NftInfo }) => {
       <div>
         <div className="flex justify-between">
           <div className="text-[14px] text-[#FFFFFF]">Mint Address</div>
-          <div
-            style={{
-              background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-            className="text-[14px]"
-          >
-            {getTrimmedAddress(info.mintAddress, { length: 10 })}
-          </div>
+          <PrimaryGradientText className="text-[14px]">
+            <ClipboardText copyValue={info.mintAddress}>
+              {getTrimmedAddressEllipsisMiddle(info.mintAddress, {
+                length: 15,
+              })}
+            </ClipboardText>
+          </PrimaryGradientText>
         </div>
       </div>
       <div className="mt-[14px] flex justify-between">
         <div className="text-[14px] text-[#FFFFFF]">Owner</div>
-        <div
-          style={{
-            background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
-            backgroundClip: 'text',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }}
-          className="text-[14px]"
-        >
-          {getTrimmedAddress(info.owner, { length: 10 })}
-        </div>
+        <PrimaryGradientText className="text-[14px]">
+          <ClipboardText copyValue={info.owner}>
+            {getTrimmedAddressEllipsisMiddle(info.owner, { length: 15 })}
+          </ClipboardText>
+        </PrimaryGradientText>
       </div>
       <div className="mt-[14px] flex justify-between">
         <div className="text-[14px] text-[#FFFFFF]">Royalties</div>

@@ -11,6 +11,7 @@ function App({ Component, pageProps }: AppProps) {
       <EthereumWalletProvider>
         <ReduxProvider store={store}>
           <Component {...pageProps} />
+          <div id="snackbar-root"></div>
         </ReduxProvider>
       </EthereumWalletProvider>
     </SolanaWalletProvider>

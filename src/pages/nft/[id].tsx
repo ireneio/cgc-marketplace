@@ -3,7 +3,11 @@ import ActionPanel from '@/components/Nft/ActionPanel';
 import AttributesPanel from '@/components/Nft/AttributesPanel';
 import CartSection from '@/components/Nft/CartSection';
 import DetailPanel from '@/components/Nft/DetailPanel';
+import HistoryTable from '@/components/Nft/HistoryTable';
 import InfoPanel from '@/components/Nft/InfoPanel';
+import Divider from '@/components/Shared/Divider';
+import Pagination from '@/components/Shared/Pagination';
+import Snackbar from '@/components/Shared/Snackbar';
 import { useAppDispatch } from '@/store';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
@@ -51,6 +55,7 @@ const Nft = () => {
     owner: 'wtS75q4ecvUjBkDesTbiEw3Y88c7eCh49nLzzuPy72t',
   });
   const [openCart, setOpenCart] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     if (router.query.id) {
@@ -102,6 +107,53 @@ const Nft = () => {
           <DetailPanel info={info} />
           <ActionPanel info={info} onCartOpen={(val) => setOpenCart(val)} />
           <AttributesPanel info={info} />
+        </div>
+      </div>
+      <div className="mt-[24px]">
+        <Divider />
+      </div>
+      <div className="mt-[24px]">
+        <div className="flex justify-between items-center">
+          <div className="text-[#FFFFFF] font-bold text-[20px]">
+            Transaction History
+          </div>
+          <div>
+            <Pagination
+              totalPages={15}
+              currentPage={currentPage}
+              onPageChange={(val) => setCurrentPage(val)}
+              onPreviousPage={() => setCurrentPage((prev) => prev - 1)}
+              onNextPage={() => setCurrentPage((prev) => prev + 1)}
+            />
+          </div>
+        </div>
+        <div className="mt-[32px]">
+          <HistoryTable
+            rows={[
+              [
+                'Listing',
+                'AC95124da74ca921wdpk1134',
+                'AC95124da74ca921wdpk1134',
+                new Date().toISOString(),
+                '12399999999.45678',
+              ],
+              [
+                'Transfer',
+                'AC95124da74ca921wdpk1134',
+                'AC95124da74ca921wdpk1134',
+                new Date().toISOString(),
+                '12399999999.45678',
+              ],
+              [
+                'Cancel',
+                'AC95124da74ca921wdpk1134',
+                'AC95124da74ca921wdpk1134',
+                new Date().toISOString(),
+                '12399999999.45678',
+              ],
+            ]}
+            headers={['type', 'seller', 'buyer', 'time', 'price']}
+          />
         </div>
       </div>
     </DefaultLayout>
