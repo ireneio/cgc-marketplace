@@ -39,6 +39,7 @@ const Game = () => {
           ...prev,
           header: 'Your Items',
         }));
+        return;
       case 'Activity':
         setInfo((prev) => ({
           ...prev,
