@@ -58,6 +58,9 @@ export default function layoutReducer(
         },
       };
     case 'SHOW_SNACKBAR':
+      if (state.snackbar.timeoutId) {
+        clearTimeout(state.snackbar.timeoutId);
+      }
       const tid = setTimeout(() => {
         clearTimeout(tid);
         store.dispatch({ type: 'CLOSE_SNACKBAR' });
