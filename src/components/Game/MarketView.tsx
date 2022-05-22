@@ -242,6 +242,11 @@ const MarketView = () => {
               </div>
             );
           })}
+        {!items.length && (
+          <div className="text-[#FFFFFF] text-semibold">
+            No Items Available.
+          </div>
+        )}
       </div>
     </div>
   );
