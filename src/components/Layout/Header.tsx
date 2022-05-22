@@ -27,7 +27,8 @@ const Header = () => {
           type="text"
           value={search}
           onChange={(e) => handleSearchInput(e.target.value)}
-          className="w-full bg-transparent rounded-[5px] text-[#FFFFFF] outline-[1px] border-solid border-[2px] border-[#290030] focus:border-none focus:outline-none"
+          className="w-full bg-transparent rounded-[5px] text-[#FFFFFF] outline-[1px] border-solid border-[2px] border-[#290030] focus:border-none focus:outline-none focus:ring-indigo-500
+          focus:border-indigo-500"
           placeholder="Search Games and Collections"
         />
         <div className="absolute right-[12px] top-[12px]">

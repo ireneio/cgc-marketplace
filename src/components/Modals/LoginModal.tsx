@@ -11,9 +11,10 @@ type LoginModalProps = {
 };
 
 export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
+  const dispatch = useAppDispatch();
   const [username, setUsername] = useState(``);
   const [password, setPassword] = useState(``);
-  const dispatch = useAppDispatch();
+  const [disableSignUp] = useState(true);
 
   const handleLoginButtonClick = async (): Promise<boolean | undefined> => {
     if (username && password) {
@@ -22,6 +23,18 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
       return true;
     } else {
       return false;
+    }
+  };
+
+  const handleCreateAccount = () => {
+    if (disableSignUp) {
+      dispatch({
+        type: 'SHOW_SNACKBAR',
+        payload: {
+          title: 'Alert',
+          text: 'Sorry, we are currently not accepting any cgPass signups.',
+        },
+      });
     }
   };
 
@@ -81,7 +94,10 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
                 </div>
                 <div className="text-[14px] text-[#AAAAAA] mt-[6px]">
                   <span>New Here? </span>
-                  <span className="text-[#FC1F8E] cursor-pointer hover:underline">
+                  <span
+                    className="text-[#FC1F8E] cursor-pointer hover:underline"
+                    onClick={() => handleCreateAccount()}
+                  >
                     Create An Account
                   </span>
                 </div>
