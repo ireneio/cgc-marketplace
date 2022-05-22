@@ -34,6 +34,23 @@ const Game = () => {
           header: 'All Items',
         }));
         return;
+      case 'Your Items':
+        setInfo((prev) => ({
+          ...prev,
+          header: 'Your Items',
+        }));
+      case 'Activity':
+        setInfo((prev) => ({
+          ...prev,
+          header: 'Activity',
+        }));
+        return;
+      case 'Staking':
+        setInfo((prev) => ({
+          ...prev,
+          header: 'Staking',
+        }));
+        return;
     }
   };
 
@@ -49,6 +66,24 @@ const Game = () => {
           { text: 'Home', value: 'Home' },
           { text: info.name, value: 'Game' },
           { text: 'All Items', value: 'All Items' },
+        ];
+      case 'Your Items':
+        return [
+          { text: 'Home', value: 'Home' },
+          { text: info.name, value: 'Game' },
+          { text: 'Your Items', value: 'Your Items' },
+        ];
+      case 'Staking':
+        return [
+          { text: 'Home', value: 'Home' },
+          { text: info.name, value: 'Game' },
+          { text: 'Staking', value: 'Staking' },
+        ];
+      case 'Activity':
+        return [
+          { text: 'Home', value: 'Home' },
+          { text: info.name, value: 'Game' },
+          { text: 'Activity', value: 'Activity' },
         ];
       default:
         return [];
