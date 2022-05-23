@@ -1,6 +1,9 @@
 export function getNumberWithCommas(val: string | number, decimals?: number) {
   if (val) {
-    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return Number(val)
+      .toFixed(decimals || 2)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
   return '0';
   // return parseFloat(String(val))

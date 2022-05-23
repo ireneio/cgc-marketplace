@@ -1,11 +1,11 @@
 import { useAppDispatch, useAppSelector } from '@/store';
-import { CART_STORAGE_KEY } from '@/store/reducers/cart';
 import { getNumberWithCommas } from '@/utils/formatters';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import DropdownMenu from '../Shared/DropdownMenu';
 import SelectGroup from '../Shared/SelectGroup';
 import Cart from './Cart';
+import Filter from './Filter';
 import ListCard, { Attr } from './ListCard';
 import ListCardLoading from './ListCardLoading';
 import RowCard from './RowCard';
@@ -32,6 +32,15 @@ const MarketView = () => {
     status: false,
     itemId: '',
   });
+  const [filters, setFilters] = useState({
+    rankMin: '',
+    rankMax: '',
+    priceMin: '',
+    priceMax: '',
+    traitCount: '',
+    isBuyNow: false,
+    isRarityRanking: false,
+  });
 
   const isItemAddedToCart = (id: string | number) => {
     return cartItems.find((item: Attr) => String(item.id) === String(id));
@@ -55,7 +64,6 @@ const MarketView = () => {
   };
 
   const handleMoreInfo = (id: string | number) => {
-    console.log('handleMoreInfo', id);
     router.push(`/nft/${id}`);
   };
 
@@ -156,6 +164,44 @@ const MarketView = () => {
             {currentFilter === 'Cart' && (
               <DropdownMenu bottom={-510} left={-266}>
                 <Cart />
+              </DropdownMenu>
+            )}
+            {currentFilter === 'Filter' && (
+              <DropdownMenu bottom={-506} left={-266}>
+                <Filter
+                  onRankFilter={(min, max) =>
+                    setFilters((prev) => ({
+                      ...prev,
+                      rankMin: min,
+                      rankMax: max,
+                    }))
+                  }
+                  onPriceFilter={(min, max) =>
+                    setFilters((prev) => ({
+                      ...prev,
+                      priceMin: min,
+                      priceMax: max,
+                    }))
+                  }
+                  onTraitCountFilter={(count) =>
+                    setFilters((prev) => ({
+                      ...prev,
+                      traitCount: count,
+                    }))
+                  }
+                  onIsBuyNowFilter={(value) =>
+                    setFilters((prev) => ({
+                      ...prev,
+                      isBuyNow: value,
+                    }))
+                  }
+                  onIsRarityRankingFilter={(value) =>
+                    setFilters((prev) => ({
+                      ...prev,
+                      isRarityRanking: value,
+                    }))
+                  }
+                />
               </DropdownMenu>
             )}
             <SelectGroup

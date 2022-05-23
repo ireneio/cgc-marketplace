@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/store';
+import { getNumberWithCommas } from '@/utils/formatters';
 import { useMemo } from 'react';
 import Button from '../Shared/Button';
 import Divider from '../Shared/Divider';
@@ -53,7 +54,7 @@ const Cart = () => {
           <div className="mt-[16px]">
             <Divider />
           </div>
-          <div className="mt-[16px] h-[243px] pt-[2px] overflow-auto">
+          <div className="mt-[16px] h-[243px] pt-[2px] overflow-auto hide-scrollbar">
             {cartItems.map((item: Attr, index: number) => {
               return (
                 <div key={index} className="mb-[12px]">
@@ -112,7 +113,7 @@ const Cart = () => {
             <div>
               <div className="flex items-center">
                 <div className="text-[#FFFFFF] text-[24px] font-semibold">
-                  {totalPrice}
+                  {getNumberWithCommas(totalPrice)}
                 </div>
                 <div className="mt-[8px] ml-[4px]">
                   <img
@@ -124,7 +125,7 @@ const Cart = () => {
                 </div>
               </div>
               <div className="text-[14px] text-[#9497AA] text-right mt-[-4px]">
-                (${totalPriceToUSD})
+                (${getNumberWithCommas(totalPriceToUSD)})
               </div>
             </div>
           </div>
