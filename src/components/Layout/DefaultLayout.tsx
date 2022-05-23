@@ -74,6 +74,8 @@ const DefaultLayout = ({ children, title }: Props) => {
     dispatch({ type: 'SET_NAVIGATION_PATH', payload: val });
     if (val === 'Home' || val.includes('Explore')) {
       router.push('/');
+    } else if (val === 'Launchpad') {
+      router.push('/launchpad');
     }
   };
 
@@ -97,6 +99,7 @@ const DefaultLayout = ({ children, title }: Props) => {
     }
     if (isPathValid) {
       // TODO
+      dispatch({ type: 'SET_NAVIGATION_PATH', payload: resultPath });
       // handleSideBarPathUpdate(resultPath);
     }
   }, []);

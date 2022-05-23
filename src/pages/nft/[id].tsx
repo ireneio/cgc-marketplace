@@ -90,7 +90,7 @@ const Nft = () => {
           onToggleCart={(val) => setOpenCart(val)}
         />
       </div>
-      <div className="flex mt-[12px]">
+      <div className="flex mt-[12px] flex-wrap">
         <div style={{ flexBasis: '50%' }}>
           <div className="max-w-[552px]">
             <img
