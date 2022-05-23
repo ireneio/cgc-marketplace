@@ -40,6 +40,22 @@ export interface CollectionInfo {
     name: string;
     percentage: number;
   }[];
+  nextIdoInfo: {
+    price: number;
+    tokensForSale: number;
+    raise: number;
+    platform: string;
+    platformIcon: string;
+    lockUp: string;
+  };
+  previousIdos: {
+    price: number;
+    tokensForSale: number;
+    raise: number;
+    platform: string;
+    platformIcon: string;
+    lockUp: string;
+  }[];
 }
 
 const Collection = () => {
@@ -99,6 +115,40 @@ const Collection = () => {
       { name: 'Airdrop', percentage: 1 },
       { name: 'Ecosystem', percentage: 12 },
       { name: 'Reserve', percentage: 100 - 54.83 },
+    ],
+    nextIdoInfo: {
+      price: 0.0125,
+      tokensForSale: 152000000,
+      raise: 190000,
+      platform: 'Solana',
+      platformIcon: '/img/icon_unit_sol.png',
+      lockUp: '20% unlock on TGE, 6 months vesting, 0 months cliff',
+    },
+    previousIdos: [
+      {
+        price: 0.0125,
+        tokensForSale: 152000000,
+        raise: 190000,
+        platform: 'Solana',
+        platformIcon: '/img/icon_unit_sol.png',
+        lockUp: '20% unlock on TGE, 6 months vesting, 0 months cliff',
+      },
+      {
+        price: 0.0125,
+        tokensForSale: 152000000,
+        raise: 190000,
+        platform: 'Solana',
+        platformIcon: '/img/icon_unit_sol.png',
+        lockUp: '20% unlock on TGE, 6 months vesting, 0 months cliff',
+      },
+      {
+        price: 0.0125,
+        tokensForSale: 152000000,
+        raise: 190000,
+        platform: 'Solana',
+        platformIcon: '/img/icon_unit_sol.png',
+        lockUp: '20% unlock on TGE, 6 months vesting, 0 months cliff',
+      },
     ],
   });
 
