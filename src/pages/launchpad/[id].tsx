@@ -1,6 +1,7 @@
 import AllocationPanel from '@/components/Collections/AllocationPanel';
 import BasicInfoPanel from '@/components/Collections/BasicInfoPanel';
 import IdoPanel from '@/components/Collections/IdoPanel';
+import PageLoading from '@/components/Collections/PageLoading';
 import PresaleWhitelistPanel from '@/components/Collections/PresaleWhitelistPanel';
 import TokenomicsPanel from '@/components/Collections/TokenomicsPanel';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
@@ -10,7 +11,7 @@ import Tag from '@/components/Shared/Tag';
 import { useAppDispatch } from '@/store';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export interface CollectionInfo {
   name: string;
@@ -151,64 +152,78 @@ const Collection = () => {
       },
     ],
   });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    const tid = setTimeout(() => {
+      setLoading(false);
+      clearTimeout(tid);
+    }, 1200);
+  }, []);
 
   return (
     <DefaultLayout>
-      <div className="mb-[12px]">
-        <BreadCrumb
-          items={[
-            { text: 'Home', value: 'Home' },
-            { text: 'Launchpad', value: 'Launchpad' },
-            { text: info.name, value: 'Launchpad' },
-          ]}
-          currentValue={'Launchpad'}
-          onItemClick={(val) => {
-            if (val === 'Home') {
-              dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
-              router.push('/');
-            }
-          }}
-        />
-      </div>
-      <div className="flex items-center mb-[28px]">
-        <div className="text-[#FFFFFF] font-bold text-[20px]">
-          {info.name} [{info.symbol.toUpperCase()}]
-        </div>
-        <div className="ml-[20px] flex items-center">
-          {info.tags.map((tag, index) => {
-            return (
-              <Tag key={index} className="mr-[20px]">
-                {tag}
-              </Tag>
-            );
-          })}
-        </div>
-      </div>
-      <div className="mb-[28px]">
-        <Divider />
-      </div>
-      <div className="flex flex-wrap">
-        <div style={{ flexBasis: '50%' }}>
-          <div className="max-w-[552px]">
-            <img
-              src={info.image}
-              alt={info.name}
-              width="552px"
-              height="552px"
-              className="rounded-[5px]"
+      {loading && <PageLoading />}
+      {!loading && (
+        <div>
+          <div className="mb-[12px]">
+            <BreadCrumb
+              items={[
+                { text: 'Home', value: 'Home' },
+                { text: 'Launchpad', value: 'Launchpad' },
+                { text: info.name, value: 'Launchpad' },
+              ]}
+              currentValue={'Launchpad'}
+              onItemClick={(val) => {
+                if (val === 'Home') {
+                  dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
+                  router.push('/');
+                }
+              }}
             />
           </div>
-          <TokenomicsPanel info={info} />
+          <div className="flex items-center mb-[28px]">
+            <div className="text-[#FFFFFF] font-bold text-[20px]">
+              {info.name} [{info.symbol.toUpperCase()}]
+            </div>
+            <div className="ml-[20px] flex items-center">
+              {info.tags.map((tag, index) => {
+                return (
+                  <Tag key={index} className="mr-[20px]">
+                    {tag}
+                  </Tag>
+                );
+              })}
+            </div>
+          </div>
+          <div className="mb-[28px]">
+            <Divider />
+          </div>
+          <div className="flex flex-wrap">
+            <div style={{ flexBasis: '50%' }}>
+              <div className="max-w-[552px]">
+                <img
+                  src={info.image}
+                  alt={info.name}
+                  width="552px"
+                  height="552px"
+                  className="rounded-[5px]"
+                />
+              </div>
+              <TokenomicsPanel info={info} />
+            </div>
+            <div style={{ flexBasis: '50%' }} className="pl-[12px]">
+              <BasicInfoPanel info={info} />
+              <PresaleWhitelistPanel info={info} />
+              <IdoPanel info={info} />
+            </div>
+          </div>
+          <div className="mt-[24px]">
+            <AllocationPanel info={info} />
+          </div>
         </div>
-        <div style={{ flexBasis: '50%' }} className="pl-[12px]">
-          <BasicInfoPanel info={info} />
-          <PresaleWhitelistPanel info={info} />
-          <IdoPanel info={info} />
-        </div>
-      </div>
-      <div className="mt-[24px]">
-        <AllocationPanel info={info} />
-      </div>
+      )}
     </DefaultLayout>
   );
 };
