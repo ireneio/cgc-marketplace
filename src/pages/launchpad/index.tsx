@@ -15,6 +15,7 @@ const LOADING_ARR = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 interface LaunchpadItem {
   id: string | number;
   type: 'nft' | 'token';
+  image: string;
 }
 
 const Launchpad = () => {
@@ -25,6 +26,7 @@ const Launchpad = () => {
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
       id: item,
       type: item % 2 === 0 ? 'nft' : 'token',
+      image: '/img/ss_1.webp',
     })),
   );
   const [loading, setLoading] = useState(true);
@@ -91,7 +93,7 @@ const Launchpad = () => {
               <div key={index} className="mb-[20px] cursor-pointer">
                 <CollectionsCard
                   id={String(index)}
-                  image={'/img/ss_1.webp'}
+                  image={item.image}
                   onClick={(val) => handleCardClick(item)}
                 />
               </div>
