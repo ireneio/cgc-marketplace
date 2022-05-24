@@ -12,11 +12,18 @@ type Selection = 'Coming Soon' | 'Ended';
 
 const LOADING_ARR = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
+interface LaunchpadItem {
+  id: string | number;
+  type: 'nft' | 'token';
+}
+
 const Launchpad = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [currentSelection, setCurrentSelection] = useState('Coming Soon');
-  const [items, setItems] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  const [items, setItems] = useState<LaunchpadItem[]>(
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({ id: item, type: 'nft' })),
+  );
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -27,8 +34,12 @@ const Launchpad = () => {
     }, 1200);
   }, []);
 
-  const handleCardClick = (id: string) => {
-    router.push(`/launchpad/${id}`);
+  const handleCardClick = (item: LaunchpadItem) => {
+    if (item.type === 'token') {
+      router.push(`/launchpad/${item.id}`);
+    } else {
+      router.push(`/launchpad/nft/${item.id}`);
+    }
   };
 
   return (
@@ -78,7 +89,7 @@ const Launchpad = () => {
                 <CollectionsCard
                   id={String(index)}
                   image={'/img/ss_1.webp'}
-                  onClick={(val) => handleCardClick(val)}
+                  onClick={(val) => handleCardClick(item)}
                 />
               </div>
             );
