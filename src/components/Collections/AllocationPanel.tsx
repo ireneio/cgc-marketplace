@@ -68,7 +68,7 @@ const AllocationPanel = ({ info }: { info: CollectionInfo }) => {
         <div className="mt-[24px] flex items-center flex-wrap">
           <div
             style={{ flexBasis: '25%' }}
-            className="relative w-[180px] h-[180px] flex justify-center items-center text-[#FFFFFF]"
+            className="relative w-[180px] h-[180px] flex justify-center items-center text-[#FFFFFF] mb-[24px]"
           >
             <div className="absolute text-center top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
               <div className="text-[12px]">{currentSelected.name}</div>
