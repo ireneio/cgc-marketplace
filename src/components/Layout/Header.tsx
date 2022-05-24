@@ -3,24 +3,33 @@ import Link from 'next/link';
 import { useState } from 'react';
 import EvmConnectButton from '@/components/Shared/EvmConnectButton';
 import CathenConnectButton from '../Shared/CathenConnectButton';
+import { useAppDispatch } from '@/store';
+import { useRouter } from 'next/router';
 
 const Header = () => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   const [search, setSearch] = useState('');
 
   const handleSearchInput = (val: string) => {
     setSearch(val);
   };
 
+  const handleGoHomePage = () => {
+    dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
+    router.push('/');
+  };
+
   return (
     <div className="z-[10] shadow-lg bg-[#0C001C] fixed top-0 left-0 flex justify-between w-[100vw] h-[75px] items-center px-[25px] mx-auto max-w-[3840px]">
       <div className="mr-[12px] cursor-pointer">
-        <Link href={'/'} passHref>
+        <div onClick={() => handleGoHomePage()}>
           <img
             className="block h-8 w-auto"
             src={'/img/cgc-logo-white.png'}
             alt="Catheon Gaming"
           />
-        </Link>
+        </div>
       </div>
       <div style={{ flexBasis: '50%' }} className="relative">
         <input
