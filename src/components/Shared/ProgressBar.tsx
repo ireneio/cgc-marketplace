@@ -13,14 +13,18 @@ const ProgressBar = ({ percentage, width, showIndicator }: Props) => {
       <div
         className="absolute left-[0px] top-[0px] bg-[#FFFFFF] h-[5px] rounded-[5px]"
         style={{
-          width: width ? Number(width) * (percentage / 100) + 'px' : '',
+          width: width
+            ? Number(width) * (percentage / 100) + 'px'
+            : `${(100 * percentage) / 100}%`,
         }}
       ></div>
       {showIndicator && (
         <div
           className="absolute bottom-[-12px]"
           style={{
-            left: width ? Number(width) * (percentage / 100) - 7 + 'px' : '',
+            left: width
+              ? Number(width) * (percentage / 100) - 7 + 'px'
+              : `${(100 * percentage) / 100 - 1}%`,
           }}
         >
           <img

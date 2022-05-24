@@ -22,7 +22,10 @@ const Launchpad = () => {
   const router = useRouter();
   const [currentSelection, setCurrentSelection] = useState('Coming Soon');
   const [items, setItems] = useState<LaunchpadItem[]>(
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({ id: item, type: 'nft' })),
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
+      id: item,
+      type: item % 2 === 0 ? 'nft' : 'token',
+    })),
   );
   const [loading, setLoading] = useState(true);
 

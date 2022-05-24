@@ -32,7 +32,7 @@ const Button = ({
           ? 'transparent'
           : 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
       }}
-      className={twMerge('rounded-[5px]  px-[1px] py-[1px]')}
+      className={twMerge('rounded-[5px]  px-[1px] py-[1px] text-center')}
     >
       <button
         // className={twMerge(
@@ -40,13 +40,14 @@ const Button = ({
         //   className,
         // )}
         className={twMerge(
-          'py-[8px] px-[32px] font-bold text-[#FFFFFF] cursor-pointer rounded-[5px] flex items-center w-full',
+          'py-[8px] px-[32px] font-bold text-[#FFFFFF] cursor-pointer rounded-[5px] flex items-center w-full text-center',
           // className,
         )}
         style={{
           cursor: disabled ? 'not-allowed' : 'pointer',
           ...style,
           background: link ? 'transparent' : '#13002B',
+          textAlign: 'center',
         }}
         onClick={() => onClick && onClick()}
         disabled={disabled}

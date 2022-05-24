@@ -1,3 +1,6 @@
+import NftInfoPanel from '@/components/Collections/NftInfoPanel';
+import NftPresalePanel from '@/components/Collections/NftPresalePanel';
+import NftPublicSalePanel from '@/components/Collections/NftPublicSalePanel';
 import PageLoading from '@/components/Collections/PageLoading';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
 import BreadCrumb from '@/components/Shared/Breadcrumb';
@@ -57,7 +60,7 @@ const LaunchpadNft = () => {
     },
     preSale: {
       whitelistTokens: 1200,
-      maxTokens: 5000,
+      maxTokens: 1,
       price: 1.2,
       priceToUSD: 1200,
       startDate: dayjs().toISOString(),
@@ -133,7 +136,9 @@ const LaunchpadNft = () => {
               </div>
             </div>
             <div style={{ flexBasis: '50%' }} className="pl-[12px]">
-              // TODO
+              <NftInfoPanel info={info} />
+              <NftPresalePanel info={info} />
+              <NftPublicSalePanel info={info} />
             </div>
           </div>
         </div>
