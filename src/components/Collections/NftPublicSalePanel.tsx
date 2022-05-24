@@ -3,6 +3,7 @@ import { getNumberWithCommas } from '@/utils/formatters';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useMemo } from 'react';
+import Countdown from '../Shared/Countdown';
 import Divider from '../Shared/Divider';
 import ProgressBar from '../Shared/ProgressBar';
 import Tag from '../Shared/Tag';
@@ -22,7 +23,9 @@ const NftPublicSalePanel = ({ info }: { info: LaunchpadNftInfo }) => {
         <div className="text-[#FFFFFF] font-bold text-[16px] flex items-center">
           <div>Public Sale</div>
           <div className="ml-auto">
-            <Tag>{dayjs(info.publicSale.startDate).fromNow()}</Tag>
+            <Tag>
+              <Countdown endDate={info.publicSale.endDate} />
+            </Tag>
           </div>
         </div>
         <div className="mt-[14px]">

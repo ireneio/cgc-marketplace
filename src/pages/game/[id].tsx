@@ -96,11 +96,15 @@ const Game = () => {
       <div className="mb-[12px]">
         <BreadCrumb
           items={breadCrumbItems}
-          currentValue={'Game'}
+          currentValue={
+            currentSelection === 'ABOUT' ? 'Game' : currentSelection
+          }
           onItemClick={(val) => {
             if (val === 'Home') {
               dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
               router.push('/');
+            } else if (val === 'Game') {
+              handleSelect('ABOUT');
             }
           }}
         />

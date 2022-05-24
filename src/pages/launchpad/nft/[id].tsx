@@ -68,7 +68,7 @@ const LaunchpadNft = () => {
       price: 1.2,
       priceToUSD: 1200,
       startDate: dayjs().toISOString(),
-      endDate: dayjs().toISOString(),
+      endDate: dayjs('2022-08-01').toISOString(),
     },
     publicSale: {
       mintedTokens: 1200,
@@ -76,7 +76,7 @@ const LaunchpadNft = () => {
       price: 1.2,
       priceToUSD: 1200,
       startDate: dayjs().toISOString(),
-      endDate: dayjs().toISOString(),
+      endDate: dayjs('2022-05-31').toISOString(),
     },
   });
   const [loading, setLoading] = useState(true);
@@ -99,13 +99,19 @@ const LaunchpadNft = () => {
               items={[
                 { text: 'Home', value: 'Home' },
                 { text: 'Launchpad', value: 'Launchpad' },
-                { text: info.name, value: 'Launchpad' },
+                { text: info.name, value: info.name },
               ]}
-              currentValue={'Launchpad'}
+              currentValue={info.name}
               onItemClick={(val) => {
                 if (val === 'Home') {
                   dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
                   router.push('/');
+                } else if (val === 'Launchpad') {
+                  dispatch({
+                    type: 'SET_NAVIGATION_PATH',
+                    payload: 'Launchpad',
+                  });
+                  router.push('/launchpad');
                 }
               }}
             />
@@ -131,13 +137,6 @@ const LaunchpadNft = () => {
             <div style={{ flexBasis: '50%' }} className="flex-1">
               <div className="max-w-[552px] mb-[30px]">
                 <ImageCarousel images={info.images} />
-                {/* <img
-                  src={info.image}
-                  alt={info.name}
-                  width="552px"
-                  height="552px"
-                  className="rounded-[5px]"
-                /> */}
               </div>
             </div>
             <div style={{ flexBasis: '50%' }} className="pl-[12px] flex-1">
