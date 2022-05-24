@@ -1,5 +1,6 @@
 import { LaunchpadNftInfo } from '@/pages/launchpad/nft/[id]';
 import { getNumberWithCommas } from '@/utils/formatters';
+import dayjs from 'dayjs';
 import Divider from '../Shared/Divider';
 import Tag from '../Shared/Tag';
 
@@ -9,7 +10,11 @@ const NftPresalePanel = ({ info }: { info: LaunchpadNftInfo }) => {
       <div>
         <div className="text-[#FFFFFF] font-bold text-[16px] flex items-center">
           <div>Presale Whitelist</div>
-          <div className="ml-auto"></div>
+          <div className="ml-auto uppercase font-normal">
+            <Tag>
+              {dayjs(info.preSale.endDate) > dayjs() ? 'ongoing' : 'ended'}
+            </Tag>
+          </div>
         </div>
         <div className="mt-[14px]">
           <Divider />
