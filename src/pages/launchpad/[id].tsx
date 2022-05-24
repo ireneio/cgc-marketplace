@@ -56,6 +56,8 @@ export interface CollectionInfo {
     platform: string;
     platformIcon: string;
     lockUp: string;
+    startDate: string;
+    endDate: string;
   }[];
 }
 
@@ -133,6 +135,8 @@ const Collection = () => {
         platform: 'Solana',
         platformIcon: '/img/icon_unit_sol.png',
         lockUp: '20% unlock on TGE, 6 months vesting, 0 months cliff',
+        startDate: dayjs().toISOString(),
+        endDate: dayjs().toISOString(),
       },
       {
         price: 0.0125,
@@ -141,6 +145,8 @@ const Collection = () => {
         platform: 'Solana',
         platformIcon: '/img/icon_unit_sol.png',
         lockUp: '20% unlock on TGE, 6 months vesting, 0 months cliff',
+        startDate: dayjs().toISOString(),
+        endDate: dayjs().toISOString(),
       },
       {
         price: 0.0125,
@@ -149,6 +155,8 @@ const Collection = () => {
         platform: 'Solana',
         platformIcon: '/img/icon_unit_sol.png',
         lockUp: '20% unlock on TGE, 6 months vesting, 0 months cliff',
+        startDate: dayjs().toISOString(),
+        endDate: dayjs().toISOString(),
       },
     ],
   });
