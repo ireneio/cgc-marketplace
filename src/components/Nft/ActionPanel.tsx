@@ -61,8 +61,18 @@ const ActionPanel = ({
             <Button
               onClick={() => handleAddToCart()}
               style={{ paddingLeft: 12, paddingRight: 12 }}
+              disabled={isItemAddedToCart}
             >
-              <img src="/img/icon_cart.png" alt="cart" width={21} height={21} />
+              {isItemAddedToCart ? (
+                'In Cart'
+              ) : (
+                <img
+                  src="/img/icon_cart.png"
+                  alt="cart"
+                  width={21}
+                  height={21}
+                />
+              )}
             </Button>
           </div>
           <div className="ml-[20px]">
