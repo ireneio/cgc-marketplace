@@ -21,35 +21,37 @@ const IdoPanel = ({ info }: { info: CollectionInfo }) => {
     <Tag className="mt-[30px] px-[28px] py-[24px]">
       <div>
         <div>
-          <div
-            className="text-[#FFFFFF] font-bold text-[16px] flex items-center cursor-pointer"
-            onClick={() => handleShowIndex(0)}
-          >
-            <div>IDO COMING SOON:</div>
-            <div className="ml-[8px]">
-              {dayjs(info.nextTokenSaleStartDate).format('DD MMM YYYY')}-
-              {dayjs(info.nextTokenSaleEndDate).format('DD MMM YYYY')}
+          {info.nextIdoInfo && (
+            <div
+              className="text-[#FFFFFF] font-bold text-[16px] flex items-center cursor-pointer"
+              onClick={() => handleShowIndex(0)}
+            >
+              <div>IDO COMING SOON:</div>
+              <div className="ml-[8px]">
+                {dayjs(info.nextTokenSaleStartDate).format('DD MMM YYYY')}-
+                {dayjs(info.nextTokenSaleEndDate).format('DD MMM YYYY')}
+              </div>
+              <div className="ml-auto">
+                {currentShowIndex === 0 && (
+                  <img
+                    src="/img/icon_chevron_up.png"
+                    alt="chevron up"
+                    width={16}
+                    height={16}
+                  />
+                )}
+                {currentShowIndex !== 0 && (
+                  <img
+                    src="/img/icon_chevron_down.png"
+                    alt="chevron down"
+                    width={16}
+                    height={16}
+                  />
+                )}
+              </div>
             </div>
-            <div className="ml-auto">
-              {currentShowIndex === 0 && (
-                <img
-                  src="/img/icon_chevron_up.png"
-                  alt="chevron up"
-                  width={16}
-                  height={16}
-                />
-              )}
-              {currentShowIndex !== 0 && (
-                <img
-                  src="/img/icon_chevron_down.png"
-                  alt="chevron down"
-                  width={16}
-                  height={16}
-                />
-              )}
-            </div>
-          </div>
-          {currentShowIndex === 0 && (
+          )}
+          {currentShowIndex === 0 && info.nextIdoInfo && (
             <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }}>
               <div className="mt-[14px]">
                 <Divider />
