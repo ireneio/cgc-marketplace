@@ -17,6 +17,10 @@ const NftPublicSalePanel = ({ info }: { info: LaunchpadNftInfo }) => {
     );
   }, [info.publicSale.mintedTokens, info.publicSale.maxTokens]);
 
+  const isEnded = useMemo(() => {
+    return dayjs(info.publicSale.endDate) < dayjs();
+  }, [info.publicSale.endDate]);
+
   return (
     <Tag className="mt-[30px] px-[28px] py-[24px]">
       <div>
@@ -24,7 +28,11 @@ const NftPublicSalePanel = ({ info }: { info: LaunchpadNftInfo }) => {
           <div>Public Sale</div>
           <div className="ml-auto">
             <Tag>
-              <Countdown endDate={info.publicSale.endDate} />
+              {isEnded ? (
+                'ENDED'
+              ) : (
+                <Countdown endDate={info.publicSale.endDate} />
+              )}
             </Tag>
           </div>
         </div>

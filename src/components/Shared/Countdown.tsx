@@ -35,7 +35,7 @@ const Countdown = ({ endDate }: { endDate?: string }) => {
     const h = Math.floor((_toSeconds / 3600) % 24);
     const m = Math.floor(((_toSeconds - h * 3600) / 60) % 60);
     const s = Math.floor(_toSeconds % 60);
-    return `${d}d ${h}hr ${m}m ${s + 1}s`;
+    return `${d}d ${h}hr ${m}m ${s}s`;
   }, [countdown]);
 
   return <div>{countdownDisplay}</div>;
