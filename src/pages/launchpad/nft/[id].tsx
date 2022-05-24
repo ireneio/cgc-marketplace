@@ -139,7 +139,7 @@ const LaunchpadNft = () => {
                 <ImageCarousel images={info.images} />
               </div>
             </div>
-            <div style={{ flexBasis: '50%' }} className="pl-[12px] flex-1">
+            <div style={{ flexBasis: '50%' }} className="pl-[30px] flex-1">
               <NftInfoPanel info={info} />
               <NftPresalePanel info={info} />
               <NftPublicSalePanel info={info} />

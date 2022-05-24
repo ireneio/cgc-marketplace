@@ -225,7 +225,7 @@ const Collection = () => {
               </div>
               <TokenomicsPanel info={info} />
             </div>
-            <div style={{ flexBasis: '50%' }} className="pl-[12px] flex-1">
+            <div style={{ flexBasis: '50%' }} className="pl-[30px] flex-1">
               <BasicInfoPanel info={info} />
               <PresaleWhitelistPanel info={info} />
               <IdoPanel info={info} />

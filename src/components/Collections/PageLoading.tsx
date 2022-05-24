@@ -24,7 +24,7 @@ const PageLoading = () => {
             <Skeleton className="w-full h-[200px]" />
           </div>
         </div>
-        <div style={{ flexBasis: '50%' }} className="pl-[12px]">
+        <div style={{ flexBasis: '50%' }} className="pl-[30px]">
           <div>
             <Skeleton className="w-full h-[200px]" />
           </div>
