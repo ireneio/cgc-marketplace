@@ -1,3 +1,4 @@
+import ImageCarousel from '@/components/Collections/ImageCarousel';
 import NftInfoPanel from '@/components/Collections/NftInfoPanel';
 import NftPresalePanel from '@/components/Collections/NftPresalePanel';
 import NftPublicSalePanel from '@/components/Collections/NftPublicSalePanel';
@@ -15,7 +16,7 @@ export interface LaunchpadNftInfo {
   name: string;
   symbol: string;
   tags: string[];
-  image: string;
+  images: string[];
   logo: string;
   description: string;
   nextMintStartDate: string;
@@ -46,7 +47,10 @@ const LaunchpadNft = () => {
     name: 'Tank Metaverse',
     symbol: 'TNK',
     tags: ['Upcoming', 'IDO'],
-    image: '/img/launchpad_image_placeholder.png',
+    images: [
+      '/img/launchpad_image_placeholder.png',
+      '/img/launchpad_image_placeholder.png',
+    ],
     logo: '/img/launchpad_logo_placeholder.png',
     description:
       'Tank Metaverse is a multi-platform and cross-reality ecosystem for true immersion and qualitative interaction with the game world. Various platforms will be implemented in stages. Tank Metaverse is a Worldwide NFT metaverse for play‑to‑earn and fun.',
@@ -126,13 +130,14 @@ const LaunchpadNft = () => {
           <div className="flex flex-wrap">
             <div style={{ flexBasis: '50%' }}>
               <div className="max-w-[552px]">
-                <img
+                <ImageCarousel images={info.images} />
+                {/* <img
                   src={info.image}
                   alt={info.name}
                   width="552px"
                   height="552px"
                   className="rounded-[5px]"
-                />
+                /> */}
               </div>
             </div>
             <div style={{ flexBasis: '50%' }} className="pl-[12px]">
