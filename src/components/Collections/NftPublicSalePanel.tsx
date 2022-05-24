@@ -22,7 +22,7 @@ const NftPublicSalePanel = ({ info }: { info: LaunchpadNftInfo }) => {
         <div className="text-[#FFFFFF] font-bold text-[16px] flex items-center">
           <div>Public Sale</div>
           <div className="ml-auto">
-            {dayjs(info.publicSale.startDate).fromNow()}
+            <Tag>{dayjs(info.publicSale.startDate).fromNow()}</Tag>
           </div>
         </div>
         <div className="mt-[14px]">
