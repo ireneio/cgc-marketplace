@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import consoleHelper from '@/utils/consoleHelper';
 import Button from '../Shared/Button';
@@ -15,6 +15,13 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
   const [username, setUsername] = useState(``);
   const [password, setPassword] = useState(``);
   const [disableSignUp] = useState(true);
+
+  useEffect(() => {
+    if (isOpen) {
+      setUsername('');
+      setPassword('');
+    }
+  }, [isOpen]);
 
   const handleLoginButtonClick = async (): Promise<boolean | undefined> => {
     if (username && password) {
