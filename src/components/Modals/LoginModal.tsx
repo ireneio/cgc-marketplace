@@ -169,6 +169,7 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
                         }
                       });
                     }}
+                    disabled={username === '' || password === ''}
                   >
                     Login
                   </Button>
