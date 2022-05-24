@@ -27,6 +27,8 @@ const Button = ({
       style={{
         background: link
           ? 'transparent'
+          : disabled
+          ? '#AAAAAA'
           : 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
       }}
       className={twMerge('rounded-[5px]  px-[1px] py-[1px] text-center')}
@@ -41,7 +43,9 @@ const Button = ({
           ...style,
           background: link
             ? 'transparent'
-            : disabled || disableHoverEffect
+            : disabled
+            ? '#AAAAAA'
+            : disableHoverEffect
             ? '#13002B'
             : hover
             ? 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)'
