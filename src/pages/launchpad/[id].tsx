@@ -42,7 +42,7 @@ export interface CollectionInfo {
     name: string;
     percentage: number;
   }[];
-  nextIdoInfo: {
+  nextIdoInfo?: {
     price: number;
     tokensForSale: number;
     raise: number;
@@ -213,7 +213,7 @@ const Collection = () => {
             <Divider />
           </div>
           <div className="flex flex-wrap">
-            <div style={{ flexBasis: '50%' }}>
+            <div style={{ flexBasis: '50%' }} className="flex-1">
               <div className="max-w-[552px]">
                 <ImageCarousel images={info.images} />
                 {/* <img
@@ -226,7 +226,7 @@ const Collection = () => {
               </div>
               <TokenomicsPanel info={info} />
             </div>
-            <div style={{ flexBasis: '50%' }} className="pl-[12px]">
+            <div style={{ flexBasis: '50%' }} className="pl-[12px] flex-1">
               <BasicInfoPanel info={info} />
               <PresaleWhitelistPanel info={info} />
               <IdoPanel info={info} />

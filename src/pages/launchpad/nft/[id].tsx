@@ -128,8 +128,8 @@ const LaunchpadNft = () => {
             <Divider />
           </div>
           <div className="flex flex-wrap">
-            <div style={{ flexBasis: '50%' }}>
-              <div className="max-w-[552px]">
+            <div style={{ flexBasis: '50%' }} className="flex-1">
+              <div className="max-w-[552px] mb-[30px]">
                 <ImageCarousel images={info.images} />
                 {/* <img
                   src={info.image}
@@ -140,7 +140,7 @@ const LaunchpadNft = () => {
                 /> */}
               </div>
             </div>
-            <div style={{ flexBasis: '50%' }} className="pl-[12px]">
+            <div style={{ flexBasis: '50%' }} className="pl-[12px] flex-1">
               <NftInfoPanel info={info} />
               <NftPresalePanel info={info} />
               <NftPublicSalePanel info={info} />

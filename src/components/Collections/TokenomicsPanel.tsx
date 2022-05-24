@@ -5,7 +5,7 @@ import Tag from '../Shared/Tag';
 
 const TokenomicsPanel = ({ info }: { info: CollectionInfo }) => {
   return (
-    <Tag className="mt-[30px] px-[28px] py-[24px]">
+    <Tag className="mb-[30px] mt-[30px] px-[28px] py-[24px]">
       <div>
         <div className="text-[#FFFFFF] font-bold text-[16px]">Tokenomics</div>
         <div className="mt-[14px]">
