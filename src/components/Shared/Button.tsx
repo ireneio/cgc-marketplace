@@ -9,6 +9,7 @@ interface Props {
   disabled?: boolean;
   disableHoverEffect?: boolean;
   link?: boolean;
+  filled?: boolean;
 }
 
 const Button = ({
@@ -19,6 +20,7 @@ const Button = ({
   disabled,
   disableHoverEffect,
   link,
+  filled,
 }: Props) => {
   const [hover, setHover] = useState(false);
 
@@ -35,19 +37,24 @@ const Button = ({
     >
       <button
         className={twMerge(
-          'py-[8px] px-[32px] font-bold text-[#FFFFFF] cursor-pointer rounded-[5px] flex items-center w-full text-center',
+          'py-[8px] px-[32px] font-bold text-[#FFFFFF] cursor-pointer rounded-[5px] flex items-center w-full text-center justify-center',
           // className,
         )}
         style={{
+          opacity: disabled ? '0.55' : '1',
           cursor: disabled ? 'not-allowed' : 'pointer',
           ...style,
           background: link
             ? 'transparent'
             : disabled
-            ? '#AAAAAA'
+            ? 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)'
             : disableHoverEffect
             ? '#13002B'
-            : hover
+            : hover && !filled
+            ? 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)'
+            : hover && filled
+            ? '#13002B'
+            : filled
             ? 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)'
             : '#13002B',
           textAlign: 'center',

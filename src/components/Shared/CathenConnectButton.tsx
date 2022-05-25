@@ -34,7 +34,8 @@ const CathenConnectButton = () => {
     <div>
       <Button
         onClick={handleConnect}
-        className="relative flex w-full text-left px-4 py-2 text-sm bg-transparent text-white"
+        className=" flex w-full text-left px-4 py-2 text-sm bg-transparent text-white"
+        style={{ position: 'relative' }}
       >
         <img
           src="/img/cgc-logo-no-text.png"

@@ -52,12 +52,12 @@ const Header = () => {
         <div className="">
           <CathenConnectButton />
         </div>
-        <div className="ml-[18px] hidden lg:block">
+        {/* <div className="ml-[18px] hidden lg:block">
           <WalletMultiButton />
         </div>
         <div className="ml-[12px] hidden lg:block">
           <EvmConnectButton />
-        </div>
+        </div> */}
       </div>
     </div>
   );
