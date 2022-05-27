@@ -8,18 +8,18 @@ const SIDE_BAR_ITEMS = [
   {
     text: 'Edit Profile',
     value: 'Edit Profile',
-    icon: '/img/icon_home.png',
+    icon: '/img/icon_user.png',
   },
   {
     text: 'Notifications',
     value: 'Notifications',
-    icon: '/img/icon_compass.png',
+    icon: '/img/icon_bell.png',
   },
-  { text: 'Choose Plan', value: 'Choose Plan', icon: '/img/icon_sell.png' },
+  { text: 'Choose Plan', value: 'Choose Plan', icon: '/img/icon_plan.png' },
   {
     text: 'Security',
     value: 'Security',
-    icon: '/img/icon_rocket.png',
+    icon: '/img/icon_shield.png',
   },
 ];
 
@@ -41,7 +41,7 @@ const ProfileView = () => {
     },
   });
 
-  const handleSave = async () => {};
+  const handleSave = async () => { };
 
   return (
     <div className="flex">
