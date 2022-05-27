@@ -52,7 +52,7 @@ const ProfileView = () => {
           onItemClick={(value) => setSidebar(value)}
         />
       </div>
-      <div className="ml-[40px]">
+      <div className="ml-[40px] border-l-[2px] border-[#290030] pl-[40px]">
         {sidebar === 'Edit Profile' && (
           <div>
             <div className="flex items-center">
