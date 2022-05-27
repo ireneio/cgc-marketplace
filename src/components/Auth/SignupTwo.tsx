@@ -12,7 +12,7 @@ const SignupTwo = ({
   return (
     <motion.div initial={{ x: '-100%' }} animate={{ x: 0 }}>
       <div className="mb-[135px] flex justify-center">
-        <PrimaryGradientText className="hover:underline">
+        <PrimaryGradientText className="hover:underline cursor-pointer">
           Resend Link
         </PrimaryGradientText>
       </div>
