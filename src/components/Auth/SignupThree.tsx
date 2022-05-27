@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { useFormContext } from 'react-hook-form';
 import Button from '../Shared/Button';
 
@@ -13,7 +14,7 @@ const SignupThree = ({
   const confirmPassword = watch('confirmPassword');
 
   return (
-    <div>
+    <motion.div initial={{ x: '-100%' }} animate={{ x: 0 }}>
       <div className="py-8 space-y-6 px-[24px] min-h-full w-full flex flex-col justify-center">
         <div>
           <div className="mt-1">
@@ -55,7 +56,7 @@ const SignupThree = ({
           <Button onClick={() => onCancel()}>Cancel</Button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

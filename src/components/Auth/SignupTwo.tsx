@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import Button from '../Shared/Button';
 import PrimaryGradientText from '../Shared/PrimaryGradientText';
 
@@ -9,7 +10,7 @@ const SignupTwo = ({
   onCancel: () => void;
 }) => {
   return (
-    <div>
+    <motion.div initial={{ x: '-100%' }} animate={{ x: 0 }}>
       <div className="mb-[135px] flex justify-center">
         <PrimaryGradientText className="hover:underline">
           Resend Link
@@ -21,7 +22,7 @@ const SignupTwo = ({
           <Button onClick={() => onCancel()}>Cancel</Button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

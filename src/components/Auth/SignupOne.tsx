@@ -1,5 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 import Button from '../Shared/Button';
+import { motion } from 'framer-motion';
 
 const SignupOne = ({
   onNextStep,
@@ -13,7 +14,7 @@ const SignupOne = ({
   const email = watch('email');
 
   return (
-    <div>
+    <motion.div initial={{ x: '-100%' }} animate={{ x: 0 }}>
       <div className="py-8 space-y-6 px-[24px] min-h-full w-full flex flex-col justify-center">
         <div>
           <div className="mt-1">
@@ -56,7 +57,7 @@ const SignupOne = ({
           <Button onClick={() => onCancel()}>Cancel</Button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

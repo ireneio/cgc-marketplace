@@ -161,7 +161,7 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
                   <div className="text-center mt-[12px] px-[24px]">{title}</div>
                 </Dialog.Title>
                 <div className="mt-0 px-[24px]">
-                  <div className="min-h-full w-full flex flex-col justify-center">
+                  <div className="min-h-full w-full flex flex-col justify-center overflow-hidden">
                     {view === 'login' && (
                       <Login
                         onCancel={() => setIsOpen(false)}
