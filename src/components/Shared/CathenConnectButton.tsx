@@ -49,8 +49,8 @@ const CathenConnectButton = () => {
         {dropdown && (
           <DropdownMenu
             items={[
+              { text: 'cgPass', value: 'Account' },
               { text: 'Logout', value: 'Logout' },
-              { text: 'My Info', value: 'Account' },
             ]}
             onItemClick={(val) => handleDropdownClick(val)}
           />
