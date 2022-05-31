@@ -41,7 +41,9 @@ const ProfileView = () => {
     },
   });
 
-  const handleSave = async () => { };
+  const handleSave = async () => {
+    console.log('handleSave');
+  };
 
   return (
     <div className="flex">
