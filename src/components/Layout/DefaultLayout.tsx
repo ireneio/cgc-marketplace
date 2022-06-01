@@ -6,7 +6,6 @@ import Sidebar from './Sidebar';
 import seo from '../../data/seo';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
-import Snackbar from '../Shared/Snackbar';
 import dynamic from 'next/dynamic';
 
 interface Props {

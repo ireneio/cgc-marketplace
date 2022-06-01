@@ -118,9 +118,9 @@ const Game = () => {
             items={[
               { text: 'About', value: 'About' },
               { text: 'All Items', value: 'All Items' },
-              { text: 'Your Items', value: 'Your Items' },
-              { text: 'Activity', value: 'Activity' },
-              { text: 'Staking', value: 'Staking' },
+              // { text: 'Your Items', value: 'Your Items' },
+              // { text: 'Activity', value: 'Activity' },
+              // { text: 'Staking', value: 'Staking' },
             ]}
             currentValue={currentSelection}
             onItemClick={(value) => handleSelect(value as Selection)}
