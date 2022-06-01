@@ -31,6 +31,7 @@ const UiKit = () => {
             marketCap={'10000'}
             coinSupply={'100000000000'}
             onPlay={() => console.log('onPlay')}
+            onFirstItemMouseOver={() => console.log()}
           />
         </div>
       </section>
