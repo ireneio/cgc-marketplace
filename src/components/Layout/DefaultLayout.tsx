@@ -135,6 +135,10 @@ const DefaultLayout = ({ children, title }: Props) => {
           <link rel="icon" href={seo.linkIcon32x32} sizes="32x32" />
           <link rel="icon" href={seo.linkIcon192x192} sizes="192x192" />
           <link rel="apple-touch-icon" href={seo.linkIconAppleTouchIcon} />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+          ></link>
         </Head>
         <DynamicSnackbar
           text={snackbarText}
@@ -142,16 +146,18 @@ const DefaultLayout = ({ children, title }: Props) => {
           title={snackbarTitle}
         />
         <Header />
-        <div className="flex mt-[75px]">
-          <div style={{ flexBasis: '15%' }}>
+        <div className="flex mt-[75px] relative">
+          <div className="w-[200px] absolute top-0 left-0 hidden md:block">
             <Sidebar
               items={SIDE_BAR_ITEMS}
               currentValue={sideBarPath}
               onItemClick={(value) => handleSideBarPathUpdate(value)}
             />
           </div>
-          <div style={{ flexBasis: '85%' }}>
-            <div className="px-[24px] pb-[24px] max-w-[80vw]">{children}</div>
+          <div className="flex-1">
+            <div className="px-[24px] pb-[24px] max-w-[1080px] mx-auto">
+              {children}
+            </div>
           </div>
         </div>
       </div>

@@ -44,13 +44,19 @@ const Index = () => {
       </div>
       {sideBarPath === 'Home' && <LandingCarousel />}
       {(sideBarPath === 'Home' || sideBarPath === 'Explore/Latest') && (
-        <LatestGames />
+        <div className="mt-[40px]">
+          <LatestGames />
+        </div>
       )}
       {(sideBarPath === 'Home' || sideBarPath === 'Explore/Popular') && (
-        <PopularGames />
+        <div className="mt-[40px]">
+          <PopularGames />
+        </div>
       )}
       {(sideBarPath === 'Home' || sideBarPath === 'Explore/All') && (
-        <AllGames />
+        <div className="mt-[40px]">
+          <AllGames />
+        </div>
       )}
       {sideBarPath === 'Home' && <LatestTransactions />}
       {sideBarPath === 'Home' && <LatestSales />}

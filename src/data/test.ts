@@ -37,6 +37,32 @@ const collections = [
     description:
       'Collect, breed, and train your own unique SolChicks in a revolutionary gaming ecosystem.',
   },
+  {
+    id: 4,
+    splashSrc:
+      'https://catheongaming.com/wp-content/uploads/2022/03/angrymals-main.jpg',
+    logoSrc:
+      'https://catheongaming.com/wp-content/uploads/2022/02/Angrymals-Logo.png',
+    videoSrc:
+      'https://angrymals.io/wp-content/uploads/2022/03/angrymals-trailer.mp4',
+    name: 'Angrymals',
+    tags: ['Solana', 'NFT'],
+    description:
+      'Inspired by Worms and Angry Birds, this new crazy videogame lets you challenge your friends with a barrage of carrots, exhausts and sperm whales!',
+  },
+  {
+    id: 5,
+    splashSrc:
+      'https://catheongaming.com/wp-content/uploads/2022/03/angrymals-main.jpg',
+    logoSrc:
+      'https://catheongaming.com/wp-content/uploads/2022/02/Angrymals-Logo.png',
+    videoSrc:
+      'https://angrymals.io/wp-content/uploads/2022/03/angrymals-trailer.mp4',
+    name: 'Angrymals',
+    tags: ['Solana', 'NFT'],
+    description:
+      'Inspired by Worms and Angry Birds, this new crazy videogame lets you challenge your friends with a barrage of carrots, exhausts and sperm whales!',
+  },
 ];
 
 export const testData = {

@@ -1,7 +1,4 @@
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
-import Link from 'next/link';
 import { useState } from 'react';
-import EvmConnectButton from '@/components/Shared/EvmConnectButton';
 import CathenConnectButton from '../Shared/CathenConnectButton';
 import { useAppDispatch } from '@/store';
 import { useRouter } from 'next/router';
@@ -22,7 +19,7 @@ const Header = () => {
 
   return (
     <div className="z-[10] shadow-lg bg-[#0C001C] fixed top-0 left-0 flex justify-between w-[100vw] h-[75px] items-center px-[25px] mx-auto max-w-[3840px]">
-      <div className="mr-[12px] cursor-pointer">
+      <div className="cursor-pointer" style={{ width: '150.87px' }}>
         <div onClick={() => handleGoHomePage()}>
           <img
             className="block h-8 w-auto"
@@ -31,7 +28,7 @@ const Header = () => {
           />
         </div>
       </div>
-      <div style={{ flexBasis: '50%' }} className="relative">
+      <div style={{ flexBasis: '68%' }} className="relative">
         <input
           type="text"
           value={search}

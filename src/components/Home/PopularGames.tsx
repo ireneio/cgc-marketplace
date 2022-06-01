@@ -1,12 +1,12 @@
 import { testData } from '@/data/test';
-import { useAppDispatch } from '@/store';
+import { useAppDispatch, useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import ButtonLink from '../Shared/ButtonLink';
-import FloatingCard from '../Shared/FloatingCard';
 import LoadingNetflixCard from '../Shared/LoadingNetflixCard';
 import SectionTitle from '../Shared/SectionTitle';
 import SelectGroup from '../Shared/SelectGroup';
+import FloatingCardWrapper from './FloatingCardWrapper';
 
 const PopularGames = () => {
   const dispatch = useAppDispatch();
@@ -14,6 +14,7 @@ const PopularGames = () => {
   const [currentSelection, setCurrentSelection] = useState('m');
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const sideBarPath = useAppSelector((state) => state.layout.navigation.path);
 
   useEffect(() => {
     const _tid = setTimeout(() => {
@@ -26,7 +27,7 @@ const PopularGames = () => {
   });
 
   const handleOnPlay = (id: string | number) => {
-    router.push(`/game/${id}`);
+    router.push(`/collection/${id}`);
   };
 
   return (
@@ -44,24 +45,8 @@ const PopularGames = () => {
           onItemClick={(value) => setCurrentSelection(value)}
         />
       </div>
-      <div className="mt-[24px] pt-[24px] overflow-y-visible mr-[-24px] flex floating-card-wrapper hide-scrollbar">
-        {!loading &&
-          items.map((item, index) => {
-            return (
-              <div key={index}>
-                <FloatingCard
-                  bg={item.splashSrc}
-                  bgOnHover={item.videoSrc}
-                  title={item.description}
-                  categories={item.tags}
-                  network={'SOL'}
-                  marketCap={'10000'}
-                  coinSupply={'100000000000'}
-                  onPlay={() => handleOnPlay(item.id)}
-                />
-              </div>
-            );
-          })}
+      <div className="mt-[24px] pt-[24px] overflow-y-visible mr-[24px] flex floating-card-wrapper hide-scrollbar justify-start">
+        {!loading && <FloatingCardWrapper items={items} />}
         {loading &&
           items.map((game, index) => {
             return (
@@ -71,18 +56,20 @@ const PopularGames = () => {
             );
           })}
       </div>
-      <div className="flex justify-end mt-[20px]">
-        <ButtonLink
-          onClick={() => {
-            dispatch({
-              type: 'SET_NAVIGATION_PATH',
-              payload: 'Explore/Popular',
-            });
-            window.scroll(0, 0);
-          }}
-        >
-          see all
-        </ButtonLink>
+      <div className="flex justify-end mt-[20px] mb-[40px]">
+        {sideBarPath === 'Home' && (
+          <ButtonLink
+            onClick={() => {
+              dispatch({
+                type: 'SET_NAVIGATION_PATH',
+                payload: 'Explore/Popular',
+              });
+              window.scroll(0, 0);
+            }}
+          >
+            see all
+          </ButtonLink>
+        )}
       </div>
     </div>
   );

@@ -8,12 +8,12 @@ import { useAppDispatch } from '@/store';
 import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
 
-type Selection = 'ABOUT' | 'All Items' | 'Your Items' | 'Activity' | 'Staking';
+type Selection = 'About' | 'All Items' | 'Your Items' | 'Activity' | 'Staking';
 
 const Game = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [currentSelection, setCurrentSelection] = useState<Selection>('ABOUT');
+  const [currentSelection, setCurrentSelection] = useState<Selection>('About');
   const [info, setInfo] = useState({
     name: 'SolChicks',
     header: 'Welcome to the SolChicks Metaverse Crypto NFT Game',
@@ -22,10 +22,11 @@ const Game = () => {
   const handleSelect = (value: Selection) => {
     setCurrentSelection(value);
     switch (value) {
-      case 'ABOUT':
+      case 'About':
         setInfo((prev) => ({
           ...prev,
-          header: `Welcome to the ${info.name} Metaverse Crypto NFT Game`,
+          // header: `Welcome to the ${info.name} Metaverse Crypto NFT Game`,
+          header: info.name,
         }));
         return;
       case 'All Items':
@@ -57,10 +58,11 @@ const Game = () => {
 
   const breadCrumbItems = useMemo(() => {
     switch (currentSelection) {
-      case 'ABOUT':
+      case 'About':
         return [
           { text: 'Home', value: 'Home' },
-          { text: info.name, value: 'Game' },
+          // { text: info.name, value: 'Game' },
+          { text: 'Explore', value: 'Explore' },
         ];
       case 'All Items':
         return [
@@ -97,22 +99,20 @@ const Game = () => {
         <BreadCrumb
           items={breadCrumbItems}
           currentValue={
-            currentSelection === 'ABOUT' ? 'Game' : currentSelection
+            currentSelection === 'About' ? 'Game' : currentSelection
           }
           onItemClick={(val) => {
             if (val === 'Home') {
               dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
               router.push('/');
             } else if (val === 'Game') {
-              handleSelect('ABOUT');
+              handleSelect('About');
             }
           }}
         />
       </div>
       <div className="flex justify-between items-center mb-[28px]">
-        <div className="text-[#FFFFFF] font-bold text-[20px]">
-          {info.header}
-        </div>
+        <div className="text-[#FFFFFF] font-bold text-[20px]">{info.name}</div>
         <div>
           <SelectGroup
             items={[
@@ -130,7 +130,7 @@ const Game = () => {
       <div className="mb-[28px]">
         <Divider />
       </div>
-      {currentSelection === 'ABOUT' && <DetailView />}
+      {currentSelection === 'About' && <DetailView />}
       {currentSelection === 'All Items' && <MarketView />}
     </DefaultLayout>
   );
