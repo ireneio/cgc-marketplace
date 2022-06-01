@@ -131,6 +131,7 @@ export default function userReducer(
         userInfo: { ...action.payload },
       };
     case 'SET_USER_EMAIL':
+      localStorage.setItem('email', JSON.stringify(action.payload));
       return {
         ...state,
         userInfo: { ...state.userInfo, email: action.payload },

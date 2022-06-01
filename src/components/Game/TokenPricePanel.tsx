@@ -86,6 +86,10 @@ const TokenPricePanel = ({
     }
   }, [currentView, highDay, highWeek, highMonth]);
 
+  const handleGoAddress = (value: string) => {
+    window.open(`https://solscan.io/token/${value}`, '_blank');
+  };
+
   return (
     <Tag className="relative px-[24px] py-[24px]">
       <div className="absolute right-[24px] top-[24px]">
@@ -147,7 +151,7 @@ const TokenPricePanel = ({
         <div className="mb-[24px]">
           <Divider />
         </div>
-        <div className="mb-[42px] flex">
+        <div className="mb-[42px] flex justify-between flex-wrap">
           <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">
               Market Cap
@@ -156,7 +160,7 @@ const TokenPricePanel = ({
               ${getNumberWithCommas(marketCap)}
             </div>
           </div>
-          <div className="ml-[48px]">
+          <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">
               Fully Diluted Market Cap
             </div>
@@ -164,7 +168,7 @@ const TokenPricePanel = ({
               ${getNumberWithCommas(fullyDilutedMarketCap)}
             </div>
           </div>
-          <div className="ml-[48px]">
+          <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">
               Volume (24hr)
             </div>
@@ -172,14 +176,14 @@ const TokenPricePanel = ({
               ${getNumberWithCommas(volume)}
             </div>
           </div>
-          <div className="ml-[48px]">
+          <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">
               Circulating Supply
             </div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px]">
+            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
               <span>${getNumberWithCommas(circulatingSupply)}</span>
               <span className="ml-[4px]">{symbol}</span>
-              <span className="ml-[20px] font-light">
+              <span className="ml-auto font-light">
                 {circulatingSupplyPercentage}%
               </span>
             </div>
@@ -187,7 +191,7 @@ const TokenPricePanel = ({
               <ProgressBar width={221} percentage={50} />
             </div>
           </div>
-          <div className="ml-[48px]">
+          <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">
               Max Supply
             </div>
@@ -202,22 +206,22 @@ const TokenPricePanel = ({
         <div className="flex">
           <div>
             <div className="text-[#FFFFFF] text-[14px]">Contract Address</div>
-            <ClipboardText copyValue={scanAddress}>
-              <div
-                className="mt-[4px]"
-                style={{
-                  background:
-                    'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
-                {contractAddress}{' '}
-              </div>
-            </ClipboardText>
+            {/* <ClipboardText copyValue={contractAddress}> */}
+            <div
+              className="mt-[4px] cursor-pointer"
+              style={{
+                background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+              onClick={() => handleGoAddress(contractAddress)}
+            >
+              {contractAddress}{' '}
+            </div>
+            {/* </ClipboardText> */}
           </div>
-          <div className="ml-[40px]">
+          {/* <div className="ml-[40px]">
             <div className="text-[#FFFFFF] text-[14px]">Solscan</div>
             <ClipboardText copyValue={scanAddress}>
               <div
@@ -233,7 +237,7 @@ const TokenPricePanel = ({
                 {scanAddress}{' '}
               </div>
             </ClipboardText>
-          </div>
+          </div> */}
         </div>
       </div>
     </Tag>

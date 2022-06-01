@@ -8,12 +8,16 @@ interface Props {
 
 const DefaultTable = ({ rows, headers }: Props) => {
   return (
-    <div className="rounded-[5px] border-solid border-[2px] border-[#290030] px-[12px]">
+    <div className="rounded-[5px] border-solid border-[2px] border-[#290030] px-[0]">
       <Table>
         <Thead>
           <Tr>
             {headers.map((header, index) => {
-              return <Th key={index}>{header}</Th>;
+              return (
+                <Th key={index} className="px-[10px] py-[12px]">
+                  {header}
+                </Th>
+              );
             })}
           </Tr>
         </Thead>

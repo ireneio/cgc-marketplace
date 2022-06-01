@@ -8,8 +8,10 @@ interface Props {
   onClick?: any;
   disabled?: boolean;
   disableHoverEffect?: boolean;
-  link?: boolean;
   filled?: boolean;
+  link?: boolean;
+  shadowed?: boolean;
+  secondary?: boolean;
 }
 
 const Button = ({
@@ -21,16 +23,22 @@ const Button = ({
   disableHoverEffect,
   link,
   filled,
+  shadowed,
+  secondary,
 }: Props) => {
   const [hover, setHover] = useState(false);
 
   return (
     <div
       style={{
+        opacity: disabled ? '0.25' : '1',
+        boxShadow: disabled ? '0px 4px 4px 0px #00000040' : '',
         background: link
           ? 'transparent'
+          : secondary
+          ? '#290030'
           : disabled
-          ? '#AAAAAA'
+          ? 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)'
           : 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
       }}
       className={twMerge('rounded-[5px]  px-[1px] py-[1px] text-center')}
@@ -41,7 +49,6 @@ const Button = ({
           // className,
         )}
         style={{
-          opacity: disabled ? '0.55' : '1',
           cursor: disabled ? 'not-allowed' : 'pointer',
           ...style,
           background: link
@@ -64,7 +71,9 @@ const Button = ({
         onMouseOut={() => setHover(false)}
         disabled={disabled}
       >
-        {children}
+        <div style={{ whiteSpace: 'nowrap' }} className="flex items-center">
+          {children}
+        </div>
       </button>
     </div>
   );

@@ -116,7 +116,7 @@ const Game = () => {
         <div>
           <SelectGroup
             items={[
-              { text: 'ABOUT', value: 'ABOUT' },
+              { text: 'About', value: 'About' },
               { text: 'All Items', value: 'All Items' },
               { text: 'Your Items', value: 'Your Items' },
               { text: 'Activity', value: 'Activity' },

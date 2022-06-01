@@ -83,6 +83,14 @@ const ProfileView = () => {
             </div>
             <div className="mt-[36px]">
               <Input
+                id="password"
+                type="password"
+                label="Password"
+                {...register('password')}
+              />
+            </div>
+            <div className="mt-[36px]">
+              <Input
                 id="phone"
                 type="text"
                 label="Contact Number"
@@ -112,14 +120,6 @@ const ProfileView = () => {
               <div className="ml-[40px]">
                 <Input id="country" label="Country" {...register('country')} />
               </div>
-            </div>
-            <div className="mt-[36px]">
-              <Input
-                id="password"
-                type="password"
-                label="Password"
-                {...register('password')}
-              />
             </div>
             <div className="mt-[36px] w-[180px]">
               <Button onClick={() => handleSave()}>Save Changes</Button>

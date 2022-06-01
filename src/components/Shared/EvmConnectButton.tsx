@@ -9,7 +9,7 @@ export default function MetamaskConnectButton() {
   const { connect, disconnect, signerAddress } = useEthereumProvider();
 
   return (
-    <div className="hidden lg:flex pr-3 pl-2">
+    <div className="flex">
       {!signerAddress && (
         <Button
           onClick={connect}

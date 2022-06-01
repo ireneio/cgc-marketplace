@@ -75,8 +75,10 @@ const ActionPanel = ({
               )}
             </Button>
           </div>
-          <div className="ml-[20px]">
-            <Button disabled={!info.auctionEndDate}>Make Offer</Button>
+          <div className="ml-auto">
+            <Button secondary disabled={!info.auctionEndDate}>
+              Make Offer
+            </Button>
           </div>
         </div>
         <div className="mt-[14px] text-[14px] font-light text-[#9497AA]">

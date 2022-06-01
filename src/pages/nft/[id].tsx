@@ -92,12 +92,11 @@ const Nft = () => {
       </div>
       <div className="flex mt-[12px] flex-wrap">
         <div style={{ flexBasis: '50%' }}>
-          <div className="max-w-[552px]">
+          <div className="w-full">
             <img
               src={info.image}
               alt={info.name}
-              width="552px"
-              height="552px"
+              width="100%"
               className="rounded-[5px]"
             />
           </div>

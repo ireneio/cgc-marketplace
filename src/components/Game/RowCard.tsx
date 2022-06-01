@@ -36,18 +36,20 @@ const RowCard = ({
           <div className="text-[#FFFFFF] text-semibold text-[24px]">{name}</div>
           <div className="font-light text-[#9497AA] text-[14px]">Price</div>
         </div>
-        <div className="flex justify-between items-center mt-[-12px]">
-          <div className="font-light text-[#9497AA] text-[14px]">{brand}</div>
+        <div className="flex justify-between items-center mt-[-18px]">
+          <div className="font-light text-[#9497AA] text-[14px] tracking-wider">
+            {brand}
+          </div>
           <div className="font-semibold text-[#FFFFFF] text-[24px] mt-[12px] flex items-center">
-            <div>{price}</div>
-            <div className="mt-[6px] ml-[4px]">
+            <div className="mt-[8px] mr-[4px]">
               <img
                 src={'/img/icon_unit_sol.png'}
                 alt={'sol'}
-                width={16}
-                height={16}
+                width={12}
+                height={12}
               />
             </div>
+            <div>{price}</div>
           </div>
         </div>
       </div>
@@ -57,7 +59,7 @@ const RowCard = ({
       <div className="flex">
         <div
           style={{ flexBasis: '30%' }}
-          className="flex items-center justify-center cursor-pointer px-[18px] py-[18px] rounded-bl-[5px] text-[#9497AA] text-[14px]"
+          className="hover:bg-[#290030] flex items-center justify-center cursor-pointer px-[18px] py-[18px] rounded-bl-[5px] text-[#9497AA] text-[14px]"
           onClick={() => onMoreInfo(id)}
         >
           {/* <img
@@ -71,7 +73,7 @@ const RowCard = ({
         {(!isAddedToCart || addToCartLoading) && (
           <div
             style={{ flexBasis: '70%' }}
-            className="flex items-center justify-center cursor-pointer px-[18px] py-[18px] border-l-[1px] border-l-[#290030] rounded-br-[5px]"
+            className="hover:bg-[#290030] flex items-center justify-center cursor-pointer px-[18px] py-[18px] border-l-[1px] border-l-[#290030] rounded-br-[5px]"
           >
             {!addToCartLoading && (
               <div>

@@ -6,7 +6,9 @@ import BreadCrumb from '@/components/Shared/Breadcrumb';
 import Button from '@/components/Shared/Button';
 import Divider from '@/components/Shared/Divider';
 import SelectGroup from '@/components/Shared/SelectGroup';
+import { useEthereumProvider } from '@/contexts/EthereumWalletProvider';
 import { useAppDispatch, useAppSelector } from '@/store';
+import { useWallet } from '@solana/wallet-adapter-react';
 import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
 
@@ -24,16 +26,31 @@ const Account = () => {
   const router = useRouter();
   const email = useAppSelector((state) => state.user.userInfo.email);
   const [currentSelection, setCurrentSelection] = useState<Selection>('wallet');
+  const wallet = useWallet();
+  const { signerAddress } = useEthereumProvider();
+
+  const walletTitle = useMemo(() => {
+    if (wallet.connected && signerAddress) {
+      return 'Connected Wallets';
+    } else if (!wallet.connected && !signerAddress) {
+      return 'Please connect your Solana and Metamask Wallet.';
+    } else if (!wallet.connected) {
+      return 'Please connect your Solana Wallet.';
+    } else if (!signerAddress) {
+      return 'Please connect your Metamask Wallet.';
+    }
+  }, [wallet.connected, signerAddress]);
+
   const title = useMemo(() => {
     switch (currentSelection) {
       case 'wallet':
-        return 'Wallet';
+        return walletTitle;
       case 'profile':
         return 'Profile Details';
       default:
         return 'title';
     }
-  }, [currentSelection]);
+  }, [currentSelection, walletTitle]);
 
   return (
     <DefaultLayout>
@@ -41,7 +58,7 @@ const Account = () => {
         <BreadCrumb
           items={[
             { text: 'Home', value: 'Home' },
-            { text: 'My Passport', value: 'Account' },
+            { text: 'cgPass', value: 'Account' },
           ]}
           currentValue={'Account'}
           onItemClick={(val) => {
@@ -57,7 +74,7 @@ const Account = () => {
           <Avatar />
         </div>
         <div className="text-[#FFFFFF] ml-[34px]">
-          <div className="font-bold text-[24px]">My cg Pass</div>
+          <div className="font-bold text-[24px]">My cgPass</div>
           <div className="text-[20px] mt-[2px]">{email}</div>
         </div>
         <div className="ml-auto">
@@ -72,12 +89,12 @@ const Account = () => {
         <div>
           <SelectGroup
             items={[
-              { text: 'Wallet', value: 'wallet' },
+              { text: 'Wallets', value: 'wallet' },
               { text: 'Profile', value: 'profile' },
-              { text: 'My Items', value: 'items' },
-              { text: 'Listed', value: 'listed' },
-              { text: 'Offers', value: 'offers' },
-              { text: 'Activities', value: 'activities' },
+              // { text: 'My Items', value: 'items' },
+              // { text: 'Listed', value: 'listed' },
+              // { text: 'Offers', value: 'offers' },
+              // { text: 'Activities', value: 'activities' },
             ]}
             currentValue={currentSelection}
             onItemClick={(value) => setCurrentSelection(value as Selection)}

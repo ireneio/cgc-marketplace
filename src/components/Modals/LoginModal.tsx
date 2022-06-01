@@ -16,6 +16,7 @@ type LoginModalProps = {
 export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
   const dispatch = useAppDispatch();
   const [disableSignUp] = useState(true);
+  const [btnLoading, setBtnLoading] = useState(false);
   const [view, setView] = useState<
     'login' | 'signup-one' | 'signup-two' | 'signup-three'
   >('login');
@@ -55,8 +56,17 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
   }, [view]);
 
   const handleLoginButtonClick = async () => {
+    setBtnLoading(true);
     dispatch({ type: 'SET_USER_EMAIL', payload: form.getValues('email') });
-    setIsOpen(false);
+    const tid = setTimeout(() => {
+      setIsOpen(false);
+      dispatch({
+        type: 'SHOW_SNACKBAR',
+        payload: { title: 'info', text: 'Sign In Success!' },
+      });
+      setBtnLoading(false);
+      clearTimeout(tid);
+    }, 1200);
   };
 
   const handleSignUpOne = async () => {
@@ -81,6 +91,12 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
       setIsOpen(false);
     }
   };
+
+  // useEffect(() => {
+  //   const div = window.document.querySelector('.login_dialog_parent');
+  //   console.log(div);
+
+  // }, [isOpen])
 
   return (
     <FormProvider {...form}>
@@ -119,73 +135,114 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
               leaveTo="opacity-0 scale-95"
             >
               <div
-                className="inline-block w-full max-w-[400px] my-12 overflow-hidden text-left align-middle transition-all
+                className="login_dialog_parent relative inline-block w-[400px] my-12 overflow-hidden text-left align-middle transition-all
             transform shadow-xl rounded-[5px] bg-[#13002B]"
               >
-                <Dialog.Title
-                  as="h3"
-                  className="text-2xl font-bold leading-6 text-white pb-2 font-circularstdbold flex flex-col items-center"
+                <div
+                  className="px-[2px] py-[2px] rounded-[5px]"
+                  style={{
+                    background:
+                      'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
+                  }}
                 >
-                  <div className="flex uppercase items-center w-full text-[12px] pb-[24px] cursor-pointer">
-                    <div
-                      style={{
-                        flexBasis: '50%',
-                        background: view === 'login' ? '#13002B' : '#181818',
-                        fontWeight: view === 'login' ? 'bold' : 'normal',
-                      }}
-                      className="text-center py-[12px]"
-                      onClick={() => setView('login')}
-                    >
-                      sign in
+                  <div className="relative flex items-center justify-center bg-[#13002B]">
+                    <div>
+                      <Dialog.Title
+                        as="h3"
+                        className="text-2xl font-bold leading-6 text-white pb-2 font-circularstdbold flex flex-col items-center"
+                      >
+                        <div className="flex uppercase items-center w-full text-[12px] pb-[24px] cursor-pointer">
+                          <div
+                            className="pr-[2px] py-0 pt-0 mt-[0px]"
+                            style={{
+                              flexBasis: '50%',
+                              // background:
+                              //   view === 'login'
+                              //     ? 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)'
+                              //     : '#000000',
+                              background:
+                                'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
+                              fontWeight: view === 'login' ? 'bold' : 'normal',
+                              paddingBottom: view !== 'login' ? 2 : 0,
+                              paddingRight: view === 'login' ? 2 : 0,
+                            }}
+                          >
+                            <div
+                              style={{
+                                background:
+                                  view === 'login' ? '#13002B' : '#000000',
+                              }}
+                              className="text-center py-[12px]"
+                              onClick={() => setView('login')}
+                            >
+                              sign in
+                            </div>
+                          </div>
+                          <div
+                            className="pl-[2px] py-0 mt-[0px]"
+                            style={{
+                              flexBasis: '50%',
+                              background:
+                                'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
+                              fontWeight: view !== 'login' ? 'bold' : 'normal',
+                              paddingBottom: view === 'login' ? 2 : 0,
+                              paddingLeft: view !== 'login' ? 2 : 0,
+                            }}
+                          >
+                            <div
+                              style={{
+                                background:
+                                  view !== 'login' ? '#13002B' : '#000000',
+                              }}
+                              className="text-center py-[12px]"
+                              onClick={() => setView('signup-one')}
+                            >
+                              register
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <img
+                            src="/img/cgc-logo-no-text.png"
+                            width={48}
+                            height={48}
+                            alt="catheon"
+                          />
+                        </div>
+                        <div className="text-center mt-[12px] px-[24px]">
+                          {title}
+                        </div>
+                      </Dialog.Title>
+                      <div className="mt-0 px-[24px]">
+                        <div className="min-h-full w-full flex flex-col justify-center overflow-hidden">
+                          {view === 'login' && (
+                            <Login
+                              onCancel={() => setIsOpen(false)}
+                              onLogin={() => handleLoginButtonClick()}
+                              loading={btnLoading}
+                            />
+                          )}
+                          {view === 'signup-one' && (
+                            <SignupOne
+                              onCancel={() => setIsOpen(false)}
+                              onNextStep={() => handleSignUpOne()}
+                            />
+                          )}
+                          {view === 'signup-two' && (
+                            <SignupTwo
+                              onCancel={() => setIsOpen(false)}
+                              onNextStep={() => handleSignUpTwo()}
+                            />
+                          )}
+                          {view === 'signup-three' && (
+                            <SignupThree
+                              onCancel={() => setIsOpen(false)}
+                              onSubmit={() => handleSignUpThree()}
+                            />
+                          )}
+                        </div>
+                      </div>
                     </div>
-                    <div
-                      style={{
-                        flexBasis: '50%',
-                        background: view !== 'login' ? '#13002B' : '#181818',
-                        fontWeight: view !== 'login' ? 'bold' : 'normal',
-                      }}
-                      className="text-center py-[12px]"
-                      onClick={() => setView('signup-one')}
-                    >
-                      register
-                    </div>
-                  </div>
-                  <div>
-                    <img
-                      src="/img/cgc-logo-no-text.png"
-                      width={48}
-                      height={48}
-                      alt="catheon"
-                    />
-                  </div>
-                  <div className="text-center mt-[12px] px-[24px]">{title}</div>
-                </Dialog.Title>
-                <div className="mt-0 px-[24px]">
-                  <div className="min-h-full w-full flex flex-col justify-center overflow-hidden">
-                    {view === 'login' && (
-                      <Login
-                        onCancel={() => setIsOpen(false)}
-                        onLogin={() => handleLoginButtonClick()}
-                      />
-                    )}
-                    {view === 'signup-one' && (
-                      <SignupOne
-                        onCancel={() => setIsOpen(false)}
-                        onNextStep={() => handleSignUpOne()}
-                      />
-                    )}
-                    {view === 'signup-two' && (
-                      <SignupTwo
-                        onCancel={() => setIsOpen(false)}
-                        onNextStep={() => handleSignUpTwo()}
-                      />
-                    )}
-                    {view === 'signup-three' && (
-                      <SignupThree
-                        onCancel={() => setIsOpen(false)}
-                        onSubmit={() => handleSignUpThree()}
-                      />
-                    )}
                   </div>
                 </div>
               </div>

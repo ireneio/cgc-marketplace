@@ -72,29 +72,17 @@ const DetailView = () => {
               {info.title}
             </div>
           </div>
-          <div className="flex justify-between mb-[24px]">
+          <div className="flex justify-between mb-[24px] flex-wrap">
             <div
               className="text-[14px] text-[#FFFFFF]"
-              style={{ flexBasis: '50%' }}
+              style={{ flexBasis: '100%' }}
             >
               {info.description}
             </div>
-            <div style={{ flexBasis: '50%' }} className="pl-[24px]">
-              <div className="text-[#FFFFFF] italic text-[14px]">Tags</div>
-              <div className="mt-[14px] flex flex-wrap">
-                {info.tags.map((tag, index) => {
-                  return (
-                    <Tag key={index} className="mr-[12px] mb-[12px]">
-                      {tag}
-                    </Tag>
-                  );
-                })}
-              </div>
-            </div>
           </div>
-          <div className="flex items-center mb-[48px]">
+          <div className="flex items-center mb-[24px]">
             <div
-              className="cursor-pointer"
+              className="cursor-pointer hover:opacity-[0.65]"
               onClick={() => handleLinkOpen('twitter')}
             >
               <img
@@ -105,7 +93,7 @@ const DetailView = () => {
               />
             </div>
             <div
-              className="ml-[16px] cursor-pointer"
+              className="ml-[16px] cursor-pointer hover:opacity-[0.65]"
               onClick={() => handleLinkOpen('discord')}
             >
               <img
@@ -116,11 +104,20 @@ const DetailView = () => {
               />
             </div>
             <div
-              className="ml-[16px] cursor-pointer"
+              className="ml-[16px] cursor-pointer hover:opacity-[0.65]"
               onClick={() => handleLinkOpen('link')}
             >
               <img src="/img/icon_link.png" width={24} height={24} alt="link" />
             </div>
+          </div>
+          <div className="flex flex-wrap">
+            {info.tags.map((tag, index) => {
+              return (
+                <Tag key={index} className="mr-[12px] mb-[12px]">
+                  {tag}
+                </Tag>
+              );
+            })}
           </div>
           <div className="mb-[24px]">
             <Divider />

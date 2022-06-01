@@ -15,6 +15,7 @@ interface Props {
   onPlay?: any;
   playDisabled?: boolean;
   onFirstItemMouseOver: (val: boolean) => void;
+  onCardClick?: () => Promise<void> | void;
 }
 
 const FloatingCard = ({
@@ -29,6 +30,7 @@ const FloatingCard = ({
   onPlay,
   playDisabled,
   onFirstItemMouseOver,
+  onCardClick,
 }: Props) => {
   const [isMouseOver, setIsMouseOver] = useState(false);
 
@@ -53,7 +55,7 @@ const FloatingCard = ({
           zIndex: isMouseOver ? 3 : 2,
         }}
         onClick={() => {
-          return true;
+          onCardClick && onCardClick();
         }}
       >
         {(!isMouseOver || !bgOnHover) && (
@@ -66,7 +68,12 @@ const FloatingCard = ({
         )}
         {isMouseOver && bgOnHover && (
           <div className="bg-img flex items-start justify-center">
-            <video autoPlay width={350 * 1.15 + 'px'} height="80px" muted>
+            <video
+              autoPlay
+              width={350 * 1.15 + 'px'}
+              height={350 * 1.15 + 'px'}
+              muted
+            >
               <source src={bgOnHover} type="video/mp4"></source>
             </video>
           </div>
@@ -117,7 +124,7 @@ const FloatingCard = ({
                     className="capitalize"
                     onClick={() => onPlay()}
                     disabled={playDisabled}
-                    style={{ padding: '2px 24px', fontSize: 12 }}
+                    style={{ padding: '8px 24px', fontSize: 10 }}
                   >
                     More Info
                   </Button>

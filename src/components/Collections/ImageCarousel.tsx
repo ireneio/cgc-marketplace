@@ -48,6 +48,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
                 src={item}
                 className="bg-cover w-full min-h-80 bg-[#181818] aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 hover:cursor-pointer"
                 alt={item}
+                width="100%"
               />
             </div>
           );

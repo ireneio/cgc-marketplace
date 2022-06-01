@@ -16,7 +16,7 @@ const CartSection = ({
     <div className="relative">
       {openCart && (
         <DropdownMenu bottom={-505} left={-228}>
-          <Cart />
+          <Cart onClose={() => onToggleCart(false)} />
         </DropdownMenu>
       )}
       <Button onClick={() => onToggleCart(!openCart)}>

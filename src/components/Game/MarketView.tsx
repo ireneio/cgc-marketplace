@@ -163,7 +163,7 @@ const MarketView = () => {
           <div className="ml-[24px] relative">
             {currentFilter === 'Cart' && (
               <DropdownMenu bottom={-510} left={-266}>
-                <Cart />
+                <Cart onClose={() => setCurrentFilter('')} />
               </DropdownMenu>
             )}
             {currentFilter === 'Filter' && (
@@ -201,6 +201,7 @@ const MarketView = () => {
                       isRarityRanking: value,
                     }))
                   }
+                  onClose={() => setCurrentFilter('')}
                 />
               </DropdownMenu>
             )}
@@ -240,20 +241,33 @@ const MarketView = () => {
         </div>
       </div>
       <div className="flex flex-wrap">
-        {loading &&
-          LOADING_ARR.map((item, index) => {
-            return (
-              <div key={index} className="mr-[34px] mb-[34px]">
-                {currentView === 'List' && <ListCardLoading />}
-                {currentView === 'Row' && <RowCardLoading />}
-              </div>
-            );
-          })}
-        {!loading &&
-          items.map((item, index) => {
-            return (
-              <div key={index} className="mr-[34px] mb-[34px]">
-                {currentView === 'List' && (
+        {currentView === 'List' && loading && (
+          <div className="grid grid-cols-4 gap-x-20">
+            {LOADING_ARR.map((item, index) => {
+              return (
+                <div key={index} className="mr-[34px] mb-[34px]">
+                  <ListCardLoading />
+                </div>
+              );
+            })}
+          </div>
+        )}
+        {currentView === 'Row' && loading && (
+          <div className="grid grid-cols-max gap-x-20">
+            {LOADING_ARR.map((item, index) => {
+              return (
+                <div key={index} className="mr-[34px] mb-[34px]">
+                  <RowCardLoading />
+                </div>
+              );
+            })}
+          </div>
+        )}
+        {currentView === 'List' && !loading && (
+          <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-x-20">
+            {items.map((item, index) => {
+              return (
+                <div key={index} className="mb-[34px]">
                   <ListCard
                     id={index}
                     image={'/img/chicks_nft1.png'}
@@ -268,8 +282,16 @@ const MarketView = () => {
                       addToCartLoading.itemId === String(index)
                     }
                   />
-                )}
-                {currentView === 'Row' && (
+                </div>
+              );
+            })}
+          </div>
+        )}
+        {currentView === 'Row' && !loading && (
+          <div className="grid grid-cols-2 gap-x-20">
+            {items.map((item, index) => {
+              return (
+                <div key={index} className="mb-[34px]">
                   <RowCard
                     id={index}
                     image={'/img/chicks_nft1.png'}
@@ -284,10 +306,11 @@ const MarketView = () => {
                       addToCartLoading.itemId === String(index)
                     }
                   />
-                )}
-              </div>
-            );
-          })}
+                </div>
+              );
+            })}
+          </div>
+        )}
         {!items.length && (
           <div className="text-[#FFFFFF] text-semibold">
             No Items Available.

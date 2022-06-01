@@ -1,4 +1,5 @@
 import { getTrimmedAddressEllipsisMiddle } from '@/utils/formatters';
+import ReactTooltip from 'react-tooltip';
 
 interface Props {
   providerIcon: string;
@@ -14,6 +15,7 @@ const WalletCard = ({
 }: Props) => {
   return (
     <div className="rounded-[5px] border-[#290030] border-[1px] px-[14px] py-[14px] flex">
+      <ReactTooltip />
       <div>
         <img src={providerIcon} alt={provider} width={25} height={25} />
       </div>
@@ -27,8 +29,9 @@ const WalletCard = ({
         <div
           className="mt-[6px] absolute right-[0] top-[0] cursor-pointer"
           onClick={() => onEditClick()}
+          data-tip="Disconnect"
         >
-          <img src="/img/icon_edit.png" alt="edit" width={12} height={12} />
+          <img src="/img/icon_edit.png" alt="edit" width={14} height={14} />
         </div>
         <div className="flex text-[#9497AA] items-center mt-[29px] text-[12px]">
           <div>Connected</div>

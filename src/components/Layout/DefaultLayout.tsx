@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import Footer from '../Shared/Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -104,6 +104,14 @@ const DefaultLayout = ({ children, title }: Props) => {
     }
   }, []);
 
+  // TODO temp:load sign in state from storage
+  useEffect(() => {
+    const email = localStorage.getItem('email');
+    if (email) {
+      dispatch({ type: 'SET_USER_EMAIL', payload: JSON.parse(email) });
+    }
+  }, []);
+
   return (
     <>
       <div className="min-h-[100vh] bg-[#0C001C] max-w-[100vw] overflow-x-hidden">
@@ -147,7 +155,7 @@ const DefaultLayout = ({ children, title }: Props) => {
         />
         <Header />
         <div className="flex mt-[75px] relative">
-          <div className="w-[200px] absolute top-0 left-0 hidden md:block">
+          <div className="w-[200px] top-0 left-0 hidden md:block">
             <Sidebar
               items={SIDE_BAR_ITEMS}
               currentValue={sideBarPath}
@@ -155,7 +163,7 @@ const DefaultLayout = ({ children, title }: Props) => {
             />
           </div>
           <div className="flex-1">
-            <div className="px-[24px] pb-[24px] max-w-[1080px] mx-auto">
+            <div className="px-[24px] pb-[24px] max-w-[80vw] mx-auto">
               {children}
             </div>
           </div>

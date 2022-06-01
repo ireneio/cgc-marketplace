@@ -21,7 +21,7 @@ const TransactionTable = ({ rows, headers }: Props) => {
       return (
         <div
           key={index}
-          className="uppercase px-[10px] py-[10px] text-[12px] text-left text-[#FFFFFF]"
+          className="uppercase px-[0px] py-[0px] text-[12px] text-left text-[#FFFFFF]"
         >
           {header}
         </div>
@@ -30,15 +30,18 @@ const TransactionTable = ({ rows, headers }: Props) => {
   }, [headers]);
 
   const _rows = useMemo(() => {
-    return rows.map((row) => {
+    return rows.map((row, rowIndex) => {
       return row.map((col, colIndex) => {
         if (colIndex === 0) {
           return (
             <div
               key={colIndex}
               className="py-[12px] flex items-center text-[14px] px-[10px]"
+              style={{
+                background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
+              }}
             >
-              <div className="h-[18px] w-[18px] mr-[12px]">
+              <div className="h-[18px] w-[18px] mr-[12px] py-[12px] flex items-center">
                 {col.icon && (
                   <img
                     className="h-[18px] w-[18px] object-contain"
@@ -54,7 +57,10 @@ const TransactionTable = ({ rows, headers }: Props) => {
           return (
             <div
               key={colIndex}
-              className="text-[#FC1F8E] text-[14px] px-[10px]"
+              className="text-[#FC1F8E] text-[14px] px-[10px] py-[12px]"
+              style={{
+                background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
+              }}
             >
               {getTrimmedAddress(String(col), { length: 12 })}
             </div>
@@ -63,7 +69,10 @@ const TransactionTable = ({ rows, headers }: Props) => {
           return (
             <div
               key={colIndex}
-              className="text-[#FFFFFF] text-[14px] px-[10px]"
+              className="text-[#FFFFFF] text-[14px] px-[10px] py-[12px]"
+              style={{
+                background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
+              }}
             >
               {dayjs(String(col)).fromNow()}
             </div>
@@ -72,7 +81,10 @@ const TransactionTable = ({ rows, headers }: Props) => {
           return (
             <div
               key={colIndex}
-              className="text-[#FC1F8E] text-[14px] px-[10px]"
+              className="text-[#FC1F8E] text-[14px] px-[10px] py-[12px]"
+              style={{
+                background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
+              }}
             >
               {getTrimmedAddress(String(col), { length: 12 })}
             </div>
@@ -81,7 +93,10 @@ const TransactionTable = ({ rows, headers }: Props) => {
           return (
             <div
               key={colIndex}
-              className="text-[#FC1F8E] text-[14px] px-[10px]"
+              className="text-[#FC1F8E] text-[14px] px-[10px] py-[12px]"
+              style={{
+                background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
+              }}
             >
               {getTrimmedAddress(String(col), { length: 12 })}
             </div>
@@ -90,7 +105,10 @@ const TransactionTable = ({ rows, headers }: Props) => {
           return (
             <div
               key={colIndex}
-              className="text-[#FFFFFF] text-[14px] px-[10px]"
+              className="text-[#FFFFFF] text-[14px] px-[10px] py-[12px]"
+              style={{
+                background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
+              }}
             >
               {getNumberWithCommas(String(col), 2)}
             </div>

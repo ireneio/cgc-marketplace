@@ -32,22 +32,24 @@ const ListCard = ({
         <img src={image} alt={name} width={205} height={205} />
       </div>
       <div className="mt-[12px] px-[12px]">
-        <div className="text-[#FFFFFF] text-semibold">{name}</div>
-        <div className="font-light text-[#9497AA] text-[14px] mt-[12px]">
-          {brand}
+        <div className="text-[#FFFFFF] text-[18px] text-semibold">{name}</div>
+        <div className="font-light text-[#9497AA] text-[12px] mt-[-1px]">
+          <div className="tracking-wider">{brand}</div>
         </div>
-        <div className="font-light text-[#9497AA] text-[14px] mt-[12px]">
-          Price
-        </div>
-        <div className="font-semibold text-[#FFFFFF] text-[24px] mt-[12px] flex items-center">
-          <div>{price}</div>
-          <div className="mt-[6px] ml-[4px]">
-            <img
-              src={'/img/icon_unit_sol.png'}
-              alt={'sol'}
-              width={16}
-              height={16}
-            />
+        <div className="flex justify-between items-center">
+          <div className="font-light text-[#9497AA] text-[14px] mt-[12px]">
+            Price
+          </div>
+          <div className="font-semibold text-[#FFFFFF] text-[24px] mt-[12px] flex items-center">
+            <div className="mt-[8px] mr-[4px]">
+              <img
+                src={'/img/icon_unit_sol.png'}
+                alt={'sol'}
+                width={12}
+                height={12}
+              />
+            </div>
+            <div>{price}</div>
           </div>
         </div>
       </div>
@@ -57,7 +59,7 @@ const ListCard = ({
       <div className="flex">
         <div
           style={{ flexBasis: '30%' }}
-          className="flex items-center justify-center cursor-pointer px-[18px] py-[18px] rounded-bl-[5px]"
+          className="hover:bg-[#290030] flex items-center justify-center cursor-pointer px-[18px] py-[18px] rounded-bl-[5px]"
           onClick={() => onMoreInfo(id)}
         >
           <img
@@ -70,7 +72,7 @@ const ListCard = ({
         {(!isAddedToCart || addToCartLoading) && (
           <div
             style={{ flexBasis: '70%' }}
-            className="flex items-center justify-center cursor-pointer px-[18px] py-[18px] border-l-[1px] border-l-[#290030] rounded-br-[5px]"
+            className="hover:bg-[#290030] flex items-center justify-center cursor-pointer px-[18px] py-[18px] border-l-[1px] border-l-[#290030] rounded-br-[5px]"
           >
             {!addToCartLoading && (
               <div>

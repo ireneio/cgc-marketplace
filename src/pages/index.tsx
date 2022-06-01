@@ -58,8 +58,8 @@ const Index = () => {
           <AllGames />
         </div>
       )}
-      {sideBarPath === 'Home' && <LatestTransactions />}
       {sideBarPath === 'Home' && <LatestSales />}
+      {sideBarPath === 'Home' && <LatestTransactions />}
     </DefaultLayout>
   );
 };

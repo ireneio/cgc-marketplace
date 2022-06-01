@@ -34,8 +34,7 @@ const CathenConnectButton = () => {
     <div>
       <Button
         onClick={handleConnect}
-        className=" flex w-full text-left px-4 py-2 text-sm bg-transparent text-white"
-        style={{ position: 'relative' }}
+        style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
       >
         <img
           src="/img/cgc-logo-no-text.png"
@@ -46,13 +45,44 @@ const CathenConnectButton = () => {
         <span className="ml-[10px]">
           {email ? getTrimmedAddress(email, { length: 5 }) : 'Connect'}
         </span>
+        {email && (
+          <div className="ml-[10px]">
+            <img
+              src={
+                dropdown
+                  ? '/img/icon_chevron_up.png'
+                  : '/img/icon_chevron_down.png'
+              }
+              alt="chevron down"
+              width={12}
+              height={12}
+              className="transition-all"
+            />
+          </div>
+        )}
         {dropdown && (
           <DropdownMenu
             items={[
               { text: 'cgPass', value: 'Account' },
-              { text: 'Logout', value: 'Logout' },
+              {
+                text: (
+                  <div className="flex items-center">
+                    <div className="mr-[12px]">Sign Out</div>
+                    <img
+                      src="/img/icon_signout.png"
+                      width={12}
+                      height={12}
+                      alt="signout"
+                      className="mt-[2px]"
+                    />
+                  </div>
+                ),
+                value: 'Logout',
+              },
             ]}
             onItemClick={(val) => handleDropdownClick(val)}
+            width={200}
+            left={-53}
           />
         )}
       </Button>

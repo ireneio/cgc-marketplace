@@ -44,6 +44,7 @@ const FloatingCardWrapper = ({ items }: { items: any[] }) => {
                   ? setAddMarginRight(val)
                   : ''
               }
+              onCardClick={() => handleOnPlay(item.id)}
             />
           </div>
         );
