@@ -47,7 +47,7 @@ const FloatingCard = ({
   return (
     <div className="">
       <li
-        className="relative cursor-pointer rounded-[5px] align-middle w-[350px] h-[235.42px] bg-[#181818] transition-all"
+        className="relative cursor-pointer rounded-[5px] align-middle w-[350px] h-[235.42px] bg-[#181818] transition-all drop-shadow-xl"
         onMouseOver={() => handleMouseOver()}
         onMouseOut={() => handleMouseOut()}
         style={{

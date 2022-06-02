@@ -242,10 +242,15 @@ const MarketView = () => {
       </div>
       <div className="flex flex-wrap">
         {currentView === 'List' && loading && (
-          <div className="grid grid-cols-4 gap-x-20">
+          <div
+            className="grid gap-x-[24px] w-full"
+            style={{
+              gridTemplateColumns: 'repeat(auto-fill, minmax(205px, 1fr))',
+            }}
+          >
             {LOADING_ARR.map((item, index) => {
               return (
-                <div key={index} className="mr-[34px] mb-[34px]">
+                <div key={index} className="mb-[34px]">
                   <ListCardLoading />
                 </div>
               );
@@ -253,7 +258,12 @@ const MarketView = () => {
           </div>
         )}
         {currentView === 'Row' && loading && (
-          <div className="grid grid-cols-max gap-x-20">
+          <div
+            className="grid gap-x-[24px] w-full"
+            style={{
+              gridTemplateColumns: 'repeat(auto-fill, minmax(364px, 1fr))',
+            }}
+          >
             {LOADING_ARR.map((item, index) => {
               return (
                 <div key={index} className="mr-[34px] mb-[34px]">
@@ -264,7 +274,12 @@ const MarketView = () => {
           </div>
         )}
         {currentView === 'List' && !loading && (
-          <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-x-20">
+          <div
+            className="grid gap-x-[24px] w-full"
+            style={{
+              gridTemplateColumns: 'repeat(auto-fill, minmax(205px, 1fr))',
+            }}
+          >
             {items.map((item, index) => {
               return (
                 <div key={index} className="mb-[34px]">
@@ -288,7 +303,12 @@ const MarketView = () => {
           </div>
         )}
         {currentView === 'Row' && !loading && (
-          <div className="grid grid-cols-2 gap-x-20">
+          <div
+            className="grid gap-x-[24px] w-full"
+            style={{
+              gridTemplateColumns: 'repeat(auto-fill, minmax(364px, 1fr))',
+            }}
+          >
             {items.map((item, index) => {
               return (
                 <div key={index} className="mb-[34px]">

@@ -80,7 +80,10 @@ const Launchpad = () => {
       <div className="mb-[28px]">
         <Divider />
       </div>
-      <div className="flex justify-between flex-wrap">
+      <div
+        className="grid"
+        style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(371px, 1fr))' }}
+      >
         {!loading && !items.length && (
           <div className="text-[#FFFFFF] text-semibold">
             No Collections Found.
