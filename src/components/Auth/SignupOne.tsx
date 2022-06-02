@@ -29,7 +29,7 @@ const SignupOne = ({
           </div>
         </div>
         <div>
-          <div className="mt-1">
+          <div className="relative mt-1 mb-[12px]">
             <FormInput
               placeholder="Email"
               id="email"
@@ -49,7 +49,13 @@ const SignupOne = ({
           Next
         </Button>
         <div className="mt-[24px]">
-          <Button onClick={() => onCancel()}>Cancel</Button>
+          <Button
+            link
+            style={{ backgroundColor: '#181818' }}
+            onClick={() => onCancel()}
+          >
+            Cancel
+          </Button>
         </div>
       </div>
     </motion.div>

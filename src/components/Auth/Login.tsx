@@ -37,7 +37,7 @@ const Login = ({
           </div>
         </div>
         <div>
-          <div className=" relative mt-1">
+          <div className="relative mt-1">
             <FormInput
               placeholder="Password"
               id="password"

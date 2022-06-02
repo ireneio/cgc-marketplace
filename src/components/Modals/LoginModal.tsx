@@ -103,7 +103,7 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
       <Transition show={isOpen}>
         <Dialog
           as="div"
-          className="fixed inset-0 z-10 overflow-y-auto"
+          className="fixed inset-0 z-10 overflow-y-auto font-circularstdbook"
           onClose={() => {
             setIsOpen(false);
           }}
@@ -136,7 +136,7 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
             >
               <div
                 className="login_dialog_parent relative inline-block w-[400px] my-12 overflow-hidden text-left align-middle transition-all
-            transform shadow-xl rounded-[5px] bg-[#13002B]"
+            transform shadow-xl rounded-[5px] bg-[#13002B] font-circularstdbook"
               >
                 <div
                   className="px-[2px] py-[2px] rounded-[5px]"

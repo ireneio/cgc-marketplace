@@ -48,7 +48,13 @@ const SignupThree = ({
           Create Account
         </Button>
         <div className="mt-[24px]">
-          <Button onClick={() => onCancel()}>Cancel</Button>
+          <Button
+            link
+            style={{ backgroundColor: '#181818' }}
+            onClick={() => onCancel()}
+          >
+            Cancel
+          </Button>
         </div>
       </div>
     </motion.div>

@@ -31,7 +31,13 @@ const SignupTwo = ({
       <div className="mt-3 px-[24px] pb-[24px]">
         <Button onClick={() => onNextStep()}>Next</Button>
         <div className="mt-[24px]">
-          <Button onClick={() => onCancel()}>Cancel</Button>
+          <Button
+            link
+            style={{ backgroundColor: '#181818' }}
+            onClick={() => onCancel()}
+          >
+            Cancel
+          </Button>
         </div>
       </div>
     </motion.div>

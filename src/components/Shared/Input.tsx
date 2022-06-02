@@ -40,7 +40,7 @@ const Input = React.forwardRef(
           {React.createElement('input', {
             ...restProps,
             className: twMerge(
-              'w-full text-[14px] rounded-[6px] bg-[#0C001C] px-[18px] py-[10px] text-[#ACACAC] outline-none border-[1px] border-[#FFFFFF] focus:border-[#AAAAAA]',
+              'font-circularstdbook w-full text-[14px] rounded-[6px] bg-[#0C001C] px-[18px] py-[10px] text-[#ACACAC] outline-none border-[1px] border-[#FFFFFF] focus:border-[#AAAAAA]',
               className,
             ),
             autoFocus,
