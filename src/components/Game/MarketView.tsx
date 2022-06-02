@@ -96,7 +96,7 @@ const MarketView = () => {
             />
           </div>
           <div className="ml-[8px] text-[#FFFFFF] text-[14px]">
-            {getNumberWithCommas(info.listedItemCount)} Items
+            {getNumberWithCommas(info.listedItemCount, 0)} Items
           </div>
           <div className="ml-auto">
             <SelectGroup
@@ -133,13 +133,18 @@ const MarketView = () => {
                       <div className="text-[#FFFFFF] ml-[4px] text-[12px] flex items-center">
                         <div>Cart</div>
                         <div
-                          className="ml-[4px]"
+                          className="ml-[4px] text-[#FFFFFF]"
                           style={{
                             background:
-                              'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
-                            backgroundClip: 'text',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
+                              currentFilter === 'Cart'
+                                ? 'transparent'
+                                : 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
+                            backgroundClip:
+                              currentFilter !== 'Cart' ? 'text' : '',
+                            WebkitBackgroundClip:
+                              currentFilter !== 'Cart' ? 'text' : '',
+                            WebkitTextFillColor:
+                              currentFilter !== 'Cart' ? 'transparent' : '',
                           }}
                         >
                           [{cartItems.length}]

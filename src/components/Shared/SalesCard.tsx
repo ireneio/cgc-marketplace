@@ -29,7 +29,7 @@ const SalesCard = ({
       <div
         className="w-full min-h-[200px] bg-[#181818] aspect-w-1 aspect-h-1 overflow-hidden
               group-hover:opacity-75 lg:aspect-none
-              rounded-t-[5px] hover:scale-[1.2] transition ease-in duration-200 hover:cursor-pointer"
+              rounded-t-[5px] transition ease-in duration-200 hover:cursor-pointer"
       >
         <img
           src={img}
@@ -39,7 +39,7 @@ const SalesCard = ({
       </div>
       <div className="px-[16px] py-[8px] bg-[#13002B]">
         <div className="text-[20px] font-bold text-[#FFFFFF]">{title}</div>
-        <div className="mt-[4px] text-[#FC1F8E] text-[14px] flex justify-center">
+        <div className="mt-[4px] text-[#FC1F8E] text-[14px] flex justify-start">
           <div>{brand}</div>
           <div className="ml-[2px]">{/* <CrIcon /> */}</div>
         </div>

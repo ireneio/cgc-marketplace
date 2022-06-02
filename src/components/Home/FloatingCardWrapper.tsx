@@ -12,7 +12,10 @@ const FloatingCardWrapper = ({ items }: { items: any[] }) => {
   };
 
   return (
-    <div className="pt-[32px] pb-[24px] floating-card-wrapper hide-scrollbar w-[3000px]">
+    <div
+      className="pt-[32px] pb-[24px] floating-card-wrapper hide-scrollbar"
+      style={{ marginTop: -32 }}
+    >
       {items.map((item, index) => {
         return (
           <div

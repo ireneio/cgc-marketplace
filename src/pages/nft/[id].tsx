@@ -5,13 +5,14 @@ import CartSection from '@/components/Nft/CartSection';
 import DetailPanel from '@/components/Nft/DetailPanel';
 import HistoryTable from '@/components/Nft/HistoryTable';
 import InfoPanel from '@/components/Nft/InfoPanel';
+import BreadCrumb from '@/components/Shared/Breadcrumb';
 import Divider from '@/components/Shared/Divider';
 import Pagination from '@/components/Shared/Pagination';
-import Snackbar from '@/components/Shared/Snackbar';
+import SelectGroup from '@/components/Shared/SelectGroup';
 import { useAppDispatch } from '@/store';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export interface NftInfo {
   id: string | number;
@@ -27,6 +28,7 @@ export interface NftInfo {
   mintAddress: string;
   owner: string;
 }
+type Selection = 'About' | 'All Items' | 'Your Items' | 'Activity' | 'Staking';
 
 const Nft = () => {
   const dispatch = useAppDispatch();
@@ -56,6 +58,83 @@ const Nft = () => {
   });
   const [openCart, setOpenCart] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
+  const [currentSelection, setCurrentSelection] =
+    useState<Selection>('All Items');
+
+  const handleSelect = (value: Selection) => {
+    setCurrentSelection(value);
+    switch (value) {
+      case 'About':
+        router.push(`/collection/${router.query.id}`);
+        setInfo((prev) => ({
+          ...prev,
+          // header: `Welcome to the ${info.name} Metaverse Crypto NFT Game`,
+          header: info.name,
+        }));
+        return;
+      case 'All Items':
+        setInfo((prev) => ({
+          ...prev,
+          header: 'All Items',
+        }));
+        return;
+      case 'Your Items':
+        setInfo((prev) => ({
+          ...prev,
+          header: 'Your Items',
+        }));
+        return;
+      case 'Activity':
+        setInfo((prev) => ({
+          ...prev,
+          header: 'Activity',
+        }));
+        return;
+      case 'Staking':
+        setInfo((prev) => ({
+          ...prev,
+          header: 'Staking',
+        }));
+        return;
+    }
+  };
+
+  const breadCrumbItems = useMemo(() => {
+    switch (currentSelection) {
+      case 'About':
+        return [
+          { text: 'Home', value: 'Home' },
+          // { text: info.name, value: 'Game' },
+          { text: 'Explore', value: 'Explore' },
+        ];
+      case 'All Items':
+        return [
+          { text: 'Home', value: 'Home' },
+          { text: info.brand, value: 'Game' },
+          { text: info.name, value: 'All Items' },
+        ];
+      case 'Your Items':
+        return [
+          { text: 'Home', value: 'Home' },
+          { text: info.name, value: 'Game' },
+          { text: 'Your Items', value: 'Your Items' },
+        ];
+      case 'Staking':
+        return [
+          { text: 'Home', value: 'Home' },
+          { text: info.name, value: 'Game' },
+          { text: 'Staking', value: 'Staking' },
+        ];
+      case 'Activity':
+        return [
+          { text: 'Home', value: 'Home' },
+          { text: info.name, value: 'Game' },
+          { text: 'Activity', value: 'Activity' },
+        ];
+      default:
+        return [];
+    }
+  }, [info, currentSelection]);
 
   useEffect(() => {
     if (router.query.id) {
@@ -73,6 +152,38 @@ const Nft = () => {
 
   return (
     <DefaultLayout>
+      <div className="mb-[12px]">
+        <BreadCrumb
+          items={breadCrumbItems}
+          currentValue={
+            currentSelection === 'About' ? 'Game' : currentSelection
+          }
+          onItemClick={(val) => {
+            if (val === 'Home') {
+              dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
+              router.push('/');
+            } else if (val === 'Game') {
+              handleSelect('About');
+            }
+          }}
+        />
+      </div>
+      <div className="flex justify-between items-center mb-[28px]">
+        <div className="text-[#FFFFFF] font-bold text-[20px]">{info.name}</div>
+        <div>
+          <SelectGroup
+            items={[
+              { text: 'About', value: 'About' },
+              { text: 'All Items', value: 'All Items' },
+              // { text: 'Your Items', value: 'Your Items' },
+              // { text: 'Activity', value: 'Activity' },
+              // { text: 'Staking', value: 'Staking' },
+            ]}
+            currentValue={currentSelection}
+            onItemClick={(value) => handleSelect(value as Selection)}
+          />
+        </div>
+      </div>
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <div className="cursor-pointer">

@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <div className="z-[10] shadow-lg bg-[#0C001C] fixed top-0 left-0 flex w-[100vw] h-[75px] items-center px-[25px] mx-auto max-w-[3840px]">
-      <div className="cursor-pointer" style={{ width: '290px' }}>
+      <div className="cursor-pointer w-[200px]">
         <div onClick={() => handleGoHomePage()}>
           <img
             className="block h-8 w-auto"
@@ -28,7 +28,7 @@ const Header = () => {
           />
         </div>
       </div>
-      <div className="w-[50vw] relative">
+      <div className="relative w-[50vw]">
         <input
           type="text"
           value={search}
@@ -45,7 +45,7 @@ const Header = () => {
           />
         </div>
       </div>
-      <div className="flex items-center ml-[18px] ml-auto">
+      <div className="flex items-center ml-auto">
         <div className="">
           <CathenConnectButton />
         </div>

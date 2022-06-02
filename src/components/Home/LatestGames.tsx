@@ -42,7 +42,7 @@ const LatestGames = () => {
         {loading &&
           items.map((game, index) => {
             return (
-              <div key={index} className="mr-[12px] pt-[32px]">
+              <div key={index} className="mr-[12px]">
                 <LoadingNetflixCard />
               </div>
             );

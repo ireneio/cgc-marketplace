@@ -10,7 +10,7 @@
 
   /*noinspection ALL*/
   /* @font-face {
-    font-family: 'CircularStd-Bold';
+    font-family: 'CircularStd-Bold';font-family: 'Noto Sans', sans-serif !important;
     src: url(/fonts/CircularStd-Bold.woff2) format('woff2');
   } */
 
@@ -21,10 +21,10 @@
   } */
 
   /*noinspection ALL*/
-  /* @font-face {
+  @font-face {
     font-family: 'CircularStd-Book';
     src: url(/fonts/CircularStd-Book.woff2) format('woff2');
-  } */
+  }
 }
 
 html {
@@ -32,7 +32,8 @@ html {
 }
 
 body {
-  font-family: 'Noto Sans', sans-serif !important;
+  /* font-family: 'Noto Sans', sans-serif !important; */
+  font-family: 'CircularStd-Book', sans-serif !important;
 }
 
 .wallet-adapter-button-trigger {
@@ -85,7 +86,7 @@ body {
   display: flex;
   margin: auto;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: auto;
   position: relative;
 }
 
@@ -105,7 +106,7 @@ body {
   /* display: inline-block; */
   background-color: transparent;
   /* transition-duration: .5s; */
-  transition-duration: .3s;
+  transition-duration: .1s;
   overflow: hidden;
   cursor: pointer;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, .75);
@@ -143,7 +144,7 @@ body {
   position: absolute;
   bottom: 0px;
   left: 50%;
-  transform: translateY(-100%) translateX(-50%);
+  transform: translateY(100%) translateX(-50%);
   transition-duration: 1s;
   opacity: 0;
   padding: 10px 10px 10px 10px;

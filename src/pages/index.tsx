@@ -43,23 +43,27 @@ const Index = () => {
         <BreadCrumb items={breadcrumbItems} currentValue={sideBarPath} />
       </div>
       {sideBarPath === 'Home' && <LandingCarousel />}
-      {(sideBarPath === 'Home' || sideBarPath === 'Explore/Latest') && (
+      {/* {(sideBarPath === 'Home' || sideBarPath === 'Explore/Latest') && (
         <div className="mt-[40px]">
           <LatestGames />
         </div>
-      )}
-      {(sideBarPath === 'Home' || sideBarPath === 'Explore/Popular') && (
+      )} */}
+      {/* {(sideBarPath === 'Home' || sideBarPath === 'Explore/Popular') && (
         <div className="mt-[40px]">
           <PopularGames />
         </div>
-      )}
+      )} */}
       {(sideBarPath === 'Home' || sideBarPath === 'Explore/All') && (
         <div className="mt-[40px]">
           <AllGames />
         </div>
       )}
       {sideBarPath === 'Home' && <LatestSales />}
-      {sideBarPath === 'Home' && <LatestTransactions />}
+      {sideBarPath === 'Home' && (
+        <div className="mb-[24px]">
+          <LatestTransactions />
+        </div>
+      )}
     </DefaultLayout>
   );
 };

@@ -27,7 +27,10 @@ const RowCard = ({
   addToCartLoading,
 }: Props) => {
   return (
-    <div className="rounded-[5px] w-[364px] bg-[#13002B] border-[1px] border-solid border-[#290030] mx-auto">
+    <div
+      className="rounded-[5px] w-[364px] bg-[#13002B] border-[2px] border-solid border-[#290030] mx-auto"
+      style={{ borderColor: isAddedToCart ? '#F41786' : '#290030' }}
+    >
       <div>
         <img src={image} alt={name} width={364} height={364} />
       </div>

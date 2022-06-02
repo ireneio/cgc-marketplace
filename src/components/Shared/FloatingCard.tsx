@@ -47,7 +47,7 @@ const FloatingCard = ({
   return (
     <div className="">
       <li
-        className="relative cursor-pointer rounded-[5px] align-middle w-[350px] h-[235.42px] bg-[#181818] transition-all drop-shadow-xl"
+        className="relative z-[1000] cursor-pointer rounded-[5px] align-middle w-[350px] h-[235.42px] bg-[#181818] transition-all drop-shadow-xl"
         onMouseOver={() => handleMouseOver()}
         onMouseOut={() => handleMouseOut()}
         style={{
@@ -68,14 +68,20 @@ const FloatingCard = ({
         )}
         {isMouseOver && bgOnHover && (
           <div className="bg-img flex items-start justify-center">
-            <video
+            {/* <video
               autoPlay
               width={350 * 1.15 + 'px'}
               height={350 * 1.15 + 'px'}
               muted
             >
               <source src={bgOnHover} type="video/mp4"></source>
-            </video>
+            </video> */}
+            <div
+              className="w-[380px] h-[235.42px] bg-contain bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `url(${bg})`,
+              }}
+            ></div>
           </div>
         )}
         {showCatheonLogo && !isMouseOver && (
@@ -87,7 +93,7 @@ const FloatingCard = ({
         <a href="#">
           <div className="relative content">
             <div className="px-[12px] py-[0px]">
-              <div className="font-bold text-[#FFFFFF] text-[12px]">
+              <div className="font-normal text-[#FFFFFF] text-[10px]">
                 {title}
               </div>
               <div className="mt-[12px] flex justify-between items-center">
@@ -111,14 +117,14 @@ const FloatingCard = ({
                     );
                   })}
                 </div>
-                {showCatheonLogo && (
+                {/* {showCatheonLogo && (
                   <div
                     className="ml-[12px] mr-[12px] w-[38px] h-[38px] bg-no-repeat bg-center bg-contain"
                     style={{
                       backgroundImage: `url(/img/cgc-logo-no-text.png)`,
                     }}
                   ></div>
-                )}
+                )} */}
                 <div>
                   <Button
                     className="capitalize"
@@ -126,7 +132,7 @@ const FloatingCard = ({
                     disabled={playDisabled}
                     style={{ padding: '8px 24px', fontSize: 10 }}
                   >
-                    More Info
+                    Play
                   </Button>
                 </div>
               </div>

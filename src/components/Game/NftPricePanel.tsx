@@ -42,7 +42,7 @@ const NftPricePanel = ({
   return (
     <Tag>
       <div className="relative px-[24px] py-[24px]">
-        <div className="mb-[10px] text-[#FFFFFF] fond-semibold text-[14px]">
+        <div className="mb-[10px] text-[#FFFFFF] font-bold text-[14px]">
           {name} NFT
         </div>
         <div className="flex flex-wrap">

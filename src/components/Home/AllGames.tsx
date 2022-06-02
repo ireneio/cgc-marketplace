@@ -26,14 +26,14 @@ const AllGames = () => {
   return (
     <div className="">
       <div className="flex justify-between items-center">
-        <SectionTitle>all games</SectionTitle>
+        <SectionTitle>all collections</SectionTitle>
       </div>
-      <div className="pb-[24px] floating-card-wrapper hide-scrollbar">
+      <div className="pb-[24px] floating-card-wrapper hide-scrollbar relative">
         {!loading && <FloatingCardWrapper items={items} />}
         {loading &&
           items.map((game, index) => {
             return (
-              <div key={index} className="mr-[12px] pt-[32px]">
+              <div key={index} className="mr-[12px]">
                 <LoadingNetflixCard />
               </div>
             );

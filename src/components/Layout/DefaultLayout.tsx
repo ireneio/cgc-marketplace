@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import Footer from '../Shared/Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -33,31 +33,31 @@ const SIDE_BAR_ITEMS = [
     icon: '/img/icon_compass.png',
     children: [
       { text: 'All', value: 'All' },
-      { text: 'Latest', value: 'Latest' },
-      { text: 'Popular', value: 'Popular' },
+      // { text: 'Latest', value: 'Latest' },
+      // { text: 'Popular', value: 'Popular' },
     ],
   },
-  { text: 'Sell', value: 'Sell', icon: '/img/icon_sell.png' },
+  // { text: 'Sell', value: 'Sell', icon: '/img/icon_sell.png' },
   {
     text: 'Launchpad',
     value: 'Launchpad',
     icon: '/img/icon_rocket.png',
   },
-  {
-    text: 'Cart',
-    value: 'Cart',
-    icon: '/img/icon_cart.png',
-  },
-  {
-    text: 'Transactions',
-    value: 'Transactions',
-    icon: '/img/icon_bar.png',
-  },
-  {
-    text: 'Latest Sales',
-    value: 'Latest Sales',
-    icon: '/img/icon_dollar.png',
-  },
+  // {
+  //   text: 'Cart',
+  //   value: 'Cart',
+  //   icon: '/img/icon_cart.png',
+  // },
+  // {
+  //   text: 'Transactions',
+  //   value: 'Transactions',
+  //   icon: '/img/icon_bar.png',
+  // },
+  // {
+  //   text: 'Latest Sales',
+  //   value: 'Latest Sales',
+  //   icon: '/img/icon_dollar.png',
+  // },
 ];
 
 const DefaultLayout = ({ children, title }: Props) => {
@@ -70,11 +70,12 @@ const DefaultLayout = ({ children, title }: Props) => {
   const router = useRouter();
 
   const handleSideBarPathUpdate = (val: string) => {
-    dispatch({ type: 'SET_NAVIGATION_PATH', payload: val });
     if (val === 'Home' || val.includes('Explore')) {
+      dispatch({ type: 'SET_NAVIGATION_PATH', payload: val });
       router.push('/');
     } else if (val === 'Launchpad') {
-      router.push('/launchpad');
+      // router.push('/launchpad');
+      window.open('', '_blank');
     }
   };
 
@@ -111,6 +112,14 @@ const DefaultLayout = ({ children, title }: Props) => {
     }
   }, []);
 
+  const [windowWidth, setWindowWidth] = useState(1366);
+
+  useEffect(() => {
+    if (window) {
+      setWindowWidth(window.innerWidth);
+    }
+  }, []);
+
   return (
     <>
       <div className="min-h-[100vh] bg-[#0C001C] max-w-[100vw] overflow-x-hidden">
@@ -142,10 +151,6 @@ const DefaultLayout = ({ children, title }: Props) => {
           <link rel="icon" href={seo.linkIcon32x32} sizes="32x32" />
           <link rel="icon" href={seo.linkIcon192x192} sizes="192x192" />
           <link rel="apple-touch-icon" href={seo.linkIconAppleTouchIcon} />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-            rel="stylesheet"
-          ></link>
         </Head>
         <DynamicSnackbar
           text={snackbarText}
@@ -154,15 +159,18 @@ const DefaultLayout = ({ children, title }: Props) => {
         />
         <Header />
         <div className="flex mt-[75px] relative">
-          <div className="w-[200px] top-0 left-0 hidden md:block">
+          <div className="w-[200px] hidden md:block flex-shrink-0">
             <Sidebar
               items={SIDE_BAR_ITEMS}
               currentValue={sideBarPath}
               onItemClick={(value) => handleSideBarPathUpdate(value)}
             />
           </div>
-          <div className="flex-1">
-            <div className="px-[24px] pb-[24px] max-w-[80vw] mx-auto">
+          <div>
+            <div
+              className="px-[25px] pb-[24px] mx-auto"
+              style={{ width: windowWidth - 200 }}
+            >
               {children}
             </div>
           </div>
