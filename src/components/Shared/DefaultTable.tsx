@@ -24,10 +24,10 @@ const DefaultTable = ({ rows, headers }: Props) => {
         <Tbody>
           {rows.map((row, index) => {
             return (
-              <Tr key={index}>
+              <Tr key={index} style={{ padding: 0, margin: 0 }}>
                 {row.map((col, _index) => {
                   return Object.keys(col).length ? (
-                    <Td key={_index}>
+                    <Td key={_index} style={{ padding: 0, margin: 0 }}>
                       <div>{col}</div>
                     </Td>
                   ) : (

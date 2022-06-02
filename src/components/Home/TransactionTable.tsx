@@ -7,11 +7,11 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 interface Props {
   rows:
-    | React.ReactNode[][]
-    | string[][]
-    | number[][]
-    | Record<string, any>[][]
-    | any[][];
+  | React.ReactNode[][]
+  | string[][]
+  | number[][]
+  | Record<string, any>[][]
+  | any[][];
   headers: string[] | number[] | React.ReactNode[];
 }
 
@@ -36,15 +36,15 @@ const TransactionTable = ({ rows, headers }: Props) => {
           return (
             <div
               key={colIndex}
-              className="py-[12px] flex items-center text-[14px] px-[10px]"
+              className="py-[10.5px] flex items-center text-[14px] px-[10px]"
               style={{
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
             >
-              <div className="h-[18px] w-[18px] mr-[12px] py-[12px] flex items-center">
+              <div className="h-[16px] w-[16px] mr-[12px] py-[12px] flex items-center">
                 {col.icon && (
                   <img
-                    className="h-[18px] w-[18px] object-contain"
+                    className="h-[16px] w-[16px] object-contain"
                     src={col.icon}
                     alt="icon"
                   />
