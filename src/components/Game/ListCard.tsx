@@ -27,7 +27,7 @@ const ListCard = ({
   addToCartLoading,
 }: Props) => {
   return (
-    <div className="rounded-[5px] w-[205px] bg-[#13002B] border-[1px] border-solid border-[#290030]">
+    <div className="rounded-[5px] w-[205px] bg-[#13002B] border-[1px] border-solid border-[#290030] mx-auto">
       <div>
         <img src={image} alt={name} width={205} height={205} />
       </div>
@@ -59,7 +59,7 @@ const ListCard = ({
       <div className="flex">
         <div
           style={{ flexBasis: '30%' }}
-          className="hover:bg-[#290030] flex items-center justify-center cursor-pointer px-[18px] py-[18px] rounded-bl-[5px]"
+          className="hover:bg-[#290030] hover:text-[#FFFFFF] flex items-center justify-center cursor-pointer px-[18px] py-[18px] rounded-bl-[5px]"
           onClick={() => onMoreInfo(id)}
         >
           <img
@@ -72,7 +72,7 @@ const ListCard = ({
         {(!isAddedToCart || addToCartLoading) && (
           <div
             style={{ flexBasis: '70%' }}
-            className="hover:bg-[#290030] flex items-center justify-center cursor-pointer px-[18px] py-[18px] border-l-[1px] border-l-[#290030] rounded-br-[5px]"
+            className="hover:bg-[#290030] hover:text-[#FFFFFF] flex items-center justify-center cursor-pointer px-[18px] py-[18px] border-l-[1px] border-l-[#290030] rounded-br-[5px]"
           >
             {!addToCartLoading && (
               <div>
