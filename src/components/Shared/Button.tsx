@@ -12,6 +12,7 @@ interface Props {
   link?: boolean;
   shadowed?: boolean;
   secondary?: boolean;
+  loading?: boolean;
 }
 
 const Button = ({
@@ -25,6 +26,7 @@ const Button = ({
   filled,
   shadowed,
   secondary,
+  loading,
 }: Props) => {
   const [hover, setHover] = useState(false);
 
@@ -71,9 +73,16 @@ const Button = ({
         onMouseOut={() => setHover(false)}
         disabled={disabled}
       >
-        <div style={{ whiteSpace: 'nowrap' }} className="flex items-center">
-          {children}
-        </div>
+        {!loading && (
+          <div style={{ whiteSpace: 'nowrap' }} className="flex items-center">
+            {children}
+          </div>
+        )}
+        {loading && (
+          <div>
+            <img src="/img/spinner.svg" alt="spinner" width={14} height={14} />
+          </div>
+        )}
       </button>
     </div>
   );
