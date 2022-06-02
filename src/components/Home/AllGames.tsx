@@ -1,11 +1,10 @@
 import { testData } from '@/data/test';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import ButtonLink from '../Shared/ButtonLink';
 import LoadingNetflixCard from '../Shared/LoadingNetflixCard';
 import SectionTitle from '../Shared/SectionTitle';
-import FloatingCardWrapper from './FloatingCardWrapper';
+import CardCarousel from './CardCarousel';
 
 const AllGames = () => {
   const dispatch = useAppDispatch();
@@ -28,16 +27,19 @@ const AllGames = () => {
       <div className="flex justify-between items-center">
         <SectionTitle>all collections</SectionTitle>
       </div>
-      <div className="pb-[24px] floating-card-wrapper hide-scrollbar relative">
-        {!loading && <FloatingCardWrapper items={items} />}
-        {loading &&
-          items.map((game, index) => {
-            return (
-              <div key={index} className="mr-[12px]">
-                <LoadingNetflixCard />
-              </div>
-            );
-          })}
+      <div className="pb-[24px] hide-scrollbar">
+        {!loading && <CardCarousel items={items} />}
+        {loading && (
+          <div className="flex pt-[12px]">
+            {items.map((game, index) => {
+              return (
+                <div key={index} className="mr-[12px]">
+                  <LoadingNetflixCard />
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
       <div className="flex justify-end mt-[20px] mb-[40px]">
         {sideBarPath === 'Home' && (

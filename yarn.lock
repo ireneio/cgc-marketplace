@@ -1929,6 +1929,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-slick@^0.23.8":
+  version "0.23.8"
+  resolved "https://registry.yarnpkg.com/@types/react-slick/-/react-slick-0.23.8.tgz#91654e657158da57f082c7b213e20756d3a37502"
+  integrity sha512-SfzSg++/3uyftVZaCgHpW+2fnJFsyJEQ/YdsuqfOWQ5lqUYV/gY/UwAnkw4qksCj5jalto/T5rKXJ8zeFldQeA==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*":
   version "18.0.8"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.8.tgz#a051eb380a9fbcaa404550543c58e1cf5ce4ab87"
@@ -3101,6 +3108,11 @@ engine.io-parser@~5.0.3:
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/engine.io-parser/-/engine.io-parser-5.0.4.tgz#0b13f704fa9271b3ec4f33112410d8f3f41d0fc0"
   integrity sha512-+nVFp+5z1E3HcToEnO7ZIj3g+3k9389DvWtvJZz0T6/eOCPIyyxehFcedoYrZQrp0LgQbD9pPXhpMBKMd5QURg==
+
+enquire.js@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/enquire.js/-/enquire.js-2.1.6.tgz#3e8780c9b8b835084c3f60e166dbc3c2a3c89814"
+  integrity sha512-/KujNpO+PT63F7Hlpu4h3pE3TokKRHN26JYmQpPyjkRD/N57R7bPDNojMXdi7uveAKjYB7yQnartCxZnFWr0Xw==
 
 enquirer@^2.3.0:
   version "2.3.6"
@@ -4350,6 +4362,13 @@ json-stringify-safe@^5.0.1:
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
   integrity sha1-Epai1Y/UXxmg9s4B1lcB4sc1tus=
 
+json2mq@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/json2mq/-/json2mq-0.2.0.tgz#b637bd3ba9eabe122c83e9720483aeb10d2c904a"
+  integrity sha512-SzoRg7ux5DWTII9J2qkrZrqV1gt+rTaoufMxEzXbS26Uid0NwaJd123HcoB80TgubEppxxIGdNxCx50fEoEWQA==
+  dependencies:
+    string-convert "^0.2.0"
+
 json5@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-1.0.1.tgz#779fb0018604fa854eacbf6252180d83543e3dbe"
@@ -4530,6 +4549,11 @@ lodash.castarray@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.castarray/-/lodash.castarray-4.4.0.tgz#c02513515e309daddd4c24c60cfddcf5976d9115"
   integrity sha1-wCUTUV4wna3dTCTGDP3c9ZdtkRU=
+
+lodash.debounce@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+  integrity sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==
 
 lodash.isplainobject@^4.0.6:
   version "4.0.6"
@@ -5292,6 +5316,11 @@ react-hook-form@^7.31.2:
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.31.2.tgz#efb7ac469810954488b7cf40be4e5017122c6e5e"
   integrity sha512-oPudn3YuyzWg//IsT9z2cMEjWocAgHWX/bmueDT8cmsYQnGY5h7/njjvMDfLVv3mbdhYBjslTRnII2MIT7eNCA==
 
+react-intersection-observer@^9.2.0:
+  version "9.2.0"
+  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-9.2.0.tgz#4a11eb76f2ce0e1e7bb9f29219a62e1d19e41114"
+  integrity sha512-tETsf3nEuS9WGKPld5x16QkmMnq9vTQu0UzFYnU1jBajgAqe0rIyAtobxlGloabomOeYZVW7aL3JaDZ9jK0Yew==
+
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -5338,6 +5367,17 @@ react-responsive-carousel@^3.2.23:
     classnames "^2.2.5"
     prop-types "^15.5.8"
     react-easy-swipe "^0.0.21"
+
+react-slick@^0.29.0:
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/react-slick/-/react-slick-0.29.0.tgz#0bed5ea42bf75a23d40c0259b828ed27627b51bb"
+  integrity sha512-TGdOKE+ZkJHHeC4aaoH85m8RnFyWqdqRfAGkhd6dirmATXMZWAxOpTLmw2Ll/jPTQ3eEG7ercFr/sbzdeYCJXA==
+  dependencies:
+    classnames "^2.2.5"
+    enquire.js "^2.1.6"
+    json2mq "^0.2.0"
+    lodash.debounce "^4.0.8"
+    resize-observer-polyfill "^1.5.0"
 
 react-super-responsive-table@^5.2.0:
   version "5.2.0"
@@ -5411,6 +5451,11 @@ require-from-string@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/require-from-string/-/require-from-string-2.0.2.tgz#89a7fdd938261267318eafe14f9c32e598c36909"
   integrity sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==
+
+resize-observer-polyfill@^1.5.0:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
+  integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
 
 resolve-from@^4.0.0:
   version "4.0.0"
@@ -5719,6 +5764,11 @@ stream-browserify@^3.0.0:
   dependencies:
     inherits "~2.0.4"
     readable-stream "^3.5.0"
+
+string-convert@^0.2.0:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/string-convert/-/string-convert-0.2.1.tgz#6982cc3049fbb4cd85f8b24568b9d9bf39eeff97"
+  integrity sha1-aYLMMEn7tM2F+LJFaLnZvznu/5c=
 
 string-width@^4.1.0, string-width@^4.2.0:
   version "4.2.3"

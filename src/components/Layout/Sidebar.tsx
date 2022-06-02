@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 interface SidebarItem {
   text: string;
   value: string;
@@ -12,8 +14,19 @@ interface Props {
 }
 
 const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
+  const [innerHeight, setInnerHeight] = useState(0);
+
+  useEffect(() => {
+    if (window) {
+      const height = Math.max(document.body.getBoundingClientRect().height, 0);
+      setInnerHeight(height);
+    }
+  }, []);
   return (
-    <div className="h-[70vh] overflow-auto px-[12px] py-[20px] bg-[#06000E] shadow-xl hide-scrollbar">
+    <div
+      className="h-[70vh] overflow-auto px-[12px] py-[20px] bg-[#0C001C] shadow-xl hide-scrollbar relative z-[10000]"
+      style={{ height: innerHeight }}
+    >
       {items.map((item) => {
         const isSelectedParent = currentValue.split('/')[0] === item.value;
         return (

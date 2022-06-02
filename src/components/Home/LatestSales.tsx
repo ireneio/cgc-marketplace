@@ -28,9 +28,9 @@ const LatestSales = () => {
           );
         })}
       </div>
-      <div className="flex justify-end mt-[20px]">
+      {/* <div className="flex justify-end mt-[20px]">
         <ButtonLink>see all</ButtonLink>
-      </div>
+      </div> */}
     </div>
   );
 };

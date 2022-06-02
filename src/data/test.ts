@@ -5,7 +5,7 @@ const collections = [
       'https://catheongaming.com/wp-content/uploads/2022/04/sstars-3-1.jpg',
     logoSrc:
       'https://catheongaming.com/wp-content/uploads/2021/12/seoulstars-logo.png',
-    videoSrc: 'https://fractal-game.imgix.net/seoulstars/stars.mp4',
+    videoSrc: '/gifs/yuna.gif',
     name: 'Seoul Stars',
     description:
       'Creating the metaverses first ever virtual K-Pop idol with a play-to-earn karaoke and rhythm game.',
@@ -30,8 +30,7 @@ const collections = [
       'https://catheongaming.com/wp-content/uploads/2022/04/solchicks-3.jpg',
     logoSrc:
       'https://catheongaming.com/wp-content/uploads/2021/12/solchicks-logo.png',
-    videoSrc:
-      'https://fractal-game.imgix.net/solchicks/solchicks.mp4?auto=compress,format',
+    videoSrc: '/gifs/solchicks.gif',
     name: 'SolChicks',
     tags: ['Solana', 'NFT', '$CHICKS', '$SHARDS'],
     description:
