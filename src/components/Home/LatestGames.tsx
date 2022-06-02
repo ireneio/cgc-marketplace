@@ -25,7 +25,7 @@ const LatestGames = () => {
   });
 
   return (
-    <div className="mt-[24px]">
+    <div className="">
       <div className="flex justify-between items-center">
         <SectionTitle>latest games</SectionTitle>
         <SelectGroup
@@ -37,12 +37,12 @@ const LatestGames = () => {
           onItemClick={(value) => setCurrentSelection(value)}
         />
       </div>
-      <div className="mt-[24px] pt-[24px] overflow-y-visible mr-[24px] flex floating-card-wrapper hide-scrollbar justify-start">
+      <div className="overflow-y-visible mr-[24px] flex floating-card-wrapper hide-scrollbar justify-start">
         {!loading && <FloatingCardWrapper items={items} />}
         {loading &&
           items.map((game, index) => {
             return (
-              <div key={index} className="mr-[24px]">
+              <div key={index} className="mr-[12px] pt-[32px]">
                 <LoadingNetflixCard />
               </div>
             );

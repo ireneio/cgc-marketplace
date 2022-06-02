@@ -17,6 +17,7 @@ const FloatingCardWrapper = ({ items }: { items: any[] }) => {
         return (
           <div
             key={index}
+            className="pr-[12px]"
             style={{
               marginLeft:
                 (index === 0 || index === items.length - 1) && addMarginLeft
