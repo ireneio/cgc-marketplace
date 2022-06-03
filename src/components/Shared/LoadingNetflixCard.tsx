@@ -2,8 +2,8 @@ import Skeleton from './Skeleton';
 
 const LoadingNetflixCard = () => {
   return (
-    <div className="w-[380px] h-[235.42px] relative">
-      <Skeleton className="w-[380px] h-[235.42px] bg-[#290030]" />
+    <div className="h-[117.66px] w-[212.94px] relative">
+      <Skeleton className="h-[117.66px] w-[212.94px] bg-[#290030]" />
     </div>
   );
 };

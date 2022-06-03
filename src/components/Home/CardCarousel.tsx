@@ -38,6 +38,7 @@ function SamplePrevArrow(props: any) {
 const CardCarousel = ({ items }: { items: any[] }) => {
   const router = useRouter();
   const [width, setWidth] = useState(0);
+  const [currentHoverId, setCurrentHoverId] = useState('-1');
 
   useEffect(() => {
     if (window) {
@@ -56,9 +57,11 @@ const CardCarousel = ({ items }: { items: any[] }) => {
   });
 
   useEffect(() => {
+    console.log(Math.floor((width - 200) / 240));
+
     setSettings((prev) => ({
       ...prev,
-      slidesToShow: Math.floor((width - 200) / 300),
+      slidesToShow: Math.floor((width - 200) / 240),
     }));
   }, [width]);
 
@@ -67,17 +70,19 @@ const CardCarousel = ({ items }: { items: any[] }) => {
   };
 
   return (
-    <div>
+    <div className="relative z-[2]">
       <Slider {...settings}>
         {items.map((item, index) => {
           return (
             <div
               key={index}
               id={String(index)}
-              className="mr-[12px] w-[350px] h-[235.42px]"
+              className="mr-[12px] h-[117.66px] w-[212.94px]"
               onClick={() => handleOnPlay(item.id)}
             >
               <FloatingCard
+                currentHoverId={currentHoverId}
+                id={String(index)}
                 bg={item.splashSrc}
                 bgOnHover={item.videoSrc}
                 title={item.description}
@@ -87,6 +92,8 @@ const CardCarousel = ({ items }: { items: any[] }) => {
                 coinSupply={'100000000000'}
                 onPlay={() => handleOnPlay(item.id)}
                 onCardClick={() => handleOnPlay(item.id)}
+                onMouseOver={() => setCurrentHoverId(String(index))}
+                onMouseLeave={() => setCurrentHoverId('-1')}
               />
             </div>
           );

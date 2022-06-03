@@ -19,14 +19,15 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
   useEffect(() => {
     if (window) {
       const height = Math.max(document.body.getBoundingClientRect().height, 0);
+      // const height = window.innerHeight;
       setInnerHeight(height);
     }
   }, []);
 
   return (
     <div
-      className="overflow-auto px-[12px] py-[20px] bg-[#0C001C] shadow-xl hide-scrollbar relative z-[2]"
-      style={{ height: '72vh' }}
+      className="overflow-auto px-[12px] py-[20px] bg-[#0C001C] shadow-xl hide-scrollbar relative z-[3]"
+      style={{ height: innerHeight }}
     >
       {items.map((item) => {
         const isSelectedParent = currentValue.split('/')[0] === item.value;
