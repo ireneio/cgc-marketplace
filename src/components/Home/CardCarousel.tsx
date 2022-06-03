@@ -57,11 +57,9 @@ const CardCarousel = ({ items }: { items: any[] }) => {
   });
 
   useEffect(() => {
-    console.log(Math.floor((width - 200) / 240));
-
     setSettings((prev) => ({
       ...prev,
-      slidesToShow: Math.floor((width - 200) / 240),
+      slidesToShow: Math.floor((width - 200) / 200),
     }));
   }, [width]);
 
@@ -77,7 +75,7 @@ const CardCarousel = ({ items }: { items: any[] }) => {
             <div
               key={index}
               id={String(index)}
-              className="mr-[12px] h-[117.66px] w-[212.94px]"
+              className="pl-[12px] pr-[12px] h-[117.66px] w-[212.94px]"
               onClick={() => handleOnPlay(item.id)}
             >
               <FloatingCard

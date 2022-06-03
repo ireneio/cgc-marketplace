@@ -1,5 +1,6 @@
 import { getNumberWithCommas } from '@/utils/formatters';
 import Button from './Button';
+import { motion } from 'framer-motion';
 
 interface Props {
   bg: string;
@@ -71,8 +72,13 @@ const FloatingCard = ({
         </li>
       )}
       {currentHoverId === id && (
-        <div
-          className="bg-[#13002B] rounded-[5px] transition-all cursor-pointer relative z-[100] translate-y-[-100px] duration-700"
+        <motion.div
+          // initial={{ width: 0, height: 0 }}
+          // animate={{ width: 300, height: 340 }}
+          initial={{ opacity: 0, x: '10px', y: '-100px' }}
+          animate={{ opacity: 1, x: '-30px', y: '-100px' }}
+          // transition={{ duration: '.3s' }}
+          className="bg-[#13002B] rounded-[5px] cursor-pointer relative z-[100] translate-y-[-100px]"
           onMouseLeave={() => handleMouseOut()}
         >
           <div className="w-[300px] h-[340px] absolute border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden">
@@ -143,7 +149,7 @@ const FloatingCard = ({
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
     </div>
   );
