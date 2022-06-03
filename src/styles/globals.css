@@ -187,6 +187,11 @@ body {
   overflow: visible !important;
 }
 
+.slick-slide {
+  margin: 0 0;
+}
+
+
 .blur {
   filter: blur(25px);
   animation-name: example;

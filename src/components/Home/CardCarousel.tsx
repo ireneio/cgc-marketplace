@@ -65,9 +65,11 @@ const CardCarousel = ({ items }: { items: any[] }) => {
   });
 
   useEffect(() => {
+    const show = Math.floor((width - 225) / (212.94));
+    console.log(show);
     setSettings((prev) => ({
       ...prev,
-      slidesToShow: Math.floor((width - 200) / 200),
+      slidesToShow: show,
     }));
   }, [width]);
 
