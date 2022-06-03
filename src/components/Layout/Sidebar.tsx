@@ -24,11 +24,12 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
     console.log(sidebarPath);
 
     if (window) {
-      const height = window.document.documentElement.scrollHeight;
-      console.log(height);
+      // const height = window.document.querySelector('.sbar')?.getBoundingClientRect().y;
+      // console.log(height);
 
       if (sidebarPath === 'Home') {
-        setInnerHeight(height);
+        // setInnerHeight(height || 0);
+        setInnerHeight('100vh');
       } else {
         setInnerHeight(window.document.documentElement.clientHeight);
       }
@@ -37,7 +38,7 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
 
   return (
     <div
-      className="overflow-auto px-[12px] py-[20px] bg-[#0C001C] shadow-xl hide-scrollbar relative z-[5]"
+      className="overflow-auto px-[12px] py-[20px] bg-[#0C001C] shadow-xl hide-scrollbar relative z-[5] sbar"
       style={{ height: innerHeight }}
     >
       {items.map((item) => {
