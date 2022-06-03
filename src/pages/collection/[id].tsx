@@ -8,7 +8,13 @@ import { useAppDispatch } from '@/store';
 import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
 
-type Selection = 'About' | 'All Items' | 'Your Items' | 'Activity' | 'Staking';
+type Selection =
+  | 'About'
+  | 'All Items'
+  | 'Your Items'
+  | 'Activity'
+  | 'Staking'
+  | '...';
 
 const Game = () => {
   const router = useRouter();
@@ -21,6 +27,9 @@ const Game = () => {
 
   const handleSelect = (value: Selection) => {
     setCurrentSelection(value);
+    if (value === '...') {
+      return;
+    }
     switch (value) {
       case 'About':
         setInfo((prev) => ({
@@ -58,10 +67,11 @@ const Game = () => {
 
   const breadCrumbItems = useMemo(() => {
     switch (currentSelection) {
+      case '...':
       case 'About':
         return [
           { text: 'Home', value: 'Home' },
-          // { text: info.name, value: 'Game' },
+          { text: info.name, value: 'Game' },
           { text: 'Explore', value: 'Explore' },
         ];
       case 'All Items':
@@ -119,6 +129,7 @@ const Game = () => {
               { text: 'About', value: 'About' },
               { text: 'All Items', value: 'All Items' },
               { text: 'Your Items', value: 'Your Items' },
+              { text: '...', value: '...' },
               // { text: 'Activity', value: 'Activity' },
               // { text: 'Staking', value: 'Staking' },
             ]}
