@@ -38,10 +38,14 @@ const Index = () => {
 
   return (
     <DefaultLayout>
-      <div className="mb-[12px]">
+      <div className="mb-[0]">
         <BreadCrumb items={breadcrumbItems} currentValue={sideBarPath} />
       </div>
-      {sideBarPath === 'Home' && <LandingCarousel />}
+      {sideBarPath === 'Home' && (
+        <div className="mt-[12px]">
+          <LandingCarousel />
+        </div>
+      )}
       {(sideBarPath === 'Home' || sideBarPath === 'Explore/All') && (
         <div className="mt-[32px]">
           <AllGames />

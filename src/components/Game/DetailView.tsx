@@ -193,7 +193,7 @@ const DetailView = () => {
               scanAddress={'solscan.io/token/cxx'}
             />
           </div>
-          <div>
+          <div className="mb-[32px]">
             <NftPricePanel
               name={'SolChicks'}
               volume={1234567.89}

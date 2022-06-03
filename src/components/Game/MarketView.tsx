@@ -84,8 +84,8 @@ const MarketView = () => {
   }, []);
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-[40px]">
+    <div className="mb-[32px]">
+      <div className="flex justify-between items-center mb-[32px]">
         <div className="flex items-center w-full">
           <div className="cursor-pointer">
             <img

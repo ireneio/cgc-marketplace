@@ -185,7 +185,7 @@ const DefaultLayout = ({ children, title }: Props) => {
             />
           </div>
           <div
-            className="pr-[24px] pb-[24px] mx-auto"
+            className="pr-[24px] mx-auto"
             style={{ width: windowWidth - 225 }}
           >
             {children}

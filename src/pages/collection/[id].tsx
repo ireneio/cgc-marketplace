@@ -95,7 +95,7 @@ const Game = () => {
 
   return (
     <DefaultLayout>
-      <div className="mb-[12px]">
+      <div className="mb-[32px]">
         <BreadCrumb
           items={breadCrumbItems}
           currentValue={
@@ -111,8 +111,8 @@ const Game = () => {
           }}
         />
       </div>
-      <div className="flex justify-between items-center mb-[28px]">
-        <div className="text-[#FFFFFF] font-bold text-[20px]">{info.name}</div>
+      <div className="flex justify-between items-center mb-[32px]">
+        <div className="text-[#FFFFFF] font-bold text-[24px]">{info.name}</div>
         <div>
           <SelectGroup
             items={[
@@ -127,7 +127,7 @@ const Game = () => {
           />
         </div>
       </div>
-      <div className="mb-[28px]">
+      <div className="mb-[32px]">
         <Divider />
       </div>
       {currentSelection === 'About' && <DetailView />}
