@@ -22,10 +22,11 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
       setInnerHeight(height);
     }
   }, []);
+
   return (
     <div
-      className="h-[70vh] overflow-auto px-[12px] py-[20px] bg-[#0C001C] shadow-xl hide-scrollbar relative z-[10000]"
-      style={{ height: innerHeight }}
+      className="overflow-auto px-[12px] py-[20px] bg-[#0C001C] shadow-xl hide-scrollbar relative z-[2]"
+      style={{ height: '72vh' }}
     >
       {items.map((item) => {
         const isSelectedParent = currentValue.split('/')[0] === item.value;

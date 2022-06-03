@@ -7,7 +7,7 @@ const LatestSales = () => {
   const [items, setitems] = useState([1, 2, 3, 4, 5]);
 
   return (
-    <div className="mt-[50px]">
+    <div>
       <div className="flex justify-between items-center">
         <SectionTitle>latest sales</SectionTitle>
       </div>

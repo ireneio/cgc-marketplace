@@ -67,7 +67,7 @@ const CardCarousel = ({ items }: { items: any[] }) => {
   };
 
   return (
-    <div className="mt-[32px]">
+    <div>
       <Slider {...settings}>
         {items.map((item, index) => {
           return (

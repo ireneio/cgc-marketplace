@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Footer from '../Shared/Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -79,7 +79,7 @@ const DefaultLayout = ({ children, title }: Props) => {
     }
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     let isPathValid = false;
     let resultPath = '';
     const savedPath = window.localStorage.getItem(SIDEBAR_PATH_STORAGE_KEY);
@@ -177,18 +177,16 @@ const DefaultLayout = ({ children, title }: Props) => {
               onItemClick={(value) => handleSideBarPathUpdate(value)}
             />
           </div>
-          <div>
-            <div
-              className="px-[25px] pb-[24px] mx-auto"
-              style={{ width: windowWidth - 200 }}
-            >
-              {children}
-            </div>
+          <div
+            className="px-[25px] pb-[24px] mx-auto"
+            style={{ width: windowWidth - 200 }}
+          >
+            {children}
           </div>
         </div>
-      </div>
-      <div className="w-full relative z-[4] overflow-x-hidden">
-        <Footer />
+        <div className="w-full relative z-[4] overflow-x-hidden">
+          <Footer />
+        </div>
       </div>
     </>
   );

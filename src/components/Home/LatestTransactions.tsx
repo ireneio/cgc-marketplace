@@ -7,7 +7,7 @@ const LatestTransactions = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   return (
-    <div className="mt-[50px]">
+    <div>
       <div className="flex justify-between items-center">
         <SectionTitle>latest transactions</SectionTitle>
         <div>

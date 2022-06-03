@@ -186,3 +186,27 @@ body {
 .slick-list {
   overflow: visible !important;
 }
+
+.blur {
+  filter: blur(25px);
+  animation-name: example;
+  animation-duration: .5s;
+  animation-delay: .5s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.no-blur {
+  filter: blur(0);
+  transition: filter .5s 2s ease-in;
+}
+
+@keyframes example {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

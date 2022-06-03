@@ -23,14 +23,18 @@ const AllGames = () => {
   });
 
   return (
-    <div className="">
+    <div className="relative">
       <div className="flex justify-between items-center">
         <SectionTitle>all collections</SectionTitle>
       </div>
-      <div className="pb-[24px] hide-scrollbar">
-        {!loading && <CardCarousel items={items} />}
+      <div className="hide-scrollbar">
+        {!loading && (
+          <div className="mt-[24px]">
+            <CardCarousel items={items} />
+          </div>
+        )}
         {loading && (
-          <div className="flex pt-[12px]">
+          <div className="flex mt-[24px]">
             {items.map((game, index) => {
               return (
                 <div key={index} className="mr-[12px]">
@@ -41,7 +45,7 @@ const AllGames = () => {
           </div>
         )}
       </div>
-      <div className="flex justify-end mt-[20px] mb-[40px]">
+      <div className="absolute bottom-[-24px] right-[0] flex justify-end">
         {sideBarPath === 'Home' && (
           <ButtonLink
             onClick={() => {

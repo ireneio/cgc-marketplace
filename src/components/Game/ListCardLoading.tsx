@@ -9,16 +9,16 @@ const ListCardLoading = () => {
       </div>
       <div className="mt-[12px] px-[12px]">
         <div className="text-[#FFFFFF] text-semibold">
-          <Skeleton className="w-[140px] h-[18px]" />
+          <Skeleton className="w-[140px] h-[14px]" />
         </div>
-        <div className="font-light text-[#9497AA] text-[14px] mt-[12px]">
-          <Skeleton className="w-[100px] h-[16px]" />
+        <div className="font-light text-[#9497AA] text-[14px] mt-[10px]">
+          <Skeleton className="w-[100px] h-[12px]" />
         </div>
-        <div className="font-light text-[#9497AA] text-[14px] mt-[12px]">
-          <Skeleton className="w-[160px] h-[18px]" />
+        <div className="font-light text-[#9497AA] text-[14px] mt-[8px]">
+          <Skeleton className="w-[160px] h-[12px]" />
         </div>
-        <div className="font-semibold text-[#FFFFFF] text-[24px] mt-[12px] flex items-center">
-          <Skeleton className="w-[84px] h-[30px]" />
+        <div className="font-semibold text-[#FFFFFF] text-[24px] mt-[8px] flex items-center">
+          <Skeleton className="w-[84px] h-[10px]" />
         </div>
       </div>
       <div className="mt-[12px]">

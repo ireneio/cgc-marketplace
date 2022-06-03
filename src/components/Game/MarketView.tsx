@@ -55,11 +55,11 @@ const MarketView = () => {
   };
 
   const handleAddToCart = (params: Attr) => {
-    setAddToCartLoading({ itemId: String(params.id), status: true });
-    const tid = setTimeout(() => {
-      setAddToCartLoading({ itemId: '', status: false });
-      clearTimeout(tid);
-    }, 1200);
+    // setAddToCartLoading({ itemId: String(params.id), status: true });
+    // const tid = setTimeout(() => {
+    //   setAddToCartLoading({ itemId: '', status: false });
+    //   clearTimeout(tid);
+    // }, 1200);
     dispatch({ type: 'ADD_CART_ITEM', payload: params });
   };
 
@@ -245,12 +245,12 @@ const MarketView = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-wrap">
+      <div>
         {currentView === 'List' && loading && (
           <div
-            className="grid gap-x-[24px] w-full"
+            className="grid gap-x-[24px] w-full justify-between"
             style={{
-              gridTemplateColumns: 'repeat(auto-fill, minmax(205px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fill, 205px)',
             }}
           >
             {LOADING_ARR.map((item, index) => {
@@ -264,9 +264,9 @@ const MarketView = () => {
         )}
         {currentView === 'Row' && loading && (
           <div
-            className="grid gap-x-[24px] w-full"
+            className="grid gap-x-[24px] w-full justify-between"
             style={{
-              gridTemplateColumns: 'repeat(auto-fill, minmax(364px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fill, 364px)',
             }}
           >
             {LOADING_ARR.map((item, index) => {
@@ -280,9 +280,9 @@ const MarketView = () => {
         )}
         {currentView === 'List' && !loading && (
           <div
-            className="grid gap-x-[24px] w-full"
+            className="grid gap-x-[12px] w-full justify-between"
             style={{
-              gridTemplateColumns: 'repeat(auto-fill, minmax(205px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fill, 205px)',
             }}
           >
             {items.map((item, index) => {
@@ -290,7 +290,9 @@ const MarketView = () => {
                 <div key={index} className="mb-[34px]">
                   <ListCard
                     id={index}
-                    image={'/img/chicks_nft1.png'}
+                    image={
+                      'https://ipfs.io/ipfs/QmeN1gvQG97kAgvTBt9oV1Ddxmi1HNc6WQbbHbXhnTQvHa/solchicks-10001.png'
+                    }
                     brand={'SOLCHICKS'}
                     name={'Solchicks 3670'}
                     price={'5.6789'}
@@ -309,9 +311,9 @@ const MarketView = () => {
         )}
         {currentView === 'Row' && !loading && (
           <div
-            className="grid gap-x-[24px] w-full"
+            className="grid gap-x-[24px] w-full justify-between"
             style={{
-              gridTemplateColumns: 'repeat(auto-fill, minmax(364px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fill, 364px)',
             }}
           >
             {items.map((item, index) => {
@@ -319,7 +321,9 @@ const MarketView = () => {
                 <div key={index} className="mb-[34px]">
                   <RowCard
                     id={index}
-                    image={'/img/chicks_nft1.png'}
+                    image={
+                      'https://ipfs.io/ipfs/QmeN1gvQG97kAgvTBt9oV1Ddxmi1HNc6WQbbHbXhnTQvHa/solchicks-10001.png'
+                    }
                     brand={'SOLCHICKS'}
                     name={'Solchicks 3670'}
                     price={'5.6789'}
