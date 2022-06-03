@@ -10,17 +10,17 @@ const SIDE_BAR_ITEMS = [
     value: 'Edit Profile',
     icon: '/img/icon_user.png',
   },
-  {
-    text: 'Notifications',
-    value: 'Notifications',
-    icon: '/img/icon_bell.png',
-  },
-  { text: 'Choose Plan', value: 'Choose Plan', icon: '/img/icon_plan.png' },
-  {
-    text: 'Security',
-    value: 'Security',
-    icon: '/img/icon_shield.png',
-  },
+  // {
+  //   text: 'Notifications',
+  //   value: 'Notifications',
+  //   icon: '/img/icon_bell.png',
+  // },
+  // { text: 'Choose Plan', value: 'Choose Plan', icon: '/img/icon_plan.png' },
+  // {
+  //   text: 'Security',
+  //   value: 'Security',
+  //   icon: '/img/icon_shield.png',
+  // },
 ];
 
 const ProfileView = () => {
