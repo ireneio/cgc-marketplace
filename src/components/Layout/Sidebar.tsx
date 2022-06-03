@@ -64,8 +64,8 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
                 cursor: isSelectedParent
                   ? 'pointer'
                   : item.disabled
-                    ? 'not-allowed'
-                    : 'pointer',
+                  ? 'not-allowed'
+                  : 'pointer',
               }}
             >
               <div>
@@ -91,8 +91,8 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
                         cursor: isSelectedChild
                           ? 'default'
                           : child.disabled
-                            ? 'not-allowed'
-                            : 'pointer',
+                          ? 'not-allowed'
+                          : 'pointer',
                       }}
                       onClick={(e) => {
                         e.stopPropagation();
