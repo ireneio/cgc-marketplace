@@ -3,7 +3,6 @@ import Button from '@/components/Shared/Button';
 import ButtonLink from '@/components/Shared/ButtonLink';
 import LandingCarousel from '@/components/Home/LandingCarousel';
 import LoadingNetflixCard from '@/components/Shared/LoadingNetflixCard';
-import NetflixCard from '@/components/Shared/NetflixCard';
 import Pagination from '@/components/Shared/Pagination';
 import SalesCard from '@/components/Shared/SalesCard';
 import SelectGroup from '@/components/Shared/SelectGroup';
@@ -11,7 +10,7 @@ import Skeleton from '@/components/Shared/Skeleton';
 import DefaultTable from '@/components/Shared/DefaultTable';
 import { useState } from 'react';
 import TransactionTable from '@/components/Home/TransactionTable';
-import FloatingCard from '@/components/Shared/FloatingCard';
+// import FloatingCard from '@/components/Shared/FloatingCard';
 
 const UiKit = () => {
   const [currentItemSelectGroup, setCurrentItemSelectGroup] = useState('m');
@@ -23,7 +22,7 @@ const UiKit = () => {
       <section className="mt-4">
         <h2>Floating Card</h2>
         <div className="mt-2 mx-auto w-[600px] floating-card-wrapper">
-          <FloatingCard
+          {/* <FloatingCard
             bg={'/img/ss_1.webp'}
             title={'Sing-to-earn rhythm action and karaoke game!'}
             categories={['virtual idol', 'metaverse', 'nft']}
@@ -32,21 +31,7 @@ const UiKit = () => {
             coinSupply={'100000000000'}
             onPlay={() => console.log('onPlay')}
             onFirstItemMouseOver={() => console.log()}
-          />
-        </div>
-      </section>
-      <section className="mt-4">
-        <h2>Netflix Card</h2>
-        <div className="mt-2 mx-auto w-[600px]">
-          <NetflixCard
-            bg={'/img/ss_1.webp'}
-            title={'Sing-to-earn rhythm action and karaoke game!'}
-            categories={['virtual idol', 'metaverse', 'nft']}
-            network={'SOL'}
-            marketCap={'10000'}
-            coinSupply={'100000000000'}
-            onPlay={() => console.log('onPlay')}
-          />
+          /> */}
         </div>
       </section>
       <section className="mt-4">
