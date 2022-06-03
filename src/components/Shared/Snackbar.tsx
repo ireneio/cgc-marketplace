@@ -41,7 +41,7 @@ const Snackbar = ({
                   {text}
                 </span>
                 <div
-                  className="cursor-pointer mt-[3px]"
+                  className="cursor-pointer mt-[0px]"
                   onClick={() => dispatch({ type: 'CLOSE_SNACKBAR' })}
                 >
                   <img
