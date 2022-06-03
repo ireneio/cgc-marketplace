@@ -1,3 +1,4 @@
+import { useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Slider from 'react-slick';
@@ -45,8 +46,13 @@ function SamplePrevArrow(props: any) {
 
 const CardCarousel = ({ items }: { items: any[] }) => {
   const router = useRouter();
+  const sideBarPath = useAppSelector((state) => state.layout.navigation.path);
   const [width, setWidth] = useState(0);
   const [currentHoverId, setCurrentHoverId] = useState('-1');
+
+  useEffect(() => {
+    setCurrentHoverId('-1');
+  }, [sideBarPath, router.pathname]);
 
   useEffect(() => {
     if (window) {
