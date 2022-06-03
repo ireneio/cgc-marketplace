@@ -1,3 +1,5 @@
+import { useAppSelector } from '@/store';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 interface SidebarItem {
@@ -15,14 +17,23 @@ interface Props {
 
 const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
   const [innerHeight, setInnerHeight] = useState(0);
+  const router = useRouter();
+  const sidebarPath = useAppSelector((state) => state.layout.navigation.path);
 
   useEffect(() => {
+    console.log(sidebarPath);
+
     if (window) {
-      const height = Math.max(document.body.getBoundingClientRect().height, 0);
-      // const height = window.innerHeight;
-      setInnerHeight(height);
+      const height = window.document.documentElement.scrollHeight;
+      console.log(height);
+
+      if (sidebarPath === 'Home') {
+        setInnerHeight(height);
+      } else {
+        setInnerHeight(window.document.documentElement.clientHeight);
+      }
     }
-  }, []);
+  }, [router.pathname, sidebarPath]);
 
   return (
     <div
@@ -53,8 +64,8 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
                 cursor: isSelectedParent
                   ? 'pointer'
                   : item.disabled
-                  ? 'not-allowed'
-                  : 'pointer',
+                    ? 'not-allowed'
+                    : 'pointer',
               }}
             >
               <div>
@@ -80,8 +91,8 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
                         cursor: isSelectedChild
                           ? 'default'
                           : child.disabled
-                          ? 'not-allowed'
-                          : 'pointer',
+                            ? 'not-allowed'
+                            : 'pointer',
                       }}
                       onClick={(e) => {
                         e.stopPropagation();
