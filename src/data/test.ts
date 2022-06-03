@@ -36,32 +36,80 @@ const collections = [
     description:
       'Collect, breed, and train your own unique SolChicks in a revolutionary gaming ecosystem.',
   },
-  {
-    id: 4,
-    splashSrc:
-      'https://catheongaming.com/wp-content/uploads/2022/03/angrymals-main.jpg',
-    logoSrc:
-      'https://catheongaming.com/wp-content/uploads/2022/02/Angrymals-Logo.png',
-    videoSrc:
-      'https://angrymals.io/wp-content/uploads/2022/03/angrymals-trailer.mp4',
-    name: 'Angrymals',
-    tags: ['Solana', 'NFT'],
-    description:
-      'Inspired by Worms and Angry Birds, this new crazy videogame lets you challenge your friends with a barrage of carrots, exhausts and sperm whales!',
-  },
-  {
-    id: 5,
-    splashSrc:
-      'https://catheongaming.com/wp-content/uploads/2022/03/angrymals-main.jpg',
-    logoSrc:
-      'https://catheongaming.com/wp-content/uploads/2022/02/Angrymals-Logo.png',
-    videoSrc:
-      'https://angrymals.io/wp-content/uploads/2022/03/angrymals-trailer.mp4',
-    name: 'Angrymals',
-    tags: ['Solana', 'NFT'],
-    description:
-      'Inspired by Worms and Angry Birds, this new crazy videogame lets you challenge your friends with a barrage of carrots, exhausts and sperm whales!',
-  },
+  // duplicates start here
+  // {
+  //   id: 4,
+  //   splashSrc:
+  //     'https://catheongaming.com/wp-content/uploads/2022/03/angrymals-main.jpg',
+  //   logoSrc:
+  //     'https://catheongaming.com/wp-content/uploads/2022/02/Angrymals-Logo.png',
+  //   videoSrc:
+  //     'https://angrymals.io/wp-content/uploads/2022/03/angrymals-trailer.mp4',
+  //   name: 'Angrymals',
+  //   tags: ['Solana', 'NFT'],
+  //   description:
+  //     'Inspired by Worms and Angry Birds, this new crazy videogame lets you challenge your friends with a barrage of carrots, exhausts and sperm whales!',
+  // },
+  // {
+  //   id: 5,
+  //   splashSrc:
+  //     'https://catheongaming.com/wp-content/uploads/2022/04/solchicks-3.jpg',
+  //   logoSrc:
+  //     'https://catheongaming.com/wp-content/uploads/2021/12/solchicks-logo.png',
+  //   videoSrc: '/gifs/solchicks.gif',
+  //   name: 'SolChicks',
+  //   tags: ['Solana', 'NFT', '$CHICKS', '$SHARDS'],
+  //   description:
+  //     'Collect, breed, and train your own unique SolChicks in a revolutionary gaming ecosystem.',
+  // },
+  // {
+  //   id: 6,
+  //   splashSrc:
+  //     'https://catheongaming.com/wp-content/uploads/2022/04/sstars-3-1.jpg',
+  //   logoSrc:
+  //     'https://catheongaming.com/wp-content/uploads/2021/12/seoulstars-logo.png',
+  //   videoSrc: '/gifs/yuna.gif',
+  //   name: 'Seoul Stars',
+  //   description:
+  //     'Creating the metaverses first ever virtual K-Pop idol with a play-to-earn karaoke and rhythm game.',
+  //   tags: ['Solana', 'NFT', '$SSTAR'],
+  // },
+  // {
+  //   id: 7,
+  //   splashSrc:
+  //     'https://catheongaming.com/wp-content/uploads/2022/04/solchicks-3.jpg',
+  //   logoSrc:
+  //     'https://catheongaming.com/wp-content/uploads/2021/12/solchicks-logo.png',
+  //   videoSrc: '/gifs/solchicks.gif',
+  //   name: 'SolChicks',
+  //   tags: ['Solana', 'NFT', '$CHICKS', '$SHARDS'],
+  //   description:
+  //     'Collect, breed, and train your own unique SolChicks in a revolutionary gaming ecosystem.',
+  // },
+  // {
+  //   id: 8,
+  //   splashSrc:
+  //     'https://catheongaming.com/wp-content/uploads/2022/04/sstars-3-1.jpg',
+  //   logoSrc:
+  //     'https://catheongaming.com/wp-content/uploads/2021/12/seoulstars-logo.png',
+  //   videoSrc: '/gifs/yuna.gif',
+  //   name: 'Seoul Stars',
+  //   description:
+  //     'Creating the metaverses first ever virtual K-Pop idol with a play-to-earn karaoke and rhythm game.',
+  //   tags: ['Solana', 'NFT', '$SSTAR'],
+  // },
+  // {
+  //   id: 9,
+  //   splashSrc:
+  //     'https://catheongaming.com/wp-content/uploads/2022/04/solchicks-3.jpg',
+  //   logoSrc:
+  //     'https://catheongaming.com/wp-content/uploads/2021/12/solchicks-logo.png',
+  //   videoSrc: '/gifs/solchicks.gif',
+  //   name: 'SolChicks',
+  //   tags: ['Solana', 'NFT', '$CHICKS', '$SHARDS'],
+  //   description:
+  //     'Collect, breed, and train your own unique SolChicks in a revolutionary gaming ecosystem.',
+  // },
 ];
 
 export const testData = {

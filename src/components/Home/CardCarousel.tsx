@@ -10,9 +10,13 @@ function SampleNextArrow(props: any) {
       className={className}
       style={{
         ...style,
-        display: 'block',
+        display: 'flex',
+        alignItems: 'center',
         background: 'transparent',
-        zIndex: 10,
+        zIndex: 12,
+        right: '0px',
+        height: '100%',
+        backgroundColor: 'rgba(255,255,255,.2)',
       }}
       onClick={onClick}
     />
@@ -26,9 +30,13 @@ function SamplePrevArrow(props: any) {
       className={className}
       style={{
         ...style,
-        display: 'block',
+        display: 'flex',
+        alignItems: 'center',
         background: 'transparent',
         zIndex: 10,
+        left: '0px',
+        height: '100%',
+        backgroundColor: 'rgba(255,255,255,.2)',
       }}
       onClick={onClick}
     />
@@ -68,7 +76,7 @@ const CardCarousel = ({ items }: { items: any[] }) => {
   };
 
   return (
-    <div className="relative z-[2]">
+    <div className="relative z-[4]">
       <Slider {...settings}>
         {items.map((item, index) => {
           return (

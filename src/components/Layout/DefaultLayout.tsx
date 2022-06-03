@@ -170,7 +170,7 @@ const DefaultLayout = ({ children, title }: Props) => {
         />
         <Header />
         <div className="flex mt-[75px] relative">
-          <div className="w-[200px] hidden md:block flex-shrink-0">
+          <div className="w-[225px] hidden md:block flex-shrink-0">
             <Sidebar
               items={SIDE_BAR_ITEMS}
               currentValue={sideBarPath}
@@ -178,8 +178,8 @@ const DefaultLayout = ({ children, title }: Props) => {
             />
           </div>
           <div
-            className="px-[25px] pb-[24px] mx-auto"
-            style={{ width: windowWidth - 200 }}
+            className="pr-[24px] pb-[24px] mx-auto"
+            style={{ width: windowWidth - 225 }}
           >
             {children}
           </div>
