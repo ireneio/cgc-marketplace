@@ -193,7 +193,7 @@ body {
 
 
 .blur {
-  filter: blur(25px);
+  filter: blur(2px);
   animation-name: example;
   animation-duration: .5s;
   animation-delay: .5s;

@@ -11,7 +11,7 @@ import TokenPricePanel from './TokenPricePanel';
 
 const DetailView = () => {
   const router = useRouter();
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const [info, setInfo] = useState({
     name: 'SolChicks',
     id: '',
@@ -67,12 +67,12 @@ const DetailView = () => {
           <div className="mb-[48px]">
             <GameCarousel />
           </div>
-          <div className="mb-[30px]">
+          <div className="mb-[32px]">
             <div className="text-[#FFFFFF] font-bold text-[20px]">
               {info.title}
             </div>
           </div>
-          <div className="flex justify-between mb-[24px] flex-wrap">
+          <div className="flex justify-between mb-[32px] flex-wrap">
             <div
               className="text-[14px] text-[#FFFFFF]"
               style={{ flexBasis: '100%' }}
@@ -80,7 +80,7 @@ const DetailView = () => {
               {info.description}
             </div>
           </div>
-          <div className="flex items-center mb-[24px]">
+          <div className="flex items-center mb-[32px]">
             <div
               className="cursor-pointer hover:opacity-[0.65]"
               onClick={() => handleLinkOpen('twitter')}
@@ -119,13 +119,13 @@ const DetailView = () => {
               );
             })}
           </div>
-          <div className="mb-[24px]">
+          <div className="mb-[32px]">
             <Divider />
           </div>
-          <div className="mb-[28px]">
+          <div className="mb-[32px]">
             <div className="text-[#FFFFFF] font-bold text-[20px]">Detail</div>
           </div>
-          <div className="mb-[28px] flex justify-between">
+          <div className="mb-[32px] flex justify-between">
             <ItemCountPanel text="items available" count={5400} />
             <ItemCountPanel text="items available" count={5400} />
             <ItemCountPanel
@@ -139,7 +139,7 @@ const DetailView = () => {
               countUnit={'/img/icon_unit_sol.png'}
             />
           </div>
-          <div className="mb-[28px]">
+          <div className="mb-[32px]">
             <TokenPricePanel
               brandImg="/img/brand_chicks.png"
               brandName="SolChicks"
@@ -166,7 +166,7 @@ const DetailView = () => {
               scanAddress={'solscan.io/token/cxx'}
             />
           </div>
-          <div className="mb-[28px]">
+          <div className="mb-[32px]">
             <TokenPricePanel
               brandImg="/img/brand_shards.png"
               brandName="SolChicks"

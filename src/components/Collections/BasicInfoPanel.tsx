@@ -38,7 +38,7 @@ const BasicInfoPanel = ({ info }: { info: CollectionInfo }) => {
               onClick={() => handleLinkOpen('whitepaper')}
             >
               <img
-                src="/img/icon_doc.png"
+                src="/img/icon_link.svg"
                 width={12}
                 height={12}
                 alt="whitepaper"
@@ -49,7 +49,7 @@ const BasicInfoPanel = ({ info }: { info: CollectionInfo }) => {
               onClick={() => handleLinkOpen('twitter')}
             >
               <img
-                src="/img/icon_twitter.png"
+                src="/img/icon_twitter.svg"
                 width={16}
                 height={16}
                 alt="twitter"
@@ -60,7 +60,7 @@ const BasicInfoPanel = ({ info }: { info: CollectionInfo }) => {
               onClick={() => handleLinkOpen('discord')}
             >
               <img
-                src="/img/icon_discord.png"
+                src="/img/icon_discord.svg"
                 width={16}
                 height={16}
                 alt="discord"

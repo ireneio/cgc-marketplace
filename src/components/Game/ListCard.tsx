@@ -41,7 +41,7 @@ const ListCard = ({
           alt={name}
           width={205}
           height={205}
-          className="blur"
+          className="blur rounded-t-[5px]"
           onLoad={(e) => handleImageLoad(e)}
         />
       </div>

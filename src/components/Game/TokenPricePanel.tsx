@@ -206,20 +206,21 @@ const TokenPricePanel = ({
         <div className="flex">
           <div>
             <div className="text-[#FFFFFF] text-[14px]">Contract Address</div>
-            {/* <ClipboardText copyValue={contractAddress}> */}
-            <div
-              className="mt-[4px] cursor-pointer"
-              style={{
-                background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-              onClick={() => handleGoAddress(contractAddress)}
-            >
-              {contractAddress}{' '}
-            </div>
-            {/* </ClipboardText> */}
+            <ClipboardText copyValue={contractAddress}>
+              <div
+                className="mt-[4px] cursor-pointer"
+                style={{
+                  background:
+                    'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+                onClick={() => handleGoAddress(contractAddress)}
+              >
+                {contractAddress}{' '}
+              </div>
+            </ClipboardText>
           </div>
           {/* <div className="ml-[40px]">
             <div className="text-[#FFFFFF] text-[14px]">Solscan</div>

@@ -248,14 +248,14 @@ const MarketView = () => {
       <div>
         {currentView === 'List' && loading && (
           <div
-            className="grid gap-x-[24px] w-full justify-between"
+            className="grid gap-y-[24px] gap-x-[12px] w-full justify-between"
             style={{
               gridTemplateColumns: 'repeat(auto-fill, 205px)',
             }}
           >
             {LOADING_ARR.map((item, index) => {
               return (
-                <div key={index} className="mb-[34px]">
+                <div key={index}>
                   <ListCardLoading />
                 </div>
               );
@@ -264,14 +264,14 @@ const MarketView = () => {
         )}
         {currentView === 'Row' && loading && (
           <div
-            className="grid gap-x-[24px] w-full justify-between"
+            className="grid gap-y-[24px] gap-x-[12px] w-full justify-between"
             style={{
               gridTemplateColumns: 'repeat(auto-fill, 364px)',
             }}
           >
             {LOADING_ARR.map((item, index) => {
               return (
-                <div key={index} className="mr-[34px] mb-[34px]">
+                <div key={index}>
                   <RowCardLoading />
                 </div>
               );
@@ -280,14 +280,14 @@ const MarketView = () => {
         )}
         {currentView === 'List' && !loading && (
           <div
-            className="grid gap-x-[12px] w-full justify-between"
+            className="grid gap-y-[24px] gap-x-[12px] w-full justify-between"
             style={{
               gridTemplateColumns: 'repeat(auto-fill, 205px)',
             }}
           >
             {items.map((item, index) => {
               return (
-                <div key={index} className="mb-[34px]">
+                <div key={index}>
                   <ListCard
                     id={index}
                     image={
@@ -311,14 +311,14 @@ const MarketView = () => {
         )}
         {currentView === 'Row' && !loading && (
           <div
-            className="grid gap-x-[24px] w-full justify-between"
+            className="grid gap-y-[24px] gap-x-[12px] w-full justify-between"
             style={{
               gridTemplateColumns: 'repeat(auto-fill, 364px)',
             }}
           >
             {items.map((item, index) => {
               return (
-                <div key={index} className="mb-[34px]">
+                <div key={index}>
                   <RowCard
                     id={index}
                     image={

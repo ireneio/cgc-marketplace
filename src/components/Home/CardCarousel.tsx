@@ -55,11 +55,20 @@ const CardCarousel = ({ items }: { items: any[] }) => {
   }, [sideBarPath, router.pathname]);
 
   useEffect(() => {
-    if (window) {
+    const cb = () => {
       const width = Math.max(document.body.getBoundingClientRect().width, 0);
       setWidth(width);
+    };
+
+    if (window) {
+      // window.addEventListener('resize', cb);
+      cb();
     }
+    return () => {
+      // window.removeEventListener('resize', cb);
+    };
   }, []);
+
   const [settings, setSettings] = useState({
     dots: false,
     infinite: false,
@@ -94,6 +103,7 @@ const CardCarousel = ({ items }: { items: any[] }) => {
               onClick={() => handleOnPlay(item.id)}
             >
               <FloatingCard
+                isFloatRight={index % settings.slidesToShow === 0}
                 logo={item.logoSrc}
                 currentHoverId={currentHoverId}
                 id={String(index)}

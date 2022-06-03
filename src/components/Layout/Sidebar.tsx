@@ -21,14 +21,12 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
   const sidebarPath = useAppSelector((state) => state.layout.navigation.path);
 
   useEffect(() => {
-    console.log(sidebarPath);
-
     if (window) {
-      // const height = window.document.querySelector('.sbar')?.getBoundingClientRect().y;
+      // const height = Math.max(document.body.getBoundingClientRect().height, 0);
       // console.log(height);
 
       if (sidebarPath === 'Home') {
-        // setInnerHeight(height || 0);
+        // setInnerHeight(height);
         setInnerHeight('70vh');
       } else {
         setInnerHeight(window.document.documentElement.clientHeight);

@@ -20,6 +20,7 @@ interface Props {
   id: string;
   currentHoverId: string;
   logo: string;
+  isFloatRight: boolean;
 }
 
 const FloatingCard = ({
@@ -39,6 +40,7 @@ const FloatingCard = ({
   onMouseOver,
   onMouseLeave,
   logo,
+  isFloatRight,
 }: Props) => {
   const handleMouseOver = () => {
     onMouseOver && onMouseOver(id);
@@ -78,7 +80,11 @@ const FloatingCard = ({
           // initial={{ width: 0, height: 0 }}
           // animate={{ width: 300, height: 340 }}
           initial={{ opacity: 0, x: '10px', y: '-100px' }}
-          animate={{ opacity: 1, x: '-30px', y: '-100px' }}
+          animate={{
+            opacity: 1,
+            x: isFloatRight ? '0px' : '-30px',
+            y: '-100px',
+          }}
           // transition={{ duration: '.3s' }}
           className="bg-[#13002B] rounded-[5px] cursor-pointer relative z-[100] translate-y-[-100px]"
           onMouseLeave={() => handleMouseOut()}

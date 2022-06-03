@@ -63,7 +63,7 @@ const Cart = ({ onClose }: { onClose?: () => void }) => {
             <div className="mt-[16px]">
               <Divider />
             </div>
-            <div className="mt-[16px] h-[243px] pt-[2px] overflow-auto">
+            <div className="mt-[16px] h-[243px] pt-[2px] pr-[12px] overflow-auto">
               {!cartItems.length && (
                 <div className="text-[#FFFFFF] w-full flex justify-center flex-col items-center h-[150px] mx-auto">
                   <div className="text-[16px]">You shopping cart is Empty.</div>

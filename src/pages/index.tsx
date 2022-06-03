@@ -43,17 +43,17 @@ const Index = () => {
       </div>
       {sideBarPath === 'Home' && <LandingCarousel />}
       {(sideBarPath === 'Home' || sideBarPath === 'Explore/All') && (
-        <div className="mt-[24px]">
+        <div className="mt-[32px]">
           <AllGames />
         </div>
       )}
       {sideBarPath === 'Home' && (
-        <div className="mt-[24px]">
+        <div className="mt-[32px]">
           <LatestSales />
         </div>
       )}
       {sideBarPath === 'Home' && (
-        <div className="mt-[24px] mb-[24px]">
+        <div className="mt-[32px] mb-[32px]">
           <LatestTransactions />
         </div>
       )}

@@ -28,7 +28,7 @@ const Header = () => {
           />
         </div>
       </div>
-      <div className="relative w-[50vw]">
+      <div className="relative w-[50vw] ml-[-4px]">
         <input
           type="text"
           value={search}
