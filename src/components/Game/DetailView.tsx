@@ -110,7 +110,7 @@ const DetailView = () => {
               <img src="/img/icon_link.png" width={24} height={24} alt="link" />
             </div>
           </div>
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap mb-[32px]">
             {info.tags.map((tag, index) => {
               return (
                 <Tag key={index} className="mr-[12px] mb-[12px]">
