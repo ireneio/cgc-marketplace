@@ -52,7 +52,8 @@
     "react-super-responsive-table": "^5.2.0",
     "react-tooltip": "^4.2.21",
     "redux": "^4.2.0",
-    "tailwind-merge": "^1.2.1"
+    "tailwind-merge": "^1.2.1",
+    "uglify-js-plugin": "^0.0.6"
   },
   "devDependencies": {
     "@ethersproject/units": "^5.5.0",
