@@ -6,7 +6,6 @@ import ButtonLink from '../Shared/ButtonLink';
 import LoadingNetflixCard from '../Shared/LoadingNetflixCard';
 import SectionTitle from '../Shared/SectionTitle';
 import SelectGroup from '../Shared/SelectGroup';
-import FloatingCardWrapper from './FloatingCardWrapper';
 
 const PopularGames = () => {
   const dispatch = useAppDispatch();
@@ -46,7 +45,7 @@ const PopularGames = () => {
         />
       </div>
       <div className="overflow-y-visible mr-[24px] flex floating-card-wrapper hide-scrollbar justify-start">
-        {!loading && <FloatingCardWrapper items={items} />}
+        {/* {!loading && <FloatingCardWrapper items={items} />} */}
         {loading &&
           items.map((game, index) => {
             return (
