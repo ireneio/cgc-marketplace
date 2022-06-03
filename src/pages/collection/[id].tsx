@@ -1,5 +1,6 @@
 import DetailView from '@/components/Game/DetailView';
 import MarketView from '@/components/Game/MarketView';
+import YourView from '@/components/Game/YourView';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
 import BreadCrumb from '@/components/Shared/Breadcrumb';
 import Divider from '@/components/Shared/Divider';
@@ -143,6 +144,7 @@ const Game = () => {
       </div>
       {currentSelection === 'About' && <DetailView />}
       {currentSelection === 'All Items' && <MarketView />}
+      {currentSelection === 'Your Items' && <YourView />}
     </DefaultLayout>
   );
 };
