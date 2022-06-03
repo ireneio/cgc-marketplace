@@ -16,7 +16,7 @@ interface Props {
 }
 
 const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
-  const [innerHeight, setInnerHeight] = useState(0);
+  const [innerHeight, setInnerHeight] = useState<string | number>(0);
   const router = useRouter();
   const sidebarPath = useAppSelector((state) => state.layout.navigation.path);
 
@@ -29,7 +29,7 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
 
       if (sidebarPath === 'Home') {
         // setInnerHeight(height || 0);
-        setInnerHeight('100vh');
+        setInnerHeight('70vh');
       } else {
         setInnerHeight(window.document.documentElement.clientHeight);
       }
@@ -65,8 +65,8 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
                 cursor: isSelectedParent
                   ? 'pointer'
                   : item.disabled
-                  ? 'not-allowed'
-                  : 'pointer',
+                    ? 'not-allowed'
+                    : 'pointer',
               }}
             >
               <div>
@@ -92,8 +92,8 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
                         cursor: isSelectedChild
                           ? 'default'
                           : child.disabled
-                          ? 'not-allowed'
-                          : 'pointer',
+                            ? 'not-allowed'
+                            : 'pointer',
                       }}
                       onClick={(e) => {
                         e.stopPropagation();
