@@ -23,11 +23,13 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
   useEffect(() => {
     if (window) {
       // const height = Math.max(document.body.getBoundingClientRect().height, 0);
-      // console.log(height);
+      const height =
+        window.document.documentElement.scrollHeight -
+        window.document.documentElement.clientHeight;
 
       if (sidebarPath === 'Home') {
-        // setInnerHeight(height);
-        setInnerHeight('70vh');
+        setInnerHeight(height);
+        // setInnerHeight('70vh');
       } else {
         setInnerHeight(window.document.documentElement.clientHeight);
       }
