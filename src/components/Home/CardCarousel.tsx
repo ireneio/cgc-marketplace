@@ -79,6 +79,7 @@ const CardCarousel = ({ items }: { items: any[] }) => {
               onClick={() => handleOnPlay(item.id)}
             >
               <FloatingCard
+                logo={item.logoSrc}
                 currentHoverId={currentHoverId}
                 id={String(index)}
                 bg={item.splashSrc}

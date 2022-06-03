@@ -19,6 +19,7 @@ interface Props {
   onMouseLeave?: any;
   id: string;
   currentHoverId: string;
+  logo: string;
 }
 
 const FloatingCard = ({
@@ -37,6 +38,7 @@ const FloatingCard = ({
   onCardClick,
   onMouseOver,
   onMouseLeave,
+  logo,
 }: Props) => {
   const handleMouseOver = () => {
     onMouseOver && onMouseOver(id);
@@ -65,7 +67,7 @@ const FloatingCard = ({
           ></div>
           {showCatheonLogo && (
             <div
-              className="absolute top-[14px] left-[8px] w-[38px] h-[38px] bg-no-repeat bg-center bg-contain"
+              className="absolute top-[8px] left-[8px] w-[24px] h-[24px] bg-no-repeat bg-center bg-contain"
               style={{ backgroundImage: `url(/img/cgc-logo-no-text.png)` }}
             ></div>
           )}
@@ -82,13 +84,16 @@ const FloatingCard = ({
           onMouseLeave={() => handleMouseOut()}
         >
           <div className="w-[300px] h-[340px] absolute border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden">
-            <div className="flex items-start justify-center">
+            <div className="relative flex items-start justify-center">
               <div
                 className="w-[300px] h-[170px] bg-cover bg-center bg-no-repeat"
                 style={{
                   backgroundImage: `url(${bgOnHover})`,
                 }}
               ></div>
+              <div className="absolute bottom-[8px] left-[8px]">
+                <img src={logo} alt={''} width={100} height={100} />
+              </div>
             </div>
             <div className="bg-[#13002B] pt-[12px] pb-[24px]">
               <div className="px-[12px] py-[0px]">
