@@ -1,6 +1,6 @@
 import { useSolanaWallet } from '@/contexts/SolanaWalletProvider';
 import { LaunchpadNftInfo } from '@/pages/launchpad/nft/[id]';
-import { getNumberWithUnits } from '@/utils/formatters';
+import { getNumberWithUnits } from '@/utils/formatHelper';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import dayjs from 'dayjs';
 import Button from '../Shared/Button';

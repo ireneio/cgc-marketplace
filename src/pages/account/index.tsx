@@ -2,7 +2,7 @@ import Avatar from '@/components/Account/Avatar';
 import ProfileView from '@/components/Account/ProfileView';
 import WalletView from '@/components/Account/WalletView';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
-import BreadCrumb from '@/components/Shared/Breadcrumb';
+import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Button from '@/components/Shared/Button';
 import Divider from '@/components/Shared/Divider';
 import SelectGroup from '@/components/Shared/SelectGroup';
@@ -55,7 +55,7 @@ const Account = () => {
   return (
     <DefaultLayout>
       <div className="mb-[24px]">
-        <BreadCrumb
+        <Breadcrumb
           items={[
             { text: 'Home', value: 'Home' },
             { text: 'cgPass', value: 'Account' },

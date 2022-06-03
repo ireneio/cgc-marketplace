@@ -1,4 +1,4 @@
-import { getNumberWithCommas } from '@/utils/formatters';
+import { getNumberWithCommas } from '@/utils/formatHelper';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Button from './Button';
@@ -92,7 +92,7 @@ const NetflixCard = ({
             <div
               className="absolute top-[8px] left-[8px] w-[38px] h-[38px] bg-no-repeat bg-center bg-contain"
               style={{ backgroundImage: `url(/img/cgc-logo-no-text.png)` }}
-            ></div>
+            />
           )}
         </>
       )}
@@ -103,7 +103,7 @@ const NetflixCard = ({
             style={{
               backgroundImage: `url(${bgOnHover || bg})`,
             }}
-          ></div>
+          />
           <div className="px-[12px] py-[12px]">
             <div className="font-bold text-[#FFFFFF] text-[18px]">{title}</div>
             <div className="mt-[12px] flex justify-between">

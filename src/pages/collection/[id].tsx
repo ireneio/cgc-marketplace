@@ -1,13 +1,14 @@
-import DetailView from '@/components/Game/DetailView';
-import MarketView from '@/components/Game/MarketView';
-import YourView from '@/components/Game/YourView';
+import DetailView from '@/components/Collection/DetailView';
+import MarketView from '@/components/Collection/MarketView';
+import YourView from '@/components/Collection/YourView';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
-import BreadCrumb from '@/components/Shared/Breadcrumb';
+import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Divider from '@/components/Shared/Divider';
 import SelectGroup from '@/components/Shared/SelectGroup';
 import { useAppDispatch } from '@/store';
 import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
+import { getBreadcrumbRoutes, getSelectGroupItems } from '@/utils/cgcConsts';
 
 type Selection =
   | 'About'
@@ -17,13 +18,13 @@ type Selection =
   | 'Staking'
   | '...';
 
-const Game = () => {
+const Collection = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [currentSelection, setCurrentSelection] = useState<Selection>('About');
   const [info, setInfo] = useState({
     name: 'SolChicks',
-    header: 'Welcome to the SolChicks Metaverse Crypto NFT Game',
+    header: 'SolChicks',
   });
 
   const handleSelect = (value: Selection) => {
@@ -35,7 +36,6 @@ const Game = () => {
       case 'About':
         setInfo((prev) => ({
           ...prev,
-          // header: `Welcome to the ${info.name} Metaverse Crypto NFT Game`,
           header: info.name,
         }));
         return;
@@ -51,95 +51,45 @@ const Game = () => {
           header: 'Your Items',
         }));
         return;
-      case 'Activity':
-        setInfo((prev) => ({
-          ...prev,
-          header: 'Activity',
-        }));
-        return;
-      case 'Staking':
-        setInfo((prev) => ({
-          ...prev,
-          header: 'Staking',
-        }));
-        return;
     }
   };
 
-  const breadCrumbItems = useMemo(() => {
-    switch (currentSelection) {
-      case '...':
-      case 'About':
-        return [
-          { text: 'Home', value: 'Home' },
-          { text: info.name, value: 'Game' },
-          { text: 'Explore', value: 'Explore' },
-        ];
-      case 'All Items':
-        return [
-          { text: 'Home', value: 'Home' },
-          { text: info.name, value: 'Game' },
-          { text: 'All Items', value: 'All Items' },
-        ];
-      case 'Your Items':
-        return [
-          { text: 'Home', value: 'Home' },
-          { text: info.name, value: 'Game' },
-          { text: 'Your Items', value: 'Your Items' },
-        ];
-      case 'Staking':
-        return [
-          { text: 'Home', value: 'Home' },
-          { text: info.name, value: 'Game' },
-          { text: 'Staking', value: 'Staking' },
-        ];
-      case 'Activity':
-        return [
-          { text: 'Home', value: 'Home' },
-          { text: info.name, value: 'Game' },
-          { text: 'Activity', value: 'Activity' },
-        ];
-      default:
-        return [];
-    }
+  const breadcrumbItems = useMemo(() => {
+    return getBreadcrumbRoutes(currentSelection, info.name);
   }, [info, currentSelection]);
 
   return (
     <DefaultLayout>
-      <div className="mb-[32px]">
-        <BreadCrumb
-          items={breadCrumbItems}
+      <div className="mb-[16px]">
+        <Breadcrumb
+          items={breadcrumbItems}
           currentValue={
-            currentSelection === 'About' ? 'Game' : currentSelection
+            currentSelection === 'About' ? 'Collection' : currentSelection
           }
           onItemClick={(val) => {
             if (val === 'Home') {
               dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
-              router.push('/');
-            } else if (val === 'Game') {
+              router.push('/').then();
+            } else if (val === 'Collection') {
               handleSelect('About');
+            } else if (val === 'Explore/All') {
+              dispatch({ type: 'SET_NAVIGATION_PATH', payload: val });
+              router.push('/').then();
             }
           }}
         />
       </div>
-      <div className="flex justify-between items-center mb-[32px]">
+      <div className="flex justify-between items-center mb-[16px]">
         <div className="text-[#FFFFFF] font-bold text-[24px]">{info.name}</div>
         <div>
           <SelectGroup
-            items={[
-              { text: 'About', value: 'About' },
-              { text: 'All Items', value: 'All Items' },
-              { text: 'Your Items', value: 'Your Items' },
-              { text: '...', value: '...' },
-              // { text: 'Activity', value: 'Activity' },
-              // { text: 'Staking', value: 'Staking' },
-            ]}
+            items={getSelectGroupItems()}
             currentValue={currentSelection}
             onItemClick={(value) => handleSelect(value as Selection)}
           />
         </div>
       </div>
-      <div className="mb-[32px]">
+      <div className="mb-[24px]">
         <Divider />
       </div>
       {currentSelection === 'About' && <DetailView />}
@@ -149,4 +99,4 @@ const Game = () => {
   );
 };
 
-export default Game;
+export default Collection;

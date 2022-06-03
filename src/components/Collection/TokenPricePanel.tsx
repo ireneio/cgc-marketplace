@@ -1,4 +1,4 @@
-import { getNumberWithCommas } from '@/utils/formatters';
+import { getNumberWithCommas } from '@/utils/formatHelper';
 import { useMemo, useState } from 'react';
 import ClipboardText from '../Shared/ClipboardText';
 import Divider from '../Shared/Divider';

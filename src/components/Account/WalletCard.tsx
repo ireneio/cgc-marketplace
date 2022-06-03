@@ -1,4 +1,4 @@
-import { getTrimmedAddressEllipsisMiddle } from '@/utils/formatters';
+import { getTrimmedAddressEllipsisMiddle } from '@/utils/formatHelper';
 import ReactTooltip from 'react-tooltip';
 
 interface Props {

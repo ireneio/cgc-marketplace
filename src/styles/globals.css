@@ -52,7 +52,7 @@ body {
   margin: 0 !important;
   /* border: 2px solid #FC1F8E !important; */
   letter-spacing: 0 !important;
-  background-color: #13002B !important;
+  background-color: #13002b !important;
 }
 
 .wallet-adapter-button:hover {
@@ -92,14 +92,14 @@ body {
   background-position: center center;
   transition: background-size 1.4s;
   background-repeat: no-repeat;
-  background-color: #13002B;
+  background-color: #13002b;
 }
 
 .floating-card-wrapper li {
   vertical-align: middle;
-  transition-duration: .1s;
+  transition-duration: 0.1s;
   cursor: pointer;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, .75);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.75);
   /* position: absolute; */
   z-index: 10000;
   position: relative;
@@ -114,7 +114,7 @@ body {
   /* transition-duration: 1s; */
   /* opacity: 0; */
   padding: 10px 10px 10px 10px;
-  background-color: #13002B;
+  background-color: #13002b;
 }
 
 .switch-input {
@@ -154,11 +154,11 @@ body {
   box-sizing: border-box;
 }
 
-.switch-input:checked+.switch-label {
-  background: linear-gradient(180deg, #F41786 0%, #A713ED 100%);
+.switch-input:checked + .switch-label {
+  background: linear-gradient(180deg, #f41786 0%, #a713ed 100%);
 }
 
-.switch-input:checked+.switch-label::after {
+.switch-input:checked + .switch-label::after {
   left: 21px;
 }
 
@@ -191,19 +191,18 @@ body {
   margin: 0 0;
 }
 
-
 .blur {
   filter: blur(2px);
   animation-name: example;
-  animation-duration: .5s;
-  animation-delay: .5s;
+  animation-duration: 0.5s;
+  animation-delay: 0.5s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
 }
 
 .no-blur {
   filter: blur(0);
-  transition: filter .5s 2s ease-in;
+  transition: filter 0.5s 2s ease-in;
 }
 
 @keyframes example {

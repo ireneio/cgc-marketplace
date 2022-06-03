@@ -5,7 +5,7 @@ interface SelectGroupItem {
 }
 interface Props {
   items: SelectGroupItem[];
-  currentValue: string;
+  currentValue?: string;
   onItemClick?: (value: string) => void | Promise<void>;
 }
 

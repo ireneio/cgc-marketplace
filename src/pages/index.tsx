@@ -1,9 +1,9 @@
-import AllGames from '@/components/Home/AllGames';
+import AllCollections from '@/components/Home/AllCollections';
 import LandingCarousel from '@/components/Home/LandingCarousel';
 import LatestSales from '@/components/Home/LatestSales';
 import LatestTransactions from '@/components/Home/LatestTransactions';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
-import BreadCrumb from '@/components/Shared/Breadcrumb';
+import Breadcrumb from '@/components/Shared/Breadcrumb';
 import { useAppSelector } from '@/store';
 import { useMemo } from 'react';
 
@@ -38,17 +38,24 @@ const Index = () => {
 
   return (
     <DefaultLayout>
-      <div className="mb-[0]">
-        <BreadCrumb items={breadcrumbItems} currentValue={sideBarPath} />
-      </div>
+      {sideBarPath != 'Home' && (
+        <div className="mb-[0]">
+          <Breadcrumb items={breadcrumbItems} currentValue={sideBarPath} />
+        </div>
+      )}
       {sideBarPath === 'Home' && (
-        <div className="mt-[12px]">
+        <div className="mt-[21px]">
           <LandingCarousel />
         </div>
       )}
-      {(sideBarPath === 'Home' || sideBarPath === 'Explore/All') && (
+      {sideBarPath === 'Home' && (
         <div className="mt-[32px]">
-          <AllGames />
+          <AllCollections />
+        </div>
+      )}
+      {sideBarPath === 'Explore/All' && (
+        <div className="mt-[16px]">
+          <AllCollections />
         </div>
       )}
       {sideBarPath === 'Home' && (
@@ -57,7 +64,7 @@ const Index = () => {
         </div>
       )}
       {sideBarPath === 'Home' && (
-        <div className="mt-[32px] mb-[32px]">
+        <div className="mt-[48px] mb-[48px]">
           <LatestTransactions />
         </div>
       )}

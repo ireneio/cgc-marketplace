@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/store';
-import { getTrimmedAddress } from '@/utils/formatters';
+import { getTrimmedAddress } from '@/utils/formatHelper';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { LoginModal } from '../Modals/LoginModal';

@@ -1,4 +1,4 @@
-import BreadCrumb from '@/components/Shared/Breadcrumb';
+import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Button from '@/components/Shared/Button';
 import ButtonLink from '@/components/Shared/ButtonLink';
 import LandingCarousel from '@/components/Home/LandingCarousel';
@@ -61,7 +61,7 @@ const UiKit = () => {
       <section className="mt-4">
         <h2>Breadcrumb</h2>
         <div className="mt-2">
-          <BreadCrumb
+          <Breadcrumb
             items={[
               { text: 'Home', value: 'd' },
               { text: 'Explore', value: 'm', disabled: true },

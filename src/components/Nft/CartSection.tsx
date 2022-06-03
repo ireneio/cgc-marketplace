@@ -1,5 +1,5 @@
 import { useAppSelector } from '@/store';
-import Cart from '../Game/Cart';
+import Cart from '../Collection/Cart';
 import Button from '../Shared/Button';
 import DropdownMenu from '../Shared/DropdownMenu';
 
@@ -22,7 +22,7 @@ const CartSection = ({
       <Button onClick={() => onToggleCart(!openCart)}>
         <div className="flex items-center">
           <div>
-            <img src="/img/icon_cart.png" alt="cart" width={12} height={12} />
+            <img src={'/img/icon_cart.png'} alt="cart" width={12} height={12} />
           </div>
           <div className="text-[#FFFFFF] ml-[4px] text-[12px] flex items-center">
             <div>Cart</div>

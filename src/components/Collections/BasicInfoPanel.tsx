@@ -1,5 +1,5 @@
 import { CollectionInfo } from '@/pages/launchpad/[id]';
-import { getNumberWithUnits } from '@/utils/formatters';
+import { getNumberWithUnits } from '@/utils/formatHelper';
 import dayjs from 'dayjs';
 import Tag from '../Shared/Tag';
 

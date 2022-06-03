@@ -1,7 +1,7 @@
 import CollectionsCard from '@/components/Collections/CollectionsCard';
 import CollectionsCardLoading from '@/components/Collections/CollectionsCardLoading';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
-import BreadCrumb from '@/components/Shared/Breadcrumb';
+import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Divider from '@/components/Shared/Divider';
 import SelectGroup from '@/components/Shared/SelectGroup';
 import { useAppDispatch } from '@/store';
@@ -50,7 +50,7 @@ const Launchpad = () => {
   return (
     <DefaultLayout>
       <div className="mb-[12px]">
-        <BreadCrumb
+        <Breadcrumb
           items={[
             { text: 'Home', value: 'Home' },
             { text: 'Launchpad', value: 'Launchpad' },

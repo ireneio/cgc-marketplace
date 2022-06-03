@@ -1,5 +1,5 @@
 import { CollectionInfo } from '@/pages/launchpad/[id]';
-import { getNumberWithCommas } from '@/utils/formatters';
+import { getNumberWithCommas } from '@/utils/formatHelper';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import Divider from '../Shared/Divider';

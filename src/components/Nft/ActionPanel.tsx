@@ -1,7 +1,7 @@
 import { NftInfo } from '@/pages/nft/[id]';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useMemo } from 'react';
-import { Attr } from '../Game/RowCard';
+import { Attr } from '../Collection/RowCard';
 import Button from '../Shared/Button';
 import Tag from '../Shared/Tag';
 
@@ -34,7 +34,7 @@ const ActionPanel = ({
   };
 
   return (
-    <Tag className="px-[28px] py-[24px] mt-[30px]">
+    <Tag className="px-[28px] py-[24px]">
       <div>
         <div className="font-light text-[#FFFFFF] text-[14px]s">
           Current Price
@@ -80,9 +80,6 @@ const ActionPanel = ({
               Make Offer
             </Button>
           </div>
-        </div>
-        <div className="mt-[14px] text-[14px] font-light text-[#9497AA]">
-          By proceeding, you agree to our Terms and Privacy
         </div>
       </div>
     </Tag>

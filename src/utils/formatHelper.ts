@@ -13,7 +13,7 @@ export function getNumberWithCommas(val: string | number, decimals?: number) {
   //   .toLocaleString();
 }
 
-type UnitTypes = 'usd' | 'bnb' | '%' | 'obrs' | 'sol';
+type UnitTypes = 'usd' | 'bnb' | '%' | 'orbs' | 'sol';
 
 interface UnitOptions {
   type: UnitTypes;
@@ -23,8 +23,8 @@ export function getNumberWithUnit(val: string | number, options?: UnitOptions) {
   if (options) {
     const { type } = options;
     switch (type) {
-      case 'obrs':
-        return getNumberWithCommas(val) + ' OBRS';
+      case 'orbs':
+        return getNumberWithCommas(val) + ' OEBS';
       case '%':
         return getNumberWithCommas(val) + '%';
       case 'bnb':

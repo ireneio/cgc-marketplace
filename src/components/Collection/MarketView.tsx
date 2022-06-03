@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/store';
-import { getNumberWithCommas } from '@/utils/formatters';
+import { getNumberWithCommas } from '@/utils/formatHelper';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import DropdownMenu from '../Shared/DropdownMenu';
@@ -64,7 +64,7 @@ const MarketView = () => {
   };
 
   const handleMoreInfo = (id: string | number) => {
-    router.push(`/nft/${id}`);
+    router.push(`/nft/${id}`).then();
   };
 
   useEffect(() => {
@@ -81,22 +81,22 @@ const MarketView = () => {
 
   useEffect(() => {
     getCart();
-  }, []);
+  }, [getCart]);
 
   return (
     <div className="mb-[32px]">
-      <div className="flex justify-between items-center mb-[32px]">
+      <div className="flex justify-between items-center mb-[24px]">
         <div className="flex items-center w-full">
           <div className="cursor-pointer">
             <img
-              src="/img/icon_refresh.png"
+              src={'/img/icon_refresh.png'}
               alt="refresh"
               width={14}
               height={14}
             />
           </div>
           <div className="ml-[8px] text-[#FFFFFF] text-[14px]">
-            {getNumberWithCommas(info.listedItemCount, 0)} Items
+            {getNumberWithCommas(info.listedItemCount, 0)} items
           </div>
           <div className="ml-auto">
             <SelectGroup
@@ -106,7 +106,7 @@ const MarketView = () => {
                     <div className="flex items-center">
                       <div>
                         <img
-                          src="/img/icon_filter.png"
+                          src={'/img/icon_filter.png'}
                           alt="row"
                           width={12}
                           height={12}
@@ -124,7 +124,7 @@ const MarketView = () => {
                     <div className="flex items-center">
                       <div>
                         <img
-                          src="/img/icon_cart.png"
+                          src={'/img/icon_cart.png'}
                           alt="cart"
                           width={12}
                           height={12}
@@ -216,7 +216,7 @@ const MarketView = () => {
                   text: (
                     <div>
                       <img
-                        src="/img/icon_view_row.png"
+                        src={'/img/icon_view_row.png'}
                         alt="row"
                         width={18}
                         height={18}
@@ -229,7 +229,7 @@ const MarketView = () => {
                   text: (
                     <div>
                       <img
-                        src="/img/icon_view_list.png"
+                        src={'/img/icon_view_list.png'}
                         alt="list"
                         width={18}
                         height={18}
@@ -264,7 +264,7 @@ const MarketView = () => {
         )}
         {currentView === 'Row' && loading && (
           <div
-            className="grid gap-y-[24px] gap-x-[12px] w-full justify-between"
+            className="grid gap-y-[12px] gap-x-[24px] w-full justify-between"
             style={{
               gridTemplateColumns: 'repeat(auto-fill, 364px)',
             }}

@@ -1,16 +1,18 @@
 import { testData } from '@/data/test';
 import { useAppDispatch, useAppSelector } from '@/store';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import ButtonLink from '../Shared/ButtonLink';
 import LoadingNetflixCard from '../Shared/LoadingNetflixCard';
 import SectionTitle from '../Shared/SectionTitle';
 import SelectGroup from '../Shared/SelectGroup';
 
-const LatestGames = () => {
+const PopularCollections = () => {
   const dispatch = useAppDispatch();
   const [items, setItems] = useState(testData.recentlyAddedCollections);
-  const [currentSelection, setCurrentSelection] = useState('live');
+  const [currentSelection, setCurrentSelection] = useState('m');
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
   const sideBarPath = useAppSelector((state) => state.layout.navigation.path);
 
   useEffect(() => {
@@ -23,14 +25,20 @@ const LatestGames = () => {
     };
   });
 
+  const handleOnPlay = (id: string | number) => {
+    router.push(`/collection/${id}`);
+  };
+
   return (
     <div className="">
       <div className="flex justify-between items-center">
-        <SectionTitle>latest games</SectionTitle>
+        <SectionTitle>popular collections</SectionTitle>
         <SelectGroup
           items={[
-            { text: 'Live', value: 'live' },
-            { text: 'Coming Soon', value: 'soon' },
+            { text: '1d', value: 'd' },
+            { text: '1w', value: 'w' },
+            { text: '1m', value: 'm' },
+            { text: 'All Time', value: 'at' },
           ]}
           currentValue={currentSelection}
           onItemClick={(value) => setCurrentSelection(value)}
@@ -53,7 +61,7 @@ const LatestGames = () => {
             onClick={() => {
               dispatch({
                 type: 'SET_NAVIGATION_PATH',
-                payload: 'Explore/Latest',
+                payload: 'Explore/Popular',
               });
               window.scroll(0, 0);
             }}
@@ -66,4 +74,4 @@ const LatestGames = () => {
   );
 };
 
-export default LatestGames;
+export default PopularCollections;

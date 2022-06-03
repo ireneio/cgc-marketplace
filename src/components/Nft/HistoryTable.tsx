@@ -1,7 +1,7 @@
 import {
   getNumberWithCommas,
   getTrimmedAddressEllipsisMiddle,
-} from '@/utils/formatters';
+} from '@/utils/formatHelper';
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
 import DefaultTable from '../Shared/DefaultTable';

@@ -1,4 +1,4 @@
-import { getBase64 } from '@/utils/images';
+import { getBase64 } from '@/utils/imageHelper';
 import { useState } from 'react';
 
 const defaultLogo = '/img/cgc-logo-no-text.png';

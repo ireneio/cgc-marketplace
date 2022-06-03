@@ -1,9 +1,7 @@
 import { testData } from '@/data/test';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import Button from '../Shared/Button';
 import FloatingCard from '../Shared/FloatingCard';
 
 const PREFILL_DATA = {
@@ -64,7 +62,7 @@ const CardCarousel = ({ items }: { items: any[] }) => {
               className="w-[80px] h-[5px] rounded-[5px] inline-block mr-[12px] cursor-pointer"
               style={{ backgroundColor: selected ? '#FFFFFF' : '#26173D' }}
               onClick={onClick}
-            ></div>
+            />
           );
         }}
       >

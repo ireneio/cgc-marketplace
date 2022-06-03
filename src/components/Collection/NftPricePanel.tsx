@@ -1,4 +1,4 @@
-import { getNumberWithCommas } from '@/utils/formatters';
+import { getNumberWithCommas } from '@/utils/formatHelper';
 import { useState } from 'react';
 import Tag from '../Shared/Tag';
 import DateViewSelector from './DateViewSelector';

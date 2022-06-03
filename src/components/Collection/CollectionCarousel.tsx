@@ -14,7 +14,7 @@ const PREFILL_DATA = {
   description: testData.landingHeroSubtitle,
 };
 
-const GameCarousel = () => {
+const CollectionCarousel = () => {
   const [carouselItems] = useState([
     PREFILL_DATA,
     // {
@@ -189,4 +189,4 @@ const GameCarousel = () => {
   );
 };
 
-export default GameCarousel;
+export default CollectionCarousel;
