@@ -29,10 +29,10 @@ const Collection = () => {
 
   const handleSelect = (value: Selection) => {
     setCurrentSelection(value);
-    router.push(`/collection/${info.name}?tab=${value.split(' ').join('_')}`);
     if (value === '...') {
       return;
     }
+    router.push(`/collection/${info.name}?tab=${value.split(' ').join('_')}`);
     switch (value) {
       case 'About':
         setInfo((prev) => ({
@@ -69,7 +69,7 @@ const Collection = () => {
 
   return (
     <DefaultLayout>
-      <div className="mb-[16px]">
+      <div className="mb-[32px]">
         <Breadcrumb
           items={breadcrumbItems}
           currentValue={
