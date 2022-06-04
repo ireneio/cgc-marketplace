@@ -32,8 +32,9 @@ const ListCard = ({
 
   return (
     <div
-      className="rounded-[5px] w-[205px] bg-[#13002B] border-[2px] border-solid border-[#290030] mx-auto"
+      className="cursor-pointer rounded-[5px] w-[205px] bg-[#13002B] border-[2px] border-solid border-[#290030] mx-auto"
       style={{ borderColor: isAddedToCart ? '#F41786' : '#290030' }}
+      onClick={() => onMoreInfo(id)}
     >
       <div>
         <img
@@ -100,7 +101,8 @@ const ListCard = ({
             )}
             <div
               className="ml-[8px] text-[#9497AA] text-[14px]"
-              onClick={() =>
+              onClick={(e) => {
+                e.stopPropagation();
                 onAddToCart({
                   image,
                   name,
@@ -108,8 +110,8 @@ const ListCard = ({
                   price,
                   id,
                   isAddedToCart,
-                })
-              }
+                });
+              }}
             >
               {addToCartLoading && <Skeleton className="w-[64px] h-[14px]" />}
               {!addToCartLoading && 'Add To Cart'}
@@ -118,10 +120,21 @@ const ListCard = ({
         )}
         {isAddedToCart && !addToCartLoading && (
           <div
-            className="text-[14px] flex items-center justify-center cursor-default px-[18px] py-[18px] text-[#FFFFFF] rounded-br-[5px]"
+            className="cursor-pointer text-[14px] flex items-center justify-center px-[18px] py-[18px] text-[#FFFFFF] rounded-br-[5px]"
             style={{
               background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
               flexBasis: '70%',
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              onAddToCart({
+                image,
+                name,
+                brand,
+                price,
+                id,
+                isAddedToCart,
+              });
             }}
           >
             Added To Cart

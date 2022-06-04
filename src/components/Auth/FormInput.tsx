@@ -41,7 +41,7 @@ const FormInput = React.forwardRef(
           {React.createElement('input', {
             ...restProps,
             className:
-              'appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#aaa] focus:border-[#aaa] sm:text-sm font-circularstdbook bg-[#0C001C] text-[#FFFFFF]',
+              'appearance-none block w-full px-3 py-2 border border-[#706f6f] rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#919090] focus:border-[#919090] sm:text-sm font-circularstdbook bg-[#0C001C] text-[#FFFFFF]',
             autoFocus,
             onChange,
             ref,

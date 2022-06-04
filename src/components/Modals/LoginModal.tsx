@@ -145,11 +145,11 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
                       'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
                   }}
                 >
-                  <div className="relative flex items-center justify-center bg-[#13002B]">
+                  <div className="relative flex items-center w-full justify-center bg-[#13002B]">
                     <div>
                       <Dialog.Title
                         as="h3"
-                        className="text-2xl font-bold leading-6 text-white pb-2 font-circularstdbold flex flex-col items-center"
+                        className="text-2xl font-bold leading-6 text-white pb-2 flex flex-col items-center"
                       >
                         <div className="flex uppercase items-center w-full text-[12px] pb-[24px] cursor-pointer">
                           <div
@@ -172,7 +172,7 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
                                 background:
                                   view === 'login' ? '#13002B' : '#000000',
                               }}
-                              className="text-center py-[12px]"
+                              className="text-center py-[12px] font-circularstdbook"
                               onClick={() => setView('login')}
                             >
                               sign in
@@ -194,7 +194,7 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
                                 background:
                                   view !== 'login' ? '#13002B' : '#000000',
                               }}
-                              className="text-center py-[12px]"
+                              className="text-center py-[12px] font-circularstdbook"
                               onClick={() => setView('signup-one')}
                             >
                               register
@@ -209,7 +209,7 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
                             alt="catheon"
                           />
                         </div>
-                        <div className="text-center mt-[12px] px-[24px]">
+                        <div className="text-center mt-[12px] px-[24px] font-circularstdbook">
                           {title}
                         </div>
                       </Dialog.Title>

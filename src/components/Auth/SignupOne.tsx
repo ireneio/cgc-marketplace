@@ -20,7 +20,7 @@ const SignupOne = ({
         <div>
           <div className="mt-1">
             <FormInput
-              placeholder="Username"
+              placeholder="Wallet Address"
               id="username"
               type="text"
               required
@@ -29,7 +29,7 @@ const SignupOne = ({
           </div>
         </div>
         <div>
-          <div className="relative mt-1 mb-[12px]">
+          <div className="relative mt-1">
             <FormInput
               placeholder="Email"
               id="email"

@@ -1,5 +1,6 @@
 import { NftInfo } from '@/pages/nft/[id]';
 import { useAppDispatch, useAppSelector } from '@/store';
+import { getNumberWithCommas } from '@/utils/formatters';
 import { useMemo } from 'react';
 import { Attr } from '../Game/RowCard';
 import Button from '../Shared/Button';
@@ -41,9 +42,9 @@ const ActionPanel = ({
         </div>
         <div className="flex items-center mt-[8px]">
           <div className="text-[24px] font-semibold text-[#FFFFFF]">
-            {info.price}
+            ${info.price}
           </div>
-          <div className="mt-[6px] ml-[6px]">
+          <div className="mt-[2px] ml-[6px]">
             <img
               src={'/img/icon_unit_sol.png'}
               alt={'sol'}

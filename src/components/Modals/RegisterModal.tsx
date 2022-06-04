@@ -73,7 +73,7 @@ export const RegisterModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
                       <div>
                         <label
                           htmlFor="email"
-                          className="block text-sm font-medium text-white font-circularstdbook"
+                          className="block text-sm font-medium text-white rcularstdbook"
                         >
                           Email
                         </label>

@@ -30,6 +30,7 @@ const RowCard = ({
     <div
       className="rounded-[5px] xl:w-[340px] w-[300px] bg-[#13002B] border-[2px] border-solid border-[#290030] mx-auto"
       style={{ borderColor: isAddedToCart ? '#F41786' : '#290030' }}
+      onClick={() => onMoreInfo(id)}
     >
       <div>
         <img
@@ -39,16 +40,18 @@ const RowCard = ({
         />
       </div>
       <div className="mt-[12px] px-[12px]">
-        <div className="flex justify-between items-end">
+        <div className="flex justify-between items-start">
           <div className="text-[#FFFFFF] text-semibold text-[24px]">{name}</div>
-          <div className="font-light text-[#9497AA] text-[14px]">Price</div>
+          <div className="font-light text-[#9497AA] text-[14px] mt-[3px]">
+            Price
+          </div>
         </div>
-        <div className="flex justify-between items-center mt-[-18px]">
-          <div className="font-light text-[#9497AA] text-[14px] tracking-wider">
+        <div className="flex justify-between items-end mt-[-18px]">
+          <div className="font-light text-[#9497AA] text-[14px] tracking-wider mb-[6px]">
             {brand}
           </div>
           <div className="font-semibold text-[#FFFFFF] text-[24px] mt-[12px] flex items-center">
-            <div className="mt-[8px] mr-[4px]">
+            <div className="mt-[4px] mr-[4px]">
               <img
                 src={'/img/icon_unit_sol.png'}
                 alt={'sol'}
@@ -94,7 +97,8 @@ const RowCard = ({
             )}
             <div
               className="ml-[8px] text-[#9497AA] text-[14px]"
-              onClick={() =>
+              onClick={(e) => {
+                e.stopPropagation();
                 onAddToCart({
                   image,
                   name,
@@ -102,8 +106,8 @@ const RowCard = ({
                   price,
                   id,
                   isAddedToCart,
-                })
-              }
+                });
+              }}
             >
               {addToCartLoading && <Skeleton className="w-[64px] h-[14px]" />}
               {!addToCartLoading && 'Add To Cart'}
@@ -116,6 +120,17 @@ const RowCard = ({
             style={{
               background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
               flexBasis: '70%',
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              onAddToCart({
+                image,
+                name,
+                brand,
+                price,
+                id,
+                isAddedToCart,
+              });
             }}
           >
             Added To Cart

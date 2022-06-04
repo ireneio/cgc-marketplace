@@ -1,3 +1,4 @@
+import YourView from '@/components/Game/YourView';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
 import ActionPanel from '@/components/Nft/ActionPanel';
 import AttributesPanel from '@/components/Nft/AttributesPanel';
@@ -66,7 +67,7 @@ const Nft = () => {
     setCurrentSelection(value);
     switch (value) {
       case 'About':
-        router.push(`/collection/${router.query.id}`);
+        router.push(`/collection/${info.brand}`);
         setInfo((prev) => ({
           ...prev,
           // header: `Welcome to the ${info.name} Metaverse Crypto NFT Game`,
@@ -83,6 +84,7 @@ const Nft = () => {
         setInfo((prev) => ({
           ...prev,
           header: 'Your Items',
+          name: info.name,
         }));
         return;
       case 'Activity':
@@ -112,12 +114,14 @@ const Nft = () => {
         return [
           { text: 'Home', value: 'Home' },
           { text: info.brand, value: 'Game' },
-          { text: info.name, value: 'All Items' },
+          { text: 'All Items', value: 'All Items' },
+          { text: info.name, value: info.name },
         ];
       case 'Your Items':
         return [
           { text: 'Home', value: 'Home' },
-          { text: info.name, value: 'Game' },
+          { text: info.brand, value: 'Game' },
+          // { text: info.name, value: 'Game' },
           { text: 'Your Items', value: 'Your Items' },
         ];
       case 'Staking':
@@ -153,7 +157,7 @@ const Nft = () => {
 
   return (
     <DefaultLayout>
-      <div className="mb-[12px]">
+      <div className="mb-[32px]">
         <BreadCrumb
           items={breadCrumbItems}
           currentValue={
@@ -165,18 +169,23 @@ const Nft = () => {
               router.push('/');
             } else if (val === 'Game') {
               handleSelect('About');
+            } else if (val === 'Your Items') {
+              handleSelect(val as Selection);
+            } else if (val === 'All Items') {
+              router.push(`/collection/${info.brand}`);
             }
           }}
         />
       </div>
-      <div className="flex justify-between items-center mb-[28px]">
-        <div className="text-[#FFFFFF] font-bold text-[20px]">{info.name}</div>
+      <div className="flex justify-between items-center mb-[32px]">
+        <div className="text-[#FFFFFF] font-bold text-[24px]">{info.name}</div>
         <div>
           <SelectGroup
             items={[
               { text: 'About', value: 'About' },
               { text: 'All Items', value: 'All Items' },
-              // { text: 'Your Items', value: 'Your Items' },
+              { text: 'Your Items', value: 'Your Items' },
+              { text: '...', value: '...' },
               // { text: 'Activity', value: 'Activity' },
               // { text: 'Staking', value: 'Staking' },
             ]}
@@ -185,88 +194,93 @@ const Nft = () => {
           />
         </div>
       </div>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center">
-          <div className="cursor-pointer">
-            <img
-              src="/img/icon_refresh.png"
-              alt="refresh"
-              width={14}
-              height={14}
+      {currentSelection === 'Your Items' && <YourView />}
+      {currentSelection !== 'Your Items' && (
+        <div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <div className="cursor-pointer">
+                <img
+                  src="/img/icon_refresh.png"
+                  alt="refresh"
+                  width={14}
+                  height={14}
+                />
+              </div>
+              <div className="ml-[8px] text-[#FFFFFF] text-[14px]">1 Item</div>
+            </div>
+            <CartSection
+              openCart={openCart}
+              onToggleCart={(val) => setOpenCart(val)}
             />
           </div>
-          <div className="ml-[8px] text-[#FFFFFF] text-[14px]">1 Item</div>
-        </div>
-        <CartSection
-          openCart={openCart}
-          onToggleCart={(val) => setOpenCart(val)}
-        />
-      </div>
-      <div className="flex mt-[12px] flex-wrap">
-        <div style={{ flexBasis: '50%' }}>
-          <div className="w-full">
-            <img
-              src={info.image}
-              alt={info.name}
-              width="100%"
-              className="rounded-[5px]"
-            />
+          <div className="flex mt-[12px] flex-wrap">
+            <div style={{ flexBasis: '50%' }}>
+              <div className="w-full">
+                <img
+                  src={info.image}
+                  alt={info.name}
+                  width="100%"
+                  className="rounded-[5px]"
+                />
+              </div>
+              <InfoPanel info={info} />
+            </div>
+            <div style={{ flexBasis: '50%' }} className="pl-[12px]">
+              <DetailPanel info={info} />
+              <ActionPanel info={info} onCartOpen={(val) => setOpenCart(val)} />
+              <AttributesPanel info={info} />
+            </div>
           </div>
-          <InfoPanel info={info} />
-        </div>
-        <div style={{ flexBasis: '50%' }} className="pl-[12px]">
-          <DetailPanel info={info} />
-          <ActionPanel info={info} onCartOpen={(val) => setOpenCart(val)} />
-          <AttributesPanel info={info} />
-        </div>
-      </div>
-      <div className="mt-[24px]">
-        <Divider />
-      </div>
-      <div className="mt-[24px]">
-        <div className="flex justify-between items-center">
-          <div className="text-[#FFFFFF] font-bold text-[20px]">
-            Transaction History
+          <div className="mt-[32px]">
+            <Divider />
           </div>
-          <div>
-            <Pagination
-              totalPages={15}
-              currentPage={currentPage}
-              onPageChange={(val) => setCurrentPage(val)}
-              onPreviousPage={() => setCurrentPage((prev) => prev - 1)}
-              onNextPage={() => setCurrentPage((prev) => prev + 1)}
-            />
+          <div className="mt-[32px]">
+            <div className="flex justify-between items-center">
+              <div className="text-[#FFFFFF] font-bold text-[20px]">
+                Transaction History
+              </div>
+              <div>
+                <Pagination
+                  totalPages={15}
+                  currentPage={currentPage}
+                  onPageChange={(val) => setCurrentPage(val)}
+                  onPreviousPage={() => setCurrentPage((prev) => prev - 1)}
+                  onNextPage={() => setCurrentPage((prev) => prev + 1)}
+                />
+              </div>
+            </div>
+            <div className="mt-[32px] mb-[32px]">
+              <HistoryTable
+                rows={[
+                  [
+                    'Listing',
+                    'AC95124da74ca921wdpk1134',
+                    'AC95124da74ca921wdpk1134',
+                    new Date().toISOString(),
+                    '12399999999.45678',
+                  ],
+                  [
+                    'Transfer',
+                    'AC95124da74ca921wdpk1134',
+                    'AC95124da74ca921wdpk1134',
+                    new Date().toISOString(),
+                    '12399999999.45678',
+                  ],
+                  [
+                    'Cancel',
+                    'AC95124da74ca921wdpk1134',
+                    'AC95124da74ca921wdpk1134',
+                    new Date().toISOString(),
+                    '12399999999.45678',
+                  ],
+                ]}
+                headers={['type', 'seller', 'buyer', 'time', 'price']}
+              />
+            </div>
           </div>
         </div>
-        <div className="mt-[32px]">
-          <HistoryTable
-            rows={[
-              [
-                'Listing',
-                'AC95124da74ca921wdpk1134',
-                'AC95124da74ca921wdpk1134',
-                new Date().toISOString(),
-                '12399999999.45678',
-              ],
-              [
-                'Transfer',
-                'AC95124da74ca921wdpk1134',
-                'AC95124da74ca921wdpk1134',
-                new Date().toISOString(),
-                '12399999999.45678',
-              ],
-              [
-                'Cancel',
-                'AC95124da74ca921wdpk1134',
-                'AC95124da74ca921wdpk1134',
-                new Date().toISOString(),
-                '12399999999.45678',
-              ],
-            ]}
-            headers={['type', 'seller', 'buyer', 'time', 'price']}
-          />
-        </div>
-      </div>
+      )}
     </DefaultLayout>
   );
 };

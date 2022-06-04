@@ -55,12 +55,11 @@ const MarketView = () => {
   };
 
   const handleAddToCart = (params: Attr) => {
-    // setAddToCartLoading({ itemId: String(params.id), status: true });
-    // const tid = setTimeout(() => {
-    //   setAddToCartLoading({ itemId: '', status: false });
-    //   clearTimeout(tid);
-    // }, 1200);
-    dispatch({ type: 'ADD_CART_ITEM', payload: params });
+    if (isItemAddedToCart(params.id)) {
+      dispatch({ type: 'REMOVE_CART_ITEM', payload: String(params.id) });
+    } else {
+      dispatch({ type: 'ADD_CART_ITEM', payload: params });
+    }
   };
 
   const handleMoreInfo = (id: string | number) => {
@@ -247,12 +246,7 @@ const MarketView = () => {
       </div>
       <div>
         {currentView === 'List' && loading && (
-          <div
-            className="grid gap-y-[24px] gap-x-[12px] w-full justify-between"
-            style={{
-              gridTemplateColumns: 'repeat(auto-fill, 205px)',
-            }}
-          >
+          <div className="grid gap-[24px] grid-cols-4 xl:grid-cols-5 w-full justify-between">
             {LOADING_ARR.map((item, index) => {
               return (
                 <div key={index}>
@@ -263,12 +257,7 @@ const MarketView = () => {
           </div>
         )}
         {currentView === 'Row' && loading && (
-          <div
-            className="grid gap-y-[24px] gap-x-[12px] w-full justify-between"
-            style={{
-              gridTemplateColumns: 'repeat(auto-fill, 364px)',
-            }}
-          >
+          <div className="grid gap-[24px] grid-cols-2 xl:grid-cols-3 w-full justify-between">
             {LOADING_ARR.map((item, index) => {
               return (
                 <div key={index}>
@@ -279,12 +268,7 @@ const MarketView = () => {
           </div>
         )}
         {currentView === 'List' && !loading && (
-          <div
-            className="grid gap-y-[24px] gap-x-[12px] w-full justify-between"
-            style={{
-              gridTemplateColumns: 'repeat(auto-fill, 205px)',
-            }}
-          >
+          <div className="grid gap-[24px] grid-cols-4 xl:grid-cols-5 w-full justify-between">
             {items.map((item, index) => {
               return (
                 <div key={index}>
@@ -310,12 +294,7 @@ const MarketView = () => {
           </div>
         )}
         {currentView === 'Row' && !loading && (
-          <div
-            className="grid gap-y-[24px] gap-x-[12px] w-full justify-between"
-            style={{
-              gridTemplateColumns: 'repeat(auto-fill, 364px)',
-            }}
-          >
+          <div className="grid gap-[24px] grid-cols-2 xl:grid-cols-3 w-full justify-between">
             {items.map((item, index) => {
               return (
                 <div key={index}>
