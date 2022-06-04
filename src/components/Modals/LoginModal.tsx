@@ -203,7 +203,7 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
                         </div>
                         <div>
                           <img
-                            src="/img/cgc-logo-no-text.png"
+                            src="/img/cgc_icon.png"
                             width={48}
                             height={48}
                             alt="catheon"

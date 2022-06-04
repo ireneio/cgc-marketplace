@@ -18,10 +18,10 @@ const LandingCarousel = () => {
   const [carouselItems] = useState([
     {
       id: 'store_carousel_example_2',
-      imageUrl: '/img/seoulstars-main.jpeg',
+      imageUrl: '/img/carousel_sstars.jpeg',
       name: 'store_carousel_example_2',
       href: 'https://seoulstars.io/',
-      logo: '/img/ss_logo.png',
+      logo: '/img/logo_sstars.png',
       title: "The Metaverse's First Virtual K-Pop Idol",
       description:
         'Sing-to-earn in this exciting rhythm action and karaoke game',

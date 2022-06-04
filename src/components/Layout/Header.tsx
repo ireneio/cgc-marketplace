@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import CathenConnectButton from '../Shared/CathenConnectButton';
+import CatheonConnectButton from '../Shared/CatheonConnectButton';
 import { useAppDispatch } from '@/store';
 import { useRouter } from 'next/router';
 
@@ -23,7 +23,7 @@ const Header = () => {
         <div onClick={() => handleGoHomePage()}>
           <img
             className="block h-8 w-auto"
-            src={'/img/cgc-logo-white.png'}
+            src={'/img/cgc_logo_white.png'}
             alt="Catheon Gaming"
           />
         </div>
@@ -47,7 +47,7 @@ const Header = () => {
       </div>
       <div className="flex items-center ml-auto">
         <div className="">
-          <CathenConnectButton />
+          <CatheonConnectButton />
         </div>
       </div>
     </div>

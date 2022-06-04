@@ -22,7 +22,7 @@ const CollectionCarousel = () => {
     //   imageUrl: '/img/angrymals-cover.png',
     //   name: 'store_carousel_example_1',
     //   href: 'https://www.angrymals.io/',
-    //   logo: '/img/ss_logo.png',
+    //   logo: '/img/logo_sstars.png',
     //   title: 'The metaverses first virtual K-Pop idol.',
     //   description:
     //     'Sing-to-earn in this exciting rhythm action and karaoke game!',

@@ -56,18 +56,19 @@ const ActionPanel = ({
           </div>
         </div>
         <div className="mt-[34px] flex items-center flex-wrap">
-          <Button onClick={() => handleBuy()}>Buy Now</Button>
-          <div className="ml-[8px]">
+          {!isItemAddedToCart && (
+            <Button onClick={() => handleBuy()}>Buy Now</Button>
+          )}
+          <div className={!isItemAddedToCart ? 'ml-[8px]' : ''}>
             <Button
               onClick={() => handleAddToCart()}
               style={{ paddingLeft: 12, paddingRight: 12 }}
-              disabled={isItemAddedToCart}
             >
               {isItemAddedToCart ? (
-                'In Cart'
+                'Remove From Cart'
               ) : (
                 <img
-                  src="/img/icon_cart.png"
+                  src={'/img/icon_cart.png'}
                   alt="cart"
                   width={21}
                   height={21}
@@ -75,11 +76,13 @@ const ActionPanel = ({
               )}
             </Button>
           </div>
-          <div className="ml-auto">
-            <Button secondary disabled={!info.auctionEndDate}>
-              Make Offer
-            </Button>
-          </div>
+          {!isItemAddedToCart && (
+            <div className="ml-auto">
+              <Button secondary disabled={!info.auctionEndDate}>
+                Make Offer
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </Tag>

@@ -91,7 +91,7 @@ const NetflixCard = ({
           {showCatheonLogo && (
             <div
               className="absolute top-[8px] left-[8px] w-[38px] h-[38px] bg-no-repeat bg-center bg-contain"
-              style={{ backgroundImage: `url(/img/cgc-logo-no-text.png)` }}
+              style={{ backgroundImage: `url(/img/cgc_icon.png)` }}
             />
           )}
         </>

@@ -68,3 +68,8 @@ export function getSelectGroupItems() {
     { text: '...', value: '...' },
   ];
 }
+
+export function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(' ');
+}
+

@@ -30,11 +30,7 @@ body {
   font-family: 'CircularStd-Book', sans-serif !important;
 }
 
-.wallet-adapter-button-trigger {
-  background-color: transparent !important;
-}
-
-.wallet-adapter-button {
+.wallet-solana > .wallet-adapter-button {
   color: white !important;
   font-family: inherit !important;
   font-size: 16px !important;
@@ -44,16 +40,11 @@ body {
   font-weight: 700 !important;
   padding: 16px 27px !important;
   margin: 0 !important;
-  /* border: 2px solid #FC1F8E !important; */
   letter-spacing: 0 !important;
   background-color: #13002b !important;
 }
 
-.wallet-adapter-button:hover {
-  background-color: transparent !important;
-}
-
-.waller-solana:hover {
+.wallet-solana > .wallet-adapter-button:hover {
   background-color: transparent !important;
 }
 
@@ -101,12 +92,6 @@ body {
 
 .floating-card-wrapper .content {
   width: 100%;
-  /* position: absolute; */
-  /* bottom: 0px; */
-  /* left: 50%; */
-  /* transform: translateY(100%) translateX(-50%); */
-  /* transition-duration: 1s; */
-  /* opacity: 0; */
   padding: 10px 10px 10px 10px;
   background-color: #13002b;
 }
