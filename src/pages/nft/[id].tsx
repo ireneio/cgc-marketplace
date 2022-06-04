@@ -74,14 +74,12 @@ const Nft = () => {
         }));
         return;
       case 'All Items':
-        router.push(`/collection/${router.query.id}`).then();
         setInfo((prev) => ({
           ...prev,
           header: 'All Items',
         }));
         return;
       case 'Your Items':
-        router.push(`/collection/${router.query.id}`).then();
         setInfo((prev) => ({
           ...prev,
           header: 'Your Items',
