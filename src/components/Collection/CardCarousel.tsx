@@ -17,18 +17,6 @@ const PREFILL_DATA = {
 const CardCarousel = ({ items }: { items: any[] }) => {
   const router = useRouter();
 
-  const handleCarouselItemClick = ({ href }: { href: string }) => {
-    console.log(href);
-  };
-
-  const handlePlay = (name: string) => {
-    console.log('handePlay', name);
-  };
-
-  const handleMoreInfo = (name: string) => {
-    console.log('handleMoreInfo', name);
-  };
-
   const handleOnPlay = (id: string | number) => {
     router.push(`/collection/${id}`);
   };
@@ -81,7 +69,7 @@ const CardCarousel = ({ items }: { items: any[] }) => {
                 network={'SOL'}
                 marketCap={'10000'}
                 coinSupply={'100000000000'}
-                onPlay={() => handleOnPlay(item.id)}
+                onPlay={() => handleOnPlay(item.name)}
               />
             </div>
           );
