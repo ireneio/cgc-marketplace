@@ -1,4 +1,4 @@
-import { getNumberWithCommas } from '@/utils/formatters';
+import { getNumberWithCommas } from '@/utils/formatHelper';
 import Button from './Button';
 
 interface Props {

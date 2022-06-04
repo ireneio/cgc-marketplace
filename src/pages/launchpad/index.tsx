@@ -1,7 +1,7 @@
 import CollectionsCard from '@/components/Collections/CollectionsCard';
 import CollectionsCardLoading from '@/components/Collections/CollectionsCardLoading';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
-import BreadCrumb from '@/components/Shared/Breadcrumb';
+import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Divider from '@/components/Shared/Divider';
 import SelectGroup from '@/components/Shared/SelectGroup';
 import { useAppDispatch } from '@/store';
@@ -26,7 +26,7 @@ const Launchpad = () => {
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
       id: item,
       type: item % 2 === 0 ? 'nft' : 'token',
-      image: '/img/ss_1.webp',
+      image: '/img/seoulstars-main.jpeg',
     })),
   );
   const [loading, setLoading] = useState(true);
@@ -50,7 +50,7 @@ const Launchpad = () => {
   return (
     <DefaultLayout>
       <div className="mb-[12px]">
-        <BreadCrumb
+        <Breadcrumb
           items={[
             { text: 'Home', value: 'Home' },
             { text: 'Launchpad', value: 'Launchpad' },

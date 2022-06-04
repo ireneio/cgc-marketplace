@@ -1,4 +1,4 @@
-import { Attr } from '@/components/Game/ListCard';
+import { Attr } from '@/components/Collection/ListCard';
 
 export const CART_STORAGE_KEY = 'CART_STORAGE_KEY';
 

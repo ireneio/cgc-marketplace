@@ -42,14 +42,14 @@ export default function Navbar() {
                       <Link href={'/'} passHref>
                         <img
                           className="block lg:hidden h-8 w-auto"
-                          src={'/img/cgc-icon.png'}
+                          src={'/img/cgc_icon.png'}
                           alt="Catheon Gaming"
                         />
                       </Link>
                       <Link href={'/'} passHref>
                         <img
                           className="hidden lg:block h-8 w-auto"
-                          src={'/img/cgc-logo-white.png'}
+                          src={'/img/cgc_logo_white.png'}
                           alt="Catheon Gaming"
                         />
                       </Link>

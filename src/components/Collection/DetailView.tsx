@@ -1,24 +1,22 @@
-import { useAppDispatch } from '@/store';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Divider from '../Shared/Divider';
 import Tag from '../Shared/Tag';
 import DetailViewLoading from './DetailViewLoading';
-import GameCarousel from './GameCarousel';
+import CollectionCarousel from './CollectionCarousel';
 import ItemCountPanel from './ItemCountPanel';
 import NftPricePanel from './NftPricePanel';
 import TokenPricePanel from './TokenPricePanel';
 
 const DetailView = () => {
   const router = useRouter();
-  // const dispatch = useAppDispatch();
   const [info, setInfo] = useState({
     name: 'SolChicks',
     id: '',
     header: 'Welcome to the SolChicks Metaverse Crypto NFT Game',
     title: 'The leading fantasy NFT PvP and P2E crypto game',
     description:
-      'SolChicks is One of The Best Play To Earn Crypto Games with exceptional PvP gaming. Our mission is simple: to be the leading fantasy NFT PvP and P2E crypto gaming ecosystem on the Solana blockchain. Buy & sell SolChicks with the community. Create collections & earn rewards. Breed adorable SolChicks to unlock rare traits. Play games in the SolChicks universe',
+      'SolChicks is One of The Best Play To Earn Crypto Games with exceptional PvP gaming. Our mission is simple: to be the leading fantasy NFT PvP and P2E crypto gaming ecosystem on the Solana blockchain. Buy & sell SolChicks with the community. Create collections & earn rewards. Breed adorable SolChicks to unlock rare traits.',
     tags: [
       'Collectibles & NFTs',
       'Gaming',
@@ -64,8 +62,8 @@ const DetailView = () => {
       {loading && <DetailViewLoading />}
       {!loading && (
         <div>
-          <div className="mb-[48px]">
-            <GameCarousel />
+          <div className="mb-[32px]">
+            <CollectionCarousel />
           </div>
           <div className="mb-[32px]">
             <div className="text-[#FFFFFF] font-bold text-[20px]">
@@ -86,7 +84,7 @@ const DetailView = () => {
               onClick={() => handleLinkOpen('twitter')}
             >
               <img
-                src="/img/icon_twitter.png"
+                src={'/img/icon_twitter.png'}
                 width={24}
                 height={24}
                 alt="twitter"
@@ -113,7 +111,7 @@ const DetailView = () => {
           <div className="flex flex-wrap mb-[32px]">
             {info.tags.map((tag, index) => {
               return (
-                <Tag key={index} className="mr-[12px] mb-[12px]">
+                <Tag key={index} className="mr-[12px]">
                   {tag}
                 </Tag>
               );
@@ -125,7 +123,7 @@ const DetailView = () => {
           <div className="mb-[32px]">
             <div className="text-[#FFFFFF] font-bold text-[20px]">Detail</div>
           </div>
-          <div className="mb-[32px] flex justify-between">
+          <div className="mb-[32px] flex space-x-4">
             <ItemCountPanel text="items available" count={5400} />
             <ItemCountPanel text="items available" count={5400} />
             <ItemCountPanel
@@ -141,7 +139,7 @@ const DetailView = () => {
           </div>
           <div className="mb-[32px]">
             <TokenPricePanel
-              brandImg="/img/brand_chicks.png"
+              brandImg="https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/cxxShYRVcepDudXhe7U62QHvw8uBJoKFifmzggGKVC2/logo.png"
               brandName="SolChicks"
               symbol="CHICKS"
               price={0.000012345}
@@ -168,7 +166,7 @@ const DetailView = () => {
           </div>
           <div className="mb-[32px]">
             <TokenPricePanel
-              brandImg="/img/brand_shards.png"
+              brandImg="https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/8j3hXRK5rdoZ2vSpGLRmXtWmW6iYaRUw5xVk4Kzmc9Hp/logo.png"
               brandName="SolChicks"
               symbol="SHARDS"
               price={0.000012345}

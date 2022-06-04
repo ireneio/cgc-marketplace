@@ -1,5 +1,5 @@
 import { LaunchpadNftInfo } from '@/pages/launchpad/nft/[id]';
-import { getNumberWithCommas } from '@/utils/formatters';
+import { getNumberWithCommas } from '@/utils/formatHelper';
 import dayjs from 'dayjs';
 import Divider from '../Shared/Divider';
 import Tag from '../Shared/Tag';

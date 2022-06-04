@@ -2,7 +2,7 @@ import { NftInfo } from '@/pages/nft/[id]';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { getNumberWithCommas } from '@/utils/formatters';
 import { useMemo } from 'react';
-import { Attr } from '../Game/RowCard';
+import { Attr } from '../Collection/RowCard';
 import Button from '../Shared/Button';
 import Tag from '../Shared/Tag';
 
@@ -35,7 +35,7 @@ const ActionPanel = ({
   };
 
   return (
-    <Tag className="px-[28px] py-[24px] mt-[30px]">
+    <Tag className="px-[28px] py-[24px]">
       <div>
         <div className="font-light text-[#FFFFFF] text-[14px]s">
           Current Price
@@ -57,18 +57,19 @@ const ActionPanel = ({
           </div>
         </div>
         <div className="mt-[34px] flex items-center flex-wrap">
-          <Button onClick={() => handleBuy()}>Buy Now</Button>
-          <div className="ml-[8px]">
+          {!isItemAddedToCart && (
+            <Button onClick={() => handleBuy()}>Buy Now</Button>
+          )}
+          <div className={!isItemAddedToCart ? 'ml-[8px]' : ''}>
             <Button
               onClick={() => handleAddToCart()}
               style={{ paddingLeft: 12, paddingRight: 12 }}
-              disabled={isItemAddedToCart}
             >
               {isItemAddedToCart ? (
-                'In Cart'
+                'Remove From Cart'
               ) : (
                 <img
-                  src="/img/icon_cart.png"
+                  src={'/img/icon_cart.png'}
                   alt="cart"
                   width={21}
                   height={21}
@@ -76,14 +77,13 @@ const ActionPanel = ({
               )}
             </Button>
           </div>
-          <div className="ml-auto">
-            <Button secondary disabled={!info.auctionEndDate}>
-              Make Offer
-            </Button>
-          </div>
-        </div>
-        <div className="mt-[14px] text-[14px] font-light text-[#9497AA]">
-          By proceeding, you agree to our Terms and Privacy
+          {!isItemAddedToCart && (
+            <div className="ml-auto">
+              <Button secondary disabled={!info.auctionEndDate}>
+                Make Offer
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </Tag>

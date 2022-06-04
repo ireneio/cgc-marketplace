@@ -2,7 +2,7 @@ import { useEthereumProvider } from '@/contexts/EthereumWalletProvider';
 import {
   getTrimmedAddress,
   getTrimmedAddressEllipsisMiddle,
-} from '@/utils/formatters';
+} from '@/utils/formatHelper';
 import Button from './Button';
 
 export default function MetamaskConnectButton() {

@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react';
 import ButtonLink from '../Shared/ButtonLink';
 import LoadingNetflixCard from '../Shared/LoadingNetflixCard';
 import SectionTitle from '../Shared/SectionTitle';
-import CardCarousel from './CardCarousel';
+import SelectGroup from '../Shared/SelectGroup';
 
-const AllGames = () => {
+const LatestCollections = () => {
   const dispatch = useAppDispatch();
   const [items, setItems] = useState(testData.recentlyAddedCollections);
+  const [currentSelection, setCurrentSelection] = useState('live');
   const [loading, setLoading] = useState(true);
   const sideBarPath = useAppSelector((state) => state.layout.navigation.path);
 
@@ -23,35 +24,36 @@ const AllGames = () => {
   });
 
   return (
-    <div className="relative">
+    <div className="">
       <div className="flex justify-between items-center">
-        <SectionTitle>all collections</SectionTitle>
+        <SectionTitle>latest games</SectionTitle>
+        <SelectGroup
+          items={[
+            { text: 'Live', value: 'live' },
+            { text: 'Coming Soon', value: 'soon' },
+          ]}
+          currentValue={currentSelection}
+          onItemClick={(value) => setCurrentSelection(value)}
+        />
       </div>
-      <div className="hide-scrollbar">
-        {!loading && (
-          <div className="mt-[24px]">
-            <CardCarousel items={items} />
-          </div>
-        )}
-        {loading && (
-          <div className="flex mt-[24px]">
-            {items.map((game, index) => {
-              return (
-                <div key={index} className="mr-[12px]">
-                  <LoadingNetflixCard />
-                </div>
-              );
-            })}
-          </div>
-        )}
+      <div className="overflow-y-visible mr-[24px] flex floating-card-wrapper hide-scrollbar justify-start">
+        {/* {!loading && <FloatingCardWrapper items={items} />} */}
+        {loading &&
+          items.map((game, index) => {
+            return (
+              <div key={index} className="mr-[12px]">
+                <LoadingNetflixCard />
+              </div>
+            );
+          })}
       </div>
-      <div className="absolute bottom-[-24px] right-[0] flex justify-end">
+      <div className="flex justify-end mt-[20px] mb-[40px]">
         {sideBarPath === 'Home' && (
           <ButtonLink
             onClick={() => {
               dispatch({
                 type: 'SET_NAVIGATION_PATH',
-                payload: 'Explore/All',
+                payload: 'Explore/Latest',
               });
               window.scroll(0, 0);
             }}
@@ -64,4 +66,4 @@ const AllGames = () => {
   );
 };
 
-export default AllGames;
+export default LatestCollections;

@@ -4,7 +4,7 @@ import NftPresalePanel from '@/components/Collections/NftPresalePanel';
 import NftPublicSalePanel from '@/components/Collections/NftPublicSalePanel';
 import PageLoading from '@/components/Collections/PageLoading';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
-import BreadCrumb from '@/components/Shared/Breadcrumb';
+import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Divider from '@/components/Shared/Divider';
 import Tag from '@/components/Shared/Tag';
 import { useAppDispatch } from '@/store';
@@ -95,7 +95,7 @@ const LaunchpadNft = () => {
       {!loading && (
         <div>
           <div className="mb-[12px]">
-            <BreadCrumb
+            <Breadcrumb
               items={[
                 { text: 'Home', value: 'Home' },
                 { text: 'Launchpad', value: 'Launchpad' },

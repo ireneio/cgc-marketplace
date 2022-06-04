@@ -1,4 +1,4 @@
-import { getNumberWithCommas } from '@/utils/formatters';
+import { getNumberWithCommas } from '@/utils/formatHelper';
 import Button from './Button';
 import { motion } from 'framer-motion';
 
@@ -17,10 +17,10 @@ interface Props {
   onCardClick?: () => Promise<void> | void;
   onMouseOver?: any;
   onMouseLeave?: any;
-  id: string;
-  currentHoverId: string;
-  logo: string;
-  isFloatRight: boolean;
+  id?: string;
+  currentHoverId?: string;
+  logo?: string;
+  isFloatRight?: boolean;
 }
 
 const FloatingCard = ({
@@ -70,7 +70,7 @@ const FloatingCard = ({
           {showCatheonLogo && (
             <div
               className="absolute top-[8px] left-[8px] w-[24px] h-[24px] bg-no-repeat bg-center bg-contain"
-              style={{ backgroundImage: `url(/img/cgc-logo-no-text.png)` }}
+              style={{ backgroundImage: `url(/img/cgc_icon.png)` }}
             ></div>
           )}
         </li>

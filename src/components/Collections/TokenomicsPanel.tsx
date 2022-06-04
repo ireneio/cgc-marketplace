@@ -1,5 +1,5 @@
 import { CollectionInfo } from '@/pages/launchpad/[id]';
-import { getNumberWithCommas } from '@/utils/formatters';
+import { getNumberWithCommas } from '@/utils/formatHelper';
 import Divider from '../Shared/Divider';
 import Tag from '../Shared/Tag';
 

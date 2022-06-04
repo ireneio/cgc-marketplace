@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/store';
-import { getNumberWithCommas } from '@/utils/formatters';
+import { getNumberWithCommas } from '@/utils/formatHelper';
 import { useMemo } from 'react';
 import Button from '../Shared/Button';
 import Divider from '../Shared/Divider';

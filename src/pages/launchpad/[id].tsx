@@ -6,7 +6,7 @@ import PageLoading from '@/components/Collections/PageLoading';
 import PresaleWhitelistPanel from '@/components/Collections/PresaleWhitelistPanel';
 import TokenomicsPanel from '@/components/Collections/TokenomicsPanel';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
-import BreadCrumb from '@/components/Shared/Breadcrumb';
+import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Divider from '@/components/Shared/Divider';
 import Tag from '@/components/Shared/Tag';
 import { useAppDispatch } from '@/store';
@@ -180,7 +180,7 @@ const Collection = () => {
       {!loading && (
         <div>
           <div className="mb-[12px]">
-            <BreadCrumb
+            <Breadcrumb
               items={[
                 { text: 'Home', value: 'Home' },
                 { text: 'Launchpad', value: 'Launchpad' },

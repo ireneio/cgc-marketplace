@@ -1,12 +1,11 @@
-import YourView from '@/components/Game/YourView';
+import YourView from '@/components/Collection/YourView';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
 import ActionPanel from '@/components/Nft/ActionPanel';
 import AttributesPanel from '@/components/Nft/AttributesPanel';
 import CartSection from '@/components/Nft/CartSection';
-import DetailPanel from '@/components/Nft/DetailPanel';
 import HistoryTable from '@/components/Nft/HistoryTable';
 import InfoPanel from '@/components/Nft/InfoPanel';
-import BreadCrumb from '@/components/Shared/Breadcrumb';
+import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Divider from '@/components/Shared/Divider';
 import Pagination from '@/components/Shared/Pagination';
 import SelectGroup from '@/components/Shared/SelectGroup';
@@ -14,6 +13,12 @@ import { useAppDispatch } from '@/store';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
+import {
+  getBreadcrumbItemRoutes,
+  getSelectGroupItems,
+} from '@/utils/cgcConsts';
+import { getNumberWithCommas } from '@/utils/formatHelper';
+import DetailPanel from '@/components/Nft/DetailPanel';
 
 export interface NftInfo {
   id: string | number;
@@ -29,7 +34,7 @@ export interface NftInfo {
   mintAddress: string;
   owner: string;
 }
-type Selection = 'About' | 'All Items' | 'Your Items' | 'Activity' | 'Staking';
+type Selection = 'About' | 'All Items' | 'Your Items' | 'Collection Item';
 
 const Nft = () => {
   const dispatch = useAppDispatch();
@@ -61,7 +66,7 @@ const Nft = () => {
   const [openCart, setOpenCart] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [currentSelection, setCurrentSelection] =
-    useState<Selection>('All Items');
+    useState<Selection>('Collection Item');
 
   const handleSelect = (value: Selection) => {
     setCurrentSelection(value);
@@ -70,33 +75,22 @@ const Nft = () => {
         router.push(`/collection/${info.brand}`);
         setInfo((prev) => ({
           ...prev,
-          // header: `Welcome to the ${info.name} Metaverse Crypto NFT Game`,
           header: info.name,
         }));
         return;
       case 'All Items':
+        router.push(`/collection/${router.query.id}`).then();
         setInfo((prev) => ({
           ...prev,
           header: 'All Items',
         }));
         return;
       case 'Your Items':
+        router.push(`/collection/${router.query.id}`).then();
         setInfo((prev) => ({
           ...prev,
           header: 'Your Items',
           name: info.name,
-        }));
-        return;
-      case 'Activity':
-        setInfo((prev) => ({
-          ...prev,
-          header: 'Activity',
-        }));
-        return;
-      case 'Staking':
-        setInfo((prev) => ({
-          ...prev,
-          header: 'Staking',
         }));
         return;
     }
@@ -124,18 +118,6 @@ const Nft = () => {
           // { text: info.name, value: 'Game' },
           { text: 'Your Items', value: 'Your Items' },
         ];
-      case 'Staking':
-        return [
-          { text: 'Home', value: 'Home' },
-          { text: info.name, value: 'Game' },
-          { text: 'Staking', value: 'Staking' },
-        ];
-      case 'Activity':
-        return [
-          { text: 'Home', value: 'Home' },
-          { text: info.name, value: 'Game' },
-          { text: 'Activity', value: 'Activity' },
-        ];
       default:
         return [];
     }
@@ -150,24 +132,22 @@ const Nft = () => {
           id: String(router.query.id),
         };
       });
-    } else {
-      // router.replace('/');
     }
-  }, [router]);
+  }, [dispatch, router]);
 
   return (
     <DefaultLayout>
       <div className="mb-[32px]">
-        <BreadCrumb
+        <Breadcrumb
           items={breadCrumbItems}
           currentValue={
-            currentSelection === 'About' ? 'Game' : currentSelection
+            currentSelection === 'About' ? 'Collection' : currentSelection
           }
           onItemClick={(val) => {
             if (val === 'Home') {
               dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
-              router.push('/');
-            } else if (val === 'Game') {
+              router.push('/').then();
+            } else if (val === 'Collection') {
               handleSelect('About');
             } else if (val === 'Your Items') {
               handleSelect(val as Selection);
@@ -250,7 +230,7 @@ const Nft = () => {
                 />
               </div>
             </div>
-            <div className="mt-[32px] mb-[32px]">
+            <div className="mt-[32px] mb-[48px]">
               <HistoryTable
                 rows={[
                   [

@@ -1,4 +1,4 @@
-import { getNumberWithCommas, getTrimmedAddress } from '@/utils/formatters';
+import { getNumberWithCommas, getTrimmedAddress } from '@/utils/formatHelper';
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
 import DefaultTable from '../Shared/DefaultTable';

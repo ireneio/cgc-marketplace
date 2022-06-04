@@ -9,10 +9,7 @@ interface Props {
 const Skeleton = ({ className, style }: Props) => {
   return (
     <div
-      className={twMerge(
-        `animate-pulse bg-[#aaaaaa] rounded m-1 h-3`,
-        className,
-      )}
+      className={twMerge(`animate-pulse bg-[#aaaaaa] rounded h-3`, className)}
       style={style}
     />
   );

@@ -16,7 +16,7 @@ const LatestSales = () => {
           return (
             <div key={index} className="mr-[28px]">
               <SalesCard
-                img={'/img/nft1.png'}
+                img={'/img/sales_sample_nft.png'}
                 title={'Wendingo #13 - The Alchemist'}
                 brand={'Kreechers'}
                 signature={'AC95124da74c130920980834'}

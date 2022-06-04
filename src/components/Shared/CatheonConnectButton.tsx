@@ -1,19 +1,19 @@
 import { useAppDispatch, useAppSelector } from '@/store';
-import { getTrimmedAddress } from '@/utils/formatters';
+import { getTrimmedAddress } from '@/utils/formatHelper';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { LoginModal } from '../Modals/LoginModal';
 import Button from './Button';
 import DropdownMenu from './DropdownMenu';
 
-const CathenConnectButton = () => {
+const CatheonConnectButton = () => {
   const dispatch = useAppDispatch();
   const email = useAppSelector((state) => state.user.userInfo.email);
   const router = useRouter();
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [dropdown, setDropdown] = useState(false);
 
-  const handleConnect = async () => {
+  const handleConnectButtonClick = async () => {
     if (!email) {
       setLoginModalOpen(true);
     } else {
@@ -33,15 +33,10 @@ const CathenConnectButton = () => {
   return (
     <div>
       <Button
-        onClick={handleConnect}
+        onClick={handleConnectButtonClick}
         style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
       >
-        <img
-          src="/img/cgc-logo-no-text.png"
-          width={18}
-          height={18}
-          alt="catheon"
-        />
+        <img src="/img/cgc_icon.png" width={18} height={18} alt="catheon" />
         <span className="ml-[10px]">
           {email ? getTrimmedAddress(email, { length: 5 }) : 'Connect'}
         </span>
@@ -91,4 +86,4 @@ const CathenConnectButton = () => {
   );
 };
 
-export default CathenConnectButton;
+export default CatheonConnectButton;

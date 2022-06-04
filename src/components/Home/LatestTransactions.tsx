@@ -24,7 +24,10 @@ const LatestTransactions = () => {
         <TransactionTable
           rows={[
             [
-              { icon: '/img/icon_shards.png', text: 'shards' },
+              {
+                icon: 'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/8j3hXRK5rdoZ2vSpGLRmXtWmW6iYaRUw5xVk4Kzmc9Hp/logo.png',
+                text: 'shards',
+              },
               'AC95124da74ca921wdpk1134',
               new Date().toISOString(),
               'AC95124da74ca921wdpk1134',
@@ -32,7 +35,10 @@ const LatestTransactions = () => {
               '123.45678',
             ],
             [
-              { icon: '/img/icon_chicks.png', text: 'chicks' },
+              {
+                icon: 'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/cxxShYRVcepDudXhe7U62QHvw8uBJoKFifmzggGKVC2/logo.png',
+                text: 'chicks',
+              },
               'AC95124da74ca921wdpk1134',
               new Date().toISOString(),
               'AC95124da74ca921wdpk1134',
@@ -40,12 +46,37 @@ const LatestTransactions = () => {
               '12345678.45678',
             ],
             [
-              { icon: '/img/icon_sol.png', text: 'chicks' },
+              {
+                icon: 'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/8j3hXRK5rdoZ2vSpGLRmXtWmW6iYaRUw5xVk4Kzmc9Hp/logo.png',
+                text: 'shards',
+              },
               'AC95124da74ca921wdpk1134',
               new Date().toISOString(),
               'AC95124da74ca921wdpk1134',
               'AC95124da74ca921wdpk1134',
-              '12399999999.45678',
+              '123.45678',
+            ],
+            [
+              {
+                icon: 'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/cxxShYRVcepDudXhe7U62QHvw8uBJoKFifmzggGKVC2/logo.png',
+                text: 'chicks',
+              },
+              'AC95124da74ca921wdpk1134',
+              new Date().toISOString(),
+              'AC95124da74ca921wdpk1134',
+              'AC95124da74ca921wdpk1134',
+              '12345678.45678',
+            ],
+            [
+              {
+                icon: 'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/cxxShYRVcepDudXhe7U62QHvw8uBJoKFifmzggGKVC2/logo.png',
+                text: 'chicks',
+              },
+              'AC95124da74ca921wdpk1134',
+              new Date().toISOString(),
+              'AC95124da74ca921wdpk1134',
+              'AC95124da74ca921wdpk1134',
+              '12345678.45678',
             ],
           ]}
           headers={['item', 'signature', 'time', 'from', 'to', 'amount($USD)']}

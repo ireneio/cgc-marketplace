@@ -1,4 +1,4 @@
-import BreadCrumb from '@/components/Shared/Breadcrumb';
+import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Button from '@/components/Shared/Button';
 import ButtonLink from '@/components/Shared/ButtonLink';
 import LandingCarousel from '@/components/Home/LandingCarousel';
@@ -23,7 +23,7 @@ const UiKit = () => {
         <h2>Floating Card</h2>
         <div className="mt-2 mx-auto w-[600px] floating-card-wrapper">
           {/* <FloatingCard
-            bg={'/img/ss_1.webp'}
+            bg={'/img/seoulstars-main.jpeg'}
             title={'Sing-to-earn rhythm action and karaoke game!'}
             categories={['virtual idol', 'metaverse', 'nft']}
             network={'SOL'}
@@ -61,7 +61,7 @@ const UiKit = () => {
       <section className="mt-4">
         <h2>Breadcrumb</h2>
         <div className="mt-2">
-          <BreadCrumb
+          <Breadcrumb
             items={[
               { text: 'Home', value: 'd' },
               { text: 'Explore', value: 'm', disabled: true },
@@ -91,7 +91,7 @@ const UiKit = () => {
         <h2>Sales Card</h2>
         <div className="mt-2">
           <SalesCard
-            img={'/img/nft1.png'}
+            img={'/img/sales_sample_nft.png'}
             title={'Wendingo #13 - The Alchemist'}
             brand={'Kreechers'}
             signature={'AC95124da74c130920980834'}
