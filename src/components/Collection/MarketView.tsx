@@ -80,7 +80,7 @@ const MarketView = () => {
 
   useEffect(() => {
     getCart();
-  }, [getCart]);
+  }, []);
 
   return (
     <div className="mb-[32px]">

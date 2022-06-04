@@ -97,7 +97,7 @@ const Nft = () => {
           // { text: info.name, value: 'Game' },
           { text: 'Explore', value: 'Explore' },
         ];
-      case 'All Items':
+      case 'Collection Item':
         return [
           { text: 'Home', value: 'Home' },
           { text: info.brand, value: 'Game' },
@@ -105,11 +105,20 @@ const Nft = () => {
           { text: info.name, value: info.name },
         ];
       case 'Your Items':
+        router.push(`/collection/${info.brand}?tab=Your_Items`);
         return [
           { text: 'Home', value: 'Home' },
           { text: info.brand, value: 'Game' },
           // { text: info.name, value: 'Game' },
           { text: 'Your Items', value: 'Your Items' },
+        ];
+      case 'All Items':
+        router.push(`/collection/${info.brand}?tab=All_Items`);
+        return [
+          { text: 'Home', value: 'Home' },
+          { text: info.brand, value: 'Game' },
+          { text: 'All Items', value: 'All Items' },
+          { text: info.name, value: info.name },
         ];
       default:
         return [];
@@ -133,19 +142,15 @@ const Nft = () => {
       <div className="mb-[32px]">
         <Breadcrumb
           items={breadCrumbItems}
-          currentValue={
-            currentSelection === 'About' ? 'Collection' : currentSelection
-          }
+          currentValue={currentSelection}
           onItemClick={(val) => {
             if (val === 'Home') {
               dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
               router.push('/').then();
-            } else if (val === 'Collection') {
+            } else if (val === 'About') {
               handleSelect('About');
             } else if (val === 'Your Items') {
               handleSelect(val as Selection);
-            } else if (val === 'All Items') {
-              router.push(`/collection/${info.brand}`);
             }
           }}
         />

@@ -7,7 +7,7 @@ import Divider from '@/components/Shared/Divider';
 import SelectGroup from '@/components/Shared/SelectGroup';
 import { useAppDispatch } from '@/store';
 import { useRouter } from 'next/router';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getBreadcrumbRoutes, getSelectGroupItems } from '@/utils/cgcConsts';
 
 type Selection =
@@ -29,6 +29,7 @@ const Collection = () => {
 
   const handleSelect = (value: Selection) => {
     setCurrentSelection(value);
+    router.push(`/collection/${info.name}?tab=${value.split(' ').join('_')}`);
     if (value === '...') {
       return;
     }
@@ -57,6 +58,14 @@ const Collection = () => {
   const breadcrumbItems = useMemo(() => {
     return getBreadcrumbRoutes(currentSelection, info.name);
   }, [info, currentSelection]);
+
+  useEffect(() => {
+    if (router.query.tab) {
+      const tab = String(router.query.tab).replaceAll('_', ' ');
+      setCurrentSelection(tab as Selection);
+      router.query.tab = '';
+    }
+  }, [router.query]);
 
   return (
     <DefaultLayout>
