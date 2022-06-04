@@ -56,7 +56,6 @@ const TokenPricePanel = ({
   circulatingSupplyPercentage,
   totalSupply,
   contractAddress,
-  scanAddress,
 }: Props) => {
   const [currentView, setCurrentView] = useState('day');
 
@@ -151,7 +150,7 @@ const TokenPricePanel = ({
         <div className="mb-[24px]">
           <Divider />
         </div>
-        <div className="mb-[42px] flex justify-between flex-wrap">
+        <div className="mb-[24px] flex justify-between flex-wrap">
           <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">
               Market Cap
@@ -222,23 +221,6 @@ const TokenPricePanel = ({
               </div>
             </ClipboardText>
           </div>
-          {/* <div className="ml-[40px]">
-            <div className="text-[#FFFFFF] text-[14px]">Solscan</div>
-            <ClipboardText copyValue={scanAddress}>
-              <div
-                className="mt-[4px]"
-                style={{
-                  background:
-                    'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
-                {scanAddress}{' '}
-              </div>
-            </ClipboardText>
-          </div> */}
         </div>
       </div>
     </Tag>

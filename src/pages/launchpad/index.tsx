@@ -26,7 +26,7 @@ const Launchpad = () => {
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
       id: item,
       type: item % 2 === 0 ? 'nft' : 'token',
-      image: '/img/ss_1.webp',
+      image: '/img/seoulstars-main.jpeg',
     })),
   );
   const [loading, setLoading] = useState(true);

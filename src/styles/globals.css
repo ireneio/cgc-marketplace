@@ -3,27 +3,22 @@
 @tailwind utilities;
 
 @layer base {
-  @font-face {
-    font-family: 'Noto Sans', sans-serif;
-    src: url(https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap);
-  }
-
-  /*noinspection ALL*/
-  /* @font-face {
-    font-family: 'CircularStd-Bold';font-family: 'Noto Sans', sans-serif !important;
-    src: url(/fonts/CircularStd-Bold.woff2) format('woff2');
-  } */
-
-  /*noinspection ALL*/
-  /* @font-face {
-    font-family: 'CircularStd-Medium';
-    src: url(/fonts/CircularStd-Medium.woff2) format('woff2');
-  } */
-
   /*noinspection ALL*/
   @font-face {
     font-family: 'CircularStd-Book';
     src: url(/fonts/CircularStd-Book.woff2) format('woff2');
+  }
+
+  /*noinspection ALL*/
+  @font-face {
+    font-family: 'CircularStd-Bold';
+    src: url(/fonts/CircularStd-Bold.woff2) format('woff2');
+  }
+
+  /*noinspection ALL*/
+  @font-face {
+    font-family: 'CircularStd-Medium';
+    src: url(/fonts/CircularStd-Medium.woff2) format('woff2');
   }
 }
 
@@ -32,7 +27,6 @@ html {
 }
 
 body {
-  /* font-family: 'Noto Sans', sans-serif !important; */
   font-family: 'CircularStd-Book', sans-serif !important;
 }
 

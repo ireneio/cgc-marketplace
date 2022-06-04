@@ -23,7 +23,7 @@ const UiKit = () => {
         <h2>Floating Card</h2>
         <div className="mt-2 mx-auto w-[600px] floating-card-wrapper">
           {/* <FloatingCard
-            bg={'/img/ss_1.webp'}
+            bg={'/img/seoulstars-main.jpeg'}
             title={'Sing-to-earn rhythm action and karaoke game!'}
             categories={['virtual idol', 'metaverse', 'nft']}
             network={'SOL'}

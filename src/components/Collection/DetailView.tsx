@@ -139,7 +139,7 @@ const DetailView = () => {
           </div>
           <div className="mb-[32px]">
             <TokenPricePanel
-              brandImg="/img/brand_chicks.png"
+              brandImg="https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/cxxShYRVcepDudXhe7U62QHvw8uBJoKFifmzggGKVC2/logo.png"
               brandName="SolChicks"
               symbol="CHICKS"
               price={0.000012345}
@@ -166,7 +166,7 @@ const DetailView = () => {
           </div>
           <div className="mb-[32px]">
             <TokenPricePanel
-              brandImg="/img/brand_shards.png"
+              brandImg="https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/8j3hXRK5rdoZ2vSpGLRmXtWmW6iYaRUw5xVk4Kzmc9Hp/logo.png"
               brandName="SolChicks"
               symbol="SHARDS"
               price={0.000012345}

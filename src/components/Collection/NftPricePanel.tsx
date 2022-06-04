@@ -41,12 +41,12 @@ const NftPricePanel = ({
 
   return (
     <Tag>
-      <div className="relative px-[24px] py-[24px]">
+      <div className="relative px-[18px] py-[24px]">
         <div className="mb-[10px] text-[#FFFFFF] font-bold text-[14px]">
           {name} NFT
         </div>
-        <div className="flex flex-wrap">
-          <div className="mr-[48px] mb-[32px]">
+        <div className="flex flex-wrap gap-y-6 gap-x-12">
+          <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">Volume</div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
               <div>${getNumberWithCommas(volume)}</div>
@@ -64,7 +64,7 @@ const NftPricePanel = ({
               </div>
             </div>
           </div>
-          <div className="mr-[48px] mb-[32px]">
+          <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">Change</div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
               <div>${getNumberWithCommas(change)}</div>
@@ -82,7 +82,7 @@ const NftPricePanel = ({
               </div>
             </div>
           </div>
-          <div className="mr-[48px] mb-[32px]">
+          <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">Sales</div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
               <div>${getNumberWithCommas(sales)}</div>
@@ -100,7 +100,7 @@ const NftPricePanel = ({
               </div>
             </div>
           </div>
-          <div className="mr-[48px] mb-[32px]">
+          <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">
               Average Price
             </div>
@@ -113,14 +113,14 @@ const NftPricePanel = ({
                   fontSize={12}
                 />
               </div>
-              <div className="ml-[24px]">
+              <div className="ml-[14px]">
                 <DateViewSelector
                   onViewChange={(val) => setCurrentViewVolume(val)}
                 />
               </div>
             </div>
           </div>
-          <div className="mr-[48px] mb-[32px]">
+          <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">
               Total Volume
             </div>
@@ -128,7 +128,7 @@ const NftPricePanel = ({
               <div>${getNumberWithCommas(totalVolume)}</div>
             </div>
           </div>
-          <div className="mr-[48px] mb-[32px]">
+          <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">
               Total Supply
             </div>
@@ -136,13 +136,13 @@ const NftPricePanel = ({
               <div>${getNumberWithCommas(totalSupply)}</div>
             </div>
           </div>
-          <div className="mr-[48px] mb-[32px]">
+          <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">Owners</div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
               <div>{getNumberWithCommas(owners)}</div>
             </div>
           </div>
-          <div className="mr-[48px] mb-[32px]">
+          <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">Count</div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
               <div>{getNumberWithCommas(count)}</div>
