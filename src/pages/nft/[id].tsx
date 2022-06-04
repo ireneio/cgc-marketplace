@@ -13,11 +13,6 @@ import { useAppDispatch } from '@/store';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
-import {
-  getBreadcrumbItemRoutes,
-  getSelectGroupItems,
-} from '@/utils/cgcConsts';
-import { getNumberWithCommas } from '@/utils/formatHelper';
 import DetailPanel from '@/components/Nft/DetailPanel';
 
 export interface NftInfo {

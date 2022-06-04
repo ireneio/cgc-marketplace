@@ -1,6 +1,5 @@
 import { NftInfo } from '@/pages/nft/[id]';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { getNumberWithCommas } from '@/utils/formatters';
 import { useMemo } from 'react';
 import { Attr } from '../Collection/RowCard';
 import Button from '../Shared/Button';
