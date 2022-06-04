@@ -29,7 +29,12 @@ export interface NftInfo {
   mintAddress: string;
   owner: string;
 }
-type Selection = 'About' | 'All Items' | 'Your Items' | 'Collection Item';
+type Selection =
+  | 'About'
+  | 'All Items'
+  | 'Your Items'
+  | 'Collection Item'
+  | 'Explore/All';
 
 const Nft = () => {
   const dispatch = useAppDispatch();
@@ -68,60 +73,34 @@ const Nft = () => {
     switch (value) {
       case 'About':
         router.push(`/collection/${info.brand}`);
-        setInfo((prev) => ({
-          ...prev,
-          header: info.name,
-        }));
         return;
       case 'All Items':
-        setInfo((prev) => ({
-          ...prev,
-          header: 'All Items',
-        }));
+        router.push(`/collection/${info.brand}?tab=All_Items`);
         return;
       case 'Your Items':
-        setInfo((prev) => ({
-          ...prev,
-          header: 'Your Items',
-          name: info.name,
-        }));
+        router.push(`/collection/${info.brand}?tab=Your_Items`);
+        return;
+      case info.brand:
+        router.push(`/collection/${info.brand}?tab=About`);
+        return;
+      case 'Explore/All':
+        dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Explore/All' });
+        router.push(`/`);
         return;
     }
   };
 
   const breadCrumbItems = useMemo(() => {
     switch (currentSelection) {
-      case 'About':
-        return [
-          { text: 'Home', value: 'Home' },
-          // { text: info.name, value: 'Game' },
-          { text: 'Explore', value: 'Explore' },
-        ];
       case 'Collection Item':
-        return [
-          { text: 'Home', value: 'Home' },
-          { text: info.brand, value: 'Game' },
-          { text: 'All Items', value: 'All Items' },
-          { text: info.name, value: info.name },
-        ];
-      case 'Your Items':
-        router.push(`/collection/${info.brand}?tab=Your_Items`);
-        return [
-          { text: 'Home', value: 'Home' },
-          { text: info.brand, value: 'Game' },
-          // { text: info.name, value: 'Game' },
-          { text: 'Your Items', value: 'Your Items' },
-        ];
-      case 'All Items':
-        router.push(`/collection/${info.brand}?tab=All_Items`);
-        return [
-          { text: 'Home', value: 'Home' },
-          { text: info.brand, value: 'Game' },
-          { text: 'All Items', value: 'All Items' },
-          { text: info.name, value: info.name },
-        ];
       default:
-        return [];
+        return [
+          { text: 'Home', value: 'Home' },
+          { text: 'Explore', value: 'Explore/All' },
+          { text: info.brand, value: info.brand },
+          { text: 'All Items', value: 'All Items' },
+          { text: info.name, value: info.name },
+        ];
     }
   }, [info, currentSelection]);
 
@@ -147,9 +126,7 @@ const Nft = () => {
             if (val === 'Home') {
               dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
               router.push('/').then();
-            } else if (val === 'About') {
-              handleSelect('About');
-            } else if (val === 'Your Items') {
+            } else {
               handleSelect(val as Selection);
             }
           }}
