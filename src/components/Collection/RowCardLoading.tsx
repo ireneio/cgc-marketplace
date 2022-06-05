@@ -13,11 +13,10 @@ const RowCardLoading = () => {
             <Skeleton className="w-[240px] h-[20px]" />
           </div>
           <div className="font-light text-[#9497AA] text-[14px]">
-            {' '}
             <Skeleton className="w-[64px] h-[12px]" />
           </div>
         </div>
-        <div className="flex justify-between items-center mt-[-12px]">
+        <div className="flex justify-between items-center mt-[4px]">
           <div className="font-light text-[#9497AA] text-[14px]">
             <Skeleton className="w-[140px] h-[8px]" />
           </div>

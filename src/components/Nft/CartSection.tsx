@@ -15,7 +15,7 @@ const CartSection = ({
   return (
     <div className="relative">
       {openCart && (
-        <DropdownMenu bottom={-505} left={-228}>
+        <DropdownMenu bottom={-505} left={-235}>
           <Cart onClose={() => onToggleCart(false)} />
         </DropdownMenu>
       )}
@@ -27,13 +27,13 @@ const CartSection = ({
           <div className="text-[#FFFFFF] ml-[4px] text-[12px] flex items-center">
             <div>Cart</div>
             <div
-              className="ml-[4px]"
-              style={{
-                background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
+              className="ml-[4px] text-[#FFFFFF]"
+              // style={{
+              //   background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
+              //   backgroundClip: 'text',
+              //   WebkitBackgroundClip: 'text',
+              //   WebkitTextFillColor: 'transparent',
+              // }}
             >
               [{cartItems.length}]
             </div>

@@ -29,8 +29,13 @@ const ActionPanel = ({
         type: 'ADD_CART_ITEM',
         payload: { ...info, isAddedToCart: true },
       });
+      onCartOpen && onCartOpen(true);
+    } else {
+      dispatch({
+        type: 'REMOVE_CART_ITEM',
+        payload: String(info.id),
+      });
     }
-    onCartOpen && onCartOpen(true);
   };
 
   return (

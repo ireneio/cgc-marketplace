@@ -32,7 +32,12 @@ const Collection = () => {
     if (value === '...') {
       return;
     }
-    router.push(`/collection/${info.name}?tab=${value.split(' ').join('_')}`);
+    router.push(
+      `/collection/${info.name}?tab=${value
+        .split(' ')
+        .join('_')
+        .toLowerCase()}`,
+    );
     switch (value) {
       case 'About':
         setInfo((prev) => ({
@@ -61,7 +66,10 @@ const Collection = () => {
 
   useEffect(() => {
     if (router.query.tab) {
-      const tab = String(router.query.tab).replaceAll('_', ' ');
+      const tab = String(router.query.tab)
+        .split('_')
+        .map((item) => item[0].toUpperCase() + item.substring(1))
+        .join(' ');
       setCurrentSelection(tab as Selection);
       router.query.tab = '';
     }

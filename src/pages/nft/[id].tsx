@@ -75,13 +75,13 @@ const Nft = () => {
         router.push(`/collection/${info.brand}`);
         return;
       case 'All Items':
-        router.push(`/collection/${info.brand}?tab=All_Items`);
+        router.push(`/collection/${info.brand}?tab=all_items`);
         return;
       case 'Your Items':
-        router.push(`/collection/${info.brand}?tab=Your_Items`);
+        router.push(`/collection/${info.brand}?tab=your_items`);
         return;
       case info.brand:
-        router.push(`/collection/${info.brand}?tab=About`);
+        router.push(`/collection/${info.brand}?tab=about`);
         return;
       case 'Explore/All':
         dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Explore/All' });
@@ -132,8 +132,10 @@ const Nft = () => {
           }}
         />
       </div>
-      <div className="flex justify-between items-center mb-[32px]">
-        <div className="text-[#FFFFFF] font-bold text-[24px]">{info.name}</div>
+      <div className="flex justify-between items-center mb-[16px]">
+        <div className="text-[#FFFFFF] font-bold text-[24px]">
+          {info.brand} {info.name}
+        </div>
         <div>
           <SelectGroup
             items={[
@@ -148,6 +150,9 @@ const Nft = () => {
             onItemClick={(value) => handleSelect(value as Selection)}
           />
         </div>
+      </div>
+      <div className="mb-[24px]">
+        <Divider />
       </div>
       {currentSelection === 'Your Items' && <YourView />}
       {currentSelection !== 'Your Items' && (
