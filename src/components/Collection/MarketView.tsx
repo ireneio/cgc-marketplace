@@ -246,10 +246,13 @@ const MarketView = () => {
       </div>
       <div>
         {currentView === 'List' && loading && (
-          <div className="grid gap-[24px] grid-cols-4 xl:grid-cols-5 w-full justify-between">
+          <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-8 pb-6">
             {LOADING_ARR.map((item, index) => {
               return (
-                <div key={index}>
+                <div
+                  key={index}
+                  className="w-full flex flex-col relative overflow-hidden cursor-pointer"
+                >
                   <ListCardLoading />
                 </div>
               );
@@ -257,10 +260,13 @@ const MarketView = () => {
           </div>
         )}
         {currentView === 'Row' && loading && (
-          <div className="grid gap-[24px] grid-cols-2 xl:grid-cols-3 w-full justify-between">
+          <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 pb-6">
             {LOADING_ARR.map((item, index) => {
               return (
-                <div key={index}>
+                <div
+                  key={index}
+                  className="w-full flex flex-col relative overflow-hidden cursor-pointer"
+                >
                   <RowCardLoading />
                 </div>
               );
@@ -268,10 +274,13 @@ const MarketView = () => {
           </div>
         )}
         {currentView === 'List' && !loading && (
-          <div className="grid gap-[24px] grid-cols-4 xl:grid-cols-5 w-full justify-between">
+          <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-8 pb-6">
             {items.map((item, index) => {
               return (
-                <div key={index}>
+                <div
+                  key={index}
+                  className="w-full flex flex-col relative overflow-hidden cursor-pointer"
+                >
                   <ListCard
                     id={index}
                     image={
@@ -294,10 +303,13 @@ const MarketView = () => {
           </div>
         )}
         {currentView === 'Row' && !loading && (
-          <div className="grid gap-[24px] grid-cols-2 xl:grid-cols-3 w-full justify-between">
+          <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 pb-6">
             {items.map((item, index) => {
               return (
-                <div key={index}>
+                <div
+                  key={index}
+                  className="w-full flex flex-col relative overflow-hidden cursor-pointer"
+                >
                   <RowCard
                     id={index}
                     image={

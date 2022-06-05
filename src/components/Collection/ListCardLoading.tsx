@@ -3,9 +3,9 @@ import Skeleton from '../Shared/Skeleton';
 
 const ListCardLoading = () => {
   return (
-    <div className="rounded-[5px] w-[205px] bg-[#13002B] border-[1px] border-solid border-[#290030]">
+    <div className="rounded-[5px] w-full bg-[#13002B] border-[1px] border-solid border-[#290030]">
       <div>
-        <Skeleton className="w-[205px] h-[205px]" />
+        <Skeleton className="w-full h-[205px]" />
       </div>
       <div className="mt-[12px] px-[12px]">
         <div className="text-[#FFFFFF] text-semibold">

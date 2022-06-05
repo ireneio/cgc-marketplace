@@ -32,7 +32,7 @@ const ListCard = ({
 
   return (
     <div
-      className="cursor-pointer rounded-[5px] w-[205px] bg-[#13002B] border-[2px] border-solid border-[#290030] mx-auto"
+      className="cursor-pointer rounded-[5px] w-full bg-[#13002B] border-[2px] border-solid border-[#290030] mx-auto"
       style={{ borderColor: isAddedToCart ? '#F41786' : '#290030' }}
       onClick={() => onMoreInfo(id)}
     >
@@ -40,8 +40,8 @@ const ListCard = ({
         <img
           src={image}
           alt={name}
-          width={205}
-          height={205}
+          // width={205}
+          // height={205}
           className="blur rounded-t-[5px]"
           onLoad={(e) => handleImageLoad(e)}
         />
@@ -89,7 +89,7 @@ const ListCard = ({
             style={{ flexBasis: '70%' }}
             className="hover:bg-[#290030] hover:text-[#FFFFFF] flex items-center justify-center cursor-pointer px-[18px] py-[18px] border-l-[1px] border-l-[#290030] rounded-br-[5px]"
           >
-            {!addToCartLoading && (
+            {/* {!addToCartLoading && (
               <div>
                 <img
                   src={'/img/icon_plus.png'}
@@ -98,7 +98,7 @@ const ListCard = ({
                   height={16}
                 />
               </div>
-            )}
+            )} */}
             <div
               className="ml-[8px] text-[#9497AA] text-[14px]"
               onClick={(e) => {

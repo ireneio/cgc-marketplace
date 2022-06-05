@@ -28,7 +28,7 @@ const RowCard = ({
 }: Props) => {
   return (
     <div
-      className="rounded-[5px] xl:w-[340px] w-[300px] bg-[#13002B] border-[2px] border-solid border-[#290030] mx-auto"
+      className="rounded-[5px] w-full bg-[#13002B] border-[2px] border-solid border-[#290030] mx-auto"
       style={{ borderColor: isAddedToCart ? '#F41786' : '#290030' }}
       onClick={() => onMoreInfo(id)}
     >
@@ -36,7 +36,7 @@ const RowCard = ({
         <img
           src={image}
           alt={name}
-          className="w-[300px] h-[300px] xl:w-[340px] xl:h-[340px]"
+          // className="w-[300px] h-[300px] xl:w-[340px] xl:h-[340px]"
         />
       </div>
       <div className="mt-[12px] px-[12px]">
