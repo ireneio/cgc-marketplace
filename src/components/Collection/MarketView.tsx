@@ -215,7 +215,7 @@ const MarketView = () => {
                   text: (
                     <div>
                       <img
-                        src={'/img/icon_view_row.png'}
+                        src={'/img/icon_row.svg'}
                         alt="row"
                         width={18}
                         height={18}
@@ -228,7 +228,7 @@ const MarketView = () => {
                   text: (
                     <div>
                       <img
-                        src={'/img/icon_view_list.png'}
+                        src={'/img/icon_list.svg'}
                         alt="list"
                         width={18}
                         height={18}
