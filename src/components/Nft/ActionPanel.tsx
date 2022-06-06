@@ -73,7 +73,7 @@ const ActionPanel = ({
                 'Remove From Cart'
               ) : (
                 <img
-                  src={'/img/icon_cart.png'}
+                  src={'/img/icon_cart.svg'}
                   alt="cart"
                   width={21}
                   height={21}

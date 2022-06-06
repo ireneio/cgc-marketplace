@@ -88,7 +88,7 @@ const MarketView = () => {
         <div className="flex items-center w-full">
           <div className="cursor-pointer">
             <img
-              src={'/img/icon_refresh.png'}
+              src={'/img/icon_refresh.svg'}
               alt="refresh"
               width={14}
               height={14}
@@ -105,7 +105,7 @@ const MarketView = () => {
                     <div className="flex items-center">
                       <div>
                         <img
-                          src={'/img/icon_filter.png'}
+                          src={'/img/icon_filter.svg'}
                           alt="row"
                           width={12}
                           height={12}
@@ -123,7 +123,7 @@ const MarketView = () => {
                     <div className="flex items-center">
                       <div>
                         <img
-                          src={'/img/icon_cart.png'}
+                          src={'/img/icon_cart.svg'}
                           alt="cart"
                           width={12}
                           height={12}

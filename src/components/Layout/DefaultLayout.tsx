@@ -46,7 +46,7 @@ const SIDE_BAR_ITEMS = [
   // {
   //   text: 'Cart',
   //   value: 'Cart',
-  //   icon: '/img/icon_cart.png',
+  //   icon: '/img/icon_cart.svg',
   // },
   // {
   //   text: 'Transactions',

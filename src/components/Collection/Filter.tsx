@@ -43,7 +43,7 @@ const Filter = ({
             <div className="text-[#FFFFFF] font-semibold text-[16px] flex items-center">
               <div>
                 <img
-                  src="/img/icon_filter.png"
+                  src="/img/icon_filter.svg"
                   alt="filter"
                   width={'16px'}
                   height={'16px'}

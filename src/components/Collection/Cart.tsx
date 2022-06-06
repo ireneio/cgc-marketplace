@@ -41,7 +41,7 @@ const Cart = ({ onClose }: { onClose?: () => void }) => {
             <div className="text-[#FFFFFF] font-semibold text-[16px] flex items-center">
               <div>
                 <img
-                  src="/img/icon_cart.png"
+                  src="/img/icon_cart.svg"
                   alt="cart"
                   width={'16px'}
                   height={'16px'}
