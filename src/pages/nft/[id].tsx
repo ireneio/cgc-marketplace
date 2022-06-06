@@ -161,7 +161,7 @@ const Nft = () => {
             <div className="flex items-center">
               <div className="cursor-pointer">
                 <img
-                  src="/img/icon_refresh.png"
+                  src="/img/icon_refresh.svg"
                   alt="refresh"
                   width={14}
                   height={14}
