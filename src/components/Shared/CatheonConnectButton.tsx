@@ -64,7 +64,7 @@ const CatheonConnectButton = () => {
                   <div className="flex items-center">
                     <div className="mr-[12px]">Sign Out</div>
                     <img
-                      src="/img/icon_signout.png"
+                      src="/img/icon_sign_out.svg"
                       width={12}
                       height={12}
                       alt="signout"
