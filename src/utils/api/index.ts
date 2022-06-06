@@ -2,8 +2,10 @@ import { API_URL, fetcher } from '../swr';
 
 const CLIENT_ID = API_URL.includes('dev')
   ? '773124bb-57cf-4eae-a7be-980c76ccd338'
-  : '';
-const CLIENT_SECRET = API_URL.includes('dev') ? '1qaz2wsx' : '';
+  : process.env.CLIENT_ID || '';
+const CLIENT_SECRET = API_URL.includes('dev')
+  ? '1qaz2wsx'
+  : process.env.CLIENT_SECRET || '';
 
 const api = {
   healthCheck: async () => {
