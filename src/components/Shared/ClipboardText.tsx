@@ -30,7 +30,7 @@ const ClipboardText = ({
         <div>{children}</div>
         <div className="ml-[6px]">
           <img
-            src="/img/icon_clipboard.png"
+            src="/img/icon_copy.svg"
             alt="clipboard"
             width={iconWidth}
             height={iconHeight}

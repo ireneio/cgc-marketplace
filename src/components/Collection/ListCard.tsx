@@ -56,7 +56,7 @@ const ListCard = ({
             Price
           </div>
           <div className="font-semibold text-[#FFFFFF] text-[24px] mt-[12px] flex items-center">
-            <div className="mt-[8px] mr-[4px]">
+            <div className="mt-[4px] mr-[4px]">
               <img
                 src={'/img/icon_unit_sol.png'}
                 alt={'sol'}
@@ -78,7 +78,7 @@ const ListCard = ({
           onClick={() => onMoreInfo(id)}
         >
           <img
-            src={'/img/icon_detail.png'}
+            src={'/img/icon_misc.svg'}
             alt={'detail'}
             width={16}
             height={16}

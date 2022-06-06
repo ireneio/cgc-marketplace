@@ -28,7 +28,7 @@ const ProgressBar = ({ percentage, width, showIndicator }: Props) => {
           }}
         >
           <img
-            src="/img/icon_triangle.png"
+            src="/img/icon_arrow_up.svg"
             alt="triangle"
             width={12}
             height={12}

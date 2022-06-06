@@ -10,15 +10,15 @@ const RowCardLoading = () => {
       <div className="mt-[12px] px-[12px]">
         <div className="flex justify-between items-end">
           <div className="text-[#FFFFFF] text-semibold text-[24px]">
-            <Skeleton className="w-[240px] h-[20px]" />
+            <Skeleton className="w-[120px] h-[20px]" />
           </div>
           <div className="font-light text-[#9497AA] text-[14px]">
-            <Skeleton className="w-[64px] h-[12px]" />
+            <Skeleton className="w-[32px] h-[12px]" />
           </div>
         </div>
         <div className="flex justify-between items-center mt-[4px]">
           <div className="font-light text-[#9497AA] text-[14px]">
-            <Skeleton className="w-[140px] h-[8px]" />
+            <Skeleton className="w-[140px] h-[12px]" />
           </div>
           <div className="font-semibold text-[#FFFFFF] text-[24px] mt-[10px] flex items-center">
             <div>

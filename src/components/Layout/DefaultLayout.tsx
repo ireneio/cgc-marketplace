@@ -25,12 +25,12 @@ const SIDE_BAR_ITEMS = [
   {
     text: 'Home',
     value: 'Home',
-    icon: '/img/icon_home.png',
+    icon: '/img/icon_home.svg',
   },
   {
     text: 'Explore',
     value: 'Explore',
-    icon: '/img/icon_compass.png',
+    icon: '/img/icon_explore.svg',
     children: [
       { text: 'All', value: 'All' },
       // { text: 'Latest', value: 'Latest' },
@@ -41,7 +41,7 @@ const SIDE_BAR_ITEMS = [
   {
     text: 'Launchpad',
     value: 'Launchpad',
-    icon: '/img/icon_rocket.png',
+    icon: '/img/icon_launchpad.svg',
   },
   // {
   //   text: 'Cart',
@@ -177,7 +177,7 @@ const DefaultLayout = ({ children, title }: Props) => {
         />
         <Header />
         <div className="flex mt-[75px] relative">
-          <div className="w-[225px] hidden md:block flex-shrink-0">
+          <div className="fixed top-[75px] w-[225px] hidden md:block flex-shrink-0">
             <Sidebar
               items={SIDE_BAR_ITEMS}
               currentValue={sideBarPath}
@@ -185,7 +185,7 @@ const DefaultLayout = ({ children, title }: Props) => {
             />
           </div>
           <div
-            className="pr-[24px] mx-auto"
+            className="ml-[225px] pr-[24px] mx-auto min-h-[100vh]"
             style={{ width: windowWidth - 225 }}
           >
             {children}

@@ -46,7 +46,7 @@ const ActionPanel = ({
         </div>
         <div className="flex items-center mt-[8px]">
           <div className="text-[24px] font-semibold text-[#FFFFFF]">
-            ${info.price}
+            {info.price}
           </div>
           <div className="mt-[2px] ml-[6px]">
             <img
@@ -56,7 +56,7 @@ const ActionPanel = ({
               height={16}
             />
           </div>
-          <div className="ml-[8px] self-center mt-[6px] text-[#9497AA]">
+          <div className="ml-[8px] self-center mt-[4px] text-[#9497AA]">
             (${info.price})
           </div>
         </div>

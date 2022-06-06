@@ -1,8 +1,7 @@
 const collections = [
   {
     id: 1,
-    splashSrc:
-      'https://catheongaming.com/wp-content/uploads/2022/04/sstars-3-1.jpg',
+    splashSrc: '/img/ss_cover.png',
     logoSrc:
       'https://catheongaming.com/wp-content/uploads/2021/12/seoulstars-logo.png',
     videoSrc: '/gifs/yuna.gif',
@@ -13,8 +12,7 @@ const collections = [
   },
   {
     id: 2,
-    splashSrc:
-      'https://catheongaming.com/wp-content/uploads/2022/03/angrymals-main.jpg',
+    splashSrc: '/img/am_cover.png',
     logoSrc:
       'https://catheongaming.com/wp-content/uploads/2022/02/Angrymals-Logo.png',
     videoSrc:

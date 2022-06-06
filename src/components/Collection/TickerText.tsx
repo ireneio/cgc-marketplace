@@ -14,8 +14,8 @@ const TickerText = ({
           <img
             src={`/img/${
               direction === 'up'
-                ? 'icon_ticker_green.png'
-                : 'icon_ticker_red.png'
+                ? 'icon_ticker_green.svg'
+                : 'icon_ticker_red.svg'
             }`}
             alt="text"
             width={10}

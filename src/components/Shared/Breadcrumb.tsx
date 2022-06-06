@@ -36,12 +36,20 @@ const Breadcrumb = ({ items, onItemClick, currentValue }: Props) => {
               <button
                 className="font-normal text-[14px] hover:underline text-[#AAAAAA] hover:text-[#FC1F8E]"
                 style={{
-                  cursor:
-                    currentValue === item.value
-                      ? 'default'
-                      : item.disabled
-                      ? 'not-allowed'
-                      : 'pointer',
+                  textDecoration:
+                    index === array.length - 1 ? 'none' : 'underline',
+                  color: index !== array.length - 1 ? '#FC1F8E' : '#AAAAAA',
+                  cursor: item.disabled
+                    ? 'not-allowed'
+                    : index !== array.length - 1
+                    ? 'pointer'
+                    : 'default',
+                  // cursor:
+                  //   currentValue === item.value
+                  //     ? 'default'
+                  //     : item.disabled
+                  //     ? 'not-allowed'
+                  //     : 'pointer',
                 }}
                 disabled={item.disabled}
                 onClick={() => {

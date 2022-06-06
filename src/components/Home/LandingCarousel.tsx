@@ -1,4 +1,5 @@
 import { testData } from '@/data/test';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -15,6 +16,7 @@ const PREFILL_DATA = {
 };
 
 const LandingCarousel = () => {
+  const router = useRouter();
   const [carouselItems] = useState([
     {
       id: 'store_carousel_example_2',
@@ -23,6 +25,7 @@ const LandingCarousel = () => {
       href: 'https://seoulstars.io/',
       logo: '/img/logo_sstars.png',
       title: "The Metaverse's First Virtual K-Pop Idol",
+      collectionId: '1',
       description:
         'Sing-to-earn in this exciting rhythm action and karaoke game',
     },
@@ -38,7 +41,7 @@ const LandingCarousel = () => {
   };
 
   const handleMoreInfo = (name: string) => {
-    console.log('handleMoreInfo', name);
+    router.push(`/collection/${name}`);
   };
 
   return (

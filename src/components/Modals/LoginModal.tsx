@@ -92,12 +92,6 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
     }
   };
 
-  // useEffect(() => {
-  //   const div = window.document.querySelector('.login_dialog_parent');
-  //   console.log(div);
-
-  // }, [isOpen])
-
   return (
     <FormProvider {...form}>
       <Transition show={isOpen}>
@@ -153,7 +147,7 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
                       >
                         <div className="flex uppercase items-center w-full text-[12px] pb-[24px] cursor-pointer">
                           <div
-                            className="pr-[2px] py-0 pt-0 mt-[0px]"
+                            className="py-0 pt-0 mt-[0px]"
                             style={{
                               flexBasis: '50%',
                               // background:
@@ -179,14 +173,14 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
                             </div>
                           </div>
                           <div
-                            className="pl-[2px] py-0 mt-[0px]"
+                            className="py-0 mt-[0px]"
                             style={{
                               flexBasis: '50%',
                               background:
                                 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
                               fontWeight: view !== 'login' ? 'bold' : 'normal',
                               paddingBottom: view === 'login' ? 2 : 0,
-                              paddingLeft: view !== 'login' ? 2 : 0,
+                              paddingLeft: view !== 'login' ? 3 : 0,
                             }}
                           >
                             <div
@@ -209,7 +203,7 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
                             alt="catheon"
                           />
                         </div>
-                        <div className="text-center mt-[12px] px-[24px] font-circularstdbook">
+                        <div className="text-center mt-[20px] px-[48px] font-circularstdbook">
                           {title}
                         </div>
                       </Dialog.Title>

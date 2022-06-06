@@ -67,12 +67,12 @@ const FloatingCard = ({
               backgroundImage: `url(${bg})`,
             }}
           ></div>
-          {showCatheonLogo && (
+          {/* {showCatheonLogo && (
             <div
-              className="absolute top-[8px] left-[8px] w-[24px] h-[24px] bg-no-repeat bg-center bg-contain"
-              style={{ backgroundImage: `url(/img/cgc_icon.png)` }}
+              className="absolute top-[8px] left-[8px] w-[24px] h-[24px] bg-no-repeat bg-center bg-contain opacity-100"
+              style={{ backgroundImage: `url(/img/cgc_watermark.svg)` }}
             ></div>
-          )}
+          )} */}
         </li>
       )}
       {currentHoverId === id && (
