@@ -1,17 +1,31 @@
 import { testData } from '@/data/test';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ButtonLink from '../Shared/ButtonLink';
 import LoadingNetflixCard from '../Shared/LoadingNetflixCard';
 import SectionTitle from '../Shared/SectionTitle';
 import CardCarousel from './CardCarousel';
 import Divider from '@/components/Shared/Divider';
+import { OAuthContext } from '@/contexts/OAuthProvider';
+import api from '@/utils/api';
 
 const AllCollections = () => {
   const dispatch = useAppDispatch();
   const [items, setItems] = useState(testData.recentlyAddedCollections);
   const [loading, setLoading] = useState(true);
   const sideBarPath = useAppSelector((state) => state.layout.navigation.path);
+  const oAuthCtx = useContext(OAuthContext);
+
+  const getCollections = async () => {
+    const response = await api.getCollection(oAuthCtx.access_token);
+    console.log(response);
+  };
+
+  useEffect(() => {
+    if (oAuthCtx.access_token) {
+      getCollections();
+    }
+  }, [oAuthCtx.access_token]);
 
   useEffect(() => {
     const _tid = setTimeout(() => {

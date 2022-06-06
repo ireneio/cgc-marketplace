@@ -8,6 +8,11 @@ interface ICtx {
   refreshToken: string;
   token_type: string;
 }
+
+interface ICtxFn extends ICtx {
+  getToken: () => string;
+}
+
 const CtxDefaultValue: ICtx = {
   access_token: '',
   expiry_access_date: 0,
@@ -15,7 +20,10 @@ const CtxDefaultValue: ICtx = {
   token_type: 'Bearer',
 };
 
-const OAuthContext = React.createContext(CtxDefaultValue);
+export const OAuthContext = React.createContext<ICtxFn>({
+  ...CtxDefaultValue,
+  getToken: () => '',
+});
 
 export const OAuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [auth, setAuth] = useState<ICtx>(CtxDefaultValue);
@@ -38,5 +46,13 @@ export const OAuthProvider = ({ children }: { children: React.ReactNode }) => {
     initGrant();
   }, []);
 
-  return <OAuthContext.Provider value={auth}>{children}</OAuthContext.Provider>;
+  const getToken = () => {
+    return auth.access_token;
+  };
+
+  return (
+    <OAuthContext.Provider value={{ ...auth, getToken }}>
+      {children}
+    </OAuthContext.Provider>
+  );
 };

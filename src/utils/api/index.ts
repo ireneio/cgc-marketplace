@@ -18,6 +18,16 @@ const api = {
     });
     return response;
   },
+  getCollection: async (token: string) => {
+    const response = await fetcher({
+      url: '/api/collection/list',
+      method: 'get',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  },
 };
 
 export default api;
