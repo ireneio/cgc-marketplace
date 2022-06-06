@@ -39,7 +39,7 @@ const Header = () => {
         <div className="absolute right-[12px] top-[12px]">
           <img
             className="hidden md:block h-[20px] w-auto"
-            src={'/img/icon_search.png'}
+            src={'/img/icon_search.svg'}
             alt="search icon"
           />
         </div>
