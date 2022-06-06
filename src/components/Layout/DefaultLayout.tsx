@@ -113,6 +113,7 @@ const DefaultLayout = ({ children, title }: Props) => {
   }, []);
 
   const [windowWidth, setWindowWidth] = useState(1366);
+  const [windowHeight, setWindowHeight] = useState(768);
 
   useEffect(() => {
     const cb = () => {
@@ -121,6 +122,7 @@ const DefaultLayout = ({ children, title }: Props) => {
     if (window) {
       // window.addEventListener('resize', cb);
       setWindowWidth(window.innerWidth);
+      setWindowHeight(window.innerHeight);
     }
     return () => {
       // window.removeEventListener('resize', cb);
@@ -185,13 +187,18 @@ const DefaultLayout = ({ children, title }: Props) => {
             />
           </div>
           <div
-            className="ml-[225px] pr-[24px] mx-auto min-h-[100vh]"
+            className="ml-[225px] pr-[24px] mx-auto min-h-[75vh]"
             style={{ width: windowWidth - 225 }}
           >
             {children}
           </div>
         </div>
-        <div className="w-full relative z-[4] overflow-x-hidden">
+        <div
+          className="w-full relative z-[4] overflow-x-hidden bg-[#141414]"
+          style={{
+            paddingBottom: windowHeight - windowHeight * 0.75 - 75 - 120,
+          }}
+        >
           <Footer />
         </div>
       </div>

@@ -6,6 +6,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import store from '../store';
 import { useEffect } from 'react';
 import api from '@/utils/api';
+import { OAuthProvider } from '@/contexts/OAuthProvider';
 
 function App({ Component, pageProps }: AppProps) {
   if (process.env.NODE_ENV === 'production') {
@@ -22,14 +23,16 @@ function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <SolanaWalletProvider>
-      <EthereumWalletProvider>
-        <ReduxProvider store={store}>
-          <Component {...pageProps} />
-          <div id="snackbar-root" />
-        </ReduxProvider>
-      </EthereumWalletProvider>
-    </SolanaWalletProvider>
+    <OAuthProvider>
+      <SolanaWalletProvider>
+        <EthereumWalletProvider>
+          <ReduxProvider store={store}>
+            <Component {...pageProps} />
+            <div id="snackbar-root" />
+          </ReduxProvider>
+        </EthereumWalletProvider>
+      </SolanaWalletProvider>
+    </OAuthProvider>
   );
 }
 
