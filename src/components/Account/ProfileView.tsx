@@ -8,7 +8,7 @@ const SIDE_BAR_ITEMS = [
   {
     text: 'Edit Profile',
     value: 'Edit Profile',
-    icon: '/img/icon_user.png',
+    icon: '/img/icon_profile.svg',
   },
   // {
   //   text: 'Notifications',
