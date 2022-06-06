@@ -4,6 +4,8 @@ import { SolanaWalletProvider } from '@/contexts/SolanaWalletProvider';
 import { EthereumWalletProvider } from '@/contexts/EthereumWalletProvider';
 import { Provider as ReduxProvider } from 'react-redux';
 import store from '../store';
+import { useEffect } from 'react';
+import api from '@/utils/api';
 
 function App({ Component, pageProps }: AppProps) {
   if (process.env.NODE_ENV === 'production') {
@@ -14,6 +16,10 @@ function App({ Component, pageProps }: AppProps) {
           return;
         };
   }
+
+  useEffect(() => {
+    api.healthCheck();
+  }, []);
 
   return (
     <SolanaWalletProvider>
