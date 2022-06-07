@@ -34,7 +34,7 @@ const ListCard = ({
 }: Props) => {
   const handleImageLoad = (e: any) => {
     e.target.classList.remove('blur');
-    e.target.src = image;
+    e.target.src = image === 'undefined' ? '/img/cgc_icon.png' : image;
   };
 
   const handleImageError = (e: any) => {

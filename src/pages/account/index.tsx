@@ -1,4 +1,5 @@
 import Avatar from '@/components/Account/Avatar';
+import ListingView from '@/components/Account/ListingView';
 import MyItemsView from '@/components/Account/MyItemsView';
 import ProfileView from '@/components/Account/ProfileView';
 import WalletView from '@/components/Account/WalletView';
@@ -113,6 +114,7 @@ const Account = () => {
         {currentSelection === 'wallet' && <WalletView />}
         {currentSelection === 'profile' && <ProfileView />}
         {currentSelection === 'items' && <MyItemsView />}
+        {currentSelection === 'listed' && <ListingView />}
       </div>
     </DefaultLayout>
   );

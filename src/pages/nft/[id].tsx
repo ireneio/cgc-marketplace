@@ -177,7 +177,9 @@ const Nft = () => {
 
   useEffect(() => {
     if (oAuthCtx.access_token && router.query.collection_id) {
-      Promise.all([getCollectionData(), getNftData()]);
+      getCollectionData().then(() => {
+        getNftData();
+      });
     }
   }, [oAuthCtx.access_token, router.query.collection_id]);
 

@@ -36,17 +36,14 @@ export const useGetCollections = () => {
   };
 };
 
-export const useGetNftByCollectionId = (collection_id: string) => {
+export const useGetNftByCollectionId = () => {
   const oAuthCtx = useContext(OAuthContext);
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState<any[]>([]);
 
-  const getData = async () => {
+  const getData = (token: string) => async (collection_id: string) => {
     setLoading(true);
-    const response = await api.getNftListByCollectionId(
-      oAuthCtx.access_token,
-      collection_id,
-    );
+    const response = await api.getNftListByCollectionId(token, collection_id);
     const map = response.map((item: any) => {
       const manifest = item?.splNftInfo?.data?.manifest;
       return {
@@ -63,12 +60,13 @@ export const useGetNftByCollectionId = (collection_id: string) => {
   };
 
   useEffect(() => {
-    if (oAuthCtx.access_token && collection_id) {
-      getData();
+    if (oAuthCtx.access_token) {
+      getData(oAuthCtx.access_token);
     }
-  }, [collection_id, oAuthCtx.access_token]);
+  }, [oAuthCtx.access_token]);
 
   return {
+    fn: getData(oAuthCtx.access_token),
     data: items,
     loading,
   };

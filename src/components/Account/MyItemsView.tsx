@@ -34,7 +34,7 @@ const MyItemsView = () => {
     threshold: 0,
   });
   const { collections } = useGetCollections();
-  const { data: recommendedItems, loading } = useGetNftByCollectionId(sidebar);
+  const { data: recommendedItems, loading, fn } = useGetNftByCollectionId();
 
   const _collections = useMemo(() => {
     return collections.map((collection) => {
@@ -51,15 +51,22 @@ const MyItemsView = () => {
     }
   }, [_collections]);
 
+  useEffect(() => {
+    fn(sidebar);
+  }, [sidebar]);
+
   const _recommendedItems = useMemo(() => {
     return recommendedItems
       .filter((item) => item.collection_id === sidebar)
       .slice(0, 5);
   }, [recommendedItems, sidebar]);
 
-  useEffect(() => {
-    console.log('items', _recommendedItems);
-  }, [_recommendedItems]);
+  const _itemsDisplay = useMemo(() => {
+    if (!myItems.length) {
+      return _recommendedItems;
+    }
+    return myItems;
+  }, [myItems, _recommendedItems]);
 
   // useEffect(() => {
   //   if (inView) {
@@ -179,93 +186,93 @@ const MyItemsView = () => {
             </div>
           </div>
         </div>
-        {!myItems.length && (
-          <div>
+        <div>
+          {!myItems.length && (
             <div className="mt-[32px] mb-[32px] font-semibold text-[24px] text-[#FFFFFF]">
               Suggested Items
             </div>
-            {currentView === 'List' && loading && (
-              <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-8 pb-6">
-                {LOADING_ARR.map((item, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="w-full flex flex-col relative overflow-hidden cursor-pointer"
-                    >
-                      <ListCardLoading />
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-            {currentView === 'Row' && loading && (
-              <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 pb-6">
-                {LOADING_ARR.map((item, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="w-full flex flex-col relative overflow-hidden cursor-pointer"
-                    >
-                      <RowCardLoading />
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-            {currentView === 'List' && !loading && (
-              <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-8 pb-6">
-                {_recommendedItems.map((item: any, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="w-full flex flex-col relative overflow-hidden cursor-pointer"
-                    >
-                      <ListCard
-                        id={index}
-                        image={item.image}
-                        brand={item.brand}
-                        name={item.name}
-                        price={item.price}
-                        isAddedToCart={isItemAddedToCart(item.tokenAddress)}
-                        onAddToCart={(params) => handleAddToCart(params)}
-                        onMoreInfo={(id) => handleMoreInfo(item.tokenAddress)}
-                        addToCartLoading={false}
-                        tokenAddress={item.tokenAddress}
-                      />
-                    </div>
-                  );
-                })}
-                {/* <div ref={ref}></div> */}
-              </div>
-            )}
-            {currentView === 'Row' && !loading && (
-              <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 pb-6">
-                {_recommendedItems.map((item: any, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="w-full flex flex-col relative overflow-hidden cursor-pointer"
-                    >
-                      <RowCard
-                        id={index}
-                        image={item.image}
-                        brand={item.brand}
-                        name={item.name}
-                        price={item.price}
-                        isAddedToCart={isItemAddedToCart(item.tokenAddress)}
-                        onAddToCart={(params) => handleAddToCart(params)}
-                        onMoreInfo={(id) => handleMoreInfo(item.tokenAddress)}
-                        addToCartLoading={false}
-                        tokenAddress={item.tokenAddress}
-                      />
-                    </div>
-                  );
-                })}
-                {/* <div ref={ref}></div> */}
-              </div>
-            )}
-          </div>
-        )}
+          )}
+          {currentView === 'List' && loading && (
+            <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-8 pb-6">
+              {LOADING_ARR.map((item, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="w-full flex flex-col relative overflow-hidden cursor-pointer"
+                  >
+                    <ListCardLoading />
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          {currentView === 'Row' && loading && (
+            <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 pb-6">
+              {LOADING_ARR.map((item, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="w-full flex flex-col relative overflow-hidden cursor-pointer"
+                  >
+                    <RowCardLoading />
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          {currentView === 'List' && !loading && (
+            <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-8 pb-6">
+              {_itemsDisplay.map((item: any, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="w-full flex flex-col relative overflow-hidden cursor-pointer"
+                  >
+                    <ListCard
+                      id={index}
+                      image={item.image}
+                      brand={item.brand}
+                      name={item.name}
+                      price={item.price}
+                      isAddedToCart={isItemAddedToCart(item.tokenAddress)}
+                      onAddToCart={(params) => handleAddToCart(params)}
+                      onMoreInfo={(id) => handleMoreInfo(item.tokenAddress)}
+                      addToCartLoading={false}
+                      tokenAddress={item.tokenAddress}
+                    />
+                  </div>
+                );
+              })}
+              {/* <div ref={ref}></div> */}
+            </div>
+          )}
+          {currentView === 'Row' && !loading && (
+            <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 pb-6">
+              {_itemsDisplay.map((item: any, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="w-full flex flex-col relative overflow-hidden cursor-pointer"
+                  >
+                    <RowCard
+                      id={index}
+                      image={item.image}
+                      brand={item.brand}
+                      name={item.name}
+                      price={item.price}
+                      isAddedToCart={isItemAddedToCart(item.tokenAddress)}
+                      onAddToCart={(params) => handleAddToCart(params)}
+                      onMoreInfo={(id) => handleMoreInfo(item.tokenAddress)}
+                      addToCartLoading={false}
+                      tokenAddress={item.tokenAddress}
+                    />
+                  </div>
+                );
+              })}
+              {/* <div ref={ref}></div> */}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
