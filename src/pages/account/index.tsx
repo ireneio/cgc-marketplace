@@ -1,4 +1,5 @@
 import Avatar from '@/components/Account/Avatar';
+import MyItemsView from '@/components/Account/MyItemsView';
 import ProfileView from '@/components/Account/ProfileView';
 import WalletView from '@/components/Account/WalletView';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
@@ -91,8 +92,8 @@ const Account = () => {
             items={[
               { text: 'Wallets', value: 'wallet' },
               { text: 'Profile', value: 'profile' },
-              // { text: 'My Items', value: 'items' },
-              // { text: 'Listed', value: 'listed' },
+              { text: 'My Items', value: 'items' },
+              { text: 'Listed', value: 'listed' },
               // { text: 'Offers', value: 'offers' },
               // { text: 'Activities', value: 'activities' },
             ]}
@@ -107,6 +108,7 @@ const Account = () => {
       <div>
         {currentSelection === 'wallet' && <WalletView />}
         {currentSelection === 'profile' && <ProfileView />}
+        {currentSelection === 'items' && <MyItemsView />}
       </div>
     </DefaultLayout>
   );

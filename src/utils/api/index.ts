@@ -25,6 +25,28 @@ const api = {
     });
     return response;
   },
+  login: async (email: string, password: string) => {
+    const response = await fetcher({
+      url: '/api/user',
+      method: 'post',
+      data: {
+        email,
+        password,
+      },
+    });
+    return response;
+  },
+  register: async (email: string, password: string) => {
+    const response = await fetcher({
+      url: '/api/user',
+      method: 'post',
+      data: {
+        email,
+        password,
+      },
+    });
+    return response;
+  },
   getCollectionList: async (token: string) => {
     const response = await fetcher({
       url: '/api/collection/list?latest',

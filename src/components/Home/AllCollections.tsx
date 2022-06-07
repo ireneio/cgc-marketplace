@@ -32,8 +32,6 @@ const AllCollections = () => {
         description: item.metadata.description,
       };
     });
-    console.log(map);
-
     setItems(map);
   };
 

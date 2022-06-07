@@ -14,7 +14,7 @@ const Menu = ({ items, currentValue, onItemClick }: Props) => {
   return (
     <div>
       {items.map((item, index) => {
-        const isSelectedParent = currentValue.split('/')[0] === item.value;
+        const isSelectedParent = currentValue === item.value;
         return (
           <div
             key={index}
@@ -34,9 +34,16 @@ const Menu = ({ items, currentValue, onItemClick }: Props) => {
               }
             }}
           >
-            <div>
-              <img src={item.icon} alt={item.text} width="14px" height="14px" />
-            </div>
+            {item.icon && (
+              <div>
+                <img
+                  src={item.icon}
+                  alt={item.text}
+                  width="14px"
+                  height="14px"
+                />
+              </div>
+            )}
             <div className="ml-[18px]">{item.text}</div>
           </div>
         );

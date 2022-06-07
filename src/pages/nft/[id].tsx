@@ -147,7 +147,6 @@ const Nft = () => {
       );
       if (!filter.length) return;
       const item = filter[0];
-      console.log('item', item);
       const manifest = item?.splNftInfo?.data?.manifest;
 
       setInfo({
