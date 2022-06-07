@@ -12,19 +12,19 @@ const initialState: CartState = {
 
 type Action =
   | {
-    type: 'ADD_CART_ITEM';
-    payload: Attr;
-  }
+      type: 'ADD_CART_ITEM';
+      payload: Attr;
+    }
   | {
-    type: 'REMOVE_CART_ITEM';
-    payload: string;
-  }
+      type: 'REMOVE_CART_ITEM';
+      payload: string;
+    }
   | {
-    type: 'CLEAR_CART';
-  }
+      type: 'CLEAR_CART';
+    }
   | {
-    type: 'INIT_CART';
-  };
+      type: 'INIT_CART';
+    };
 
 export default function cartReducer(
   state: CartState = initialState,

@@ -79,7 +79,6 @@ const MarketView = () => {
     console.log('params', params);
     console.log(cartItems);
 
-
     if (isItemAddedToCart(params.tokenAddress)) {
       dispatch({
         type: 'REMOVE_CART_ITEM',
