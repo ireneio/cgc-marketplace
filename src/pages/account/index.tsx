@@ -48,6 +48,10 @@ const Account = () => {
         return walletTitle;
       case 'profile':
         return 'Profile Details';
+      case 'items':
+        return 'My Items';
+      case 'listed':
+        return 'My Listed Items';
       default:
         return 'title';
     }
