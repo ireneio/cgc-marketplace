@@ -26,7 +26,7 @@ const AllCollections = () => {
         videoSrc: item.metadata.videoSrcUrl,
         name: item.metadata.name,
         slug: item.metadata.name.toLowerCase().split(' ').join(''),
-        tags: item.tags.map((item: any) => item.tag),
+        tags: item.tags.length ? item.tags.map((item: any) => item.tag) : [],
         genre: Object.entries(item.metadata.genre).map(([, value]) => value),
         services: item.services,
         description: item.metadata.description,
