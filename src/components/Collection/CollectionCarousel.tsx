@@ -119,7 +119,7 @@ const CollectionCarousel = ({ carouselItems }: { carouselItems: Item[] }) => {
                   alt={name}
                 /> */}
                 <div className="w-full collection_video">
-                  <video muted autoPlay className="w-full">
+                  <video muted autoPlay loop className="w-full">
                     <source src={imageUrl} type="video/mp4" />
                   </video>
                 </div>
