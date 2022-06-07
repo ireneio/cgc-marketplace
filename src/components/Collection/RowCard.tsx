@@ -9,6 +9,8 @@ export interface Attr {
   id: string | number;
   isAddedToCart: boolean;
   tokenAddress: string;
+  addBtnText?: string;
+  removeBtnText?: string;
 }
 interface Props extends Attr {
   onAddToCart: (params: Attr) => void | Promise<void>;
@@ -27,6 +29,8 @@ const RowCard = ({
   onMoreInfo,
   addToCartLoading,
   tokenAddress,
+  addBtnText,
+  removeBtnText,
 }: Props) => {
   const handleImageLoad = (e: any) => {
     e.target.classList.remove('blur');
@@ -129,7 +133,7 @@ const RowCard = ({
             )}
             <div className="ml-[8px] text-[#9497AA] text-[14px]">
               {addToCartLoading && <Skeleton className="w-[64px] h-[14px]" />}
-              {!addToCartLoading && 'Add To Cart'}
+              {!addToCartLoading && (addBtnText ? addBtnText : 'Add To Cart')}
             </div>
           </div>
         )}
@@ -153,7 +157,7 @@ const RowCard = ({
               });
             }}
           >
-            Added To Cart
+            {removeBtnText ? removeBtnText : 'Added To Cart'}
           </div>
         )}
       </div>
