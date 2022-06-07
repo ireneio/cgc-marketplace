@@ -8,7 +8,9 @@ import Tag from '../Shared/Tag';
 const ActionPanel = ({
   info,
   onCartOpen,
+  loading,
 }: {
+  loading: boolean;
   info: NftInfo;
   onCartOpen: (val: boolean) => void;
 }) => {
@@ -68,12 +70,15 @@ const ActionPanel = ({
         </div>
         <div className="mt-[34px] flex items-center flex-wrap">
           {!isItemAddedToCart && (
-            <Button onClick={() => handleBuy()}>Buy Now</Button>
+            <Button onClick={() => handleBuy()} disabled={loading}>
+              Buy Now
+            </Button>
           )}
           <div className={!isItemAddedToCart ? 'ml-[8px]' : ''}>
             <Button
               onClick={() => handleAddToCart()}
               style={{ paddingLeft: 12, paddingRight: 12 }}
+              disabled={loading}
             >
               {isItemAddedToCart ? (
                 'Remove From Cart'
@@ -89,7 +94,7 @@ const ActionPanel = ({
           </div>
           {!isItemAddedToCart && (
             <div className="ml-auto">
-              <Button secondary disabled={!info.auctionEndDate}>
+              <Button secondary disabled={!info.auctionEndDate || loading}>
                 Make Offer
               </Button>
             </div>

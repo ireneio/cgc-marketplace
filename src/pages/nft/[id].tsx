@@ -291,7 +291,11 @@ const Nft = () => {
             </div>
             <div style={{ flexBasis: '50%' }} className="pl-[12px]">
               <DetailPanel info={info} />
-              <ActionPanel info={info} onCartOpen={(val) => setOpenCart(val)} />
+              <ActionPanel
+                info={info}
+                onCartOpen={(val) => setOpenCart(val)}
+                loading={loading}
+              />
               <AttributesPanel info={info} />
             </div>
           </div>
