@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Divider from '../Shared/Divider';
 import Tag from '../Shared/Tag';
 import DetailViewLoading from './DetailViewLoading';
@@ -7,29 +7,71 @@ import CollectionCarousel from './CollectionCarousel';
 import ItemCountPanel from './ItemCountPanel';
 import NftPricePanel from './NftPricePanel';
 import TokenPricePanel from './TokenPricePanel';
+import { useAppSelector } from '@/store';
 
 const DetailView = () => {
   const router = useRouter();
-  const [info, setInfo] = useState({
-    name: 'SolChicks',
-    id: '',
-    header: 'Welcome to the SolChicks Metaverse Crypto NFT Game',
-    title: 'The leading fantasy NFT PvP and P2E crypto game',
-    description:
-      'SolChicks is One of The Best Play To Earn Crypto Games with exceptional PvP gaming. Our mission is simple: to be the leading fantasy NFT PvP and P2E crypto gaming ecosystem on the Solana blockchain. Buy & sell SolChicks with the community. Create collections & earn rewards. Breed adorable SolChicks to unlock rare traits.',
-    tags: [
-      'Collectibles & NFTs',
-      'Gaming',
-      'Solana Ecosystem',
-      'Trustswap Launchpad',
-    ],
-    socialMedia: {
-      discord: '',
-      twitter: '',
-      link: '',
-    },
-  });
+  // const [info, setInfo] = useState({
+  //   name: 'SolChicks',
+  //   id: '',
+  //   header: 'Welcome to the SolChicks Metaverse Crypto NFT Game',
+  //   title: 'The leading fantasy NFT PvP and P2E crypto game',
+  //   description:
+  //     'SolChicks is One of The Best Play To Earn Crypto Games with exceptional PvP gaming. Our mission is simple: to be the leading fantasy NFT PvP and P2E crypto gaming ecosystem on the Solana blockchain. Buy & sell SolChicks with the community. Create collections & earn rewards. Breed adorable SolChicks to unlock rare traits.',
+  //   tags: [
+  //     'Collectibles & NFTs',
+  //     'Gaming',
+  //     'Solana Ecosystem',
+  //     'Trustswap Launchpad',
+  //   ],
+  //   socialMedia: {
+  //     discord: '',
+  //     twitter: '',
+  //     link: '',
+  //   },
+  // });
   const [loading, setLoading] = useState(true);
+  const metadata = useAppSelector(
+    (state) => state.collection.currentCollection.metadata,
+  );
+  const tags = useAppSelector(
+    (state) => state.collection.currentCollection.tags,
+  );
+
+  const services = useAppSelector(
+    (state) => state.collection.currentCollection.services,
+  );
+
+  const info = useMemo(() => {
+    return {
+      title: 'title',
+      name: metadata.name,
+      id: metadata.id,
+      slug: metadata.slug,
+      description: metadata.description,
+      socialMedia: {
+        discord: metadata.discordUrl,
+        twitter: metadata.twitterUrl,
+        link: metadata.websiteUrl,
+      },
+      services: services.map((item: any) => item.name),
+      tags: services.map((item: any) => item.tag),
+    };
+  }, [metadata, services]);
+
+  const carouselItems = useMemo(() => {
+    return [
+      {
+        imageUrl: metadata.videoSrcUrl as string,
+        title: metadata.name as string,
+        description: metadata.description as string,
+        id: metadata.id as string,
+        href: '',
+        logo: metadata.logoSrcUrl as string,
+        name: metadata.name as string,
+      },
+    ];
+  }, [metadata]);
 
   useEffect(() => {
     setLoading(true);
@@ -43,19 +85,19 @@ const DetailView = () => {
     window.open(info.socialMedia[type], '_blank');
   };
 
-  useEffect(() => {
-    if (router.query.id) {
-      setInfo((prev) => {
-        return {
-          ...prev,
-          id: String(router.query.id),
-        };
-      });
-    } else {
-      // dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
-      // router.replace('/');
-    }
-  }, [router.query]);
+  // useEffect(() => {
+  //   if (router.query.id) {
+  //     setInfo((prev) => {
+  //       return {
+  //         ...prev,
+  //         id: String(router.query.id),
+  //       };
+  //     });
+  //   } else {
+  //     // dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
+  //     // router.replace('/');
+  //   }
+  // }, [router.query]);
 
   return (
     <div>
@@ -63,7 +105,7 @@ const DetailView = () => {
       {!loading && (
         <div>
           <div className="mb-[32px]">
-            <CollectionCarousel />
+            <CollectionCarousel carouselItems={carouselItems} />
           </div>
           <div className="mb-[32px]">
             <div className="text-[#FFFFFF] font-bold text-[20px]">
@@ -109,7 +151,7 @@ const DetailView = () => {
             </div>
           </div>
           <div className="flex flex-wrap mb-[32px]">
-            {info.tags.map((tag, index) => {
+            {info.services.map((tag: string, index: number) => {
               return (
                 <Tag key={index} className="mr-[12px]">
                   {tag}

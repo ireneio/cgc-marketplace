@@ -17,8 +17,24 @@ const AllCollections = () => {
   const oAuthCtx = useContext(OAuthContext);
 
   const getCollections = async () => {
-    const response = await api.getCollection(oAuthCtx.access_token);
-    console.log(response);
+    const response = await api.getCollectionList(oAuthCtx.access_token);
+    const map = response.map((item: any) => {
+      return {
+        ...item,
+        splashSrc: item.metadata.splashSrcUrl,
+        logoSrc: item.metadata.logoSrcUrl,
+        videoSrc: item.metadata.videoSrcUrl,
+        name: item.metadata.name,
+        slug: item.metadata.name.toLowerCase().split(' ').join(''),
+        tags: item.tags.map((item: any) => item.tag),
+        genre: Object.entries(item.metadata.genre).map(([, value]) => value),
+        services: item.services,
+        description: item.metadata.description,
+      };
+    });
+    console.log(map);
+
+    setItems(map);
   };
 
   useEffect(() => {

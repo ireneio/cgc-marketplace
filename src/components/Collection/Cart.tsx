@@ -20,8 +20,8 @@ const Cart = ({ onClose }: { onClose?: () => void }) => {
     return totalPrice;
   }, [totalPrice]);
 
-  const handleRemoveItem = (id: number | string) => {
-    dispatch({ type: 'REMOVE_CART_ITEM', payload: String(id) });
+  const handleRemoveItem = (tokenAddress: string) => {
+    dispatch({ type: 'REMOVE_CART_ITEM', payload: String(tokenAddress) });
   };
 
   const handleBuy = async () => {
@@ -89,7 +89,7 @@ const Cart = ({ onClose }: { onClose?: () => void }) => {
                         />
                         <div
                           className="absolute right-[-2px] top-[-2px] cursor-pointer hover:scale-[1.35] transition-all"
-                          onClick={() => handleRemoveItem(item.id)}
+                          onClick={() => handleRemoveItem(item.tokenAddress)}
                         >
                           <img
                             src="/img/icon_purple_rounded_close.png"

@@ -12,19 +12,19 @@ const initialState: CartState = {
 
 type Action =
   | {
-      type: 'ADD_CART_ITEM';
-      payload: Attr;
-    }
+    type: 'ADD_CART_ITEM';
+    payload: Attr;
+  }
   | {
-      type: 'REMOVE_CART_ITEM';
-      payload: string;
-    }
+    type: 'REMOVE_CART_ITEM';
+    payload: string;
+  }
   | {
-      type: 'CLEAR_CART';
-    }
+    type: 'CLEAR_CART';
+  }
   | {
-      type: 'INIT_CART';
-    };
+    type: 'INIT_CART';
+  };
 
 export default function cartReducer(
   state: CartState = initialState,
@@ -41,7 +41,7 @@ export default function cartReducer(
     case 'REMOVE_CART_ITEM':
       const _removed = [
         ...state.cartItems.filter(
-          (item) => String(item.id) !== String(action.payload),
+          (item) => String(item.tokenAddress) !== String(action.payload),
         ),
       ];
       window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(_removed));

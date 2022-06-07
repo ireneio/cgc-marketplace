@@ -15,7 +15,7 @@ const ListCardLoading = () => {
           <Skeleton className="w-[100px] h-[12px]" />
         </div>
         <div className="font-light text-[#9497AA] text-[14px] mt-[8px]">
-          <Skeleton className="w-[160px] h-[12px]" />
+          <Skeleton className="w-[120px] h-[12px]" />
         </div>
         <div className="font-semibold text-[#FFFFFF] text-[24px] mt-[8px] flex items-center">
           <Skeleton className="w-[84px] h-[10px]" />

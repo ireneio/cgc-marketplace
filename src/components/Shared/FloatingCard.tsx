@@ -9,8 +9,8 @@ interface Props {
   title: string;
   categories: string[];
   network: string;
-  marketCap: string;
-  coinSupply: string;
+  marketCap?: string;
+  coinSupply?: string;
   onPlay?: any;
   playDisabled?: boolean;
   onFirstItemMouseOver?: (val: boolean) => void;
@@ -91,12 +91,17 @@ const FloatingCard = ({
         >
           <div className="w-[300px] h-[340px] absolute border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden">
             <div className="relative flex items-start justify-center">
-              <div
+              {/* <div
                 className="w-[300px] h-[170px] bg-cover bg-center bg-no-repeat"
                 style={{
                   backgroundImage: `url(${bgOnHover})`,
                 }}
-              ></div>
+              ></div> */}
+              <div className="w-[300px] h-[170px]">
+                <video muted width={300} autoPlay>
+                  <source src={bgOnHover} type="video/mp4" />
+                </video>
+              </div>
               <div className="absolute bottom-[8px] left-[8px]">
                 <img src={logo} alt={''} width={100} height={100} />
               </div>
@@ -148,7 +153,7 @@ const FloatingCard = ({
                 <div className="text-[10px] flex items-center ml-[12px]">
                   <div className="text-[#9497AA]">M Cap:</div>
                   <div className="text-[#FC1F8E] ml-[3px]">
-                    {getNumberWithCommas(marketCap)}
+                    {getNumberWithCommas(marketCap || '')}
                   </div>
                 </div>
                 {/* <div className="text-[10px] flex items-center">

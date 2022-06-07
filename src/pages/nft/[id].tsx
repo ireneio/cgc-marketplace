@@ -9,11 +9,13 @@ import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Divider from '@/components/Shared/Divider';
 import Pagination from '@/components/Shared/Pagination';
 import SelectGroup from '@/components/Shared/SelectGroup';
-import { useAppDispatch } from '@/store';
+import { useAppDispatch, useAppSelector } from '@/store';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import DetailPanel from '@/components/Nft/DetailPanel';
+import api from '@/utils/api';
+import { OAuthContext } from '@/contexts/OAuthProvider';
 
 export interface NftInfo {
   id: string | number;
@@ -38,16 +40,18 @@ type Selection =
 
 const Nft = () => {
   const dispatch = useAppDispatch();
+  const metadata = useAppSelector(
+    (state) => state.collection.currentCollection.metadata,
+  );
+  const oAuthCtx = useContext(OAuthContext);
   const router = useRouter();
   const [info, setInfo] = useState<NftInfo>({
     id: '',
-    name: '3670',
-    brand: 'SolChicks',
-    description:
-      'SolChicks is One of The Best Play To Earn Crypto Games with exceptional PvP gaming. Our mission is simple: to be the leading fantasy NFT PvP and P2E crypto gaming ecosystem on the Solana blockchain. Buy & sell SolChicks with the community. Create collections & earn rewards. Breed adorable SolChicks to unlock rare traits. Play games in the SolChicks universe',
-    price: '3.5',
-    image:
-      'https://ipfs.io/ipfs/QmeN1gvQG97kAgvTBt9oV1Ddxmi1HNc6WQbbHbXhnTQvHa/solchicks-10001.png',
+    name: '',
+    brand: '-',
+    description: '',
+    price: '0',
+    image: '/img/cgc_icon.png',
     auctionEndDate: dayjs().toISOString(),
     saleEndDate: dayjs().toISOString(),
     attributes: [
@@ -60,11 +64,12 @@ const Nft = () => {
       { traitType: 'traitType', value: 'Mountains' },
     ],
     royaltiesPercentage: 5,
-    mintAddress: 'wtS75q4ecvUjBkDesTbiEw3Y88c7eCh49nLzzuPy72t',
-    owner: 'wtS75q4ecvUjBkDesTbiEw3Y88c7eCh49nLzzuPy72t',
+    mintAddress: '',
+    owner: '',
   });
   const [openCart, setOpenCart] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [currentSelection, setCurrentSelection] =
     useState<Selection>('Collection Item');
 
@@ -72,16 +77,24 @@ const Nft = () => {
     setCurrentSelection(value);
     switch (value) {
       case 'About':
-        router.push(`/collection/${info.brand}`);
+        router.push(
+          `/collection/${metadata.slug}?collection_id=${metadata.id}`,
+        );
         return;
       case 'All Items':
-        router.push(`/collection/${info.brand}?tab=all_items`);
+        router.push(
+          `/collection/${metadata.slug}?collection_id=${metadata.id}&tab=all_items`,
+        );
         return;
       case 'Your Items':
-        router.push(`/collection/${info.brand}?tab=your_items`);
+        router.push(
+          `/collection/${metadata.slug}?collection_id=${metadata.id}&tab=your_items`,
+        );
         return;
-      case info.brand:
-        router.push(`/collection/${info.brand}?tab=about`);
+      case metadata.slug:
+        router.push(
+          `/collection/${metadata.slug}?collection_id=${metadata.id}&tab=about`,
+        );
         return;
       case 'Explore/All':
         dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Explore/All' });
@@ -89,20 +102,6 @@ const Nft = () => {
         return;
     }
   };
-
-  const breadCrumbItems = useMemo(() => {
-    switch (currentSelection) {
-      case 'Collection Item':
-      default:
-        return [
-          { text: 'Home', value: 'Home' },
-          { text: 'Explore', value: 'Explore/All' },
-          { text: info.brand, value: info.brand },
-          { text: 'All Items', value: 'All Items' },
-          { text: info.name, value: info.name },
-        ];
-    }
-  }, [info, currentSelection]);
 
   useEffect(() => {
     if (router.query.id) {
@@ -115,6 +114,116 @@ const Nft = () => {
       });
     }
   }, [dispatch, router]);
+
+  const getCollectionData = async () => {
+    const response = await api.getCollectionById(
+      oAuthCtx.access_token,
+      String(router.query.collection_id),
+    );
+    if (response) {
+      dispatch({
+        type: 'SET_CURRENT_COLLECTION',
+        payload: {
+          ...response,
+          metadata: {
+            ...response.metadata,
+            slug: response.metadata.name.toLowerCase().split(' ').join(''),
+            id: response.id,
+          },
+        },
+      });
+    }
+  };
+
+  const getNftData = async () => {
+    setLoading(true);
+    const response = await api.getNftListByCollectionId(
+      oAuthCtx.access_token,
+      String(router.query.collection_id),
+    );
+    if (response && response.length) {
+      const filter = response.filter(
+        (item: any) => item.tokenAddress === router.query.id,
+      );
+      if (!filter.length) return;
+      const item = filter[0];
+      console.log('item', item);
+      const manifest = item?.splNftInfo?.data?.manifest;
+
+      setInfo({
+        id: item.id,
+        name: manifest?.name,
+        brand: manifest?.collection?.name,
+        image: manifest?.image,
+        description: manifest?.description,
+        attributes:
+          manifest?.attributes.map((item: any) => ({
+            traitType: item.trait_type,
+            value: item.value,
+          })) || [],
+        auctionEndDate: '',
+        saleEndDate: '',
+        royaltiesPercentage: 0,
+        mintAddress: item.tokenAddress,
+        owner: item?.splNftInfo?.walletAddress,
+        price: '0',
+      });
+    }
+    setLoading(false);
+  };
+
+  const handleRefresh = async () => {
+    getNftData();
+  };
+
+  useEffect(() => {
+    if (oAuthCtx.access_token && router.query.collection_id) {
+      Promise.all([getCollectionData(), getNftData()]);
+    }
+  }, [oAuthCtx.access_token, router.query.collection_id]);
+
+  const breadCrumbItems = useMemo(() => {
+    switch (currentSelection) {
+      case 'Collection Item':
+      default:
+        return [
+          { text: 'Home', value: 'Home', disabled: loading || !metadata.name },
+          {
+            text: 'Explore',
+            value: 'Explore/All',
+            disabled: loading || !metadata.slug,
+          },
+          {
+            text: metadata?.name,
+            value: 'About',
+            disabled: loading || !metadata.slug,
+          },
+          {
+            text: 'All Items',
+            value: 'All Items',
+            disabled: loading || !metadata.slug,
+          },
+          {
+            text: info.name,
+            value: info.name,
+            disabled: loading || !metadata.slug,
+          },
+        ];
+    }
+  }, [metadata, currentSelection, info, loading]);
+
+  const selectgroupItems = useMemo(() => {
+    return [
+      { text: 'About', value: 'About', disabled: !metadata.slug },
+      { text: 'All Items', value: 'All Items', disabled: !metadata.slug },
+      {
+        text: 'Your Items',
+        value: 'Your Items',
+        disabled: !metadata.slug,
+      },
+      { text: '...', value: '...', disabled: !metadata.slug },
+    ];
+  }, [metadata]);
 
   return (
     <DefaultLayout>
@@ -138,14 +247,7 @@ const Nft = () => {
         </div>
         <div>
           <SelectGroup
-            items={[
-              { text: 'About', value: 'About' },
-              { text: 'All Items', value: 'All Items' },
-              { text: 'Your Items', value: 'Your Items' },
-              { text: '...', value: '...' },
-              // { text: 'Activity', value: 'Activity' },
-              // { text: 'Staking', value: 'Staking' },
-            ]}
+            items={selectgroupItems}
             currentValue={currentSelection}
             onItemClick={(value) => handleSelect(value as Selection)}
           />
@@ -159,7 +261,7 @@ const Nft = () => {
         <div>
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <div className="cursor-pointer">
+              <div className="cursor-pointer" onClick={() => handleRefresh()}>
                 <img
                   src="/img/icon_refresh.svg"
                   alt="refresh"
@@ -172,6 +274,7 @@ const Nft = () => {
             <CartSection
               openCart={openCart}
               onToggleCart={(val) => setOpenCart(val)}
+              disabled={loading}
             />
           </div>
           <div className="flex mt-[12px] flex-wrap">

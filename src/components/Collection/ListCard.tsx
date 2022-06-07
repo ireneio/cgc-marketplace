@@ -8,6 +8,7 @@ export interface Attr {
   price: string | number;
   id: string | number;
   isAddedToCart: boolean;
+  tokenAddress: string;
 }
 interface Props extends Attr {
   onAddToCart: (params: Attr) => void | Promise<void>;
@@ -25,9 +26,15 @@ const ListCard = ({
   onAddToCart,
   onMoreInfo,
   addToCartLoading,
+  tokenAddress,
 }: Props) => {
   const handleImageLoad = (e: any) => {
     e.target.classList.remove('blur');
+    e.target.src = image;
+  };
+
+  const handleImageError = (e: any) => {
+    e.target.src = '/img/cgc_icon.png';
   };
 
   return (
@@ -36,13 +43,19 @@ const ListCard = ({
       style={{ borderColor: isAddedToCart ? '#F41786' : '#290030' }}
       onClick={() => onMoreInfo(id)}
     >
-      <div>
+      <div
+        className="w-inherit bg-contain bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url(${'/img/cgc_icon.png'})`,
+        }}
+      >
         <img
-          src={image}
+          src={'/img/cgc_icon.png'}
           alt={name}
           // width={205}
           // height={205}
-          className="blur rounded-t-[5px]"
+          onError={(e) => handleImageError(e)}
+          className="blur rounded-t-[5px] w-full h-auto"
           onLoad={(e) => handleImageLoad(e)}
         />
       </div>
@@ -88,6 +101,18 @@ const ListCard = ({
           <div
             style={{ flexBasis: '70%' }}
             className="hover:bg-[#290030] hover:text-[#FFFFFF] flex items-center justify-center cursor-pointer px-[18px] py-[18px] border-l-[1px] border-l-[#290030] rounded-br-[5px]"
+            onClick={(e) => {
+              e.stopPropagation();
+              onAddToCart({
+                image,
+                name,
+                brand,
+                price,
+                id,
+                isAddedToCart,
+                tokenAddress,
+              });
+            }}
           >
             {/* {!addToCartLoading && (
               <div>
@@ -99,20 +124,7 @@ const ListCard = ({
                 />
               </div>
             )} */}
-            <div
-              className="ml-[8px] text-[#9497AA] text-[14px]"
-              onClick={(e) => {
-                e.stopPropagation();
-                onAddToCart({
-                  image,
-                  name,
-                  brand,
-                  price,
-                  id,
-                  isAddedToCart,
-                });
-              }}
-            >
+            <div className="ml-[8px] text-[#FFFFFF] text-[12px]">
               {addToCartLoading && <Skeleton className="w-[64px] h-[14px]" />}
               {!addToCartLoading && 'Add To Cart'}
             </div>
@@ -120,7 +132,7 @@ const ListCard = ({
         )}
         {isAddedToCart && !addToCartLoading && (
           <div
-            className="cursor-pointer text-[14px] flex items-center justify-center px-[18px] py-[18px] text-[#FFFFFF] rounded-br-[5px]"
+            className="cursor-pointer text-[12px] flex items-center justify-center px-[18px] py-[18px] text-[#FFFFFF] rounded-br-[5px]"
             style={{
               background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
               flexBasis: '70%',
@@ -134,6 +146,7 @@ const ListCard = ({
                 price,
                 id,
                 isAddedToCart,
+                tokenAddress,
               });
             }}
           >

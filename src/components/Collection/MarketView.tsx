@@ -1,7 +1,9 @@
+import { OAuthContext } from '@/contexts/OAuthProvider';
 import { useAppDispatch, useAppSelector } from '@/store';
+import api from '@/utils/api';
 import { getNumberWithCommas } from '@/utils/formatHelper';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext, useMemo } from 'react';
 import DropdownMenu from '../Shared/DropdownMenu';
 import SelectGroup from '../Shared/SelectGroup';
 import Cart from './Cart';
@@ -10,6 +12,7 @@ import ListCard, { Attr } from './ListCard';
 import ListCardLoading from './ListCardLoading';
 import RowCard from './RowCard';
 import RowCardLoading from './RowCardLoading';
+import { useInView } from 'react-intersection-observer';
 
 type SelectionView = 'Row' | 'List';
 
@@ -21,17 +24,32 @@ const MarketView = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const cartItems = useAppSelector((state) => state.cart.cartItems);
-  const [info, setInfo] = useState({
-    listedItemCount: 1234,
-  });
+  const metadata = useAppSelector(
+    (state) => state.collection.currentCollection.metadata,
+  );
+  const oAuthCtx = useContext(OAuthContext);
   const [currentView, setCurrentView] = useState<SelectionView>('List');
   const [currentFilter, setCurrentFilter] = useState<SelectionFilter>('');
-  const [items, setItems] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-  const [loading, setLoading] = useState(true);
-  const [addToCartLoading, setAddToCartLoading] = useState({
-    status: false,
-    itemId: '',
+  const [items, setItems] = useState([]);
+  const [page, setPage] = useState(0);
+  const { ref, inView, entry } = useInView({
+    /* Optional options */
+    threshold: 0,
   });
+
+  const listedItemCount = items.length;
+
+  const _items = useMemo(() => {
+    return items.slice(0, page + 19);
+  }, [items, page]);
+
+  useEffect(() => {
+    if (inView) {
+      setPage((prev) => prev + 19);
+    }
+  }, [inView]);
+
+  const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({
     rankMin: '',
     rankMax: '',
@@ -41,9 +59,12 @@ const MarketView = () => {
     isBuyNow: false,
     isRarityRanking: false,
   });
+  const [refresh, setRefresh] = useState(false);
 
-  const isItemAddedToCart = (id: string | number) => {
-    return cartItems.find((item: Attr) => String(item.id) === String(id));
+  const isItemAddedToCart = (tokenAddress: string) => {
+    return cartItems.find(
+      (item: Attr) => String(item.tokenAddress) === String(tokenAddress),
+    );
   };
 
   const handleSelectView = (value: SelectionView) => {
@@ -55,24 +76,49 @@ const MarketView = () => {
   };
 
   const handleAddToCart = (params: Attr) => {
-    if (isItemAddedToCart(params.id)) {
-      dispatch({ type: 'REMOVE_CART_ITEM', payload: String(params.id) });
+    console.log('params', params);
+    console.log(cartItems);
+
+
+    if (isItemAddedToCart(params.tokenAddress)) {
+      dispatch({
+        type: 'REMOVE_CART_ITEM',
+        payload: String(params.tokenAddress),
+      });
     } else {
       dispatch({ type: 'ADD_CART_ITEM', payload: params });
     }
   };
 
-  const handleMoreInfo = (id: string | number) => {
-    router.push(`/nft/${id}`).then();
+  const handleMoreInfo = (tokenAddress: string | number) => {
+    router.push(`/nft/${tokenAddress}?collection_id=${metadata.id}`).then();
+  };
+
+  const getData = async () => {
+    setLoading(true);
+    const response = await api.getNftListByCollectionId(
+      oAuthCtx.access_token,
+      metadata.id,
+    );
+    const map = response.map((item: any) => {
+      const manifest = item?.splNftInfo?.data?.manifest;
+      return {
+        image: manifest?.image,
+        brand: manifest?.collection?.name,
+        name: manifest?.name,
+        price: 0,
+        tokenAddress: item?.tokenAddress,
+      };
+    });
+    setItems(map);
+    setLoading(false);
   };
 
   useEffect(() => {
-    setLoading(true);
-    const tid = setTimeout(() => {
-      setLoading(false);
-      clearTimeout(tid);
-    }, 1200);
-  }, [currentView]);
+    if (oAuthCtx.access_token && metadata.id) {
+      getData();
+    }
+  }, [metadata, oAuthCtx.access_token, refresh]);
 
   const getCart = () => {
     dispatch({ type: 'INIT_CART' });
@@ -86,7 +132,10 @@ const MarketView = () => {
     <div className="mb-[32px]">
       <div className="flex justify-between items-center mb-[24px]">
         <div className="flex items-center w-full">
-          <div className="cursor-pointer">
+          <div
+            className="cursor-pointer"
+            onClick={() => setRefresh((prev) => !prev)}
+          >
             <img
               src={'/img/icon_refresh.svg'}
               alt="refresh"
@@ -95,7 +144,7 @@ const MarketView = () => {
             />
           </div>
           <div className="ml-[8px] text-[#FFFFFF] text-[14px]">
-            {getNumberWithCommas(info.listedItemCount, 0)} items
+            {getNumberWithCommas(listedItemCount, 0)} items
           </div>
           <div className="ml-auto">
             <SelectGroup
@@ -275,7 +324,7 @@ const MarketView = () => {
         )}
         {currentView === 'List' && !loading && (
           <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-8 pb-6">
-            {items.map((item, index) => {
+            {_items.map((item: any, index) => {
               return (
                 <div
                   key={index}
@@ -283,28 +332,25 @@ const MarketView = () => {
                 >
                   <ListCard
                     id={index}
-                    image={
-                      'https://ipfs.io/ipfs/QmeN1gvQG97kAgvTBt9oV1Ddxmi1HNc6WQbbHbXhnTQvHa/solchicks-10001.png'
-                    }
-                    brand={'SOLCHICKS'}
-                    name={'Solchicks 3670'}
-                    price={'5.6789'}
-                    isAddedToCart={isItemAddedToCart(index)}
+                    image={item.image}
+                    brand={item.brand}
+                    name={item.name}
+                    price={item.price}
+                    isAddedToCart={isItemAddedToCart(item.tokenAddress)}
                     onAddToCart={(params) => handleAddToCart(params)}
-                    onMoreInfo={(id) => handleMoreInfo(id)}
-                    addToCartLoading={
-                      addToCartLoading.status &&
-                      addToCartLoading.itemId === String(index)
-                    }
+                    onMoreInfo={(id) => handleMoreInfo(item.tokenAddress)}
+                    addToCartLoading={false}
+                    tokenAddress={item.tokenAddress}
                   />
                 </div>
               );
             })}
+            <div ref={ref}></div>
           </div>
         )}
         {currentView === 'Row' && !loading && (
           <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 pb-6">
-            {items.map((item, index) => {
+            {_items.map((item: any, index) => {
               return (
                 <div
                   key={index}
@@ -312,26 +358,23 @@ const MarketView = () => {
                 >
                   <RowCard
                     id={index}
-                    image={
-                      'https://ipfs.io/ipfs/QmeN1gvQG97kAgvTBt9oV1Ddxmi1HNc6WQbbHbXhnTQvHa/solchicks-10001.png'
-                    }
-                    brand={'SOLCHICKS'}
-                    name={'Solchicks 3670'}
-                    price={'5.6789'}
-                    isAddedToCart={isItemAddedToCart(index)}
+                    image={item.image}
+                    brand={item.brand}
+                    name={item.name}
+                    price={item.price}
+                    isAddedToCart={isItemAddedToCart(item.tokenAddress)}
                     onAddToCart={(params) => handleAddToCart(params)}
-                    onMoreInfo={(id) => handleMoreInfo(id)}
-                    addToCartLoading={
-                      addToCartLoading.status &&
-                      addToCartLoading.itemId === String(index)
-                    }
+                    onMoreInfo={(id) => handleMoreInfo(item.tokenAddress)}
+                    addToCartLoading={false}
+                    tokenAddress={item.tokenAddress}
                   />
                 </div>
               );
             })}
+            <div ref={ref}></div>
           </div>
         )}
-        {!items.length && (
+        {!items.length && !loading && (
           <div className="text-[#FFFFFF] text-semibold">
             No Items Available.
           </div>

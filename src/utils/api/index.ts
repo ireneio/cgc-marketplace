@@ -25,9 +25,29 @@ const api = {
     });
     return response;
   },
-  getCollection: async (token: string) => {
+  getCollectionList: async (token: string) => {
     const response = await fetcher({
-      url: '/api/collection/list',
+      url: '/api/collection/list?latest',
+      method: 'get',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  },
+  getCollectionById: async (token: string, id: string) => {
+    const response = await fetcher({
+      url: `/api/collection/list?collection_id=${id}`,
+      method: 'get',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  },
+  getNftListByCollectionId: async (token: string, id: string) => {
+    const response = await fetcher({
+      url: `/api/nft/list?collection_id=${id}`,
       method: 'get',
       headers: {
         authorization: `Bearer ${token}`,

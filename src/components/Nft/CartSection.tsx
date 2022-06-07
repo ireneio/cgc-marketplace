@@ -6,9 +6,11 @@ import DropdownMenu from '../Shared/DropdownMenu';
 const CartSection = ({
   openCart,
   onToggleCart,
+  disabled,
 }: {
   openCart: boolean;
   onToggleCart: (val: boolean) => void;
+  disabled?: boolean;
 }) => {
   const cartItems = useAppSelector((state) => state.cart.cartItems);
 
@@ -19,7 +21,7 @@ const CartSection = ({
           <Cart onClose={() => onToggleCart(false)} />
         </DropdownMenu>
       )}
-      <Button onClick={() => onToggleCart(!openCart)}>
+      <Button onClick={() => onToggleCart(!openCart)} disabled={disabled}>
         <div className="flex items-center">
           <div>
             <img src={'/img/icon_cart.svg'} alt="cart" width={12} height={12} />

@@ -5,10 +5,12 @@ import DefaultLayout from '@/components/Layout/DefaultLayout';
 import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Divider from '@/components/Shared/Divider';
 import SelectGroup from '@/components/Shared/SelectGroup';
-import { useAppDispatch } from '@/store';
+import { useAppDispatch, useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { getBreadcrumbRoutes, getSelectGroupItems } from '@/utils/cgcConsts';
+import api from '@/utils/api';
+import { OAuthContext } from '@/contexts/OAuthProvider';
 
 type Selection =
   | 'About'
@@ -22,47 +24,35 @@ const Collection = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [currentSelection, setCurrentSelection] = useState<Selection>('About');
-  const [info, setInfo] = useState({
-    name: 'SolChicks',
-    header: 'SolChicks',
-  });
+  const oAuthCtx = useContext(OAuthContext);
+  const metadata = useAppSelector(
+    (state) => state.collection.currentCollection.metadata,
+  );
 
   const handleSelect = (value: Selection) => {
     setCurrentSelection(value);
     if (value === '...') {
       return;
     }
+    if (!metadata.slug) {
+      return;
+    }
     router.push(
-      `/collection/${info.name}?tab=${value
+      `/collection/${metadata.slug}?collection_id=${metadata.id}&tab=${value
         .split(' ')
         .join('_')
         .toLowerCase()}`,
     );
-    switch (value) {
-      case 'About':
-        setInfo((prev) => ({
-          ...prev,
-          header: info.name,
-        }));
-        return;
-      case 'All Items':
-        setInfo((prev) => ({
-          ...prev,
-          header: 'All Items',
-        }));
-        return;
-      case 'Your Items':
-        setInfo((prev) => ({
-          ...prev,
-          header: 'Your Items',
-        }));
-        return;
-    }
   };
 
   const breadcrumbItems = useMemo(() => {
-    return getBreadcrumbRoutes(currentSelection, info.name);
-  }, [info, currentSelection]);
+    return getBreadcrumbRoutes(currentSelection, metadata.name || '...').map(
+      (item) => ({
+        ...item,
+        disabled: !metadata.slug,
+      }),
+    );
+  }, [metadata, currentSelection]);
 
   useEffect(() => {
     if (router.query.tab) {
@@ -74,6 +64,45 @@ const Collection = () => {
       router.query.tab = '';
     }
   }, [router.query]);
+
+  const getCollectionData = async () => {
+    const response = await api.getCollectionById(
+      oAuthCtx.access_token,
+      String(router.query.collection_id),
+    );
+    if (response) {
+      dispatch({
+        type: 'SET_CURRENT_COLLECTION',
+        payload: {
+          ...response,
+          metadata: {
+            ...response.metadata,
+            slug: response.metadata.name.toLowerCase().split(' ').join(''),
+            id: response.id,
+          },
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (oAuthCtx.access_token && router.query.collection_id) {
+      getCollectionData();
+    }
+  }, [oAuthCtx.access_token, router.query.collection_id]);
+
+  const selectgroupItems = useMemo(() => {
+    return [
+      { text: 'About', value: 'About', disabled: !metadata.slug },
+      { text: 'All Items', value: 'All Items', disabled: !metadata.slug },
+      {
+        text: 'Your Items',
+        value: 'Your Items',
+        disabled: !metadata.slug,
+      },
+      { text: '...', value: '...', disabled: !metadata.slug },
+    ];
+  }, [metadata]);
 
   return (
     <DefaultLayout>
@@ -97,10 +126,12 @@ const Collection = () => {
         />
       </div>
       <div className="flex justify-between items-center mb-[16px]">
-        <div className="text-[#FFFFFF] font-bold text-[24px]">{info.name}</div>
+        <div className="text-[#FFFFFF] font-bold text-[24px]">
+          {metadata.name}
+        </div>
         <div>
           <SelectGroup
-            items={getSelectGroupItems()}
+            items={selectgroupItems}
             currentValue={currentSelection}
             onItemClick={(value) => handleSelect(value as Selection)}
           />

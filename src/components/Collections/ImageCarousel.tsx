@@ -50,6 +50,11 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
                 alt={item}
                 width="100%"
               />
+              {/* <div className="w-[300px] h-[170px]">
+                <video muted width={300} autoPlay>
+                  <source src={item} type="video/mp4" />
+                </video>
+              </div> */}
             </div>
           );
         })}

@@ -8,6 +8,7 @@ export interface Attr {
   price: string | number;
   id: string | number;
   isAddedToCart: boolean;
+  tokenAddress: string;
 }
 interface Props extends Attr {
   onAddToCart: (params: Attr) => void | Promise<void>;
@@ -25,18 +26,37 @@ const RowCard = ({
   onAddToCart,
   onMoreInfo,
   addToCartLoading,
+  tokenAddress,
 }: Props) => {
+  const handleImageLoad = (e: any) => {
+    e.target.classList.remove('blur');
+    e.target.src = image;
+  };
+
+  const handleImageError = (e: any) => {
+    e.target.src = '/img/cgc_icon.png';
+  };
+
   return (
     <div
       className="rounded-[5px] w-full bg-[#13002B] border-[2px] border-solid border-[#290030] mx-auto"
       style={{ borderColor: isAddedToCart ? '#F41786' : '#290030' }}
       onClick={() => onMoreInfo(id)}
     >
-      <div>
+      <div
+        className="w-inherit bg-contain bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url(${'/img/cgc_icon.png'})`,
+        }}
+      >
         <img
-          src={image}
+          src={'/img/cgc_icon.png'}
           alt={name}
-          // className="w-[300px] h-[300px] xl:w-[340px] xl:h-[340px]"
+          // width={205}
+          // height={205}
+          onError={(e) => handleImageError(e)}
+          className="blur rounded-t-[5px] w-full h-auto"
+          onLoad={(e) => handleImageLoad(e)}
         />
       </div>
       <div className="mt-[12px] px-[12px]">
@@ -84,6 +104,18 @@ const RowCard = ({
           <div
             style={{ flexBasis: '70%' }}
             className="hover:bg-[#290030] hover:text-[#FFFFFF] flex items-center justify-center cursor-pointer px-[18px] py-[18px] border-l-[1px] border-l-[#290030] rounded-br-[5px]"
+            onClick={(e) => {
+              e.stopPropagation();
+              onAddToCart({
+                image,
+                name,
+                brand,
+                price,
+                id,
+                isAddedToCart,
+                tokenAddress,
+              });
+            }}
           >
             {!addToCartLoading && (
               <div>
@@ -95,20 +127,7 @@ const RowCard = ({
                 />
               </div>
             )}
-            <div
-              className="ml-[8px] text-[#9497AA] text-[14px]"
-              onClick={(e) => {
-                e.stopPropagation();
-                onAddToCart({
-                  image,
-                  name,
-                  brand,
-                  price,
-                  id,
-                  isAddedToCart,
-                });
-              }}
-            >
+            <div className="ml-[8px] text-[#9497AA] text-[14px]">
               {addToCartLoading && <Skeleton className="w-[64px] h-[14px]" />}
               {!addToCartLoading && 'Add To Cart'}
             </div>
@@ -130,6 +149,7 @@ const RowCard = ({
                 price,
                 id,
                 isAddedToCart,
+                tokenAddress,
               });
             }}
           >

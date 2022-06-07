@@ -16,7 +16,9 @@ const ActionPanel = ({
   const cartItems = useAppSelector((state) => state.cart.cartItems);
 
   const isItemAddedToCart = useMemo(() => {
-    return cartItems.find((item: Attr) => String(info.id) === String(item.id));
+    return cartItems.find(
+      (item: Attr) => String(info.mintAddress) === String(item.tokenAddress),
+    );
   }, [cartItems, info]);
 
   const handleBuy = async () => {
@@ -27,13 +29,17 @@ const ActionPanel = ({
     if (!isItemAddedToCart) {
       dispatch({
         type: 'ADD_CART_ITEM',
-        payload: { ...info, isAddedToCart: true },
+        payload: {
+          ...info,
+          isAddedToCart: true,
+          tokenAddress: info.mintAddress,
+        },
       });
       onCartOpen && onCartOpen(true);
     } else {
       dispatch({
         type: 'REMOVE_CART_ITEM',
-        payload: String(info.id),
+        payload: String(info.mintAddress),
       });
     }
   };
