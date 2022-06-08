@@ -65,7 +65,7 @@ export interface CollectionInfo {
 const Collection = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const [info, setInfo] = useState<CollectionInfo>({
+  const [info] = useState<CollectionInfo>({
     name: 'Tank Metaverse',
     symbol: 'TNK',
     tags: ['Upcoming', 'IDO'],

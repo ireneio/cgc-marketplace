@@ -1,8 +1,5 @@
 import { NftInfo } from '@/pages/nft/[id]';
-import {
-  getTrimmedAddress,
-  getTrimmedAddressEllipsisMiddle,
-} from '@/utils/formatHelper';
+import { getTrimmedAddressEllipsisMiddle } from '@/utils/formatHelper';
 import ClipboardText from '../Shared/ClipboardText';
 import PrimaryGradientText from '../Shared/PrimaryGradientText';
 import Tag from '../Shared/Tag';

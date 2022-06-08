@@ -8,7 +8,7 @@ import SelectGroup from '@/components/Shared/SelectGroup';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useMemo, useState } from 'react';
-import { getBreadcrumbRoutes, getSelectGroupItems } from '@/utils/cgcConsts';
+import { getBreadcrumbRoutes } from '@/utils/cgcConsts';
 import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
 

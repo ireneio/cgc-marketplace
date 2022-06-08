@@ -118,11 +118,11 @@ const DefaultLayout = ({ children, title }: Props) => {
   useEffect(() => {
     const cb = () => {
       setWindowWidth(window.innerWidth);
+      setWindowHeight(window.innerHeight);
     };
     if (window) {
       // window.addEventListener('resize', cb);
-      setWindowWidth(window.innerWidth);
-      setWindowHeight(window.innerHeight);
+      cb();
     }
     return () => {
       // window.removeEventListener('resize', cb);

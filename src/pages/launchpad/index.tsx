@@ -22,7 +22,7 @@ const Launchpad = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [currentSelection, setCurrentSelection] = useState('Coming Soon');
-  const [items, setItems] = useState<LaunchpadItem[]>(
+  const [items] = useState<LaunchpadItem[]>(
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
       id: item,
       type: item % 2 === 0 ? 'nft' : 'token',
@@ -97,7 +97,7 @@ const Launchpad = () => {
                 <CollectionsCard
                   id={String(index)}
                   image={item.image}
-                  onClick={(val) => handleCardClick(item)}
+                  onClick={() => handleCardClick(item)}
                 />
               </div>
             );

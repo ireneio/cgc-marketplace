@@ -12,7 +12,7 @@ interface Props {
   onItemClick?: (value: string) => void | Promise<void>;
 }
 
-const Breadcrumb = ({ items, onItemClick, currentValue }: Props) => {
+const Breadcrumb = ({ items, onItemClick }: Props) => {
   const dispatch = useAppDispatch();
 
   const handleSideBarPathUpdate = (val: string) => {

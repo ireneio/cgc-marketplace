@@ -17,14 +17,14 @@ interface Props {
 
 const Button = ({
   children,
-  className,
+  // className,
   style,
   onClick,
   disabled,
   disableHoverEffect,
   link,
   filled,
-  shadowed,
+  // shadowed,
   secondary,
   loading,
 }: Props) => {

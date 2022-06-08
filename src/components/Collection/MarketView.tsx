@@ -32,7 +32,7 @@ const MarketView = () => {
   const [currentFilter, setCurrentFilter] = useState<SelectionFilter>('');
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(0);
-  const { ref, inView, entry } = useInView({
+  const { ref, inView } = useInView({
     /* Optional options */
     threshold: 0,
   });
@@ -50,7 +50,7 @@ const MarketView = () => {
   }, [inView]);
 
   const [loading, setLoading] = useState(true);
-  const [filters, setFilters] = useState({
+  const [, setFilters] = useState({
     rankMin: '',
     rankMax: '',
     priceMin: '',
@@ -334,7 +334,7 @@ const MarketView = () => {
                     price={item.price}
                     isAddedToCart={isItemAddedToCart(item.tokenAddress)}
                     onAddToCart={(params) => handleAddToCart(params)}
-                    onMoreInfo={(id) => handleMoreInfo(item.tokenAddress)}
+                    onMoreInfo={() => handleMoreInfo(item.tokenAddress)}
                     addToCartLoading={false}
                     tokenAddress={item.tokenAddress}
                   />
@@ -360,7 +360,7 @@ const MarketView = () => {
                     price={item.price}
                     isAddedToCart={isItemAddedToCart(item.tokenAddress)}
                     onAddToCart={(params) => handleAddToCart(params)}
-                    onMoreInfo={(id) => handleMoreInfo(item.tokenAddress)}
+                    onMoreInfo={() => handleMoreInfo(item.tokenAddress)}
                     addToCartLoading={false}
                     tokenAddress={item.tokenAddress}
                   />

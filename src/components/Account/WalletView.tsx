@@ -1,6 +1,5 @@
 import { useEthereumProvider } from '@/contexts/EthereumWalletProvider';
 import { useWallet } from '@solana/wallet-adapter-react';
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import WalletCard from './WalletCard';
 import EvmConnectButton from '@/components/Shared/EvmConnectButton';
 import SolanaConnectButton from '../Shared/SolanaConnectButton';

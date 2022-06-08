@@ -1,5 +1,4 @@
 import React, { ChangeEvent, InputHTMLAttributes } from 'react';
-import { twMerge } from 'tailwind-merge';
 
 interface InputProps extends InputHTMLAttributes<HTMLElement> {
   autoFocus?: boolean;
@@ -18,9 +17,9 @@ const FormInput = React.forwardRef(
     const {
       autoFocus = false,
       onChange,
-      className,
-      prependIcon,
-      appendIcon,
+      // className,
+      // prependIcon,
+      // appendIcon,
       block,
       id,
       label,

@@ -87,7 +87,7 @@ const CardCarousel = ({ items }: { items: any[] }) => {
     }));
   }, [width]);
 
-  const handleGoDetail = (slug: string, id: string | number) => {
+  const handleGoDetail = (slug: string) => {
     router.push(`/collection/${slug}`);
   };
 
@@ -100,7 +100,7 @@ const CardCarousel = ({ items }: { items: any[] }) => {
               key={index}
               id={String(index)}
               className="pl-[0] pr-[12px] h-[176.49px] w-[319.41px]"
-              onClick={() => handleGoDetail(item.slug, item.id)}
+              onClick={() => handleGoDetail(item.slug)}
             >
               <FloatingCard
                 isFloatRight={index % settings.slidesToShow === 0}
@@ -114,8 +114,8 @@ const CardCarousel = ({ items }: { items: any[] }) => {
                 network={'SOL'}
                 marketCap={'10000'}
                 coinSupply={'100000000000'}
-                onPlay={() => handleGoDetail(item.slug, item.id)}
-                onCardClick={() => handleGoDetail(item.slug, item.id)}
+                onPlay={() => handleGoDetail(item.slug)}
+                onCardClick={() => handleGoDetail(item.slug)}
                 onMouseOver={() => setCurrentHoverId(String(index))}
                 onMouseLeave={() => setCurrentHoverId('-1')}
               />

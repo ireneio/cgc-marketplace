@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import ButtonLink from '../Shared/ButtonLink';
 import SalesCard from '../Shared/SalesCard';
 import SectionTitle from '../Shared/SectionTitle';
 
 const LatestSales = () => {
-  const [items, setitems] = useState([1, 2, 3, 4, 5]);
+  const [items] = useState([1, 2, 3, 4, 5]);
 
   return (
     <div>

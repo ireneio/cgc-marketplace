@@ -1,18 +1,7 @@
-import { testData } from '@/data/test';
 import { useRouter } from 'next/router';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import FloatingCard from '../Shared/FloatingCard';
-
-const PREFILL_DATA = {
-  id: 'testData',
-  imageUrl: testData.landingHeroBackground,
-  name: 'testData',
-  href: 'https://seoulstars.io/',
-  logo: testData.landingHeroLogo,
-  title: testData.landingHeroTitle,
-  description: testData.landingHeroSubtitle,
-};
 
 const CardCarousel = ({ items }: { items: any[] }) => {
   const router = useRouter();
@@ -39,12 +28,7 @@ const CardCarousel = ({ items }: { items: any[] }) => {
         centerMode
         centerSlidePercentage={15}
         emulateTouch
-        renderIndicator={(
-          onClick: any,
-          selected: any,
-          index: any,
-          label: any,
-        ) => {
+        renderIndicator={(onClick, selected) => {
           return (
             <div
               className="w-[80px] h-[5px] rounded-[5px] inline-block mr-[12px] cursor-pointer"

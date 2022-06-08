@@ -28,7 +28,7 @@ const NftPricePanel = ({
   sales,
   averagePrice,
   totalVolume,
-  totalSales,
+  // totalSales,
   totalSupply,
   owners,
   count,
@@ -37,7 +37,7 @@ const NftPricePanel = ({
   salesPercentage,
   averagePricePercentage,
 }: Props) => {
-  const [currentViewVolume, setCurrentViewVolume] = useState('day');
+  const [, setCurrentViewVolume] = useState('day');
 
   return (
     <Tag>

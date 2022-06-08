@@ -19,8 +19,6 @@ const Input = React.forwardRef(
       autoFocus = false,
       onChange,
       className,
-      prependIcon,
-      appendIcon,
       block,
       id,
       label,

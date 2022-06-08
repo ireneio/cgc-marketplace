@@ -4,8 +4,7 @@ import {
 } from '@/hooks/collections';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
-import { useEffect, useMemo, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
+import { useMemo, useState } from 'react';
 import ListCard, { Attr } from '../Collection/ListCard';
 import ListCardLoading from '../Collection/ListCardLoading';
 import RowCard from '../Collection/RowCard';
@@ -24,17 +23,12 @@ const ListingView = () => {
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
-  const [refresh, setRefresh] = useState(false);
+  const [, setRefresh] = useState(false);
   const [sidebar, setSidebar] = useState('All');
-  const [listed, setListed] = useState([]);
+  const [listed] = useState([]);
   const [currentView, setCurrentView] = useState<SelectionView>('List');
-  const [page, setPage] = useState(0);
-  const { ref, inView, entry } = useInView({
-    /* Optional options */
-    threshold: 0,
-  });
   const { collections } = useGetCollections();
-  const { data: recommendedItems, loading, fn } = useGetNftByCollectionId();
+  const { loading } = useGetNftByCollectionId();
 
   const _collections = useMemo(() => {
     return collections.map((collection) => {
@@ -202,7 +196,7 @@ const ListingView = () => {
                       price={item.price}
                       isAddedToCart={isItemAddedToCart(item.tokenAddress)}
                       onAddToCart={(params) => handleAddToCart(params)}
-                      onMoreInfo={(id) => handleMoreInfo(item.tokenAddress)}
+                      onMoreInfo={() => handleMoreInfo(item.tokenAddress)}
                       addToCartLoading={false}
                       tokenAddress={item.tokenAddress}
                       addBtnText={'Cancel Listing'}
@@ -229,7 +223,7 @@ const ListingView = () => {
                       price={item.price}
                       isAddedToCart={isItemAddedToCart(item.tokenAddress)}
                       onAddToCart={(params) => handleAddToCart(params)}
-                      onMoreInfo={(id) => handleMoreInfo(item.tokenAddress)}
+                      onMoreInfo={() => handleMoreInfo(item.tokenAddress)}
                       addToCartLoading={false}
                       tokenAddress={item.tokenAddress}
                       addBtnText={'Cancel Listing'}

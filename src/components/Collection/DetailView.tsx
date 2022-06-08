@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import Divider from '../Shared/Divider';
 import Tag from '../Shared/Tag';
@@ -10,34 +9,10 @@ import TokenPricePanel from './TokenPricePanel';
 import { useAppSelector } from '@/store';
 
 const DetailView = () => {
-  const router = useRouter();
-  // const [info, setInfo] = useState({
-  //   name: 'SolChicks',
-  //   id: '',
-  //   header: 'Welcome to the SolChicks Metaverse Crypto NFT Game',
-  //   title: 'The leading fantasy NFT PvP and P2E crypto game',
-  //   description:
-  //     'SolChicks is One of The Best Play To Earn Crypto Games with exceptional PvP gaming. Our mission is simple: to be the leading fantasy NFT PvP and P2E crypto gaming ecosystem on the Solana blockchain. Buy & sell SolChicks with the community. Create collections & earn rewards. Breed adorable SolChicks to unlock rare traits.',
-  //   tags: [
-  //     'Collectibles & NFTs',
-  //     'Gaming',
-  //     'Solana Ecosystem',
-  //     'Trustswap Launchpad',
-  //   ],
-  //   socialMedia: {
-  //     discord: '',
-  //     twitter: '',
-  //     link: '',
-  //   },
-  // });
   const [loading, setLoading] = useState(true);
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
-  const tags = useAppSelector(
-    (state) => state.collection.currentCollection.tags,
-  );
-
   const services = useAppSelector(
     (state) => state.collection.currentCollection.services,
   );
@@ -84,20 +59,6 @@ const DetailView = () => {
   const handleLinkOpen = (type: 'discord' | 'twitter' | 'link') => {
     window.open(info.socialMedia[type], '_blank');
   };
-
-  // useEffect(() => {
-  //   if (router.query.id) {
-  //     setInfo((prev) => {
-  //       return {
-  //         ...prev,
-  //         id: String(router.query.id),
-  //       };
-  //     });
-  //   } else {
-  //     // dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
-  //     // router.replace('/');
-  //   }
-  // }, [router.query]);
 
   return (
     <div>

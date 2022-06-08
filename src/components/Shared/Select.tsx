@@ -6,13 +6,7 @@ interface Props {
   onChange?: (val: string) => void | Promise<void>;
 }
 
-const Select = ({
-  options,
-  placeholder,
-  defaultValue,
-  onChange,
-  value,
-}: Props) => {
+const Select = ({ options, onChange, value }: Props) => {
   return (
     <select
       className="appearance-none block px-3 py-2 border-[2px] border-[#290030] rounded-md

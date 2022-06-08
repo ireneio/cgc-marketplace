@@ -20,12 +20,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
         // centerMode
         // centerSlidePercentage={_centerSlidePercentage}
         emulateTouch
-        renderIndicator={(
-          onClick: any,
-          selected: any,
-          index: any,
-          label: any,
-        ) => {
+        renderIndicator={(onClick, selected) => {
           return (
             <div
               className="w-[80px] h-[5px] rounded-[5px] inline-block mr-[12px] cursor-pointer"

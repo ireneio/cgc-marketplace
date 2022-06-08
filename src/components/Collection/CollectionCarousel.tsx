@@ -1,19 +1,7 @@
-import { testData } from '@/data/test';
 import dayjs from 'dayjs';
-import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Button from '../Shared/Button';
-
-const PREFILL_DATA = {
-  id: 'testData',
-  imageUrl: testData.landingHeroBackground,
-  name: 'testData',
-  href: 'https://seoulstars.io/',
-  logo: testData.landingHeroLogo,
-  title: testData.landingHeroTitle,
-  description: testData.landingHeroSubtitle,
-};
 
 interface Item {
   id: string;
@@ -84,12 +72,7 @@ const CollectionCarousel = ({ carouselItems }: { carouselItems: Item[] }) => {
         // centerMode
         // centerSlidePercentage={_centerSlidePercentage}
         emulateTouch
-        renderIndicator={(
-          onClick: any,
-          selected: any,
-          index: any,
-          label: any,
-        ) => {
+        renderIndicator={(onClick, selected) => {
           return (
             <div
               className="w-[80px] h-[5px] rounded-[5px] inline-block mr-[12px] cursor-pointer"

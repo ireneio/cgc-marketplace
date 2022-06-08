@@ -43,7 +43,7 @@ export interface LaunchpadNftInfo {
 const LaunchpadNft = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const [info, setInfo] = useState<LaunchpadNftInfo>({
+  const [info] = useState<LaunchpadNftInfo>({
     name: 'Tank Metaverse',
     symbol: 'TNK',
     tags: ['Upcoming', 'IDO'],
