@@ -53,8 +53,10 @@ const FloatingCard = ({
   return (
     <div>
       {currentHoverId !== id && (
+        // 212.94
+        // 117.66
         <li
-          className="absolute bg-[#290030] cursor-pointer rounded-[5px] align-middle h-[117.66px] w-[212.94px] transition-all drop-shadow-xl"
+          className="absolute bg-[#290030] cursor-pointer rounded-[5px] align-middle h-[176.49px] w-[319.41px] transition-all drop-shadow-xl"
           onMouseOver={() => handleMouseOver()}
           onMouseLeave={() => handleMouseOut()}
           onClick={() => {
@@ -62,7 +64,7 @@ const FloatingCard = ({
           }}
         >
           <div
-            className="absolute top-0 left-0 h-[117.66px] w-[212.94px] bg-cover bg-center bg-no-repeat"
+            className="absolute top-0 left-0 h-[176.49px] w-[319.41px] bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: `url(${bg})`,
             }}
@@ -77,18 +79,16 @@ const FloatingCard = ({
       )}
       {currentHoverId === id && (
         <motion.div
-          // initial={{ width: 0, height: 0 }}
-          // animate={{ width: 300, height: 340 }}
           initial={{ opacity: 0, x: '10px', y: '-100px' }}
           animate={{
             opacity: 1,
-            x: isFloatRight ? '0px' : '-30px',
+            x: isFloatRight ? '0px' : '10px',
             y: '-100px',
           }}
-          // transition={{ duration: '.3s' }}
-          className="bg-[#13002B] rounded-[5px] cursor-pointer relative z-[100] translate-y-[-100px]"
+          className="bg-[#13002B] rounded-[5px] cursor-pointer relative z-[100]"
           onMouseLeave={() => handleMouseOut()}
         >
+          {/*300x340*/}
           <div className="w-[300px] h-[340px] absolute border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden">
             <div className="relative flex items-start justify-center">
               {/* <div
@@ -116,21 +116,25 @@ const FloatingCard = ({
                     className="text-[#FFFFFF] text-[12px] uppercase flex items-center pr-[12px] flex-wrap"
                     style={{ flexBasis: '70%' }}
                   >
-                    {categories.map((category, index) => {
-                      return (
-                        <div
-                          key={index}
-                          className="text-[12px] flex items-center"
-                        >
-                          {category}
-                          {index !== categories.length - 1 && (
-                            <span className="ml-[4px] mr-[4px] text-[#aaa] text-[12px]">
-                              •
-                            </span>
-                          )}
-                        </div>
-                      );
-                    })}
+                    {categories && categories.length ? (
+                      categories.map((category, index) => {
+                        return (
+                          <div
+                            key={index}
+                            className="text-[12px] flex items-center"
+                          >
+                            {category}
+                            {index !== categories.length - 1 && (
+                              <span className="ml-[4px] mr-[4px] text-[#aaa] text-[12px]">
+                                •
+                              </span>
+                            )}
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <></>
+                    )}
                   </div>
                   <div className="flex-shrink-0">
                     <Button
