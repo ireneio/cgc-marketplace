@@ -38,7 +38,7 @@ const Collection = () => {
       return;
     }
     router.push(
-      `/collection/${metadata.slug}?collection_id=${metadata.id}&tab=${value
+      `/collection/${metadata.slug}?tab=${value
         .split(' ')
         .join('_')
         .toLowerCase()}`,
@@ -68,7 +68,7 @@ const Collection = () => {
   const getCollectionData = async () => {
     const response = await api.getCollectionById(
       oAuthCtx.access_token,
-      String(router.query.collection_id),
+      String(router.query.id),
     );
     if (response) {
       dispatch({
@@ -86,10 +86,10 @@ const Collection = () => {
   };
 
   useEffect(() => {
-    if (oAuthCtx.access_token && router.query.collection_id) {
+    if (oAuthCtx.access_token && router.query.id) {
       getCollectionData();
     }
-  }, [oAuthCtx.access_token, router.query.collection_id]);
+  }, [oAuthCtx.access_token, router.query.id]);
 
   const selectgroupItems = useMemo(() => {
     return [

@@ -179,7 +179,7 @@ const DefaultLayout = ({ children, title }: Props) => {
         />
         <Header />
         <div className="flex mt-[75px] relative">
-          <div className="fixed top-[75px] w-[225px] hidden md:block flex-shrink-0">
+          <div className="fixed top-[75px] w-[225px] hidden md:block flex-shrink-0 z-[100]">
             <Sidebar
               items={SIDE_BAR_ITEMS}
               currentValue={sideBarPath}

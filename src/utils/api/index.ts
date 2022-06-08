@@ -57,9 +57,9 @@ const api = {
     });
     return response;
   },
-  getCollectionById: async (token: string, id: string) => {
+  getCollectionById: async (token: string, slug: string) => {
     const response = await fetcher({
-      url: `/api/collection/list?collection_id=${id}`,
+      url: `/api/collection/list?slug=${slug}`,
       method: 'get',
       headers: {
         authorization: `Bearer ${token}`,
@@ -67,9 +67,9 @@ const api = {
     });
     return response;
   },
-  getNftListByCollectionId: async (token: string, id: string) => {
+  getNftListByCollectionId: async (token: string, slug: string) => {
     const response = await fetcher({
-      url: `/api/nft/list?collection_id=${id}`,
+      url: `/api/nft/list?slug=${slug}`,
       method: 'get',
       headers: {
         authorization: `Bearer ${token}`,

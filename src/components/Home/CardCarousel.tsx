@@ -88,15 +88,13 @@ const CardCarousel = ({ items }: { items: any[] }) => {
   }, [width]);
 
   const handleGoDetail = (slug: string, id: string | number) => {
-    router.push(`/collection/${slug}?collection_id=${id}`);
+    router.push(`/collection/${slug}`);
   };
 
   return (
     <div className="relative z-[4]">
       <Slider {...settings}>
         {items.map((item, index) => {
-          console.log(item);
-
           return (
             <div
               key={index}

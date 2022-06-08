@@ -87,14 +87,14 @@ const MarketView = () => {
   };
 
   const handleMoreInfo = (tokenAddress: string | number) => {
-    router.push(`/nft/${tokenAddress}?collection_id=${metadata.id}`).then();
+    router.push(`/nft/${tokenAddress}?slug=${metadata.slug}`).then();
   };
 
   const getData = async () => {
     setLoading(true);
     const response = await api.getNftListByCollectionId(
       oAuthCtx.access_token,
-      metadata.id,
+      metadata.slug,
     );
     const map = response.map((item: any) => {
       const manifest = item?.splNftInfo?.data?.manifest;

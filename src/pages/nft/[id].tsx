@@ -77,24 +77,16 @@ const Nft = () => {
     setCurrentSelection(value);
     switch (value) {
       case 'About':
-        router.push(
-          `/collection/${metadata.slug}?collection_id=${metadata.id}`,
-        );
+        router.push(`/collection/${metadata.slug}`);
         return;
       case 'All Items':
-        router.push(
-          `/collection/${metadata.slug}?collection_id=${metadata.id}&tab=all_items`,
-        );
+        router.push(`/collection/${metadata.slug}?tab=all_items`);
         return;
       case 'Your Items':
-        router.push(
-          `/collection/${metadata.slug}?collection_id=${metadata.id}&tab=your_items`,
-        );
+        router.push(`/collection/${metadata.slug}?tab=your_items`);
         return;
       case metadata.slug:
-        router.push(
-          `/collection/${metadata.slug}?collection_id=${metadata.id}&tab=about`,
-        );
+        router.push(`/collection/${metadata.slug}?tab=about`);
         return;
       case 'Explore/All':
         dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Explore/All' });
@@ -118,7 +110,7 @@ const Nft = () => {
   const getCollectionData = async () => {
     const response = await api.getCollectionById(
       oAuthCtx.access_token,
-      String(router.query.collection_id),
+      String(router.query.slug),
     );
     if (response) {
       dispatch({
@@ -139,7 +131,7 @@ const Nft = () => {
     setLoading(true);
     const response = await api.getNftListByCollectionId(
       oAuthCtx.access_token,
-      String(router.query.collection_id),
+      String(router.query.slug),
     );
     if (response && response.length) {
       const filter = response.filter(
@@ -176,12 +168,12 @@ const Nft = () => {
   };
 
   useEffect(() => {
-    if (oAuthCtx.access_token && router.query.collection_id) {
+    if (oAuthCtx.access_token && router.query.slug) {
       getCollectionData().then(() => {
         getNftData();
       });
     }
-  }, [oAuthCtx.access_token, router.query.collection_id]);
+  }, [oAuthCtx.access_token, router.query.slug]);
 
   const breadCrumbItems = useMemo(() => {
     switch (currentSelection) {
