@@ -85,9 +85,31 @@ const Collection = () => {
     }
   };
 
+  const getTokenData = async () => {
+    const response = await api.getTokenListByCollectionId(
+      oAuthCtx.access_token,
+      String(router.query.id),
+    );
+    console.log(response);
+    // if (response) {
+    //   dispatch({
+    //     type: 'SET_CURRENT_COLLECTION',
+    //     payload: {
+    //       ...response,
+    //       metadata: {
+    //         ...response.metadata,
+    //         slug: response.metadata.name.toLowerCase().split(' ').join(''),
+    //         id: response.id,
+    //       },
+    //     },
+    //   });
+    // }
+  };
+
   useEffect(() => {
     if (oAuthCtx.access_token && router.query.id) {
       getCollectionData();
+      getTokenData();
     }
   }, [oAuthCtx.access_token, router.query.id]);
 

@@ -5,7 +5,7 @@ const RowCardLoading = () => {
   return (
     <div className="rounded-[5px] w-full bg-[#13002B] border-[1px] border-solid border-[#290030]">
       <div>
-        <Skeleton className="w-full h-[364px]" />
+        <Skeleton className="w-full h-[320px]" />
       </div>
       <div className="mt-[12px] px-[12px]">
         <div className="flex justify-between items-end">

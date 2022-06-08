@@ -67,6 +67,16 @@ const api = {
     });
     return response;
   },
+  getTokenListByCollectionId: async (token: string, slug: string) => {
+    const response = await fetcher({
+      url: `/api/token/list?slug=${slug}`,
+      method: 'get',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  },
   getNftListByCollectionId: async (token: string, slug: string) => {
     const response = await fetcher({
       url: `/api/nft/list?slug=${slug}`,
