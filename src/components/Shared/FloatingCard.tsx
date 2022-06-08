@@ -89,7 +89,7 @@ const FloatingCard = ({
           onMouseLeave={() => handleMouseOut()}
         >
           {/*300x340*/}
-          <div className="w-[300px] h-[340px] absolute border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden">
+          <div className="w-[360px] h-[340px] absolute border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden">
             <div className="relative flex items-start justify-center">
               {/* <div
                 className="w-[300px] h-[170px] bg-cover bg-center bg-no-repeat"
@@ -97,8 +97,8 @@ const FloatingCard = ({
                   backgroundImage: `url(${bgOnHover})`,
                 }}
               ></div> */}
-              <div className="w-[300px] h-[170px]">
-                <video muted width={300} autoPlay>
+              <div className="w-[360px] h-[170px]">
+                <video muted width={360} autoPlay>
                   <source src={bgOnHover} type="video/mp4" />
                 </video>
               </div>
