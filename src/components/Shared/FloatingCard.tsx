@@ -51,7 +51,7 @@ const FloatingCard = ({
   };
 
   return (
-    <div>
+    <div className="h-[176.49px] w-[319.41px]">
       {currentHoverId !== id && (
         // 212.94
         // 117.66

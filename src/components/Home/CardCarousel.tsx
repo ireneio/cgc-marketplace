@@ -101,7 +101,7 @@ const CardCarousel = ({ items }: { items: any[] }) => {
             <div
               key={index}
               id={String(index)}
-              className="pl-[0] pr-[12px] h-[117.66px] w-[212.94px]"
+              className="pl-[0] pr-[12px] h-[176.49px] w-[319.41px]"
               onClick={() => handleGoDetail(item.slug, item.id)}
             >
               <FloatingCard
