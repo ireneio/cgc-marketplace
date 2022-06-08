@@ -194,7 +194,7 @@ const DefaultLayout = ({ children, title }: Props) => {
           </div>
         </div>
         <div
-          className="w-full relative z-[4] overflow-x-hidden bg-[#141414]"
+          className="w-full relative overflow-x-hidden bg-[#141414] z-[101]"
           style={{
             paddingBottom: windowHeight - windowHeight * 0.75 - 75 - 120,
           }}

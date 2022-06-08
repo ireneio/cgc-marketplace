@@ -38,8 +38,8 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
 
   return (
     <div
-      className="overflow-auto px-[12px] py-[20px] bg-[#0C001C] shadow-xl hide-scrollbar relative z-[5] sbar min-h-[500px]"
-      style={{ height: innerHeight }}
+      className="overflow-auto px-[12px] py-[20px] bg-[#0C001C] shadow-xl hide-scrollbar relative z-[5]"
+      style={{ height: Number(innerHeight) - 120 - 75 }}
     >
       {items.map((item) => {
         const isSelectedParent = currentValue.split('/')[0] === item.value;
