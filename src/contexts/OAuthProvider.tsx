@@ -43,7 +43,7 @@ export const OAuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    initGrant();
+    initGrant().then();
   }, []);
 
   const getToken = () => {
