@@ -1,7 +1,7 @@
 import axios, { Method } from 'axios';
 
 export const API_URL =
-  process.env.API_URL || ' https://dev-api.catheongaming.com';
+  process.env.API_URL || 'https://dev-api.catheongaming.com';
 
 console.log('[env] API_URL', API_URL);
 

@@ -10,7 +10,7 @@ const CLIENT_SECRET = API_URL.includes('dev')
 const api = {
   healthCheck: async () => {
     const response = await fetcher({ url: '/', method: 'get' });
-    console.log(response);
+    console.log('API Health: ', response);
     return response;
   },
   getAuthToken: async () => {
