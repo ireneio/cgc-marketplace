@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import Footer from '../Shared/Footer';
+import Footer from './Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import seo from '../../data/seo';
@@ -187,8 +187,11 @@ const DefaultLayout = ({ children, title }: Props) => {
             />
           </div>
           <div
-            className="ml-[225px] pr-[24px] mx-auto min-h-[75vh]"
-            style={{ width: windowWidth - 225 }}
+            className="ml-[225px] pr-[24px] mx-auto"
+            style={{
+              width: windowWidth - 225,
+              minHeight: windowHeight - 75 - 100,
+            }}
           >
             {children}
           </div>

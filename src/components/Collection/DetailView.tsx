@@ -87,7 +87,7 @@ const DetailView = () => {
               onClick={() => handleLinkOpen('twitter')}
             >
               <img
-                src={'/img/icon_twitter.png'}
+                src={'/img/icon_twitter.svg'}
                 width={24}
                 height={24}
                 alt="twitter"
@@ -98,7 +98,7 @@ const DetailView = () => {
               onClick={() => handleLinkOpen('discord')}
             >
               <img
-                src="/img/icon_discord.png"
+                src="/img/icon_discord.svg"
                 width={24}
                 height={24}
                 alt="discord"
@@ -108,7 +108,7 @@ const DetailView = () => {
               className="ml-[16px] cursor-pointer hover:opacity-[0.65]"
               onClick={() => handleLinkOpen('link')}
             >
-              <img src="/img/icon_link.png" width={24} height={24} alt="link" />
+              <img src="/img/icon_link.svg" width={24} height={24} alt="link" />
             </div>
           </div>
           <div className="flex flex-wrap mb-[32px]">
