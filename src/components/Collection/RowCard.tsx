@@ -98,12 +98,6 @@ const RowCard = ({
           className="hover:bg-[#290030] hover:text-[#FFFFFF] flex items-center justify-center cursor-pointer px-[18px] py-[18px] rounded-bl-[5px] text-[#9497AA] text-[14px]"
           onClick={() => onMoreInfo(id)}
         >
-          {/* <img
-            src={'/img/icon_detail.png'}
-            alt={'detail'}
-            width={16}
-            height={16}
-          /> */}
           More Info
         </div>
         {(!isAddedToCart || addToCartLoading) && (

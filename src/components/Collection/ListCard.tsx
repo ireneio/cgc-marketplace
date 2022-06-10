@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Divider from '../Shared/Divider';
 import Skeleton from '../Shared/Skeleton';
 
@@ -18,17 +19,6 @@ interface Props extends Attr {
   addToCartLoading: boolean;
 }
 
-const handleImageLoad = (e: any, image: string) => {
-  e.target.classList.remove('blur');
-  e.target.src = image === 'undefined' ? '/img/cgc_icon.png' : image;
-  e.target.style.width = '100%';
-  e.target.style.height = 'auto';
-};
-
-const handleImageError = (e: any) => {
-  e.target.src = '/img/cgc_icon.png';
-};
-
 const ListCard = ({
   image,
   name,
@@ -43,20 +33,35 @@ const ListCard = ({
   addBtnText,
   removeBtnText,
 }: Props) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const handleImageLoad = (e: any, image: string) => {
+    e.target.classList.remove('blur');
+    e.target.src = image === 'undefined' ? '/img/cgc_icon.png' : image;
+    e.target.style.width = '100%';
+    e.target.style.height = 'auto';
+    setImageLoaded(true);
+  };
+
+  const handleImageError = (e: any) => {
+    e.target.src = '/img/cgc_icon.png';
+    setImageLoaded(true);
+  };
+
   return (
     <div
       className="cursor-pointer rounded-[5px] w-full bg-[#13002B] border-[2px] border-solid border-[#290030] mx-auto"
       style={{ borderColor: isAddedToCart ? '#F41786' : '#290030' }}
       onClick={() => onMoreInfo(id)}
     >
-      <div
-        className="w-inherit bg-contain bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url(${'/img/cgc_icon.png'})`,
-        }}
-      >
+      <div className="w-inherit bg-contain bg-center bg-no-repeat h-auto min-h-[170px]">
+        {!imageLoaded && (
+          <div className="w-full flex justify-center items-center h-[170px]">
+            <img src="/img/spinner.svg" alt="spinner" />
+          </div>
+        )}
         <img
-          src={'/img/cgc_icon.png'}
+          src={'/img/spinner.svg'}
           alt={name}
           // width={'100%'}
           height={150}

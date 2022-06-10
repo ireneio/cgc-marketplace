@@ -337,7 +337,7 @@ const MarketView = () => {
                     image={item.image}
                     brand={item.brand}
                     name={item.name}
-                    price={item.price}
+                    price={item.price || ' '}
                     isAddedToCart={isItemAddedToCart(item.tokenAddress)}
                     onAddToCart={(params) => handleAddToCart(params)}
                     onMoreInfo={() => handleMoreInfo(item.tokenAddress)}

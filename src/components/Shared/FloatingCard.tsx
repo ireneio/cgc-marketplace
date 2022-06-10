@@ -41,8 +41,6 @@ const FloatingCard = ({
   logo,
   isFloatRight,
 }: Props) => {
-  console.log(categories);
-
   const handleMouseOver = () => {
     onMouseOver && onMouseOver(id);
   };
