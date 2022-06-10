@@ -99,13 +99,13 @@ const FloatingCard = ({
                 }}
               ></div> */}
               {/* video */}
-              <div className="w-[360px] h-[170px]">
+              <div className="relative w-[360px]">
                 <video muted width={360} autoPlay>
                   <source src={bgOnHover} type="video/mp4" />
                 </video>
-              </div>
-              <div className="absolute bottom-[8px] left-[8px]">
-                <img src={logo} alt={''} width={100} height={100} />
+                <div className="absolute bottom-[8px] left-[8px]">
+                  <img src={logo} alt={''} width={100} height={100} />
+                </div>
               </div>
             </div>
             <div className="bg-[#13002B] pt-[40px] pb-[24px]">
