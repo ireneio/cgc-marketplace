@@ -26,13 +26,12 @@ export const useGetCollections = () => {
   };
 
   useEffect(() => {
-    if (oAuthCtx.access_token) {
-      getCollections();
-    }
-  }, [oAuthCtx.access_token]);
+    getCollections();
+  }, []);
 
   return {
-    collections: items,
+    refresh: getCollections,
+    data: items,
   };
 };
 
@@ -60,13 +59,11 @@ export const useGetNftByCollectionId = () => {
   };
 
   useEffect(() => {
-    if (oAuthCtx.access_token) {
-      getData(oAuthCtx.access_token);
-    }
-  }, [oAuthCtx.access_token]);
+    getData(oAuthCtx.access_token);
+  }, []);
 
   return {
-    fn: getData(oAuthCtx.access_token),
+    getData: getData(oAuthCtx.access_token),
     data: items,
     loading,
   };

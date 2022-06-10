@@ -34,7 +34,7 @@ const Collection = () => {
   const handleSelect = (value: Selection) => {
     if (value === 'Your Items') {
       if (email) {
-        router.push('/account');
+        router.push('/account?tab=items');
       } else {
         setLoginModalOpen(true);
       }
@@ -171,7 +171,7 @@ const Collection = () => {
       <LoginModal
         isOpen={loginModalOpen}
         setIsOpen={setLoginModalOpen}
-        redirectPath="/account"
+        redirectPath="/account?tab=items"
       />
     </DefaultLayout>
   );

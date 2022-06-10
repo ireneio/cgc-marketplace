@@ -7,7 +7,7 @@ import Login from '../Auth/Login';
 import SignupOne from '../Auth/SignupOne';
 import SignupTwo from '../Auth/SignupTwo';
 import SignupThree from '../Auth/SignupThree';
-import api from '@/utils/api';
+// import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
 import { useRouter } from 'next/router';
 
