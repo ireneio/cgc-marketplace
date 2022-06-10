@@ -16,6 +16,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import DetailPanel from '@/components/Nft/DetailPanel';
 import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
+import { LoginModal } from '@/components/Modals/LoginModal';
 
 export interface NftInfo {
   id: string | number;
@@ -38,8 +39,20 @@ type Selection =
   | 'Collection Item'
   | 'Explore/All';
 
+const handleImageLoad = (e: any, image: string) => {
+  e.target.classList.remove('blur');
+  e.target.src = image === 'undefined' ? '/img/cgc_icon.png' : image;
+  e.target.style.width = '100%';
+  e.target.style.height = 'auto';
+};
+
+const handleImageError = (e: any) => {
+  e.target.src = '/img/cgc_icon.png';
+};
+
 const Nft = () => {
   const dispatch = useAppDispatch();
+  const email = useAppSelector((state) => state.user.userInfo.email);
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
@@ -67,14 +80,56 @@ const Nft = () => {
     mintAddress: '',
     owner: '',
   });
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [currentSelection, setCurrentSelection] =
-    useState<Selection>('Collection Item');
+  const [currentSelection] = useState<Selection>('Collection Item');
+
+  const breadCrumbItems = useMemo(() => {
+    switch (currentSelection) {
+      case 'Collection Item':
+      default:
+        return [
+          { text: 'Home', value: 'Home', disabled: loading || !metadata.name },
+          {
+            text: 'Explore',
+            value: 'Explore/All',
+            disabled: loading || !metadata.slug,
+          },
+          {
+            text: metadata?.name,
+            value: 'About',
+            disabled: loading || !metadata.slug,
+          },
+          {
+            text: 'All Items',
+            value: 'All Items',
+            disabled: loading || !metadata.slug,
+          },
+          {
+            text: info.name,
+            value: info.name,
+            disabled: loading || !metadata.slug,
+          },
+        ];
+    }
+  }, [metadata, currentSelection, info, loading]);
+
+  const selectgroupItems = useMemo(() => {
+    return [
+      { text: 'About', value: 'About', disabled: !metadata.slug },
+      { text: 'All Items', value: 'All Items', disabled: !metadata.slug },
+      {
+        text: 'Your Items',
+        value: 'Your Items',
+        disabled: !metadata.slug,
+      },
+      { text: '...', value: '...', disabled: !metadata.slug },
+    ];
+  }, [metadata]);
 
   const handleSelect = (value: Selection) => {
-    setCurrentSelection(value);
     switch (value) {
       case 'About':
         router.push(`/collection/${metadata.slug}`);
@@ -82,9 +137,14 @@ const Nft = () => {
       case 'All Items':
         router.push(`/collection/${metadata.slug}?tab=all_items`);
         return;
-      case 'Your Items':
-        router.push(`/collection/${metadata.slug}?tab=your_items`);
+      case 'Your Items': {
+        if (!email) {
+          setLoginModalOpen(true);
+        } else {
+          router.push(`/account?tab=items`);
+        }
         return;
+      }
       case metadata.slug:
         router.push(`/collection/${metadata.slug}?tab=about`);
         return;
@@ -94,18 +154,6 @@ const Nft = () => {
         return;
     }
   };
-
-  useEffect(() => {
-    if (router.query.id) {
-      dispatch({ type: 'INIT_CART' });
-      setInfo((prev) => {
-        return {
-          ...prev,
-          id: String(router.query.id),
-        };
-      });
-    }
-  }, [dispatch, router]);
 
   const getCollectionData = async () => {
     const response = await api.getCollectionById(
@@ -168,55 +216,24 @@ const Nft = () => {
   };
 
   useEffect(() => {
+    if (router.query.id) {
+      dispatch({ type: 'INIT_CART' });
+      setInfo((prev) => {
+        return {
+          ...prev,
+          id: String(router.query.id),
+        };
+      });
+    }
+  }, [dispatch, router]);
+
+  useEffect(() => {
     if (router.query.slug) {
       getCollectionData().then(() => {
         getNftData();
       });
     }
   }, [router.query.slug]);
-
-  const breadCrumbItems = useMemo(() => {
-    switch (currentSelection) {
-      case 'Collection Item':
-      default:
-        return [
-          { text: 'Home', value: 'Home', disabled: loading || !metadata.name },
-          {
-            text: 'Explore',
-            value: 'Explore/All',
-            disabled: loading || !metadata.slug,
-          },
-          {
-            text: metadata?.name,
-            value: 'About',
-            disabled: loading || !metadata.slug,
-          },
-          {
-            text: 'All Items',
-            value: 'All Items',
-            disabled: loading || !metadata.slug,
-          },
-          {
-            text: info.name,
-            value: info.name,
-            disabled: loading || !metadata.slug,
-          },
-        ];
-    }
-  }, [metadata, currentSelection, info, loading]);
-
-  const selectgroupItems = useMemo(() => {
-    return [
-      { text: 'About', value: 'About', disabled: !metadata.slug },
-      { text: 'All Items', value: 'All Items', disabled: !metadata.slug },
-      {
-        text: 'Your Items',
-        value: 'Your Items',
-        disabled: !metadata.slug,
-      },
-      { text: '...', value: '...', disabled: !metadata.slug },
-    ];
-  }, [metadata]);
 
   return (
     <DefaultLayout>
@@ -277,7 +294,9 @@ const Nft = () => {
                   src={info.image}
                   alt={info.name}
                   width="100%"
-                  className="rounded-[5px]"
+                  className="rounded-[5px] blur"
+                  onError={(e) => handleImageError(e)}
+                  onLoad={(e) => handleImageLoad(e, info.image)}
                 />
               </div>
               <InfoPanel info={info} />
@@ -341,6 +360,11 @@ const Nft = () => {
           </div>
         </div>
       )}
+      <LoginModal
+        isOpen={loginModalOpen}
+        setIsOpen={setLoginModalOpen}
+        redirectPath="/account?tab=items"
+      />
     </DefaultLayout>
   );
 };

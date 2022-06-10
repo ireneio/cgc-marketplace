@@ -18,6 +18,17 @@ interface Props extends Attr {
   addToCartLoading: boolean;
 }
 
+const handleImageLoad = (e: any, image: string) => {
+  e.target.classList.remove('blur');
+  e.target.src = image === 'undefined' ? '/img/cgc_icon.png' : image;
+  e.target.style.width = '100%';
+  e.target.style.height = 'auto';
+};
+
+const handleImageError = (e: any) => {
+  e.target.src = '/img/cgc_icon.png';
+};
+
 const ListCard = ({
   image,
   name,
@@ -32,17 +43,6 @@ const ListCard = ({
   addBtnText,
   removeBtnText,
 }: Props) => {
-  const handleImageLoad = (e: any) => {
-    e.target.classList.remove('blur');
-    e.target.src = image === 'undefined' ? '/img/cgc_icon.png' : image;
-    e.target.style.width = '100%';
-    e.target.style.height = 'auto';
-  };
-
-  const handleImageError = (e: any) => {
-    e.target.src = '/img/cgc_icon.png';
-  };
-
   return (
     <div
       className="cursor-pointer rounded-[5px] w-full bg-[#13002B] border-[2px] border-solid border-[#290030] mx-auto"
@@ -62,7 +62,7 @@ const ListCard = ({
           height={150}
           onError={(e) => handleImageError(e)}
           className="blur rounded-t-[5px] w-full h-auto"
-          onLoad={(e) => handleImageLoad(e)}
+          onLoad={(e) => handleImageLoad(e, image)}
         />
       </div>
       <div className="mt-[12px] px-[12px]">
