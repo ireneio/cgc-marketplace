@@ -163,6 +163,12 @@ const DetailView = () => {
                   priceFluctuation={
                     token?.tokenStats[0]?.usdAthChangePercentage
                   }
+                  priceChangePercentage7d={
+                    token?.tokenStats[0]?.priceChangePercentage7d
+                  }
+                  priceChangePercentage30d={
+                    token?.tokenStats[0]?.priceChangePercentage30d
+                  }
                   priceToBTCFluctuation={2.45}
                   priceToETHFluctuation={2.45}
                   lowDay={token?.tokenStats[0]?.usdLow24h}

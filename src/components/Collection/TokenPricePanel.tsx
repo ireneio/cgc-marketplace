@@ -4,7 +4,7 @@ import ClipboardText from '../Shared/ClipboardText';
 import Divider from '../Shared/Divider';
 import ProgressBar from '../Shared/ProgressBar';
 import Tag from '../Shared/Tag';
-import DateViewSelector from './DateViewSelector';
+import DateViewSelector, { DateTypes } from './DateViewSelector';
 import TickerText from './TickerText';
 
 interface Props {
@@ -30,6 +30,8 @@ interface Props {
   circulatingSupplyPercentage: number;
   totalSupply: number;
   contractAddress: string;
+  priceChangePercentage7d: number;
+  priceChangePercentage30d: number;
 }
 
 const TokenPricePanel = ({
@@ -55,8 +57,10 @@ const TokenPricePanel = ({
   circulatingSupplyPercentage,
   totalSupply,
   contractAddress,
+  priceChangePercentage7d,
+  priceChangePercentage30d,
 }: Props) => {
-  const [currentView, setCurrentView] = useState('day');
+  const [currentView, setCurrentView] = useState<DateTypes>('day');
 
   const low = useMemo(() => {
     switch (currentView) {
@@ -88,6 +92,22 @@ const TokenPricePanel = ({
     window.open(`https://solscan.io/token/${value}`, '_blank');
   };
 
+  const _priceFluctuation = useMemo(() => {
+    switch (currentView) {
+      case 'day':
+        return priceFluctuation;
+      case 'week':
+        return priceChangePercentage7d;
+      case 'month':
+        return priceChangePercentage30d;
+    }
+  }, [
+    currentView,
+    priceFluctuation,
+    priceChangePercentage7d,
+    priceChangePercentage30d,
+  ]);
+
   return (
     <Tag className="relative px-[24px] py-[24px]">
       <div className="absolute right-[24px] top-[24px]">
@@ -101,8 +121,8 @@ const TokenPricePanel = ({
           <div className="font-bold text-[36px] text-[#FFFFFF]">${price}</div>
           <div className="ml-[14px]">
             <TickerText
-              text={priceFluctuation}
-              direction={priceFluctuation > 0 ? 'up' : 'down'}
+              text={_priceFluctuation}
+              direction={_priceFluctuation > 0 ? 'up' : 'down'}
               fontSize={14}
             />
           </div>
@@ -136,7 +156,11 @@ const TokenPricePanel = ({
             Low: ${low}
           </div>
           <div className="ml-[12px]">
-            <ProgressBar width={221} percentage={50} showIndicator />
+            <ProgressBar
+              width={221}
+              percentage={(price / (low + high)) * 100}
+              showIndicator
+            />
           </div>
           <div className="text-[#FFFFFF] text-[14px] font-semibold ml-[12px]">
             High: ${high}
@@ -144,6 +168,7 @@ const TokenPricePanel = ({
           <DateViewSelector
             className="ml-[24px]"
             onViewChange={(val) => setCurrentView(val)}
+            current={currentView}
           />
         </div>
         <div className="mb-[24px]">
@@ -179,7 +204,7 @@ const TokenPricePanel = ({
               Circulating Supply
             </div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <span>${getNumberWithCommas(circulatingSupply)}</span>
+              <span>{getNumberWithCommas(circulatingSupply, 0)}</span>
               <span className="ml-[4px]">{symbol}</span>
               <span className="ml-auto font-light">
                 {circulatingSupplyPercentage}%
