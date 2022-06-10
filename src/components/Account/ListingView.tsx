@@ -27,7 +27,7 @@ const ListingView = () => {
   const [sidebar, setSidebar] = useState('All');
   const [listed] = useState([]);
   const [currentView, setCurrentView] = useState<SelectionView>('List');
-  const { collections } = useGetCollections();
+  const { data: collections } = useGetCollections();
   const { loading } = useGetNftByCollectionId();
 
   const _collections = useMemo(() => {
