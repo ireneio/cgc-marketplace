@@ -204,7 +204,6 @@ const ListingView = () => {
                   </div>
                 );
               })}
-              {/* <div ref={ref}></div> */}
             </div>
           )}
           {currentView === 'Row' && !loading && (
@@ -231,7 +230,6 @@ const ListingView = () => {
                   </div>
                 );
               })}
-              {/* <div ref={ref}></div> */}
             </div>
           )}
         </div>
