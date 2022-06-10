@@ -26,7 +26,7 @@ const HistoryTable = ({ rows, headers }: Props) => {
       return (
         <div
           key={index}
-          className="uppercase px-[10px] py-[10px] text-[12px] text-left text-[#FFFFFF]"
+          className="uppercase text-[12px] text-left text-[#FFFFFF]"
         >
           {header}
         </div>

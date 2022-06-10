@@ -168,12 +168,12 @@ const Nft = () => {
   };
 
   useEffect(() => {
-    if (oAuthCtx.access_token && router.query.slug) {
+    if (router.query.slug) {
       getCollectionData().then(() => {
         getNftData();
       });
     }
-  }, [oAuthCtx.access_token, router.query.slug]);
+  }, [router.query.slug]);
 
   const breadCrumbItems = useMemo(() => {
     switch (currentSelection) {
