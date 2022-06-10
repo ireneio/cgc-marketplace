@@ -1,28 +1,33 @@
 import { twMerge } from 'tailwind-merge';
 
+export type DateTypes = 'day' | 'week' | 'month';
 interface Props {
   className?: string;
-  onViewChange: (val: 'day' | 'week' | 'month') => void;
+  onViewChange: (val: DateTypes) => void;
+  current?: DateTypes;
 }
 
-const DateViewSelector = ({ className, onViewChange }: Props) => {
+const DateViewSelector = ({ className, onViewChange, current }: Props) => {
   return (
     <div className={twMerge('flex', className)}>
       <div
         className="text-[14px] text-[#9497AA] cursor-pointer hover:underline hover:text-[#FFFFFF]"
         onClick={() => onViewChange('day')}
+        style={{ color: current === 'day' ? '#AAA' : '#FFF' }}
       >
         1d
       </div>
       <div
         className="text-[14px] text-[#9497AA] ml-[12px] cursor-pointer hover:underline hover:text-[#FFFFFF]"
         onClick={() => onViewChange('week')}
+        style={{ color: current === 'week' ? '#AAA' : '#FFF' }}
       >
         1w
       </div>
       <div
         className="text-[14px] text-[#9497AA] ml-[12px] cursor-pointer hover:underline hover:text-[#FFFFFF]"
         onClick={() => onViewChange('month')}
+        style={{ color: current === 'month' ? '#AAA' : '#FFF' }}
       >
         1m
       </div>

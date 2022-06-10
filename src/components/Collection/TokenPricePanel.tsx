@@ -102,7 +102,7 @@ const TokenPricePanel = ({
           <div className="ml-[14px]">
             <TickerText
               text={priceFluctuation}
-              direction={'up'}
+              direction={priceFluctuation > 0 ? 'up' : 'down'}
               fontSize={14}
             />
           </div>
@@ -114,7 +114,7 @@ const TokenPricePanel = ({
           <div className="ml-[14px] text-[12px]">
             <TickerText
               text={priceToBTCFluctuation}
-              direction={'down'}
+              direction={priceToBTCFluctuation > 0 ? 'up' : 'down'}
               fontSize={12}
             />
           </div>
@@ -126,7 +126,7 @@ const TokenPricePanel = ({
           <div className="ml-[14px] text-[12px]">
             <TickerText
               text={priceToETHFluctuation}
-              direction={'up'}
+              direction={priceToETHFluctuation > 0 ? 'up' : 'down'}
               fontSize={12}
             />
           </div>
@@ -186,7 +186,10 @@ const TokenPricePanel = ({
               </span>
             </div>
             <div className="mt-[6px]">
-              <ProgressBar width={221} percentage={50} />
+              <ProgressBar
+                width={221}
+                percentage={circulatingSupplyPercentage}
+              />
             </div>
           </div>
           <div>

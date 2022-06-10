@@ -1,21 +1,37 @@
 import { getNumberWithCommas } from '@/utils/formatHelper';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Tag from '../Shared/Tag';
-import DateViewSelector from './DateViewSelector';
+import DateViewSelector, { DateTypes } from './DateViewSelector';
 import TickerText from './TickerText';
 
 interface Props {
   name: string;
   volume: number;
   volumePercentage: number;
+  volume7Days: number;
+  volume7DaysPercentage: number;
+  volume30Days: number;
+  volume30DaysPercentage: number;
   change: number;
   changePercentage: number;
+  change7Days: number;
+  change7DaysPercentage: number;
+  change30Days: number;
+  change30DaysPercentage: number;
   sales: number;
   salesPercentage: number;
+  sales7Days: number;
+  sales7DaysPercentage: number;
+  sales30Days: number;
+  sales30DaysPercentage: number;
   averagePrice: number;
   averagePricePercentage: number;
+  averagePrice7Days: number;
+  averagePrice7DaysPercentage: number;
+  averagePrice30Days: number;
+  averagePrice30DaysPercentage: number;
   totalVolume: number;
-  totalSales: number;
+  // totalSales: number;
   totalSupply: number;
   owners: number;
   count: number;
@@ -23,21 +39,90 @@ interface Props {
 
 const NftPricePanel = ({
   name,
-  volume,
-  change,
-  sales,
-  averagePrice,
   totalVolume,
   // totalSales,
   totalSupply,
   owners,
   count,
+  volume,
   volumePercentage,
+  volume7Days,
+  volume7DaysPercentage,
+  volume30Days,
+  volume30DaysPercentage,
+  change,
   changePercentage,
+  change7Days,
+  change7DaysPercentage,
+  change30Days,
+  change30DaysPercentage,
+  sales,
   salesPercentage,
+  sales7Days,
+  sales7DaysPercentage,
+  sales30Days,
+  sales30DaysPercentage,
+  averagePrice,
   averagePricePercentage,
+  averagePrice7Days,
+  averagePrice7DaysPercentage,
+  averagePrice30Days,
+  averagePrice30DaysPercentage,
 }: Props) => {
-  const [, setCurrentViewVolume] = useState('day');
+  const [currentViewVolume, setCurrentViewVolume] = useState<DateTypes>('day');
+  const [currentViewChange, setCurrentViewChange] = useState<DateTypes>('day');
+  const [currentViewSales, setCurrentViewSales] = useState<DateTypes>('day');
+  const [currentViewAveragePrice, setCurrentViewAveragePrice] =
+    useState<DateTypes>('day');
+
+  const _change = useMemo(() => {
+    switch (currentViewChange) {
+      case 'day':
+        return change;
+      case 'week':
+        return change7Days;
+      case 'month':
+        return change30Days;
+    }
+  }, [change, change7Days, change30Days, currentViewChange]);
+
+  const _volume = useMemo(() => {
+    switch (currentViewVolume) {
+      case 'day':
+        return volume;
+      case 'week':
+        return volume7Days;
+      case 'month':
+        return volume30Days;
+    }
+  }, [volume, volume7Days, volume30Days, currentViewVolume]);
+
+  const _sales = useMemo(() => {
+    switch (currentViewSales) {
+      case 'day':
+        return sales;
+      case 'week':
+        return sales7Days;
+      case 'month':
+        return sales30Days;
+    }
+  }, [sales, sales7Days, sales30Days, currentViewSales]);
+
+  const _averagePrice = useMemo(() => {
+    switch (currentViewAveragePrice) {
+      case 'day':
+        return averagePrice;
+      case 'week':
+        return averagePrice7Days;
+      case 'month':
+        return averagePrice30Days;
+    }
+  }, [
+    averagePrice,
+    averagePrice7Days,
+    averagePrice30Days,
+    currentViewAveragePrice,
+  ]);
 
   return (
     <Tag>
@@ -49,7 +134,7 @@ const NftPricePanel = ({
           <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">Volume</div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>${getNumberWithCommas(volume)}</div>
+              <div>${getNumberWithCommas(_volume)}</div>
               <div className="text-[12px] text-green ml-[10px] mt-[2px]">
                 <TickerText
                   text={volumePercentage}
@@ -60,6 +145,7 @@ const NftPricePanel = ({
               <div className="ml-[24px]">
                 <DateViewSelector
                   onViewChange={(val) => setCurrentViewVolume(val)}
+                  current={currentViewVolume}
                 />
               </div>
             </div>
@@ -67,7 +153,7 @@ const NftPricePanel = ({
           <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">Change</div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>${getNumberWithCommas(change)}</div>
+              <div>${getNumberWithCommas(_change)}</div>
               <div className="text-[12px] text-green ml-[10px] mt-[2px]">
                 <TickerText
                   text={changePercentage}
@@ -77,7 +163,8 @@ const NftPricePanel = ({
               </div>
               <div className="ml-[24px]">
                 <DateViewSelector
-                  onViewChange={(val) => setCurrentViewVolume(val)}
+                  onViewChange={(val) => setCurrentViewChange(val)}
+                  current={currentViewChange}
                 />
               </div>
             </div>
@@ -85,7 +172,7 @@ const NftPricePanel = ({
           <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">Sales</div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>${getNumberWithCommas(sales)}</div>
+              <div>${getNumberWithCommas(_sales)}</div>
               <div className="text-[12px] text-green ml-[10px] mt-[2px]">
                 <TickerText
                   text={salesPercentage}
@@ -95,7 +182,8 @@ const NftPricePanel = ({
               </div>
               <div className="ml-[24px]">
                 <DateViewSelector
-                  onViewChange={(val) => setCurrentViewVolume(val)}
+                  onViewChange={(val) => setCurrentViewSales(val)}
+                  current={currentViewSales}
                 />
               </div>
             </div>
@@ -105,7 +193,7 @@ const NftPricePanel = ({
               Average Price
             </div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>${getNumberWithCommas(averagePrice)}</div>
+              <div>${getNumberWithCommas(_averagePrice)}</div>
               <div className="text-[12px] text-green ml-[10px] mt-[2px]">
                 <TickerText
                   text={averagePricePercentage}
@@ -115,7 +203,8 @@ const NftPricePanel = ({
               </div>
               <div className="ml-[14px]">
                 <DateViewSelector
-                  onViewChange={(val) => setCurrentViewVolume(val)}
+                  onViewChange={(val) => setCurrentViewAveragePrice(val)}
+                  current={currentViewAveragePrice}
                 />
               </div>
             </div>
@@ -133,19 +222,19 @@ const NftPricePanel = ({
               Total Supply
             </div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>${getNumberWithCommas(totalSupply)}</div>
+              <div>{getNumberWithCommas(totalSupply, 0)}</div>
             </div>
           </div>
           <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">Owners</div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>{getNumberWithCommas(owners)}</div>
+              <div>{getNumberWithCommas(owners, 0)}</div>
             </div>
           </div>
           <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">Count</div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>{getNumberWithCommas(count)}</div>
+              <div>{getNumberWithCommas(count, 0)}</div>
             </div>
           </div>
         </div>

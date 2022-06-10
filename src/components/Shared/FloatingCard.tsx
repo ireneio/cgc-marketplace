@@ -41,6 +41,8 @@ const FloatingCard = ({
   logo,
   isFloatRight,
 }: Props) => {
+  console.log(categories);
+
   const handleMouseOver = () => {
     onMouseOver && onMouseOver(id);
   };
@@ -99,7 +101,7 @@ const FloatingCard = ({
                 }}
               ></div> */}
               {/* video */}
-              <div className="relative w-[360px]">
+              <div className="relative w-[360px] min-h-[170px]">
                 <video muted width={360} autoPlay>
                   <source src={bgOnHover} type="video/mp4" />
                 </video>
@@ -108,7 +110,7 @@ const FloatingCard = ({
                 </div>
               </div>
             </div>
-            <div className="bg-[#13002B] pt-[40px] pb-[24px]">
+            <div className="bg-[#13002B] pt-[20px] pb-[24px]">
               <div className="px-[12px] py-[0px]">
                 <div className="font-normal text-[#FFFFFF] text-[14px]">
                   {title.length > 75 ? title.slice(0, 75) + '...' : title}

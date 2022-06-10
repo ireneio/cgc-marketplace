@@ -26,7 +26,7 @@ const AllCollections = () => {
         name: item.metadata.name,
         slug: item.metadata.name.toLowerCase().split(' ').join(''),
         tags: item.tags.length ? item.tags.map((item: any) => item.tag) : [],
-        genre: Object.entries(item.metadata.genre).map(([, value]) => value),
+        genre: [item.metadata.genre],
         services: item.services,
         description: item.metadata.description,
       };

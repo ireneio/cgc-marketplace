@@ -16,6 +16,7 @@ const initialState: CollectionState = {
       name: '',
       slug: '',
     },
+    nftCollectionStats: {},
     services: [],
     categories: [],
     genre: [],

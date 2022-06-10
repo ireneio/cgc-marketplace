@@ -19,6 +19,9 @@ const DetailView = () => {
   const tokens = useAppSelector(
     (state) => state.collection.currentCollection.tokens,
   );
+  const nftCollectionStats = useAppSelector(
+    (state) => state.collection.currentCollection.nftCollectionStats,
+  );
 
   const info = useMemo(() => {
     return {
@@ -130,17 +133,21 @@ const DetailView = () => {
             <div className="text-[#FFFFFF] font-bold text-[20px]">Detail</div>
           </div>
           <div className="mb-[32px] flex space-x-4">
-            <ItemCountPanel text="items available" count={5400} />
-            <ItemCountPanel text="items available" count={5400} />
             <ItemCountPanel
-              text="items available"
-              count={5400}
-              countUnit={'/img/icon_unit_sol.png'}
+              text="Items available"
+              count={nftCollectionStats?.count}
             />
             <ItemCountPanel
-              text="items available"
-              count={5400}
-              countUnit={'/img/icon_unit_sol.png'}
+              text="Items Listed"
+              count={nftCollectionStats?.meListingCount}
+            />
+            <ItemCountPanel
+              text="Number of Owners"
+              count={nftCollectionStats?.numOwners}
+            />
+            <ItemCountPanel
+              text="Total Supply"
+              count={nftCollectionStats?.totalSupply}
             />
           </div>
           {tokens.map((token: any, idx: number) => {
@@ -150,24 +157,34 @@ const DetailView = () => {
                   brandImg={token?.iconSrcUrl}
                   brandName={metadata.name}
                   symbol={token?.symbol?.toUpperCase()}
-                  price={0.000012345}
+                  price={token?.tokenActivePrice?.usdPrice}
                   priceToBTC={0.000012345}
                   priceToETH={0.0000012345}
-                  priceFluctuation={2.45}
+                  priceFluctuation={
+                    token?.tokenStats[0]?.usdAthChangePercentage
+                  }
                   priceToBTCFluctuation={2.45}
                   priceToETHFluctuation={2.45}
-                  lowDay={0.001}
-                  lowWeek={0.005213123}
-                  lowMonth={0.1234567}
-                  highDay={1.23456}
-                  highWeek={123.456677}
-                  highMonth={123.666666}
-                  marketCap={1999992345}
-                  fullyDilutedMarketCap={123456789}
-                  volume={123456789}
-                  circulatingSupply={1234455}
-                  circulatingSupplyPercentage={5.2}
-                  totalSupply={12345567899}
+                  lowDay={token?.tokenStats[0]?.usdLow24h}
+                  lowWeek={token?.tokenStats[0]?.usdLow24h}
+                  lowMonth={token?.tokenStats[0]?.usdLow24h}
+                  highDay={token?.tokenStats[0]?.usdHigh24h}
+                  highWeek={token?.tokenStats[0]?.usdHigh24h}
+                  highMonth={token?.tokenStats[0]?.usdHigh24h}
+                  marketCap={token?.tokenStats[0]?.usdMarketCap}
+                  fullyDilutedMarketCap={
+                    token?.tokenStats[0]?.usdFullyDilutedValuation
+                  }
+                  volume={token?.tokenStats[0]?.usdTotalVolume}
+                  circulatingSupply={token?.tokenStats[0]?.circulatingSupply}
+                  circulatingSupplyPercentage={Number(
+                    (
+                      (token?.tokenStats[0]?.circulatingSupply /
+                        token?.tokenStats[0]?.totalSupply) *
+                      100
+                    ).toFixed(2),
+                  )}
+                  totalSupply={token?.tokenStats[0]?.totalSupply}
                   contractAddress={token?.tokenAddress}
                 />
               </div>
@@ -175,20 +192,36 @@ const DetailView = () => {
           })}
           <div className="mb-[32px]">
             <NftPricePanel
-              name={'SolChicks'}
-              volume={1234567.89}
-              volumePercentage={12}
-              change={124567}
-              changePercentage={4.5}
-              sales={6789123}
-              salesPercentage={6.1}
-              averagePrice={1233314}
-              averagePricePercentage={1.45}
-              totalVolume={124554.4}
-              totalSales={1243324345}
-              totalSupply={123456789}
-              owners={12345}
-              count={123456789}
+              name={metadata.name}
+              volume={nftCollectionStats?.usdMeTotalVolume}
+              volumePercentage={0}
+              volume7Days={nftCollectionStats?.usdSevenDayVolumn}
+              volume7DaysPercentage={0}
+              volume30Days={nftCollectionStats?.usdThirtyDayVolumn}
+              volume30DaysPercentage={0}
+              change={nftCollectionStats?.usdOneDayChange}
+              changePercentage={0}
+              change7Days={nftCollectionStats?.usdSevenDayChange}
+              change7DaysPercentage={0}
+              change30Days={nftCollectionStats?.usdThirtyDayChange}
+              change30DaysPercentage={0}
+              sales={nftCollectionStats?.usdOneDaySales}
+              salesPercentage={0}
+              sales7Days={nftCollectionStats?.usdSevenDaySales}
+              sales7DaysPercentage={0}
+              sales30Days={nftCollectionStats?.usdThirtyDaySales}
+              sales30DaysPercentage={0}
+              averagePrice={nftCollectionStats?.usdAveragePrice}
+              averagePricePercentage={0}
+              averagePrice7Days={nftCollectionStats?.usdSevenDayAveragePrice}
+              averagePrice7DaysPercentage={0}
+              averagePrice30Days={nftCollectionStats?.usdThirtyDayAveragePrice}
+              averagePrice30DaysPercentage={0}
+              totalVolume={nftCollectionStats?.usdTotalVolume}
+              // totalSales={nftCollectionStats?.totalSales}
+              totalSupply={nftCollectionStats?.totalSupply}
+              owners={nftCollectionStats?.numOwners}
+              count={nftCollectionStats?.count}
             />
           </div>
         </div>
