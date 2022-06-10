@@ -16,10 +16,13 @@ const DetailView = () => {
   const services = useAppSelector(
     (state) => state.collection.currentCollection.services,
   );
+  const tokens = useAppSelector(
+    (state) => state.collection.currentCollection.tokens,
+  );
 
   const info = useMemo(() => {
     return {
-      title: 'title',
+      title: metadata.name,
       name: metadata.name,
       id: metadata.id,
       slug: metadata.slug,
@@ -140,60 +143,36 @@ const DetailView = () => {
               countUnit={'/img/icon_unit_sol.png'}
             />
           </div>
-          <div className="mb-[32px]">
-            <TokenPricePanel
-              brandImg="https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/cxxShYRVcepDudXhe7U62QHvw8uBJoKFifmzggGKVC2/logo.png"
-              brandName="SolChicks"
-              symbol="CHICKS"
-              price={0.000012345}
-              priceToBTC={0.000012345}
-              priceToETH={0.0000012345}
-              priceFluctuation={2.45}
-              priceToBTCFluctuation={2.45}
-              priceToETHFluctuation={2.45}
-              lowDay={0.001}
-              lowWeek={0.005213123}
-              lowMonth={0.1234567}
-              highDay={1.23456}
-              highWeek={123.456677}
-              highMonth={123.666666}
-              marketCap={1999992345}
-              fullyDilutedMarketCap={123456789}
-              volume={123456789}
-              circulatingSupply={1234455}
-              circulatingSupplyPercentage={5.2}
-              totalSupply={12345567899}
-              contractAddress={'cxxShYRVcepDudXhe7U62QHvw8uBJoKFifmzggGKVC2'}
-              scanAddress={'solscan.io/token/cxx'}
-            />
-          </div>
-          <div className="mb-[32px]">
-            <TokenPricePanel
-              brandImg="https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/8j3hXRK5rdoZ2vSpGLRmXtWmW6iYaRUw5xVk4Kzmc9Hp/logo.png"
-              brandName="SolChicks"
-              symbol="SHARDS"
-              price={0.000012345}
-              priceToBTC={0.000012345}
-              priceToETH={0.0000012345}
-              priceFluctuation={2.45}
-              priceToBTCFluctuation={2.45}
-              priceToETHFluctuation={2.45}
-              lowDay={0.001}
-              lowWeek={0.005213123}
-              lowMonth={0.1234567}
-              highDay={1.23456}
-              highWeek={123.456677}
-              highMonth={123.666666}
-              marketCap={1999992345}
-              fullyDilutedMarketCap={123456789}
-              volume={123456789}
-              circulatingSupply={1234455}
-              circulatingSupplyPercentage={5.2}
-              totalSupply={12345567899}
-              contractAddress={'cxxShYRVcepDudXhe7U62QHvw8uBJoKFifmzggGKVC2'}
-              scanAddress={'solscan.io/token/cxx'}
-            />
-          </div>
+          {tokens.map((token: any, idx: number) => {
+            return (
+              <div className="mb-[32px]" key={idx}>
+                <TokenPricePanel
+                  brandImg={token?.iconSrcUrl}
+                  brandName={metadata.name}
+                  symbol={token?.symbol?.toUpperCase()}
+                  price={0.000012345}
+                  priceToBTC={0.000012345}
+                  priceToETH={0.0000012345}
+                  priceFluctuation={2.45}
+                  priceToBTCFluctuation={2.45}
+                  priceToETHFluctuation={2.45}
+                  lowDay={0.001}
+                  lowWeek={0.005213123}
+                  lowMonth={0.1234567}
+                  highDay={1.23456}
+                  highWeek={123.456677}
+                  highMonth={123.666666}
+                  marketCap={1999992345}
+                  fullyDilutedMarketCap={123456789}
+                  volume={123456789}
+                  circulatingSupply={1234455}
+                  circulatingSupplyPercentage={5.2}
+                  totalSupply={12345567899}
+                  contractAddress={token?.tokenAddress}
+                />
+              </div>
+            );
+          })}
           <div className="mb-[32px]">
             <NftPricePanel
               name={'SolChicks'}

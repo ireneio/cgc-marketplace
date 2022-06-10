@@ -38,7 +38,10 @@ const AllCollections = () => {
     setLoading(true);
     const collections = await getCollections();
     setItems(collections);
-    setLoading(false);
+    const tid = setTimeout(() => {
+      setLoading(false);
+      clearTimeout(tid);
+    }, 800);
   };
 
   useEffect(() => {
