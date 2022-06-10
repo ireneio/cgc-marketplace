@@ -12,7 +12,7 @@ import { useEthereumProvider } from '@/contexts/EthereumWalletProvider';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useRouter } from 'next/router';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 type Selection =
   | 'wallet'
@@ -57,6 +57,19 @@ const Account = () => {
         return 'title';
     }
   }, [currentSelection, walletTitle]);
+
+  const handleSelection = (value: Selection) => {
+    setCurrentSelection(value);
+    router.push(`/account?tab=${value}`);
+  };
+
+  useEffect(() => {
+    if (router.query.tab) {
+      const tab = String(router.query.tab);
+      setCurrentSelection(tab as Selection);
+      router.query.tab = '';
+    }
+  }, [router.query]);
 
   return (
     <DefaultLayout>
@@ -103,7 +116,7 @@ const Account = () => {
               // { text: 'Activities', value: 'activities' },
             ]}
             currentValue={currentSelection}
-            onItemClick={(value) => setCurrentSelection(value as Selection)}
+            onItemClick={(value) => handleSelection(value as Selection)}
           />
         </div>
       </div>

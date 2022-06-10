@@ -68,6 +68,7 @@ const FloatingCard = ({
               backgroundImage: `url(${bg})`,
             }}
           ></div>
+          {/* deprecated catheon logo */}
           {/* {showCatheonLogo && (
             <div
               className="absolute top-[8px] left-[8px] w-[24px] h-[24px] bg-no-repeat bg-center bg-contain opacity-100"
@@ -81,21 +82,23 @@ const FloatingCard = ({
           initial={{ opacity: 0, x: '10px', y: '-100px' }}
           animate={{
             opacity: 1,
-            x: isFloatRight ? '0px' : '10px',
+            x: isFloatRight ? '0px' : '-25px',
             y: '-100px',
           }}
           className="bg-[#13002B] rounded-[5px] cursor-pointer relative z-[100]"
           onMouseLeave={() => handleMouseOut()}
         >
           {/*300x340*/}
-          <div className="w-[360px] h-[340px] absolute border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden">
+          <div className="w-[360px] h-[360px] absolute border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden">
             <div className="relative flex items-start justify-center">
+              {/* gif */}
               {/* <div
                 className="w-[300px] h-[170px] bg-cover bg-center bg-no-repeat"
                 style={{
                   backgroundImage: `url(${bgOnHover})`,
                 }}
               ></div> */}
+              {/* video */}
               <div className="w-[360px] h-[170px]">
                 <video muted width={360} autoPlay>
                   <source src={bgOnHover} type="video/mp4" />
@@ -105,12 +108,12 @@ const FloatingCard = ({
                 <img src={logo} alt={''} width={100} height={100} />
               </div>
             </div>
-            <div className="bg-[#13002B] pt-[12px] pb-[24px]">
+            <div className="bg-[#13002B] pt-[40px] pb-[24px]">
               <div className="px-[12px] py-[0px]">
                 <div className="font-normal text-[#FFFFFF] text-[14px]">
                   {title.length > 75 ? title.slice(0, 75) + '...' : title}
                 </div>
-                <div className="w-full absolute bottom-[54px] flex justify-between items-center pr-[24px]">
+                <div className="w-full absolute bottom-[48px] flex justify-between items-center pr-[24px]">
                   <div
                     className="text-[#FFFFFF] text-[12px] uppercase flex items-center pr-[12px] flex-wrap"
                     style={{ flexBasis: '70%' }}

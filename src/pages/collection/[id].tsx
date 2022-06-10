@@ -1,6 +1,5 @@
 import DetailView from '@/components/Collection/DetailView';
 import MarketView from '@/components/Collection/MarketView';
-import YourView from '@/components/Collection/YourView';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
 import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Divider from '@/components/Shared/Divider';
@@ -11,6 +10,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { getBreadcrumbRoutes } from '@/utils/cgcConsts';
 import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
+import { LoginModal } from '@/components/Modals/LoginModal';
 
 type Selection =
   | 'About'
@@ -23,17 +23,28 @@ type Selection =
 const Collection = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [currentSelection, setCurrentSelection] = useState<Selection>('About');
   const oAuthCtx = useContext(OAuthContext);
+  const email = useAppSelector((state) => state.user.userInfo.email);
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
+  const [currentSelection, setCurrentSelection] = useState<Selection>('About');
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
 
   const handleSelect = (value: Selection) => {
-    setCurrentSelection(value);
+    if (value === 'Your Items') {
+      if (email) {
+        router.push('/account?tab=items');
+      } else {
+        setLoginModalOpen(true);
+      }
+      return;
+    }
     if (value === '...') {
       return;
     }
+
+    setCurrentSelection(value);
     if (!metadata.slug) {
       return;
     }
@@ -90,28 +101,19 @@ const Collection = () => {
       oAuthCtx.access_token,
       String(router.query.id),
     );
-    console.log(response);
-    // if (response) {
-    //   dispatch({
-    //     type: 'SET_CURRENT_COLLECTION',
-    //     payload: {
-    //       ...response,
-    //       metadata: {
-    //         ...response.metadata,
-    //         slug: response.metadata.name.toLowerCase().split(' ').join(''),
-    //         id: response.id,
-    //       },
-    //     },
-    //   });
-    // }
+    if (response?.data) {
+      dispatch({
+        type: 'SET_CURRENT_COLLECTION_TOKEN_DATA',
+        payload: response?.data,
+      });
+    }
   };
 
   useEffect(() => {
-    if (oAuthCtx.access_token && router.query.id) {
-      getCollectionData();
-      getTokenData();
+    if (router.query.id) {
+      Promise.all([getCollectionData(), getTokenData()]);
     }
-  }, [oAuthCtx.access_token, router.query.id]);
+  }, [router.query.id]);
 
   const selectgroupItems = useMemo(() => {
     return [
@@ -143,6 +145,8 @@ const Collection = () => {
             } else if (val === 'Explore/All') {
               dispatch({ type: 'SET_NAVIGATION_PATH', payload: val });
               router.push('/').then();
+            } else if (val === 'Your Items') {
+              handleSelect('Your Items');
             }
           }}
         />
@@ -164,7 +168,11 @@ const Collection = () => {
       </div>
       {currentSelection === 'About' && <DetailView />}
       {currentSelection === 'All Items' && <MarketView />}
-      {currentSelection === 'Your Items' && <YourView />}
+      <LoginModal
+        isOpen={loginModalOpen}
+        setIsOpen={setLoginModalOpen}
+        redirectPath="/account?tab=items"
+      />
     </DefaultLayout>
   );
 };

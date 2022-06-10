@@ -7,7 +7,7 @@ interface SidebarItem {
 interface Props {
   items: SidebarItem[];
   currentValue: string;
-  onItemClick?: (value: string) => void | Promise<void>;
+  onItemClick?: (value: any) => void | Promise<void>;
 }
 
 const Menu = ({ items, currentValue, onItemClick }: Props) => {
@@ -30,7 +30,7 @@ const Menu = ({ items, currentValue, onItemClick }: Props) => {
             }}
             onClick={() => {
               if (!item.disabled) {
-                onItemClick && onItemClick(item.value);
+                onItemClick && onItemClick(item);
               }
             }}
           >

@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Footer from './Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -112,23 +112,6 @@ const DefaultLayout = ({ children, title }: Props) => {
     }
   }, []);
 
-  const [windowWidth, setWindowWidth] = useState(1366);
-  const [windowHeight, setWindowHeight] = useState(768);
-
-  useEffect(() => {
-    const cb = () => {
-      setWindowWidth(window.innerWidth);
-      setWindowHeight(window.innerHeight);
-    };
-    if (window) {
-      // window.addEventListener('resize', cb);
-      cb();
-    }
-    return () => {
-      // window.removeEventListener('resize', cb);
-    };
-  }, []);
-
   return (
     <>
       <div className="min-h-[100vh] bg-[#0C001C] max-w-[100vw] overflow-x-hidden">
@@ -187,10 +170,10 @@ const DefaultLayout = ({ children, title }: Props) => {
             />
           </div>
           <div
-            className="ml-[225px] pr-[24px] mx-auto w-full"
+            className="ml-[225px] pr-[24px] mx-auto"
             style={{
-              // width: windowWidth - 225,
-              minHeight: windowHeight - 75 - 100,
+              width: 'calc(100vw - 225px)',
+              minHeight: 'calc(100vh - 75px - 100px)',
             }}
           >
             {children}
@@ -199,7 +182,7 @@ const DefaultLayout = ({ children, title }: Props) => {
         <div
           className="w-full relative overflow-x-hidden bg-[#141414] z-[101]"
           style={{
-            paddingBottom: windowHeight - windowHeight * 0.75 - 75 - 120,
+            paddingBottom: 'calc(100vh - calc(100vh * 0.75) - 75px - 120px)',
           }}
         >
           <Footer />

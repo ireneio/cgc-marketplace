@@ -80,7 +80,8 @@ const Button = ({
         )}
         {loading && (
           <div>
-            <img src="/img/spinner.svg" alt="spinner" width={14} height={14} />
+            {/* <img src="/img/spinner.svg" alt="spinner" width={24} height={24} /> */}
+            Loading...
           </div>
         )}
       </button>

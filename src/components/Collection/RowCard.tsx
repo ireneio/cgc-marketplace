@@ -35,6 +35,8 @@ const RowCard = ({
   const handleImageLoad = (e: any) => {
     e.target.classList.remove('blur');
     e.target.src = image;
+    e.target.style.width = '100%';
+    e.target.style.height = 'auto';
   };
 
   const handleImageError = (e: any) => {
@@ -57,7 +59,7 @@ const RowCard = ({
           src={'/img/cgc_icon.png'}
           alt={name}
           // width={205}
-          // height={205}
+          height={150}
           onError={(e) => handleImageError(e)}
           className="blur rounded-t-[5px] w-full h-auto"
           onLoad={(e) => handleImageLoad(e)}

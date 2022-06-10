@@ -37,8 +37,6 @@ const MarketView = () => {
     threshold: 0,
   });
 
-  const listedItemCount = items.length;
-
   const _items = useMemo(() => {
     return items.slice(0, page + 19);
   }, [items, page]);
@@ -91,7 +89,6 @@ const MarketView = () => {
   };
 
   const getData = async () => {
-    setLoading(true);
     const response = await api.getNftListByCollectionId(
       oAuthCtx.access_token,
       metadata.slug,
@@ -106,15 +103,24 @@ const MarketView = () => {
         tokenAddress: item?.tokenAddress,
       };
     });
-    setItems(map);
-    setLoading(false);
+    return map;
+  };
+
+  const initData = async () => {
+    setLoading(true);
+    const nfts = await getData();
+    setItems(nfts);
+    const tid = setTimeout(() => {
+      setLoading(false);
+      clearTimeout(tid);
+    }, 800);
   };
 
   useEffect(() => {
-    if (oAuthCtx.access_token && metadata.id) {
-      getData();
+    if (metadata.slug) {
+      initData();
     }
-  }, [metadata, oAuthCtx.access_token, refresh]);
+  }, [metadata, refresh]);
 
   const getCart = () => {
     dispatch({ type: 'INIT_CART' });
@@ -140,7 +146,7 @@ const MarketView = () => {
             />
           </div>
           <div className="ml-[8px] text-[#FFFFFF] text-[14px]">
-            {getNumberWithCommas(listedItemCount, 0)} items
+            {getNumberWithCommas(items.length, 0)} items
           </div>
           <div className="ml-auto">
             <SelectGroup

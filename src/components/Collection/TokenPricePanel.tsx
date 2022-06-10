@@ -30,7 +30,6 @@ interface Props {
   circulatingSupplyPercentage: number;
   totalSupply: number;
   contractAddress: string;
-  scanAddress: string;
 }
 
 const TokenPricePanel = ({

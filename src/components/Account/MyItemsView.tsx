@@ -14,6 +14,12 @@ import Menu from './Menu';
 
 type SelectionView = 'Row' | 'List';
 
+type Sidebar = {
+  text: string;
+  collection_id: string;
+  value: string;
+};
+
 const LOADING_ARR = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const MyItemsView = () => {
@@ -24,34 +30,48 @@ const MyItemsView = () => {
     (state) => state.collection.currentCollection.metadata,
   );
   const [, setRefresh] = useState(false);
-  const [sidebar, setSidebar] = useState('');
+  const [sidebar, setSidebar] = useState<Sidebar>({
+    text: '',
+    collection_id: '',
+    value: '',
+  });
   const [myItems] = useState([]);
   const [currentView, setCurrentView] = useState<SelectionView>('List');
-  const { collections } = useGetCollections();
-  const { data: recommendedItems, loading, fn } = useGetNftByCollectionId();
+  const { data: collections } = useGetCollections();
+  const {
+    data: recommendedItems,
+    loading,
+    getData: getNftDataByCollectionId,
+  } = useGetNftByCollectionId();
 
   const _collections = useMemo(() => {
     return collections.map((collection) => {
       return {
         text: collection.name,
-        value: collection.id,
+        value: collection.name.toLowerCase(),
+        collection_id: collection.id,
       };
     });
   }, [collections]);
 
+  // set default to first collection
   useEffect(() => {
     if (_collections.length) {
-      setSidebar(_collections[0].value);
+      const first = _collections[0];
+      setSidebar(first);
     }
   }, [_collections]);
 
+  // when there are collections and no owned items, get recommended items
   useEffect(() => {
-    fn(sidebar);
-  }, [sidebar]);
+    if (sidebar && !myItems.length) {
+      getNftDataByCollectionId(sidebar.value);
+    }
+  }, [sidebar, myItems]);
 
   const _recommendedItems = useMemo(() => {
     return recommendedItems
-      .filter((item) => item.collection_id === sidebar)
+      .filter((item) => item.collection_id === sidebar.collection_id)
       .slice(0, 5);
   }, [recommendedItems, sidebar]);
 
@@ -61,12 +81,6 @@ const MyItemsView = () => {
     }
     return myItems;
   }, [myItems, _recommendedItems]);
-
-  // useEffect(() => {
-  //   if (inView) {
-  //     setPage((prev) => prev + 19);
-  //   }
-  // }, [inView]);
 
   const handleSelectView = (value: SelectionView) => {
     setCurrentView(value);
@@ -93,13 +107,17 @@ const MyItemsView = () => {
     router.push(`/nft/${tokenAddress}?collection_id=${metadata.id}`).then();
   };
 
+  const handleSidebarChange = (value: Sidebar) => {
+    setSidebar(value);
+  };
+
   return (
     <div className="flex">
       <div style={{ width: '200px', flexShrink: 0 }} className="mr-[24px]">
         <Menu
           items={_collections}
-          currentValue={sidebar}
-          onItemClick={(value) => setSidebar(value)}
+          currentValue={sidebar.value}
+          onItemClick={(value) => handleSidebarChange(value)}
         />
       </div>
       <div style={{ flexGrow: 1 }}>
@@ -237,7 +255,6 @@ const MyItemsView = () => {
                   </div>
                 );
               })}
-              {/* <div ref={ref}></div> */}
             </div>
           )}
           {currentView === 'Row' && !loading && (
@@ -263,7 +280,6 @@ const MyItemsView = () => {
                   </div>
                 );
               })}
-              {/* <div ref={ref}></div> */}
             </div>
           )}
         </div>

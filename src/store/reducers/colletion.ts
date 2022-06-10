@@ -34,6 +34,10 @@ type Action =
   | {
       type: 'SET_COLLECTIONS';
       payload: any[];
+    }
+  | {
+      type: 'SET_CURRENT_COLLECTION_TOKEN_DATA';
+      payload: Record<string, any>[];
     };
 
 export default function collectionReducer(
@@ -50,6 +54,14 @@ export default function collectionReducer(
       return {
         ...state,
         currentCollection: action.payload,
+      };
+    case 'SET_CURRENT_COLLECTION_TOKEN_DATA':
+      return {
+        ...state,
+        currentCollection: {
+          ...state.currentCollection,
+          tokens: action.payload,
+        },
       };
     default:
       return state;

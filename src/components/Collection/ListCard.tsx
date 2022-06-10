@@ -35,6 +35,8 @@ const ListCard = ({
   const handleImageLoad = (e: any) => {
     e.target.classList.remove('blur');
     e.target.src = image === 'undefined' ? '/img/cgc_icon.png' : image;
+    e.target.style.width = '100%';
+    e.target.style.height = 'auto';
   };
 
   const handleImageError = (e: any) => {
@@ -56,8 +58,8 @@ const ListCard = ({
         <img
           src={'/img/cgc_icon.png'}
           alt={name}
-          // width={205}
-          // height={205}
+          // width={'100%'}
+          height={150}
           onError={(e) => handleImageError(e)}
           className="blur rounded-t-[5px] w-full h-auto"
           onLoad={(e) => handleImageLoad(e)}
