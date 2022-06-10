@@ -9,13 +9,20 @@ import SignupTwo from '../Auth/SignupTwo';
 import SignupThree from '../Auth/SignupThree';
 import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
+import { useRouter } from 'next/router';
 
 type LoginModalProps = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  redirectPath?: string;
 };
 
-export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
+export const LoginModal = ({
+  isOpen,
+  setIsOpen,
+  redirectPath,
+}: LoginModalProps) => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const oAuthCtx = useContext(OAuthContext);
   const [disableSignUp] = useState(true);
@@ -61,10 +68,20 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
   const handleLoginButtonClick = async () => {
     if (btnLoading) return;
     setBtnLoading(true);
-    const response = await api.login(
-      form.getValues('email'),
-      form.getValues('password'),
-    );
+    // const response = await api.login(
+    //   form.getValues('email'),
+    //   form.getValues('password'),
+    // );
+    // TODO temp success response
+    const response = {
+      success: true,
+      data: {
+        access_token: '',
+        expired_at: 123,
+        token_type: 'bearer',
+      },
+      message: '',
+    };
     if (response.success) {
       oAuthCtx.successLogin(
         response?.data.access_token,
@@ -75,6 +92,9 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
         type: 'SHOW_SNACKBAR',
         payload: { title: 'info', text: 'Sign In Success!' },
       });
+      if (redirectPath) {
+        router.replace(redirectPath);
+      }
       setBtnLoading(false);
       setIsOpen(false);
     } else {
