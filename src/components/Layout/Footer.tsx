@@ -222,7 +222,7 @@ export default function Footer() {
             </form>
           </div>
         </div>
-        <Divider />
+        {/* <Divider />
         <div className="pt-8 lg:flex lg:items-center lg:justify-between xl:mt-0">
           <div>
             <h3 className="text-sm font-semibold text-[#9497AA] tracking-wider uppercase">
@@ -249,8 +249,8 @@ export default function Footer() {
               <Button onClick={() => handleSubscribe()}>Subscribe</Button>
             </div>
           </form>
-        </div>
-        <div className="mb-8 mt-8">
+        </div> */}
+        <div className="mb-[24px] mt-[24px]">
           <Divider />
         </div>
         <div className="pt-8 md:flex md:items-center md:justify-between">
