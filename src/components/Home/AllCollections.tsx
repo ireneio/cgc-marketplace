@@ -1,4 +1,3 @@
-import { testData } from '@/data/test';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useContext, useEffect, useState } from 'react';
 import ButtonLink from '../Shared/ButtonLink';
@@ -11,7 +10,7 @@ import api from '@/utils/api';
 
 const AllCollections = () => {
   const dispatch = useAppDispatch();
-  const [items, setItems] = useState(testData.recentlyAddedCollections);
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const sideBarPath = useAppSelector((state) => state.layout.navigation.path);
   const oAuthCtx = useContext(OAuthContext);
@@ -32,24 +31,19 @@ const AllCollections = () => {
         description: item.metadata.description,
       };
     });
-    setItems(map);
+    return map;
+  };
+
+  const initCollections = async () => {
+    setLoading(true);
+    const collections = await getCollections();
+    setItems(collections);
+    setLoading(false);
   };
 
   useEffect(() => {
-    if (oAuthCtx.access_token) {
-      getCollections();
-    }
-  }, [oAuthCtx.access_token]);
-
-  useEffect(() => {
-    const _tid = setTimeout(() => {
-      setLoading(false);
-      clearTimeout(_tid);
-    }, 1200);
-    return () => {
-      clearTimeout(_tid);
-    };
-  });
+    initCollections();
+  }, []);
 
   return (
     <div className="relative">
