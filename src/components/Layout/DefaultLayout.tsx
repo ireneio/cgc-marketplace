@@ -112,7 +112,7 @@ const DefaultLayout = ({ children, title }: Props) => {
     }
   }, []);
 
-  const [windowWidth, setWindowWidth] = useState(1366);
+  const [, setWindowWidth] = useState(1366);
   const [windowHeight, setWindowHeight] = useState(768);
 
   useEffect(() => {
