@@ -1,7 +1,7 @@
 import axios, { Method } from 'axios';
 
 export const API_URL =
-  process.env.API_URL || ' https://dev-api.catheongaming.com';
+  process.env.API_URL || 'https://dev-api.catheongaming.com';
 
 console.log('[env] API_URL', API_URL);
 
@@ -29,8 +29,21 @@ export const fetcher = (config: FetcherConfig) => {
         params: query,
         ...rest,
       })
-      .then((res) => res.data)
-      .catch((err) => err);
+      .then((res) => {
+        return {
+          success: true,
+          message: 'success',
+          data: res.data,
+        };
+      })
+      .catch((err) => {
+        console.log(err);
+        return {
+          success: false,
+          message: err.response.data.message,
+          data: {},
+        };
+      });
   } else {
     return apiInstance
       .request({
@@ -38,7 +51,10 @@ export const fetcher = (config: FetcherConfig) => {
         url: config,
       })
       .then((res) => res.data)
-      .catch((err) => err);
+      .catch((err) => {
+        console.log(err);
+        return null;
+      });
   }
 };
 
@@ -51,9 +67,5 @@ export const checkResponseError = (data: any) => {
 };
 
 export const isResponseError = (data: any) => {
-  const _data = data;
-  if (_data.isAxiosError) {
-    return true;
-  }
-  return false;
+  return !!data.isAxiosError;
 };

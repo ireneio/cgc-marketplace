@@ -64,6 +64,7 @@ const Login = ({
           onClick={() => onLogin()}
           disabled={email === '' || password === '' || loading}
           filled
+          loading={loading}
         >
           Sign In
         </Button>

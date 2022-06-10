@@ -1,40 +1,20 @@
-import { API_URL, fetcher } from '../swr';
-
-const CLIENT_ID = API_URL.includes('dev')
-  ? '773124bb-57cf-4eae-a7be-980c76ccd338'
-  : process.env.CLIENT_ID || '';
-const CLIENT_SECRET = API_URL.includes('dev')
-  ? '1qaz2wsx'
-  : process.env.CLIENT_SECRET || '';
+import { fetcher } from '../swr';
 
 const api = {
   healthCheck: async () => {
     const response = await fetcher({ url: '/', method: 'get' });
-    console.log(response);
-    return response;
-  },
-  getAuthToken: async () => {
-    const response = await fetcher({
-      url: '/api/oauth2/token',
-      method: 'post',
-      data: {
-        client_id: CLIENT_ID,
-        client_secret: CLIENT_SECRET,
-        grant_type: 'authorization_code',
-      },
-    });
+    console.log('API Health: ', response);
     return response;
   },
   login: async (email: string, password: string) => {
-    const response = await fetcher({
-      url: '/api/user',
+    return await fetcher({
+      url: '/api/user/login',
       method: 'post',
       data: {
         email,
         password,
       },
     });
-    return response;
   },
   register: async (email: string, password: string) => {
     const response = await fetcher({
@@ -55,7 +35,7 @@ const api = {
         authorization: `Bearer ${token}`,
       },
     });
-    return response;
+    return response.data;
   },
   getCollectionById: async (token: string, slug: string) => {
     const response = await fetcher({
@@ -65,7 +45,7 @@ const api = {
         authorization: `Bearer ${token}`,
       },
     });
-    return response;
+    return response.data;
   },
   getTokenListByCollectionId: async (token: string, slug: string) => {
     const response = await fetcher({
@@ -85,7 +65,7 @@ const api = {
         authorization: `Bearer ${token}`,
       },
     });
-    return response;
+    return response.data;
   },
 };
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Fragment, useState, useEffect, useMemo } from 'react';
+import { Fragment, useState, useEffect, useMemo, useContext } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useAppDispatch } from '@/store';
 import { useForm, FormProvider } from 'react-hook-form';
@@ -7,6 +7,8 @@ import Login from '../Auth/Login';
 import SignupOne from '../Auth/SignupOne';
 import SignupTwo from '../Auth/SignupTwo';
 import SignupThree from '../Auth/SignupThree';
+import api from '@/utils/api';
+import { OAuthContext } from '@/contexts/OAuthProvider';
 
 type LoginModalProps = {
   isOpen: boolean;
@@ -15,6 +17,7 @@ type LoginModalProps = {
 
 export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
   const dispatch = useAppDispatch();
+  const oAuthCtx = useContext(OAuthContext);
   const [disableSignUp] = useState(true);
   const [btnLoading, setBtnLoading] = useState(false);
   const [view, setView] = useState<
@@ -24,8 +27,8 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
     mode: 'onChange',
     defaultValues: {
       username: '',
-      email: '',
-      password: '',
+      email: 'test2@hotmail.co.uk',
+      password: '1qaz2wsx',
       confirmPassword: '',
     },
   });
@@ -56,8 +59,32 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
   }, [view]);
 
   const handleLoginButtonClick = async () => {
+    if (btnLoading) return;
     setBtnLoading(true);
-    dispatch({ type: 'SET_USER_EMAIL', payload: form.getValues('email') });
+    const response = await api.login(
+      form.getValues('email'),
+      form.getValues('password'),
+    );
+    if (response.success) {
+      oAuthCtx.successLogin(
+        response?.data.access_token,
+        response?.data.expired_at,
+        response?.data.token_type,
+      );
+      dispatch({
+        type: 'SHOW_SNACKBAR',
+        payload: { title: 'info', text: 'Sign In Success!' },
+      });
+      setBtnLoading(false);
+      setIsOpen(false);
+    } else {
+      dispatch({
+        type: 'SHOW_SNACKBAR',
+        payload: { title: 'error', text: response.message },
+      });
+      setBtnLoading(false);
+    }
+    /*dispatch({ type: 'SET_USER_EMAIL', payload: form.getValues('email') });
     const tid = setTimeout(() => {
       setIsOpen(false);
       dispatch({
@@ -66,7 +93,7 @@ export const LoginModal = ({ isOpen, setIsOpen }: LoginModalProps) => {
       });
       setBtnLoading(false);
       clearTimeout(tid);
-    }, 1200);
+    }, 1200);*/
   };
 
   const handleSignUpOne = async () => {

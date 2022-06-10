@@ -21,9 +21,10 @@ const SignupOne = ({
           <div className="mt-1">
             <FormInput
               placeholder="Wallet Address"
-              id="username"
+              id="wallet"
               type="text"
               required
+              readOnly
               {...register('username')}
             />
           </div>
