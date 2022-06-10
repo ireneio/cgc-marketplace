@@ -11,7 +11,7 @@ const FooterSelect = ({ options, id, name, onChange }: Props) => {
     <select
       id={id}
       name={name || id}
-      className="custom_select appearance-none block w-full bg-none bg-[#0C001C] border border-[#290030] rounded-md py-2 pl-3 pr-10 text-base text-white focus:outline-none focus:ring-[#FC1F8E] focus:border-[#FC1F8E] sm:text-sm"
+      className="custom_select appearance-none block w-full bg-none bg-[#0C001C] border-[2px] border-[#290030] rounded-md py-2 pl-3 pr-10 text-base text-white focus:outline-none focus:ring-[#FC1F8E] focus:border-[#FC1F8E] sm:text-sm"
       defaultValue="English"
       onChange={(e) => onChange && onChange(e.target.value)}
     >

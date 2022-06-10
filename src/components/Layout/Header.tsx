@@ -28,24 +28,26 @@ const Header = () => {
           />
         </div>
       </div>
-      <div className="relative w-[50vw] ml-[-4px]">
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => handleSearchInput(e.target.value)}
-          className="ml-[5px] w-full font-circularstdbook appearance-none bg-white border border-transparent rounded-md py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-[#FC1F8E] focus:border-white focus:placeholder-gray-400"
-          placeholder="Search Games and Collections"
-        />
-        <div className="absolute right-[12px] top-[12px]">
-          <img
-            className="hidden md:block h-[20px] w-auto"
-            src={'/img/icon_search.svg'}
-            alt="search icon"
+      <div style={{ width: 'calc(100vw - 200px - 200px)' }}>
+        <div className="relative w-[50vw]">
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => handleSearchInput(e.target.value)}
+            className="ml-[6px] bg-[#0C001C] w-full font-circularstdbook appearance-none border border-[#290030] rounded-md py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-[#FC1F8E] focus:border-white focus:placeholder-gray-400"
+            placeholder="Search Games and Collections"
           />
+          <div className="absolute right-[12px] top-[12px]">
+            <img
+              className="hidden md:block h-[20px] w-auto"
+              src={'/img/icon_search.svg'}
+              alt="search icon"
+            />
+          </div>
         </div>
       </div>
-      <div className="flex items-center ml-auto">
-        <div className="">
+      <div className="flex items-center w-[200px]">
+        <div className="flex w-full justify-end">
           <CatheonConnectButton />
         </div>
       </div>

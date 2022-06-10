@@ -142,11 +142,14 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#290030]" aria-labelledby="footer-heading">
+    <footer className="bg-[#0C001C]" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+      <div
+        className="mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8"
+        style={{ maxWidth: 'calc(100vw - 200px - 200px)' }}
+      >
         <div className="pb-8 xl:grid xl:grid-cols-5 xl:gap-8">
           <div className="grid grid-cols-2 gap-8 xl:col-span-4">
             <div className="md:grid md:grid-cols-2 md:gap-8">
@@ -219,7 +222,7 @@ export default function Footer() {
             </form>
           </div>
         </div>
-        <Divider color="#FFFFFF" />
+        <Divider />
         <div className="pt-8 lg:flex lg:items-center lg:justify-between xl:mt-0">
           <div>
             <h3 className="text-sm font-semibold text-[#9497AA] tracking-wider uppercase">
@@ -248,7 +251,7 @@ export default function Footer() {
           </form>
         </div>
         <div className="mb-8 mt-8">
-          <Divider color="#FFFFFF" />
+          <Divider />
         </div>
         <div className="pt-8 md:flex md:items-center md:justify-between">
           <div className="flex space-x-6 md:order-2">
