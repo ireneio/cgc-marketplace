@@ -68,7 +68,7 @@ const Button = ({
             : '#13002B',
           textAlign: 'center',
         }}
-        onClick={() => onClick && onClick()}
+        onClick={(e) => onClick && onClick(e)}
         onMouseOver={() => setHover(true)}
         onMouseOut={() => setHover(false)}
         disabled={disabled}

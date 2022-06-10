@@ -5,23 +5,13 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Button from '../Shared/Button';
 
-const PREFILL_DATA = {
-  id: 'testData',
-  imageUrl: testData.landingHeroBackground,
-  name: 'testData',
-  href: 'https://seoulstars.io/',
-  logo: testData.landingHeroLogo,
-  title: testData.landingHeroTitle,
-  description: testData.landingHeroSubtitle,
-};
-
 const LandingCarousel = () => {
   const router = useRouter();
   const [carouselItems] = useState([
     {
-      id: 'store_carousel_example_2',
+      id: 'seoulstars',
       imageUrl: '/img/carousel_sstars.jpeg',
-      name: 'store_carousel_example_2',
+      name: 'seoulstars',
       href: 'https://seoulstars.io/',
       logo: '/img/logo_sstars.png',
       title: "The Metaverse's First Virtual K-Pop Idol",
@@ -29,7 +19,15 @@ const LandingCarousel = () => {
       description:
         'Sing-to-earn in this exciting rhythm action and karaoke game',
     },
-    PREFILL_DATA,
+    {
+      id: 'solchicks',
+      imageUrl: testData.landingHeroBackground,
+      name: 'solchicks',
+      href: 'https://solchicks.io/',
+      logo: testData.landingHeroLogo,
+      title: testData.landingHeroTitle,
+      description: testData.landingHeroSubtitle,
+    },
   ]);
 
   const handleCarouselItemClick = ({ href }: { href: string }) => {
@@ -104,7 +102,13 @@ const LandingCarousel = () => {
                 <div className="z-[3] absolute bottom-[10%] left-[16px] md:left-[50px] text-[#FFFFFF] flex">
                   <Button onClick={() => handlePlay(name)}>Play</Button>
                   <div className="ml-[16px]">
-                    <Button link onClick={() => handleMoreInfo(name)}>
+                    <Button
+                      link
+                      onClick={(e: any) => {
+                        e.stopPropagation();
+                        handleMoreInfo(name);
+                      }}
+                    >
                       More Info
                     </Button>
                   </div>
