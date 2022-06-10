@@ -1,8 +1,6 @@
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import FooterVerticalList from './FooterVerticalList';
 import Divider from '../Shared/Divider';
-import Input from '../Shared/Input';
-import Button from '../Shared/Button';
 import dayjs from 'dayjs';
 import FooterSelect from './FooterSelect';
 import { useForm } from 'react-hook-form';
@@ -121,18 +119,6 @@ const brandInfo = {
 };
 
 export default function Footer() {
-  const { register } = useForm({
-    mode: 'onChange',
-    defaultValues: {
-      email: '',
-    },
-  });
-
-  const handleSubscribe = () => {
-    // TODO subscribe
-    // const email = getValues('email');
-  };
-
   const handleLanguageChange = (lang: string) => {
     console.log('lang', lang);
   };
@@ -222,34 +208,6 @@ export default function Footer() {
             </form>
           </div>
         </div>
-        {/* <Divider />
-        <div className="pt-8 lg:flex lg:items-center lg:justify-between xl:mt-0">
-          <div>
-            <h3 className="text-sm font-semibold text-[#9497AA] tracking-wider uppercase">
-              Subscribe to our newsletter
-            </h3>
-            <p className="mt-2 text-base text-[#FFFFFF]">
-              The latest news, articles, and resources, sent to your inbox
-              weekly.
-            </p>
-          </div>
-          <form className="mt-4 sm:flex sm:max-w-md lg:mt-0">
-            <label htmlFor="email-address" className="sr-only">
-              Email address
-            </label>
-            <Input
-              type="email"
-              id="email-address"
-              autoComplete="email"
-              placeholder="Enter your email"
-              required
-              {...register('email')}
-            />
-            <div className="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-              <Button onClick={() => handleSubscribe()}>Subscribe</Button>
-            </div>
-          </form>
-        </div> */}
         <div className="mb-[24px] mt-[24px]">
           <Divider />
         </div>
