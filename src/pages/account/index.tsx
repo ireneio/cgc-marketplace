@@ -60,7 +60,7 @@ const Account = () => {
 
   const handleSelection = (value: Selection) => {
     setCurrentSelection(value);
-    router.push(`/account?tab=${value}`);
+    router.push(`/account?tab=${value}`).then();
   };
 
   useEffect(() => {
@@ -83,7 +83,7 @@ const Account = () => {
           onItemClick={(val) => {
             if (val === 'Home') {
               dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
-              router.push('/');
+              router.push('/').then();
             }
           }}
         />

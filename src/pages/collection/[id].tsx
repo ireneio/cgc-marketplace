@@ -34,7 +34,7 @@ const Collection = () => {
   const handleSelect = (value: Selection) => {
     if (value === 'Your Items') {
       if (email) {
-        router.push('/account?tab=items');
+        router.push('/account?tab=items').then();
       } else {
         setLoginModalOpen(true);
       }
@@ -48,12 +48,14 @@ const Collection = () => {
     if (!metadata.slug) {
       return;
     }
-    router.push(
-      `/collection/${metadata.slug}?tab=${value
-        .split(' ')
-        .join('_')
-        .toLowerCase()}`,
-    );
+    router
+      .push(
+        `/collection/${metadata.slug}?tab=${value
+          .split(' ')
+          .join('_')
+          .toLowerCase()}`,
+      )
+      .then();
   };
 
   const breadcrumbItems = useMemo(() => {
@@ -88,7 +90,7 @@ const Collection = () => {
           ...response,
           metadata: {
             ...response.metadata,
-            slug: response.metadata.name.toLowerCase().split(' ').join(''),
+            slug: response.metadata.name.toLowerCase().split(' ').join('_'),
             id: response.id,
           },
         },
@@ -111,11 +113,11 @@ const Collection = () => {
 
   useEffect(() => {
     if (router.query.id) {
-      Promise.all([getCollectionData(), getTokenData()]);
+      Promise.all([getCollectionData(), getTokenData()]).then();
     }
   }, [router.query.id]);
 
-  const selectgroupItems = useMemo(() => {
+  const selectGroupItems = useMemo(() => {
     return [
       { text: 'About', value: 'About', disabled: !metadata.slug },
       { text: 'All Items', value: 'All Items', disabled: !metadata.slug },
@@ -157,7 +159,7 @@ const Collection = () => {
         </div>
         <div>
           <SelectGroup
-            items={selectgroupItems}
+            items={selectGroupItems}
             currentValue={currentSelection}
             onItemClick={(value) => handleSelect(value as Selection)}
           />

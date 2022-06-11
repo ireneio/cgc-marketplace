@@ -9,9 +9,9 @@ const LandingCarousel = () => {
   const router = useRouter();
   const [carouselItems] = useState([
     {
-      id: 'seoulstars',
+      id: 'seoul_stars',
       imageUrl: '/img/carousel_sstars.jpeg',
-      name: 'seoulstars',
+      name: 'seoul_stars',
       href: 'https://seoulstars.io/',
       logo: '/img/logo_sstars.png',
       title: "The Metaverse's First Virtual K-Pop Idol",
@@ -35,11 +35,11 @@ const LandingCarousel = () => {
   };
 
   const handlePlay = (name: string) => {
-    console.log('handePlay', name);
+    console.log('handlePlay', name);
   };
 
   const handleMoreInfo = (name: string) => {
-    router.push(`/collection/${name}`);
+    router.push(`/collection/${name}`).then();
   };
 
   return (

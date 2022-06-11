@@ -9,29 +9,20 @@ interface Props {
   volume: number;
   volumePercentage: number;
   volume7Days: number;
-  volume7DaysPercentage: number;
   volume30Days: number;
-  volume30DaysPercentage: number;
   change: number;
   changePercentage: number;
   change7Days: number;
-  change7DaysPercentage: number;
   change30Days: number;
-  change30DaysPercentage: number;
   sales: number;
   salesPercentage: number;
   sales7Days: number;
-  sales7DaysPercentage: number;
   sales30Days: number;
-  sales30DaysPercentage: number;
   averagePrice: number;
   averagePricePercentage: number;
   averagePrice7Days: number;
-  averagePrice7DaysPercentage: number;
   averagePrice30Days: number;
-  averagePrice30DaysPercentage: number;
   totalVolume: number;
-  // totalSales: number;
   totalSupply: number;
   owners: number;
   count: number;
@@ -40,34 +31,25 @@ interface Props {
 const NftPricePanel = ({
   name,
   totalVolume,
-  // totalSales,
   totalSupply,
   owners,
   count,
   volume,
   volumePercentage,
   volume7Days,
-  volume7DaysPercentage,
   volume30Days,
-  volume30DaysPercentage,
   change,
   changePercentage,
   change7Days,
-  change7DaysPercentage,
   change30Days,
-  change30DaysPercentage,
   sales,
   salesPercentage,
   sales7Days,
-  sales7DaysPercentage,
   sales30Days,
-  sales30DaysPercentage,
   averagePrice,
   averagePricePercentage,
   averagePrice7Days,
-  averagePrice7DaysPercentage,
   averagePrice30Days,
-  averagePrice30DaysPercentage,
 }: Props) => {
   const [currentViewVolume, setCurrentViewVolume] = useState<DateTypes>('day');
   const [currentViewChange, setCurrentViewChange] = useState<DateTypes>('day');
