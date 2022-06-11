@@ -252,7 +252,7 @@ const Nft = () => {
         />
       </div>
       <div className="flex justify-between items-center mb-[16px] flex-wrap">
-        <div className="text-[#FFFFFF] font-bold text-[24px]">
+        <div className="basis-[100%] lg:basis-auto text-[#FFFFFF] font-bold text-[24px]">
           {info.brand} {info.name}
         </div>
         <div className="basis-[100%] md:basis-auto">
