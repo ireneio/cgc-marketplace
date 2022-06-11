@@ -104,7 +104,7 @@ const DetailView = () => {
               onClick={() => handleLinkOpen('discord')}
             >
               <img
-                src="/img/icon_discord.svg"
+                src={'/img/icon_discord.svg'}
                 width={24}
                 height={24}
                 alt="discord"
@@ -114,7 +114,12 @@ const DetailView = () => {
               className="ml-[16px] cursor-pointer hover:opacity-[0.65]"
               onClick={() => handleLinkOpen('link')}
             >
-              <img src="/img/icon_link.svg" width={24} height={24} alt="link" />
+              <img
+                src={'/img/icon_link.svg'}
+                width={24}
+                height={24}
+                alt="link"
+              />
             </div>
           </div>
           <div className="flex flex-wrap mb-[32px]">
@@ -201,30 +206,21 @@ const DetailView = () => {
               name={metadata.name}
               volume={nftCollectionStats?.usdMeTotalVolume}
               volumePercentage={0}
-              volume7Days={nftCollectionStats?.usdSevenDayVolumn}
-              volume7DaysPercentage={0}
-              volume30Days={nftCollectionStats?.usdThirtyDayVolumn}
-              volume30DaysPercentage={0}
+              volume7Days={nftCollectionStats?.usdSevenDayVolume}
+              volume30Days={nftCollectionStats?.usdThirtyDayVolume}
               change={nftCollectionStats?.usdOneDayChange}
               changePercentage={0}
               change7Days={nftCollectionStats?.usdSevenDayChange}
-              change7DaysPercentage={0}
               change30Days={nftCollectionStats?.usdThirtyDayChange}
-              change30DaysPercentage={0}
               sales={nftCollectionStats?.usdOneDaySales}
               salesPercentage={0}
               sales7Days={nftCollectionStats?.usdSevenDaySales}
-              sales7DaysPercentage={0}
               sales30Days={nftCollectionStats?.usdThirtyDaySales}
-              sales30DaysPercentage={0}
               averagePrice={nftCollectionStats?.usdAveragePrice}
               averagePricePercentage={0}
               averagePrice7Days={nftCollectionStats?.usdSevenDayAveragePrice}
-              averagePrice7DaysPercentage={0}
               averagePrice30Days={nftCollectionStats?.usdThirtyDayAveragePrice}
-              averagePrice30DaysPercentage={0}
               totalVolume={nftCollectionStats?.usdTotalVolume}
-              // totalSales={nftCollectionStats?.totalSales}
               totalSupply={nftCollectionStats?.totalSupply}
               owners={nftCollectionStats?.numOwners}
               count={nftCollectionStats?.count}
