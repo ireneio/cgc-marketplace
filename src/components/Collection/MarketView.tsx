@@ -84,8 +84,8 @@ const MarketView = () => {
     }
   };
 
-  const handleMoreInfo = (tokenAddress: string | number) => {
-    router.push(`/nft/${tokenAddress}?slug=${metadata.slug}`).then();
+  const handleMoreInfo = (hash: string) => {
+    router.push(`/nft/${hash}`).then();
   };
 
   const getData = async () => {
