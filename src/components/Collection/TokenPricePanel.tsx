@@ -111,7 +111,13 @@ const TokenPricePanel = ({
   return (
     <Tag className="relative px-[24px] py-[24px]">
       <div className="absolute right-[24px] top-[24px]">
-        <img src={brandImg} alt={brandName} width={105} height={105} />
+        <img
+          src={brandImg}
+          alt={brandName}
+          width={105}
+          height={105}
+          className="md:opacity-100 opacity-20"
+        />
       </div>
       <div>
         <div className="text-[#FFFFFF] font-semibold text-[14px] mb-[12px]">
@@ -151,22 +157,22 @@ const TokenPricePanel = ({
             />
           </div>
         </div>
-        <div className="flex items-center mb-[24px]">
+        <div className="flex items-center mb-[24px] flex-wrap">
           <div className="text-[#FFFFFF] text-[14px] font-semibold">
             Low: ${low}
           </div>
-          <div className="ml-[12px]">
+          <div className="ml-0 md:ml-[12px] basis-[100%] md:basis-auto mt-[12px] md:mt-0">
             <ProgressBar
               width={221}
               percentage={(price / (low + high)) * 100}
               showIndicator
             />
           </div>
-          <div className="text-[#FFFFFF] text-[14px] font-semibold ml-[12px]">
+          <div className="text-[#FFFFFF] text-[14px] font-semibold ml-0 md:ml-[12px] mt-[12px] md:mt-0">
             High: ${high}
           </div>
           <DateViewSelector
-            className="ml-[24px]"
+            className="ml-[24px] mt-[12px] md:mt-0"
             onViewChange={(val) => setCurrentView(val)}
             current={currentView}
           />
@@ -174,7 +180,7 @@ const TokenPricePanel = ({
         <div className="mb-[24px]">
           <Divider />
         </div>
-        <div className="mb-[24px] flex justify-between flex-wrap">
+        <div className="mb-[24px] grid gap-[24px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 2xl:grid-cols-5">
           <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">
               Market Cap

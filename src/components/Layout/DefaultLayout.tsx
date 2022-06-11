@@ -7,6 +7,7 @@ import seo from '../../data/seo';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+import { useWindowWidth } from '@/hooks/window';
 
 interface Props {
   children?: React.ReactNode;
@@ -66,8 +67,8 @@ const DefaultLayout = ({ children, title }: Props) => {
   const snackbarShow = useAppSelector((state) => state.layout.snackbar.show);
   const snackbarText = useAppSelector((state) => state.layout.snackbar.text);
   const snackbarTitle = useAppSelector((state) => state.layout.snackbar.title);
-
   const router = useRouter();
+  const windowWidth = useWindowWidth();
 
   const handleSideBarPathUpdate = (val: string) => {
     if (val === 'Home' || val.includes('Explore')) {
@@ -164,7 +165,11 @@ const DefaultLayout = ({ children, title }: Props) => {
         />
         <Header />
         <div className="flex mt-[75px] relative">
-          <div className="fixed top-[75px] w-[225px] hidden md:block flex-shrink-0 z-[100]">
+          {/* hidden lg:block  */}
+          <div
+            className="fixed top-[75px] w-[225px] flex-shrink-0 z-[100]"
+            style={{ display: windowWidth < 768 ? 'none' : 'block' }}
+          >
             <Sidebar
               items={SIDE_BAR_ITEMS}
               currentValue={sideBarPath}
@@ -172,10 +177,13 @@ const DefaultLayout = ({ children, title }: Props) => {
             />
           </div>
           <div
-            className="ml-[225px] pr-[24px] mx-auto"
+            className="mx-auto"
             style={{
-              width: 'calc(100vw - 225px)',
+              width: windowWidth < 768 ? '100vw' : 'calc(100vw - 225px)',
               minHeight: 'calc(100vh - 75px - 100px)',
+              marginLeft: windowWidth < 768 ? 0 : 225,
+              paddingRight: windowWidth < 768 ? 24 : 24,
+              paddingLeft: windowWidth < 768 ? 24 : 0,
             }}
           >
             {children}

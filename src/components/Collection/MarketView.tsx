@@ -93,6 +93,8 @@ const MarketView = () => {
       oAuthCtx.access_token,
       metadata.slug,
     );
+    console.log(response);
+
     const map = response.map((item: any) => {
       const manifest = item?.splNftInfo?.data?.manifest;
       return {

@@ -43,7 +43,6 @@ const Collection = () => {
     if (value === '...') {
       return;
     }
-
     setCurrentSelection(value);
     if (!metadata.slug) {
       return;
@@ -67,16 +66,18 @@ const Collection = () => {
     );
   }, [metadata, currentSelection]);
 
-  useEffect(() => {
-    if (router.query.tab) {
-      const tab = String(router.query.tab)
-        .split('_')
-        .map((item) => item[0].toUpperCase() + item.substring(1))
-        .join(' ');
-      setCurrentSelection(tab as Selection);
-      router.query.tab = '';
-    }
-  }, [router.query]);
+  const selectGroupItems = useMemo(() => {
+    return [
+      { text: 'About', value: 'About', disabled: !metadata.slug },
+      { text: 'All Items', value: 'All Items', disabled: !metadata.slug },
+      {
+        text: 'Your Items',
+        value: 'Your Items',
+        disabled: !metadata.slug,
+      },
+      { text: '...', value: '...', disabled: !metadata.slug },
+    ];
+  }, [metadata]);
 
   const getCollectionData = async () => {
     const response = await api.getCollectionById(
@@ -117,18 +118,16 @@ const Collection = () => {
     }
   }, [router.query.id]);
 
-  const selectGroupItems = useMemo(() => {
-    return [
-      { text: 'About', value: 'About', disabled: !metadata.slug },
-      { text: 'All Items', value: 'All Items', disabled: !metadata.slug },
-      {
-        text: 'Your Items',
-        value: 'Your Items',
-        disabled: !metadata.slug,
-      },
-      { text: '...', value: '...', disabled: !metadata.slug },
-    ];
-  }, [metadata]);
+  useEffect(() => {
+    if (router.query.tab) {
+      const tab = String(router.query.tab)
+        .split('_')
+        .map((item) => item[0].toUpperCase() + item.substring(1))
+        .join(' ');
+      setCurrentSelection(tab as Selection);
+      router.query.tab = '';
+    }
+  }, [router.query]);
 
   return (
     <DefaultLayout>
@@ -153,7 +152,7 @@ const Collection = () => {
           }}
         />
       </div>
-      <div className="flex justify-between items-center mb-[16px]">
+      <div className="flex justify-between items-center mb-[16px] max-w-full">
         <div className="text-[#FFFFFF] font-bold text-[24px]">
           {metadata.name}
         </div>

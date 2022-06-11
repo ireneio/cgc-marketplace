@@ -47,7 +47,7 @@ const ActionPanel = ({
   };
 
   return (
-    <Tag className="px-[28px] py-[24px]">
+    <Tag className="px-[24px] py-[24px]">
       <div>
         <div className="font-light text-[#FFFFFF] text-[14px]s">
           Current Price
@@ -93,7 +93,7 @@ const ActionPanel = ({
             </Button>
           </div>
           {!isItemAddedToCart && (
-            <div className="ml-auto">
+            <div className="ml-auto basis-[100%] md:basis-auto mt-[12px] md:mt-0">
               <Button secondary disabled={!info.auctionEndDate || loading}>
                 Make Offer
               </Button>

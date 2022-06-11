@@ -116,6 +116,10 @@ body {
   left: 21px;
 }
 
+.scollbar_thin {
+  scrollbar-width: thin;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 3px;
@@ -124,17 +128,17 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #FFFFFF;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: rgb(41, 0, 48);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #FC1F8E;
 }
 
 .slick-list {
@@ -183,4 +187,10 @@ body {
 .force_card_height {
   width: 205px;
   height: 205px;
+}
+
+.no_line_break {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

@@ -103,7 +103,7 @@ const NftPricePanel = ({
         <div className="mb-[10px] text-[#FFFFFF] font-bold text-[14px]">
           {name} NFT
         </div>
-        <div className="grid grid-flow-col grid-rows-2 gap-y-12 gap-x-12">
+        <div className="grid grid-cols-2 xl:grid-cols-3 gap-[24px] auto-rows-auto">
           <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">Volume</div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">

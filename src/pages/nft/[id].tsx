@@ -302,19 +302,25 @@ const Nft = () => {
               <InfoPanel info={info} />
             </div>
             <div style={{ flexBasis: '50%' }} className="pl-[12px]">
-              <DetailPanel info={info} />
-              <ActionPanel
-                info={info}
-                onCartOpen={(val) => setOpenCart(val)}
-                loading={loading}
-              />
-              <AttributesPanel info={info} />
+              <div className="mb-[24px]">
+                <DetailPanel info={info} />
+              </div>
+              <div className="mb-[24px]">
+                <ActionPanel
+                  info={info}
+                  onCartOpen={(val) => setOpenCart(val)}
+                  loading={loading}
+                />
+              </div>
+              <div className="mb-[0px]">
+                <AttributesPanel info={info} />
+              </div>
             </div>
           </div>
-          <div className="mt-[32px]">
+          <div className="mt-[24px]">
             <Divider />
           </div>
-          <div className="mt-[32px]">
+          <div className="mt-[24px]">
             <div className="flex justify-between items-center">
               <div className="text-[#FFFFFF] font-bold text-[20px]">
                 Transaction History
@@ -329,7 +335,7 @@ const Nft = () => {
                 />
               </div>
             </div>
-            <div className="mt-[32px] mb-[48px]">
+            <div className="mt-[24px] mb-[48px]">
               <HistoryTable
                 rows={[
                   [
