@@ -251,11 +251,11 @@ const Nft = () => {
           }}
         />
       </div>
-      <div className="flex justify-between items-center mb-[16px]">
+      <div className="flex justify-between items-center mb-[16px] flex-wrap">
         <div className="text-[#FFFFFF] font-bold text-[24px]">
           {info.brand} {info.name}
         </div>
-        <div>
+        <div className="basis-[100%] md:basis-auto">
           <SelectGroup
             items={selectGroupItems}
             currentValue={currentSelection}
