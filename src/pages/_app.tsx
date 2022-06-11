@@ -19,7 +19,7 @@ function App({ Component, pageProps }: AppProps) {
   }
 
   useEffect(() => {
-    api.healthCheck();
+    api.healthCheck().then();
   }, []);
 
   return (

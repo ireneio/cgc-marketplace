@@ -72,9 +72,8 @@ const DefaultLayout = ({ children, title }: Props) => {
   const handleSideBarPathUpdate = (val: string) => {
     if (val === 'Home' || val.includes('Explore')) {
       dispatch({ type: 'SET_NAVIGATION_PATH', payload: val });
-      router.push('/');
+      router.push('/').then();
     } else if (val === 'Launchpad') {
-      // router.push('/launchpad');
       window.open('', '_blank');
     }
   };
@@ -146,13 +145,16 @@ const DefaultLayout = ({ children, title }: Props) => {
           <link
             rel="stylesheet"
             type="text/css"
-            // charset="UTF-8"
-            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+            href={
+              'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
+            }
           />
           <link
             rel="stylesheet"
             type="text/css"
-            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+            href={
+              'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
+            }
           />
         </Head>
         <DynamicSnackbar
@@ -179,12 +181,7 @@ const DefaultLayout = ({ children, title }: Props) => {
             {children}
           </div>
         </div>
-        <div
-          className="w-full relative overflow-x-hidden bg-[#141414] z-[101]"
-          style={{
-            paddingBottom: 'calc(100vh - calc(100vh * 0.75) - 75px - 120px)',
-          }}
-        >
+        <div className="w-full relative overflow-x-hidden bg-[#141414] z-[101]">
           <Footer />
         </div>
       </div>

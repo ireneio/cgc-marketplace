@@ -26,7 +26,7 @@ export const useGetCollections = () => {
   };
 
   useEffect(() => {
-    getCollections();
+    getCollections().then();
   }, []);
 
   return {

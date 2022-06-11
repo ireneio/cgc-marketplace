@@ -14,6 +14,8 @@ const FooterVerticalList = ({ title, itemList }: Props) => {
           <li key={item.name}>
             <a
               href={item.href}
+              rel={'noreferrer'}
+              target={'_blank'}
               className="text-base text-[#9497AA] hover:text-[#FC1F8E]"
             >
               {item.name}
