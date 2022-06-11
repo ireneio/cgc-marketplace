@@ -90,7 +90,7 @@ const Collection = () => {
           ...response,
           metadata: {
             ...response.metadata,
-            slug: response.metadata.name.toLowerCase().split(' ').join(''),
+            slug: response.metadata.name.toLowerCase().split(' ').join('_'),
             id: response.id,
           },
         },

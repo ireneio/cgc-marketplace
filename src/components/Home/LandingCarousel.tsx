@@ -35,11 +35,11 @@ const LandingCarousel = () => {
   };
 
   const handlePlay = (name: string) => {
-    console.log('handePlay', name);
+    console.log('handlePlay', name);
   };
 
   const handleMoreInfo = (name: string) => {
-    router.push(`/collection/${name}`);
+    router.push(`/collection/${name}`).then();
   };
 
   return (

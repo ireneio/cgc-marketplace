@@ -116,7 +116,7 @@ const Nft = () => {
     }
   }, [metadata, currentSelection, info, loading]);
 
-  const selectgroupItems = useMemo(() => {
+  const selectGroupItems = useMemo(() => {
     return [
       { text: 'About', value: 'About', disabled: !metadata.slug },
       { text: 'All Items', value: 'All Items', disabled: !metadata.slug },
@@ -132,25 +132,25 @@ const Nft = () => {
   const handleSelect = (value: Selection) => {
     switch (value) {
       case 'About':
-        router.push(`/collection/${metadata.slug}`);
+        router.push(`/collection/${metadata.slug}`).then();
         return;
       case 'All Items':
-        router.push(`/collection/${metadata.slug}?tab=all_items`);
+        router.push(`/collection/${metadata.slug}?tab=all_items`).then();
         return;
       case 'Your Items': {
         if (!email) {
           setLoginModalOpen(true);
         } else {
-          router.push(`/account?tab=items`);
+          router.push(`/account?tab=items`).then();
         }
         return;
       }
       case metadata.slug:
-        router.push(`/collection/${metadata.slug}?tab=about`);
+        router.push(`/collection/${metadata.slug}?tab=about`).then();
         return;
       case 'Explore/All':
         dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Explore/All' });
-        router.push(`/`);
+        router.push(`/`).then();
         return;
     }
   };
@@ -167,7 +167,7 @@ const Nft = () => {
           ...response,
           metadata: {
             ...response.metadata,
-            slug: response.metadata.name.toLowerCase().split(' ').join(''),
+            slug: response.metadata.name.toLowerCase().split(' ').join('_'),
             id: response.id,
           },
         },
@@ -212,7 +212,7 @@ const Nft = () => {
   };
 
   const handleRefresh = async () => {
-    getNftData();
+    getNftData().then();
   };
 
   useEffect(() => {
@@ -230,7 +230,7 @@ const Nft = () => {
   useEffect(() => {
     if (router.query.slug) {
       getCollectionData().then(() => {
-        getNftData();
+        getNftData().then();
       });
     }
   }, [router.query.slug]);
@@ -257,7 +257,7 @@ const Nft = () => {
         </div>
         <div>
           <SelectGroup
-            items={selectgroupItems}
+            items={selectGroupItems}
             currentValue={currentSelection}
             onItemClick={(value) => handleSelect(value as Selection)}
           />
@@ -273,7 +273,7 @@ const Nft = () => {
             <div className="flex items-center">
               <div className="cursor-pointer" onClick={() => handleRefresh()}>
                 <img
-                  src="/img/icon_refresh.svg"
+                  src={'/img/icon_refresh.svg'}
                   alt="refresh"
                   width={14}
                   height={14}
