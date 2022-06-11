@@ -28,6 +28,7 @@ const ListCard = ({
 }: Props) => {
   const handleImageLoad = (e: any) => {
     e.target.classList.remove('blur');
+    e.target.classList.remove('force_card_height');
   };
 
   return (
@@ -42,7 +43,7 @@ const ListCard = ({
           alt={name}
           width={205}
           height={205}
-          className="blur rounded-t-[5px]"
+          className="blur rounded-t-[5px] force_card_height"
           onLoad={(e) => handleImageLoad(e)}
         />
       </div>

@@ -25,10 +25,13 @@
 
 html {
   padding-right: 0 !important;
+  height: 100%;
+  overflow: auto;
 }
 
 body {
   font-family: 'CircularStd-Book', sans-serif !important;
+  height: 100%;
 }
 
 .wallet-solana>.wallet-adapter-button {
@@ -175,4 +178,9 @@ body {
 
 .custom_select>option {
   color: #FFFFFF;
+}
+
+.force_card_height {
+  width: 205px;
+  height: 205px;
 }
