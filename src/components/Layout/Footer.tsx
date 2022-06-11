@@ -149,7 +149,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-12 border-t border-[#290030] pt-8 md:flex md:items-center md:justify-between lg:mt-16">
+        <div className="mt-8 border-t border-[#290030] pt-8 md:flex md:items-center md:justify-between lg:mt-12">
           <div className="flex space-x-6 md:order-2">
             {footerNavigation.social.map((item) => (
               <a
