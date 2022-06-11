@@ -6,15 +6,16 @@ import dayjs from 'dayjs';
 import { useMemo } from 'react';
 import DefaultTable from '../Shared/DefaultTable';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import ClipboardText from '../Shared/ClipboardText';
 
 dayjs.extend(relativeTime);
 interface Props {
   rows:
-    | React.ReactNode[][]
-    | string[][]
-    | number[][]
-    | Record<string, any>[][]
-    | any[][];
+  | React.ReactNode[][]
+  | string[][]
+  | number[][]
+  | Record<string, any>[][]
+  | any[][];
   headers: string[] | number[] | React.ReactNode[];
   loading?: boolean;
 }
@@ -60,13 +61,15 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
         } else if (colIndex === 1) {
           return (
             <div
-              key={colIndex}
               className="text-[#FC1F8E] text-[14px] px-[10px] py-[12px]"
+              key={colIndex}
               style={{
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
             >
-              {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
+              <ClipboardText copyValue={String(col)}>
+                {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
+              </ClipboardText>
             </div>
           );
         } else if (colIndex === 2) {
@@ -90,7 +93,9 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
             >
-              {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
+              <ClipboardText copyValue={String(col)}>
+                {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
+              </ClipboardText>
             </div>
           );
         } else if (colIndex === 4) {
@@ -102,7 +107,9 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
             >
-              {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
+              <ClipboardText copyValue={String(col)}>
+                {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
+              </ClipboardText>
             </div>
           );
         } else if (colIndex === 5) {
