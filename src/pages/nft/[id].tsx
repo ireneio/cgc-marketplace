@@ -299,8 +299,10 @@ const Nft = () => {
                   onLoad={(e) => handleImageLoad(e, info.image)}
                 />
               </div>
-              <InfoPanel info={info} />
-            </div>
+              <div className="mb-[24px] md:mb-0">
+                <InfoPanel info={info} />
+              </div>
+           </div>
             <div className="basis-[100%] md:basis-[48%]">
               <div className="mb-[24px]">
                 <DetailPanel info={info} />
