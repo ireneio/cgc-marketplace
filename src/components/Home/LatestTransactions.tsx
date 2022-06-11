@@ -79,7 +79,7 @@ const LatestTransactions = () => {
               '12345678.45678',
             ],
           ]}
-          headers={['item', 'signature', 'time', 'from', 'to', 'amount($USD)']}
+          headers={['item', 'signature', 'time', 'from', 'to', 'amount ($USD)']}
         />
       </div>
     </div>
