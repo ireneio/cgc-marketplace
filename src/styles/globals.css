@@ -68,35 +68,6 @@ body {
   /* Firefox */
 }
 
-.floating-card-wrapper {
-  display: flex;
-  overflow-x: auto;
-}
-
-.floating-card-wrapper .bg-img {
-  background-size: cover;
-  background-position: center center;
-  transition: background-size 1.4s;
-  background-repeat: no-repeat;
-  background-color: #13002b;
-}
-
-.floating-card-wrapper li {
-  vertical-align: middle;
-  transition-duration: 0.1s;
-  cursor: pointer;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.75);
-  /* position: absolute; */
-  z-index: 10000;
-  position: relative;
-}
-
-.floating-card-wrapper .content {
-  width: 100%;
-  padding: 10px 10px 10px 10px;
-  background-color: #13002b;
-}
-
 .switch-input {
   height: 0;
   width: 0;

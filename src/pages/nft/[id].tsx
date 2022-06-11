@@ -177,9 +177,9 @@ const Nft = () => {
 
   const getNftData = async () => {
     setLoading(true);
-    const response = await api.getNftListByCollectionId(
+    const response = await api.getNftListByHash(
       oAuthCtx.access_token,
-      String(router.query.slug),
+      String(router.query.id),
     );
     if (response && response.length) {
       const filter = response.filter(
