@@ -268,7 +268,7 @@ const Nft = () => {
       </div>
       {currentSelection === 'Your Items' && <YourView />}
       {currentSelection !== 'Your Items' && (
-        <div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-1 gap-[24px] pt-[12px]">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <div className="cursor-pointer" onClick={() => handleRefresh()}>
@@ -287,8 +287,8 @@ const Nft = () => {
               disabled={loading}
             />
           </div>
-          <div className="flex mt-[12px] flex-wrap">
-            <div style={{ flexBasis: '50%' }}>
+          <div className="flex flex-wrap justify-between">
+            <div className="basis-[100%] md:basis-[48%]">
               <div className="w-full">
                 <img
                   src={info.image}
@@ -301,7 +301,7 @@ const Nft = () => {
               </div>
               <InfoPanel info={info} />
             </div>
-            <div style={{ flexBasis: '50%' }} className="pl-[12px]">
+            <div className="basis-[100%] md:basis-[48%]">
               <div className="mb-[24px]">
                 <DetailPanel info={info} />
               </div>
@@ -321,11 +321,11 @@ const Nft = () => {
             <Divider />
           </div>
           <div className="mt-[24px]">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center flex-wrap">
               <div className="text-[#FFFFFF] font-bold text-[20px]">
                 Transaction History
               </div>
-              <div>
+              <div className="basis-[50%] md:basis[100%] mt-[12px] md:mt-0 flex justify-end">
                 <Pagination
                   totalPages={15}
                   currentPage={currentPage}
