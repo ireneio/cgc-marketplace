@@ -16,15 +16,26 @@ const api = {
       },
     });
   },
-  register: async (email: string, password: string) => {
-    return await fetcher({
-      url: '/api/user',
+  register: async ({
+    email,
+    password,
+    walletAddress,
+  }: {
+    email: string;
+    password: string;
+    walletAddress: string;
+  }) => {
+    const response = await fetcher({
+      url: '/api/user/register',
       method: 'post',
       data: {
         email,
         password,
+        walletAddress,
       },
     });
+
+    return response.data;
   },
   getCollectionList: async (token: string) => {
     const response = await fetcher({

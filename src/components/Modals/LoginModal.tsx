@@ -4,12 +4,17 @@ import { Dialog, Transition } from '@headlessui/react';
 import { useAppDispatch } from '@/store';
 import { useForm, FormProvider } from 'react-hook-form';
 import Login from '../Auth/Login';
-import SignupOne from '../Auth/SignupOne';
-import SignupTwo from '../Auth/SignupTwo';
+// import SignupOne from '../Auth/SignupOne';
+// import SignupTwo from '../Auth/SignupTwo';
 import SignupThree from '../Auth/SignupThree';
 import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
 import { useRouter } from 'next/router';
+import SignupOneNew from '../Auth/SignUpOneNew';
+import SignUpTwoNew from '../Auth/SignUpTwoNew';
+import SignupTwo from '../Auth/SignupTwo';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { isResponseError } from '@/utils/swr';
 
 type LoginModalProps = {
   isOpen: boolean;
@@ -22,10 +27,11 @@ export const LoginModal = ({
   setIsOpen,
   redirectPath,
 }: LoginModalProps) => {
+  const wallet = useWallet();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const oAuthCtx = useContext(OAuthContext);
-  const [disableSignUp] = useState(true);
+  // const [disableSignUp] = useState(false);
   const [btnLoading, setBtnLoading] = useState(false);
   const [view, setView] = useState<
     'login' | 'signup-one' | 'signup-two' | 'signup-three'
@@ -44,11 +50,11 @@ export const LoginModal = ({
       case 'login':
         return 'Sign in to your cgPass account';
       case 'signup-one':
-        return 'Create a new cgPass Account';
       case 'signup-two':
-        return 'Click the link in your email to verify';
+        return 'Create a new cgPass Account';
       case 'signup-three':
-        return 'Set your password';
+        return 'Click the link in your email to verify';
+      // return 'Set your password';
     }
   }, [view]);
 
@@ -122,21 +128,44 @@ export const LoginModal = ({
 
   const handleSignUpTwo = async () => {
     setView('signup-three');
-    setIsOpen(false);
+  };
+
+  const register = async () => {
+    const response = await api.register({
+      email: form.getValues('email'),
+      password: form.getValues('password'),
+      walletAddress: String(wallet.publicKey),
+    });
+    return response;
   };
 
   const handleSignUpThree = async () => {
-    if (disableSignUp) {
+    // TODO submit
+    const result = await register();
+    if (Object.keys(result).length === 0) {
       dispatch({
         type: 'SHOW_SNACKBAR',
         payload: {
           title: 'Alert',
-          text: 'Sorry, we are currently not accepting any cgPass signups.',
+          // text: result?.message,
+          text: 'Credentials Invalid or Wallet Address Not In Whitelist',
         },
       });
     } else {
+      // success
       setIsOpen(false);
     }
+    // if (disableSignUp) {
+    //   dispatch({
+    //     type: 'SHOW_SNACKBAR',
+    //     payload: {
+    //       title: 'Alert',
+    //       text: 'Sorry, we are currently not accepting any cgPass signups.',
+    //     },
+    //   });
+    // } else {
+    //   setIsOpen(false);
+    // }
   };
 
   return (
@@ -144,7 +173,7 @@ export const LoginModal = ({
       <Transition show={isOpen}>
         <Dialog
           as="div"
-          className="fixed inset-0 z-10 overflow-y-auto font-circularstdbook"
+          className="fixed inset-0 z-[103] overflow-y-auto font-circularstdbook"
           onClose={() => {
             setIsOpen(false);
           }}
@@ -176,7 +205,7 @@ export const LoginModal = ({
               leaveTo="opacity-0 scale-95"
             >
               <div
-                className="login_dialog_parent relative inline-block w-[400px] my-12 overflow-hidden text-left align-middle transition-all
+                className="login_dialog_parent relative inline-block my-12 overflow-hidden text-left align-middle transition-all
             transform shadow-xl rounded-[5px] bg-[#13002B] font-circularstdbook"
               >
                 <div
@@ -250,7 +279,7 @@ export const LoginModal = ({
                             alt="catheon"
                           />
                         </div>
-                        <div className="text-center mt-[20px] px-[48px] font-circularstdbook">
+                        <div className="text-center mt-[20px] px-[48px] max-w-[24rem] font-circularstdbook">
                           {title}
                         </div>
                       </Dialog.Title>
@@ -264,21 +293,22 @@ export const LoginModal = ({
                             />
                           )}
                           {view === 'signup-one' && (
-                            <SignupOne
+                            <SignupOneNew
                               onCancel={() => setIsOpen(false)}
                               onNextStep={() => handleSignUpOne()}
                             />
                           )}
                           {view === 'signup-two' && (
-                            <SignupTwo
+                            <SignUpTwoNew
                               onCancel={() => setIsOpen(false)}
                               onNextStep={() => handleSignUpTwo()}
                             />
                           )}
                           {view === 'signup-three' && (
-                            <SignupThree
+                            <SignupTwo
                               onCancel={() => setIsOpen(false)}
-                              onSubmit={() => handleSignUpThree()}
+                              onNextStep={() => handleSignUpThree()}
+                              loading={btnLoading}
                             />
                           )}
                         </div>

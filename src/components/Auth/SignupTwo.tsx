@@ -6,9 +6,11 @@ import PrimaryGradientText from '../Shared/PrimaryGradientText';
 const SignupTwo = ({
   onNextStep,
   onCancel,
+  loading,
 }: {
   onNextStep: () => Promise<void>;
   onCancel: () => void;
+  loading: boolean;
 }) => {
   const dispatch = useAppDispatch();
 
@@ -29,7 +31,9 @@ const SignupTwo = ({
         </PrimaryGradientText>
       </div>
       <div className="mt-3 px-[24px] pb-[24px]">
-        <Button onClick={() => onNextStep()}>Next</Button>
+        <Button onClick={() => onNextStep()} loading={loading}>
+          Next
+        </Button>
         <div className="mt-[24px]">
           <Button
             link

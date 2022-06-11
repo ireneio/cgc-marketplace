@@ -18,7 +18,7 @@ const Header = () => {
   };
 
   return (
-    <div className="z-[10] shadow-lg bg-[#0C001C] fixed top-0 left-0 flex w-[100vw] h-[75px] items-center px-[25px] mx-auto max-w-[3840px]">
+    <div className="flex z-[10] shadow-lg bg-[#0C001C] fixed top-0 left-0 w-[100vw] h-[75px] items-center px-[25px] mx-auto max-w-[3840px]">
       <div className="cursor-pointer w-[200px]">
         <div onClick={() => handleGoHomePage()}>
           <img
@@ -29,7 +29,7 @@ const Header = () => {
         </div>
       </div>
       <div style={{ width: 'calc(100vw - 200px - 200px)' }}>
-        <div className="relative w-[50vw]">
+        <div className="relative w-[50vw] hidden md:flex ">
           <input
             type="text"
             value={search}
