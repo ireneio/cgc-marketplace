@@ -117,16 +117,6 @@ const RowCard = ({
               });
             }}
           >
-            {!addToCartLoading && (
-              <div>
-                <img
-                  src={'/img/icon_plus.png'}
-                  alt={'plus'}
-                  width={16}
-                  height={16}
-                />
-              </div>
-            )}
             <div className="ml-[8px] text-[#9497AA] text-[14px]">
               {addToCartLoading && <Skeleton className="w-[64px] h-[14px]" />}
               {!addToCartLoading && (addBtnText ? addBtnText : 'Add To Cart')}
