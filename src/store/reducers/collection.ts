@@ -1,5 +1,5 @@
 interface CollectionState {
-  collections: any[];
+  collections: Record<string, any>[];
   currentCollection: Record<string, any>;
 }
 

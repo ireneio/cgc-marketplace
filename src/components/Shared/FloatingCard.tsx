@@ -50,32 +50,22 @@ const FloatingCard = ({
   };
 
   return (
-    <div className="h-[176.49px] w-[319.41px]">
+    <div className="w-full h-[196px]">
       {currentHoverId !== id && (
-        // 212.94
-        // 117.66
-        <li
-          className="absolute bg-[#290030] cursor-pointer rounded-[5px] align-middle h-[176.49px] w-[319.41px] transition-all drop-shadow-xl"
+        <div
+          className="bg-[#290030] cursor-pointer rounded-[5px] align-middle transition-all drop-shadow-xl"
           onMouseOver={() => handleMouseOver()}
           onMouseLeave={() => handleMouseOut()}
           onClick={() => {
             onCardClick && onCardClick();
           }}
         >
-          <div
-            className="absolute top-0 left-0 h-[176.49px] w-[319.41px] bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url(${bg})`,
-            }}
-          ></div>
-          {/* deprecated catheon logo */}
-          {/* {showCatheonLogo && (
-            <div
-              className="absolute top-[8px] left-[8px] w-[24px] h-[24px] bg-no-repeat bg-center bg-contain opacity-100"
-              style={{ backgroundImage: `url(/img/cgc_watermark.svg)` }}
-            ></div>
-          )} */}
-        </li>
+          <img
+            src={bg}
+            alt={title}
+            className="object-cover rounded-[5px] h-[196px] w-full"
+          />
+        </div>
       )}
       {currentHoverId === id && (
         <motion.div
@@ -85,11 +75,10 @@ const FloatingCard = ({
             x: isFloatRight ? '0px' : '-25px',
             y: '-100px',
           }}
-          className="bg-[#13002B] rounded-[5px] cursor-pointer relative z-[100]"
+          className="bg-[#13002B] rounded-[5px] cursor-pointer absolute z-[100]"
           onMouseLeave={() => handleMouseOut()}
         >
-          {/*300x340*/}
-          <div className="w-[360px] h-[360px] absolute border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden">
+          <div className="w-[370px] h-[370px] absolute border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden">
             <div className="relative flex items-start justify-center">
               {/* gif */}
               {/* <div

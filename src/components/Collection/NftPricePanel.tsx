@@ -2,24 +2,19 @@ import { getNumberWithCommas } from '@/utils/formatHelper';
 import { useMemo, useState } from 'react';
 import Tag from '../Shared/Tag';
 import DateViewSelector, { DateTypes } from './DateViewSelector';
-import TickerText from './TickerText';
 
 interface Props {
   name: string;
   volume: number;
-  volumePercentage: number;
   volume7Days: number;
   volume30Days: number;
   change: number;
-  changePercentage: number;
   change7Days: number;
   change30Days: number;
   sales: number;
-  salesPercentage: number;
   sales7Days: number;
   sales30Days: number;
   averagePrice: number;
-  averagePricePercentage: number;
   averagePrice7Days: number;
   averagePrice30Days: number;
   totalVolume: number;
@@ -35,19 +30,15 @@ const NftPricePanel = ({
   owners,
   count,
   volume,
-  volumePercentage,
   volume7Days,
   volume30Days,
   change,
-  changePercentage,
   change7Days,
   change30Days,
   sales,
-  salesPercentage,
   sales7Days,
   sales30Days,
   averagePrice,
-  averagePricePercentage,
   averagePrice7Days,
   averagePrice30Days,
 }: Props) => {
@@ -112,18 +103,18 @@ const NftPricePanel = ({
         <div className="mb-[10px] text-[#FFFFFF] font-bold text-[14px]">
           {name} NFT
         </div>
-        <div className="flex flex-wrap gap-y-6 gap-x-12">
+        <div className="grid grid-flow-col grid-rows-2 gap-y-12 gap-x-12">
           <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">Volume</div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
               <div>${getNumberWithCommas(_volume)}</div>
-              <div className="text-[12px] text-green ml-[10px] mt-[2px]">
+              {/* <div className="text-[12px] text-green ml-[10px] mt-[2px]">
                 <TickerText
                   text={volumePercentage}
                   direction={'up'}
                   fontSize={12}
                 />
-              </div>
+              </div> */}
               <div className="ml-[24px]">
                 <DateViewSelector
                   onViewChange={(val) => setCurrentViewVolume(val)}
@@ -136,13 +127,13 @@ const NftPricePanel = ({
             <div className="text-[#FFFFFF] font-light text-[14px]">Change</div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
               <div>${getNumberWithCommas(_change)}</div>
-              <div className="text-[12px] text-green ml-[10px] mt-[2px]">
+              {/* <div className="text-[12px] text-green ml-[10px] mt-[2px]">
                 <TickerText
                   text={changePercentage}
                   direction={'up'}
                   fontSize={12}
                 />
-              </div>
+              </div> */}
               <div className="ml-[24px]">
                 <DateViewSelector
                   onViewChange={(val) => setCurrentViewChange(val)}
@@ -155,13 +146,13 @@ const NftPricePanel = ({
             <div className="text-[#FFFFFF] font-light text-[14px]">Sales</div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
               <div>${getNumberWithCommas(_sales)}</div>
-              <div className="text-[12px] text-green ml-[10px] mt-[2px]">
+              {/* <div className="text-[12px] text-green ml-[10px] mt-[2px]">
                 <TickerText
                   text={salesPercentage}
                   direction={'up'}
                   fontSize={12}
                 />
-              </div>
+              </div> */}
               <div className="ml-[24px]">
                 <DateViewSelector
                   onViewChange={(val) => setCurrentViewSales(val)}
@@ -176,13 +167,13 @@ const NftPricePanel = ({
             </div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
               <div>${getNumberWithCommas(_averagePrice)}</div>
-              <div className="text-[12px] text-green ml-[10px] mt-[2px]">
+              {/* <div className="text-[12px] text-green ml-[10px] mt-[2px]">
                 <TickerText
                   text={averagePricePercentage}
                   direction={'down'}
                   fontSize={12}
                 />
-              </div>
+              </div> */}
               <div className="ml-[14px]">
                 <DateViewSelector
                   onViewChange={(val) => setCurrentViewAveragePrice(val)}

@@ -205,19 +205,15 @@ const DetailView = () => {
             <NftPricePanel
               name={metadata.name}
               volume={nftCollectionStats?.usdMeTotalVolume}
-              volumePercentage={0}
               volume7Days={nftCollectionStats?.usdSevenDayVolume}
               volume30Days={nftCollectionStats?.usdThirtyDayVolume}
               change={nftCollectionStats?.usdOneDayChange}
-              changePercentage={0}
               change7Days={nftCollectionStats?.usdSevenDayChange}
               change30Days={nftCollectionStats?.usdThirtyDayChange}
               sales={nftCollectionStats?.usdOneDaySales}
-              salesPercentage={0}
               sales7Days={nftCollectionStats?.usdSevenDaySales}
               sales30Days={nftCollectionStats?.usdThirtyDaySales}
               averagePrice={nftCollectionStats?.usdAveragePrice}
-              averagePricePercentage={0}
               averagePrice7Days={nftCollectionStats?.usdSevenDayAveragePrice}
               averagePrice30Days={nftCollectionStats?.usdThirtyDayAveragePrice}
               totalVolume={nftCollectionStats?.usdTotalVolume}

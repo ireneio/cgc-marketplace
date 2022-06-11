@@ -3,12 +3,14 @@ import { useContext, useEffect, useState } from 'react';
 import ButtonLink from '../Shared/ButtonLink';
 import LoadingNetflixCard from '../Shared/LoadingNetflixCard';
 import SectionTitle from '../Shared/SectionTitle';
-import CardCarousel from './CardCarousel';
 import Divider from '@/components/Shared/Divider';
 import { OAuthContext } from '@/contexts/OAuthProvider';
 import api from '@/utils/api';
+import FloatingCard from '../Shared/FloatingCard';
+import { useRouter } from 'next/router';
 
 const AllCollections = () => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -47,6 +49,16 @@ const AllCollections = () => {
     initCollections().then();
   }, []);
 
+  const handleGoDetail = (slug: string) => {
+    router.push(`/collection/${slug}`);
+  };
+
+  const [currentHoverId, setCurrentHoverId] = useState('-1');
+
+  useEffect(() => {
+    setCurrentHoverId('-1');
+  }, [sideBarPath, router.pathname]);
+
   return (
     <div className="relative">
       <div className="flex justify-between items-center">
@@ -60,7 +72,34 @@ const AllCollections = () => {
       <div className="hide-scrollbar">
         {!loading && (
           <div className="mt-[24px]">
-            <CardCarousel items={items} />
+            <div className="grid gap-[12px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cold-6 auto-rows-auto">
+              {items.map((collection: any, index) => {
+                return (
+                  <div
+                    key={index}
+                    onClick={() => handleGoDetail(collection.slug)}
+                  >
+                    <FloatingCard
+                      isFloatRight={false}
+                      logo={collection.logoSrc}
+                      currentHoverId={currentHoverId}
+                      id={String(index)}
+                      bg={collection.splashSrc}
+                      bgOnHover={collection.videoSrc}
+                      title={collection.description}
+                      categories={collection.genre}
+                      network={'SOL'}
+                      marketCap={'10000'}
+                      coinSupply={'100000000000'}
+                      onPlay={() => handleGoDetail(collection.slug)}
+                      onCardClick={() => handleGoDetail(collection.slug)}
+                      onMouseOver={() => setCurrentHoverId(String(index))}
+                      onMouseLeave={() => setCurrentHoverId('-1')}
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
         )}
         {loading && (
@@ -74,7 +113,7 @@ const AllCollections = () => {
             })}
           </div>
         )}
-        <div className="right-[0] flex justify-end">
+        <div className="mt-[12px] flex justify-end">
           {sideBarPath === 'Home' && (
             <ButtonLink
               onClick={() => {

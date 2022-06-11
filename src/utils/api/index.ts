@@ -65,6 +65,16 @@ const api = {
     });
     return response.data;
   },
+  getNftListByHash: async (token: string, hash: string) => {
+    const response = await fetcher({
+      url: `/api/nft?hash=${hash}`,
+      method: 'get',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  },
 };
 
 export default api;
