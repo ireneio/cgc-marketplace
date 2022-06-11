@@ -11,11 +11,11 @@ import ClipboardText from '../Shared/ClipboardText';
 dayjs.extend(relativeTime);
 interface Props {
   rows:
-  | React.ReactNode[][]
-  | string[][]
-  | number[][]
-  | Record<string, any>[][]
-  | any[][];
+    | React.ReactNode[][]
+    | string[][]
+    | number[][]
+    | Record<string, any>[][]
+    | any[][];
   headers: string[] | number[] | React.ReactNode[];
   loading?: boolean;
 }
@@ -68,7 +68,9 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
               }}
             >
               <ClipboardText copyValue={String(col)}>
-                {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
+                <div className="w-[150px]">
+                  {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
+                </div>
               </ClipboardText>
             </div>
           );
@@ -94,7 +96,9 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
               }}
             >
               <ClipboardText copyValue={String(col)}>
-                {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
+                <div className="w-[150px]">
+                  {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
+                </div>
               </ClipboardText>
             </div>
           );
@@ -108,7 +112,9 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
               }}
             >
               <ClipboardText copyValue={String(col)}>
-                {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
+                <div className="w-[150px]">
+                  {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
+                </div>
               </ClipboardText>
             </div>
           );
