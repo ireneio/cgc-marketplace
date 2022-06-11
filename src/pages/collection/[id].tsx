@@ -153,7 +153,7 @@ const Collection = () => {
         />
       </div>
       <div className="flex justify-between items-center mb-[16px] max-w-full flexl-wrap">
-        <div className="text-[#FFFFFF] font-bold text-[24px]">
+        <div className="basis-[100%] lg:basis-auto text-[#FFFFFF] font-bold text-[24px]">
           {metadata.name}
         </div>
         <div className="basis-[100%] md:basis-auto">
