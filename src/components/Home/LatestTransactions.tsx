@@ -62,7 +62,7 @@ const LatestTransactions = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center flex-wrap">
         <SectionTitle>latest transactions</SectionTitle>
         <div className="basis-[100%] md:basis-auto mt-[12px] md:mt-0">
           <Pagination
