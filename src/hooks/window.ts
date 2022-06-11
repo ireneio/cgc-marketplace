@@ -8,7 +8,6 @@ export const useWindowWidth = () => {
   useEffect(() => {
     const cb = () => {
       setWindowWidth(window.innerWidth);
-      // setWindowWidth(window.document.documentElement.getElementsByTagName('body')[0].clientWidth)
     };
     window.addEventListener('resize', cb);
     window.addEventListener('load', cb);

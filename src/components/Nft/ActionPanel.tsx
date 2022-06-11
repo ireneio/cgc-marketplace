@@ -93,7 +93,7 @@ const ActionPanel = ({
             </Button>
           </div>
           {!isItemAddedToCart && (
-            <div className="ml-auto basis-[100%] md:basis-auto mt-[12px] md:mt-0">
+            <div className="ml-auto basis-[100%] lg:basis-auto mt-[12px] lg:mt-0">
               <Button secondary disabled={!info.auctionEndDate || loading}>
                 Make Offer
               </Button>
