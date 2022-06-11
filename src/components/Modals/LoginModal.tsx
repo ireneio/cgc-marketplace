@@ -5,8 +5,7 @@ import { useAppDispatch } from '@/store';
 import { useForm, FormProvider } from 'react-hook-form';
 import Login from '../Auth/Login';
 // import SignupOne from '../Auth/SignupOne';
-// import SignupTwo from '../Auth/SignupTwo';
-import SignupThree from '../Auth/SignupThree';
+// import SignupThree from '../Auth/SignupThree';
 import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
 import { useRouter } from 'next/router';
@@ -14,7 +13,6 @@ import SignupOneNew from '../Auth/SignUpOneNew';
 import SignUpTwoNew from '../Auth/SignUpTwoNew';
 import SignupTwo from '../Auth/SignupTwo';
 import { useWallet } from '@solana/wallet-adapter-react';
-import { isResponseError } from '@/utils/swr';
 
 type LoginModalProps = {
   isOpen: boolean;
