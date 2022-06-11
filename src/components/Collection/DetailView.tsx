@@ -8,6 +8,14 @@ import NftPricePanel from './NftPricePanel';
 import TokenPricePanel from './TokenPricePanel';
 import { useAppSelector } from '@/store';
 
+type SocialTypes = 'discord' | 'twitter' | 'link';
+
+const socials: Record<string, string | SocialTypes>[] = [
+  { name: 'twitter', icon: '/img/icon_twitter.svg' },
+  { name: 'discord', icon: '/img/icon_discord.svg' },
+  { name: 'link', icon: '/img/icon_link.svg' },
+];
+
 const DetailView = () => {
   const [loading, setLoading] = useState(true);
   const metadata = useAppSelector(
@@ -86,39 +94,17 @@ const DetailView = () => {
             </div>
           </div>
           <div className="flex items-center mb-[32px]">
-            <div
-              className="cursor-pointer hover:opacity-[0.65]"
-              onClick={() => handleLinkOpen('twitter')}
-            >
-              <img
-                src={'/img/icon_twitter.svg'}
-                width={24}
-                height={24}
-                alt="twitter"
-              />
-            </div>
-            <div
-              className="ml-[16px] cursor-pointer hover:opacity-[0.65]"
-              onClick={() => handleLinkOpen('discord')}
-            >
-              <img
-                src={'/img/icon_discord.svg'}
-                width={24}
-                height={24}
-                alt="discord"
-              />
-            </div>
-            <div
-              className="ml-[16px] cursor-pointer hover:opacity-[0.65]"
-              onClick={() => handleLinkOpen('link')}
-            >
-              <img
-                src={'/img/icon_link.svg'}
-                width={24}
-                height={24}
-                alt="link"
-              />
-            </div>
+            {socials.map((social, idx) => {
+              return (
+                <div
+                  key={idx}
+                  className="cursor-pointer hover:opacity-[0.65] mr-[16px]"
+                  onClick={() => handleLinkOpen(social.name as SocialTypes)}
+                >
+                  <img src={social.icon} width={24} height={24} alt="twitter" />
+                </div>
+              );
+            })}
           </div>
           {info.tags.length > 0 && (
             <div className="flex flex-wrap mb-[32px]">
