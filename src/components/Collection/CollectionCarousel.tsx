@@ -51,7 +51,7 @@ const CollectionCarousel = ({ carouselItems }: { carouselItems: Item[] }) => {
   };
 
   const handlePlay = (name: string) => {
-    console.log('handePlay', name);
+    console.log('handlePlay', name);
   };
 
   return (
@@ -67,10 +67,7 @@ const CollectionCarousel = ({ carouselItems }: { carouselItems: Item[] }) => {
         showThumbs={false}
         infiniteLoop
         autoPlay
-        // dynamicHeight
         width="100%"
-        // centerMode
-        // centerSlidePercentage={_centerSlidePercentage}
         emulateTouch
         renderIndicator={(onClick, selected) => {
           return (
@@ -78,7 +75,7 @@ const CollectionCarousel = ({ carouselItems }: { carouselItems: Item[] }) => {
               className="w-[80px] h-[5px] rounded-[5px] inline-block mr-[12px] cursor-pointer"
               style={{ backgroundColor: selected ? '#FFFFFF' : '#26173D' }}
               onClick={onClick}
-            ></div>
+            />
           );
         }}
       >
@@ -95,86 +92,25 @@ const CollectionCarousel = ({ carouselItems }: { carouselItems: Item[] }) => {
                   style={{
                     background: `radial-gradient(61.02% 182.1% at 82.63% 36.94%, rgba(253, 32, 142, 0.075) 0%, rgba(167, 16, 124, 0.75) 61.36%, rgba(83, 1, 106, 0.75) 100%)`,
                   }}
-                ></div>
-                {/* <img
-                  src={imageUrl}
-                  className="object-cover w-[30vh] h-[70vh] bg-[#181818] rounded-[5px] overflow-hidden transform transition duration-500 hover:cursor-pointer"
-                  alt={name}
-                /> */}
+                />
                 <div className="w-full collection_video">
                   <video muted autoPlay loop className="w-full">
                     <source src={imageUrl} type="video/mp4" />
                   </video>
                 </div>
-                <div className="z-[3] absolute bottom-[45%] left-[16px] md:left-[50px] font-bold text-[32px]">
+                <div className="z-[3] absolute bottom-[40%] left-[16px] md:left-[50px] font-bold text-[32px]">
                   <img
                     src={logo}
-                    className="h-[84px] w-[400px] bg-transparent aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 aspect-none hover:cursor-pointer"
+                    className="h-[100px] w-[400px] bg-transparent aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 aspect-none hover:cursor-pointer"
                     alt={name}
                   />
                 </div>
-                <div className="text-left z-[3] absolute bottom-[37%] md:bottom-[35%] left-[16px] md:left-[50px] font-bold text-[16px] md:text-[26px] lg:text-[32px] text-[#FFFFFF]">
-                  {title}
-                </div>
-                <div className="hidden md:block text-left z-[3] absolute bottom-[30%] left-[16px] md:left-[50px] text-[#FFFFFF]">
+                <div className="hidden md:block text-left z-[3] absolute bottom-[30%] left-[16px] md:left-[50px] text-[#FFFFFF] text-xl">
                   {description}
                 </div>
-                <div className="z-[3] absolute bottom-[10%] left-[16px] md:left-[50px] text-[#FFFFFF] flex">
+                <div className="z-[3] absolute bottom-[17.5%] left-[16px] md:left-[50px] text-[#FFFFFF] flex">
                   <Button onClick={() => handlePlay(name)}>Play</Button>
-                  {/* <div className="ml-[16px]">
-                    <Button link onClick={() => handleMoreInfo(name)}>
-                      More Info
-                    </Button>
-                  </div> */}
                 </div>
-                {/* <div className="absolute bottom-[10%] right-[50px] flex text-[#FFFFFF]">
-                  <div>
-                    <div className="font-bold text-[20px]">
-                      {getNumberWithUnits(items)}
-                    </div>
-                    <div className="capitalize text-[12px] font-light">
-                      items
-                    </div>
-                  </div>
-                  <div className="ml-[24px] text-[#FFFFFF]">
-                    <div className="font-bold text-[20px]">
-                      {getNumberWithUnits(owners)}
-                    </div>
-                    <div className="capitalize text-[12px] font-light">
-                      owners
-                    </div>
-                  </div>
-                  <div className="ml-[24px] text-[#FFFFFF]">
-                    <div className="font-bold text-[20px] flex items-center">
-                      <div>{getNumberWithUnits(floor)}</div>
-                      <div className="ml-[8px] flex items-center">
-                        <img
-                          src={'/img/icon_sol_white.png'}
-                          className="h-[10px] w-[10px] bg-transparent aspect-w-1 aspect-h-1 rounded-md overflow-hidden transform transition duration-500 lg:aspect-none hover:cursor-pointer"
-                          alt={'solana icon'}
-                        />
-                      </div>
-                    </div>
-                    <div className="capitalize text-[12px] font-light">
-                      floor price
-                    </div>
-                  </div>
-                  <div className="ml-[24px] text-[#FFFFFF]">
-                    <div className="font-bold text-[20px] flex items-center">
-                      <div>{getNumberWithUnits(vol)}</div>
-                      <div className="ml-[8px] flex items-center">
-                        <img
-                          src={'/img/icon_sol_white.png'}
-                          className="h-[10px] w-[10px] bg-transparent aspect-w-1 aspect-h-1 rounded-md overflow-hidden transform transition duration-500 lg:aspect-none hover:cursor-pointer"
-                          alt={'solana icon'}
-                        />
-                      </div>
-                    </div>
-                    <div className="capitalize text-[12px] font-light">
-                      volume
-                    </div>
-                  </div>
-                </div> */}
               </div>
             );
           },

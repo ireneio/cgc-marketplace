@@ -61,11 +61,11 @@ const CardCarousel = ({ items }: { items: any[] }) => {
     };
 
     if (window) {
-      // window.addEventListener('resize', cb);
+      window.addEventListener('resize', cb);
       cb();
     }
     return () => {
-      // window.removeEventListener('resize', cb);
+      window.removeEventListener('resize', cb);
     };
   }, []);
 

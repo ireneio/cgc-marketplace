@@ -75,9 +75,7 @@ const DetailView = () => {
             <CollectionCarousel carouselItems={carouselItems} />
           </div>
           <div className="mb-[32px]">
-            <div className="text-[#FFFFFF] font-bold text-[20px]">
-              {info.title}
-            </div>
+            <div className="text-[#FFFFFF] font-bold text-[20px]">Summary</div>
           </div>
           <div className="flex justify-between mb-[32px] flex-wrap">
             <div
@@ -122,15 +120,17 @@ const DetailView = () => {
               />
             </div>
           </div>
-          <div className="flex flex-wrap mb-[32px]">
-            {info.services.map((tag: string, index: number) => {
-              return (
-                <Tag key={index} className="mr-[12px]">
-                  {tag}
-                </Tag>
-              );
-            })}
-          </div>
+          {info.tags.length > 0 && (
+            <div className="flex flex-wrap mb-[32px]">
+              {info.tags.map((tag: string, index: number) => {
+                return (
+                  <Tag key={index} className="mr-[12px]">
+                    {tag}
+                  </Tag>
+                );
+              })}
+            </div>
+          )}
           <div className="mb-[32px]">
             <Divider />
           </div>
