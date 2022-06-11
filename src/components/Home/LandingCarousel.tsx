@@ -23,7 +23,7 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
     <div>
       {!carouselItems.length && (
         <div className="relative w-full h-[80vh]">
-          <Skeleton className="w-full h-50vh] md:h-[80vh]" />
+          <Skeleton className="w-full h-[50vh] md:h-[80vh]" />
         </div>
       )}
       <Carousel
