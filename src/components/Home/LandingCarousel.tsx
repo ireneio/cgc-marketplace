@@ -1,34 +1,11 @@
-import { testData } from '@/data/test';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Button from '../Shared/Button';
+import Skeleton from '../Shared/Skeleton';
 
-const LandingCarousel = () => {
+const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
   const router = useRouter();
-  const [carouselItems] = useState([
-    {
-      id: 'seoul_stars',
-      imageUrl: '/img/carousel_sstars.jpeg',
-      name: 'seoul_stars',
-      href: 'https://seoulstars.io/',
-      logo: '/img/logo_sstars.png',
-      title: "The Metaverse's First Virtual K-Pop Idol",
-      collectionId: '1',
-      description:
-        'Sing-to-earn in this exciting rhythm action and karaoke game',
-    },
-    {
-      id: 'solchicks',
-      imageUrl: testData.landingHeroBackground,
-      name: 'solchicks',
-      href: 'https://solchicks.io/',
-      logo: testData.landingHeroLogo,
-      title: testData.landingHeroTitle,
-      description: testData.landingHeroSubtitle,
-    },
-  ]);
 
   const handleCarouselItemClick = ({ href }: { href: string }) => {
     console.log(href);
@@ -44,6 +21,11 @@ const LandingCarousel = () => {
 
   return (
     <div>
+      {!carouselItems.length && (
+        <div className="relative w-full h-[80vh]">
+          <Skeleton className="w-full h-[80vh]" />
+        </div>
+      )}
       <Carousel
         ariaLabel="Carousel"
         useKeyboardArrows

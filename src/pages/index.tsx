@@ -9,6 +9,20 @@ import { useMemo } from 'react';
 
 const Index = () => {
   const sideBarPath = useAppSelector((state) => state.layout.navigation.path);
+  const collections = useAppSelector((state) => state.collection.collections);
+
+  const carouselItems = useMemo(() => {
+    return collections.slice(0, 5).map((collection: any) => {
+      return {
+        id: collection?.slug,
+        name: collection?.slug,
+        logo: collection?.logoSrc,
+        imageUrl: collection?.splashSrc,
+        description: collection?.description,
+        href: '',
+      };
+    });
+  }, [collections]);
 
   const breadcrumbItems = useMemo(() => {
     switch (sideBarPath) {
@@ -46,7 +60,7 @@ const Index = () => {
       )}
       {sideBarPath === 'Home' && (
         <div className="mt-[21px]">
-          <LandingCarousel />
+          <LandingCarousel carouselItems={carouselItems} />
         </div>
       )}
       {sideBarPath === 'Home' && (

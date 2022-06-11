@@ -12,10 +12,10 @@ import { useRouter } from 'next/router';
 const AllCollections = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
   const sideBarPath = useAppSelector((state) => state.layout.navigation.path);
+  const collections = useAppSelector((state) => state.collection.collections);
   const oAuthCtx = useContext(OAuthContext);
+  const [loading, setLoading] = useState(true);
 
   const getCollections = async () => {
     const response = await api.getCollectionList(oAuthCtx.access_token);
@@ -38,7 +38,7 @@ const AllCollections = () => {
   const initCollections = async () => {
     setLoading(true);
     const collections = await getCollections();
-    setItems(collections);
+    dispatch({ type: 'SET_COLLECTIONS', payload: collections });
     const tid = setTimeout(() => {
       setLoading(false);
       clearTimeout(tid);
@@ -73,7 +73,7 @@ const AllCollections = () => {
         {!loading && (
           <div className="mt-[24px]">
             <div className="grid gap-[12px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cold-6 auto-rows-auto">
-              {items.map((collection: any, index) => {
+              {collections.map((collection: any, index) => {
                 return (
                   <div
                     key={index}
@@ -104,7 +104,7 @@ const AllCollections = () => {
         )}
         {loading && (
           <div className="flex mt-[24px]">
-            {items.map((game, index) => {
+            {[0, 1, 2, 3, 4, 5].map((game, index) => {
               return (
                 <div key={index} className="mr-[12px]">
                   <LoadingNetflixCard />
