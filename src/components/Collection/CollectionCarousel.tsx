@@ -14,38 +14,6 @@ interface Item {
 }
 
 const CollectionCarousel = ({ carouselItems }: { carouselItems: Item[] }) => {
-  // const [carouselItems] = useState([
-  //   PREFILL_DATA,
-  //   // {
-  //   //   id: 'store_carousel_example_1',
-  //   //   imageUrl: '/img/angrymals-cover.png',
-  //   //   name: 'store_carousel_example_1',
-  //   //   href: 'https://www.angrymals.io/',
-  //   //   logo: '/img/logo_sstars.png',
-  //   //   title: 'The metaverses first virtual K-Pop idol.',
-  //   //   description:
-  //   //     'Sing-to-earn in this exciting rhythm action and karaoke game!',
-  //   //   items: 1000,
-  //   //   floor: 1.85,
-  //   //   vol: 20000,
-  //   //   owners: 1500,
-  //   // },
-  //   // {
-  //   //   id: 'store_carousel_example_4',
-  //   //   imageUrl: '/img/solchicks_1.png',
-  //   //   name: 'store_carousel_example_4',
-  //   //   href: 'https://www.solchicks.io/',
-  //   //   logo: '/img/sc_logo.png',
-  //   //   title: 'Play the Mini Game Now',
-  //   //   description:
-  //   //     'Collect, breed, and train your own unique SolChicks in a revolutionary gaming ecosystem.',
-  //   //   items: 1000,
-  //   //   floor: 1.85,
-  //   //   vol: 20000,
-  //   //   owners: 1500,
-  //   // },
-  // ]);
-
   const handleCarouselItemClick = ({ href }: { href: string }) => {
     console.log(href);
   };
@@ -80,7 +48,7 @@ const CollectionCarousel = ({ carouselItems }: { carouselItems: Item[] }) => {
         }}
       >
         {carouselItems.map(
-          ({ id, imageUrl, name, href, description, title, logo }) => {
+          ({ id, imageUrl, name, href, description, logo }) => {
             return (
               <div
                 key={id + dayjs().toISOString()}
