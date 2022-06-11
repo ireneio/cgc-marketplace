@@ -65,7 +65,7 @@ const AllCollections = () => {
         <SectionTitle>all collections</SectionTitle>
       </div>
       {sideBarPath === 'Explore/All' && (
-        <div className="mt-[16px] mb-[32px]">
+        <div className="mt-[24px] mb-[24px]">
           <Divider />
         </div>
       )}

@@ -237,7 +237,7 @@ const Nft = () => {
 
   return (
     <DefaultLayout>
-      <div className="mb-[32px]">
+      <div className="mb-[24px]">
         <Breadcrumb
           items={breadCrumbItems}
           currentValue={currentSelection}

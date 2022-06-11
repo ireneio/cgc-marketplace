@@ -37,6 +37,7 @@ const ListCard = ({
 
   const handleImageLoad = (e: any, image: string) => {
     e.target.classList.remove('blur');
+    e.target.classList.remove('force_card_height');
     e.target.src = image === 'undefined' ? '/img/cgc_icon.png' : image;
     e.target.style.width = '100%';
     e.target.style.height = 'auto';
@@ -44,7 +45,10 @@ const ListCard = ({
   };
 
   const handleImageError = (e: any) => {
-    e.target.src = '/img/cgc_icon.png';
+    if (e.target.src === '/img/spinner.svg') {
+      return;
+    }
+    e.target.src = '/img/spinner.svg';
     setImageLoaded(true);
   };
 
@@ -63,10 +67,9 @@ const ListCard = ({
         <img
           src={'/img/spinner.svg'}
           alt={name}
-          // width={'100%'}
           height={150}
           onError={(e) => handleImageError(e)}
-          className="blur rounded-t-[5px] w-full h-auto"
+          className="blur rounded-t-[5px] w-full h-auto force_card_height"
           onLoad={(e) => handleImageLoad(e, image)}
         />
       </div>

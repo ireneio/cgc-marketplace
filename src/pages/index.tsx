@@ -38,6 +38,7 @@ const Index = () => {
 
   return (
     <DefaultLayout>
+      {/* Home Page */}
       {sideBarPath != 'Home' && (
         <div className="mb-[0]">
           <Breadcrumb items={breadcrumbItems} currentValue={sideBarPath} />
@@ -53,11 +54,6 @@ const Index = () => {
           <AllCollections />
         </div>
       )}
-      {sideBarPath === 'Explore/All' && (
-        <div className="mt-[16px]">
-          <AllCollections />
-        </div>
-      )}
       {sideBarPath === 'Home' && (
         <div className="mt-[32px]">
           <LatestSales />
@@ -66,6 +62,12 @@ const Index = () => {
       {sideBarPath === 'Home' && (
         <div className="mt-[48px] mb-[48px]">
           <LatestTransactions />
+        </div>
+      )}
+      {/* Explore Page */}
+      {sideBarPath === 'Explore/All' && (
+        <div className="mt-[24px]">
+          <AllCollections />
         </div>
       )}
     </DefaultLayout>
