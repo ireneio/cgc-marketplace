@@ -70,7 +70,10 @@ const ActionPanel = ({
         </div>
         <div className="mt-[34px] flex items-center flex-wrap">
           {!isItemAddedToCart && (
-            <Button onClick={() => handleBuy()} disabled={loading}>
+            <Button
+              onClick={() => handleBuy()}
+              disabled={loading || !info.mintAddress}
+            >
               Buy Now
             </Button>
           )}
@@ -78,7 +81,7 @@ const ActionPanel = ({
             <Button
               onClick={() => handleAddToCart()}
               style={{ paddingLeft: 12, paddingRight: 12 }}
-              disabled={loading}
+              disabled={loading || !info.mintAddress}
             >
               {isItemAddedToCart ? (
                 'Remove From Cart'
@@ -94,7 +97,10 @@ const ActionPanel = ({
           </div>
           {!isItemAddedToCart && (
             <div className="ml-auto basis-[100%] lg:basis-auto mt-[12px] lg:mt-0">
-              <Button secondary disabled={!info.auctionEndDate || loading}>
+              <Button
+                secondary
+                disabled={!info.auctionEndDate || loading || !info.mintAddress}
+              >
                 Make Offer
               </Button>
             </div>

@@ -1,6 +1,7 @@
 import { useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 interface SidebarItem {
   text: string;
@@ -13,9 +14,15 @@ interface Props {
   items: SidebarItem[];
   currentValue: string;
   onItemClick?: (value: string) => void | Promise<void>;
+  rootClassName?: string;
 }
 
-const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
+const Sidebar = ({
+  items,
+  currentValue,
+  onItemClick,
+  rootClassName,
+}: Props) => {
   const [innerHeight, setInnerHeight] = useState<string | number>(0);
   const router = useRouter();
   const sidebarPath = useAppSelector((state) => state.layout.navigation.path);
@@ -38,7 +45,10 @@ const Sidebar = ({ items, currentValue, onItemClick }: Props) => {
 
   return (
     <div
-      className="overflow-auto px-[12px] py-[20px] bg-[#0C001C] shadow-xl hide-scrollbar relative z-[5]"
+      className={twMerge(
+        'overflow-auto px-[12px] py-[20px] bg-[#0C001C] shadow-xl hide-scrollbar relative z-[5]',
+        rootClassName,
+      )}
       style={{ height: Number(innerHeight) - 120 - 75 }}
     >
       {items.map((item) => {

@@ -15,6 +15,7 @@ const Index = () => {
     return collections.slice(0, 5).map((collection: any) => {
       return {
         id: collection?.slug,
+        title: collection?.name,
         name: collection?.slug,
         logo: collection?.logoSrc,
         imageUrl: collection?.splashSrc,

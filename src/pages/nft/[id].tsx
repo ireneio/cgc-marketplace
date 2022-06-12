@@ -268,8 +268,8 @@ const Nft = () => {
       </div>
       {currentSelection === 'Your Items' && <YourView />}
       {currentSelection !== 'Your Items' && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-1 gap-[24px] pt-[12px]">
-          <div className="flex items-center justify-between">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-[24px] pt-[12px]">
+          <div className="flex items-center justify-between col-span-2">
             <div className="flex items-center">
               <div className="cursor-pointer" onClick={() => handleRefresh()}>
                 <img
@@ -287,9 +287,9 @@ const Nft = () => {
               disabled={loading}
             />
           </div>
-          <div className="flex flex-wrap justify-between">
+          <div className="flex flex-wrap justify-between col-span-2">
             <div className="basis-[100%] md:basis-[48%]">
-              <div className="w-full">
+              <div className="w-full mb-[24px] md:mb-0">
                 <img
                   src={info.image}
                   alt={info.name}
@@ -319,10 +319,10 @@ const Nft = () => {
               </div>
             </div>
           </div>
-          <div className="mt-[24px]">
+          <div className="mt-[24px] col-span-2">
             <Divider />
           </div>
-          <div className="mt-[24px]">
+          <div className="mt-[24px] col-span-2">
             <div className="flex justify-between items-center flex-wrap">
               <div className="text-[#FFFFFF] font-bold text-[20px]">
                 Transaction History

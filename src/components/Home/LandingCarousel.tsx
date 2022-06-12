@@ -50,7 +50,7 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
         }}
       >
         {carouselItems.map(
-          ({ id, imageUrl, name, href, description, title, logo }) => {
+          ({ id, imageUrl, name, href, description, logo }) => {
             return (
               <div
                 key={id}
@@ -68,17 +68,18 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
                   className="bg-cover w-full h-[50vh] md:h-[80vh] bg-[#181818] aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 hover:cursor-pointer object-cover"
                   alt={name}
                 />
-                <div className="z-[3] absolute bottom-[45%] left-[16px] md:left-[50px] font-bold text-[32px]">
+                <div className="z-[3] absolute top-[24px] md:top-[55%] left-[16px] md:left-[50px] font-bold text-[32px]">
                   <img
                     src={logo}
-                    className="h-[84px] w-[400px] bg-transparent aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 aspect-none hover:cursor-pointer"
+                    className="md:h-[84px] h-[42px] bg-transparent aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 aspect-none hover:cursor-pointer"
                     alt={name}
                   />
                 </div>
-                <div className="text-left z-[3] absolute bottom-[37%] md:bottom-[35%] left-[16px] md:left-[50px] font-bold text-[16px] md:text-[26px] lg:text-[32px] text-[#FFFFFF]">
+                {/* <div className="text-left z-[3] absolute top-[72px] md:top-[65%] xl:top-[68%] left-[16px] md:left-[50px] font-bold text-[16px] md:text-[26px] lg:text-[32px] text-[#FFFFFF]">
                   {title}
-                </div>
-                <div className="hidden md:block text-left z-[3] absolute bottom-[30%] left-[16px] md:left-[50px] text-[#FFFFFF]">
+                </div> */}
+                {/* <div className="text-[24px] text-left z-[3] absolute top-[140px] md:top-[70%] xl:top-[75%] left-[16px] md:left-[50px] text-[#FFFFFF]"> */}
+                <div className="px-[12px] drop-shadow-xl text-[18px] 2xl:text-[32px] text-left z-[3] absolute top-[140px] md:top-[70%] xl:top-[70%] left-[16px] md:left-[50px] text-[#FFFFFF]">
                   {description}
                 </div>
                 <div className="z-[3] absolute bottom-[10%] left-[16px] md:left-[50px] text-[#FFFFFF] flex">

@@ -1,12 +1,12 @@
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useContext, useEffect, useState } from 'react';
 import ButtonLink from '../Shared/ButtonLink';
-import LoadingNetflixCard from '../Shared/LoadingNetflixCard';
+import LoadingNetflixCard from './FloatingCardLoading';
 import SectionTitle from '../Shared/SectionTitle';
 import Divider from '@/components/Shared/Divider';
 import { OAuthContext } from '@/contexts/OAuthProvider';
 import api from '@/utils/api';
-import FloatingCard from '../Shared/FloatingCard';
+import FloatingCard from './FloatingCard';
 import { useRouter } from 'next/router';
 
 const AllCollections = () => {
@@ -31,6 +31,7 @@ const AllCollections = () => {
         genre: [item.metadata.genre],
         services: item.services,
         description: item.metadata.description,
+        totalSupply: item?.nftCollectionStats?.totalSupply,
       };
     });
   };
@@ -90,7 +91,7 @@ const AllCollections = () => {
                       categories={collection.genre}
                       network={'SOL'}
                       marketCap={'10000'}
-                      coinSupply={'100000000000'}
+                      coinSupply={collection.totalSupply}
                       onPlay={() => handleGoDetail(collection.slug)}
                       onCardClick={() => handleGoDetail(collection.slug)}
                       onMouseOver={() => setCurrentHoverId(String(index))}
@@ -103,10 +104,10 @@ const AllCollections = () => {
           </div>
         )}
         {loading && (
-          <div className="flex mt-[24px]">
+          <div className="grid gap-[12px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cold-6 auto-rows-auto">
             {[0, 1, 2, 3, 4, 5].map((game, index) => {
               return (
-                <div key={index} className="mr-[12px]">
+                <div key={index}>
                   <LoadingNetflixCard />
                 </div>
               );

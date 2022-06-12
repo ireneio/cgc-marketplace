@@ -1,5 +1,5 @@
 import { getNumberWithCommas } from '@/utils/formatHelper';
-import Button from './Button';
+import Button from '../Shared/Button';
 import { motion } from 'framer-motion';
 
 interface Props {
@@ -32,7 +32,7 @@ const FloatingCard = ({
   categories,
   network,
   marketCap,
-  // coinSupply,
+  coinSupply,
   onPlay,
   // playDisabled,
   onCardClick,
@@ -140,23 +140,25 @@ const FloatingCard = ({
                 </div>
               </div>
               <div className="absolute bottom-[32px] mt-[12px] h-[2px] w-full bg-[#290030]"></div>
-              <div className="absolute bottom-[12px] left-0 right-0 w-full px-[12px] mt-[8px] mb-[-4px] flex">
+              <div className="grid gap-[12px] grid-cols-3 absolute bottom-[12px] left-0 right-0 w-full px-[12px] mt-[8px] mb-[-4px]">
+                {network && (
+                  <div className="text-[10px] flex items-center">
+                    <div className="text-[#9497AA]">Network:</div>
+                    <div className="text-[#FC1F8E] ml-[3px]">{network}</div>
+                  </div>
+                )}
                 <div className="text-[10px] flex items-center">
-                  <div className="text-[#9497AA]">Network:</div>
-                  <div className="text-[#FC1F8E] ml-[3px]">{network}</div>
-                </div>
-                <div className="text-[10px] flex items-center ml-[12px]">
                   <div className="text-[#9497AA]">M Cap:</div>
                   <div className="text-[#FC1F8E] ml-[3px]">
-                    {getNumberWithCommas(marketCap || '')}
+                    {getNumberWithCommas(Number(marketCap), 2)}
                   </div>
                 </div>
-                {/* <div className="text-[10px] flex items-center">
+                <div className="text-[10px] flex items-center">
                   <div className="text-[#9497AA]">C Supply:</div>
                   <div className="text-[#FC1F8E] ml-[3px]">
-                    {getNumberWithCommas(coinSupply)}
+                    {getNumberWithCommas(Number(coinSupply), 2)}
                   </div>
-                </div> */}
+                </div>
               </div>
             </div>
           </div>
