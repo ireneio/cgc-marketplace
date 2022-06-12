@@ -52,7 +52,9 @@ const handleImageError = (e: any) => {
 
 const Nft = () => {
   const dispatch = useAppDispatch();
-  const email = useAppSelector((state) => state.user.userInfo.email);
+  const access_token = useAppSelector(
+    (state) => state.user.userInfo.access_token,
+  );
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
@@ -138,7 +140,7 @@ const Nft = () => {
         router.push(`/collection/${metadata.slug}?tab=all_items`).then();
         return;
       case 'Your Items': {
-        if (!email) {
+        if (!access_token) {
           setLoginModalOpen(true);
         } else {
           router.push(`/account?tab=items`).then();
