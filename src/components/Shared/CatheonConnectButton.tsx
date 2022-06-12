@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/store';
 // import { getTrimmedAddress } from '@/utils/formatHelper';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { LoginModal } from '../Modals/LoginModal';
 import Button from './Button';
 import DropdownMenu from './DropdownMenu';
@@ -33,12 +33,8 @@ const CatheonConnectButton = () => {
   };
 
   const handlecSignOut = () => {
-    window.localStorage.removeItem('auth');
+    oAuthCtx.logout();
   };
-
-  useEffect(() => {
-    console.log(userInfo);
-  }, [userInfo]);
 
   return oAuthCtx.authorised() ? (
     <>
@@ -89,7 +85,7 @@ const CatheonConnectButton = () => {
             ]}
             onItemClick={(val) => handleDropdownClick(val)}
             width={200}
-            left={-22}
+            right={0}
           />
         )}
       </Button>

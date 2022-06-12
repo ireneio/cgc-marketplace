@@ -81,6 +81,7 @@ export const LoginModal = ({
         response?.data.access_token,
         response?.data.expired_at,
         response?.data.token_type,
+        response?.data.id,
       );
       dispatch({
         type: 'SHOW_SNACKBAR',

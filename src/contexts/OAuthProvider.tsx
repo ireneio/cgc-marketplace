@@ -16,6 +16,7 @@ interface ICtxFn extends ICtx {
     access_token: string,
     expired_at: number,
     token_type: string,
+    id: number | string,
   ) => void;
   logout: () => void;
 }
@@ -80,20 +81,17 @@ export const OAuthProvider = ({ children }: { children: React.ReactNode }) => {
     access_token: string,
     expired_at: number,
     token_type: string,
+    id: number | string,
   ) => {
-    setAuth({
+    const payload = {
       access_token: access_token,
       expired_at: expired_at,
       token_type: token_type,
       refresh_token: '',
-      id: 0,
-    });
-    const result = JSON.stringify({
-      access_token: access_token,
-      expired_at: expired_at,
-      token_type: token_type,
-      refresh_token: '',
-    });
+      id,
+    };
+    setAuth(payload);
+    const result = JSON.stringify(payload);
     localStorage.setItem('auth', result.toString());
   };
 

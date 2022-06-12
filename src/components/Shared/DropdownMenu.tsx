@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 interface Items {
   text: string | React.ReactNode;
   value: string;
@@ -8,7 +10,8 @@ interface Props {
   onItemClick?: (value: string) => void | Promise<void>;
   children?: React.ReactNode;
   bottom?: number;
-  left?: number;
+  left?: number | boolean;
+  right?: number;
   width?: number;
   // right?: number;
 }
@@ -18,22 +21,39 @@ const DropdownMenu = ({
   onItemClick,
   children,
   bottom,
+  right,
   left,
   width,
-}: // right,
-Props) => {
+}: Props) => {
+  const style = useMemo(() => {
+    if ((right || Number(right) === 0) && right !== undefined) {
+      return {
+        background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
+        width: width ? width : 'inherit',
+        bottom: bottom ? bottom + 'px' : '-265%',
+        right:
+          (right || Number(right) === 0) && right !== undefined
+            ? Number(right) + 'px'
+            : '',
+      };
+    }
+    return {
+      background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
+      width: width ? width : 'inherit',
+      bottom: bottom ? bottom + 'px' : '-265%',
+      left:
+        left || (Number(left) === 0 && left !== undefined)
+          ? Number(left) + 'px'
+          : '0px',
+    };
+  }, [left, right]);
+
   return (
     <>
       {!children && (
         <div
-          style={{
-            background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
-            width: width ? width : 'inherit',
-            bottom: bottom ? bottom + 'px' : '-265%',
-            left: left ? left + 'px' : 0,
-            // right: right ? right + 'px' : 0,
-          }}
-          className="absolute bottom-[-265%] left-0  px-[2px] py-[2px] rounded-[5px] flex items-center justify-center"
+          style={style}
+          className="absolute bottom-[-265%] px-[2px] py-[2px] rounded-[5px] flex items-center justify-center"
         >
           <div
             className="bg-[#181818] z-[3]"
