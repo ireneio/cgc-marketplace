@@ -66,12 +66,12 @@ const Cart = ({ onClose }: { onClose?: () => void }) => {
             <div className="mt-[16px] h-[243px] pt-[2px] pr-[12px] overflow-auto">
               {!cartItems.length && (
                 <div className="text-[#FFFFFF] w-full flex justify-center flex-col items-center h-[150px] mx-auto">
-                  <div className="text-[16px]">You shopping cart is Empty.</div>
+                  <div className="text-[16px]">You shopping cart is empty.</div>
                   <div
                     className="text[-18px] mt-[8px] text-[#9497AA] cursor-pointer underline"
                     onClick={() => onClose && onClose()}
                   >
-                    Continue Shopping!
+                    Continue shopping
                   </div>
                 </div>
               )}
