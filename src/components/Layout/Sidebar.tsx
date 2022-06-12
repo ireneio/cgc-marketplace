@@ -1,6 +1,4 @@
-import { useAppSelector } from '@/store';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useWindowHeight, useWindowWidth } from '@/hooks/window';
 import { twMerge } from 'tailwind-merge';
 
 interface SidebarItem {
@@ -23,25 +21,8 @@ const Sidebar = ({
   onItemClick,
   rootClassName,
 }: Props) => {
-  const [innerHeight, setInnerHeight] = useState<string | number>(0);
-  const router = useRouter();
-  const sidebarPath = useAppSelector((state) => state.layout.navigation.path);
-
-  useEffect(() => {
-    if (window) {
-      // const height = Math.max(document.body.getBoundingClientRect().height, 0);
-      const height =
-        window.document.documentElement.scrollHeight -
-        window.document.documentElement.clientHeight;
-
-      if (sidebarPath === 'Home') {
-        setInnerHeight(height);
-        // setInnerHeight('70vh');
-      } else {
-        setInnerHeight(window.document.documentElement.clientHeight);
-      }
-    }
-  }, [router.pathname, sidebarPath]);
+  const windowWidth = useWindowWidth();
+  const windiwHeight = useWindowHeight();
 
   return (
     <div
@@ -49,7 +30,12 @@ const Sidebar = ({
         'overflow-auto px-[12px] py-[20px] bg-[#0C001C] shadow-xl hide-scrollbar relative z-[5]',
         rootClassName,
       )}
-      style={{ height: Number(innerHeight) - 120 - 75 }}
+      style={{
+        height:
+          windowWidth < 768
+            ? Number(windiwHeight)
+            : Number(windiwHeight) - 120 - 366,
+      }}
     >
       {items.map((item) => {
         const isSelectedParent = currentValue.split('/')[0] === item.value;

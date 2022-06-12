@@ -201,7 +201,7 @@ const DefaultLayout = ({ children, title }: Props) => {
               items={SIDE_BAR_ITEMS}
               currentValue={sideBarPath}
               onItemClick={(value) => handleSideBarPathUpdate(value)}
-              rootClassName={'static bg-[#13002B] w-[70vw]'}
+              rootClassName={'static bg-[#13002B] w-[70vw] h-inherit'}
             />
           </motion.div>
           {sideBarOpen && (

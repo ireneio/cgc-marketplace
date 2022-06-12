@@ -25,3 +25,28 @@ export const useWindowWidth = () => {
 
   return windowWidth;
 };
+
+export const useWindowHeight = () => {
+  const [windowHeight, setWindowHeight] = useState(0);
+  const router = useRouter();
+
+  useEffect(() => {
+    const cb = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    window.addEventListener('resize', cb);
+    window.addEventListener('load', cb);
+    return () => {
+      window.removeEventListener('resize', cb);
+      window.removeEventListener('load', cb);
+    };
+  });
+
+  useEffect(() => {
+    if (window) {
+      setWindowHeight(window.innerHeight);
+    }
+  }, [router.pathname]);
+
+  return windowHeight;
+};
