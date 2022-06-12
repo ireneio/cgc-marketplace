@@ -160,7 +160,7 @@ const TokenPricePanel = ({
             />
           </div>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-3 items-center mb-[24px] flex-wrap max-w-[800px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center mb-[24px] flex-wrap max-w-[800px]">
           <div className="text-[#FFFFFF] text-[14px] font-semibold">
             Low: ${low}
           </div>
@@ -171,7 +171,7 @@ const TokenPricePanel = ({
               showIndicator
             />
           </div>
-          <div className="text-[#FFFFFF] text-[14px] font-semibold ml-0 lg:ml-[12px] mt-[12px] md:mt-0">
+          <div className="text-[#FFFFFF] text-[14px] font-semibold ml-0 lg:ml-[12px] mt-[12px] lg:mt-0">
             High: ${high}
           </div>
           <DateViewSelector
