@@ -152,11 +152,11 @@ const Collection = () => {
           }}
         />
       </div>
-      <div className="flex justify-between items-center mb-[16px] max-w-full flex-wrap">
+      <div className="flex justify-between items-center mb-[12px] max-w-full flex-wrap">
         <div className="basis-[100%] md:basis-[50%] text-[#FFFFFF] font-bold text-[24px]">
           {metadata.name}
         </div>
-        <div className="basis-[100%] md:basis-auto mt-[12px] lg:mt-0">
+        <div className="basis-[100%] lg:basis-auto mt-[12px] lg:mt-0">
           <SelectGroup
             items={selectGroupItems}
             currentValue={currentSelection}

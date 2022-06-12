@@ -19,10 +19,9 @@ const WalletView = () => {
   return (
     <div>
       <div>
-        {/* <div className="text-[#FFFFFF] font-bold text-[20px]">{title}</div> */}
-        <div className="mt-[20px] flex flex-wrap items-center">
+        <div className="mt-[24px] grid-cols-1 lg:grid-cols-4 grid gap-[24px]">
           {wallet.connected && (
-            <div className="mr-[30px]">
+            <div className="lg:colspan-2">
               <WalletCard
                 providerIcon="/img/logo_phantom.png"
                 provider="Phantom"
@@ -32,7 +31,7 @@ const WalletView = () => {
             </div>
           )}
           {signerAddress && (
-            <div>
+            <div className="lg:colspan-2">
               <WalletCard
                 providerIcon="/img/icon_metamask.svg"
                 provider="Metamask"
@@ -42,10 +41,10 @@ const WalletView = () => {
             </div>
           )}
         </div>
-        <div className="mt-[20px]">
+        <div className="mt-[24px]">
           {!wallet.connected && <SolanaConnectButton />}
           {!signerAddress && (
-            <div className="mt-[20px]">
+            <div className="mt-[24px]">
               <EvmConnectButton />
             </div>
           )}

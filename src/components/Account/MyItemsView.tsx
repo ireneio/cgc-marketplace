@@ -132,7 +132,7 @@ const MyItemsView = () => {
 
   return (
     <div className="flex flex-wrap">
-      <div className="lg:hidden basis-[100%]">
+      <div className="md:hidden basis-[100%]">
         {!myItems.length && (
           <div className="mb-[28px] text-[#FFFFFF] rounded-[5px] text-semibold w-full border-[#290030] border-[2px] bg-[#13002B] h-[115px] flex items-center justify-center">
             <div className="hidden lg:block">
@@ -154,15 +154,15 @@ const MyItemsView = () => {
           </div>
         )}
       </div>
-      <div className="basis-[33%] pr-[6px]">
+      <div className="lg:basis-[250px] basis-[100%] lg:pr-[6px] mb-[24px] lg:mb-0">
         <Menu
           items={_collections}
           currentValue={sidebar.value}
           onItemClick={(value) => handleSidebarChange(value)}
         />
       </div>
-      <div className="basis-[66%] pl-[6px]">
-        <div className="hidden lg:block">
+      <div className="lg:flex-1 lg:pl-[6px]">
+        <div className="hidden md:block">
           {!myItems.length && (
             <div className="mb-[28px] text-[#FFFFFF] rounded-[5px] text-semibold w-full border-[#290030] border-[2px] bg-[#13002B] h-[115px] flex items-center justify-center">
               <div className="hidden lg:block">
@@ -242,7 +242,7 @@ const MyItemsView = () => {
         </div>
         <div>
           {!myItems.length && (
-            <div className="mt-[32px] mb-[32px] font-semibold text-[24px] text-[#FFFFFF]">
+            <div className="mt-[24px] mb-[24px] font-semibold text-[24px] text-[#FFFFFF]">
               Suggested Items
             </div>
           )}

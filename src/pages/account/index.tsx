@@ -125,7 +125,7 @@ const Account = ({
       </div>
       <div className="flex justify-between items-center mb-[24px] flex-wrap">
         <div className="text-[#FFFFFF] font-bold text-[20px]">{title}</div>
-        <div className="basis-[100%] md:basis-auto mt-[12px] lg:mt-0">
+        <div className="basis-[100%] lg:basis-auto mt-[12px] lg:mt-0">
           <SelectGroup
             items={[
               { text: 'Wallets', value: 'wallet' },

@@ -255,7 +255,7 @@ const Nft = () => {
         <div className="basis-[100%] lg:basis-auto text-[#FFFFFF] font-bold text-[24px]">
           {info.brand} {info.name}
         </div>
-        <div className="basis-[100%] md:basis-auto mt-[12px] lg:mt-0">
+        <div className="basis-[100%] lg:basis-auto mt-[12px] lg:mt-0">
           <SelectGroup
             items={selectGroupItems}
             currentValue={currentSelection}
