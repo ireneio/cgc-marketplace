@@ -7,6 +7,7 @@ import ItemCountPanel from './ItemCountPanel';
 import NftPricePanel from './NftPricePanel';
 import TokenPricePanel from './TokenPricePanel';
 import { useAppSelector } from '@/store';
+import { getNumberWithCommas } from '@/utils/formatHelper';
 
 type SocialTypes = 'discord' | 'twitter' | 'link';
 
@@ -126,7 +127,7 @@ const DetailView = () => {
           <div className="mb-[32px] grid grid-cols-2 lg:grid-cols-4 gap-[24px]">
             <ItemCountPanel
               text="Items available"
-              count={nftCollectionStats?.count}
+              count={nftCollectionStats?.totalSupply}
             />
             <ItemCountPanel
               text="Items Listed"
@@ -137,8 +138,10 @@ const DetailView = () => {
               count={nftCollectionStats?.numOwners}
             />
             <ItemCountPanel
-              text="Total Supply"
-              count={nftCollectionStats?.totalSupply}
+              text="Total Volume"
+              count={
+                '$' + getNumberWithCommas(nftCollectionStats?.usdTotalVolume, 2)
+              }
             />
           </div>
           {tokens.map((token: any, idx: number) => {

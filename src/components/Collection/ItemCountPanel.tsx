@@ -2,7 +2,7 @@ import Tag from '../Shared/Tag';
 
 interface Props {
   text: string;
-  count: number;
+  count: number | string;
   countUnit?: string;
 }
 

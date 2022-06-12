@@ -27,6 +27,9 @@ const MarketView = () => {
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
+  const currentCollection = useAppSelector(
+    (state) => state.collection.currentCollection,
+  );
   const oAuthCtx = useContext(OAuthContext);
   const [currentView, setCurrentView] = useState<SelectionView>('List');
   const [currentFilter, setCurrentFilter] = useState<SelectionFilter>('');
@@ -147,6 +150,8 @@ const MarketView = () => {
     getCart();
   }, []);
 
+  console.log(currentCollection);
+
   return (
     <div className="mb-[32px]">
       <div className="flex justify-between items-center mb-[24px]">
@@ -163,7 +168,11 @@ const MarketView = () => {
             />
           </div>
           <div className="ml-[8px] text-[#FFFFFF] text-[14px]">
-            {getNumberWithCommas(items.length, 0)} items
+            {getNumberWithCommas(
+              currentCollection?.nftCollectionStats?.totalSupply?.length,
+              0,
+            )}{' '}
+            items
           </div>
           <div className="ml-auto">
             <SelectGroup
