@@ -86,12 +86,12 @@ const FloatingCard = ({
           initial={{
             opacity: 0,
             x: isDefaultFloating ? 0 : '10px',
-            y: isDefaultFloating ? 0 : '-100px',
+            y: isDefaultFloating ? 0 : '-90px',
           }}
           animate={{
             opacity: 1,
             x: isDefaultFloating ? 0 : isFloatRight ? '0px' : '-25px',
-            y: isDefaultFloating ? 0 : '-100px',
+            y: isDefaultFloating ? 0 : '-95px',
           }}
           className="bg-[#13002B] rounded-[5px] cursor-pointer absolute z-[100]"
           onMouseLeave={() => handleMouseOut()}
@@ -123,15 +123,15 @@ const FloatingCard = ({
                 <video muted width={390} autoPlay>
                   <source src={bgOnHover} type="video/mp4" />
                 </video>
-                <div className="absolute bottom-[8px] left-[8px]">
-                  <img src={logo} alt={''} width={100} height={100} />
-                </div>
               </div>
             </div>
             <div
               className="bg-[#13002B] pt-[20px] pb-[24px] absolute bottom-[0%] h-[170px]"
               style={{ height: isDefaultFloating ? 170 : '' }}
             >
+              <div className="absolute top-[-28px] pl-[12px]">
+                <img src={logo} alt={''} width={100} height={100} />
+              </div>
               <div className="px-[12px] py-[0px]">
                 <div className="font-normal text-[#FFFFFF] text-[14px]">
                   {title?.length > 75 ? title?.slice(0, 75) + '...' : title}
