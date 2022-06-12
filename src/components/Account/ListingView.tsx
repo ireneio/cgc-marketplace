@@ -65,15 +65,24 @@ const ListingView = () => {
   };
 
   return (
-    <div className="flex">
-      <div style={{ width: '200px', flexShrink: 0 }} className="mr-[24px]">
+    <div className="flex flex-wrap">
+      <div className="lg:basis-[250px] basis-[100%] lg:pr-[6px] mb-[24px] lg:mb-0">
         <Menu
           items={[{ text: 'All Listed Items', value: 'All' }, ..._collections]}
           currentValue={sidebar}
-          onItemClick={(value) => setSidebar(value)}
+          onItemClick={(value) => setSidebar(value?.value)}
         />
+        {/* <select name="" id="">
+          {_collections.map((item) => {
+            return (
+              <option value={item.value} key={item.value}>
+                {item.text}
+              </option>
+            );
+          })}
+        </select> */}
       </div>
-      <div style={{ flexGrow: 1 }}>
+      <div className="lg:flex-1 lg:pl-[6px] w-full">
         {/* {!listed.length && (
           <div className="mb-[28px] text-[#FFFFFF] rounded-[5px] text-semibold w-full border-[#290030] border-[2px] bg-[#13002B] h-[115px] flex items-center justify-center">
             <div>

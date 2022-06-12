@@ -16,7 +16,7 @@ type SelectionView = 'Row' | 'List';
 
 type Sidebar = {
   text: string;
-  collection_id: string;
+  collection_id?: string;
   value: string;
 };
 

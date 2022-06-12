@@ -1,13 +1,16 @@
-interface SidebarItem {
+interface SidebarEmitItem {
   text: string;
   value: string;
+}
+
+interface SidebarItem extends SidebarEmitItem {
   disabled?: boolean;
   icon?: string;
 }
 interface Props {
   items: SidebarItem[];
   currentValue: string;
-  onItemClick?: (value: any) => void | Promise<void>;
+  onItemClick?: (value: SidebarEmitItem) => void | Promise<void>;
 }
 
 const Menu = ({ items, currentValue, onItemClick }: Props) => {
