@@ -9,6 +9,7 @@ import Button from '@/components/Shared/Button';
 import Divider from '@/components/Shared/Divider';
 import SelectGroup from '@/components/Shared/SelectGroup';
 import { useEthereumProvider } from '@/contexts/EthereumWalletProvider';
+import withAuth from '@/middlewares/withAuth';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useRouter } from 'next/router';
@@ -133,4 +134,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default withAuth(Account);

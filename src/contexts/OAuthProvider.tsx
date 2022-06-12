@@ -1,5 +1,5 @@
-import { useAppDispatch } from '@/store';
-import React, { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/store';
+import React, { useCallback, useEffect } from 'react';
 
 interface ICtx {
   access_token: string;
@@ -11,7 +11,7 @@ interface ICtx {
 
 interface ICtxFn extends ICtx {
   getToken: () => string;
-  authorised: () => boolean;
+  authorized: () => boolean;
   successLogin: (
     access_token: string,
     expired_at: number,
@@ -32,14 +32,22 @@ const CtxDefaultValue: ICtx = {
 export const OAuthContext = React.createContext<ICtxFn>({
   ...CtxDefaultValue,
   getToken: () => '',
-  authorised: () => false,
+  authorized: () => false,
   successLogin: () => null,
   logout: () => null,
 });
 
+const EMPTY_PAYLOAD = {
+  access_token: '',
+  expired_at: 0,
+  refresh_token: '',
+  token_type: 'Bearer',
+  id: 0,
+};
+
 export const OAuthProvider = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
-  const [auth, setAuth] = useState<ICtx>(CtxDefaultValue);
+  const user = useAppSelector((state) => state.user.userInfo);
 
   const initGrant = async () => {
     const auth = localStorage.getItem('auth') ?? '';
@@ -52,16 +60,9 @@ export const OAuthProvider = ({ children }: { children: React.ReactNode }) => {
         token_type: 'Bearer',
         id: value?.id,
       };
-      setAuth(payload);
       dispatch({ type: 'SET_USER_INFO', payload });
     } else {
-      setAuth({
-        access_token: '',
-        expired_at: 0,
-        refresh_token: '',
-        token_type: 'Bearer',
-        id: 0,
-      });
+      dispatch({ type: 'SET_USER_INFO', payload: EMPTY_PAYLOAD });
     }
   };
 
@@ -70,12 +71,12 @@ export const OAuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const getToken = () => {
-    return auth.access_token;
+    return user.access_token;
   };
 
-  const authorised = () => {
-    return auth.access_token !== '';
-  };
+  const authorized = useCallback(() => {
+    return user.access_token !== '';
+  }, [user.access_token]);
 
   const successLogin = (
     access_token: string,
@@ -90,25 +91,19 @@ export const OAuthProvider = ({ children }: { children: React.ReactNode }) => {
       refresh_token: '',
       id,
     };
-    setAuth(payload);
     const result = JSON.stringify(payload);
-    localStorage.setItem('auth', result.toString());
+    window.localStorage.setItem('auth', result.toString());
+    dispatch({ type: 'SET_USER_INFO', payload });
   };
 
   const logout = () => {
-    setAuth({
-      access_token: '',
-      expired_at: 0,
-      refresh_token: '',
-      token_type: 'Bearer',
-      id: 0,
-    });
-    localStorage.setItem('auth', '');
+    window.localStorage.setItem('auth', '');
+    dispatch({ type: 'SET_USER_INFO', payload: EMPTY_PAYLOAD });
   };
 
   return (
     <OAuthContext.Provider
-      value={{ ...auth, getToken, authorised, successLogin, logout }}
+      value={{ ...user, getToken, authorized, successLogin, logout }}
     >
       {children}
     </OAuthContext.Provider>

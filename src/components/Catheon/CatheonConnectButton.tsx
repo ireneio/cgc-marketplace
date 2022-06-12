@@ -16,7 +16,7 @@ const CatheonConnectButton = () => {
   const oAuthCtx = useContext(OAuthContext);
 
   const handleConnectButtonClick = async () => {
-    if (oAuthCtx.authorised()) {
+    if (oAuthCtx.authorized()) {
       setDropdown((prev) => !prev);
     } else {
       setLoginModalOpen(true);
@@ -36,7 +36,7 @@ const CatheonConnectButton = () => {
     oAuthCtx.logout();
   };
 
-  return oAuthCtx.authorised() ? (
+  return oAuthCtx.access_token ? (
     <>
       <Button
         onClick={handleConnectButtonClick}

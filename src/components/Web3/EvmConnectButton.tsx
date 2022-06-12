@@ -1,6 +1,6 @@
 import { useEthereumProvider } from '@/contexts/EthereumWalletProvider';
 import { getTrimmedAddressEllipsisMiddle } from '@/utils/formatHelper';
-import Button from './Button';
+import Button from '../Shared/Button';
 
 export default function MetamaskConnectButton() {
   const { connect, disconnect, signerAddress } = useEthereumProvider();
