@@ -35,7 +35,7 @@ const MyItemsView = () => {
     collection_id: '',
     value: '',
   });
-  const [myItems] = useState([]);
+  const [myItems, setMyItems] = useState([]);
   const [currentView, setCurrentView] = useState<SelectionView>('List');
   const { data: collections } = useGetCollections();
   const {
@@ -43,6 +43,25 @@ const MyItemsView = () => {
     loading,
     getData: getNftDataByCollectionId,
   } = useGetNftByCollectionId();
+  const [myItemLoading, setMyItemLoading] = useState(false);
+
+  // TODO get my items
+  const getMyItemsData = async () => {
+    return [];
+  };
+
+  const setMyItemsData = async () => {
+    setMyItemLoading(true);
+    const items = await getMyItemsData();
+    if (items && items.length) {
+      // TODO map data to grid/card
+      setMyItems(items);
+    }
+    const tid = setTimeout(() => {
+      setMyItemLoading(false);
+      clearTimeout(tid);
+    }, 800);
+  };
 
   const _collections = useMemo(() => {
     return collections.map((collection) => {
@@ -112,36 +131,59 @@ const MyItemsView = () => {
   };
 
   return (
-    <div className="flex">
-      <div style={{ width: '200px', flexShrink: 0 }} className="mr-[24px]">
-        <Menu
-          items={_collections}
-          currentValue={sidebar.value}
-          onItemClick={(value) => handleSidebarChange(value)}
-        />
-      </div>
-      <div style={{ flexGrow: 1 }}>
+    <div className="flex flex-wrap">
+      <div className="lg:hidden basis-[100%]">
         {!myItems.length && (
           <div className="mb-[28px] text-[#FFFFFF] rounded-[5px] text-semibold w-full border-[#290030] border-[2px] bg-[#13002B] h-[115px] flex items-center justify-center">
-            <div>
+            <div className="hidden lg:block">
               <img
                 src="/img/icon_warning_triangle.svg"
                 alt="warning"
-                width={32}
-                height={32}
+                className="w-[32px] h-[32px]"
               />
             </div>
             <div className="ml-[20px]">
-              <div className="font-bold text-[16px]">
+              <div className="font-bold md:text-[16px] text-[14px]">
                 We could not find any items in your wallet.
               </div>
-              <div className="font-light text-[14px]">
+              <div className="font-light md:text-[14px] text-[12px]">
                 Here’s a few suggested items from current collections that you
                 can purchase.
               </div>
             </div>
           </div>
         )}
+      </div>
+      <div className="basis-[33%] pr-[6px]">
+        <Menu
+          items={_collections}
+          currentValue={sidebar.value}
+          onItemClick={(value) => handleSidebarChange(value)}
+        />
+      </div>
+      <div className="basis-[66%] pl-[6px]">
+        <div className="hidden lg:block">
+          {!myItems.length && (
+            <div className="mb-[28px] text-[#FFFFFF] rounded-[5px] text-semibold w-full border-[#290030] border-[2px] bg-[#13002B] h-[115px] flex items-center justify-center">
+              <div className="hidden lg:block">
+                <img
+                  src="/img/icon_warning_triangle.svg"
+                  alt="warning"
+                  className="w-[32px] h-[32px]"
+                />
+              </div>
+              <div className="ml-[20px]">
+                <div className="font-bold md:text-[16px] text-[14px]">
+                  We could not find any items in your wallet.
+                </div>
+                <div className="font-light md:text-[14px] text-[12px]">
+                  Here’s a few suggested items from current collections that you
+                  can purchase.
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
         <div className="flex justify-between items-center mb-[24px] w-full">
           <div className="flex items-center w-full justify-between">
             <div className="flex items-center">

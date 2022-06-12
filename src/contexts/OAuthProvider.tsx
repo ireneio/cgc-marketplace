@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/store';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 interface ICtx {
   access_token: string;
@@ -7,6 +7,8 @@ interface ICtx {
   refresh_token: string;
   token_type: string;
   id: number | string;
+  isDoneGrant: boolean;
+  isLoggedIn: boolean;
 }
 
 interface ICtxFn extends ICtx {
@@ -27,6 +29,8 @@ const CtxDefaultValue: ICtx = {
   refresh_token: '',
   token_type: 'Bearer',
   id: 0,
+  isDoneGrant: false,
+  isLoggedIn: false,
 };
 
 export const OAuthContext = React.createContext<ICtxFn>({
@@ -48,6 +52,8 @@ const EMPTY_PAYLOAD = {
 export const OAuthProvider = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.userInfo);
+  const [isDoneGrant, setIsDoneGrant] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const initGrant = async () => {
     const auth = localStorage.getItem('auth') ?? '';
@@ -61,13 +67,16 @@ export const OAuthProvider = ({ children }: { children: React.ReactNode }) => {
         id: value?.id,
       };
       dispatch({ type: 'SET_USER_INFO', payload });
+      setIsLoggedIn(true);
     } else {
       dispatch({ type: 'SET_USER_INFO', payload: EMPTY_PAYLOAD });
     }
   };
 
   useEffect(() => {
-    initGrant().then();
+    initGrant().then(() => {
+      setIsDoneGrant(true);
+    });
   }, []);
 
   const getToken = () => {
@@ -94,16 +103,27 @@ export const OAuthProvider = ({ children }: { children: React.ReactNode }) => {
     const result = JSON.stringify(payload);
     window.localStorage.setItem('auth', result.toString());
     dispatch({ type: 'SET_USER_INFO', payload });
+    setIsDoneGrant(true);
+    setIsLoggedIn(true);
   };
 
   const logout = () => {
     window.localStorage.setItem('auth', '');
     dispatch({ type: 'SET_USER_INFO', payload: EMPTY_PAYLOAD });
+    setIsLoggedIn(false);
   };
 
   return (
     <OAuthContext.Provider
-      value={{ ...user, getToken, authorized, successLogin, logout }}
+      value={{
+        ...user,
+        getToken,
+        authorized,
+        successLogin,
+        logout,
+        isDoneGrant,
+        isLoggedIn,
+      }}
     >
       {children}
     </OAuthContext.Provider>
