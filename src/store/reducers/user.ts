@@ -1,114 +1,27 @@
-interface UserInfoRole {
-  createdAt: string;
-  id: number;
-  roleDescription: string;
-  roleName: string;
-  updatedAt: string;
-}
-
 interface UserState {
-  walletInfo: {
-    connected: boolean;
-    address: string;
-  };
-  userInfo: {
-    name: string;
-    email: string;
-    id: number;
-    token: string;
-    updatedAt: string;
-    createdAt: string;
-  };
-  hiddenUserInfo: {
-    email: string;
-    id: number;
-    isActive: boolean;
-    needChangePassword: boolean;
-    organization: {
-      createdAt: string;
-      updatedAt: string;
-      id: number;
-      isActive: boolean;
-      name: string;
-      type: number;
-    };
-    roles: UserInfoRole[];
-    token: string;
-    username: string;
-  };
+  userInfo: Record<string, any>;
 }
 
 const initialState: UserState = {
-  walletInfo: {
-    connected: false,
-    address: '',
-  },
   userInfo: {
-    name: '',
-    email: '',
+    expired_at: '',
     id: 0,
-    token: '',
-    updatedAt: '',
-    createdAt: '',
-  },
-  hiddenUserInfo: {
-    email: '',
-    id: 0,
-    isActive: true,
-    needChangePassword: false,
-    organization: {
-      createdAt: '',
-      updatedAt: '',
-      id: 0,
-      isActive: true,
-      name: '',
-      type: 1,
-    },
-    roles: [],
-    token: '',
-    username: '',
+    access_token: '',
+    token_type: '',
   },
 };
 
 type Action =
   | {
-      type: 'SET_WALLET_INFO';
-      payload: { connected: boolean; address: string };
-    }
-  | {
       type: 'SET_USER_INFO';
-      payload: {
-        name: string;
-        email: string;
-        id: number;
-        token: string;
-        updatedAt: string;
-        createdAt: string;
-      };
-    }
-  | {
-      type: 'SET_HIDDEN_USER_INFO';
-      payload: {
-        email: string;
-        id: number;
-        isActive: boolean;
-        needChangePassword: boolean;
-        organization: {
-          createdAt: string;
-          updatedAt: string;
-          id: number;
-          isActive: boolean;
-          name: string;
-          type: number;
-        };
-        roles: UserInfoRole[];
-        token: string;
-        username: string;
-      };
+      payload: Record<string, any>;
     }
   | {
       type: 'SET_USER_EMAIL';
       payload: string;
+    }
+  | {
+      type: 'INIT_USER_INFO';
     };
 
 export default function userReducer(
@@ -116,13 +29,16 @@ export default function userReducer(
   action: Action,
 ) {
   switch (action.type) {
-    case 'SET_WALLET_INFO':
+    case 'INIT_USER_INFO':
+      const _auth = window.localStorage.getItem('auth');
+      if (_auth) {
+        return {
+          ...state,
+          userInfo: JSON.parse(_auth),
+        };
+      }
       return {
         ...state,
-        walletInfo: {
-          connected: action.payload.connected,
-          address: action.payload.address,
-        },
       };
     case 'SET_USER_INFO':
       localStorage.setItem('info', JSON.stringify(action.payload));
@@ -135,30 +51,6 @@ export default function userReducer(
       return {
         ...state,
         userInfo: { ...state.userInfo, email: action.payload },
-      };
-    case 'SET_HIDDEN_USER_INFO':
-      const {
-        email,
-        id,
-        isActive,
-        needChangePassword,
-        organization,
-        roles,
-        token,
-        username,
-      } = action.payload;
-      return {
-        ...state,
-        hiddenUserInfo: {
-          email,
-          id,
-          isActive: true,
-          needChangePassword: false,
-          organization,
-          roles,
-          token,
-          username,
-        },
       };
     default:
       return state;

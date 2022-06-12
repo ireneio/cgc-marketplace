@@ -156,9 +156,7 @@ const FloatingCard = ({
                   </div>
                   <div className="flex-shrink-0">
                     <Button
-                      className="capitalize"
                       onClick={() => onPlay()}
-                      // disabled={playDisabled}
                       style={{ padding: '8px 24px', fontSize: 10 }}
                     >
                       Play

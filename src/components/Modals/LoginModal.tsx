@@ -29,7 +29,7 @@ export const LoginModal = ({
   const router = useRouter();
   const dispatch = useAppDispatch();
   const oAuthCtx = useContext(OAuthContext);
-  // const [disableSignUp] = useState(false);
+  const [disableSignUp] = useState(false);
   const [btnLoading, setBtnLoading] = useState(false);
   const [view, setView] = useState<
     'login' | 'signup-one' | 'signup-two' | 'signup-three'
@@ -38,8 +38,8 @@ export const LoginModal = ({
     mode: 'onChange',
     defaultValues: {
       username: '',
-      email: 'test2@hotmail.co.uk',
-      password: '1qaz2wsx',
+      email: 'irene1@gmail.com',
+      password: '123456',
       confirmPassword: '',
     },
   });
@@ -76,16 +76,6 @@ export const LoginModal = ({
       form.getValues('email'),
       form.getValues('password'),
     );
-    // TODO temp success response
-    // const response = {
-    //   success: true,
-    //   data: {
-    //     access_token: '',
-    //     expired_at: 123,
-    //     token_type: 'bearer',
-    //   },
-    //   message: '',
-    // };
     if (response.success) {
       oAuthCtx.successLogin(
         response?.data.access_token,
@@ -97,7 +87,7 @@ export const LoginModal = ({
         payload: { title: 'info', text: 'Sign In Success!' },
       });
       if (redirectPath) {
-        router.replace(redirectPath);
+        router.replace(redirectPath).then();
       }
       setBtnLoading(false);
       setIsOpen(false);
@@ -138,32 +128,37 @@ export const LoginModal = ({
   };
 
   const handleSignUpThree = async () => {
-    // TODO submit
-    const result = await register();
-    if (Object.keys(result).length === 0) {
+    if (disableSignUp) {
       dispatch({
         type: 'SHOW_SNACKBAR',
         payload: {
           title: 'Alert',
-          // text: result?.message,
-          text: 'Credentials Invalid or Wallet Address Not In Whitelist',
+          text: 'Sorry, we are currently not accepting any cgPass signups.',
+        },
+      });
+      setIsOpen(false);
+    }
+    setBtnLoading(true);
+    const result = await register();
+    if (!result.success) {
+      dispatch({
+        type: 'SHOW_SNACKBAR',
+        payload: {
+          title: 'Alert',
+          text: result.message,
         },
       });
     } else {
-      // success
+      dispatch({
+        type: 'SHOW_SNACKBAR',
+        payload: {
+          title: 'Info',
+          text: 'Sign Up Success',
+        },
+      });
       setIsOpen(false);
     }
-    // if (disableSignUp) {
-    //   dispatch({
-    //     type: 'SHOW_SNACKBAR',
-    //     payload: {
-    //       title: 'Alert',
-    //       text: 'Sorry, we are currently not accepting any cgPass signups.',
-    //     },
-    //   });
-    // } else {
-    //   setIsOpen(false);
-    // }
+    setBtnLoading(false);
   };
 
   return (

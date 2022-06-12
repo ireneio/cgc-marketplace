@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/store';
-import { getTrimmedAddress } from '@/utils/formatHelper';
+// import { getTrimmedAddress } from '@/utils/formatHelper';
 import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { LoginModal } from '../Modals/LoginModal';
 import Button from './Button';
 import DropdownMenu from './DropdownMenu';
@@ -9,7 +9,7 @@ import { OAuthContext } from '@/contexts/OAuthProvider';
 
 const CatheonConnectButton = () => {
   const dispatch = useAppDispatch();
-  const email = useAppSelector((state) => state.user.userInfo.email);
+  const userInfo = useAppSelector((state) => state.user.userInfo);
   const router = useRouter();
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [dropdown, setDropdown] = useState(false);
@@ -32,6 +32,14 @@ const CatheonConnectButton = () => {
     }
   };
 
+  const handlecSignOut = () => {
+    window.localStorage.removeItem('auth');
+  };
+
+  useEffect(() => {
+    console.log(userInfo);
+  }, [userInfo]);
+
   return oAuthCtx.authorised() ? (
     <>
       <Button
@@ -40,7 +48,8 @@ const CatheonConnectButton = () => {
       >
         <img src="/img/cgc_icon.png" width={18} height={18} alt="catheon" />
         <span className="ml-[10px]">
-          {getTrimmedAddress(email, { length: 5 })}
+          {/* {getTrimmedAddress(email, { length: 5 })} */}
+          {userInfo?.id || userInfo.id !== 0 ? String(userInfo?.id) : 'Connect'}
         </span>
         <div className="ml-[10px]">
           <img
@@ -61,7 +70,10 @@ const CatheonConnectButton = () => {
               { text: 'cgPass', value: 'Account' },
               {
                 text: (
-                  <div className="flex items-center">
+                  <div
+                    className="flex items-center"
+                    onClick={() => handlecSignOut()}
+                  >
                     <div className="mr-[12px]">Sign Out</div>
                     <img
                       src="/img/icon_sign_out.svg"
@@ -77,7 +89,7 @@ const CatheonConnectButton = () => {
             ]}
             onItemClick={(val) => handleDropdownClick(val)}
             width={200}
-            left={-53}
+            left={-22}
           />
         )}
       </Button>

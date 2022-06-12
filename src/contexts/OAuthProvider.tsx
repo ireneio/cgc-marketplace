@@ -1,5 +1,4 @@
-import api from '@/utils/api';
-import { isResponseError } from '@/utils/swr';
+import { useAppDispatch } from '@/store';
 import React, { useEffect, useState } from 'react';
 
 interface ICtx {
@@ -36,18 +35,21 @@ export const OAuthContext = React.createContext<ICtxFn>({
 });
 
 export const OAuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const dispatch = useAppDispatch();
   const [auth, setAuth] = useState<ICtx>(CtxDefaultValue);
 
   const initGrant = async () => {
     const auth = localStorage.getItem('auth') ?? '';
     if (auth !== '') {
       const value = JSON.parse(auth);
-      setAuth({
+      const payload = {
         access_token: value['access_token'],
         expired_at: value['expired_at'],
         refresh_token: value['refresh_token'],
         token_type: 'Bearer',
-      });
+      };
+      setAuth(payload);
+      dispatch({ type: 'SET_USER_INFO', payload });
     } else {
       setAuth({
         access_token: '',

@@ -3,15 +3,15 @@ import { twMerge } from 'tailwind-merge';
 
 interface Props {
   children: React.ReactNode;
-  className?: string;
+  // className?: string;
   style?: CSSProperties;
   onClick?: any;
   disabled?: boolean;
   disableHoverEffect?: boolean;
   filled?: boolean;
   link?: boolean;
-  shadowed?: boolean;
-  secondary?: boolean;
+  // shadowed?: boolean;
+  // secondary?: boolean;
   loading?: boolean;
 }
 
@@ -25,23 +25,31 @@ const Button = ({
   link,
   filled,
   // shadowed,
-  secondary,
+  // secondary,
   loading,
 }: Props) => {
   const [hover, setHover] = useState(false);
+
+  const bgColor = link
+    ? 'transparent'
+    : disabled
+    ? 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)'
+    : disableHoverEffect
+    ? '#13002B'
+    : hover && !filled
+    ? 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)'
+    : hover && filled
+    ? '#13002B'
+    : filled
+    ? 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)'
+    : '#13002B';
 
   return (
     <div
       style={{
         opacity: disabled ? '0.25' : '1',
         boxShadow: disabled ? '0px 4px 4px 0px #00000040' : '',
-        background: link
-          ? 'transparent'
-          : secondary
-          ? '#290030'
-          : disabled
-          ? 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)'
-          : 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
+        background: bgColor,
       }}
       className={twMerge('rounded-[5px]  px-[1px] py-[1px] text-center')}
     >
@@ -51,7 +59,7 @@ const Button = ({
           // className,
         )}
         style={{
-          cursor: disabled ? 'not-allowed' : 'pointer',
+          cursor: disabled || loading ? 'not-allowed' : 'pointer',
           ...style,
           background: link
             ? 'transparent'
@@ -71,7 +79,7 @@ const Button = ({
         onClick={(e) => onClick && onClick(e)}
         onMouseOver={() => setHover(true)}
         onMouseOut={() => setHover(false)}
-        disabled={disabled}
+        disabled={disabled || loading}
       >
         {!loading && (
           <div style={{ whiteSpace: 'nowrap' }} className="flex items-center">

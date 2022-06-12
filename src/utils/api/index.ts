@@ -35,7 +35,7 @@ const api = {
       },
     });
 
-    return response.data;
+    return response;
   },
   getCollectionList: async (token: string) => {
     const response = await fetcher({
