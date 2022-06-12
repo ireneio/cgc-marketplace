@@ -1,6 +1,7 @@
 import { getNumberWithCommas } from '@/utils/formatHelper';
 import Button from '../Shared/Button';
 import { motion } from 'framer-motion';
+import { useWindowWidth } from '@/hooks/window';
 
 interface Props {
   bg: string;
@@ -43,12 +44,18 @@ const FloatingCard = ({
   isFloatRight,
   isDefaultFloating,
 }: Props) => {
+  const windowWidth = useWindowWidth();
+
   const handleMouseOver = () => {
-    onMouseOver && onMouseOver(id);
+    if (windowWidth > 768) {
+      onMouseOver && onMouseOver(id);
+    }
   };
 
   const handleMouseOut = () => {
-    onMouseLeave && onMouseLeave(id);
+    if (windowWidth > 768) {
+      onMouseLeave && onMouseLeave(id);
+    }
   };
 
   return (
