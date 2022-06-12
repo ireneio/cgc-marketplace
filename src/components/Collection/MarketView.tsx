@@ -108,6 +108,7 @@ const MarketView = () => {
         name: manifest?.name,
         price: 0,
         tokenAddress: item?.tokenAddress,
+        id: item?.id,
       };
     });
     return map;

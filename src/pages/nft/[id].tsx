@@ -228,12 +228,12 @@ const Nft = () => {
   }, [dispatch, router]);
 
   useEffect(() => {
-    if (router.query.slug) {
+    if (router.query.id) {
       getCollectionData().then(() => {
         getNftData().then();
       });
     }
-  }, [router.query.slug]);
+  }, [router.query.id]);
 
   return (
     <DefaultLayout>
