@@ -141,7 +141,7 @@ const MyItemsView = () => {
     <div className="flex flex-wrap">
       <div className="md:hidden basis-[100%]">
         {!myItems.length && (
-          <div className="mb-[28px] text-[#FFFFFF] rounded-[5px] text-semibold w-full border-[#290030] border-[2px] bg-[#13002B] h-[115px] flex items-center justify-center">
+          <div className="mb-[24px] text-[#FFFFFF] rounded-[5px] text-semibold w-full border-[#290030] border-[2px] bg-[#13002B] px-[16px] py-[16px] flex items-center justify-center">
             <div className="hidden lg:block">
               <img
                 src="/img/icon_warning_triangle.svg"
