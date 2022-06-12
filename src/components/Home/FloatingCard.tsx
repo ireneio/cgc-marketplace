@@ -67,7 +67,7 @@ const FloatingCard = ({
     >
       {currentHoverId !== id && !isDefaultFloating && (
         <div
-          className="bg-[#290030] cursor-pointer rounded-[5px] align-middle transition-all drop-shadow-xl"
+          className="bg-[#290030] cursor-pointer rounded-[5px] align-middle transition-all drop-shadow-xl relative z-[1]"
           onMouseOver={() => handleMouseOver()}
           onMouseLeave={() => handleMouseOut()}
           onClick={() => {
@@ -86,21 +86,23 @@ const FloatingCard = ({
           initial={{
             opacity: 0,
             x: isDefaultFloating ? 0 : '10px',
-            y: isDefaultFloating ? 0 : '-90px',
+            y: isDefaultFloating ? 0 : '-105px',
+            zIndex: 100,
           }}
           animate={{
             opacity: 1,
             x: isDefaultFloating ? 0 : isFloatRight ? '0px' : '-25px',
-            y: isDefaultFloating ? 0 : '-95px',
+            y: isDefaultFloating ? 0 : '-105px',
+            zIndex: 100,
           }}
-          className="bg-[#13002B] rounded-[5px] cursor-pointer absolute z-[100]"
+          className="bg-[#13002B] rounded-[5px] cursor-pointer absolute"
           onMouseLeave={() => handleMouseOut()}
           style={{ position: isDefaultFloating ? 'static' : 'absolute' }}
         >
           <div
             style={{
-              width: isDefaultFloating ? 'auto' : 390,
-              height: isDefaultFloating ? 'auto' : 390,
+              width: isDefaultFloating ? 'auto' : 420,
+              height: isDefaultFloating ? 'auto' : 420,
             }}
             className="absolute border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden"
           >
@@ -116,11 +118,11 @@ const FloatingCard = ({
               <div
                 className="relative min-h-[170px]"
                 style={{
-                  width: isDefaultFloating ? '90vw' : 390,
+                  width: isDefaultFloating ? '90vw' : 420,
                   minHeight: isDefaultFloating ? 199 : 170,
                 }}
               >
-                <video muted width={390} autoPlay>
+                <video muted width={420} autoPlay>
                   <source src={bgOnHover} type="video/mp4" />
                 </video>
               </div>
@@ -129,7 +131,7 @@ const FloatingCard = ({
               className="bg-[#13002B] pt-[20px] pb-[24px] absolute bottom-[0%] h-[170px]"
               style={{ height: isDefaultFloating ? 170 : '' }}
             >
-              <div className="absolute top-[-28px] pl-[12px]">
+              <div className="absolute top-[-42px] pl-[12px]">
                 <img src={logo} alt={''} width={100} height={100} />
               </div>
               <div className="px-[12px] py-[0px]">
