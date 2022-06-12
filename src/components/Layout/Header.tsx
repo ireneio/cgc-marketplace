@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import CatheonConnectButton from '../Shared/CatheonConnectButton';
+import CatheonConnectButton from '../Catheon/CatheonConnectButton';
 import { useAppDispatch } from '@/store';
 import { useRouter } from 'next/router';
 
