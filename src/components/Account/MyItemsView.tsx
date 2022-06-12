@@ -91,6 +91,7 @@ const MyItemsView = () => {
   const _recommendedItems = useMemo(() => {
     return recommendedItems
       .filter((item) => item.collection_id === sidebar.collection_id)
+      .filter((item) => item?.is_listed)
       .slice(0, 4)
       .map((item) => {
         return {

@@ -98,18 +98,28 @@ const MarketView = () => {
       oAuthCtx.access_token,
       metadata.slug,
     );
-    const map = response.map((item: any) => {
-      const manifest = item?.splNftInfo?.data?.manifest;
-      return {
-        // default image
-        image: manifest?.image || '/img/cgc_icon.png',
-        brand: manifest?.collection?.name,
-        name: manifest?.name,
-        price: 0,
-        tokenAddress: item?.tokenAddress,
-        id: item?.id,
-      };
-    });
+    const map = response
+      .map((item: any) => {
+        const manifest = item?.splNftInfo?.data?.manifest;
+        return {
+          // default image
+          image: manifest?.image || '/img/cgc_icon.png',
+          brand: manifest?.collection?.name,
+          name: manifest?.name,
+          price: 0,
+          tokenAddress: item?.tokenAddress,
+          id: item?.id,
+          is_listed: item?.external_marketplace_listing?.length,
+          external_marketplace_listing:
+            item?.external_marketplace_listing || [],
+        };
+      })
+      .sort((a: any, b: any) => {
+        return (
+          b.external_marketplace_listing.length -
+          a.external_marketplace_listing.length
+        );
+      });
     return map;
   };
 

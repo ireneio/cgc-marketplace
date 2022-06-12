@@ -52,6 +52,8 @@ export const useGetNftByCollectionId = () => {
         price: 0,
         tokenAddress: item?.tokenAddress,
         collection_id: item?.collections[0]?.id,
+        is_listed: item?.external_marketplace_listing?.length,
+        external_marketplace_listing: item?.external_marketplace_listing,
       };
     });
     setItems(map);
