@@ -6,6 +6,7 @@ interface ICtx {
   expired_at: number;
   refresh_token: string;
   token_type: string;
+  id: number | string;
 }
 
 interface ICtxFn extends ICtx {
@@ -24,6 +25,7 @@ const CtxDefaultValue: ICtx = {
   expired_at: 0,
   refresh_token: '',
   token_type: 'Bearer',
+  id: 0,
 };
 
 export const OAuthContext = React.createContext<ICtxFn>({
@@ -47,6 +49,7 @@ export const OAuthProvider = ({ children }: { children: React.ReactNode }) => {
         expired_at: value['expired_at'],
         refresh_token: value['refresh_token'],
         token_type: 'Bearer',
+        id: value?.id,
       };
       setAuth(payload);
       dispatch({ type: 'SET_USER_INFO', payload });
@@ -56,6 +59,7 @@ export const OAuthProvider = ({ children }: { children: React.ReactNode }) => {
         expired_at: 0,
         refresh_token: '',
         token_type: 'Bearer',
+        id: 0,
       });
     }
   };
@@ -82,6 +86,7 @@ export const OAuthProvider = ({ children }: { children: React.ReactNode }) => {
       expired_at: expired_at,
       token_type: token_type,
       refresh_token: '',
+      id: 0,
     });
     const result = JSON.stringify({
       access_token: access_token,
@@ -98,6 +103,7 @@ export const OAuthProvider = ({ children }: { children: React.ReactNode }) => {
       expired_at: 0,
       refresh_token: '',
       token_type: 'Bearer',
+      id: 0,
     });
     localStorage.setItem('auth', '');
   };
