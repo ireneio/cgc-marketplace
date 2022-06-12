@@ -106,9 +106,9 @@ const DetailView = () => {
               );
             })}
           </div>
-          {info.tags.length > 0 && (
+          {info.services.length > 0 && (
             <div className="flex flex-wrap mb-[32px]">
-              {info.tags.map((tag: string, index: number) => {
+              {info.services.map((tag: string, index: number) => {
                 return (
                   <Tag key={index} className="mr-[12px]">
                     {tag}
