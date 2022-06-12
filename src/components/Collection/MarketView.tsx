@@ -30,7 +30,7 @@ const MarketView = () => {
   const oAuthCtx = useContext(OAuthContext);
   const [currentView, setCurrentView] = useState<SelectionView>('List');
   const [currentFilter, setCurrentFilter] = useState<SelectionFilter>('');
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<any>([]);
   const [page, setPage] = useState(0);
   const { ref, inView } = useInView({
     /* Optional options */
@@ -38,7 +38,12 @@ const MarketView = () => {
   });
 
   const _items = useMemo(() => {
-    return items.slice(0, page + 19);
+    return items.slice(0, page + 19).map((item: any) => {
+      return {
+        ...item,
+        is_listed: item?.external_marketplace_listing?.length,
+      };
+    });
   }, [items, page]);
 
   useEffect(() => {
@@ -328,7 +333,7 @@ const MarketView = () => {
         )}
         {currentView === 'List' && !loading && (
           <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-8 pb-6">
-            {_items.map((item: any, index) => {
+            {_items.map((item: any, index: number) => {
               return (
                 <div
                   key={index}
@@ -344,6 +349,7 @@ const MarketView = () => {
                     onAddToCart={(params) => handleAddToCart(params)}
                     onMoreInfo={() => handleMoreInfo(item.tokenAddress)}
                     addToCartLoading={false}
+                    addToCartDisabled={!item.is_listed}
                     tokenAddress={item.tokenAddress}
                   />
                 </div>
@@ -354,7 +360,7 @@ const MarketView = () => {
         )}
         {currentView === 'Row' && !loading && (
           <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 pb-6">
-            {_items.map((item: any, index) => {
+            {_items.map((item: any, index: number) => {
               return (
                 <div
                   key={index}
@@ -370,6 +376,7 @@ const MarketView = () => {
                     onAddToCart={(params) => handleAddToCart(params)}
                     onMoreInfo={() => handleMoreInfo(item.tokenAddress)}
                     addToCartLoading={false}
+                    addToCartDisabled={!item.is_listed}
                     tokenAddress={item.tokenAddress}
                   />
                 </div>

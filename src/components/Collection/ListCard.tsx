@@ -17,6 +17,7 @@ interface Props extends Attr {
   onAddToCart: (params: Attr) => void | Promise<void>;
   onMoreInfo: (id: string | number) => void | Promise<void>;
   addToCartLoading: boolean;
+  addToCartDisabled?: boolean;
 }
 
 const ListCard = ({
@@ -29,6 +30,7 @@ const ListCard = ({
   onAddToCart,
   onMoreInfo,
   addToCartLoading,
+  addToCartDisabled,
   tokenAddress,
   addBtnText,
   removeBtnText,
@@ -111,7 +113,19 @@ const ListCard = ({
             height={16}
           />
         </div>
-        {(!isAddedToCart || addToCartLoading) && (
+        {addToCartDisabled && (
+          <div
+            className="cursor-not-allowed text-[12px] flex items-center justify-center px-[18px] py-[18px] text-[#FFFFFF] rounded-br-[5px]"
+            style={{
+              background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
+              flexBasis: '70%',
+              opacity: 0.5,
+            }}
+          >
+            Not Listed
+          </div>
+        )}
+        {(!isAddedToCart || addToCartLoading) && !addToCartDisabled && (
           <div
             style={{ flexBasis: '70%' }}
             className="hover:bg-[#290030] hover:text-[#FFFFFF] flex items-center justify-center cursor-pointer px-[18px] py-[18px] border-l-[1px] border-l-[#290030] rounded-br-[5px]"
@@ -134,7 +148,7 @@ const ListCard = ({
             </div>
           </div>
         )}
-        {isAddedToCart && !addToCartLoading && (
+        {isAddedToCart && !addToCartLoading && !addToCartDisabled && (
           <div
             className="cursor-pointer text-[12px] flex items-center justify-center px-[18px] py-[18px] text-[#FFFFFF] rounded-br-[5px]"
             style={{
