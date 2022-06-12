@@ -107,7 +107,7 @@ const AllCollections = () => {
           <div className="grid gap-[12px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cold-6 auto-rows-auto">
             {[0, 1, 2, 3, 4, 5].map((game, index) => {
               return (
-                <div key={index}>
+                <div key={index} className="mt-[24px]">
                   <LoadingNetflixCard />
                 </div>
               );
