@@ -68,7 +68,7 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
                   className="bg-cover w-full h-[50vh] md:h-[80vh] bg-[#181818] aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 hover:cursor-pointer object-cover"
                   alt={name}
                 />
-                <div className="absolute bottom-[3rem] z-[3] left-[50%] translate-x-[-50%] md:translate-x-0 md:left-[32px]">
+                <div className="absolute bottom-[3rem] z-[3] left-[50%] translate-x-[-50%] md:translate-x-0 md:left-[32px] md:right-[32px]">
                   <div className="max-w-[300px]">
                     <img
                       src={logo}
@@ -77,7 +77,7 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
                     />
                   </div>
                   <div className="mt-[16px] drop-shadow-xl text-[18px] 2xl:text-[18px] text-left text-[#FFFFFF]">
-                    {description}
+                    {description?.slice(0, 150)}
                   </div>
                   <div className="text-[#FFFFFF] flex mt-[16px]">
                     <Button onClick={() => handlePlay(name)}>Play</Button>
