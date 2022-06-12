@@ -1,34 +1,11 @@
-import { testData } from '@/data/test';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Button from '../Shared/Button';
+import Skeleton from '../Shared/Skeleton';
 
-const LandingCarousel = () => {
+const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
   const router = useRouter();
-  const [carouselItems] = useState([
-    {
-      id: 'seoul_stars',
-      imageUrl: '/img/carousel_sstars.jpeg',
-      name: 'seoul_stars',
-      href: 'https://seoulstars.io/',
-      logo: '/img/logo_sstars.png',
-      title: "The Metaverse's First Virtual K-Pop Idol",
-      collectionId: '1',
-      description:
-        'Sing-to-earn in this exciting rhythm action and karaoke game',
-    },
-    {
-      id: 'solchicks',
-      imageUrl: testData.landingHeroBackground,
-      name: 'solchicks',
-      href: 'https://solchicks.io/',
-      logo: testData.landingHeroLogo,
-      title: testData.landingHeroTitle,
-      description: testData.landingHeroSubtitle,
-    },
-  ]);
 
   const handleCarouselItemClick = ({ href }: { href: string }) => {
     console.log(href);
@@ -44,6 +21,11 @@ const LandingCarousel = () => {
 
   return (
     <div>
+      {!carouselItems.length && (
+        <div className="relative w-full">
+          <Skeleton className="w-full h-[50vh] md:h-[80vh]" />
+        </div>
+      )}
       <Carousel
         ariaLabel="Carousel"
         useKeyboardArrows
@@ -68,7 +50,7 @@ const LandingCarousel = () => {
         }}
       >
         {carouselItems.map(
-          ({ id, imageUrl, name, href, description, title, logo }) => {
+          ({ id, imageUrl, name, href, description, logo }) => {
             return (
               <div
                 key={id}
@@ -76,27 +58,28 @@ const LandingCarousel = () => {
                 className="relative rounded-[5px]"
               >
                 <div
-                  className="absolute w-full h-[80vh] z-[2] opacity-[.62] rounded-[5px]"
+                  className="absolute w-full h-[50vh] md:h-[80vh] z-[2] opacity-[.62] rounded-[5px]"
                   style={{
                     background: `radial-gradient(61.02% 182.1% at 82.63% 36.94%, rgba(253, 32, 142, 0.075) 0%, rgba(167, 16, 124, 0.75) 61.36%, rgba(83, 1, 106, 0.75) 100%)`,
                   }}
                 />
                 <img
                   src={imageUrl}
-                  className="bg-cover w-full h-[80vh] bg-[#181818] aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 hover:cursor-pointer object-cover"
+                  className="bg-cover w-full h-[50vh] md:h-[80vh] bg-[#181818] aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 hover:cursor-pointer object-cover"
                   alt={name}
                 />
-                <div className="z-[3] absolute bottom-[45%] left-[16px] md:left-[50px] font-bold text-[32px]">
+                <div className="z-[3] absolute max-w-[60vw] md:w-auto top-[12px] md:top-[55%] left-[12px] md:left-[50px] font-bold text-[32px]">
                   <img
                     src={logo}
-                    className="h-[84px] w-[400px] bg-transparent aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 aspect-none hover:cursor-pointer"
+                    className="bg-contain md:h-[84px] h-[42px] bg-transparent aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 aspect-none hover:cursor-pointer"
                     alt={name}
                   />
                 </div>
-                <div className="text-left z-[3] absolute bottom-[37%] md:bottom-[35%] left-[16px] md:left-[50px] font-bold text-[16px] md:text-[26px] lg:text-[32px] text-[#FFFFFF]">
+                {/* <div className="text-left z-[3] absolute top-[72px] md:top-[65%] xl:top-[68%] left-[16px] md:left-[50px] font-bold text-[16px] md:text-[26px] lg:text-[32px] text-[#FFFFFF]">
                   {title}
-                </div>
-                <div className="hidden md:block text-left z-[3] absolute bottom-[30%] left-[16px] md:left-[50px] text-[#FFFFFF]">
+                </div> */}
+                {/* <div className="text-[24px] text-left z-[3] absolute top-[140px] md:top-[70%] xl:top-[75%] left-[16px] md:left-[50px] text-[#FFFFFF]"> */}
+                <div className="bg-[#aaa] bg-opacity-[0.33] md:bg-none md:bg-opacity-0 px-[12px] py-[12px] drop-shadow-xl text-[18px] 2xl:text-[18px] text-left z-[3] absolute top-[140px] md:top-[70%] xl:top-[70%] left-[16px] md:left-[50px] text-[#FFFFFF]">
                   {description}
                 </div>
                 <div className="z-[3] absolute bottom-[10%] left-[16px] md:left-[50px] text-[#FFFFFF] flex">

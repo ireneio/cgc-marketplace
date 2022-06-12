@@ -1,21 +1,23 @@
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useContext, useEffect, useState } from 'react';
 import ButtonLink from '../Shared/ButtonLink';
-import LoadingNetflixCard from '../Shared/LoadingNetflixCard';
+import LoadingNetflixCard from './FloatingCardLoading';
 import SectionTitle from '../Shared/SectionTitle';
 import Divider from '@/components/Shared/Divider';
 import { OAuthContext } from '@/contexts/OAuthProvider';
 import api from '@/utils/api';
-import FloatingCard from '../Shared/FloatingCard';
+import FloatingCard from './FloatingCard';
 import { useRouter } from 'next/router';
+import { useWindowWidth } from '@/hooks/window';
 
 const AllCollections = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
   const sideBarPath = useAppSelector((state) => state.layout.navigation.path);
+  const collections = useAppSelector((state) => state.collection.collections);
   const oAuthCtx = useContext(OAuthContext);
+  const [loading, setLoading] = useState(true);
+  const windowWidth = useWindowWidth();
 
   const getCollections = async () => {
     const response = await api.getCollectionList(oAuthCtx.access_token);
@@ -31,6 +33,9 @@ const AllCollections = () => {
         genre: [item.metadata.genre],
         services: item.services,
         description: item.metadata.description,
+        totalSupply: item?.nftCollectionStats?.totalSupply,
+        marketCap: item?.nftCollectionStats?.usdMarketCap,
+        network: 'SOL',
       };
     });
   };
@@ -38,7 +43,7 @@ const AllCollections = () => {
   const initCollections = async () => {
     setLoading(true);
     const collections = await getCollections();
-    setItems(collections);
+    dispatch({ type: 'SET_COLLECTIONS', payload: collections });
     const tid = setTimeout(() => {
       setLoading(false);
       clearTimeout(tid);
@@ -65,21 +70,22 @@ const AllCollections = () => {
         <SectionTitle>all collections</SectionTitle>
       </div>
       {sideBarPath === 'Explore/All' && (
-        <div className="mt-[16px] mb-[32px]">
+        <div className="mt-[24px] mb-[24px]">
           <Divider />
         </div>
       )}
       <div className="hide-scrollbar">
         {!loading && (
           <div className="mt-[24px]">
-            <div className="grid gap-[12px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cold-6 auto-rows-auto">
-              {items.map((collection: any, index) => {
+            <div className="grid gap-[12px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cold-6">
+              {collections.map((collection: any, index) => {
                 return (
                   <div
                     key={index}
                     onClick={() => handleGoDetail(collection.slug)}
                   >
                     <FloatingCard
+                      isDefaultFloating={windowWidth < 768}
                       isFloatRight={false}
                       logo={collection.logoSrc}
                       currentHoverId={currentHoverId}
@@ -88,9 +94,9 @@ const AllCollections = () => {
                       bgOnHover={collection.videoSrc}
                       title={collection.description}
                       categories={collection.genre}
-                      network={'SOL'}
-                      marketCap={'10000'}
-                      coinSupply={'100000000000'}
+                      network={collection.network}
+                      marketCap={collection.marketCap}
+                      coinSupply={collection.totalSupply}
                       onPlay={() => handleGoDetail(collection.slug)}
                       onCardClick={() => handleGoDetail(collection.slug)}
                       onMouseOver={() => setCurrentHoverId(String(index))}
@@ -103,10 +109,10 @@ const AllCollections = () => {
           </div>
         )}
         {loading && (
-          <div className="flex mt-[24px]">
-            {items.map((game, index) => {
+          <div className="grid gap-[12px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cold-6 auto-rows-auto">
+            {[0, 1, 2, 3, 4, 5].map((game, index) => {
               return (
-                <div key={index} className="mr-[12px]">
+                <div key={index} className="mt-[24px]">
                   <LoadingNetflixCard />
                 </div>
               );

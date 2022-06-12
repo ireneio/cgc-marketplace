@@ -3,8 +3,8 @@ import Tag from '../Shared/Tag';
 
 const AttributesPanel = ({ info }: { info: NftInfo }) => {
   return (
-    <Tag className="px-[28px] py-[24px] mt-[30px]">
-      <div className="grid grid-cols-3 gap-[12px]">
+    <Tag className="px-[24px] py-[24px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[12px]">
         {info.attributes.map((attr, index) => {
           return (
             <div key={index}>

@@ -1,12 +1,12 @@
 import { NftInfo } from '@/pages/nft/[id]';
 import { getTrimmedAddressEllipsisMiddle } from '@/utils/formatHelper';
 import ClipboardText from '../Shared/ClipboardText';
-import PrimaryGradientText from '../Shared/PrimaryGradientText';
+import PrimaryGradientText from '../Catheon/PrimaryGradientText';
 import Tag from '../Shared/Tag';
 
 const InfoPanel = ({ info }: { info: NftInfo }) => {
   return (
-    <Tag className="mt-[30px] px-[28px] py-[24px]">
+    <Tag className="px-[24px] py-[24px]">
       <div>
         <div className="flex justify-between">
           <div className="text-[14px] text-[#FFFFFF]">Mint Address</div>

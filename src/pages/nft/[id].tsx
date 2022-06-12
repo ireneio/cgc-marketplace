@@ -16,7 +16,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import DetailPanel from '@/components/Nft/DetailPanel';
 import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
-import { LoginModal } from '@/components/Modals/LoginModal';
+import { LoginModal } from '@/components/Auth/LoginModal';
 
 export interface NftInfo {
   id: string | number;
@@ -52,7 +52,9 @@ const handleImageError = (e: any) => {
 
 const Nft = () => {
   const dispatch = useAppDispatch();
-  const email = useAppSelector((state) => state.user.userInfo.email);
+  const access_token = useAppSelector(
+    (state) => state.user.userInfo.access_token,
+  );
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
@@ -138,7 +140,7 @@ const Nft = () => {
         router.push(`/collection/${metadata.slug}?tab=all_items`).then();
         return;
       case 'Your Items': {
-        if (!email) {
+        if (!access_token) {
           setLoginModalOpen(true);
         } else {
           router.push(`/account?tab=items`).then();
@@ -228,16 +230,16 @@ const Nft = () => {
   }, [dispatch, router]);
 
   useEffect(() => {
-    if (router.query.slug) {
+    if (router.query.id) {
       getCollectionData().then(() => {
         getNftData().then();
       });
     }
-  }, [router.query.slug]);
+  }, [router.query.id]);
 
   return (
     <DefaultLayout>
-      <div className="mb-[32px]">
+      <div className="mb-[24px]">
         <Breadcrumb
           items={breadCrumbItems}
           currentValue={currentSelection}
@@ -251,11 +253,11 @@ const Nft = () => {
           }}
         />
       </div>
-      <div className="flex justify-between items-center mb-[16px]">
-        <div className="text-[#FFFFFF] font-bold text-[24px]">
+      <div className="flex justify-between items-center mb-[16px] flex-wrap">
+        <div className="basis-[100%] lg:basis-auto text-[#FFFFFF] font-bold text-[24px]">
           {info.brand} {info.name}
         </div>
-        <div>
+        <div className="basis-[100%] lg:basis-auto mt-[12px] lg:mt-0">
           <SelectGroup
             items={selectGroupItems}
             currentValue={currentSelection}
@@ -268,8 +270,8 @@ const Nft = () => {
       </div>
       {currentSelection === 'Your Items' && <YourView />}
       {currentSelection !== 'Your Items' && (
-        <div>
-          <div className="flex items-center justify-between">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-[24px] pt-[12px]">
+          <div className="flex items-center justify-between col-span-2">
             <div className="flex items-center">
               <div className="cursor-pointer" onClick={() => handleRefresh()}>
                 <img
@@ -287,9 +289,9 @@ const Nft = () => {
               disabled={loading}
             />
           </div>
-          <div className="flex mt-[12px] flex-wrap">
-            <div style={{ flexBasis: '50%' }}>
-              <div className="w-full">
+          <div className="flex flex-wrap justify-between col-span-2">
+            <div className="basis-[100%] md:basis-[48%]">
+              <div className="w-full mb-[24px] md:mb-0">
                 <img
                   src={info.image}
                   alt={info.name}
@@ -299,27 +301,35 @@ const Nft = () => {
                   onLoad={(e) => handleImageLoad(e, info.image)}
                 />
               </div>
-              <InfoPanel info={info} />
+              <div className="mb-[24px] md:mb-0">
+                <InfoPanel info={info} />
+              </div>
             </div>
-            <div style={{ flexBasis: '50%' }} className="pl-[12px]">
-              <DetailPanel info={info} />
-              <ActionPanel
-                info={info}
-                onCartOpen={(val) => setOpenCart(val)}
-                loading={loading}
-              />
-              <AttributesPanel info={info} />
+            <div className="basis-[100%] md:basis-[48%]">
+              <div className="mb-[24px]">
+                <DetailPanel info={info} />
+              </div>
+              <div className="mb-[24px]">
+                <ActionPanel
+                  info={info}
+                  onCartOpen={(val) => setOpenCart(val)}
+                  loading={loading}
+                />
+              </div>
+              <div className="mb-[0px]">
+                <AttributesPanel info={info} />
+              </div>
             </div>
           </div>
-          <div className="mt-[32px]">
+          <div className="mt-[24px] col-span-2">
             <Divider />
           </div>
-          <div className="mt-[32px]">
-            <div className="flex justify-between items-center">
+          <div className="mt-[24px] col-span-2">
+            <div className="flex justify-between items-center flex-wrap">
               <div className="text-[#FFFFFF] font-bold text-[20px]">
                 Transaction History
               </div>
-              <div>
+              <div className="basis-[50%] md:basis[100%] mt-[12px] md:mt-0 flex justify-end">
                 <Pagination
                   totalPages={15}
                   currentPage={currentPage}
@@ -329,7 +339,7 @@ const Nft = () => {
                 />
               </div>
             </div>
-            <div className="mt-[32px] mb-[48px]">
+            <div className="mt-[24px] mb-[48px]">
               <HistoryTable
                 rows={[
                   [

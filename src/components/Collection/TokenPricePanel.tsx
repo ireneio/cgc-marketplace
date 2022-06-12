@@ -1,4 +1,7 @@
-import { getNumberWithCommas } from '@/utils/formatHelper';
+import {
+  getNumberWithCommas,
+  getTrimmedAddressEllipsisMiddle,
+} from '@/utils/formatHelper';
 import { useMemo, useState } from 'react';
 import ClipboardText from '../Shared/ClipboardText';
 import Divider from '../Shared/Divider';
@@ -111,7 +114,13 @@ const TokenPricePanel = ({
   return (
     <Tag className="relative px-[24px] py-[24px]">
       <div className="absolute right-[24px] top-[24px]">
-        <img src={brandImg} alt={brandName} width={105} height={105} />
+        <img
+          src={brandImg}
+          alt={brandName}
+          width={105}
+          height={105}
+          className="md:opacity-100 opacity-20"
+        />
       </div>
       <div>
         <div className="text-[#FFFFFF] font-semibold text-[14px] mb-[12px]">
@@ -121,7 +130,7 @@ const TokenPricePanel = ({
           <div className="font-bold text-[36px] text-[#FFFFFF]">${price}</div>
           <div className="ml-[14px]">
             <TickerText
-              text={_priceFluctuation}
+              text={Number(getNumberWithCommas(_priceFluctuation, 2))}
               direction={_priceFluctuation > 0 ? 'up' : 'down'}
               fontSize={14}
             />
@@ -151,22 +160,22 @@ const TokenPricePanel = ({
             />
           </div>
         </div>
-        <div className="flex items-center mb-[24px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center mb-[24px] flex-wrap max-w-[800px]">
           <div className="text-[#FFFFFF] text-[14px] font-semibold">
             Low: ${low}
           </div>
-          <div className="ml-[12px]">
+          <div className="ml-0 lg:ml-[12px] basis-[100%] md:basis-auto mt-[12px] md:mt-0">
             <ProgressBar
               width={221}
               percentage={(price / (low + high)) * 100}
               showIndicator
             />
           </div>
-          <div className="text-[#FFFFFF] text-[14px] font-semibold ml-[12px]">
+          <div className="text-[#FFFFFF] text-[14px] font-semibold ml-0 lg:ml-[12px] mt-[12px] lg:mt-0">
             High: ${high}
           </div>
           <DateViewSelector
-            className="ml-[24px]"
+            className="xl:ml-[24px] mt-[12px] md:mt-0 ml-0"
             onViewChange={(val) => setCurrentView(val)}
             current={currentView}
           />
@@ -174,13 +183,13 @@ const TokenPricePanel = ({
         <div className="mb-[24px]">
           <Divider />
         </div>
-        <div className="mb-[24px] flex justify-between flex-wrap">
+        <div className="mb-[24px] grid gap-[24px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 2xl:grid-cols-5">
           <div>
             <div className="text-[#FFFFFF] font-light text-[14px]">
               Market Cap
             </div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px]">
-              ${getNumberWithCommas(marketCap)}
+              ${getNumberWithCommas(marketCap, 2)}
             </div>
           </div>
           <div>
@@ -188,7 +197,7 @@ const TokenPricePanel = ({
               Fully Diluted Market Cap
             </div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px]">
-              ${getNumberWithCommas(fullyDilutedMarketCap)}
+              ${getNumberWithCommas(fullyDilutedMarketCap, 2)}
             </div>
           </div>
           <div>
@@ -196,7 +205,7 @@ const TokenPricePanel = ({
               Volume (24hr)
             </div>
             <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px]">
-              ${getNumberWithCommas(volume)}
+              ${getNumberWithCommas(volume, 2)}
             </div>
           </div>
           <div>
@@ -244,7 +253,12 @@ const TokenPricePanel = ({
                 }}
                 onClick={() => handleGoAddress(contractAddress)}
               >
-                {contractAddress}{' '}
+                <div className="hidden xl:block">{contractAddress}</div>
+                <div className="xl:hidden">
+                  {getTrimmedAddressEllipsisMiddle(contractAddress, {
+                    length: 15,
+                  })}
+                </div>
               </div>
             </ClipboardText>
           </div>

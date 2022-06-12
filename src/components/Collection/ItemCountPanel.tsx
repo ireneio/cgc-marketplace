@@ -8,7 +8,7 @@ interface Props {
 
 const ItemCountPanel = ({ text, count, countUnit }: Props) => {
   return (
-    <Tag className="px-[64px] py-[28px]">
+    <Tag className="md:px-[64px] md:py-[28px]">
       <div className="text-[#FFFFFF]">
         <div className="flex items-center w-full">
           <div className="text-[36px] text-center font-bold w-full">

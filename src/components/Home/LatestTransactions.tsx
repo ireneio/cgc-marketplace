@@ -1,18 +1,72 @@
-import { useState } from 'react';
+import { OAuthContext } from '@/contexts/OAuthProvider';
+import api from '@/utils/api';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import Pagination from '../Shared/Pagination';
 import SectionTitle from '../Shared/SectionTitle';
 import TransactionTable from './TransactionTable';
 
+const PAGE_LIMIT = 10;
+
 const LatestTransactions = () => {
   const [currentPage, setCurrentPage] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const oAuthCtx = useContext(OAuthContext);
+  const [txList, setTxList] = useState<any[]>([]);
+
+  const _txList = useMemo(() => {
+    const startIdx = currentPage * PAGE_LIMIT;
+    const endIdx = startIdx + PAGE_LIMIT;
+    return txList.slice(startIdx, endIdx);
+  }, [txList, currentPage]);
+
+  const getData = async () => {
+    const response = await api.getTokenList(oAuthCtx.access_token);
+    return response;
+  };
+
+  const setData = async () => {
+    setLoading(true);
+    setCurrentPage(0);
+    const data = await getData();
+    const map = data
+      .map((tx: any) => {
+        return {
+          info: { icon: tx?.iconSrcUrl, text: tx?.symbol },
+          list: tx?.tokenHistoricalTxns,
+        };
+      })
+      .reduce((acc: any[], curr: any) => {
+        const _curr = curr.list.map((item: any) => ({ ...item, ...curr.info }));
+        acc = [...acc, ..._curr];
+        return acc;
+      }, [])
+      .sort((a: any, b: any) => b.block_time - a.block_time)
+      .map((item: any) => {
+        return [
+          { icon: item?.icon, text: item?.text },
+          item?.signature,
+          item?.block_time,
+          item?.senderAddress,
+          item?.recipientAddress,
+          // item?.amountToken
+          item?.amountUsd,
+        ];
+      });
+    setTxList(map);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    setData();
+  }, []);
 
   return (
     <div>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center flex-wrap">
         <SectionTitle>latest transactions</SectionTitle>
-        <div>
+        <div className="basis-[100%] md:basis-auto mt-[12px] md:mt-0">
           <Pagination
-            totalPages={15}
+            totalPages={Math.ceil(txList.length / PAGE_LIMIT)}
             currentPage={currentPage}
             onPageChange={(val) => setCurrentPage(val)}
             onPreviousPage={() => setCurrentPage((prev) => prev - 1)}
@@ -22,64 +76,9 @@ const LatestTransactions = () => {
       </div>
       <div className="mt-[24px]">
         <TransactionTable
-          rows={[
-            [
-              {
-                icon: 'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/8j3hXRK5rdoZ2vSpGLRmXtWmW6iYaRUw5xVk4Kzmc9Hp/logo.png',
-                text: 'shards',
-              },
-              'AC95124da74ca921wdpk1134',
-              new Date().toISOString(),
-              'AC95124da74ca921wdpk1134',
-              'AC95124da74ca921wdpk1134',
-              '123.45678',
-            ],
-            [
-              {
-                icon: 'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/cxxShYRVcepDudXhe7U62QHvw8uBJoKFifmzggGKVC2/logo.png',
-                text: 'chicks',
-              },
-              'AC95124da74ca921wdpk1134',
-              new Date().toISOString(),
-              'AC95124da74ca921wdpk1134',
-              'AC95124da74ca921wdpk1134',
-              '12345678.45678',
-            ],
-            [
-              {
-                icon: 'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/8j3hXRK5rdoZ2vSpGLRmXtWmW6iYaRUw5xVk4Kzmc9Hp/logo.png',
-                text: 'shards',
-              },
-              'AC95124da74ca921wdpk1134',
-              new Date().toISOString(),
-              'AC95124da74ca921wdpk1134',
-              'AC95124da74ca921wdpk1134',
-              '123.45678',
-            ],
-            [
-              {
-                icon: 'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/cxxShYRVcepDudXhe7U62QHvw8uBJoKFifmzggGKVC2/logo.png',
-                text: 'chicks',
-              },
-              'AC95124da74ca921wdpk1134',
-              new Date().toISOString(),
-              'AC95124da74ca921wdpk1134',
-              'AC95124da74ca921wdpk1134',
-              '12345678.45678',
-            ],
-            [
-              {
-                icon: 'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/cxxShYRVcepDudXhe7U62QHvw8uBJoKFifmzggGKVC2/logo.png',
-                text: 'chicks',
-              },
-              'AC95124da74ca921wdpk1134',
-              new Date().toISOString(),
-              'AC95124da74ca921wdpk1134',
-              'AC95124da74ca921wdpk1134',
-              '12345678.45678',
-            ],
-          ]}
-          headers={['item', 'signature', 'time', 'from', 'to', 'amount ($USD)']}
+          rows={_txList}
+          headers={['item', 'signature', 'time', 'from', 'to', 'amount($USD)']}
+          loading={loading}
         />
       </div>
     </div>

@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import Button from '../Shared/Button';
 import Input from '../Shared/Input';
+import EditProfileForm from './EditProfileForm';
 import Menu from './Menu';
 
 const SIDE_BAR_ITEMS = [
   {
     text: 'Edit Profile',
-    value: 'Edit Profile',
+    value: 'edit_profile',
     icon: '/img/icon_profile.svg',
   },
   // {
@@ -24,8 +25,8 @@ const SIDE_BAR_ITEMS = [
 ];
 
 const ProfileView = () => {
-  const [sidebar, setSidebar] = useState('Edit Profile');
-  const { register } = useForm({
+  const [sidebar, setSidebar] = useState('edit_profile');
+  const form = useForm({
     mode: 'onChange',
     defaultValues: {
       firstName: '',
@@ -46,88 +47,20 @@ const ProfileView = () => {
   };
 
   return (
-    <div className="flex">
-      <div>
-        <Menu
-          items={SIDE_BAR_ITEMS}
-          currentValue={sidebar}
-          onItemClick={(value) => setSidebar(value)}
-        />
+    <FormProvider {...form}>
+      <div className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-6">
+        <div className="mb-[12px] md:mb-0 md:mr-[40px] 2xl:cols-span-2">
+          <Menu
+            items={SIDE_BAR_ITEMS}
+            currentValue={sidebar}
+            onItemClick={(item) => setSidebar(item.value)}
+          />
+        </div>
+        <div className="nd:border-l-[2px] border-[#290030] md:pl-[40px] col-span-2 border-0 2xl:cols-span-4">
+          {sidebar === 'edit_profile' && <EditProfileForm />}
+        </div>
       </div>
-      <div className="ml-[40px] border-l-[2px] border-[#290030] pl-[40px]">
-        {sidebar === 'Edit Profile' && (
-          <div>
-            <div className="flex items-center">
-              <div>
-                <Input
-                  id="firstName"
-                  label="First Name"
-                  {...register('firstName')}
-                />
-              </div>
-              <div className="ml-[40px]">
-                <Input
-                  id="lastName"
-                  label="Last Name"
-                  {...register('lastName')}
-                />
-              </div>
-            </div>
-            <div className="mt-[36px]">
-              <Input
-                id="email"
-                type="email"
-                label="Email"
-                {...register('email')}
-              />
-            </div>
-            <div className="mt-[36px]">
-              <Input
-                id="password"
-                type="password"
-                label="Password"
-                {...register('password')}
-              />
-            </div>
-            <div className="mt-[36px]">
-              <Input
-                id="phone"
-                type="text"
-                label="Contact Number"
-                {...register('phoneNumber')}
-              />
-            </div>
-            <div className="mt-[36px]">
-              <Input
-                id="address"
-                type="text"
-                label="Address"
-                {...register('address')}
-              />
-            </div>
-            <div className="flex items-center mt-[36px]">
-              <div>
-                <Input id="city" label="City" {...register('city')} />
-              </div>
-              <div className="ml-[40px]">
-                <Input id="state" label="State" {...register('state')} />
-              </div>
-            </div>
-            <div className="flex items-center mt-[36px]">
-              <div>
-                <Input id="zip" label="Zip Code" {...register('zipCode')} />
-              </div>
-              <div className="ml-[40px]">
-                <Input id="country" label="Country" {...register('country')} />
-              </div>
-            </div>
-            <div className="mt-[36px] w-[180px]">
-              <Button onClick={() => handleSave()}>Save Changes</Button>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+    </FormProvider>
   );
 };
 

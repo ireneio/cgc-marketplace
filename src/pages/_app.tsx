@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import api from '@/utils/api';
 import { OAuthProvider } from '@/contexts/OAuthProvider';
 
-function App({ Component, pageProps }: AppProps) {
+function removeConsole() {
   if (process.env.NODE_ENV === 'production') {
     console.log =
       console.warn =
@@ -17,22 +17,36 @@ function App({ Component, pageProps }: AppProps) {
           return;
         };
   }
+}
 
+removeConsole();
+
+function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     api.healthCheck().then();
+    const cb = () => {
+      const _tid = setTimeout(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        clearTimeout(_tid);
+      }, 200);
+    };
+    window.addEventListener('load', cb);
+    return () => {
+      window.removeEventListener('load', cb);
+    };
   }, []);
 
   return (
-    <OAuthProvider>
-      <SolanaWalletProvider>
-        <EthereumWalletProvider>
-          <ReduxProvider store={store}>
+    <SolanaWalletProvider>
+      <EthereumWalletProvider>
+        <ReduxProvider store={store}>
+          <OAuthProvider>
             <Component {...pageProps} />
             <div id="snackbar-root" />
-          </ReduxProvider>
-        </EthereumWalletProvider>
-      </SolanaWalletProvider>
-    </OAuthProvider>
+          </OAuthProvider>
+        </ReduxProvider>
+      </EthereumWalletProvider>
+    </SolanaWalletProvider>
   );
 }
 

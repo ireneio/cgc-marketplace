@@ -9,10 +9,12 @@ import Button from '@/components/Shared/Button';
 import Divider from '@/components/Shared/Divider';
 import SelectGroup from '@/components/Shared/SelectGroup';
 import { useEthereumProvider } from '@/contexts/EthereumWalletProvider';
+import { OAuthContext } from '@/contexts/OAuthProvider';
+import withAuth, { SavedPathType } from '@/middlewares/withAuth';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useRouter } from 'next/router';
-import { useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 type Selection =
   | 'wallet'
@@ -23,13 +25,19 @@ type Selection =
   | 'offers'
   | 'activities';
 
-const Account = () => {
+const Account = ({
+  setSavedPath,
+}: {
+  setSavedPath: React.Dispatch<React.SetStateAction<SavedPathType>>;
+}) => {
   const dispatch = useAppDispatch();
-  const router = useRouter();
   const email = useAppSelector((state) => state.user.userInfo.email);
-  const [currentSelection, setCurrentSelection] = useState<Selection>('wallet');
+  const sidebarPath = useAppSelector((state) => state.layout.navigation.path);
+  const router = useRouter();
   const wallet = useWallet();
   const { signerAddress } = useEthereumProvider();
+  const oAuthCtx = useContext(OAuthContext);
+  const [currentSelection, setCurrentSelection] = useState<Selection>('wallet');
 
   const walletTitle = useMemo(() => {
     if (wallet.connected && signerAddress) {
@@ -63,6 +71,10 @@ const Account = () => {
     router.push(`/account?tab=${value}`).then();
   };
 
+  const handleSignOut = () => {
+    oAuthCtx.logout();
+  };
+
   useEffect(() => {
     if (router.query.tab) {
       const tab = String(router.query.tab);
@@ -70,6 +82,14 @@ const Account = () => {
       router.query.tab = '';
     }
   }, [router.query]);
+
+  useEffect(() => {
+    if (sidebarPath) {
+      setSavedPath({ type: 'sidebar', sideBarValue: sidebarPath, path: '/' });
+    } else {
+      setSavedPath({ type: 'route', path: '/' });
+    }
+  }, [router.pathname, sidebarPath]);
 
   return (
     <DefaultLayout>
@@ -88,7 +108,7 @@ const Account = () => {
           }}
         />
       </div>
-      <div className="flex items-center mb-[40px]">
+      <div className="flex items-center mb-[24px] flex-wrap">
         <div>
           <Avatar />
         </div>
@@ -96,16 +116,16 @@ const Account = () => {
           <div className="font-bold text-[24px]">My cgPass</div>
           <div className="text-[20px] mt-[2px]">{email}</div>
         </div>
-        <div className="ml-auto">
-          <Button>Sign Out</Button>
+        <div className="ml-auto basis-[100%] md:basis-auto mt-[24px] md:mt-0">
+          <Button onClick={() => handleSignOut()}>Sign Out</Button>
         </div>
       </div>
-      <div className="mb-[30px]">
+      <div className="mb-[24px]">
         <Divider />
       </div>
-      <div className="flex justify-between items-center mb-[30px]">
+      <div className="flex justify-between items-center mb-[24px] flex-wrap">
         <div className="text-[#FFFFFF] font-bold text-[20px]">{title}</div>
-        <div>
+        <div className="basis-[100%] lg:basis-auto mt-[12px] lg:mt-0">
           <SelectGroup
             items={[
               { text: 'Wallets', value: 'wallet' },
@@ -120,7 +140,7 @@ const Account = () => {
           />
         </div>
       </div>
-      <div className="mb-[30px]">
+      <div className="mb-[24px]">
         <Divider />
       </div>
       <div>
@@ -133,4 +153,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default withAuth(Account);

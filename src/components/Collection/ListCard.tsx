@@ -17,6 +17,7 @@ interface Props extends Attr {
   onAddToCart: (params: Attr) => void | Promise<void>;
   onMoreInfo: (id: string | number) => void | Promise<void>;
   addToCartLoading: boolean;
+  addToCartDisabled?: boolean;
 }
 
 const ListCard = ({
@@ -29,6 +30,7 @@ const ListCard = ({
   onAddToCart,
   onMoreInfo,
   addToCartLoading,
+  addToCartDisabled,
   tokenAddress,
   addBtnText,
   removeBtnText,
@@ -37,6 +39,7 @@ const ListCard = ({
 
   const handleImageLoad = (e: any, image: string) => {
     e.target.classList.remove('blur');
+    e.target.classList.remove('force_card_height');
     e.target.src = image === 'undefined' ? '/img/cgc_icon.png' : image;
     e.target.style.width = '100%';
     e.target.style.height = 'auto';
@@ -44,7 +47,10 @@ const ListCard = ({
   };
 
   const handleImageError = (e: any) => {
-    e.target.src = '/img/cgc_icon.png';
+    if (e.target.src === '/img/spinner.svg') {
+      return;
+    }
+    e.target.src = '/img/spinner.svg';
     setImageLoaded(true);
   };
 
@@ -63,10 +69,9 @@ const ListCard = ({
         <img
           src={'/img/spinner.svg'}
           alt={name}
-          // width={'100%'}
           height={150}
           onError={(e) => handleImageError(e)}
-          className="blur rounded-t-[5px] w-full h-auto"
+          className="blur rounded-t-[5px] w-full h-auto force_card_height"
           onLoad={(e) => handleImageLoad(e, image)}
         />
       </div>
@@ -108,7 +113,19 @@ const ListCard = ({
             height={16}
           />
         </div>
-        {(!isAddedToCart || addToCartLoading) && (
+        {addToCartDisabled && (
+          <div
+            className="cursor-not-allowed text-[12px] flex items-center justify-center px-[18px] py-[18px] text-[#FFFFFF] rounded-br-[5px]"
+            style={{
+              background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
+              flexBasis: '70%',
+              opacity: 0.5,
+            }}
+          >
+            Not Listed
+          </div>
+        )}
+        {(!isAddedToCart || addToCartLoading) && !addToCartDisabled && (
           <div
             style={{ flexBasis: '70%' }}
             className="hover:bg-[#290030] hover:text-[#FFFFFF] flex items-center justify-center cursor-pointer px-[18px] py-[18px] border-l-[1px] border-l-[#290030] rounded-br-[5px]"
@@ -125,23 +142,13 @@ const ListCard = ({
               });
             }}
           >
-            {/* {!addToCartLoading && (
-              <div>
-                <img
-                  src={'/img/icon_plus.png'}
-                  alt={'plus'}
-                  width={16}
-                  height={16}
-                />
-              </div>
-            )} */}
             <div className="ml-[8px] text-[#FFFFFF] text-[12px]">
               {addToCartLoading && <Skeleton className="w-[64px] h-[14px]" />}
               {!addToCartLoading && addBtnText ? addBtnText : 'Add To Cart'}
             </div>
           </div>
         )}
-        {isAddedToCart && !addToCartLoading && (
+        {isAddedToCart && !addToCartLoading && !addToCartDisabled && (
           <div
             className="cursor-pointer text-[12px] flex items-center justify-center px-[18px] py-[18px] text-[#FFFFFF] rounded-br-[5px]"
             style={{

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import FloatingCard from '../Shared/FloatingCard';
+import FloatingCard from '../Home/FloatingCard';
 
 const CardCarousel = ({ items }: { items: any[] }) => {
   const router = useRouter();

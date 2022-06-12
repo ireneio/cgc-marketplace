@@ -10,7 +10,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { getBreadcrumbRoutes } from '@/utils/cgcConsts';
 import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
-import { LoginModal } from '@/components/Modals/LoginModal';
+import { LoginModal } from '@/components/Auth/LoginModal';
 
 type Selection =
   | 'About'
@@ -24,7 +24,9 @@ const Collection = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const oAuthCtx = useContext(OAuthContext);
-  const email = useAppSelector((state) => state.user.userInfo.email);
+  const access_token = useAppSelector(
+    (state) => state.user.userInfo.access_token,
+  );
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
@@ -33,7 +35,7 @@ const Collection = () => {
 
   const handleSelect = (value: Selection) => {
     if (value === 'Your Items') {
-      if (email) {
+      if (access_token) {
         router.push('/account?tab=items').then();
       } else {
         setLoginModalOpen(true);
@@ -43,7 +45,6 @@ const Collection = () => {
     if (value === '...') {
       return;
     }
-
     setCurrentSelection(value);
     if (!metadata.slug) {
       return;
@@ -67,16 +68,18 @@ const Collection = () => {
     );
   }, [metadata, currentSelection]);
 
-  useEffect(() => {
-    if (router.query.tab) {
-      const tab = String(router.query.tab)
-        .split('_')
-        .map((item) => item[0].toUpperCase() + item.substring(1))
-        .join(' ');
-      setCurrentSelection(tab as Selection);
-      router.query.tab = '';
-    }
-  }, [router.query]);
+  const selectGroupItems = useMemo(() => {
+    return [
+      { text: 'About', value: 'About', disabled: !metadata.slug },
+      { text: 'All Items', value: 'All Items', disabled: !metadata.slug },
+      {
+        text: 'Your Items',
+        value: 'Your Items',
+        disabled: !metadata.slug,
+      },
+      { text: '...', value: '...', disabled: !metadata.slug },
+    ];
+  }, [metadata]);
 
   const getCollectionData = async () => {
     const response = await api.getCollectionById(
@@ -117,22 +120,20 @@ const Collection = () => {
     }
   }, [router.query.id]);
 
-  const selectGroupItems = useMemo(() => {
-    return [
-      { text: 'About', value: 'About', disabled: !metadata.slug },
-      { text: 'All Items', value: 'All Items', disabled: !metadata.slug },
-      {
-        text: 'Your Items',
-        value: 'Your Items',
-        disabled: !metadata.slug,
-      },
-      { text: '...', value: '...', disabled: !metadata.slug },
-    ];
-  }, [metadata]);
+  useEffect(() => {
+    if (router.query.tab) {
+      const tab = String(router.query.tab)
+        .split('_')
+        .map((item) => item[0].toUpperCase() + item.substring(1))
+        .join(' ');
+      setCurrentSelection(tab as Selection);
+      router.query.tab = '';
+    }
+  }, [router.query]);
 
   return (
     <DefaultLayout>
-      <div className="mb-[32px]">
+      <div className="mb-[24px]">
         <Breadcrumb
           items={breadcrumbItems}
           currentValue={
@@ -153,11 +154,11 @@ const Collection = () => {
           }}
         />
       </div>
-      <div className="flex justify-between items-center mb-[16px]">
-        <div className="text-[#FFFFFF] font-bold text-[24px]">
+      <div className="flex justify-between items-center mb-[12px] max-w-full flex-wrap">
+        <div className="basis-[100%] md:basis-[50%] text-[#FFFFFF] font-bold text-[24px]">
           {metadata.name}
         </div>
-        <div>
+        <div className="basis-[100%] lg:basis-auto mt-[12px] lg:mt-0">
           <SelectGroup
             items={selectGroupItems}
             currentValue={currentSelection}

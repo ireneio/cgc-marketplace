@@ -1,31 +1,25 @@
 import { useFormContext } from 'react-hook-form';
 import Button from '../Shared/Button';
 import { motion } from 'framer-motion';
-import PrimaryGradientText from '../Catheon/PrimaryGradientText';
 import FormInput from './FormInput';
 
-const Login = ({
-  onLogin,
+const SignUpTwoNew = ({
+  onNextStep,
   onCancel,
-  loading,
 }: {
-  onLogin: () => Promise<void>;
+  onNextStep: () => Promise<void>;
   onCancel: () => void;
-  loading: boolean;
 }) => {
   const { register, watch } = useFormContext();
+  // const username = watch('username');
   const email = watch('email');
   const password = watch('password');
 
-  const handleForgotPassword = () => {
-    // TODO
-  };
-
   return (
     <motion.div initial={{ x: '-100%' }} animate={{ x: 0 }}>
-      <div className="py-8 space-y-6 px-[24px] min-h-full justify flex-col justify-center w-full">
+      <div className="py-8 space-y-6 px-[24px] min-h-full w-full flex flex-col justify-center">
         <div>
-          <div className="mt-1">
+          <div className="relative mt-1">
             <FormInput
               placeholder="Email"
               id="email"
@@ -39,34 +33,22 @@ const Login = ({
         <div>
           <div className="relative mt-1">
             <FormInput
-              placeholder="Password"
+              placeholder="password"
               id="password"
               type="password"
               autoComplete="password"
               required
               {...register('password')}
             />
-            <div className="absolute right-0 bottom-[-24px] flex justify-end">
-              <div
-                className="underline cursor-pointer text-[12px]"
-                onClick={() => handleForgotPassword()}
-              >
-                <PrimaryGradientText underline>
-                  Forgot Password
-                </PrimaryGradientText>
-              </div>
-            </div>
           </div>
         </div>
       </div>
       <div className="mt-3 px-[24px] pb-[24px]">
         <Button
-          onClick={() => onLogin()}
-          disabled={email === '' || password === '' || loading}
-          filled
-          loading={loading}
+          onClick={() => onNextStep()}
+          disabled={email === '' || password === ''}
         >
-          Sign In
+          Next
         </Button>
         <div className="mt-[24px]">
           <Button
@@ -82,4 +64,4 @@ const Login = ({
   );
 };
 
-export default Login;
+export default SignUpTwoNew;

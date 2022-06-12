@@ -16,15 +16,26 @@ const api = {
       },
     });
   },
-  register: async (email: string, password: string) => {
-    return await fetcher({
-      url: '/api/user',
+  register: async ({
+    email,
+    password,
+    walletAddress,
+  }: {
+    email: string;
+    password: string;
+    walletAddress: string;
+  }) => {
+    const response = await fetcher({
+      url: '/api/user/register',
       method: 'post',
       data: {
         email,
         password,
+        walletAddress,
       },
     });
+
+    return response;
   },
   getCollectionList: async (token: string) => {
     const response = await fetcher({
@@ -68,6 +79,16 @@ const api = {
   getNftListByHash: async (token: string, hash: string) => {
     const response = await fetcher({
       url: `/api/nft?hash=${hash}`,
+      method: 'get',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  },
+  getTokenList: async (token: string) => {
+    const response = await fetcher({
+      url: `/api/token/list`,
       method: 'get',
       headers: {
         authorization: `Bearer ${token}`,

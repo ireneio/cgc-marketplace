@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import SalesCard from '../Shared/SalesCard';
+import SalesCard from './SalesCard';
 import SectionTitle from '../Shared/SectionTitle';
 
 const LatestSales = () => {
@@ -8,9 +8,9 @@ const LatestSales = () => {
   return (
     <div>
       <div className="flex justify-between items-center">
-        <SectionTitle>latest sales</SectionTitle>
+        <SectionTitle> latest sales</SectionTitle>
       </div>
-      <div className="mt-[24px] flex overflow-auto hide-scrollbar">
+      <div className="mt-[24px] flex overflow-auto pb-[24px] scollbar_thin">
         {items.map((game, index) => {
           return (
             <div key={index} className="mr-[28px]">
@@ -27,9 +27,6 @@ const LatestSales = () => {
           );
         })}
       </div>
-      {/* <div className="flex justify-end mt-[20px]">
-        <ButtonLink>see all</ButtonLink>
-      </div> */}
     </div>
   );
 };

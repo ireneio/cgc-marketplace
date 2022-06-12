@@ -198,6 +198,7 @@ const ListingView = () => {
                       onAddToCart={(params) => handleAddToCart(params)}
                       onMoreInfo={() => handleMoreInfo(item.tokenAddress)}
                       addToCartLoading={false}
+                      addToCartDisabled={false}
                       tokenAddress={item.tokenAddress}
                       addBtnText={'Cancel Listing'}
                     />
@@ -224,6 +225,7 @@ const ListingView = () => {
                       onAddToCart={(params) => handleAddToCart(params)}
                       onMoreInfo={() => handleMoreInfo(item.tokenAddress)}
                       addToCartLoading={false}
+                      addToCartDisabled={false}
                       tokenAddress={item.tokenAddress}
                       addBtnText={'Cancel Listing'}
                     />

@@ -10,7 +10,6 @@ interface Props {
   disableHoverEffect?: boolean;
   filled?: boolean;
   link?: boolean;
-  shadowed?: boolean;
   secondary?: boolean;
   loading?: boolean;
 }
@@ -24,7 +23,6 @@ const Button = ({
   disableHoverEffect,
   link,
   filled,
-  // shadowed,
   secondary,
   loading,
 }: Props) => {
@@ -51,7 +49,7 @@ const Button = ({
           // className,
         )}
         style={{
-          cursor: disabled ? 'not-allowed' : 'pointer',
+          cursor: disabled || loading ? 'not-allowed' : 'pointer',
           ...style,
           background: link
             ? 'transparent'
@@ -71,7 +69,7 @@ const Button = ({
         onClick={(e) => onClick && onClick(e)}
         onMouseOver={() => setHover(true)}
         onMouseOut={() => setHover(false)}
-        disabled={disabled}
+        disabled={disabled || loading}
       >
         {!loading && (
           <div style={{ whiteSpace: 'nowrap' }} className="flex items-center">

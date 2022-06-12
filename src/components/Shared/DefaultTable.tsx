@@ -8,7 +8,7 @@ interface Props {
 
 const DefaultTable = ({ rows, headers }: Props) => {
   return (
-    <div className="rounded-[5px] border-solid border-[2px] border-[#290030] px-[0]">
+    <div className="rounded-[5px] border-solid border-[2px] border-[#290030] px-[0] overflow-auto">
       <Table>
         <Thead>
           <Tr>
@@ -27,11 +27,17 @@ const DefaultTable = ({ rows, headers }: Props) => {
               <Tr key={index} style={{ padding: 0, margin: 0 }}>
                 {row.map((col, _index) => {
                   return Object.keys(col).length ? (
-                    <Td key={_index} style={{ padding: 0, margin: 0 }}>
+                    <Td
+                      key={_index}
+                      style={{ padding: 0, margin: 0 }}
+                      className="no_line_break"
+                    >
                       <div>{col}</div>
                     </Td>
                   ) : (
-                    <Td key={_index}>{String(col)}</Td>
+                    <Td key={_index} className="no_line_break">
+                      {String(col)}
+                    </Td>
                   );
                 })}
               </Tr>
