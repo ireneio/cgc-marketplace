@@ -77,7 +77,7 @@ const LatestTransactions = () => {
       <div className="mt-[24px]">
         <TransactionTable
           rows={_txList}
-          headers={['item', 'signature', 'time', 'from', 'to', 'amount($USD)']}
+          headers={['item', 'signature', 'time', 'from', 'to', 'amount ($usd)']}
           loading={loading}
         />
       </div>
