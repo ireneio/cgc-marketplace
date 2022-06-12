@@ -24,7 +24,9 @@ const Collection = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const oAuthCtx = useContext(OAuthContext);
-  const email = useAppSelector((state) => state.user.userInfo.email);
+  const access_token = useAppSelector(
+    (state) => state.user.userInfo.access_token,
+  );
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
@@ -33,7 +35,7 @@ const Collection = () => {
 
   const handleSelect = (value: Selection) => {
     if (value === 'Your Items') {
-      if (email) {
+      if (access_token) {
         router.push('/account?tab=items').then();
       } else {
         setLoginModalOpen(true);
