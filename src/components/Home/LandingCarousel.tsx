@@ -68,32 +68,30 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
                   className="bg-cover w-full h-[50vh] md:h-[80vh] bg-[#181818] aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 hover:cursor-pointer object-cover"
                   alt={name}
                 />
-                <div className="z-[3] absolute max-w-[60vw] md:w-auto top-[12px] md:top-[55%] left-[12px] md:left-[50px] font-bold text-[32px]">
-                  <img
-                    src={logo}
-                    className="bg-contain md:h-[84px] h-[42px] bg-transparent aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 aspect-none hover:cursor-pointer"
-                    alt={name}
-                  />
-                </div>
-                {/* <div className="text-left z-[3] absolute top-[72px] md:top-[65%] xl:top-[68%] left-[16px] md:left-[50px] font-bold text-[16px] md:text-[26px] lg:text-[32px] text-[#FFFFFF]">
-                  {title}
-                </div> */}
-                {/* <div className="text-[24px] text-left z-[3] absolute top-[140px] md:top-[70%] xl:top-[75%] left-[16px] md:left-[50px] text-[#FFFFFF]"> */}
-                <div className="bg-[#aaa] bg-opacity-[0.33] md:bg-none md:bg-opacity-0 py-[12px] drop-shadow-xl text-[18px] 2xl:text-[18px] text-left z-[3] absolute top-[140px] md:top-[70%] xl:top-[70%] left-[16px] md:left-[50px] text-[#FFFFFF]">
-                  {description}
-                </div>
-                <div className="z-[3] absolute bottom-[10%] left-[16px] md:left-[50px] text-[#FFFFFF] flex">
-                  <Button onClick={() => handlePlay(name)}>Play</Button>
-                  <div className="ml-[16px]">
-                    <Button
-                      link
-                      onClick={(e: any) => {
-                        e.stopPropagation();
-                        handleMoreInfo(name);
-                      }}
-                    >
-                      More Info
-                    </Button>
+                <div className="absolute bottom-[3rem] z-[3] left-[50%] translate-x-[-50%] md:translate-x-0 md:left-[32px]">
+                  <div className="max-w-[300px]">
+                    <img
+                      src={logo}
+                      className="bg-contain max-w-[300px] bg-transparent aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 aspect-none hover:cursor-pointer"
+                      alt={name}
+                    />
+                  </div>
+                  <div className="mt-[16px] drop-shadow-xl text-[18px] 2xl:text-[18px] text-left text-[#FFFFFF]">
+                    {description}
+                  </div>
+                  <div className="text-[#FFFFFF] flex mt-[16px]">
+                    <Button onClick={() => handlePlay(name)}>Play</Button>
+                    <div className="ml-[16px]">
+                      <Button
+                        link
+                        onClick={(e: any) => {
+                          e.stopPropagation();
+                          handleMoreInfo(name);
+                        }}
+                      >
+                        More Info
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>

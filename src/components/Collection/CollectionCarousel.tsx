@@ -66,12 +66,15 @@ const CollectionCarousel = ({ carouselItems }: { carouselItems: Item[] }) => {
                     <source src={imageUrl} type="video/mp4" />
                   </video>
                 </div>
-                <div className="bottom-[3rem] absolute left-[32px] z-[3] grid grid-cols-1 items-start justify-start text-left text-[#FFFFFF] text-xl">
-                  <div
-                    className=" h-[60px] w-[300px] mb-[16px] basis-[50%] bg-no-repeat bg-contain bg-center"
-                    style={{ backgroundImage: `url(${logo})` }}
-                  ></div>
-                  {description?.slice(0, 150)}
+                <div className="bottom-[3rem] absolute left-[50%] translate-x-[-50%] md:translate-x-0 md:left-[32px] z-[3] grid grid-cols-1 items-start justify-start text-left text-[#FFFFFF] text-xl">
+                  <div className="max-w-[300px]">
+                    <img
+                      src={logo}
+                      className="bg-contain max-w-[300px] bg-transparent aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 aspect-none hover:cursor-pointer"
+                      alt={name}
+                    />
+                  </div>
+                  <div className="mt-[16px]">{description?.slice(0, 150)}</div>
                   <div className="mt-[16px] text-[#FFFFFF] flex items-start justify-start mr-auto">
                     <Button onClick={() => handlePlay(name)}>Play</Button>
                   </div>
