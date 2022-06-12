@@ -85,7 +85,8 @@ const AllCollections = () => {
                     onClick={() => handleGoDetail(collection.slug)}
                   >
                     <FloatingCard
-                      isDefaultFloating={windowWidth < 768}
+                      // isDefaultFloating={windowWidth < 768}
+                      isDefaultFloating={false}
                       isFloatRight={false}
                       logo={collection.logoSrc}
                       currentHoverId={currentHoverId}

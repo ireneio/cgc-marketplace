@@ -98,12 +98,11 @@ const MarketView = () => {
       oAuthCtx.access_token,
       metadata.slug,
     );
-    console.log(response);
-
     const map = response.map((item: any) => {
       const manifest = item?.splNftInfo?.data?.manifest;
       return {
-        image: manifest?.image,
+        // default image
+        image: manifest?.image || '/img/cgc_icon.png',
         brand: manifest?.collection?.name,
         name: manifest?.name,
         price: 0,

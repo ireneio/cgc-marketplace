@@ -84,7 +84,7 @@ const Collection = () => {
   const getCollectionData = async () => {
     const response = await api.getCollectionById(
       oAuthCtx.access_token,
-      String(router.query.id),
+      String(router.query.id).split('_').join('_'),
     );
     if (response) {
       dispatch({

@@ -55,7 +55,7 @@ const FloatingCard = ({
     <div
       className="w-full"
       style={{
-        height: isDefaultFloating ? 370 : 196,
+        height: isDefaultFloating ? 390 : 196,
       }}
     >
       {currentHoverId !== id && !isDefaultFloating && (
@@ -92,8 +92,8 @@ const FloatingCard = ({
         >
           <div
             style={{
-              width: isDefaultFloating ? 'auto' : 370,
-              height: isDefaultFloating ? 'auto' : 370,
+              width: isDefaultFloating ? 'auto' : 390,
+              height: isDefaultFloating ? 'auto' : 390,
             }}
             className="absolute border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden"
           >
@@ -109,11 +109,11 @@ const FloatingCard = ({
               <div
                 className="relative min-h-[170px]"
                 style={{
-                  width: isDefaultFloating ? '90vw' : 370,
+                  width: isDefaultFloating ? '90vw' : 390,
                   minHeight: isDefaultFloating ? 199 : 170,
                 }}
               >
-                <video muted height={199} autoPlay>
+                <video muted width={390} autoPlay>
                   <source src={bgOnHover} type="video/mp4" />
                 </video>
                 <div className="absolute bottom-[8px] left-[8px]">
@@ -122,7 +122,7 @@ const FloatingCard = ({
               </div>
             </div>
             <div
-              className="bg-[#13002B] pt-[20px] pb-[24px]"
+              className="bg-[#13002B] pt-[20px] pb-[24px] absolute bottom-[0%] h-[170px]"
               style={{ height: isDefaultFloating ? 170 : '' }}
             >
               <div className="px-[12px] py-[0px]">
