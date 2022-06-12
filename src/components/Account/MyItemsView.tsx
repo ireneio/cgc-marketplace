@@ -91,7 +91,13 @@ const MyItemsView = () => {
   const _recommendedItems = useMemo(() => {
     return recommendedItems
       .filter((item) => item.collection_id === sidebar.collection_id)
-      .slice(0, 5);
+      .slice(0, 4)
+      .map((item) => {
+        return {
+          ...item,
+          is_listed: item?.external_marketplace_listing?.length,
+        };
+      });
   }, [recommendedItems, sidebar]);
 
   const _itemsDisplay = useMemo(() => {
@@ -292,6 +298,7 @@ const MyItemsView = () => {
                       onAddToCart={(params) => handleAddToCart(params)}
                       onMoreInfo={() => handleMoreInfo(item.tokenAddress)}
                       addToCartLoading={false}
+                      addToCartDisabled={!item.is_listed}
                       tokenAddress={item.tokenAddress}
                     />
                   </div>
@@ -317,6 +324,7 @@ const MyItemsView = () => {
                       onAddToCart={(params) => handleAddToCart(params)}
                       onMoreInfo={() => handleMoreInfo(item.tokenAddress)}
                       addToCartLoading={false}
+                      addToCartDisabled={!item.is_listed}
                       tokenAddress={item.tokenAddress}
                     />
                   </div>
