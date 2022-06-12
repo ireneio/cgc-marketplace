@@ -74,7 +74,7 @@ const CollectionCarousel = ({ carouselItems }: { carouselItems: Item[] }) => {
                   />
                 </div>
                 <div className="block text-left z-[3] absolute bottom-[100px] md:bottom-[160px] lg:bottom-[30%] left-[16px] md:left-[50px] text-[#FFFFFF] text-xl">
-                  {description.slice(0, 201)}
+                  {description?.slice(0, 201)}
                 </div>
                 <div className="z-[3] absolute bottom-[12px] lg:bottom-[17.5%] left-[16px] md:left-[50px] text-[#FFFFFF] flex">
                   <Button onClick={() => handlePlay(name)}>Play</Button>
