@@ -1,7 +1,7 @@
 import { useAppDispatch } from '@/store';
 import { motion } from 'framer-motion';
 import Button from '../Shared/Button';
-import PrimaryGradientText from '../Shared/PrimaryGradientText';
+import PrimaryGradientText from '../Catheon/PrimaryGradientText';
 
 const SignupTwo = ({
   onNextStep,

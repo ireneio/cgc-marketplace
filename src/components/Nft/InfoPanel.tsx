@@ -1,7 +1,7 @@
 import { NftInfo } from '@/pages/nft/[id]';
 import { getTrimmedAddressEllipsisMiddle } from '@/utils/formatHelper';
 import ClipboardText from '../Shared/ClipboardText';
-import PrimaryGradientText from '../Shared/PrimaryGradientText';
+import PrimaryGradientText from '../Catheon/PrimaryGradientText';
 import Tag from '../Shared/Tag';
 
 const InfoPanel = ({ info }: { info: NftInfo }) => {
