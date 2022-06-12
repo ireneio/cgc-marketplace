@@ -34,6 +34,8 @@ const AllCollections = () => {
         services: item.services,
         description: item.metadata.description,
         totalSupply: item?.nftCollectionStats?.totalSupply,
+        marketCap: item?.nftCollectionStats?.usdMarketCap,
+        network: 'SOL',
       };
     });
   };
@@ -92,8 +94,8 @@ const AllCollections = () => {
                       bgOnHover={collection.videoSrc}
                       title={collection.description}
                       categories={collection.genre}
-                      network={'SOL'}
-                      marketCap={'10000'}
+                      network={collection.network}
+                      marketCap={collection.marketCap}
                       coinSupply={collection.totalSupply}
                       onPlay={() => handleGoDetail(collection.slug)}
                       onCardClick={() => handleGoDetail(collection.slug)}

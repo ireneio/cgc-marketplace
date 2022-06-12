@@ -3,15 +3,14 @@ import { twMerge } from 'tailwind-merge';
 
 interface Props {
   children: React.ReactNode;
-  // className?: string;
+  className?: string;
   style?: CSSProperties;
   onClick?: any;
   disabled?: boolean;
   disableHoverEffect?: boolean;
   filled?: boolean;
   link?: boolean;
-  // shadowed?: boolean;
-  // secondary?: boolean;
+  secondary?: boolean;
   loading?: boolean;
 }
 
@@ -24,32 +23,23 @@ const Button = ({
   disableHoverEffect,
   link,
   filled,
-  // shadowed,
-  // secondary,
+  secondary,
   loading,
 }: Props) => {
   const [hover, setHover] = useState(false);
-
-  const bgColor = link
-    ? 'transparent'
-    : disabled
-    ? 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)'
-    : disableHoverEffect
-    ? '#13002B'
-    : hover && !filled
-    ? 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)'
-    : hover && filled
-    ? '#13002B'
-    : filled
-    ? 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)'
-    : '#13002B';
 
   return (
     <div
       style={{
         opacity: disabled ? '0.25' : '1',
         boxShadow: disabled ? '0px 4px 4px 0px #00000040' : '',
-        background: bgColor,
+        background: link
+          ? 'transparent'
+          : secondary
+          ? '#290030'
+          : disabled
+          ? 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)'
+          : 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
       }}
       className={twMerge('rounded-[5px]  px-[1px] py-[1px] text-center')}
     >
