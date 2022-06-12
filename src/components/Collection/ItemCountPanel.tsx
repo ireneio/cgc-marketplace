@@ -8,10 +8,10 @@ interface Props {
 
 const ItemCountPanel = ({ text, count, countUnit }: Props) => {
   return (
-    <Tag className="md:px-[64px] md:py-[28px]">
+    <Tag className="md:px-[64px] md:py-[28px] px-[16px] py-[16px]">
       <div className="text-[#FFFFFF]">
-        <div className="flex items-center w-full">
-          <div className="text-[36px] text-center font-bold w-full">
+        <div className="flex items-center w-full justify-center">
+          <div className="text-[36px] text-center font-bold w-full flex justify-center">
             {count}
           </div>
           {!!countUnit && (

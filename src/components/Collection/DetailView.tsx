@@ -124,7 +124,7 @@ const DetailView = () => {
           <div className="mb-[32px]">
             <div className="text-[#FFFFFF] font-bold text-[20px]">Detail</div>
           </div>
-          <div className="mb-[32px] grid grid-cols-2 lg:grid-cols-4 gap-[24px]">
+          <div className="mb-[32px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[24px]">
             <ItemCountPanel
               text="Items available"
               count={nftCollectionStats?.totalSupply}
