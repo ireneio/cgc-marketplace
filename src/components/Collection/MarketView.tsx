@@ -13,6 +13,7 @@ import ListCardLoading from './ListCardLoading';
 import RowCard from './RowCard';
 import RowCardLoading from './RowCardLoading';
 import { useInView } from 'react-intersection-observer';
+import { CollectionTabSelection } from '@/pages/collection/[id]';
 
 type SelectionView = 'Row' | 'List';
 
@@ -20,7 +21,7 @@ type SelectionFilter = 'Filter' | 'Cart' | '';
 
 const LOADING_ARR = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-const MarketView = () => {
+const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const cartItems = useAppSelector((state) => state.cart.cartItems);
@@ -41,13 +42,17 @@ const MarketView = () => {
   });
 
   const _items = useMemo(() => {
-    return items.slice(0, page + 19).map((item: any) => {
+    let arr = [...items];
+    if (currentTab === 'Listed Items') {
+      arr = arr.filter((item) => item?.external_marketplace_listing?.length);
+    }
+    return arr.slice(0, page + 19).map((item: any) => {
       return {
         ...item,
         is_listed: item?.external_marketplace_listing?.length,
       };
     });
-  }, [items, page]);
+  }, [items, page, currentTab]);
 
   useEffect(() => {
     if (inView) {
@@ -66,6 +71,20 @@ const MarketView = () => {
     isRarityRanking: false,
   });
   const [refresh, setRefresh] = useState(false);
+
+  const itemCount = useMemo(() => {
+    if (currentTab === 'All Items') {
+      return getNumberWithCommas(
+        currentCollection?.nftCollectionStats?.totalSupply,
+        0,
+      );
+    } else if (currentTab === 'Listed Items') {
+      const listed = items.filter(
+        (item: any) => item?.external_marketplace_listing?.length,
+      );
+      return getNumberWithCommas(listed.length, 0);
+    }
+  }, [currentTab]);
 
   const isItemAddedToCart = (tokenAddress: string) => {
     return cartItems.find(
@@ -168,11 +187,7 @@ const MarketView = () => {
             />
           </div>
           <div className="ml-[8px] text-[#FFFFFF] text-[14px]">
-            {getNumberWithCommas(
-              currentCollection?.nftCollectionStats?.totalSupply?.length,
-              0,
-            )}{' '}
-            items
+            {itemCount} items
           </div>
           <div className="ml-auto">
             <SelectGroup

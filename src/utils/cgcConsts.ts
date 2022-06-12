@@ -19,6 +19,13 @@ export const getYourItemsRoute = (collectionName: string) => [
   { text: 'Your Items', value: 'Your Items' },
 ];
 
+export const getListedItemsRoute = (collectionName: string) => [
+  { text: 'Home', value: 'Home' },
+  { text: 'Explore', value: 'Explore/All' },
+  { text: collectionName, value: 'Collection' },
+  { text: 'Listed Items', value: 'Listed Items' },
+];
+
 export const getCollectionItemRoute = (
   collectionName: string,
   collectionItemName: string,
@@ -41,6 +48,8 @@ export function getBreadcrumbRoutes(
       return getAllItemsRoute(collectionName);
     case 'Your Items':
       return getYourItemsRoute(collectionName);
+    case 'Listed Items':
+      return getListedItemsRoute(collectionName);
     default:
       return [];
   }

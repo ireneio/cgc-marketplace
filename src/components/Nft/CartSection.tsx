@@ -28,17 +28,7 @@ const CartSection = ({
           </div>
           <div className="text-[#FFFFFF] ml-[4px] text-[12px] flex items-center">
             <div>Cart</div>
-            <div
-              className="ml-[4px] text-[#FFFFFF]"
-              // style={{
-              //   background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
-              //   backgroundClip: 'text',
-              //   WebkitBackgroundClip: 'text',
-              //   WebkitTextFillColor: 'transparent',
-              // }}
-            >
-              [{cartItems.length}]
-            </div>
+            <div className="ml-[4px] text-[#FFFFFF]">[{cartItems.length}]</div>
           </div>
         </div>
       </Button>

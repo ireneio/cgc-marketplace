@@ -135,7 +135,7 @@ const Cart = ({ onClose }: { onClose?: () => void }) => {
                   <div className="text-[#FFFFFF] text-[24px] font-semibold">
                     {getNumberWithCommas(totalPrice)}
                   </div>
-                  <div className="mt-[8px] ml-[4px]">
+                  <div className="mt-[4px] ml-[4px]">
                     <img
                       src="/img/icon_unit_sol.png"
                       alt="sol"

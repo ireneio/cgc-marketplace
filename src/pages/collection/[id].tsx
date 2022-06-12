@@ -12,10 +12,11 @@ import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
 import { LoginModal } from '@/components/Auth/LoginModal';
 
-type Selection =
+export type CollectionTabSelection =
   | 'About'
   | 'All Items'
   | 'Your Items'
+  | 'Listed Items'
   | 'Activity'
   | 'Staking'
   | '...';
@@ -30,10 +31,11 @@ const Collection = () => {
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
-  const [currentSelection, setCurrentSelection] = useState<Selection>('About');
+  const [currentSelection, setCurrentSelection] =
+    useState<CollectionTabSelection>('About');
   const [loginModalOpen, setLoginModalOpen] = useState(false);
 
-  const handleSelect = (value: Selection) => {
+  const handleSelect = (value: CollectionTabSelection) => {
     if (value === 'Your Items') {
       if (access_token) {
         router.push('/account?tab=items').then();
@@ -75,6 +77,11 @@ const Collection = () => {
       {
         text: 'Your Items',
         value: 'Your Items',
+        disabled: !metadata.slug,
+      },
+      {
+        text: 'Listed Items',
+        value: 'Listed Items',
         disabled: !metadata.slug,
       },
       { text: '...', value: '...', disabled: !metadata.slug },
@@ -126,7 +133,7 @@ const Collection = () => {
         .split('_')
         .map((item) => item[0].toUpperCase() + item.substring(1))
         .join(' ');
-      setCurrentSelection(tab as Selection);
+      setCurrentSelection(tab as CollectionTabSelection);
       router.query.tab = '';
     }
   }, [router.query]);
@@ -162,7 +169,9 @@ const Collection = () => {
           <SelectGroup
             items={selectGroupItems}
             currentValue={currentSelection}
-            onItemClick={(value) => handleSelect(value as Selection)}
+            onItemClick={(value) =>
+              handleSelect(value as CollectionTabSelection)
+            }
           />
         </div>
       </div>
@@ -170,7 +179,10 @@ const Collection = () => {
         <Divider />
       </div>
       {currentSelection === 'About' && <DetailView />}
-      {currentSelection === 'All Items' && <MarketView />}
+      {(currentSelection === 'All Items' ||
+        currentSelection === 'Listed Items') && (
+        <MarketView currentTab={currentSelection} />
+      )}
       <LoginModal
         isOpen={loginModalOpen}
         setIsOpen={setLoginModalOpen}
