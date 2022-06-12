@@ -2,9 +2,9 @@ import { useAppDispatch, useAppSelector } from '@/store';
 // import { getTrimmedAddress } from '@/utils/formatHelper';
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
-import { LoginModal } from '../Modals/LoginModal';
-import Button from './Button';
-import DropdownMenu from './DropdownMenu';
+import { LoginModal } from '../Auth/LoginModal';
+import Button from '../Shared/Button';
+import DropdownMenu from '../Shared/DropdownMenu';
 import { OAuthContext } from '@/contexts/OAuthProvider';
 
 const CatheonConnectButton = () => {

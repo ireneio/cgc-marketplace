@@ -1,6 +1,6 @@
 import Button from '../Shared/Button';
 import { motion } from 'framer-motion';
-import SolanaConnectButton from '../Shared/SolanaConnectButton';
+import SolanaConnectButton from '../Web3/SolanaConnectButton';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useEffect } from 'react';
 

@@ -10,7 +10,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { getBreadcrumbRoutes } from '@/utils/cgcConsts';
 import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
-import { LoginModal } from '@/components/Modals/LoginModal';
+import { LoginModal } from '@/components/Auth/LoginModal';
 
 type Selection =
   | 'About'

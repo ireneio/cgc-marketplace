@@ -16,7 +16,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import DetailPanel from '@/components/Nft/DetailPanel';
 import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
-import { LoginModal } from '@/components/Modals/LoginModal';
+import { LoginModal } from '@/components/Auth/LoginModal';
 
 export interface NftInfo {
   id: string | number;

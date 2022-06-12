@@ -3,15 +3,15 @@ import { Fragment, useState, useEffect, useMemo, useContext } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useAppDispatch } from '@/store';
 import { useForm, FormProvider } from 'react-hook-form';
-import Login from '../Auth/Login';
+import Login from './Login';
 // import SignupOne from '../Auth/SignupOne';
 // import SignupThree from '../Auth/SignupThree';
 import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
 import { useRouter } from 'next/router';
-import SignupOneNew from '../Auth/SignUpOneNew';
-import SignUpTwoNew from '../Auth/SignUpTwoNew';
-import SignupTwo from '../Auth/SignupTwo';
+import SignupOneNew from './SignUpOneNew';
+import SignUpTwoNew from './SignUpTwoNew';
+import SignupTwo from './SignupTwo';
 import { useWallet } from '@solana/wallet-adapter-react';
 
 type LoginModalProps = {

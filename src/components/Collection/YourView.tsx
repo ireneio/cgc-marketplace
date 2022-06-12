@@ -1,4 +1,4 @@
-import SolanaConnectButton from '../Shared/SolanaConnectButton';
+import SolanaConnectButton from '../Web3/SolanaConnectButton';
 
 const YourView = () => {
   return (
