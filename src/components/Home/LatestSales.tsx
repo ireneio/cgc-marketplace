@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import SalesCard from '../Shared/SalesCard';
+import SalesCard from './SalesCard';
 import SectionTitle from '../Shared/SectionTitle';
 
 const LatestSales = () => {
