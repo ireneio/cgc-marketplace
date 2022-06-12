@@ -79,7 +79,7 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
                   {title}
                 </div> */}
                 {/* <div className="text-[24px] text-left z-[3] absolute top-[140px] md:top-[70%] xl:top-[75%] left-[16px] md:left-[50px] text-[#FFFFFF]"> */}
-                <div className="bg-[#aaa] bg-opacity-[0.33] md:bg-none md:bg-opacity-0 px-[12px] py-[12px] drop-shadow-xl text-[18px] 2xl:text-[18px] text-left z-[3] absolute top-[140px] md:top-[70%] xl:top-[70%] left-[16px] md:left-[50px] text-[#FFFFFF]">
+                <div className="bg-[#aaa] bg-opacity-[0.33] md:bg-none md:bg-opacity-0 py-[12px] drop-shadow-xl text-[18px] 2xl:text-[18px] text-left z-[3] absolute top-[140px] md:top-[70%] xl:top-[70%] left-[16px] md:left-[50px] text-[#FFFFFF]">
                   {description}
                 </div>
                 <div className="z-[3] absolute bottom-[10%] left-[16px] md:left-[50px] text-[#FFFFFF] flex">

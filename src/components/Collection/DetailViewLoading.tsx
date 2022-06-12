@@ -4,7 +4,7 @@ const DetailViewLoading = () => {
   return (
     <div>
       <div>
-        <Skeleton className="w-full h-[90vh]" />
+        <Skeleton className="w-full h-[50vh] lg:h-[70vh]" />
       </div>
       <div className="mt-[30px] flex justify-between items-center">
         <Skeleton className="w-full h-[240px]" />
