@@ -161,7 +161,7 @@ const MyItemsView = () => {
           onItemClick={(value) => handleSidebarChange(value)}
         />
       </div>
-      <div className="lg:flex-1 lg:pl-[6px]">
+      <div className="lg:flex-1 lg:pl-[6px] w-full">
         <div className="hidden md:block">
           {!myItems.length && (
             <div className="mb-[28px] text-[#FFFFFF] rounded-[5px] text-semibold w-full border-[#290030] border-[2px] bg-[#13002B] h-[115px] flex items-center justify-center">
