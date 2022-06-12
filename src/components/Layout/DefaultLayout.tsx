@@ -206,6 +206,7 @@ const DefaultLayout = ({ children, title }: Props) => {
           </motion.div>
           {sideBarOpen && (
             <div
+              aria-label="sidebar_mask"
               className="z-[99999] w-[100vw] h-[100vh] absolute top-0 bg-[#000000] opacity-70"
               onClick={() => setSideBarOpen(false)}
             ></div>

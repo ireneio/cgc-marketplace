@@ -31,12 +31,22 @@ const HeaderMobile = ({
           />
         </div>
         <div className="ml-auto pl-[24px]" onClick={() => handleOpenNav()}>
-          <img
-            className="block h-8 w-auto -rotate-90"
-            src={navOpen ? '/img/icon_close.png' : '/img/icon_signal.svg'}
-            alt="close"
-            width={20}
-          />
+          {!navOpen && (
+            <img
+              className="block h-8 w-auto -rotate-90"
+              src={'/img/icon_signal.svg'}
+              alt="signal"
+              width={20}
+            />
+          )}
+          {navOpen && (
+            <img
+              className="block h-8 w-auto -rotate-90 ml-[12px] mr-[-8px]"
+              src={'/img/icon_close.png'}
+              alt="close"
+              width={32}
+            />
+          )}
         </div>
       </div>
     </div>
