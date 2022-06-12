@@ -53,7 +53,7 @@ const CollectionCarousel = ({ carouselItems }: { carouselItems: Item[] }) => {
               <div
                 key={id + dayjs().toISOString()}
                 onClick={() => handleCarouselItemClick({ href })}
-                className="relative rounded-[5px] h-[70vh]"
+                className="relative rounded-[5px] h-[50vh] lg:h-[70vh]"
               >
                 <div
                   className="absolute w-full h-full z-[2] opacity-[.62] rounded-[5px]"
@@ -66,17 +66,17 @@ const CollectionCarousel = ({ carouselItems }: { carouselItems: Item[] }) => {
                     <source src={imageUrl} type="video/mp4" />
                   </video>
                 </div>
-                <div className="z-[3] absolute bottom-[40%] left-[16px] md:left-[50px] font-bold text-[32px]">
+                <div className="z-[3] absolute bottom-[220px] lg:bottom-[40%] left-[16px] md:left-[50px] font-bold text-[32px]">
                   <img
                     src={logo}
-                    className="h-[100px] w-[400px] bg-transparent aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 aspect-none hover:cursor-pointer"
+                    className="h-[60px] 2xl:h-[80px] max-w-[80vw] bg-transparent aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 aspect-none hover:cursor-pointer"
                     alt={name}
                   />
                 </div>
-                <div className="hidden md:block text-left z-[3] absolute bottom-[30%] left-[16px] md:left-[50px] text-[#FFFFFF] text-xl">
-                  {description}
+                <div className="block text-left z-[3] absolute bottom-[100px] md:bottom-[160px] lg:bottom-[30%] left-[16px] md:left-[50px] text-[#FFFFFF] text-xl">
+                  {description.slice(0, 201)}
                 </div>
-                <div className="z-[3] absolute bottom-[17.5%] left-[16px] md:left-[50px] text-[#FFFFFF] flex">
+                <div className="z-[3] absolute bottom-[12px] lg:bottom-[17.5%] left-[16px] md:left-[50px] text-[#FFFFFF] flex">
                   <Button onClick={() => handlePlay(name)}>Play</Button>
                 </div>
               </div>

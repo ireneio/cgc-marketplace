@@ -21,6 +21,7 @@ interface Props {
   currentHoverId?: string;
   logo?: string;
   isFloatRight?: boolean;
+  isDefaultFloating?: boolean;
 }
 
 const FloatingCard = ({
@@ -40,6 +41,7 @@ const FloatingCard = ({
   onMouseLeave,
   logo,
   isFloatRight,
+  isDefaultFloating,
 }: Props) => {
   const handleMouseOver = () => {
     onMouseOver && onMouseOver(id);
@@ -50,8 +52,13 @@ const FloatingCard = ({
   };
 
   return (
-    <div className="w-full h-[196px]">
-      {currentHoverId !== id && (
+    <div
+      className="w-full"
+      style={{
+        height: isDefaultFloating ? 370 : 196,
+      }}
+    >
+      {currentHoverId !== id && !isDefaultFloating && (
         <div
           className="bg-[#290030] cursor-pointer rounded-[5px] align-middle transition-all drop-shadow-xl"
           onMouseOver={() => handleMouseOver()}
@@ -67,18 +74,29 @@ const FloatingCard = ({
           />
         </div>
       )}
-      {currentHoverId === id && (
+      {(currentHoverId === id || isDefaultFloating) && (
         <motion.div
-          initial={{ opacity: 0, x: '10px', y: '-100px' }}
+          initial={{
+            opacity: 0,
+            x: isDefaultFloating ? 0 : '10px',
+            y: isDefaultFloating ? 0 : '-100px',
+          }}
           animate={{
             opacity: 1,
-            x: isFloatRight ? '0px' : '-25px',
-            y: '-100px',
+            x: isDefaultFloating ? 0 : isFloatRight ? '0px' : '-25px',
+            y: isDefaultFloating ? 0 : '-100px',
           }}
           className="bg-[#13002B] rounded-[5px] cursor-pointer absolute z-[100]"
           onMouseLeave={() => handleMouseOut()}
+          style={{ position: isDefaultFloating ? 'static' : 'absolute' }}
         >
-          <div className="w-[370px] h-[370px] absolute border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden">
+          <div
+            style={{
+              width: isDefaultFloating ? 'auto' : 370,
+              height: isDefaultFloating ? 'auto' : 370,
+            }}
+            className="absolute border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden"
+          >
             <div className="relative flex items-start justify-center">
               {/* gif */}
               {/* <div
@@ -88,8 +106,14 @@ const FloatingCard = ({
                 }}
               ></div> */}
               {/* video */}
-              <div className="relative w-[360px] min-h-[170px]">
-                <video muted width={360} autoPlay>
+              <div
+                className="relative min-h-[170px]"
+                style={{
+                  width: isDefaultFloating ? '90vw' : 370,
+                  minHeight: isDefaultFloating ? 199 : 170,
+                }}
+              >
+                <video muted height={199} autoPlay>
                   <source src={bgOnHover} type="video/mp4" />
                 </video>
                 <div className="absolute bottom-[8px] left-[8px]">
@@ -97,7 +121,10 @@ const FloatingCard = ({
                 </div>
               </div>
             </div>
-            <div className="bg-[#13002B] pt-[20px] pb-[24px]">
+            <div
+              className="bg-[#13002B] pt-[20px] pb-[24px]"
+              style={{ height: isDefaultFloating ? 170 : '' }}
+            >
               <div className="px-[12px] py-[0px]">
                 <div className="font-normal text-[#FFFFFF] text-[14px]">
                   {title.length > 75 ? title.slice(0, 75) + '...' : title}

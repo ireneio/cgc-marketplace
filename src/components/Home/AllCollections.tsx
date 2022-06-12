@@ -8,6 +8,7 @@ import { OAuthContext } from '@/contexts/OAuthProvider';
 import api from '@/utils/api';
 import FloatingCard from './FloatingCard';
 import { useRouter } from 'next/router';
+import { useWindowWidth } from '@/hooks/window';
 
 const AllCollections = () => {
   const router = useRouter();
@@ -16,6 +17,7 @@ const AllCollections = () => {
   const collections = useAppSelector((state) => state.collection.collections);
   const oAuthCtx = useContext(OAuthContext);
   const [loading, setLoading] = useState(true);
+  const windowWidth = useWindowWidth();
 
   const getCollections = async () => {
     const response = await api.getCollectionList(oAuthCtx.access_token);
@@ -73,7 +75,7 @@ const AllCollections = () => {
       <div className="hide-scrollbar">
         {!loading && (
           <div className="mt-[24px]">
-            <div className="grid gap-[12px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cold-6 auto-rows-auto">
+            <div className="grid gap-[12px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cold-6">
               {collections.map((collection: any, index) => {
                 return (
                   <div
@@ -81,6 +83,7 @@ const AllCollections = () => {
                     onClick={() => handleGoDetail(collection.slug)}
                   >
                     <FloatingCard
+                      isDefaultFloating={windowWidth < 768}
                       isFloatRight={false}
                       logo={collection.logoSrc}
                       currentHoverId={currentHoverId}

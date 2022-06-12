@@ -68,7 +68,7 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
                   className="bg-cover w-full h-[50vh] md:h-[80vh] bg-[#181818] aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 hover:cursor-pointer object-cover"
                   alt={name}
                 />
-                <div className="z-[3] absolute top-[24px] md:top-[55%] left-[16px] md:left-[50px] font-bold text-[32px]">
+                <div className="z-[3] absolute max-w-[60vw] md:w-auto top-[12px] md:top-[55%] left-[12px] md:left-[50px] font-bold text-[32px]">
                   <img
                     src={logo}
                     className="md:h-[84px] h-[42px] bg-transparent aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 aspect-none hover:cursor-pointer"
@@ -79,7 +79,7 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
                   {title}
                 </div> */}
                 {/* <div className="text-[24px] text-left z-[3] absolute top-[140px] md:top-[70%] xl:top-[75%] left-[16px] md:left-[50px] text-[#FFFFFF]"> */}
-                <div className="px-[12px] drop-shadow-xl text-[18px] 2xl:text-[32px] text-left z-[3] absolute top-[140px] md:top-[70%] xl:top-[70%] left-[16px] md:left-[50px] text-[#FFFFFF]">
+                <div className="bg-[#aaa] bg-opacity-[0.33] md:bg-none md:bg-opacity-0 px-[12px] py-[12px] drop-shadow-xl text-[18px] 2xl:text-[32px] text-left z-[3] absolute top-[140px] md:top-[70%] xl:top-[70%] left-[16px] md:left-[50px] text-[#FFFFFF]">
                   {description}
                 </div>
                 <div className="z-[3] absolute bottom-[10%] left-[16px] md:left-[50px] text-[#FFFFFF] flex">

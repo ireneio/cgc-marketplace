@@ -156,7 +156,7 @@ const Collection = () => {
         <div className="basis-[100%] md:basis-[50%] text-[#FFFFFF] font-bold text-[24px]">
           {metadata.name}
         </div>
-        <div className="basis-[100%] md:basis-auto mt-[12px] md:mt-0">
+        <div className="basis-[100%] md:basis-auto mt-[12px] lg:mt-0">
           <SelectGroup
             items={selectGroupItems}
             currentValue={currentSelection}
