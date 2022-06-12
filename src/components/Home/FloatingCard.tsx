@@ -127,7 +127,7 @@ const FloatingCard = ({
             >
               <div className="px-[12px] py-[0px]">
                 <div className="font-normal text-[#FFFFFF] text-[14px]">
-                  {title.length > 75 ? title.slice(0, 75) + '...' : title}
+                  {title?.length > 75 ? title?.slice(0, 75) + '...' : title}
                 </div>
                 <div className="w-full absolute bottom-[48px] flex justify-between items-center pr-[24px]">
                   <div
