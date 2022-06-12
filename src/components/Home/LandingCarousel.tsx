@@ -71,7 +71,7 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
                 <div className="z-[3] absolute max-w-[60vw] md:w-auto top-[12px] md:top-[55%] left-[12px] md:left-[50px] font-bold text-[32px]">
                   <img
                     src={logo}
-                    className="md:h-[84px] h-[42px] bg-transparent aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 aspect-none hover:cursor-pointer"
+                    className="bg-contain md:h-[84px] h-[42px] bg-transparent aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 aspect-none hover:cursor-pointer"
                     alt={name}
                   />
                 </div>
