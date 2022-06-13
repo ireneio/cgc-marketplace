@@ -8,10 +8,10 @@ export function getNumberWithCommas(val: string | number, decimals?: number) {
   //   return result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   // }
   // return '0';
-
   return Number(val)
+    .toString()
     .toFixed(decimals || 2)
-    .toLocaleString();
+    .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
 }
 
 type UnitTypes = 'usd' | 'bnb' | '%' | 'orbs' | 'sol';
