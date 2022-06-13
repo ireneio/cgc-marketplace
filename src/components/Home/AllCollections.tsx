@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useContext, useEffect, useState } from 'react';
 import ButtonLink from '../Shared/ButtonLink';
-import LoadingNetflixCard from './FloatingCardLoading';
+import FloatingCardLoading from './FloatingCardLoading';
 import SectionTitle from '../Shared/SectionTitle';
 import Divider from '@/components/Shared/Divider';
 import { OAuthContext } from '@/contexts/OAuthProvider';
@@ -111,10 +111,10 @@ const AllCollections = () => {
         )}
         {loading && (
           <div className="mt-[24px] grid gap-[12px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cold-6 auto-rows-auto">
-            {[0, 1, 2, 3, 4, 5].map((game, index) => {
+            {[0, 1, 2].map((game, index) => {
               return (
                 <div key={index}>
-                  <LoadingNetflixCard />
+                  <FloatingCardLoading />
                 </div>
               );
             })}
