@@ -1,8 +1,10 @@
 import { OAuthContext } from '@/contexts/OAuthProvider';
+import { useAppDispatch } from '@/store';
 import api from '@/utils/api';
 import { useContext, useEffect, useState } from 'react';
 
 export const useGetCollections = () => {
+  const dispatch = useAppDispatch();
   const oAuthCtx = useContext(OAuthContext);
   const [items, setItems] = useState<any[]>([]);
 
@@ -17,11 +19,15 @@ export const useGetCollections = () => {
         name: item.metadata.name,
         slug: item.metadata.name.toLowerCase().split(' ').join(''),
         tags: item.tags.length ? item.tags.map((item: any) => item.tag) : [],
-        genre: Object.entries(item.metadata.genre).map(([, value]) => value),
+        genre: [item.metadata.genre, ...item.tags.slice(0, 2)],
         services: item.services,
         description: item.metadata.description,
+        totalSupply: item?.nftCollectionStats?.totalSupply || null,
+        marketCap: item?.nftCollectionStats?.usdMarketCap || null,
+        network: 'SOL',
       };
     });
+    dispatch({ type: 'SET_COLLECTIONS', payload: map });
     setItems(map);
   };
 
@@ -35,7 +41,43 @@ export const useGetCollections = () => {
   };
 };
 
+export const useGetCollectionsBySlug = ({ slug }: { slug: string }) => {
+  const dispatch = useAppDispatch();
+  const oAuthCtx = useContext(OAuthContext);
+  const [items, setItems] = useState<any[]>([]);
+
+  const getCollectionData = async () => {
+    const response = await api.getCollectionBySlug(
+      oAuthCtx.access_token,
+      slug.split('_').join('_'),
+    );
+    if (response) {
+      dispatch({
+        type: 'SET_CURRENT_COLLECTION',
+        payload: {
+          ...response,
+          metadata: {
+            ...response.metadata,
+            slug: response.metadata.name.toLowerCase().split(' ').join('_'),
+            id: response.id,
+          },
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    getCollectionData().then();
+  }, []);
+
+  return {
+    refresh: getCollectionData,
+    data: items,
+  };
+};
+
 export const useGetNftByCollectionId = () => {
+  const dispatch = useAppDispatch();
   const oAuthCtx = useContext(OAuthContext);
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState<any[]>([]);
@@ -43,6 +85,12 @@ export const useGetNftByCollectionId = () => {
   const getData = (token: string) => async (collection_id: string) => {
     setLoading(true);
     const response = await api.getNftListByCollectionId(token, collection_id);
+    if (response?.data) {
+      dispatch({
+        type: 'SET_CURRENT_COLLECTION_TOKEN_DATA',
+        payload: response?.data,
+      });
+    }
     const map = response.map((item: any) => {
       const manifest = item?.splNftInfo?.data?.manifest;
       return {
@@ -54,8 +102,13 @@ export const useGetNftByCollectionId = () => {
         collection_id: item?.collections[0]?.id,
         is_listed: item?.external_marketplace_listing?.length,
         external_marketplace_listing: item?.external_marketplace_listing,
+        external_marketplace_listing_logo: item?.external_marketplace_listing
+          .length
+          ? item?.external_marketplace_listing[0]?.logoSrcUrl
+          : '',
       };
     });
+
     setItems(map);
     setLoading(false);
   };
@@ -68,5 +121,6 @@ export const useGetNftByCollectionId = () => {
     getData: getData(oAuthCtx.access_token),
     data: items,
     loading,
+    refresh: getData(oAuthCtx.access_token),
   };
 };

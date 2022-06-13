@@ -15,6 +15,7 @@ import RowCardLoading from './RowCardLoading';
 import { useInView } from 'react-intersection-observer';
 import { CollectionTabSelection } from '@/pages/collection/[id]';
 import { useCart } from '@/hooks/cart';
+import { useGetNftByCollectionId } from '@/hooks/collections';
 
 type SelectionView = 'Row' | 'List';
 
@@ -42,9 +43,10 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
     threshold: 0,
   });
   const { handleAddToCart, isItemAddedToCart } = useCart();
+  const { getData, data, loading } = useGetNftByCollectionId();
 
   const _items = useMemo(() => {
-    let arr = [...items];
+    let arr = [...data];
     if (currentTab === 'Listed Items') {
       arr = arr.filter((item) => item?.external_marketplace_listing?.length);
     }
@@ -54,7 +56,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
         is_listed: item?.external_marketplace_listing?.length,
       };
     });
-  }, [items, page, currentTab]);
+  }, [data, page, currentTab]);
 
   useEffect(() => {
     if (inView) {
@@ -62,7 +64,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
     }
   }, [inView]);
 
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [, setFilters] = useState({
     rankMin: '',
     rankMax: '',
@@ -100,56 +102,9 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
     router.push(`/nft/${hash}`).then();
   };
 
-  const getData = async () => {
-    const response = await api.getNftListByCollectionId(
-      oAuthCtx.access_token,
-      metadata.slug,
-    );
-    const map =
-      response && response.length
-        ? response
-            .map((item: any) => {
-              const manifest = item?.splNftInfo?.data?.manifest;
-              return {
-                // default image
-                image: manifest?.image || '/img/cgc_icon.png',
-                brand: manifest?.collection?.name,
-                name: manifest?.name,
-                price: 0,
-                tokenAddress: item?.tokenAddress,
-                id: item?.id,
-                is_listed: item?.external_marketplace_listing?.length,
-                external_marketplace_listing:
-                  item?.external_marketplace_listing || [],
-                external_marketplace_listing_logo: item
-                  ?.external_marketplace_listing.length
-                  ? item?.external_marketplace_listing[0]?.logoSrcUrl
-                  : '',
-              };
-            })
-            .sort((a: any, b: any) => {
-              return (
-                b.external_marketplace_listing.length -
-                a.external_marketplace_listing.length
-              );
-            })
-        : [];
-    return map;
-  };
-
-  const initData = async () => {
-    setLoading(true);
-    const nfts = await getData();
-    setItems(nfts);
-    const tid = setTimeout(() => {
-      setLoading(false);
-      clearTimeout(tid);
-    }, 800);
-  };
-
   useEffect(() => {
     if (metadata.slug) {
-      initData();
+      getData(metadata.slug);
     }
   }, [metadata, refresh]);
 

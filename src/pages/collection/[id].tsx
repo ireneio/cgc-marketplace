@@ -11,6 +11,10 @@ import { getBreadcrumbRoutes } from '@/utils/cgcConsts';
 import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
 import { LoginModal } from '@/components/Auth/LoginModal';
+import {
+  useGetCollectionsBySlug,
+  useGetNftByCollectionId,
+} from '@/hooks/collections';
 
 export type CollectionTabSelection =
   | 'About'
@@ -34,6 +38,10 @@ const Collection = () => {
   const [currentSelection, setCurrentSelection] =
     useState<CollectionTabSelection>('About');
   const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const { data: nfts, loading } = useGetNftByCollectionId();
+  const { data: collections, refresh } = useGetCollectionsBySlug({
+    slug: String(router.query.id),
+  });
 
   const handleSelect = (value: CollectionTabSelection) => {
     if (value === 'Your Items') {
@@ -87,45 +95,6 @@ const Collection = () => {
       { text: '...', value: '...', disabled: !metadata.slug },
     ];
   }, [metadata]);
-
-  const getCollectionData = async () => {
-    const response = await api.getCollectionBySlug(
-      oAuthCtx.access_token,
-      String(router.query.id).split('_').join('_'),
-    );
-    if (response) {
-      dispatch({
-        type: 'SET_CURRENT_COLLECTION',
-        payload: {
-          ...response,
-          metadata: {
-            ...response.metadata,
-            slug: response.metadata.name.toLowerCase().split(' ').join('_'),
-            id: response.id,
-          },
-        },
-      });
-    }
-  };
-
-  const getTokenData = async () => {
-    const response = await api.getTokenListByCollectionId(
-      oAuthCtx.access_token,
-      String(router.query.id),
-    );
-    if (response?.data) {
-      dispatch({
-        type: 'SET_CURRENT_COLLECTION_TOKEN_DATA',
-        payload: response?.data,
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (router.query.id) {
-      Promise.all([getCollectionData(), getTokenData()]).then();
-    }
-  }, [router.query.id]);
 
   useEffect(() => {
     if (router.query.tab) {
