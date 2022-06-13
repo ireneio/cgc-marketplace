@@ -30,11 +30,11 @@ const AllCollections = () => {
         name: item.metadata.name,
         slug: item.metadata.name.toLowerCase().split(' ').join('_'),
         tags: item.tags.length ? item.tags.map((item: any) => item.tag) : [],
-        genre: [item.metadata.genre],
+        genre: [item.metadata.genre, ...item.tags.slice(0, 2)],
         services: item.services,
         description: item.metadata.description,
-        totalSupply: item?.nftCollectionStats?.totalSupply,
-        marketCap: item?.nftCollectionStats?.usdMarketCap,
+        totalSupply: item?.nftCollectionStats?.totalSupply || null,
+        marketCap: item?.nftCollectionStats?.usdMarketCap || null,
         network: 'SOL',
       };
     });

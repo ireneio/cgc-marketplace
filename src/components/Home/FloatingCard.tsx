@@ -141,7 +141,7 @@ const FloatingCard = ({
                 </div>
                 <div className="w-full absolute bottom-[48px] flex justify-between items-center pr-[24px]">
                   <div
-                    className="text-[#FFFFFF] text-[12px] uppercase flex items-center pr-[12px] flex-wrap"
+                    className="text-[#FFFFFF] text-[12px] flex items-center pr-[12px] flex-wrap"
                     style={{ flexBasis: '70%' }}
                   >
                     {categories && categories.length ? (
@@ -151,7 +151,7 @@ const FloatingCard = ({
                             key={index}
                             className="text-[12px] flex items-center"
                           >
-                            {category}
+                            {String(category).toLowerCase()}
                             {index !== categories.length - 1 && (
                               <span className="ml-[4px] mr-[4px] text-[#aaa] text-[12px]">
                                 •
@@ -182,18 +182,22 @@ const FloatingCard = ({
                     <div className="text-[#FC1F8E] ml-[3px]">{network}</div>
                   </div>
                 )}
-                <div className="text-[10px] flex items-center">
-                  <div className="text-[#9497AA]">M Cap:</div>
-                  <div className="text-[#FC1F8E] ml-[3px]">
-                    {getNumberWithCommas(Number(marketCap), 2)}
+                {marketCap !== null && (
+                  <div className="text-[10px] flex items-center">
+                    <div className="text-[#9497AA]">M Cap:</div>
+                    <div className="text-[#FC1F8E] ml-[3px]">
+                      {getNumberWithCommas(Number(marketCap), 2)}
+                    </div>
                   </div>
-                </div>
-                <div className="text-[10px] flex items-center">
-                  <div className="text-[#9497AA]">C Supply:</div>
-                  <div className="text-[#FC1F8E] ml-[3px]">
-                    {getNumberWithCommas(Number(coinSupply), 2)}
+                )}
+                {coinSupply !== null && (
+                  <div className="text-[10px] flex items-center">
+                    <div className="text-[#9497AA]">C Supply:</div>
+                    <div className="text-[#FC1F8E] ml-[3px]">
+                      {getNumberWithCommas(Number(coinSupply), 2)}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
