@@ -1,14 +1,12 @@
-import { OAuthContext } from '@/contexts/OAuthProvider';
 import { useAppDispatch, useAppSelector } from '@/store';
-import api from '@/utils/api';
 import { getNumberWithCommas } from '@/utils/formatHelper';
 import { useRouter } from 'next/router';
-import { useState, useEffect, useContext, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import DropdownMenu from '../Shared/DropdownMenu';
 import SelectGroup from '../Shared/SelectGroup';
 import Cart from './Cart';
 import Filter from './Filter';
-import ListCard, { Attr } from './ListCard';
+import ListCard from './ListCard';
 import ListCardLoading from './ListCardLoading';
 import RowCard from './RowCard';
 import RowCardLoading from './RowCardLoading';
@@ -33,7 +31,6 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
   const currentCollection = useAppSelector(
     (state) => state.collection.currentCollection,
   );
-  const oAuthCtx = useContext(OAuthContext);
   const [currentView, setCurrentView] = useState<SelectionView>('List');
   const [currentFilter, setCurrentFilter] = useState<SelectionFilter>('');
   const [items, setItems] = useState<any>([]);
@@ -78,6 +75,9 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
 
   const itemCount = useMemo(() => {
     if (currentTab === 'All Items') {
+      if (!currentCollection?.nftCollectionStats?.totalSupply) {
+        return 0;
+      }
       return getNumberWithCommas(
         currentCollection?.nftCollectionStats?.totalSupply,
         0,

@@ -1,22 +1,14 @@
 import { useWindowHeight, useWindowWidth } from '@/hooks/window';
+import { SIDE_BAR_ITEMS } from '@/utils/cgcConsts';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-
-interface SidebarItem {
-  text: string;
-  value: string;
-  disabled?: boolean;
-  icon?: string;
-  children?: SidebarItem[];
-}
 interface Props {
-  items: SidebarItem[];
   onItemClick?: (value: string) => void | Promise<void>;
   rootClassName?: string;
 }
 
-const Sidebar = ({ items, onItemClick, rootClassName }: Props) => {
+const Sidebar = ({ onItemClick, rootClassName }: Props) => {
   const router = useRouter();
   const windowWidth = useWindowWidth();
   const windiwHeight = useWindowHeight();
@@ -39,7 +31,7 @@ const Sidebar = ({ items, onItemClick, rootClassName }: Props) => {
             : Number(windiwHeight) - 120 - 366,
       }}
     >
-      {items.map((item) => {
+      {SIDE_BAR_ITEMS.map((item) => {
         const isSelectedParent = currentValue === item.value;
         return (
           <div

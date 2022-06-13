@@ -100,7 +100,15 @@ export function classNames(...classes: string[]) {
 
 export const BASE_SIDEBAR_PATH = 'Home';
 
-export const SIDE_BAR_ITEMS = [
+interface SideBarItem {
+  text: string;
+  value: string;
+  icon?: string;
+  children?: SideBarItem[];
+  disabled?: boolean;
+}
+
+export const SIDE_BAR_ITEMS: SideBarItem[] = [
   {
     text: 'Home',
     value: '/',

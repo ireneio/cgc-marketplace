@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Footer from './Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -10,7 +10,6 @@ import dynamic from 'next/dynamic';
 import { useWindowWidth } from '@/hooks/window';
 import HeaderMobile from './HeaderMobile';
 import { motion } from 'framer-motion';
-import { SIDE_BAR_ITEMS } from '@/utils/cgcConsts';
 
 interface Props {
   children?: React.ReactNode;
@@ -42,31 +41,6 @@ const DefaultLayout = ({ children, title }: Props) => {
       router.push(val);
     }
   };
-
-  // useEffect(() => {
-  //   let isPathValid = false;
-  //   let resultPath = '';
-  //   const savedPath = window.localStorage.getItem(SIDEBAR_PATH_STORAGE_KEY);
-  //   if (savedPath) {
-  //     const _path = JSON.parse(savedPath);
-  //     resultPath = _path;
-  //     const _arr = _path.split('/');
-  //     const _f = SIDE_BAR_ITEMS.find((item) => item.value === _arr[0]);
-  //     if (_f && _arr.length > 1 && _f.children && _f.children.length) {
-  //       const _fChild = _f.children?.find((item) => item.value === _arr[1]);
-  //       if (_fChild) {
-  //         isPathValid = true;
-  //       }
-  //     } else {
-  //       isPathValid = true;
-  //     }
-  //   }
-  //   if (isPathValid) {
-  //     // TODO
-  //     // dispatch({ type: 'SET_NAVIGATION_PATH', payload: resultPath });
-  //     // handleSideBarPathUpdate(resultPath);
-  //   }
-  // }, []);
 
   return (
     <>
@@ -133,11 +107,7 @@ const DefaultLayout = ({ children, title }: Props) => {
             className="fixed top-[75px] w-[225px] flex-shrink-0 z-[100]"
             style={{ display: windowWidth < 768 ? 'none' : 'block' }}
           >
-            <Sidebar
-              items={SIDE_BAR_ITEMS}
-              // currentValue={sideBarPath}
-              onItemClick={(value) => handleSideBarPathUpdate(value)}
-            />
+            <Sidebar onItemClick={(value) => handleSideBarPathUpdate(value)} />
           </div>
           <motion.div
             variants={sidebarAnimationVariants}
@@ -146,8 +116,6 @@ const DefaultLayout = ({ children, title }: Props) => {
             style={{ display: windowWidth < 768 ? 'block' : 'none' }}
           >
             <Sidebar
-              items={SIDE_BAR_ITEMS}
-              // currentValue={router.pathname}
               onItemClick={(value) => handleSideBarPathUpdate(value)}
               rootClassName={'static bg-[#13002B] w-[70vw] h-inherit'}
             />
