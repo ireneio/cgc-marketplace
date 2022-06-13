@@ -1,4 +1,4 @@
-import SolanaConnectButton from '../Shared/SolanaConnectButton';
+import SolanaConnectButton from '../Web3/SolanaConnectButton';
 
 const YourView = () => {
   return (
@@ -6,7 +6,7 @@ const YourView = () => {
       <div className="text-[#FFFFFF]">
         Please connect your wallet to view your items.
       </div>
-      <div className="mt-[32px]">
+      <div className="mt-[24px]">
         <SolanaConnectButton />
       </div>
     </div>

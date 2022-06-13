@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import Button from '../Shared/Button';
 import { motion } from 'framer-motion';
-import PrimaryGradientText from '../Shared/PrimaryGradientText';
+import PrimaryGradientText from '../Catheon/PrimaryGradientText';
 import FormInput from './FormInput';
 
 const Login = ({

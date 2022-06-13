@@ -3,7 +3,7 @@ import Tag from '../Shared/Tag';
 
 const DetailPanel = ({ info }: { info: NftInfo }) => {
   return (
-    <Tag className="px-[28px] py-[24px]">
+    <Tag className="px-[24px] py-[24px]">
       <div>
         <div className="mt-[24px] text-[#FFFFFF] text-[14px]">
           {info.description}

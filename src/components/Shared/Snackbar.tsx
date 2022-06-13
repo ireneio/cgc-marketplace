@@ -22,6 +22,7 @@ const Snackbar = ({
           className="fixed top-[30px] left-[50%] z-[100]"
           animate={{ y: 0 }}
           initial={{ y: -1000, x: '-50%' }}
+          transition={{ duration: 0.25, type: 'spring' }}
         >
           <div className="bg-transparent text-center py-4 lg:px-4">
             <div

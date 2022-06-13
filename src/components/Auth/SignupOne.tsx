@@ -11,7 +11,7 @@ const SignupOne = ({
   onCancel: () => void;
 }) => {
   const { register, watch } = useFormContext();
-  const username = watch('username');
+  // const username = watch('username');
   const email = watch('email');
 
   return (
@@ -43,10 +43,7 @@ const SignupOne = ({
         </div>
       </div>
       <div className="mt-3 px-[24px] pb-[24px]">
-        <Button
-          onClick={() => onNextStep()}
-          disabled={username === '' || email === ''}
-        >
+        <Button onClick={() => onNextStep()} disabled={email === ''}>
           Next
         </Button>
         <div className="mt-[24px]">

@@ -16,20 +16,30 @@ const api = {
       },
     });
   },
-  register: async (email: string, password: string) => {
+  register: async ({
+    email,
+    password,
+    walletAddress,
+  }: {
+    email: string;
+    password: string;
+    walletAddress: string;
+  }) => {
     const response = await fetcher({
-      url: '/api/user',
+      url: '/api/user/register',
       method: 'post',
       data: {
         email,
         password,
+        walletAddress,
       },
     });
+
     return response;
   },
   getCollectionList: async (token: string) => {
     const response = await fetcher({
-      url: '/api/collection/list?latest',
+      url: '/api/collection/list',
       method: 'get',
       headers: {
         authorization: `Bearer ${token}`,
@@ -48,18 +58,37 @@ const api = {
     return response.data;
   },
   getTokenListByCollectionId: async (token: string, slug: string) => {
-    const response = await fetcher({
+    return await fetcher({
       url: `/api/token/list?slug=${slug}`,
       method: 'get',
       headers: {
         authorization: `Bearer ${token}`,
       },
     });
-    return response;
   },
   getNftListByCollectionId: async (token: string, slug: string) => {
     const response = await fetcher({
       url: `/api/nft/list?slug=${slug}`,
+      method: 'get',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  },
+  getNftListByHash: async (token: string, hash: string) => {
+    const response = await fetcher({
+      url: `/api/nft?hash=${hash}`,
+      method: 'get',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  },
+  getTokenList: async (token: string) => {
+    const response = await fetcher({
+      url: `/api/token/list`,
       method: 'get',
       headers: {
         authorization: `Bearer ${token}`,

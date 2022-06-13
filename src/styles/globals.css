@@ -25,10 +25,13 @@
 
 html {
   padding-right: 0 !important;
+  height: 100%;
+  overflow: auto;
 }
 
 body {
   font-family: 'CircularStd-Book', sans-serif !important;
+  height: 100%;
 }
 
 .wallet-solana>.wallet-adapter-button {
@@ -66,35 +69,6 @@ body {
   /* IE and Edge */
   scrollbar-width: none;
   /* Firefox */
-}
-
-.floating-card-wrapper {
-  display: flex;
-  overflow-x: auto;
-}
-
-.floating-card-wrapper .bg-img {
-  background-size: cover;
-  background-position: center center;
-  transition: background-size 1.4s;
-  background-repeat: no-repeat;
-  background-color: #13002b;
-}
-
-.floating-card-wrapper li {
-  vertical-align: middle;
-  transition-duration: 0.1s;
-  cursor: pointer;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.75);
-  /* position: absolute; */
-  z-index: 10000;
-  position: relative;
-}
-
-.floating-card-wrapper .content {
-  width: 100%;
-  padding: 10px 10px 10px 10px;
-  background-color: #13002b;
 }
 
 .switch-input {
@@ -142,6 +116,10 @@ body {
   left: 21px;
 }
 
+.scollbar_thin {
+  scrollbar-width: thin;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 3px;
@@ -150,17 +128,17 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #FFFFFF;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: rgb(41, 0, 48);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #FC1F8E;
 }
 
 .slick-list {
@@ -200,4 +178,19 @@ body {
   width: 177.77777778vh;
   min-width: 100%;
   min-height: 56.25vw;
+}
+
+.custom_select>option {
+  color: #FFFFFF;
+}
+
+.force_card_height {
+  width: 205px;
+  height: 205px;
+}
+
+.no_line_break {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

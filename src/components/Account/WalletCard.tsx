@@ -31,7 +31,12 @@ const WalletCard = ({
           onClick={() => onEditClick()}
           data-tip="Disconnect"
         >
-          <img src="/img/icon_edit.png" alt="edit" width={14} height={14} />
+          <img
+            src="/img/icon_edit_purple.svg"
+            alt="edit"
+            width={14}
+            height={14}
+          />
         </div>
         <div className="flex text-[#9497AA] items-center mt-[29px] text-[12px]">
           <div>Connected</div>

@@ -1,8 +1,12 @@
-import { getNumberWithCommas, getTrimmedAddress } from '@/utils/formatHelper';
+import {
+  getNumberWithCommas,
+  getTrimmedAddressEllipsisMiddle,
+} from '@/utils/formatHelper';
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
 import DefaultTable from '../Shared/DefaultTable';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import ClipboardText from '../Shared/ClipboardText';
 
 dayjs.extend(relativeTime);
 interface Props {
@@ -13,9 +17,10 @@ interface Props {
     | Record<string, any>[][]
     | any[][];
   headers: string[] | number[] | React.ReactNode[];
+  loading?: boolean;
 }
 
-const TransactionTable = ({ rows, headers }: Props) => {
+const TransactionTable = ({ rows, headers, loading }: Props) => {
   const _headers = useMemo(() => {
     return headers.map((header, index) => {
       return (
@@ -56,13 +61,17 @@ const TransactionTable = ({ rows, headers }: Props) => {
         } else if (colIndex === 1) {
           return (
             <div
-              key={colIndex}
               className="text-[#FC1F8E] text-[14px] px-[10px] py-[12px]"
+              key={colIndex}
               style={{
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
             >
-              {getTrimmedAddress(String(col), { length: 12 })}
+              <ClipboardText copyValue={String(col)}>
+                <div className="w-[150px]">
+                  {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
+                </div>
+              </ClipboardText>
             </div>
           );
         } else if (colIndex === 2) {
@@ -74,7 +83,7 @@ const TransactionTable = ({ rows, headers }: Props) => {
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
             >
-              {dayjs(String(col)).fromNow()}
+              {dayjs(Number(col) * 1000).fromNow()}
             </div>
           );
         } else if (colIndex === 3) {
@@ -86,7 +95,11 @@ const TransactionTable = ({ rows, headers }: Props) => {
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
             >
-              {getTrimmedAddress(String(col), { length: 12 })}
+              <ClipboardText copyValue={String(col)}>
+                <div className="w-[150px]">
+                  {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
+                </div>
+              </ClipboardText>
             </div>
           );
         } else if (colIndex === 4) {
@@ -98,7 +111,11 @@ const TransactionTable = ({ rows, headers }: Props) => {
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
             >
-              {getTrimmedAddress(String(col), { length: 12 })}
+              <ClipboardText copyValue={String(col)}>
+                <div className="w-[150px]">
+                  {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
+                </div>
+              </ClipboardText>
             </div>
           );
         } else if (colIndex === 5) {
@@ -110,7 +127,7 @@ const TransactionTable = ({ rows, headers }: Props) => {
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
             >
-              {getNumberWithCommas(String(col), 2)}
+              ${getNumberWithCommas(String(col), 2)}
             </div>
           );
         }
@@ -120,7 +137,12 @@ const TransactionTable = ({ rows, headers }: Props) => {
 
   return (
     <div>
-      <DefaultTable rows={_rows} headers={_headers} />
+      {!loading && <DefaultTable rows={_rows} headers={_headers} />}
+      {loading && (
+        <div className="w-full flex items-center justify-center">
+          <img src="/img/spinner.svg" alt="spinner" />
+        </div>
+      )}
     </div>
   );
 };

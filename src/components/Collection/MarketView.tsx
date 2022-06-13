@@ -13,6 +13,7 @@ import ListCardLoading from './ListCardLoading';
 import RowCard from './RowCard';
 import RowCardLoading from './RowCardLoading';
 import { useInView } from 'react-intersection-observer';
+import { CollectionTabSelection } from '@/pages/collection/[id]';
 
 type SelectionView = 'Row' | 'List';
 
@@ -20,28 +21,38 @@ type SelectionFilter = 'Filter' | 'Cart' | '';
 
 const LOADING_ARR = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-const MarketView = () => {
+const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const cartItems = useAppSelector((state) => state.cart.cartItems);
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
+  const currentCollection = useAppSelector(
+    (state) => state.collection.currentCollection,
+  );
   const oAuthCtx = useContext(OAuthContext);
   const [currentView, setCurrentView] = useState<SelectionView>('List');
   const [currentFilter, setCurrentFilter] = useState<SelectionFilter>('');
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<any>([]);
   const [page, setPage] = useState(0);
   const { ref, inView } = useInView({
     /* Optional options */
     threshold: 0,
   });
 
-  const listedItemCount = items.length;
-
   const _items = useMemo(() => {
-    return items.slice(0, page + 19);
-  }, [items, page]);
+    let arr = [...items];
+    if (currentTab === 'Listed Items') {
+      arr = arr.filter((item) => item?.external_marketplace_listing?.length);
+    }
+    return arr.slice(0, page + 19).map((item: any) => {
+      return {
+        ...item,
+        is_listed: item?.external_marketplace_listing?.length,
+      };
+    });
+  }, [items, page, currentTab]);
 
   useEffect(() => {
     if (inView) {
@@ -60,6 +71,20 @@ const MarketView = () => {
     isRarityRanking: false,
   });
   const [refresh, setRefresh] = useState(false);
+
+  const itemCount = useMemo(() => {
+    if (currentTab === 'All Items') {
+      return getNumberWithCommas(
+        currentCollection?.nftCollectionStats?.totalSupply,
+        0,
+      );
+    } else if (currentTab === 'Listed Items') {
+      const listed = items.filter(
+        (item: any) => item?.external_marketplace_listing?.length,
+      );
+      return getNumberWithCommas(listed.length, 0);
+    }
+  }, [currentTab]);
 
   const isItemAddedToCart = (tokenAddress: string) => {
     return cartItems.find(
@@ -86,35 +111,55 @@ const MarketView = () => {
     }
   };
 
-  const handleMoreInfo = (tokenAddress: string | number) => {
-    router.push(`/nft/${tokenAddress}?slug=${metadata.slug}`).then();
+  const handleMoreInfo = (hash: string) => {
+    router.push(`/nft/${hash}`).then();
   };
 
   const getData = async () => {
-    setLoading(true);
     const response = await api.getNftListByCollectionId(
       oAuthCtx.access_token,
       metadata.slug,
     );
-    const map = response.map((item: any) => {
-      const manifest = item?.splNftInfo?.data?.manifest;
-      return {
-        image: manifest?.image,
-        brand: manifest?.collection?.name,
-        name: manifest?.name,
-        price: 0,
-        tokenAddress: item?.tokenAddress,
-      };
-    });
-    setItems(map);
-    setLoading(false);
+    const map = response
+      .map((item: any) => {
+        const manifest = item?.splNftInfo?.data?.manifest;
+        return {
+          // default image
+          image: manifest?.image || '/img/cgc_icon.png',
+          brand: manifest?.collection?.name,
+          name: manifest?.name,
+          price: 0,
+          tokenAddress: item?.tokenAddress,
+          id: item?.id,
+          is_listed: item?.external_marketplace_listing?.length,
+          external_marketplace_listing:
+            item?.external_marketplace_listing || [],
+        };
+      })
+      .sort((a: any, b: any) => {
+        return (
+          b.external_marketplace_listing.length -
+          a.external_marketplace_listing.length
+        );
+      });
+    return map;
+  };
+
+  const initData = async () => {
+    setLoading(true);
+    const nfts = await getData();
+    setItems(nfts);
+    const tid = setTimeout(() => {
+      setLoading(false);
+      clearTimeout(tid);
+    }, 800);
   };
 
   useEffect(() => {
-    if (oAuthCtx.access_token && metadata.id) {
-      getData();
+    if (metadata.slug) {
+      initData();
     }
-  }, [metadata, oAuthCtx.access_token, refresh]);
+  }, [metadata, refresh]);
 
   const getCart = () => {
     dispatch({ type: 'INIT_CART' });
@@ -123,6 +168,8 @@ const MarketView = () => {
   useEffect(() => {
     getCart();
   }, []);
+
+  console.log(currentCollection);
 
   return (
     <div className="mb-[32px]">
@@ -140,7 +187,7 @@ const MarketView = () => {
             />
           </div>
           <div className="ml-[8px] text-[#FFFFFF] text-[14px]">
-            {getNumberWithCommas(listedItemCount, 0)} items
+            {itemCount} items
           </div>
           <div className="ml-auto">
             <SelectGroup
@@ -320,7 +367,7 @@ const MarketView = () => {
         )}
         {currentView === 'List' && !loading && (
           <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-8 pb-6">
-            {_items.map((item: any, index) => {
+            {_items.map((item: any, index: number) => {
               return (
                 <div
                   key={index}
@@ -331,11 +378,12 @@ const MarketView = () => {
                     image={item.image}
                     brand={item.brand}
                     name={item.name}
-                    price={item.price}
+                    price={item.price || ' '}
                     isAddedToCart={isItemAddedToCart(item.tokenAddress)}
                     onAddToCart={(params) => handleAddToCart(params)}
                     onMoreInfo={() => handleMoreInfo(item.tokenAddress)}
                     addToCartLoading={false}
+                    addToCartDisabled={!item.is_listed}
                     tokenAddress={item.tokenAddress}
                   />
                 </div>
@@ -346,7 +394,7 @@ const MarketView = () => {
         )}
         {currentView === 'Row' && !loading && (
           <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 pb-6">
-            {_items.map((item: any, index) => {
+            {_items.map((item: any, index: number) => {
               return (
                 <div
                   key={index}
@@ -362,6 +410,7 @@ const MarketView = () => {
                     onAddToCart={(params) => handleAddToCart(params)}
                     onMoreInfo={() => handleMoreInfo(item.tokenAddress)}
                     addToCartLoading={false}
+                    addToCartDisabled={!item.is_listed}
                     tokenAddress={item.tokenAddress}
                   />
                 </div>

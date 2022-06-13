@@ -1,4 +1,4 @@
-import { CSSProperties, useState } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface Props {
@@ -10,7 +10,6 @@ interface Props {
   disableHoverEffect?: boolean;
   filled?: boolean;
   link?: boolean;
-  shadowed?: boolean;
   secondary?: boolean;
   loading?: boolean;
 }
@@ -24,7 +23,6 @@ const Button = ({
   disableHoverEffect,
   link,
   filled,
-  // shadowed,
   secondary,
   loading,
 }: Props) => {
@@ -51,7 +49,7 @@ const Button = ({
           // className,
         )}
         style={{
-          cursor: disabled ? 'not-allowed' : 'pointer',
+          cursor: disabled || loading ? 'not-allowed' : 'pointer',
           ...style,
           background: link
             ? 'transparent'
@@ -68,10 +66,10 @@ const Button = ({
             : '#13002B',
           textAlign: 'center',
         }}
-        onClick={() => onClick && onClick()}
+        onClick={(e) => onClick && onClick(e)}
         onMouseOver={() => setHover(true)}
         onMouseOut={() => setHover(false)}
-        disabled={disabled}
+        disabled={disabled || loading}
       >
         {!loading && (
           <div style={{ whiteSpace: 'nowrap' }} className="flex items-center">
@@ -80,7 +78,8 @@ const Button = ({
         )}
         {loading && (
           <div>
-            <img src="/img/spinner.svg" alt="spinner" width={14} height={14} />
+            {/* <img src="/img/spinner.svg" alt="spinner" width={24} height={24} /> */}
+            Loading...
           </div>
         )}
       </button>

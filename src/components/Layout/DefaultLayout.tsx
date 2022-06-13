@@ -1,12 +1,15 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import Footer from '../Shared/Footer';
+import Footer from './Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import seo from '../../data/seo';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+import { useWindowWidth } from '@/hooks/window';
+import HeaderMobile from './HeaderMobile';
+import { motion } from 'framer-motion';
 
 interface Props {
   children?: React.ReactNode;
@@ -60,21 +63,26 @@ const SIDE_BAR_ITEMS = [
   // },
 ];
 
+const sidebarAnimationVariants = {
+  open: { x: 0 },
+  close: { x: '-100%' },
+};
+
 const DefaultLayout = ({ children, title }: Props) => {
   const dispatch = useAppDispatch();
   const sideBarPath = useAppSelector((state) => state.layout.navigation.path);
   const snackbarShow = useAppSelector((state) => state.layout.snackbar.show);
   const snackbarText = useAppSelector((state) => state.layout.snackbar.text);
   const snackbarTitle = useAppSelector((state) => state.layout.snackbar.title);
-
   const router = useRouter();
+  const windowWidth = useWindowWidth();
+  const [sideBarOpen, setSideBarOpen] = useState(false);
 
   const handleSideBarPathUpdate = (val: string) => {
     if (val === 'Home' || val.includes('Explore')) {
       dispatch({ type: 'SET_NAVIGATION_PATH', payload: val });
-      router.push('/');
+      router.push('/').then();
     } else if (val === 'Launchpad') {
-      // router.push('/launchpad');
       window.open('', '_blank');
     }
   };
@@ -105,29 +113,12 @@ const DefaultLayout = ({ children, title }: Props) => {
   }, []);
 
   // TODO temp:load sign in state from storage
-  useEffect(() => {
-    const email = localStorage.getItem('email');
-    if (email) {
-      dispatch({ type: 'SET_USER_EMAIL', payload: JSON.parse(email) });
-    }
-  }, []);
-
-  const [windowWidth, setWindowWidth] = useState(1366);
-  const [windowHeight, setWindowHeight] = useState(768);
-
-  useEffect(() => {
-    const cb = () => {
-      setWindowWidth(window.innerWidth);
-      setWindowHeight(window.innerHeight);
-    };
-    if (window) {
-      // window.addEventListener('resize', cb);
-      cb();
-    }
-    return () => {
-      // window.removeEventListener('resize', cb);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const email = localStorage.getItem('email');
+  //   if (email) {
+  //     dispatch({ type: 'SET_USER_EMAIL', payload: JSON.parse(email) });
+  //   }
+  // }, []);
 
   return (
     <>
@@ -163,13 +154,16 @@ const DefaultLayout = ({ children, title }: Props) => {
           <link
             rel="stylesheet"
             type="text/css"
-            // charset="UTF-8"
-            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+            href={
+              'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
+            }
           />
           <link
             rel="stylesheet"
             type="text/css"
-            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+            href={
+              'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
+            }
           />
         </Head>
         <DynamicSnackbar
@@ -177,28 +171,60 @@ const DefaultLayout = ({ children, title }: Props) => {
           show={snackbarShow}
           title={snackbarTitle}
         />
-        <Header />
+        <div style={{ display: windowWidth < 768 ? 'none' : 'block' }}>
+          <Header />
+        </div>
+        <div style={{ display: windowWidth < 768 ? 'block' : 'none' }}>
+          <HeaderMobile
+            onNavOpen={() => setSideBarOpen((prev) => !prev)}
+            navOpen={sideBarOpen}
+          />
+        </div>
         <div className="flex mt-[75px] relative">
-          <div className="fixed top-[75px] w-[225px] hidden md:block flex-shrink-0 z-[100]">
+          <div
+            className="fixed top-[75px] w-[225px] flex-shrink-0 z-[100]"
+            style={{ display: windowWidth < 768 ? 'none' : 'block' }}
+          >
             <Sidebar
               items={SIDE_BAR_ITEMS}
               currentValue={sideBarPath}
               onItemClick={(value) => handleSideBarPathUpdate(value)}
             />
           </div>
+          <motion.div
+            variants={sidebarAnimationVariants}
+            animate={sideBarOpen ? 'open' : 'close'}
+            className="fixed top-0 z-[100000]"
+            style={{ display: windowWidth < 768 ? 'block' : 'none' }}
+          >
+            <Sidebar
+              items={SIDE_BAR_ITEMS}
+              currentValue={sideBarPath}
+              onItemClick={(value) => handleSideBarPathUpdate(value)}
+              rootClassName={'static bg-[#13002B] w-[70vw] h-inherit'}
+            />
+          </motion.div>
+          {sideBarOpen && (
+            <div
+              aria-label="sidebar_mask"
+              className="z-[99999] w-[100vw] h-[100vh] absolute top-0 bg-[#000000] opacity-70"
+              onClick={() => setSideBarOpen(false)}
+            ></div>
+          )}
           <div
-            className="ml-[225px] pr-[24px] mx-auto min-h-[75vh]"
-            style={{ width: windowWidth - 225 }}
+            className="mx-auto"
+            style={{
+              width: windowWidth < 768 ? '100vw' : 'calc(100vw - 225px)',
+              minHeight: 'calc(100vh - 75px - 100px)',
+              marginLeft: windowWidth < 768 ? 0 : 225,
+              paddingRight: windowWidth < 768 ? 24 : 24,
+              paddingLeft: windowWidth < 768 ? 24 : 0,
+            }}
           >
             {children}
           </div>
         </div>
-        <div
-          className="w-full relative overflow-x-hidden bg-[#141414] z-[101]"
-          style={{
-            paddingBottom: windowHeight - windowHeight * 0.75 - 75 - 120,
-          }}
-        >
+        <div className="w-full relative overflow-x-hidden bg-[#141414] z-[101]">
           <Footer />
         </div>
       </div>

@@ -14,6 +14,12 @@ import Menu from './Menu';
 
 type SelectionView = 'Row' | 'List';
 
+type Sidebar = {
+  text: string;
+  collection_id?: string;
+  value: string;
+};
+
 const LOADING_ARR = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const MyItemsView = () => {
@@ -24,35 +30,75 @@ const MyItemsView = () => {
     (state) => state.collection.currentCollection.metadata,
   );
   const [, setRefresh] = useState(false);
-  const [sidebar, setSidebar] = useState('');
-  const [myItems] = useState([]);
+  const [sidebar, setSidebar] = useState<Sidebar>({
+    text: '',
+    collection_id: '',
+    value: '',
+  });
+  const [myItems, setMyItems] = useState([]);
   const [currentView, setCurrentView] = useState<SelectionView>('List');
-  const { collections } = useGetCollections();
-  const { data: recommendedItems, loading, fn } = useGetNftByCollectionId();
+  const { data: collections } = useGetCollections();
+  const {
+    data: recommendedItems,
+    loading,
+    getData: getNftDataByCollectionId,
+  } = useGetNftByCollectionId();
+  const [myItemLoading, setMyItemLoading] = useState(false);
+
+  // TODO get my items
+  const getMyItemsData = async () => {
+    return [];
+  };
+
+  const setMyItemsData = async () => {
+    setMyItemLoading(true);
+    const items = await getMyItemsData();
+    if (items && items.length) {
+      // TODO map data to grid/card
+      setMyItems(items);
+    }
+    const tid = setTimeout(() => {
+      setMyItemLoading(false);
+      clearTimeout(tid);
+    }, 800);
+  };
 
   const _collections = useMemo(() => {
     return collections.map((collection) => {
       return {
         text: collection.name,
-        value: collection.id,
+        value: collection.name.toLowerCase(),
+        collection_id: collection.id,
       };
     });
   }, [collections]);
 
+  // set default to first collection
   useEffect(() => {
     if (_collections.length) {
-      setSidebar(_collections[0].value);
+      const first = _collections[0];
+      setSidebar(first);
     }
   }, [_collections]);
 
+  // when there are collections and no owned items, get recommended items
   useEffect(() => {
-    fn(sidebar);
-  }, [sidebar]);
+    if (sidebar && !myItems.length) {
+      getNftDataByCollectionId(sidebar.value);
+    }
+  }, [sidebar, myItems]);
 
   const _recommendedItems = useMemo(() => {
     return recommendedItems
-      .filter((item) => item.collection_id === sidebar)
-      .slice(0, 5);
+      .filter((item) => item.collection_id === sidebar.collection_id)
+      .filter((item) => item?.is_listed)
+      .slice(0, 4)
+      .map((item) => {
+        return {
+          ...item,
+          is_listed: item?.external_marketplace_listing?.length,
+        };
+      });
   }, [recommendedItems, sidebar]);
 
   const _itemsDisplay = useMemo(() => {
@@ -61,12 +107,6 @@ const MyItemsView = () => {
     }
     return myItems;
   }, [myItems, _recommendedItems]);
-
-  // useEffect(() => {
-  //   if (inView) {
-  //     setPage((prev) => prev + 19);
-  //   }
-  // }, [inView]);
 
   const handleSelectView = (value: SelectionView) => {
     setCurrentView(value);
@@ -93,37 +133,64 @@ const MyItemsView = () => {
     router.push(`/nft/${tokenAddress}?collection_id=${metadata.id}`).then();
   };
 
+  const handleSidebarChange = (value: Sidebar) => {
+    setSidebar(value);
+  };
+
   return (
-    <div className="flex">
-      <div style={{ width: '200px', flexShrink: 0 }} className="mr-[24px]">
-        <Menu
-          items={_collections}
-          currentValue={sidebar}
-          onItemClick={(value) => setSidebar(value)}
-        />
-      </div>
-      <div style={{ flexGrow: 1 }}>
+    <div className="flex flex-wrap">
+      <div className="md:hidden basis-[100%]">
         {!myItems.length && (
-          <div className="mb-[28px] text-[#FFFFFF] rounded-[5px] text-semibold w-full border-[#290030] border-[2px] bg-[#13002B] h-[115px] flex items-center justify-center">
-            <div>
+          <div className="mb-[24px] text-[#FFFFFF] rounded-[5px] text-semibold w-full border-[#290030] border-[2px] bg-[#13002B] px-[16px] py-[16px] flex items-center justify-center">
+            <div className="hidden lg:block">
               <img
                 src="/img/icon_warning_triangle.svg"
                 alt="warning"
-                width={32}
-                height={32}
+                className="w-[32px] h-[32px]"
               />
             </div>
             <div className="ml-[20px]">
-              <div className="font-bold text-[16px]">
+              <div className="font-bold md:text-[16px] text-[14px]">
                 We could not find any items in your wallet.
               </div>
-              <div className="font-light text-[14px]">
+              <div className="font-light md:text-[14px] text-[12px]">
                 Here’s a few suggested items from current collections that you
                 can purchase.
               </div>
             </div>
           </div>
         )}
+      </div>
+      <div className="lg:basis-[250px] basis-[100%] lg:pr-[6px] mb-[24px] lg:mb-0">
+        <Menu
+          items={_collections}
+          currentValue={sidebar.value}
+          onItemClick={(value) => handleSidebarChange(value)}
+        />
+      </div>
+      <div className="lg:flex-1 lg:pl-[6px] w-full">
+        <div className="hidden md:block">
+          {!myItems.length && (
+            <div className="mb-[28px] text-[#FFFFFF] rounded-[5px] text-semibold w-full border-[#290030] border-[2px] bg-[#13002B] h-[115px] flex items-center justify-center">
+              <div className="hidden lg:block">
+                <img
+                  src="/img/icon_warning_triangle.svg"
+                  alt="warning"
+                  className="w-[32px] h-[32px]"
+                />
+              </div>
+              <div className="ml-[20px]">
+                <div className="font-bold md:text-[16px] text-[14px]">
+                  We could not find any items in your wallet.
+                </div>
+                <div className="font-light md:text-[14px] text-[12px]">
+                  Here’s a few suggested items from current collections that you
+                  can purchase.
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
         <div className="flex justify-between items-center mb-[24px] w-full">
           <div className="flex items-center w-full justify-between">
             <div className="flex items-center">
@@ -182,7 +249,7 @@ const MyItemsView = () => {
         </div>
         <div>
           {!myItems.length && (
-            <div className="mt-[32px] mb-[32px] font-semibold text-[24px] text-[#FFFFFF]">
+            <div className="mt-[24px] mb-[24px] font-semibold text-[24px] text-[#FFFFFF]">
               Suggested Items
             </div>
           )}
@@ -232,12 +299,12 @@ const MyItemsView = () => {
                       onAddToCart={(params) => handleAddToCart(params)}
                       onMoreInfo={() => handleMoreInfo(item.tokenAddress)}
                       addToCartLoading={false}
+                      addToCartDisabled={!item.is_listed}
                       tokenAddress={item.tokenAddress}
                     />
                   </div>
                 );
               })}
-              {/* <div ref={ref}></div> */}
             </div>
           )}
           {currentView === 'Row' && !loading && (
@@ -258,12 +325,12 @@ const MyItemsView = () => {
                       onAddToCart={(params) => handleAddToCart(params)}
                       onMoreInfo={() => handleMoreInfo(item.tokenAddress)}
                       addToCartLoading={false}
+                      addToCartDisabled={!item.is_listed}
                       tokenAddress={item.tokenAddress}
                     />
                   </div>
                 );
               })}
-              {/* <div ref={ref}></div> */}
             </div>
           )}
         </div>

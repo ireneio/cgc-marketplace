@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 import DefaultTable from '../Shared/DefaultTable';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import ClipboardText from '../Shared/ClipboardText';
-import PrimaryGradientText from '../Shared/PrimaryGradientText';
+import PrimaryGradientText from '../Catheon/PrimaryGradientText';
 
 dayjs.extend(relativeTime);
 interface Props {
@@ -26,7 +26,7 @@ const HistoryTable = ({ rows, headers }: Props) => {
       return (
         <div
           key={index}
-          className="uppercase px-[10px] py-[10px] text-[12px] text-left text-[#FFFFFF]"
+          className="uppercase text-[12px] text-left text-[#FFFFFF]"
         >
           {header}
         </div>

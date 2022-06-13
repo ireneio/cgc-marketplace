@@ -41,9 +41,9 @@ const Launchpad = () => {
 
   const handleCardClick = (item: LaunchpadItem) => {
     if (item.type === 'token') {
-      router.push(`/launchpad/${item.id}`);
+      router.push(`/launchpad/${item.id}`).then();
     } else {
-      router.push(`/launchpad/nft/${item.id}`);
+      router.push(`/launchpad/nft/${item.id}`).then();
     }
   };
 
@@ -59,7 +59,7 @@ const Launchpad = () => {
           onItemClick={(val) => {
             if (val === 'Home') {
               dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
-              router.push('/');
+              router.push('/').then();
             }
           }}
         />

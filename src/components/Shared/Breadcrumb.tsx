@@ -44,12 +44,6 @@ const Breadcrumb = ({ items, onItemClick }: Props) => {
                     : index !== array.length - 1
                     ? 'pointer'
                     : 'default',
-                  // cursor:
-                  //   currentValue === item.value
-                  //     ? 'default'
-                  //     : item.disabled
-                  //     ? 'not-allowed'
-                  //     : 'pointer',
                 }}
                 disabled={item.disabled}
                 onClick={() => {

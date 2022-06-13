@@ -2,7 +2,7 @@ import { useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Slider from 'react-slick';
-import FloatingCard from '../Shared/FloatingCard';
+import FloatingCard from './FloatingCard';
 
 function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
@@ -61,11 +61,11 @@ const CardCarousel = ({ items }: { items: any[] }) => {
     };
 
     if (window) {
-      // window.addEventListener('resize', cb);
+      window.addEventListener('resize', cb);
       cb();
     }
     return () => {
-      // window.removeEventListener('resize', cb);
+      window.removeEventListener('resize', cb);
     };
   }, []);
 

@@ -26,13 +26,12 @@ export const useGetCollections = () => {
   };
 
   useEffect(() => {
-    if (oAuthCtx.access_token) {
-      getCollections();
-    }
-  }, [oAuthCtx.access_token]);
+    getCollections().then();
+  }, []);
 
   return {
-    collections: items,
+    refresh: getCollections,
+    data: items,
   };
 };
 
@@ -53,6 +52,8 @@ export const useGetNftByCollectionId = () => {
         price: 0,
         tokenAddress: item?.tokenAddress,
         collection_id: item?.collections[0]?.id,
+        is_listed: item?.external_marketplace_listing?.length,
+        external_marketplace_listing: item?.external_marketplace_listing,
       };
     });
     setItems(map);
@@ -60,13 +61,11 @@ export const useGetNftByCollectionId = () => {
   };
 
   useEffect(() => {
-    if (oAuthCtx.access_token) {
-      getData(oAuthCtx.access_token);
-    }
-  }, [oAuthCtx.access_token]);
+    getData(oAuthCtx.access_token);
+  }, []);
 
   return {
-    fn: getData(oAuthCtx.access_token),
+    getData: getData(oAuthCtx.access_token),
     data: items,
     loading,
   };

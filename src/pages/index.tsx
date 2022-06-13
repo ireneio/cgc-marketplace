@@ -9,6 +9,21 @@ import { useMemo } from 'react';
 
 const Index = () => {
   const sideBarPath = useAppSelector((state) => state.layout.navigation.path);
+  const collections = useAppSelector((state) => state.collection.collections);
+
+  const carouselItems = useMemo(() => {
+    return collections.slice(0, 5).map((collection: any) => {
+      return {
+        id: collection?.slug,
+        title: collection?.name,
+        name: collection?.slug,
+        logo: collection?.logoSrc,
+        imageUrl: collection?.splashSrc,
+        description: collection?.description,
+        href: '',
+      };
+    });
+  }, [collections]);
 
   const breadcrumbItems = useMemo(() => {
     switch (sideBarPath) {
@@ -38,6 +53,7 @@ const Index = () => {
 
   return (
     <DefaultLayout>
+      {/* Home Page */}
       {sideBarPath != 'Home' && (
         <div className="mb-[0]">
           <Breadcrumb items={breadcrumbItems} currentValue={sideBarPath} />
@@ -45,16 +61,11 @@ const Index = () => {
       )}
       {sideBarPath === 'Home' && (
         <div className="mt-[21px]">
-          <LandingCarousel />
+          <LandingCarousel carouselItems={carouselItems} />
         </div>
       )}
       {sideBarPath === 'Home' && (
         <div className="mt-[32px]">
-          <AllCollections />
-        </div>
-      )}
-      {sideBarPath === 'Explore/All' && (
-        <div className="mt-[16px]">
           <AllCollections />
         </div>
       )}
@@ -66,6 +77,12 @@ const Index = () => {
       {sideBarPath === 'Home' && (
         <div className="mt-[48px] mb-[48px]">
           <LatestTransactions />
+        </div>
+      )}
+      {/* Explore Page */}
+      {sideBarPath === 'Explore/All' && (
+        <div className="mt-[24px]">
+          <AllCollections />
         </div>
       )}
     </DefaultLayout>

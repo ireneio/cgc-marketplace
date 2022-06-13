@@ -16,6 +16,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import DetailPanel from '@/components/Nft/DetailPanel';
 import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
+import { LoginModal } from '@/components/Auth/LoginModal';
 
 export interface NftInfo {
   id: string | number;
@@ -38,8 +39,22 @@ type Selection =
   | 'Collection Item'
   | 'Explore/All';
 
+const handleImageLoad = (e: any, image: string) => {
+  e.target.classList.remove('blur');
+  e.target.src = image === 'undefined' ? '/img/cgc_icon.png' : image;
+  e.target.style.width = '100%';
+  e.target.style.height = 'auto';
+};
+
+const handleImageError = (e: any) => {
+  e.target.src = '/img/cgc_icon.png';
+};
+
 const Nft = () => {
   const dispatch = useAppDispatch();
+  const access_token = useAppSelector(
+    (state) => state.user.userInfo.access_token,
+  );
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
@@ -67,45 +82,80 @@ const Nft = () => {
     mintAddress: '',
     owner: '',
   });
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [currentSelection, setCurrentSelection] =
-    useState<Selection>('Collection Item');
+  const [currentSelection] = useState<Selection>('Collection Item');
+
+  const breadCrumbItems = useMemo(() => {
+    switch (currentSelection) {
+      case 'Collection Item':
+      default:
+        return [
+          { text: 'Home', value: 'Home', disabled: loading || !metadata.name },
+          {
+            text: 'Explore',
+            value: 'Explore/All',
+            disabled: loading || !metadata.slug,
+          },
+          {
+            text: metadata?.name,
+            value: 'About',
+            disabled: loading || !metadata.slug,
+          },
+          {
+            text: 'All Items',
+            value: 'All Items',
+            disabled: loading || !metadata.slug,
+          },
+          {
+            text: info.name,
+            value: info.name,
+            disabled: loading || !metadata.slug,
+          },
+        ];
+    }
+  }, [metadata, currentSelection, info, loading]);
+
+  const selectGroupItems = useMemo(() => {
+    return [
+      { text: 'About', value: 'About', disabled: !metadata.slug },
+      { text: 'All Items', value: 'All Items', disabled: !metadata.slug },
+      {
+        text: 'Your Items',
+        value: 'Your Items',
+        disabled: !metadata.slug,
+      },
+      { text: '...', value: '...', disabled: !metadata.slug },
+    ];
+  }, [metadata]);
 
   const handleSelect = (value: Selection) => {
-    setCurrentSelection(value);
     switch (value) {
       case 'About':
-        router.push(`/collection/${metadata.slug}`);
+        router.push(`/collection/${metadata.slug}`).then();
         return;
       case 'All Items':
-        router.push(`/collection/${metadata.slug}?tab=all_items`);
+        router.push(`/collection/${metadata.slug}?tab=all_items`).then();
         return;
-      case 'Your Items':
-        router.push(`/collection/${metadata.slug}?tab=your_items`);
+      case 'Your Items': {
+        if (!access_token) {
+          setLoginModalOpen(true);
+        } else {
+          router.push(`/account?tab=items`).then();
+        }
         return;
+      }
       case metadata.slug:
-        router.push(`/collection/${metadata.slug}?tab=about`);
+        router.push(`/collection/${metadata.slug}?tab=about`).then();
         return;
       case 'Explore/All':
         dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Explore/All' });
-        router.push(`/`);
+        router.push(`/`).then();
         return;
     }
   };
-
-  useEffect(() => {
-    if (router.query.id) {
-      dispatch({ type: 'INIT_CART' });
-      setInfo((prev) => {
-        return {
-          ...prev,
-          id: String(router.query.id),
-        };
-      });
-    }
-  }, [dispatch, router]);
 
   const getCollectionData = async () => {
     const response = await api.getCollectionById(
@@ -119,7 +169,7 @@ const Nft = () => {
           ...response,
           metadata: {
             ...response.metadata,
-            slug: response.metadata.name.toLowerCase().split(' ').join(''),
+            slug: response.metadata.name.toLowerCase().split(' ').join('_'),
             id: response.id,
           },
         },
@@ -129,9 +179,9 @@ const Nft = () => {
 
   const getNftData = async () => {
     setLoading(true);
-    const response = await api.getNftListByCollectionId(
+    const response = await api.getNftListByHash(
       oAuthCtx.access_token,
-      String(router.query.slug),
+      String(router.query.id),
     );
     if (response && response.length) {
       const filter = response.filter(
@@ -164,63 +214,32 @@ const Nft = () => {
   };
 
   const handleRefresh = async () => {
-    getNftData();
+    getNftData().then();
   };
 
   useEffect(() => {
-    if (oAuthCtx.access_token && router.query.slug) {
-      getCollectionData().then(() => {
-        getNftData();
+    if (router.query.id) {
+      dispatch({ type: 'INIT_CART' });
+      setInfo((prev) => {
+        return {
+          ...prev,
+          id: String(router.query.id),
+        };
       });
     }
-  }, [oAuthCtx.access_token, router.query.slug]);
+  }, [dispatch, router]);
 
-  const breadCrumbItems = useMemo(() => {
-    switch (currentSelection) {
-      case 'Collection Item':
-      default:
-        return [
-          { text: 'Home', value: 'Home', disabled: loading || !metadata.name },
-          {
-            text: 'Explore',
-            value: 'Explore/All',
-            disabled: loading || !metadata.slug,
-          },
-          {
-            text: metadata?.name,
-            value: 'About',
-            disabled: loading || !metadata.slug,
-          },
-          {
-            text: 'All Items',
-            value: 'All Items',
-            disabled: loading || !metadata.slug,
-          },
-          {
-            text: info.name,
-            value: info.name,
-            disabled: loading || !metadata.slug,
-          },
-        ];
+  useEffect(() => {
+    if (router.query.id) {
+      getCollectionData().then(() => {
+        getNftData().then();
+      });
     }
-  }, [metadata, currentSelection, info, loading]);
-
-  const selectgroupItems = useMemo(() => {
-    return [
-      { text: 'About', value: 'About', disabled: !metadata.slug },
-      { text: 'All Items', value: 'All Items', disabled: !metadata.slug },
-      {
-        text: 'Your Items',
-        value: 'Your Items',
-        disabled: !metadata.slug,
-      },
-      { text: '...', value: '...', disabled: !metadata.slug },
-    ];
-  }, [metadata]);
+  }, [router.query.id]);
 
   return (
     <DefaultLayout>
-      <div className="mb-[32px]">
+      <div className="mb-[24px]">
         <Breadcrumb
           items={breadCrumbItems}
           currentValue={currentSelection}
@@ -234,13 +253,13 @@ const Nft = () => {
           }}
         />
       </div>
-      <div className="flex justify-between items-center mb-[16px]">
-        <div className="text-[#FFFFFF] font-bold text-[24px]">
+      <div className="flex justify-between items-center mb-[16px] flex-wrap">
+        <div className="basis-[100%] lg:basis-auto text-[#FFFFFF] font-bold text-[24px]">
           {info.brand} {info.name}
         </div>
-        <div>
+        <div className="basis-[100%] lg:basis-auto mt-[12px] lg:mt-0">
           <SelectGroup
-            items={selectgroupItems}
+            items={selectGroupItems}
             currentValue={currentSelection}
             onItemClick={(value) => handleSelect(value as Selection)}
           />
@@ -251,12 +270,12 @@ const Nft = () => {
       </div>
       {currentSelection === 'Your Items' && <YourView />}
       {currentSelection !== 'Your Items' && (
-        <div>
-          <div className="flex items-center justify-between">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-[24px] pt-[12px]">
+          <div className="flex items-center justify-between col-span-2">
             <div className="flex items-center">
               <div className="cursor-pointer" onClick={() => handleRefresh()}>
                 <img
-                  src="/img/icon_refresh.svg"
+                  src={'/img/icon_refresh.svg'}
                   alt="refresh"
                   width={14}
                   height={14}
@@ -270,37 +289,47 @@ const Nft = () => {
               disabled={loading}
             />
           </div>
-          <div className="flex mt-[12px] flex-wrap">
-            <div style={{ flexBasis: '50%' }}>
-              <div className="w-full">
+          <div className="flex flex-wrap justify-between col-span-2">
+            <div className="basis-[100%] md:basis-[48%]">
+              <div className="w-full mb-[24px] md:mb-0">
                 <img
                   src={info.image}
                   alt={info.name}
                   width="100%"
-                  className="rounded-[5px]"
+                  className="rounded-[5px] blur"
+                  onError={(e) => handleImageError(e)}
+                  onLoad={(e) => handleImageLoad(e, info.image)}
                 />
               </div>
-              <InfoPanel info={info} />
+              <div className="mb-[24px] md:mb-0">
+                <InfoPanel info={info} />
+              </div>
             </div>
-            <div style={{ flexBasis: '50%' }} className="pl-[12px]">
-              <DetailPanel info={info} />
-              <ActionPanel
-                info={info}
-                onCartOpen={(val) => setOpenCart(val)}
-                loading={loading}
-              />
-              <AttributesPanel info={info} />
+            <div className="basis-[100%] md:basis-[48%]">
+              <div className="mb-[24px]">
+                <DetailPanel info={info} />
+              </div>
+              <div className="mb-[24px]">
+                <ActionPanel
+                  info={info}
+                  onCartOpen={(val) => setOpenCart(val)}
+                  loading={loading}
+                />
+              </div>
+              <div className="mb-[0px]">
+                <AttributesPanel info={info} />
+              </div>
             </div>
           </div>
-          <div className="mt-[32px]">
+          <div className="mt-[24px] col-span-2">
             <Divider />
           </div>
-          <div className="mt-[32px]">
-            <div className="flex justify-between items-center">
+          <div className="mt-[24px] col-span-2">
+            <div className="flex justify-between items-center flex-wrap">
               <div className="text-[#FFFFFF] font-bold text-[20px]">
                 Transaction History
               </div>
-              <div>
+              <div className="basis-[50%] md:basis[100%] mt-[12px] md:mt-0 flex justify-end">
                 <Pagination
                   totalPages={15}
                   currentPage={currentPage}
@@ -310,7 +339,7 @@ const Nft = () => {
                 />
               </div>
             </div>
-            <div className="mt-[32px] mb-[48px]">
+            <div className="mt-[24px] mb-[48px]">
               <HistoryTable
                 rows={[
                   [
@@ -341,6 +370,11 @@ const Nft = () => {
           </div>
         </div>
       )}
+      <LoginModal
+        isOpen={loginModalOpen}
+        setIsOpen={setLoginModalOpen}
+        redirectPath="/account?tab=items"
+      />
     </DefaultLayout>
   );
 };
