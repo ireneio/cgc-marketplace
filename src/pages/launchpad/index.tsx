@@ -49,7 +49,7 @@ const Launchpad = () => {
 
   return (
     <DefaultLayout>
-      <div className="mb-[12px]">
+      <div className="mb-[24px]">
         <Breadcrumb
           items={[
             { text: 'Home', value: '/' },
@@ -57,7 +57,7 @@ const Launchpad = () => {
           ]}
         />
       </div>
-      <div className="flex justify-between items-center mb-[28px]">
+      <div className="flex justify-between items-center mb-[24px]">
         <div className="text-[#FFFFFF] font-bold text-[20px]">Collections</div>
         <div>
           <SelectGroup
@@ -70,11 +70,11 @@ const Launchpad = () => {
           />
         </div>
       </div>
-      <div className="mb-[28px]">
+      <div className="mb-[24px]">
         <Divider />
       </div>
       <div
-        className="grid"
+        className="grid mb-[24px]"
         style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(371px, 1fr))' }}
       >
         {!loading && !items.length && (
