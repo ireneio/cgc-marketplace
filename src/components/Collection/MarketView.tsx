@@ -14,6 +14,7 @@ import RowCard from './RowCard';
 import RowCardLoading from './RowCardLoading';
 import { useInView } from 'react-intersection-observer';
 import { CollectionTabSelection } from '@/pages/collection/[id]';
+import { useCart } from '@/hooks/cart';
 
 type SelectionView = 'Row' | 'List';
 
@@ -40,6 +41,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
     /* Optional options */
     threshold: 0,
   });
+  const { handleAddToCart, isItemAddedToCart } = useCart();
 
   const _items = useMemo(() => {
     let arr = [...items];
@@ -86,29 +88,12 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
     }
   }, [currentTab]);
 
-  const isItemAddedToCart = (tokenAddress: string) => {
-    return cartItems.find(
-      (item: Attr) => String(item.tokenAddress) === String(tokenAddress),
-    );
-  };
-
   const handleSelectView = (value: SelectionView) => {
     setCurrentView(value);
   };
 
   const handleSelectFilter = (value: SelectionFilter) => {
     setCurrentFilter(value);
-  };
-
-  const handleAddToCart = (params: Attr) => {
-    if (isItemAddedToCart(params.tokenAddress)) {
-      dispatch({
-        type: 'REMOVE_CART_ITEM',
-        payload: String(params.tokenAddress),
-      });
-    } else {
-      dispatch({ type: 'ADD_CART_ITEM', payload: params });
-    }
   };
 
   const handleMoreInfo = (hash: string) => {

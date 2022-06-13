@@ -8,15 +8,15 @@ import TransactionTable from './TransactionTable';
 const PAGE_LIMIT = 10;
 
 const LatestTransactions = () => {
+  const oAuthCtx = useContext(OAuthContext);
   const [currentPage, setCurrentPage] = useState(0);
   const [loading, setLoading] = useState(true);
-  const oAuthCtx = useContext(OAuthContext);
   const [txList, setTxList] = useState<any[]>([]);
 
   const _txList = useMemo(() => {
     const startIdx = currentPage * PAGE_LIMIT;
     const endIdx = startIdx + PAGE_LIMIT;
-    return txList.slice(startIdx, endIdx);
+    return txList.length ? txList.slice(startIdx, endIdx) : [];
   }, [txList, currentPage]);
 
   const getData = async () => {
@@ -36,8 +36,15 @@ const LatestTransactions = () => {
         };
       })
       .reduce((acc: any[], curr: any) => {
-        const _curr = curr.list.map((item: any) => ({ ...item, ...curr.info }));
-        acc = [...acc, ..._curr];
+        const _curr = curr?.list?.map((item: any) => ({
+          ...item,
+          ...curr.info,
+        }));
+        if (_curr && curr.length) {
+          acc = [...acc, ..._curr];
+        } else {
+          acc = [...acc];
+        }
         return acc;
       }, [])
       .sort((a: any, b: any) => b.block_time - a.block_time)

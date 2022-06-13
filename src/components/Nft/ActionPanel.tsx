@@ -1,7 +1,5 @@
+import { useCart } from '@/hooks/cart';
 import { NftInfo } from '@/pages/nft/[id]';
-import { useAppDispatch, useAppSelector } from '@/store';
-import { useMemo } from 'react';
-import { Attr } from '../Collection/RowCard';
 import Button from '../Shared/Button';
 import Tag from '../Shared/Tag';
 
@@ -14,36 +12,10 @@ const ActionPanel = ({
   info: NftInfo;
   onCartOpen: (val: boolean) => void;
 }) => {
-  const dispatch = useAppDispatch();
-  const cartItems = useAppSelector((state) => state.cart.cartItems);
-
-  const isItemAddedToCart = useMemo(() => {
-    return cartItems.find(
-      (item: Attr) => String(info.mintAddress) === String(item.tokenAddress),
-    );
-  }, [cartItems, info]);
+  const { handleAddToCart, isItemAddedToCart } = useCart();
 
   const handleBuy = async () => {
     console.log('handleBuy');
-  };
-
-  const handleAddToCart = () => {
-    if (!isItemAddedToCart) {
-      dispatch({
-        type: 'ADD_CART_ITEM',
-        payload: {
-          ...info,
-          isAddedToCart: true,
-          tokenAddress: info.mintAddress,
-        },
-      });
-      onCartOpen && onCartOpen(true);
-    } else {
-      dispatch({
-        type: 'REMOVE_CART_ITEM',
-        payload: String(info.mintAddress),
-      });
-    }
   };
 
   return (
@@ -79,11 +51,17 @@ const ActionPanel = ({
           )}
           <div className={!isItemAddedToCart ? 'ml-[8px]' : ''}>
             <Button
-              onClick={() => handleAddToCart()}
+              onClick={() =>
+                handleAddToCart({
+                  ...info,
+                  isAddedToCart: isItemAddedToCart(info?.mintAddress),
+                  tokenAddress: info.mintAddress,
+                })
+              }
               style={{ paddingLeft: 12, paddingRight: 12 }}
               disabled={loading || !info.mintAddress}
             >
-              {isItemAddedToCart ? (
+              {isItemAddedToCart(info?.mintAddress) ? (
                 'Remove From Cart'
               ) : (
                 <img

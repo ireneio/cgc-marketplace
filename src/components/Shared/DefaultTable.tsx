@@ -22,6 +22,11 @@ const DefaultTable = ({ rows, headers }: Props) => {
           </Tr>
         </Thead>
         <Tbody>
+          {!rows.length && (
+            <Tr className="text-[#FFFFFF] text-[18px] w-full flex items-center justify-center">
+              No Data Available.
+            </Tr>
+          )}
           {rows.map((row, index) => {
             return (
               <Tr key={index} style={{ padding: 0, margin: 0 }}>

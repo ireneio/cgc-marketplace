@@ -1,11 +1,12 @@
+import { useCart } from '@/hooks/cart';
 import {
   useGetCollections,
   useGetNftByCollectionId,
 } from '@/hooks/collections';
-import { useAppDispatch, useAppSelector } from '@/store';
+import { useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
-import ListCard, { Attr } from '../Collection/ListCard';
+import ListCard from '../Collection/ListCard';
 import ListCardLoading from '../Collection/ListCardLoading';
 import RowCard from '../Collection/RowCard';
 import RowCardLoading from '../Collection/RowCardLoading';
@@ -17,9 +18,7 @@ type SelectionView = 'Row' | 'List';
 const LOADING_ARR = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const ListingView = () => {
-  const dispatch = useAppDispatch();
   const router = useRouter();
-  const cartItems = useAppSelector((state) => state.cart.cartItems);
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
@@ -29,6 +28,7 @@ const ListingView = () => {
   const [currentView, setCurrentView] = useState<SelectionView>('List');
   const { data: collections } = useGetCollections();
   const { loading } = useGetNftByCollectionId();
+  const { handleAddToCart, isItemAddedToCart } = useCart();
 
   const _collections = useMemo(() => {
     return collections.map((collection) => {
@@ -41,23 +41,6 @@ const ListingView = () => {
 
   const handleSelectView = (value: SelectionView) => {
     setCurrentView(value);
-  };
-
-  const handleAddToCart = (params: Attr) => {
-    if (isItemAddedToCart(params.tokenAddress)) {
-      dispatch({
-        type: 'REMOVE_CART_ITEM',
-        payload: String(params.tokenAddress),
-      });
-    } else {
-      dispatch({ type: 'ADD_CART_ITEM', payload: params });
-    }
-  };
-
-  const isItemAddedToCart = (tokenAddress: string) => {
-    return cartItems.find(
-      (item: Attr) => String(item.tokenAddress) === String(tokenAddress),
-    );
   };
 
   const handleMoreInfo = (tokenAddress: string | number) => {
