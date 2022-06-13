@@ -115,7 +115,7 @@ const NftPricePanel = ({
               </div>
             </div>
             <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-              <div>${getNumberWithCommas(_volume)}</div>
+              {_volume ? <div>${getNumberWithCommas(_volume)}</div> : <></>}
             </div>
           </div>
           <div className="flex items-center justify-between">
@@ -129,7 +129,7 @@ const NftPricePanel = ({
               </div>
             </div>
             <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-              <div>${getNumberWithCommas(_change)}</div>
+              {_change ? <div>${getNumberWithCommas(_change)}</div> : <></>}
             </div>
           </div>
           <div className="flex items-center justify-between">
@@ -143,7 +143,7 @@ const NftPricePanel = ({
               </div>
             </div>
             <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-              <div>${getNumberWithCommas(_sales)}</div>
+              {_sales ? <div>${getNumberWithCommas(_sales)}</div> : <></>}
             </div>
           </div>
           <div className="flex items-center justify-between">
@@ -158,7 +158,11 @@ const NftPricePanel = ({
             </div>
 
             <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-              <div>${getNumberWithCommas(_averagePrice)}</div>
+              {_averagePrice ? (
+                <div>${getNumberWithCommas(_averagePrice)}</div>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
           <div className="flex items-center justify-between">
@@ -166,7 +170,11 @@ const NftPricePanel = ({
               Total Volume
             </div>
             <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-              <div>${getNumberWithCommas(totalVolume)}</div>
+              {totalVolume ? (
+                <div>${getNumberWithCommas(totalVolume)}</div>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
           <div className="flex items-center justify-between">
@@ -174,19 +182,23 @@ const NftPricePanel = ({
               Total Supply
             </div>
             <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-              <div>{getNumberWithCommas(totalSupply, 0)}</div>
+              {totalSupply ? (
+                <div>{getNumberWithCommas(totalSupply)}</div>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
           <div className="flex items-center justify-between">
             <div className="text-[#FFFFFF] font-light text-[14px]">Owners</div>
             <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-              <div>{getNumberWithCommas(owners, 0)}</div>
+              {owners ? <div>{getNumberWithCommas(owners, 0)}</div> : <></>}
             </div>
           </div>
           <div className="flex items-center justify-between">
             <div className="text-[#FFFFFF] font-light text-[14px]">Count</div>
             <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-              <div>{getNumberWithCommas(count, 0)}</div>
+              {count ? <div>{getNumberWithCommas(count, 0)}</div> : <></>}
             </div>
           </div>
         </div>

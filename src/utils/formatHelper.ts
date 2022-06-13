@@ -1,13 +1,7 @@
 export function getNumberWithCommas(val: string | number, decimals?: number) {
-  // if (val) {
-  //   let result: string | number = Number(val);
-
-  //   if (decimals !== 0) {
-  //     result = result.toFixed(decimals || 2);
-  //   }
-  //   return result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  // }
-  // return '0';
+  if (isNaN(Number(val))) {
+    return '';
+  }
   return Number(val)
     .toFixed(decimals || 2)
     .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
@@ -16,24 +10,25 @@ export function getNumberWithCommas(val: string | number, decimals?: number) {
 type UnitTypes = 'usd' | 'bnb' | '%' | 'orbs' | 'sol';
 
 interface UnitOptions {
-  type: UnitTypes;
+  type?: UnitTypes;
+  decimals?: number;
 }
 
 export function getNumberWithUnit(val: string | number, options?: UnitOptions) {
   if (options) {
-    const { type } = options;
+    const { type, decimals } = options;
     switch (type) {
       case 'orbs':
-        return getNumberWithCommas(val) + ' OEBS';
+        return getNumberWithCommas(val, decimals) + ' OEBS';
       case '%':
-        return getNumberWithCommas(val) + '%';
+        return getNumberWithCommas(val, decimals) + '%';
       case 'bnb':
-        return getNumberWithCommas(val) + ' BNB';
+        return getNumberWithCommas(val, decimals) + ' BNB';
       case 'sol':
-        return getNumberWithCommas(val) + ' SOL';
+        return getNumberWithCommas(val, decimals) + ' SOL';
       case 'usd':
       default:
-        return '$' + getNumberWithCommas(val);
+        return '$' + getNumberWithCommas(val, decimals);
     }
   }
   return '$' + getNumberWithCommas(val);
