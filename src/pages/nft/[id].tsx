@@ -151,8 +151,7 @@ const Nft = () => {
         router.push(`/collection/${metadata.slug}?tab=about`).then();
         return;
       case 'Explore/All':
-        dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Explore/All' });
-        router.push(`/`).then();
+        router.push('/explore').then();
         return;
     }
   };
@@ -246,14 +245,8 @@ const Nft = () => {
       <div className="mb-[24px]">
         <Breadcrumb
           items={breadCrumbItems}
-          currentValue={currentSelection}
           onItemClick={(val) => {
-            if (val === 'Home') {
-              dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
-              router.push('/').then();
-            } else {
-              handleSelect(val as Selection);
-            }
+            handleSelect(val as Selection);
           }}
         />
       </div>
