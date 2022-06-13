@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import Frame from '../Game/frame';
+import Frame from '../Game/Frame';
 import Button from '../Shared/Button';
 import Skeleton from '../Shared/Skeleton';
 
