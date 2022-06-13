@@ -18,7 +18,7 @@ interface Props extends Attr {
   onMoreInfo: (id: string | number) => void | Promise<void>;
   addToCartLoading: boolean;
   addToCartDisabled?: boolean;
-  external_marketplace_listing_logo: string;
+  external_marketplace_listing_logo?: string;
 }
 
 const RowCard = ({
