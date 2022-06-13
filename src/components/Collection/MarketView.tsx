@@ -120,7 +120,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
   }, []);
 
   return (
-    <div className="mb-[32px]">
+    <div className="mb-[24px]">
       <div className="flex justify-between items-center mb-[24px]">
         <div className="flex items-center w-full">
           <div

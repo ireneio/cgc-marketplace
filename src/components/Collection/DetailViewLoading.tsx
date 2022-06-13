@@ -2,7 +2,7 @@ import Skeleton from '../Shared/Skeleton';
 
 const DetailViewLoading = () => {
   return (
-    <div>
+    <div className="mb-[24px]">
       <div>
         <Skeleton className="w-full h-[50vh] lg:h-[70vh] bg-[#290030]" />
       </div>

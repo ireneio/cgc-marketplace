@@ -122,48 +122,48 @@ const DetailView = () => {
             nftCollectionStats?.meListingCount ||
             nftCollectionStats?.numOwners ||
             nftCollectionStats?.usdTotalVolume) && (
-            <div>
-              <div className="mb-[32px]">
-                <div className="text-[#FFFFFF] font-bold text-[20px]">
-                  Detail
+              <div>
+                <div className="mb-[32px]">
+                  <div className="text-[#FFFFFF] font-bold text-[20px]">
+                    Detail
+                  </div>
                 </div>
-              </div>
-              <div className="mb-[32px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[24px]">
-                {nftCollectionStats?.totalSupply && (
-                  <ItemCountPanel
-                    text="Items available"
-                    count={nftCollectionStats?.totalSupply || '-'}
-                  />
-                )}
-                {nftCollectionStats?.meListingCount && (
-                  <ItemCountPanel
-                    text="Items Listed"
-                    count={nftCollectionStats?.meListingCount || '-'}
-                  />
-                )}
-                {nftCollectionStats?.numOwners && (
-                  <ItemCountPanel
-                    text="Number of Owners"
-                    count={nftCollectionStats?.numOwners || '-'}
-                  />
-                )}
-                {nftCollectionStats?.usdTotalVolume && (
-                  <ItemCountPanel
-                    text="Total Volume"
-                    count={
-                      nftCollectionStats?.usdTotalVolume
-                        ? '$' +
+                <div className="mb-[32px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[24px]">
+                  {nftCollectionStats?.totalSupply && (
+                    <ItemCountPanel
+                      text="Items available"
+                      count={nftCollectionStats?.totalSupply || '-'}
+                    />
+                  )}
+                  {nftCollectionStats?.meListingCount && (
+                    <ItemCountPanel
+                      text="Items Listed"
+                      count={nftCollectionStats?.meListingCount || '-'}
+                    />
+                  )}
+                  {nftCollectionStats?.numOwners && (
+                    <ItemCountPanel
+                      text="Number of Owners"
+                      count={nftCollectionStats?.numOwners || '-'}
+                    />
+                  )}
+                  {nftCollectionStats?.usdTotalVolume && (
+                    <ItemCountPanel
+                      text="Total Volume"
+                      count={
+                        nftCollectionStats?.usdTotalVolume
+                          ? '$' +
                           getNumberWithCommas(
                             nftCollectionStats?.usdTotalVolume,
                             2,
                           )
-                        : '-'
-                    }
-                  />
-                )}
+                          : '-'
+                      }
+                    />
+                  )}
+                </div>
               </div>
-            </div>
-          )}
+            )}
           {tokens.map((token: any, idx: number) => {
             return (
               <div className="mb-[32px]" key={idx}>
