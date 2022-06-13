@@ -1,4 +1,3 @@
-import YourView from '@/components/Collection/YourView';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
 import ActionPanel from '@/components/Nft/ActionPanel';
 import AttributesPanel from '@/components/Nft/AttributesPanel';
@@ -265,7 +264,6 @@ const Nft = () => {
       <div className="mb-[24px]">
         <Divider />
       </div>
-      {currentSelection === 'Your Items' && <YourView />}
       {currentSelection !== 'Your Items' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-[24px] pt-[12px]">
           <div className="flex items-center justify-between col-span-2">
