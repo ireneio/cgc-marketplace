@@ -78,7 +78,7 @@ const FloatingCard = ({
           <img
             src={bg}
             alt={title}
-            className="object-cover rounded-[5px] h-[20vh] w-full"
+            className="object-cover rounded-[5px] h-[25vh] w-full"
           />
         </div>
       )}

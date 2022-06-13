@@ -7,8 +7,10 @@ export const useGetCollections = () => {
   const dispatch = useAppDispatch();
   const oAuthCtx = useContext(OAuthContext);
   const [items, setItems] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const getCollections = async () => {
+    setLoading(true);
     const response = await api.getCollectionList(oAuthCtx.access_token);
     const map = response.map((item: any) => {
       return {
@@ -29,6 +31,7 @@ export const useGetCollections = () => {
     });
     dispatch({ type: 'SET_COLLECTIONS', payload: map });
     setItems(map);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -38,6 +41,7 @@ export const useGetCollections = () => {
   return {
     refresh: getCollections,
     data: items,
+    loading,
   };
 };
 

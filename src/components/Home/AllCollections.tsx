@@ -15,15 +15,7 @@ const AllCollections = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const sideBarPath = useAppSelector((state) => state.layout.navigation.path);
-  const collections = useAppSelector((state) => state.collection.collections);
-  const oAuthCtx = useContext(OAuthContext);
-  const [loading, setLoading] = useState(true);
-  const windowWidth = useWindowWidth();
-  const { data } = useGetCollections();
-
-  useEffect(() => {
-    setLoading(false);
-  }, [data]);
+  const { data, loading } = useGetCollections();
 
   const handleGoDetail = (slug: string) => {
     router.push(`/collection/${slug}`);
