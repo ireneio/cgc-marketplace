@@ -8,6 +8,7 @@ import NftPricePanel from './NftPricePanel';
 import TokenPricePanel from './TokenPricePanel';
 import { useAppSelector } from '@/store';
 import { getNumberWithCommas } from '@/utils/formatHelper';
+import { useGetCollectionsBySlug } from '@/hooks/collections';
 
 type SocialTypes = 'discord' | 'twitter' | 'link';
 
@@ -18,7 +19,7 @@ const socials: Record<string, string | SocialTypes>[] = [
 ];
 
 const DetailView = () => {
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
@@ -34,6 +35,7 @@ const DetailView = () => {
   const nftCollectionStats = useAppSelector(
     (state) => state.collection.currentCollection.nftCollectionStats,
   );
+  const { loading } = useGetCollectionsBySlug();
 
   const info = useMemo(() => {
     return {
@@ -65,14 +67,6 @@ const DetailView = () => {
       },
     ];
   }, [metadata]);
-
-  useEffect(() => {
-    setLoading(true);
-    const tid = setTimeout(() => {
-      setLoading(false);
-      clearTimeout(tid);
-    }, 1200);
-  }, []);
 
   const handleLinkOpen = (type: 'discord' | 'twitter' | 'link') => {
     window.open(info.socialMedia[type], '_blank');

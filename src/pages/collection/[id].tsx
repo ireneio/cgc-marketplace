@@ -4,7 +4,7 @@ import DefaultLayout from '@/components/Layout/DefaultLayout';
 import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Divider from '@/components/Shared/Divider';
 import SelectGroup from '@/components/Shared/SelectGroup';
-import { useAppDispatch, useAppSelector } from '@/store';
+import { useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import { getBreadcrumbRoutes } from '@/utils/cgcConsts';
@@ -25,7 +25,6 @@ export type CollectionTabSelection =
 
 const Collection = () => {
   const router = useRouter();
-  const dispatch = useAppDispatch();
   const access_token = useAppSelector(
     (state) => state.user.userInfo.access_token,
   );
@@ -35,8 +34,6 @@ const Collection = () => {
   const [currentSelection, setCurrentSelection] =
     useState<CollectionTabSelection>('About');
   const [loginModalOpen, setLoginModalOpen] = useState(false);
-  useGetNftByCollectionId();
-  useGetCollectionsBySlug();
 
   const handleSelect = (value: CollectionTabSelection) => {
     if (value === 'Your Items') {

@@ -52,6 +52,7 @@ export const useGetCollectionsBySlug = () => {
   const oAuthCtx = useContext(OAuthContext);
   const [items, setItems] = useState<any[]>([]);
   const [slug, setSlug] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (router.query.id) {
@@ -81,7 +82,10 @@ export const useGetCollectionsBySlug = () => {
 
   useEffect(() => {
     if (slug) {
-      getCollectionData().then();
+      setLoading(true);
+      getCollectionData().then(() => {
+        setLoading(false);
+      });
     }
   }, [slug]);
 
@@ -89,6 +93,7 @@ export const useGetCollectionsBySlug = () => {
     refresh: getCollectionData,
     data: items,
     setSlug,
+    loading,
   };
 };
 
