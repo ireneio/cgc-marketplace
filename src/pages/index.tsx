@@ -60,7 +60,7 @@ const Index = () => {
           <LatestTransactions />
         </div>
       )} */}
-      <div className="mt-[48px] mb-[48px]">
+      <div className="mt-[32px] mb-[48px]">
         <LatestTransactions />
       </div>
       {/* Explore Page */}
