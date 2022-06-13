@@ -62,13 +62,13 @@ const FloatingCard = ({
     <div
       className="w-full"
       style={{
-        height: isDefaultFloating ? 390 : 196,
+        height: isDefaultFloating ? 390 : 'auto',
         // width: isDefaultFloating ? 390 : 196,
       }}
     >
       {currentHoverId !== id && !isDefaultFloating && (
         <div
-          className="bg-[#290030] cursor-pointer rounded-[5px] align-middle transition-all drop-shadow-xl relative z-[1]"
+          className="cursor-pointer rounded-[5px] align-middle transition-all drop-shadow-xl relative z-[1]"
           onMouseOver={() => handleMouseOver()}
           onMouseLeave={() => handleMouseOut()}
           onClick={() => {
@@ -78,7 +78,7 @@ const FloatingCard = ({
           <img
             src={bg}
             alt={title}
-            className="object-cover rounded-[5px] h-[196px] w-full"
+            className="object-cover rounded-[5px] h-[20vh] w-full"
           />
         </div>
       )}
