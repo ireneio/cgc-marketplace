@@ -9,7 +9,6 @@ export function getNumberWithCommas(val: string | number, decimals?: number) {
   // }
   // return '0';
   return Number(val)
-    .toString()
     .toFixed(decimals || 2)
     .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
 }
