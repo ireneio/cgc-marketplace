@@ -1,7 +1,7 @@
 import {
   BASE_SIDEBAR_PATH,
   SIDEBAR_PATH_STORAGE_KEY,
-} from '@/components/Layout/DefaultLayout';
+} from '@/utils/cgcConsts';
 import store from '..';
 
 interface LayoutState {
