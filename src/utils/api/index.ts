@@ -1,4 +1,4 @@
-import {fetcher} from '../swr';
+import { fetcher } from '../swr';
 
 const api = {
   healthCheck: async () => {

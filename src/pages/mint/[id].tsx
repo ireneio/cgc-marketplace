@@ -10,10 +10,10 @@ import Tag from '@/components/Shared/Tag';
 import { useAppDispatch } from '@/store';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
-import {useContext, useEffect, useState} from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { sleep } from '@/utils/helper';
-import {OAuthContext} from "@/contexts/OAuthProvider";
-import api from "@/utils/api";
+import { OAuthContext } from '@/contexts/OAuthProvider';
+import api from '@/utils/api';
 
 export interface LaunchpadNftInfo {
   name: string;
