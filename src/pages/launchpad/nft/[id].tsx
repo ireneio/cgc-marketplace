@@ -107,7 +107,7 @@ const LaunchpadNft = () => {
             <div className="text-[#FFFFFF] font-bold text-[20px]">
               {info.name} [{info.symbol.toUpperCase()}]
             </div>
-            <div className="ml-[20px] flex items-center">
+            <div className="ml-[20px] flex flex-wrap items-center">
               {info.tags.map((tag, index) => {
                 return (
                   <Tag key={index} className="mr-[20px]">
