@@ -58,7 +58,7 @@ const RowCard = ({
       style={{ borderColor: isAddedToCart ? '#F41786' : '#290030' }}
       onClick={() => onMoreInfo(id)}
     >
-      {imageLoaded && (
+      {imageLoaded && external_marketplace_listing_logo && (
         <div className="absolute top-[24px] left-[24px] rounded-[50%] bg-[#3C3C3C]">
           <img
             src={external_marketplace_listing_logo}
