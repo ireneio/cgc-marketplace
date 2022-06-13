@@ -5,6 +5,7 @@ import Pagination from '../Shared/Pagination';
 import SectionTitle from '../Shared/SectionTitle';
 import TransactionTable from './TransactionTable';
 import { flatten } from 'lodash';
+import { parseUnits } from 'ethers/lib/utils';
 
 const PAGE_LIMIT = 10;
 
@@ -34,6 +35,7 @@ const LatestTransactions = () => {
           icon: token?.iconSrcUrl,
           text: token?.symbol,
           id: token?.id,
+          decimals: token?.decimals,
         };
       })
       .reduce((acc: any[], curr: any) => {
@@ -58,6 +60,8 @@ const LatestTransactions = () => {
           row?.transaction?.senderAddress || '',
           row?.transaction?.recipientAddress || '',
           row?.transaction?.amountToken || '',
+          // parseUnits(String(row?.transaction?.amountToken), row?.decimals) ||
+          //   '',
           row?.transaction?.amountUsd || '',
         ];
       });

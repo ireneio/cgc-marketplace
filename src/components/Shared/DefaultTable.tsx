@@ -27,27 +27,28 @@ const DefaultTable = ({ rows, headers }: Props) => {
               No Data Available.
             </Tr>
           )}
-          {rows.map((row, index) => {
-            return (
-              <Tr key={index} style={{ padding: 0, margin: 0 }}>
-                {row.map((col, _index) => {
-                  return Object.keys(col).length ? (
-                    <Td
-                      key={_index}
-                      style={{ padding: 0, margin: 0 }}
-                      className="no_line_break"
-                    >
-                      <div>{col}</div>
-                    </Td>
-                  ) : (
-                    <Td key={_index} className="no_line_break">
-                      {String(col)}
-                    </Td>
-                  );
-                })}
-              </Tr>
-            );
-          })}
+          {rows.length &&
+            rows.map((row, index) => {
+              return (
+                <Tr key={index} style={{ padding: 0, margin: 0 }}>
+                  {row.map((col, _index) => {
+                    return Object.keys(col).length ? (
+                      <Td
+                        key={_index}
+                        style={{ padding: 0, margin: 0 }}
+                        className="no_line_break"
+                      >
+                        <div>{col}</div>
+                      </Td>
+                    ) : (
+                      <Td key={_index} className="no_line_break">
+                        {String(col)}
+                      </Td>
+                    );
+                  })}
+                </Tr>
+              );
+            })}
         </Tbody>
       </Table>
     </div>

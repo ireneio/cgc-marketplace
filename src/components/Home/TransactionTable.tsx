@@ -127,6 +127,18 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
             >
+              {getNumberWithCommas(String(col), 2)}
+            </div>
+          );
+        } else if (colIndex === 6) {
+          return (
+            <div
+              key={colIndex}
+              className="text-[#FFFFFF] text-[14px] px-[10px] py-[12px]"
+              style={{
+                background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
+              }}
+            >
               ${getNumberWithCommas(String(col), 2)}
             </div>
           );
