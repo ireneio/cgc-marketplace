@@ -94,7 +94,7 @@ const LaunchpadNft = () => {
       {loading && <PageLoading />}
       {!loading && (
         <div>
-          <div className="mb-[12px]">
+          <div className="mb-[24px]">
             <Breadcrumb
               items={[
                 { text: 'Home', value: '/' },
@@ -103,7 +103,7 @@ const LaunchpadNft = () => {
               ]}
             />
           </div>
-          <div className="flex items-center mb-[28px]">
+          <div className="flex items-center mb-[24px]">
             <div className="text-[#FFFFFF] font-bold text-[20px]">
               {info.name} [{info.symbol.toUpperCase()}]
             </div>
@@ -117,16 +117,16 @@ const LaunchpadNft = () => {
               })}
             </div>
           </div>
-          <div className="mb-[28px]">
+          <div className="mb-[24px]">
             <Divider />
           </div>
           <div className="flex flex-wrap">
-            <div style={{ flexBasis: '50%' }} className="flex-1">
-              <div className="max-w-[552px] mb-[30px]">
+            <div className="pr-[12px] basis-[100%] lg:basis-[50%]">
+              <div className="max-w-full mb-[24px]">
                 <ImageCarousel images={info.images} />
               </div>
             </div>
-            <div style={{ flexBasis: '50%' }} className="pl-[30px] flex-1">
+            <div className="pl-[12px] basis-[100%] lg:basis-[50%]">
               <NftInfoPanel info={info} />
               <NftPresalePanel info={info} />
               <NftPublicSalePanel info={info} />
