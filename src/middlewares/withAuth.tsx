@@ -31,12 +31,12 @@ const withAuth = (Component: (props: any) => JSX.Element) => {
           if (fallbackPath) {
             router.push(fallbackPath);
           } else if (savedPath) {
-            if (savedPath.type === 'sidebar' && savedPath.sideBarValue) {
-              dispatch({
-                type: 'SET_NAVIGATION_PATH',
-                payload: savedPath.sideBarValue,
-              });
-            }
+            // if (savedPath.type === 'sidebar' && savedPath.sideBarValue) {
+            //   dispatch({
+            //     type: 'SET_NAVIGATION_PATH',
+            //     payload: savedPath.sideBarValue,
+            //   });
+            // }
             router.push(savedPath.path);
           } else {
             router.push('/');

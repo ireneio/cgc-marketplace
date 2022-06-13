@@ -1,4 +1,3 @@
-// import { useAppDispatch } from '@/store';
 import { useRouter } from 'next/router';
 
 interface BreadcrumbItem {
@@ -14,10 +13,8 @@ interface Props {
 
 const Breadcrumb = ({ items, onItemClick }: Props) => {
   const router = useRouter();
-  // const dispatch = useAppDispatch();
 
   const handleSideBarPathUpdate = (val: string) => {
-    // dispatch({ type: 'SET_NAVIGATION_PATH', payload: val });
     router.push(val);
   };
 

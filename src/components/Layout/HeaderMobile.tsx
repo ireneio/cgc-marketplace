@@ -1,4 +1,3 @@
-import { useAppDispatch } from '@/store';
 import { useRouter } from 'next/router';
 
 const HeaderMobile = ({
@@ -8,11 +7,9 @@ const HeaderMobile = ({
   onNavOpen: () => void;
   navOpen: boolean;
 }) => {
-  const dispatch = useAppDispatch();
   const router = useRouter();
 
   const handleGoHomePage = () => {
-    dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
     router.push('/');
   };
 

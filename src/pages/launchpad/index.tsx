@@ -4,7 +4,6 @@ import DefaultLayout from '@/components/Layout/DefaultLayout';
 import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Divider from '@/components/Shared/Divider';
 import SelectGroup from '@/components/Shared/SelectGroup';
-import { useAppDispatch } from '@/store';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -19,7 +18,6 @@ interface LaunchpadItem {
 }
 
 const Launchpad = () => {
-  const dispatch = useAppDispatch();
   const router = useRouter();
   const [currentSelection, setCurrentSelection] = useState('Coming Soon');
   const [items] = useState<LaunchpadItem[]>(
@@ -73,10 +71,7 @@ const Launchpad = () => {
       <div className="mb-[24px]">
         <Divider />
       </div>
-      <div
-        className="grid mb-[24px]"
-        style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(371px, 1fr))' }}
-      >
+      <div className="grid grid-cols-1 md:grid-col-2 xl:grid-cols-4 mb-[24px]">
         {!loading && !items.length && (
           <div className="text-[#FFFFFF] text-semibold">
             No Collections Found.

@@ -99,7 +99,6 @@ export function classNames(...classes: string[]) {
 }
 
 export const BASE_SIDEBAR_PATH = 'Home';
-export const SIDEBAR_PATH_STORAGE_KEY = 'navigation_path';
 
 export const SIDE_BAR_ITEMS = [
   {

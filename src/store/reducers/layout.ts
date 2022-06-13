@@ -1,7 +1,4 @@
-import {
-  BASE_SIDEBAR_PATH,
-  SIDEBAR_PATH_STORAGE_KEY,
-} from '@/utils/cgcConsts';
+import { BASE_SIDEBAR_PATH } from '@/utils/cgcConsts';
 import store from '..';
 
 interface LayoutState {
@@ -30,10 +27,6 @@ const initialState: LayoutState = {
 
 type Action =
   | {
-      type: 'SET_NAVIGATION_PATH';
-      payload: string;
-    }
-  | {
       type: 'SHOW_SNACKBAR';
       payload: { title: string; text: string };
     }
@@ -46,17 +39,6 @@ export default function layoutReducer(
   action: Action,
 ) {
   switch (action.type) {
-    case 'SET_NAVIGATION_PATH':
-      window.localStorage.setItem(
-        SIDEBAR_PATH_STORAGE_KEY,
-        JSON.stringify(action.payload),
-      );
-      return {
-        ...state,
-        navigation: {
-          path: action.payload,
-        },
-      };
     case 'SHOW_SNACKBAR':
       if (state.snackbar.timeoutId) {
         clearTimeout(state.snackbar.timeoutId);

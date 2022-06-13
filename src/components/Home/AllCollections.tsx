@@ -1,20 +1,16 @@
-import { useAppDispatch, useAppSelector } from '@/store';
-import { useContext, useEffect, useState } from 'react';
+import { useAppDispatch } from '@/store';
+import { useEffect, useState } from 'react';
 import ButtonLink from '../Shared/ButtonLink';
 import FloatingCardLoading from './FloatingCardLoading';
 import SectionTitle from '../Shared/SectionTitle';
 import Divider from '@/components/Shared/Divider';
-import { OAuthContext } from '@/contexts/OAuthProvider';
-import api from '@/utils/api';
 import FloatingCard from './FloatingCard';
 import { useRouter } from 'next/router';
-import { useWindowWidth } from '@/hooks/window';
 import { useGetCollections } from '@/hooks/collections';
 
 const AllCollections = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const sideBarPath = useAppSelector((state) => state.layout.navigation.path);
   const { data, loading } = useGetCollections();
 
   const handleGoDetail = (slug: string) => {
@@ -25,18 +21,16 @@ const AllCollections = () => {
 
   useEffect(() => {
     setCurrentHoverId('-1');
-  }, [sideBarPath, router.pathname]);
+  }, [router.pathname]);
 
   return (
     <div className="relative">
       <div className="flex justify-between items-center">
         <SectionTitle>all collections</SectionTitle>
       </div>
-      {sideBarPath === 'Explore/All' && (
-        <div className="mt-[24px] mb-[24px]">
-          <Divider />
-        </div>
-      )}
+      <div className="mt-[24px] mb-[24px]">
+        <Divider />
+      </div>
       <div className="hide-scrollbar">
         {!loading && (
           <div className="mt-[24px]">
@@ -87,11 +81,7 @@ const AllCollections = () => {
           {router.pathname === '/' && (
             <ButtonLink
               onClick={() => {
-                dispatch({
-                  type: 'SET_NAVIGATION_PATH',
-                  payload: 'Explore/All',
-                });
-                window.scroll(0, 0);
+                router.push('/explore');
               }}
             >
               see all
