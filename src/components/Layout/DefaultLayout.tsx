@@ -47,6 +47,7 @@ const DefaultLayout = ({ children, title }: Props) => {
     }
   };
 
+/*
   useEffect(() => {
     let isPathValid = false;
     let resultPath = '';
@@ -71,14 +72,7 @@ const DefaultLayout = ({ children, title }: Props) => {
       // handleSideBarPathUpdate(resultPath);
     }
   }, []);
-
-  // TODO temp:load sign in state from storage
-  // useEffect(() => {
-  //   const email = localStorage.getItem('email');
-  //   if (email) {
-  //     dispatch({ type: 'SET_USER_EMAIL', payload: JSON.parse(email) });
-  //   }
-  // }, []);
+*/
 
   return (
     <>
