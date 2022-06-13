@@ -17,6 +17,8 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
   };
 
   const handleMoreInfo = (name: string) => {
+    console.log('name', name);
+
     router.push(`/collection/${name}`).then();
   };
 

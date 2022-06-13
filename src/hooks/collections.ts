@@ -19,7 +19,7 @@ export const useGetCollections = () => {
         logoSrc: item.metadata.logoSrcUrl,
         videoSrc: item.metadata.videoSrcUrl,
         name: item.metadata.name,
-        slug: item.metadata.name.toLowerCase().split(' ').join(''),
+        slug: item.metadata.name.toLowerCase().split(' ').join('_'),
         tags: item.tags.length ? item.tags.map((item: any) => item.tag) : [],
         genre: [item.metadata.genre, ...item.tags.slice(0, 2)],
         services: item.services,
@@ -95,23 +95,26 @@ export const useGetNftByCollectionId = () => {
         payload: response?.data,
       });
     }
-    const map = response.map((item: any) => {
-      const manifest = item?.splNftInfo?.data?.manifest;
-      return {
-        image: manifest?.image,
-        brand: manifest?.collection?.name,
-        name: manifest?.name,
-        price: 0,
-        tokenAddress: item?.tokenAddress,
-        collection_id: item?.collections[0]?.id,
-        is_listed: item?.external_marketplace_listing?.length,
-        external_marketplace_listing: item?.external_marketplace_listing,
-        external_marketplace_listing_logo: item?.external_marketplace_listing
-          .length
-          ? item?.external_marketplace_listing[0]?.logoSrcUrl
-          : '',
-      };
-    });
+    const map =
+      response && response.length
+        ? response.map((item: any) => {
+            const manifest = item?.splNftInfo?.data?.manifest;
+            return {
+              image: manifest?.image,
+              brand: manifest?.collection?.name,
+              name: manifest?.name,
+              price: 0,
+              tokenAddress: item?.tokenAddress,
+              collection_id: item?.collections[0]?.id,
+              is_listed: item?.external_marketplace_listing?.length,
+              external_marketplace_listing: item?.external_marketplace_listing,
+              external_marketplace_listing_logo: item
+                ?.external_marketplace_listing.length
+                ? item?.external_marketplace_listing[0]?.logoSrcUrl
+                : '',
+            };
+          })
+        : [];
 
     setItems(map);
     setLoading(false);
