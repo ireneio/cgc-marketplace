@@ -84,7 +84,7 @@ const AllCollections = () => {
           </div>
         )}
         <div className="mt-[12px] flex justify-end">
-          {sideBarPath === 'Home' && (
+          {router.pathname === '/' && (
             <ButtonLink
               onClick={() => {
                 dispatch({

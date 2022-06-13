@@ -1,4 +1,6 @@
 import { useWindowHeight, useWindowWidth } from '@/hooks/window';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface SidebarItem {
@@ -10,19 +12,19 @@ interface SidebarItem {
 }
 interface Props {
   items: SidebarItem[];
-  currentValue: string;
   onItemClick?: (value: string) => void | Promise<void>;
   rootClassName?: string;
 }
 
-const Sidebar = ({
-  items,
-  currentValue,
-  onItemClick,
-  rootClassName,
-}: Props) => {
+const Sidebar = ({ items, onItemClick, rootClassName }: Props) => {
+  const router = useRouter();
   const windowWidth = useWindowWidth();
   const windiwHeight = useWindowHeight();
+  const [currentValue, setCurrentValue] = useState('/');
+
+  useEffect(() => {
+    setCurrentValue(router.pathname);
+  }, [router.pathname]);
 
   return (
     <div
@@ -38,7 +40,7 @@ const Sidebar = ({
       }}
     >
       {items.map((item) => {
-        const isSelectedParent = currentValue.split('/')[0] === item.value;
+        const isSelectedParent = currentValue === item.value;
         return (
           <div
             key={item.value}
@@ -79,10 +81,13 @@ const Sidebar = ({
               <div className="px-[38px]">
                 {item.children?.map((child) => {
                   const isSelectedChild =
-                    currentValue.split('/')[1] === child.value;
+                    (currentValue.split('/')[2] === child.value ||
+                      (currentValue.split('/').length === 2 &&
+                        child.value === '')) &&
+                    isSelectedParent;
                   return (
                     <div
-                      key={child.value}
+                      key={item.value + child.value}
                       className="flex items-center transition-all py-[6px]"
                       style={{
                         cursor: isSelectedChild

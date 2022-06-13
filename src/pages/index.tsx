@@ -54,37 +54,49 @@ const Index = () => {
   return (
     <DefaultLayout>
       {/* Home Page */}
-      {sideBarPath != 'Home' && (
+      {/* {sideBarPath != 'Home' && (
         <div className="mb-[0]">
           <Breadcrumb items={breadcrumbItems} currentValue={sideBarPath} />
         </div>
-      )}
-      {sideBarPath === 'Home' && (
+      )} */}
+      {/* {sideBarPath === 'Home' && (
         <div className="mt-[21px]">
           <LandingCarousel carouselItems={carouselItems} />
         </div>
-      )}
-      {sideBarPath === 'Home' && (
+      )} */}
+      <div className="mt-[21px]">
+        <LandingCarousel carouselItems={carouselItems} />
+      </div>
+      {/* {sideBarPath === 'Home' && (
         <div className="mt-[32px]">
           <AllCollections />
         </div>
-      )}
-      {sideBarPath === 'Home' && (
+      )} */}
+      <div className="mt-[32px]">
+        <AllCollections />
+      </div>
+      {/* {sideBarPath === 'Home' && (
         <div className="mt-[32px]">
           <LatestSales />
         </div>
-      )}
-      {sideBarPath === 'Home' && (
+      )} */}
+      <div className="mt-[32px]">
+        <LatestSales />
+      </div>
+      {/* {sideBarPath === 'Home' && (
         <div className="mt-[48px] mb-[48px]">
           <LatestTransactions />
         </div>
-      )}
+      )} */}
+      <div className="mt-[48px] mb-[48px]">
+        <LatestTransactions />
+      </div>
       {/* Explore Page */}
-      {sideBarPath === 'Explore/All' && (
+      {/* {sideBarPath === 'Explore/All' && (
         <div className="mt-[24px]">
           <AllCollections />
         </div>
-      )}
+      )} */}
     </DefaultLayout>
   );
 };

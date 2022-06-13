@@ -3,7 +3,7 @@ export function getNumberWithCommas(val: string | number, decimals?: number) {
     return '';
   }
   return Number(val)
-    .toFixed(decimals || 2)
+    .toFixed(decimals || decimals === 0 ? decimals : 2)
     .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
 }
 

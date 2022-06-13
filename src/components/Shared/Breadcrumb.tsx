@@ -1,4 +1,5 @@
-import { useAppDispatch } from '@/store';
+// import { useAppDispatch } from '@/store';
+import { useRouter } from 'next/router';
 
 interface BreadcrumbItem {
   text: string;
@@ -8,15 +9,16 @@ interface BreadcrumbItem {
 }
 interface Props {
   items: BreadcrumbItem[];
-  currentValue: string;
   onItemClick?: (value: string) => void | Promise<void>;
 }
 
 const Breadcrumb = ({ items, onItemClick }: Props) => {
-  const dispatch = useAppDispatch();
+  const router = useRouter();
+  // const dispatch = useAppDispatch();
 
   const handleSideBarPathUpdate = (val: string) => {
-    dispatch({ type: 'SET_NAVIGATION_PATH', payload: val });
+    // dispatch({ type: 'SET_NAVIGATION_PATH', payload: val });
+    router.push(val);
   };
 
   return (
@@ -47,7 +49,7 @@ const Breadcrumb = ({ items, onItemClick }: Props) => {
                 }}
                 disabled={item.disabled}
                 onClick={() => {
-                  if (!item.disabled) {
+                  if (!item.disabled && index !== array.length - 1) {
                     handleSideBarPathUpdate(item.value);
                   }
                 }}

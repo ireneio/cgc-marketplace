@@ -10,6 +10,7 @@ import dynamic from 'next/dynamic';
 import { useWindowWidth } from '@/hooks/window';
 import HeaderMobile from './HeaderMobile';
 import { motion } from 'framer-motion';
+import { SIDEBAR_PATH_STORAGE_KEY, SIDE_BAR_ITEMS } from '@/utils/cgcConsts';
 
 interface Props {
   children?: React.ReactNode;
@@ -20,48 +21,6 @@ const DynamicSnackbar = dynamic(
   () => import('../../components/Shared/Snackbar'),
   { ssr: false },
 );
-
-export const BASE_SIDEBAR_PATH = 'Home';
-export const SIDEBAR_PATH_STORAGE_KEY = 'navigation_path';
-
-const SIDE_BAR_ITEMS = [
-  {
-    text: 'Home',
-    value: 'Home',
-    icon: '/img/icon_home.svg',
-  },
-  {
-    text: 'Explore',
-    value: 'Explore',
-    icon: '/img/icon_explore.svg',
-    children: [
-      { text: 'All', value: 'All' },
-      // { text: 'Latest', value: 'Latest' },
-      // { text: 'Popular', value: 'Popular' },
-    ],
-  },
-  // { text: 'Sell', value: 'Sell', icon: '/img/icon_sell.png' },
-  {
-    text: 'Launchpad',
-    value: 'Launchpad',
-    icon: '/img/icon_launchpad.svg',
-  },
-  // {
-  //   text: 'Cart',
-  //   value: 'Cart',
-  //   icon: '/img/icon_cart.svg',
-  // },
-  // {
-  //   text: 'Transactions',
-  //   value: 'Transactions',
-  //   icon: '/img/icon_bar.png',
-  // },
-  // {
-  //   text: 'Latest Sales',
-  //   value: 'Latest Sales',
-  //   icon: '/img/icon_dollar.png',
-  // },
-];
 
 const sidebarAnimationVariants = {
   open: { x: 0 },
@@ -79,11 +38,12 @@ const DefaultLayout = ({ children, title }: Props) => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
 
   const handleSideBarPathUpdate = (val: string) => {
-    if (val === 'Home' || val.includes('Explore')) {
-      dispatch({ type: 'SET_NAVIGATION_PATH', payload: val });
-      router.push('/').then();
-    } else if (val === 'Launchpad') {
+    console.log(val);
+
+    if (val === 'Launchpad') {
       window.open('', '_blank');
+    } else {
+      router.push(val);
     }
   };
 
@@ -107,7 +67,7 @@ const DefaultLayout = ({ children, title }: Props) => {
     }
     if (isPathValid) {
       // TODO
-      dispatch({ type: 'SET_NAVIGATION_PATH', payload: resultPath });
+      // dispatch({ type: 'SET_NAVIGATION_PATH', payload: resultPath });
       // handleSideBarPathUpdate(resultPath);
     }
   }, []);
@@ -187,7 +147,7 @@ const DefaultLayout = ({ children, title }: Props) => {
           >
             <Sidebar
               items={SIDE_BAR_ITEMS}
-              currentValue={sideBarPath}
+              // currentValue={sideBarPath}
               onItemClick={(value) => handleSideBarPathUpdate(value)}
             />
           </div>
@@ -199,7 +159,7 @@ const DefaultLayout = ({ children, title }: Props) => {
           >
             <Sidebar
               items={SIDE_BAR_ITEMS}
-              currentValue={sideBarPath}
+              // currentValue={router.pathname}
               onItemClick={(value) => handleSideBarPathUpdate(value)}
               rootClassName={'static bg-[#13002B] w-[70vw] h-inherit'}
             />

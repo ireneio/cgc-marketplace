@@ -6,10 +6,8 @@ import Divider from '@/components/Shared/Divider';
 import SelectGroup from '@/components/Shared/SelectGroup';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getBreadcrumbRoutes } from '@/utils/cgcConsts';
-import api from '@/utils/api';
-import { OAuthContext } from '@/contexts/OAuthProvider';
 import { LoginModal } from '@/components/Auth/LoginModal';
 import {
   useGetCollectionsBySlug,
@@ -28,7 +26,6 @@ export type CollectionTabSelection =
 const Collection = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const oAuthCtx = useContext(OAuthContext);
   const access_token = useAppSelector(
     (state) => state.user.userInfo.access_token,
   );
@@ -110,19 +107,8 @@ const Collection = () => {
       <div className="mb-[24px]">
         <Breadcrumb
           items={breadcrumbItems}
-          currentValue={
-            currentSelection === 'About' ? 'Collection' : currentSelection
-          }
           onItemClick={(val) => {
-            if (val === 'Home') {
-              dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
-              router.push('/').then();
-            } else if (val === 'Collection') {
-              handleSelect('About');
-            } else if (val === 'Explore/All') {
-              dispatch({ type: 'SET_NAVIGATION_PATH', payload: val });
-              router.push('/').then();
-            } else if (val === 'Your Items') {
+            if (val === 'Your Items') {
               handleSelect('Your Items');
             }
           }}
