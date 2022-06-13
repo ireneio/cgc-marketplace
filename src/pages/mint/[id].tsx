@@ -10,7 +10,10 @@ import Tag from '@/components/Shared/Tag';
 import { useAppDispatch } from '@/store';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import {useContext, useEffect, useState} from 'react';
+import { sleep } from '@/utils/helper';
+import {OAuthContext} from "@/contexts/OAuthProvider";
+import api from "@/utils/api";
 
 export interface LaunchpadNftInfo {
   name: string;
@@ -40,9 +43,12 @@ export interface LaunchpadNftInfo {
   };
 }
 
-const LaunchpadNft = () => {
+const MintNFT = () => {
   const dispatch = useAppDispatch();
+  const oAuthCtx = useContext(OAuthContext);
   const router = useRouter();
+  const id = 4;
+  const contract = 'G17ksqA9jiLUvEAtQg5B4kGJGAPCC9EtkgPP9w28JFRV';
   const [info] = useState<LaunchpadNftInfo>({
     name: 'Tank Metaverse',
     symbol: 'TNK',
@@ -83,11 +89,20 @@ const LaunchpadNft = () => {
 
   useEffect(() => {
     setLoading(true);
-    const tid = setTimeout(() => {
+    Promise.all([getCollectionInfo(), getContractInfo()]).then(() => {
       setLoading(false);
-      clearTimeout(tid);
-    }, 1200);
+    });
   }, []);
+
+  const getCollectionInfo = async () => {
+    const response = await api.getCollectionById(3);
+    console.log(response?.data);
+  };
+
+  const getContractInfo = async () => {
+    await sleep(5000);
+    console.log('Get Contract Info');
+  };
 
   return (
     <DefaultLayout>
@@ -151,4 +166,4 @@ const LaunchpadNft = () => {
   );
 };
 
-export default LaunchpadNft;
+export default MintNFT;
