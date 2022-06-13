@@ -1,6 +1,7 @@
 import { OAuthContext } from '@/contexts/OAuthProvider';
 import { useAppDispatch } from '@/store';
 import api from '@/utils/api';
+import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 
 export const useGetCollections = () => {
@@ -45,10 +46,18 @@ export const useGetCollections = () => {
   };
 };
 
-export const useGetCollectionsBySlug = ({ slug }: { slug: string }) => {
+export const useGetCollectionsBySlug = () => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const oAuthCtx = useContext(OAuthContext);
   const [items, setItems] = useState<any[]>([]);
+  const [slug, setSlug] = useState('');
+
+  useEffect(() => {
+    if (router.query.id) {
+      setSlug(String(router.query.id));
+    }
+  }, [router.query.id]);
 
   const getCollectionData = async () => {
     const response = await api.getCollectionBySlug(
@@ -71,12 +80,15 @@ export const useGetCollectionsBySlug = ({ slug }: { slug: string }) => {
   };
 
   useEffect(() => {
-    getCollectionData().then();
-  }, []);
+    if (slug) {
+      getCollectionData().then();
+    }
+  }, [slug]);
 
   return {
     refresh: getCollectionData,
     data: items,
+    setSlug,
   };
 };
 

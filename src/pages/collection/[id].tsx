@@ -38,10 +38,8 @@ const Collection = () => {
   const [currentSelection, setCurrentSelection] =
     useState<CollectionTabSelection>('About');
   const [loginModalOpen, setLoginModalOpen] = useState(false);
-  const { data: nfts, loading } = useGetNftByCollectionId();
-  const { data: collections, refresh } = useGetCollectionsBySlug({
-    slug: String(router.query.id),
-  });
+  useGetNftByCollectionId();
+  useGetCollectionsBySlug();
 
   const handleSelect = (value: CollectionTabSelection) => {
     if (value === 'Your Items') {
