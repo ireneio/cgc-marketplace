@@ -13,7 +13,10 @@ import RowCardLoading from './RowCardLoading';
 import { useInView } from 'react-intersection-observer';
 import { CollectionTabSelection } from '@/pages/collection/[id]';
 import { useCart } from '@/hooks/cart';
-import { useGetNftByCollectionId } from '@/hooks/collections';
+import {
+  useGetCollectionsBySlug,
+  useGetNftByCollectionId,
+} from '@/hooks/collections';
 
 type SelectionView = 'Row' | 'List';
 
@@ -40,6 +43,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
   });
   const { handleAddToCart, isItemAddedToCart } = useCart();
   const { getData, data, loading } = useGetNftByCollectionId();
+  useGetCollectionsBySlug();
 
   const _items = useMemo(() => {
     let arr = [...data];

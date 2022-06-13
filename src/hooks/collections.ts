@@ -66,6 +66,7 @@ export const useGetCollectionsBySlug = () => {
       slug.split('_').join('_'),
     );
     if (response) {
+      setItems(response);
       dispatch({
         type: 'SET_CURRENT_COLLECTION',
         payload: {
