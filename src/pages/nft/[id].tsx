@@ -158,7 +158,7 @@ const Nft = () => {
   };
 
   const getCollectionData = async () => {
-    const response = await api.getCollectionById(
+    const response = await api.getCollectionBySlug(
       oAuthCtx.access_token,
       String(router.query.slug),
     );
