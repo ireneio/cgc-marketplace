@@ -52,16 +52,9 @@ const Launchpad = () => {
       <div className="mb-[12px]">
         <Breadcrumb
           items={[
-            { text: 'Home', value: 'Home' },
-            { text: 'Launchpad', value: 'Launchpad' },
+            { text: 'Home', value: '/' },
+            { text: 'Launchpad', value: '/launchpad' },
           ]}
-          currentValue={'Launchpad'}
-          onItemClick={(val) => {
-            if (val === 'Home') {
-              dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
-              router.push('/').then();
-            }
-          }}
         />
       </div>
       <div className="flex justify-between items-center mb-[28px]">
