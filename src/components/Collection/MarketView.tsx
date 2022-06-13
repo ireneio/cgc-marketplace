@@ -33,7 +33,6 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
   );
   const [currentView, setCurrentView] = useState<SelectionView>('List');
   const [currentFilter, setCurrentFilter] = useState<SelectionFilter>('');
-  const [items, setItems] = useState<any>([]);
   const [page, setPage] = useState(0);
   const { ref, inView } = useInView({
     /* Optional options */
@@ -83,12 +82,12 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
         0,
       );
     } else if (currentTab === 'Listed Items') {
-      const listed = items.filter(
+      const listed = data.filter(
         (item: any) => item?.external_marketplace_listing?.length,
       );
       return getNumberWithCommas(listed.length, 0);
     }
-  }, [currentTab]);
+  }, [currentTab, data]);
 
   const handleSelectView = (value: SelectionView) => {
     setCurrentView(value);
@@ -370,7 +369,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
             <div ref={ref}></div>
           </div>
         )}
-        {!items.length && !loading && (
+        {!_items.length && !loading && (
           <div className="text-[#FFFFFF] text-semibold">
             No Items Available.
           </div>
