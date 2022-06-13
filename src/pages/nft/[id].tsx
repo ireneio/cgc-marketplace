@@ -178,7 +178,6 @@ const Nft = () => {
   };
 
   const getNftData = async () => {
-    setLoading(true);
     const response = await api.getNftListByHash(
       oAuthCtx.access_token,
       String(router.query.id),
@@ -210,11 +209,13 @@ const Nft = () => {
         price: '0',
       });
     }
-    setLoading(false);
   };
 
   const handleRefresh = async () => {
-    getNftData().then();
+    setLoading(true);
+    getNftData().then(() => {
+      setLoading(false);
+    });
   };
 
   useEffect(() => {
@@ -231,8 +232,11 @@ const Nft = () => {
 
   useEffect(() => {
     if (router.query.id) {
+      setLoading(true);
       getCollectionData().then(() => {
-        getNftData().then();
+        getNftData().then(() => {
+          setLoading(false);
+        });
       });
     }
   }, [router.query.id]);

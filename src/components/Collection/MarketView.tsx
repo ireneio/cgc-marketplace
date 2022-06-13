@@ -161,8 +161,6 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
     getCart();
   }, []);
 
-  console.log(currentCollection);
-
   return (
     <div className="mb-[32px]">
       <div className="flex justify-between items-center mb-[24px]">
