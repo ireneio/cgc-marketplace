@@ -7,7 +7,7 @@ interface Props {
 const CollectionsCard = ({ image, onClick, id }: Props) => {
   return (
     <div
-      className="w-auto h-[253px] bg-cover bg-no-repeat"
+      className="w-auto h-[253px] bg-cover bg-no-repeat bg-center"
       style={{ backgroundImage: `url(${image})` }}
       onClick={() => onClick && onClick(id)}
     ></div>

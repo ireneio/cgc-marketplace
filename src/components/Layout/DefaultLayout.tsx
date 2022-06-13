@@ -1,10 +1,10 @@
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Footer from './Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import seo from '../../data/seo';
-import { useAppDispatch, useAppSelector } from '@/store';
+import { useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import { useWindowWidth } from '@/hooks/window';
@@ -28,8 +28,6 @@ const sidebarAnimationVariants = {
 };
 
 const DefaultLayout = ({ children, title }: Props) => {
-  const dispatch = useAppDispatch();
-  const sideBarPath = useAppSelector((state) => state.layout.navigation.path);
   const snackbarShow = useAppSelector((state) => state.layout.snackbar.show);
   const snackbarText = useAppSelector((state) => state.layout.snackbar.text);
   const snackbarTitle = useAppSelector((state) => state.layout.snackbar.title);

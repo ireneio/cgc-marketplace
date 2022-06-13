@@ -24,7 +24,7 @@ const Launchpad = () => {
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
       id: item,
       type: item % 2 === 0 ? 'nft' : 'token',
-      image: '/img/seoulstars-main.jpeg',
+      image: '/img/cgc_icon.png',
     })),
   );
   const [loading, setLoading] = useState(true);
@@ -71,7 +71,7 @@ const Launchpad = () => {
       <div className="mb-[24px]">
         <Divider />
       </div>
-      <div className="grid grid-cols-1 md:grid-col-2 xl:grid-cols-4 mb-[24px]">
+      <div className="grid gap-[12px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cold-6 auto-rows-auto mb-[24px]">
         {!loading && !items.length && (
           <div className="text-[#FFFFFF] text-semibold">
             No Collections Found.
@@ -81,7 +81,7 @@ const Launchpad = () => {
           items.length &&
           items.map((item, index) => {
             return (
-              <div key={index} className="mb-[20px] cursor-pointer">
+              <div key={index} className="cursor-pointer">
                 <CollectionsCard
                   id={String(index)}
                   image={item.image}
@@ -93,7 +93,7 @@ const Launchpad = () => {
         {loading &&
           LOADING_ARR.map((item, index) => {
             return (
-              <div key={index} className="mb-[20px]">
+              <div key={index}>
                 <CollectionsCardLoading />
               </div>
             );

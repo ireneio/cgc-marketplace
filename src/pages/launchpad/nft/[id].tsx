@@ -91,49 +91,49 @@ const LaunchpadNft = () => {
 
   return (
     <DefaultLayout>
-      {loading && <PageLoading />}
-      {!loading && (
-        <div>
-          <div className="mb-[24px]">
-            <Breadcrumb
-              items={[
-                { text: 'Home', value: '/' },
-                { text: 'Launchpad', value: '/launchpad' },
-                { text: info.name, value: '/launchpad' + info.name },
-              ]}
-            />
-          </div>
-          <div className="flex items-center mb-[24px]">
-            <div className="text-[#FFFFFF] font-bold text-[20px]">
-              {info.name} [{info.symbol.toUpperCase()}]
+      <div className="mb-[24px]">
+        {loading && <PageLoading />}
+        {!loading && (
+          <div>
+            <div className="mb-[24px]">
+              <Breadcrumb
+                items={[
+                  { text: 'Home', value: '/' },
+                  { text: 'Launchpad', value: '/launchpad' },
+                  { text: info.name, value: '/launchpad' + info.name },
+                ]}
+              />
             </div>
-            <div className="ml-[20px] flex flex-wrap items-center">
-              {info.tags.map((tag, index) => {
-                return (
-                  <Tag key={index} className="mr-[20px]">
-                    {tag}
-                  </Tag>
-                );
-              })}
-            </div>
-          </div>
-          <div className="mb-[24px]">
-            <Divider />
-          </div>
-          <div className="flex flex-wrap">
-            <div className="pr-[12px] basis-[100%] lg:basis-[50%]">
-              <div className="max-w-full mb-[24px]">
-                <ImageCarousel images={info.images} />
+            <div className="flex items-center mb-[24px]">
+              <div className="text-[#FFFFFF] font-bold text-[20px]">
+                {info.name} [{info.symbol.toUpperCase()}]
+              </div>
+              <div className="ml-[20px] flex flex-wrap items-center">
+                {info.tags.map((tag, index) => {
+                  return (
+                    <Tag key={index} className="mr-[20px]">
+                      {tag}
+                    </Tag>
+                  );
+                })}
               </div>
             </div>
-            <div className="pl-[12px] basis-[100%] lg:basis-[50%]">
-              <NftInfoPanel info={info} />
-              <NftPresalePanel info={info} />
-              <NftPublicSalePanel info={info} />
+            <div className="mb-[24px]">
+              <Divider />
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-[24px]">
+              <div>
+                <ImageCarousel images={info.images} />
+              </div>
+              <div className="grid gap-y-[24px]">
+                <NftInfoPanel info={info} />
+                <NftPresalePanel info={info} />
+                <NftPublicSalePanel info={info} />
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </DefaultLayout>
   );
 };

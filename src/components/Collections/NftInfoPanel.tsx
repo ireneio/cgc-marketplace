@@ -59,10 +59,11 @@ const NftInfoPanel = ({ info }: { info: LaunchpadNftInfo }) => {
               onClick={() => handleLinkOpen('whitepaper')}
             >
               <img
-                src="/img/icon_doc.png"
-                width={12}
-                height={12}
+                src="/img/icon_paper.svg"
+                width={18}
+                height={18}
                 alt="whitepaper"
+                className="mt-[7px]"
               />
             </div>
             <div
@@ -70,7 +71,7 @@ const NftInfoPanel = ({ info }: { info: LaunchpadNftInfo }) => {
               onClick={() => handleLinkOpen('twitter')}
             >
               <img
-                src="/img/icon_twitter.png"
+                src="/img/icon_twitter.svg"
                 width={16}
                 height={16}
                 alt="twitter"
@@ -81,7 +82,7 @@ const NftInfoPanel = ({ info }: { info: LaunchpadNftInfo }) => {
               onClick={() => handleLinkOpen('discord')}
             >
               <img
-                src="/img/icon_discord.png"
+                src="/img/icon_discord.svg"
                 width={16}
                 height={16}
                 alt="discord"
@@ -91,7 +92,7 @@ const NftInfoPanel = ({ info }: { info: LaunchpadNftInfo }) => {
               className="ml-[16px] cursor-pointer"
               onClick={() => handleLinkOpen('link')}
             >
-              <img src="/img/icon_link.png" width={16} height={16} alt="link" />
+              <img src="/img/icon_link.svg" width={16} height={16} alt="link" />
             </div>
           </div>
         </div>
