@@ -63,6 +63,7 @@ const FloatingCard = ({
       className="w-full"
       style={{
         height: isDefaultFloating ? 390 : 196,
+        // width: isDefaultFloating ? 390 : 196,
       }}
     >
       {currentHoverId !== id && !isDefaultFloating && (
@@ -101,8 +102,8 @@ const FloatingCard = ({
         >
           <div
             style={{
-              width: isDefaultFloating ? 'auto' : 420,
-              height: isDefaultFloating ? 'auto' : 420,
+              width: isDefaultFloating ? 'auto' : '24rem',
+              height: isDefaultFloating ? 'auto' : '24rem',
             }}
             className="absolute border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden"
           >

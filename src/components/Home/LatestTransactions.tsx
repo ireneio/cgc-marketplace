@@ -10,7 +10,7 @@ const PAGE_LIMIT = 10;
 const LatestTransactions = () => {
   const oAuthCtx = useContext(OAuthContext);
   const [currentPage, setCurrentPage] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [txList, setTxList] = useState<any[]>([]);
 
   const _txList = useMemo(() => {
@@ -60,11 +60,12 @@ const LatestTransactions = () => {
         ];
       });
     setTxList(map);
-    setLoading(false);
   };
 
   useEffect(() => {
-    setData();
+    setData().then(() => {
+      // setLoading(false);
+    });
   }, []);
 
   return (

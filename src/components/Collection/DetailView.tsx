@@ -25,6 +25,9 @@ const DetailView = () => {
   const services = useAppSelector(
     (state) => state.collection.currentCollection.services,
   );
+  const tags = useAppSelector(
+    (state) => state.collection.currentCollection.tags,
+  );
   const tokens = useAppSelector(
     (state) => state.collection.currentCollection.tokens,
   );
@@ -45,7 +48,7 @@ const DetailView = () => {
         link: metadata.websiteUrl,
       },
       services: services.map((item: any) => item.name),
-      tags: services.map((item: any) => item.tag),
+      tags: tags.map((item: any) => item),
     };
   }, [metadata, services]);
 
@@ -107,9 +110,9 @@ const DetailView = () => {
               );
             })}
           </div>
-          {info.services.length > 0 && (
+          {info.tags.length > 0 && (
             <div className="flex flex-wrap mb-[32px]">
-              {info.services.map((tag: string, index: number) => {
+              {info.tags.map((tag: string, index: number) => {
                 return (
                   <Tag key={index} className="mr-[12px]">
                     {tag}
