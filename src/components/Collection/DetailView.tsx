@@ -197,25 +197,39 @@ const DetailView = () => {
             );
           })}
           <div className="mb-[32px] w-full lg:w-[70%] 2xl:w-[50%]">
-            <NftPricePanel
-              name={metadata.name}
-              volume={nftCollectionStats?.usdMeTotalVolume}
-              volume7Days={nftCollectionStats?.usdSevenDayVolume}
-              volume30Days={nftCollectionStats?.usdThirtyDayVolume}
-              change={nftCollectionStats?.usdOneDayChange}
-              change7Days={nftCollectionStats?.usdSevenDayChange}
-              change30Days={nftCollectionStats?.usdThirtyDayChange}
-              sales={nftCollectionStats?.usdOneDaySales}
-              sales7Days={nftCollectionStats?.usdSevenDaySales}
-              sales30Days={nftCollectionStats?.usdThirtyDaySales}
-              averagePrice={nftCollectionStats?.usdAveragePrice}
-              averagePrice7Days={nftCollectionStats?.usdSevenDayAveragePrice}
-              averagePrice30Days={nftCollectionStats?.usdThirtyDayAveragePrice}
-              totalVolume={nftCollectionStats?.usdTotalVolume}
-              totalSupply={nftCollectionStats?.totalSupply}
-              owners={nftCollectionStats?.numOwners}
-              count={nftCollectionStats?.count}
-            />
+            {nftCollectionStats ? (
+              <NftPricePanel
+                name={metadata.name}
+                volume={nftCollectionStats?.usdMeTotalVolume}
+                volume7Days={nftCollectionStats?.usdSevenDayVolume}
+                volume30Days={nftCollectionStats?.usdThirtyDayVolume}
+                change={nftCollectionStats?.usdOneDayChange}
+                change7Days={nftCollectionStats?.usdSevenDayChange}
+                change30Days={nftCollectionStats?.usdThirtyDayChange}
+                sales={nftCollectionStats?.usdOneDaySales}
+                sales7Days={nftCollectionStats?.usdSevenDaySales}
+                sales30Days={nftCollectionStats?.usdThirtyDaySales}
+                averagePrice={nftCollectionStats?.usdAveragePrice}
+                averagePrice7Days={nftCollectionStats?.usdSevenDayAveragePrice}
+                averagePrice30Days={
+                  nftCollectionStats?.usdThirtyDayAveragePrice
+                }
+                totalVolume={nftCollectionStats?.usdTotalVolume}
+                totalSupply={nftCollectionStats?.totalSupply}
+                owners={nftCollectionStats?.numOwners}
+                count={nftCollectionStats?.count}
+              />
+            ) : (
+              <div>
+                <Tag className="relative px-[18px] py-[24px]">
+                  <div className="mb-[8px] text-[#FFFFFF] font-bold text-[14px]">
+                    {metadata?.name} NFT
+                  </div>
+                  Sorry, we could not retrieve any data at this moment in time.
+                  Please try again later.{' '}
+                </Tag>
+              </div>
+            )}
           </div>
         </div>
       )}
