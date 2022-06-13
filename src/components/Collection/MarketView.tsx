@@ -119,6 +119,10 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
           is_listed: item?.external_marketplace_listing?.length,
           external_marketplace_listing:
             item?.external_marketplace_listing || [],
+          external_marketplace_listing_logo: item?.external_marketplace_listing
+            .length
+            ? item?.external_marketplace_listing[0]?.logoSrcUrl
+            : '',
         };
       })
       .sort((a: any, b: any) => {
@@ -370,6 +374,9 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
                     addToCartLoading={false}
                     addToCartDisabled={!item.is_listed}
                     tokenAddress={item.tokenAddress}
+                    external_marketplace_listing_logo={
+                      item.external_marketplace_listing_logo
+                    }
                   />
                 </div>
               );
@@ -397,6 +404,9 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
                     addToCartLoading={false}
                     addToCartDisabled={!item.is_listed}
                     tokenAddress={item.tokenAddress}
+                    external_marketplace_listing_logo={
+                      item.external_marketplace_listing_logo
+                    }
                   />
                 </div>
               );

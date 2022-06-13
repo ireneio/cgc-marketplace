@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Divider from '../Shared/Divider';
 import Skeleton from '../Shared/Skeleton';
 
@@ -17,6 +18,7 @@ interface Props extends Attr {
   onMoreInfo: (id: string | number) => void | Promise<void>;
   addToCartLoading: boolean;
   addToCartDisabled?: boolean;
+  external_marketplace_listing_logo: string;
 }
 
 const RowCard = ({
@@ -33,24 +35,38 @@ const RowCard = ({
   tokenAddress,
   addBtnText,
   removeBtnText,
+  external_marketplace_listing_logo,
 }: Props) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   const handleImageLoad = (e: any) => {
     e.target.classList.remove('blur');
-    e.target.src = image;
+    e.target.src = image === 'undefined' ? '/img/cgc_icon.png' : image;
     e.target.style.width = '100%';
     e.target.style.height = 'auto';
+    setImageLoaded(true);
   };
 
   const handleImageError = (e: any) => {
     e.target.src = '/img/cgc_icon.png';
+    setImageLoaded(true);
   };
 
   return (
     <div
-      className="rounded-[5px] w-full bg-[#13002B] border-[2px] border-solid border-[#290030] mx-auto"
+      className="relative rounded-[5px] w-full bg-[#13002B] border-[2px] border-solid border-[#290030] mx-auto"
       style={{ borderColor: isAddedToCart ? '#F41786' : '#290030' }}
       onClick={() => onMoreInfo(id)}
     >
+      {imageLoaded && (
+        <div className="absolute top-[24px] left-[24px] rounded-[50%] bg-[#3C3C3C]">
+          <img
+            src={external_marketplace_listing_logo}
+            className="rounded-[50%]"
+            alt=""
+          />
+        </div>
+      )}
       <div
         className="w-inherit bg-contain bg-center bg-no-repeat"
         style={{

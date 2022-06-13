@@ -18,6 +18,7 @@ interface Props extends Attr {
   onMoreInfo: (id: string | number) => void | Promise<void>;
   addToCartLoading: boolean;
   addToCartDisabled?: boolean;
+  external_marketplace_listing_logo: string;
 }
 
 const ListCard = ({
@@ -34,6 +35,7 @@ const ListCard = ({
   tokenAddress,
   addBtnText,
   removeBtnText,
+  external_marketplace_listing_logo,
 }: Props) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -56,10 +58,19 @@ const ListCard = ({
 
   return (
     <div
-      className="cursor-pointer rounded-[5px] w-full bg-[#13002B] border-[2px] border-solid border-[#290030] mx-auto"
+      className="relative cursor-pointer rounded-[5px] w-full bg-[#13002B] border-[2px] border-solid border-[#290030] mx-auto"
       style={{ borderColor: isAddedToCart ? '#F41786' : '#290030' }}
       onClick={() => onMoreInfo(id)}
     >
+      {imageLoaded && (
+        <div className="absolute top-[24px] left-[24px] rounded-[50%] bg-[#3C3C3C]">
+          <img
+            src={external_marketplace_listing_logo}
+            className="rounded-[50%]"
+            alt=""
+          />
+        </div>
+      )}
       <div className="w-inherit bg-contain bg-center bg-no-repeat h-auto min-h-[170px]">
         {!imageLoaded && (
           <div className="w-full flex justify-center items-center h-[170px]">
