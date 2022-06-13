@@ -7,10 +7,6 @@ import Skeleton from '../Shared/Skeleton';
 const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
   const router = useRouter();
 
-  const handleCarouselItemClick = ({ href }: { href: string }) => {
-    console.log(href);
-  };
-
   const handlePlay = (name: string) => {
     console.log('handlePlay', name);
   };
@@ -52,11 +48,7 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
         {carouselItems.map(
           ({ id, imageUrl, name, href, description, logo }) => {
             return (
-              <div
-                key={id}
-                onClick={() => handleCarouselItemClick({ href })}
-                className="relative rounded-[5px]"
-              >
+              <div key={id} className="relative rounded-[5px]">
                 <div
                   className="absolute w-full h-[50vh] md:h-[80vh] z-[2] opacity-[.62] rounded-[5px]"
                   style={{

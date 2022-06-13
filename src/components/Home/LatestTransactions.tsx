@@ -4,6 +4,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import Pagination from '../Shared/Pagination';
 import SectionTitle from '../Shared/SectionTitle';
 import TransactionTable from './TransactionTable';
+import { flatten } from 'lodash';
 
 const PAGE_LIMIT = 10;
 
@@ -21,56 +22,55 @@ const LatestTransactions = () => {
 
   const getData = async () => {
     const response = await api.getTokenList(oAuthCtx.access_token);
-    return response;
+    return response && response.length ? response : [];
   };
 
   const setData = async () => {
-    setLoading(true);
-    setCurrentPage(0);
     const data = await getData();
-    const map = data
-      .map((tx: any) => {
+    const transformed = data
+      .map((token: any) => {
         return {
-          info: { icon: tx?.iconSrcUrl, text: tx?.symbol },
-          list: tx?.tokenHistoricalTxns || [],
+          tokenHistoricalTxns: flatten(token?.tokenHistoricalTxns || []),
+          icon: token?.iconSrcUrl,
+          text: token?.symbol,
+          id: token?.id,
         };
       })
       .reduce((acc: any[], curr: any) => {
-        const _curr = curr?.list?.map((item: any) => ({
-          ...item,
-          ...curr.info,
-        }));
-        if (_curr && curr.length) {
-          acc = [...acc, ..._curr];
-        } else {
-          acc = [...acc];
+        for (let i = 0; i < curr?.tokenHistoricalTxns.length; i++) {
+          acc.push({
+            icon: curr.icon,
+            text: curr.text,
+            id: curr.id,
+            transaction: curr.tokenHistoricalTxns[i],
+          });
         }
         return acc;
       }, [])
-      .sort((a: any, b: any) => b.block_time - a.block_time)
-      .map((item: any) => {
+      .sort((a: any, b: any) => {
+        return b?.transaction?.block_time - a?.transaction?.block_time;
+      })
+      .map((row: any) => {
         return [
-          { icon: item?.icon, text: item?.text },
-          item?.signature,
-          item?.block_time,
-          item?.senderAddress,
-          item?.recipientAddress,
-          // item?.amountToken
-          item?.amountUsd,
+          { icon: row?.icon, text: row?.text },
+          row?.transaction?.signature || '',
+          row?.transaction?.block_time || '',
+          row?.transaction?.senderAddress || '',
+          row?.transaction?.recipientAddress || '',
+          // row?.transaction?.amountToken || '',
+          row?.transaction?.amountUsd || '',
         ];
       });
-    setTxList(map);
+    setTxList(transformed);
   };
 
   useEffect(() => {
-    setData();
-  }, []);
-
-  useEffect(() => {
-    if (txList.length) {
+    setLoading(true);
+    setCurrentPage(0);
+    setData().then(() => {
       setLoading(false);
-    }
-  }, [txList]);
+    });
+  }, []);
 
   return (
     <div>
