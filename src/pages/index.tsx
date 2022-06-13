@@ -20,7 +20,7 @@ const Index = () => {
         logo: collection?.logoSrc,
         imageUrl: collection?.splashSrc,
         description: collection?.description,
-        href: '',
+        href: 'https://solchicks-minigame-apr18.s3.us-west-2.amazonaws.com/index.html',
       };
     });
   }, [collections]);
