@@ -130,20 +130,23 @@ const DetailView = () => {
           <div className="mb-[32px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[24px]">
             <ItemCountPanel
               text="Items available"
-              count={nftCollectionStats?.totalSupply}
+              count={nftCollectionStats?.totalSupply || '-'}
             />
             <ItemCountPanel
               text="Items Listed"
-              count={nftCollectionStats?.meListingCount}
+              count={nftCollectionStats?.meListingCount || '-'}
             />
             <ItemCountPanel
               text="Number of Owners"
-              count={nftCollectionStats?.numOwners}
+              count={nftCollectionStats?.numOwners || '-'}
             />
             <ItemCountPanel
               text="Total Volume"
               count={
-                '$' + getNumberWithCommas(nftCollectionStats?.usdTotalVolume, 2)
+                nftCollectionStats?.usdTotalVolume
+                  ? '$' +
+                    getNumberWithCommas(nftCollectionStats?.usdTotalVolume, 2)
+                  : '-'
               }
             />
           </div>
