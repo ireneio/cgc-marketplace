@@ -63,10 +63,14 @@ const LatestTransactions = () => {
   };
 
   useEffect(() => {
-    setData().then(() => {
-      // setLoading(false);
-    });
+    setData();
   }, []);
+
+  useEffect(() => {
+    if (txList.length) {
+      setLoading(false);
+    }
+  }, [txList]);
 
   return (
     <div>

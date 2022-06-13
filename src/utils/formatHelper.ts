@@ -1,13 +1,17 @@
 export function getNumberWithCommas(val: string | number, decimals?: number) {
-  if (val) {
-    let result: string | number = Number(val);
+  // if (val) {
+  //   let result: string | number = Number(val);
 
-    if (decimals !== 0) {
-      result = result.toFixed(decimals || 2);
-    }
-    return result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }
-  return '0';
+  //   if (decimals !== 0) {
+  //     result = result.toFixed(decimals || 2);
+  //   }
+  //   return result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  // }
+  // return '0';
+
+  return Number(val)
+    .toFixed(decimals || 2)
+    .toLocaleString();
 }
 
 type UnitTypes = 'usd' | 'bnb' | '%' | 'orbs' | 'sol';

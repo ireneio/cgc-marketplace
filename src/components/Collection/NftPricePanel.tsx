@@ -104,109 +104,88 @@ const NftPricePanel = ({
           {name} NFT
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[24px] auto-rows-auto">
-          <div>
-            <div className="text-[#FFFFFF] font-light text-[14px]">Volume</div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>${getNumberWithCommas(_volume)}</div>
-              {/* <div className="text-[12px] text-green ml-[10px] mt-[2px]">
-                <TickerText
-                  text={volumePercentage}
-                  direction={'up'}
-                  fontSize={12}
-                />
-              </div> */}
-              <div className="ml-[24px]">
+          <div className="flex items-center justify-between">
+            <div className="text-[#FFFFFF] font-light text-[14px]">
+              Volume
+              <div>
                 <DateViewSelector
                   onViewChange={(val) => setCurrentViewVolume(val)}
                   current={currentViewVolume}
                 />
               </div>
             </div>
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
+              <div>${getNumberWithCommas(_volume)}</div>
+            </div>
           </div>
-          <div>
-            <div className="text-[#FFFFFF] font-light text-[14px]">Change</div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>${getNumberWithCommas(_change)}</div>
-              {/* <div className="text-[12px] text-green ml-[10px] mt-[2px]">
-                <TickerText
-                  text={changePercentage}
-                  direction={'up'}
-                  fontSize={12}
-                />
-              </div> */}
-              <div className="ml-[24px]">
+          <div className="flex items-center justify-between">
+            <div className="text-[#FFFFFF] font-light text-[14px]">
+              Change
+              <div className="ml-auto">
                 <DateViewSelector
                   onViewChange={(val) => setCurrentViewChange(val)}
                   current={currentViewChange}
                 />
               </div>
             </div>
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
+              <div>${getNumberWithCommas(_change)}</div>
+            </div>
           </div>
-          <div>
-            <div className="text-[#FFFFFF] font-light text-[14px]">Sales</div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>${getNumberWithCommas(_sales)}</div>
-              {/* <div className="text-[12px] text-green ml-[10px] mt-[2px]">
-                <TickerText
-                  text={salesPercentage}
-                  direction={'up'}
-                  fontSize={12}
-                />
-              </div> */}
-              <div className="ml-[24px]">
+          <div className="flex items-center justify-between">
+            <div className="text-[#FFFFFF] font-light text-[14px]">
+              Sales
+              <div>
                 <DateViewSelector
                   onViewChange={(val) => setCurrentViewSales(val)}
                   current={currentViewSales}
                 />
               </div>
             </div>
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
+              <div>${getNumberWithCommas(_sales)}</div>
+            </div>
           </div>
-          <div>
+          <div className="flex items-center justify-between">
             <div className="text-[#FFFFFF] font-light text-[14px]">
               Average Price
-            </div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>${getNumberWithCommas(_averagePrice)}</div>
-              {/* <div className="text-[12px] text-green ml-[10px] mt-[2px]">
-                <TickerText
-                  text={averagePricePercentage}
-                  direction={'down'}
-                  fontSize={12}
-                />
-              </div> */}
-              <div className="ml-[14px]">
+              <div>
                 <DateViewSelector
                   onViewChange={(val) => setCurrentViewAveragePrice(val)}
                   current={currentViewAveragePrice}
                 />
               </div>
             </div>
+
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
+              <div>${getNumberWithCommas(_averagePrice)}</div>
+            </div>
           </div>
-          <div>
+          <div className="flex items-center justify-between">
             <div className="text-[#FFFFFF] font-light text-[14px]">
               Total Volume
             </div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
               <div>${getNumberWithCommas(totalVolume)}</div>
             </div>
           </div>
-          <div>
+          <div className="flex items-center justify-between">
             <div className="text-[#FFFFFF] font-light text-[14px]">
               Total Supply
             </div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
               <div>{getNumberWithCommas(totalSupply, 0)}</div>
             </div>
           </div>
-          <div>
+          <div className="flex items-center justify-between">
             <div className="text-[#FFFFFF] font-light text-[14px]">Owners</div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
               <div>{getNumberWithCommas(owners, 0)}</div>
             </div>
           </div>
-          <div>
+          <div className="flex items-center justify-between">
             <div className="text-[#FFFFFF] font-light text-[14px]">Count</div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
               <div>{getNumberWithCommas(count, 0)}</div>
             </div>
           </div>

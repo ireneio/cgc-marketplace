@@ -193,7 +193,7 @@ const DetailView = () => {
               </div>
             );
           })}
-          <div className="mb-[32px]">
+          <div className="mb-[32px] w-full lg:w-[70%] 2xl:w-[50%]">
             <NftPricePanel
               name={metadata.name}
               volume={nftCollectionStats?.usdMeTotalVolume}
