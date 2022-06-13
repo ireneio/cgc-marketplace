@@ -32,7 +32,7 @@ const LatestTransactions = () => {
       .map((tx: any) => {
         return {
           info: { icon: tx?.iconSrcUrl, text: tx?.symbol },
-          list: tx?.tokenHistoricalTxns,
+          list: tx?.tokenHistoricalTxns || [],
         };
       })
       .reduce((acc: any[], curr: any) => {
