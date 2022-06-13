@@ -89,7 +89,7 @@ const Collection = () => {
   }, [metadata]);
 
   const getCollectionData = async () => {
-    const response = await api.getCollectionById(
+    const response = await api.getCollectionBySlug(
       oAuthCtx.access_token,
       String(router.query.id).split('_').join('_'),
     );

@@ -1,4 +1,4 @@
-import { fetcher } from '../swr';
+import {fetcher} from '../swr';
 
 const api = {
   healthCheck: async () => {
@@ -47,7 +47,7 @@ const api = {
     });
     return response.data;
   },
-  getCollectionById: async (token: string, slug: string) => {
+  getCollectionBySlug: async (token: string, slug: string) => {
     const response = await fetcher({
       url: `/api/collection/list?slug=${slug}`,
       method: 'get',
@@ -56,6 +56,12 @@ const api = {
       },
     });
     return response.data;
+  },
+  getCollectionById: async (id: number) => {
+    return await fetcher({
+      url: `/api/collection/list?collection_id=${id}`,
+      method: 'get',
+    });
   },
   getTokenListByCollectionId: async (token: string, slug: string) => {
     return await fetcher({
