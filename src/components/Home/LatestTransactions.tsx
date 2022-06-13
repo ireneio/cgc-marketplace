@@ -57,7 +57,7 @@ const LatestTransactions = () => {
           row?.transaction?.block_time || '',
           row?.transaction?.senderAddress || '',
           row?.transaction?.recipientAddress || '',
-          // row?.transaction?.amountToken || '',
+          row?.transaction?.amountToken || '',
           row?.transaction?.amountUsd || '',
         ];
       });
@@ -89,7 +89,15 @@ const LatestTransactions = () => {
       <div className="mt-[24px]">
         <TransactionTable
           rows={_txList}
-          headers={['item', 'signature', 'time', 'from', 'to', 'amount ($usd)']}
+          headers={[
+            'item',
+            'signature',
+            'time',
+            'from',
+            'to',
+            'amount',
+            'amount ($usd)',
+          ]}
           loading={loading}
         />
       </div>
