@@ -18,7 +18,7 @@ const IdoPanel = ({ info }: { info: CollectionInfo }) => {
   };
 
   return (
-    <Tag className="mt-[30px] px-[28px] py-[24px]">
+    <Tag className="px-[28px] py-[24px]">
       <div>
         <div>
           {info.nextIdoInfo && (

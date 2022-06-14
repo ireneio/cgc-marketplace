@@ -100,116 +100,125 @@ const NftPricePanel = ({
   return (
     <Tag>
       <div className="relative px-[18px] py-[24px]">
-        <div className="mb-[10px] text-[#FFFFFF] font-bold text-[14px]">
+        <div className="mb-[8px] text-[#FFFFFF] font-bold text-[14px]">
           {name} NFT
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[24px] auto-rows-auto">
-          <div>
-            <div className="text-[#FFFFFF] font-light text-[14px]">Volume</div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>${getNumberWithCommas(_volume)}</div>
-              {/* <div className="text-[12px] text-green ml-[10px] mt-[2px]">
-                <TickerText
-                  text={volumePercentage}
-                  direction={'up'}
-                  fontSize={12}
-                />
-              </div> */}
-              <div className="ml-[24px]">
-                <DateViewSelector
-                  onViewChange={(val) => setCurrentViewVolume(val)}
-                  current={currentViewVolume}
-                />
+          {(_volume || _volume === 0) && (
+            <div className="flex items-center justify-between">
+              <div className="text-[#FFFFFF] font-light text-[14px]">
+                Volume
+                <div>
+                  <DateViewSelector
+                    onViewChange={(val) => setCurrentViewVolume(val)}
+                    current={currentViewVolume}
+                  />
+                </div>
+              </div>
+              <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
+                {_volume ? <div>${getNumberWithCommas(_volume)}</div> : <></>}
               </div>
             </div>
-          </div>
-          <div>
-            <div className="text-[#FFFFFF] font-light text-[14px]">Change</div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>${getNumberWithCommas(_change)}</div>
-              {/* <div className="text-[12px] text-green ml-[10px] mt-[2px]">
-                <TickerText
-                  text={changePercentage}
-                  direction={'up'}
-                  fontSize={12}
-                />
-              </div> */}
-              <div className="ml-[24px]">
-                <DateViewSelector
-                  onViewChange={(val) => setCurrentViewChange(val)}
-                  current={currentViewChange}
-                />
+          )}
+          {(_change || _change === 0) && (
+            <div className="flex items-center justify-between">
+              <div className="text-[#FFFFFF] font-light text-[14px]">
+                Change
+                <div className="ml-auto">
+                  <DateViewSelector
+                    onViewChange={(val) => setCurrentViewChange(val)}
+                    current={currentViewChange}
+                  />
+                </div>
+              </div>
+              <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
+                {_change ? <div>${getNumberWithCommas(_change)}</div> : <></>}
               </div>
             </div>
-          </div>
-          <div>
-            <div className="text-[#FFFFFF] font-light text-[14px]">Sales</div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>${getNumberWithCommas(_sales)}</div>
-              {/* <div className="text-[12px] text-green ml-[10px] mt-[2px]">
-                <TickerText
-                  text={salesPercentage}
-                  direction={'up'}
-                  fontSize={12}
-                />
-              </div> */}
-              <div className="ml-[24px]">
-                <DateViewSelector
-                  onViewChange={(val) => setCurrentViewSales(val)}
-                  current={currentViewSales}
-                />
+          )}
+          {(_sales || _sales === 0) && (
+            <div className="flex items-center justify-between">
+              <div className="text-[#FFFFFF] font-light text-[14px]">
+                Sales
+                <div>
+                  <DateViewSelector
+                    onViewChange={(val) => setCurrentViewSales(val)}
+                    current={currentViewSales}
+                  />
+                </div>
+              </div>
+              <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
+                {_sales ? <div>${getNumberWithCommas(_sales)}</div> : <></>}
               </div>
             </div>
-          </div>
-          <div>
-            <div className="text-[#FFFFFF] font-light text-[14px]">
-              Average Price
-            </div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>${getNumberWithCommas(_averagePrice)}</div>
-              {/* <div className="text-[12px] text-green ml-[10px] mt-[2px]">
-                <TickerText
-                  text={averagePricePercentage}
-                  direction={'down'}
-                  fontSize={12}
-                />
-              </div> */}
-              <div className="ml-[14px]">
-                <DateViewSelector
-                  onViewChange={(val) => setCurrentViewAveragePrice(val)}
-                  current={currentViewAveragePrice}
-                />
+          )}
+          {(_averagePrice || _averagePrice === 0) && (
+            <div className="flex items-center justify-between">
+              <div className="text-[#FFFFFF] font-light text-[14px]">
+                Average Price
+                <div>
+                  <DateViewSelector
+                    onViewChange={(val) => setCurrentViewAveragePrice(val)}
+                    current={currentViewAveragePrice}
+                  />
+                </div>
+              </div>
+              <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
+                {_averagePrice ? (
+                  <div>${getNumberWithCommas(_averagePrice)}</div>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
-          </div>
-          <div>
-            <div className="text-[#FFFFFF] font-light text-[14px]">
-              Total Volume
+          )}
+          {(totalVolume || totalVolume === 0) && (
+            <div className="flex items-center justify-between">
+              <div className="text-[#FFFFFF] font-light text-[14px]">
+                Total Volume
+              </div>
+              <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
+                {totalVolume ? (
+                  <div>${getNumberWithCommas(totalVolume)}</div>
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>${getNumberWithCommas(totalVolume)}</div>
+          )}
+          {totalSupply ||
+            (totalSupply === 0 && (
+              <div className="flex items-center justify-between">
+                <div className="text-[#FFFFFF] font-light text-[14px]">
+                  Total Supply
+                </div>
+                <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
+                  {totalSupply ? (
+                    <div>{getNumberWithCommas(totalSupply)}</div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              </div>
+            ))}
+          {(owners || owners === 0) && (
+            <div className="flex items-center justify-between">
+              <div className="text-[#FFFFFF] font-light text-[14px]">
+                Owners
+              </div>
+              <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
+                {owners ? <div>{getNumberWithCommas(owners, 0)}</div> : <></>}
+              </div>
             </div>
-          </div>
-          <div>
-            <div className="text-[#FFFFFF] font-light text-[14px]">
-              Total Supply
+          )}
+          {(count || count === 0) && (
+            <div className="flex items-center justify-between">
+              <div className="text-[#FFFFFF] font-light text-[14px]">Count</div>
+              <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
+                {count ? <div>{getNumberWithCommas(count, 0)}</div> : <></>}
+              </div>
             </div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>{getNumberWithCommas(totalSupply, 0)}</div>
-            </div>
-          </div>
-          <div>
-            <div className="text-[#FFFFFF] font-light text-[14px]">Owners</div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>{getNumberWithCommas(owners, 0)}</div>
-            </div>
-          </div>
-          <div>
-            <div className="text-[#FFFFFF] font-light text-[14px]">Count</div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <div>{getNumberWithCommas(count, 0)}</div>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </Tag>

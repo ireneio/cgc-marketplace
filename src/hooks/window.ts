@@ -2,19 +2,21 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 export const useWindowWidth = () => {
-  const [windowWidth, setWindowWidth] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(768);
   const router = useRouter();
 
   useEffect(() => {
-    const cb = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    window.addEventListener('resize', cb);
-    window.addEventListener('load', cb);
-    return () => {
-      window.removeEventListener('resize', cb);
-      window.removeEventListener('load', cb);
-    };
+    if (window) {
+      const cb = () => {
+        setWindowWidth(window.innerWidth);
+      };
+      window.addEventListener('resize', cb);
+      window.addEventListener('load', cb);
+      return () => {
+        window.removeEventListener('resize', cb);
+        window.removeEventListener('load', cb);
+      };
+    }
   });
 
   useEffect(() => {

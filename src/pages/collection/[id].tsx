@@ -4,12 +4,10 @@ import DefaultLayout from '@/components/Layout/DefaultLayout';
 import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Divider from '@/components/Shared/Divider';
 import SelectGroup from '@/components/Shared/SelectGroup';
-import { useAppDispatch, useAppSelector } from '@/store';
+import { useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getBreadcrumbRoutes } from '@/utils/cgcConsts';
-import api from '@/utils/api';
-import { OAuthContext } from '@/contexts/OAuthProvider';
 import { LoginModal } from '@/components/Auth/LoginModal';
 
 export type CollectionTabSelection =
@@ -23,8 +21,6 @@ export type CollectionTabSelection =
 
 const Collection = () => {
   const router = useRouter();
-  const dispatch = useAppDispatch();
-  const oAuthCtx = useContext(OAuthContext);
   const access_token = useAppSelector(
     (state) => state.user.userInfo.access_token,
   );
@@ -88,45 +84,6 @@ const Collection = () => {
     ];
   }, [metadata]);
 
-  const getCollectionData = async () => {
-    const response = await api.getCollectionBySlug(
-      oAuthCtx.access_token,
-      String(router.query.id).split('_').join('_'),
-    );
-    if (response) {
-      dispatch({
-        type: 'SET_CURRENT_COLLECTION',
-        payload: {
-          ...response,
-          metadata: {
-            ...response.metadata,
-            slug: response.metadata.name.toLowerCase().split(' ').join('_'),
-            id: response.id,
-          },
-        },
-      });
-    }
-  };
-
-  const getTokenData = async () => {
-    const response = await api.getTokenListByCollectionId(
-      oAuthCtx.access_token,
-      String(router.query.id),
-    );
-    if (response?.data) {
-      dispatch({
-        type: 'SET_CURRENT_COLLECTION_TOKEN_DATA',
-        payload: response?.data,
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (router.query.id) {
-      Promise.all([getCollectionData(), getTokenData()]).then();
-    }
-  }, [router.query.id]);
-
   useEffect(() => {
     if (router.query.tab) {
       const tab = String(router.query.tab)
@@ -143,19 +100,8 @@ const Collection = () => {
       <div className="mb-[24px]">
         <Breadcrumb
           items={breadcrumbItems}
-          currentValue={
-            currentSelection === 'About' ? 'Collection' : currentSelection
-          }
           onItemClick={(val) => {
-            if (val === 'Home') {
-              dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
-              router.push('/').then();
-            } else if (val === 'Collection') {
-              handleSelect('About');
-            } else if (val === 'Explore/All') {
-              dispatch({ type: 'SET_NAVIGATION_PATH', payload: val });
-              router.push('/').then();
-            } else if (val === 'Your Items') {
+            if (val === 'Your Items') {
               handleSelect('Your Items');
             }
           }}

@@ -8,6 +8,7 @@ import NftPricePanel from './NftPricePanel';
 import TokenPricePanel from './TokenPricePanel';
 import { useAppSelector } from '@/store';
 import { getNumberWithCommas } from '@/utils/formatHelper';
+import { useGetCollectionsBySlug } from '@/hooks/collections';
 
 type SocialTypes = 'discord' | 'twitter' | 'link';
 
@@ -18,7 +19,7 @@ const socials: Record<string, string | SocialTypes>[] = [
 ];
 
 const DetailView = () => {
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
@@ -34,6 +35,7 @@ const DetailView = () => {
   const nftCollectionStats = useAppSelector(
     (state) => state.collection.currentCollection.nftCollectionStats,
   );
+  const { loading } = useGetCollectionsBySlug();
 
   const info = useMemo(() => {
     return {
@@ -65,14 +67,6 @@ const DetailView = () => {
       },
     ];
   }, [metadata]);
-
-  useEffect(() => {
-    setLoading(true);
-    const tid = setTimeout(() => {
-      setLoading(false);
-      clearTimeout(tid);
-    }, 1200);
-  }, []);
 
   const handleLinkOpen = (type: 'discord' | 'twitter' | 'link') => {
     window.open(info.socialMedia[type], '_blank');
@@ -124,29 +118,52 @@ const DetailView = () => {
           <div className="mb-[32px]">
             <Divider />
           </div>
-          <div className="mb-[32px]">
-            <div className="text-[#FFFFFF] font-bold text-[20px]">Detail</div>
-          </div>
-          <div className="mb-[32px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[24px]">
-            <ItemCountPanel
-              text="Items available"
-              count={nftCollectionStats?.totalSupply}
-            />
-            <ItemCountPanel
-              text="Items Listed"
-              count={nftCollectionStats?.meListingCount}
-            />
-            <ItemCountPanel
-              text="Number of Owners"
-              count={nftCollectionStats?.numOwners}
-            />
-            <ItemCountPanel
-              text="Total Volume"
-              count={
-                '$' + getNumberWithCommas(nftCollectionStats?.usdTotalVolume, 2)
-              }
-            />
-          </div>
+          {(nftCollectionStats?.totalSupply ||
+            nftCollectionStats?.meListingCount ||
+            nftCollectionStats?.numOwners ||
+            nftCollectionStats?.usdTotalVolume) && (
+            <div>
+              <div className="mb-[32px]">
+                <div className="text-[#FFFFFF] font-bold text-[20px]">
+                  Detail
+                </div>
+              </div>
+              <div className="mb-[32px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[24px]">
+                {nftCollectionStats?.totalSupply && (
+                  <ItemCountPanel
+                    text="Items available"
+                    count={nftCollectionStats?.totalSupply || '-'}
+                  />
+                )}
+                {nftCollectionStats?.meListingCount && (
+                  <ItemCountPanel
+                    text="Items Listed"
+                    count={nftCollectionStats?.meListingCount || '-'}
+                  />
+                )}
+                {nftCollectionStats?.numOwners && (
+                  <ItemCountPanel
+                    text="Number of Owners"
+                    count={nftCollectionStats?.numOwners || '-'}
+                  />
+                )}
+                {nftCollectionStats?.usdTotalVolume && (
+                  <ItemCountPanel
+                    text="Total Volume"
+                    count={
+                      nftCollectionStats?.usdTotalVolume
+                        ? '$' +
+                          getNumberWithCommas(
+                            nftCollectionStats?.usdTotalVolume,
+                            2,
+                          )
+                        : '-'
+                    }
+                  />
+                )}
+              </div>
+            </div>
+          )}
           {tokens.map((token: any, idx: number) => {
             return (
               <div className="mb-[32px]" key={idx}>
@@ -155,8 +172,8 @@ const DetailView = () => {
                   brandName={metadata.name}
                   symbol={token?.symbol?.toUpperCase()}
                   price={token?.tokenActivePrice?.usdPrice}
-                  priceToBTC={0.000012345}
-                  priceToETH={0.0000012345}
+                  priceToBTC={token?.tokenActivePrice?.btcPrice}
+                  priceToETH={token?.tokenActivePrice?.ethPrice}
                   priceFluctuation={
                     token?.tokenStats[0]?.usdAthChangePercentage
                   }
@@ -193,26 +210,40 @@ const DetailView = () => {
               </div>
             );
           })}
-          <div className="mb-[32px]">
-            <NftPricePanel
-              name={metadata.name}
-              volume={nftCollectionStats?.usdMeTotalVolume}
-              volume7Days={nftCollectionStats?.usdSevenDayVolume}
-              volume30Days={nftCollectionStats?.usdThirtyDayVolume}
-              change={nftCollectionStats?.usdOneDayChange}
-              change7Days={nftCollectionStats?.usdSevenDayChange}
-              change30Days={nftCollectionStats?.usdThirtyDayChange}
-              sales={nftCollectionStats?.usdOneDaySales}
-              sales7Days={nftCollectionStats?.usdSevenDaySales}
-              sales30Days={nftCollectionStats?.usdThirtyDaySales}
-              averagePrice={nftCollectionStats?.usdAveragePrice}
-              averagePrice7Days={nftCollectionStats?.usdSevenDayAveragePrice}
-              averagePrice30Days={nftCollectionStats?.usdThirtyDayAveragePrice}
-              totalVolume={nftCollectionStats?.usdTotalVolume}
-              totalSupply={nftCollectionStats?.totalSupply}
-              owners={nftCollectionStats?.numOwners}
-              count={nftCollectionStats?.count}
-            />
+          <div className="mb-[32px] w-full lg:w-[70%] 2xl:w-[65%]">
+            {nftCollectionStats ? (
+              <NftPricePanel
+                name={metadata.name}
+                volume={nftCollectionStats?.usdMeTotalVolume}
+                volume7Days={nftCollectionStats?.usdSevenDayVolume}
+                volume30Days={nftCollectionStats?.usdThirtyDayVolume}
+                change={nftCollectionStats?.usdOneDayChange}
+                change7Days={nftCollectionStats?.usdSevenDayChange}
+                change30Days={nftCollectionStats?.usdThirtyDayChange}
+                sales={nftCollectionStats?.usdOneDaySales}
+                sales7Days={nftCollectionStats?.usdSevenDaySales}
+                sales30Days={nftCollectionStats?.usdThirtyDaySales}
+                averagePrice={nftCollectionStats?.usdAveragePrice}
+                averagePrice7Days={nftCollectionStats?.usdSevenDayAveragePrice}
+                averagePrice30Days={
+                  nftCollectionStats?.usdThirtyDayAveragePrice
+                }
+                totalVolume={nftCollectionStats?.usdTotalVolume}
+                totalSupply={nftCollectionStats?.totalSupply}
+                owners={nftCollectionStats?.numOwners}
+                count={nftCollectionStats?.count}
+              />
+            ) : (
+              <div>
+                <Tag className="relative px-[18px] py-[24px]">
+                  <div className="mb-[8px] text-[#FFFFFF] font-bold text-[14px]">
+                    {metadata?.name} NFT
+                  </div>
+                  Sorry, we could not retrieve any data at this moment in time.
+                  Please try again later.{' '}
+                </Tag>
+              </div>
+            )}
           </div>
         </div>
       )}

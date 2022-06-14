@@ -1,20 +1,22 @@
-import { OAuthContext } from '@/contexts/OAuthProvider';
 import { useAppDispatch, useAppSelector } from '@/store';
-import api from '@/utils/api';
 import { getNumberWithCommas } from '@/utils/formatHelper';
 import { useRouter } from 'next/router';
-import { useState, useEffect, useContext, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import DropdownMenu from '../Shared/DropdownMenu';
 import SelectGroup from '../Shared/SelectGroup';
 import Cart from './Cart';
 import Filter from './Filter';
-import ListCard, { Attr } from './ListCard';
+import ListCard from './ListCard';
 import ListCardLoading from './ListCardLoading';
 import RowCard from './RowCard';
 import RowCardLoading from './RowCardLoading';
 import { useInView } from 'react-intersection-observer';
 import { CollectionTabSelection } from '@/pages/collection/[id]';
 import { useCart } from '@/hooks/cart';
+import {
+  useGetCollectionsBySlug,
+  useGetNftByCollectionId,
+} from '@/hooks/collections';
 
 type SelectionView = 'Row' | 'List';
 
@@ -32,19 +34,19 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
   const currentCollection = useAppSelector(
     (state) => state.collection.currentCollection,
   );
-  const oAuthCtx = useContext(OAuthContext);
   const [currentView, setCurrentView] = useState<SelectionView>('List');
   const [currentFilter, setCurrentFilter] = useState<SelectionFilter>('');
-  const [items, setItems] = useState<any>([]);
   const [page, setPage] = useState(0);
   const { ref, inView } = useInView({
     /* Optional options */
     threshold: 0,
   });
   const { handleAddToCart, isItemAddedToCart } = useCart();
+  const { getData, data, loading } = useGetNftByCollectionId();
+  useGetCollectionsBySlug();
 
   const _items = useMemo(() => {
-    let arr = [...items];
+    let arr = [...data];
     if (currentTab === 'Listed Items') {
       arr = arr.filter((item) => item?.external_marketplace_listing?.length);
     }
@@ -54,7 +56,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
         is_listed: item?.external_marketplace_listing?.length,
       };
     });
-  }, [items, page, currentTab]);
+  }, [data, page, currentTab]);
 
   useEffect(() => {
     if (inView) {
@@ -62,7 +64,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
     }
   }, [inView]);
 
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [, setFilters] = useState({
     rankMin: '',
     rankMax: '',
@@ -76,17 +78,20 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
 
   const itemCount = useMemo(() => {
     if (currentTab === 'All Items') {
+      if (!currentCollection?.nftCollectionStats?.totalSupply) {
+        return getNumberWithCommas(data.length, 0);
+      }
       return getNumberWithCommas(
         currentCollection?.nftCollectionStats?.totalSupply,
         0,
       );
     } else if (currentTab === 'Listed Items') {
-      const listed = items.filter(
+      const listed = data.filter(
         (item: any) => item?.external_marketplace_listing?.length,
       );
       return getNumberWithCommas(listed.length, 0);
     }
-  }, [currentTab]);
+  }, [currentTab, data]);
 
   const handleSelectView = (value: SelectionView) => {
     setCurrentView(value);
@@ -100,49 +105,9 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
     router.push(`/nft/${hash}`).then();
   };
 
-  const getData = async () => {
-    const response = await api.getNftListByCollectionId(
-      oAuthCtx.access_token,
-      metadata.slug,
-    );
-    const map = response
-      .map((item: any) => {
-        const manifest = item?.splNftInfo?.data?.manifest;
-        return {
-          // default image
-          image: manifest?.image || '/img/cgc_icon.png',
-          brand: manifest?.collection?.name,
-          name: manifest?.name,
-          price: 0,
-          tokenAddress: item?.tokenAddress,
-          id: item?.id,
-          is_listed: item?.external_marketplace_listing?.length,
-          external_marketplace_listing:
-            item?.external_marketplace_listing || [],
-        };
-      })
-      .sort((a: any, b: any) => {
-        return (
-          b.external_marketplace_listing.length -
-          a.external_marketplace_listing.length
-        );
-      });
-    return map;
-  };
-
-  const initData = async () => {
-    setLoading(true);
-    const nfts = await getData();
-    setItems(nfts);
-    const tid = setTimeout(() => {
-      setLoading(false);
-      clearTimeout(tid);
-    }, 800);
-  };
-
   useEffect(() => {
     if (metadata.slug) {
-      initData();
+      getData(metadata.slug);
     }
   }, [metadata, refresh]);
 
@@ -154,10 +119,8 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
     getCart();
   }, []);
 
-  console.log(currentCollection);
-
   return (
-    <div className="mb-[32px]">
+    <div className="mb-[24px]">
       <div className="flex justify-between items-center mb-[24px]">
         <div className="flex items-center w-full">
           <div
@@ -370,6 +333,9 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
                     addToCartLoading={false}
                     addToCartDisabled={!item.is_listed}
                     tokenAddress={item.tokenAddress}
+                    external_marketplace_listing_logo={
+                      item.external_marketplace_listing_logo
+                    }
                   />
                 </div>
               );
@@ -397,6 +363,9 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
                     addToCartLoading={false}
                     addToCartDisabled={!item.is_listed}
                     tokenAddress={item.tokenAddress}
+                    external_marketplace_listing_logo={
+                      item.external_marketplace_listing_logo
+                    }
                   />
                 </div>
               );
@@ -404,7 +373,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
             <div ref={ref}></div>
           </div>
         )}
-        {!items.length && !loading && (
+        {!_items.length && !loading && (
           <div className="text-[#FFFFFF] text-semibold">
             No Items Available.
           </div>

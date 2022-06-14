@@ -49,7 +49,7 @@ const ProfileView = () => {
   return (
     <FormProvider {...form}>
       <div className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-6">
-        <div className="mb-[12px] md:mb-0 md:mr-[40px] 2xl:cols-span-2">
+        <div className="mb-[24px] md:mb-0 md:mr-[40px] 2xl:cols-span-2">
           <Menu
             items={SIDE_BAR_ITEMS}
             currentValue={sidebar}

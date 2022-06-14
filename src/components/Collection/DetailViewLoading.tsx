@@ -2,22 +2,22 @@ import Skeleton from '../Shared/Skeleton';
 
 const DetailViewLoading = () => {
   return (
-    <div>
+    <div className="mb-[24px]">
       <div>
-        <Skeleton className="w-full h-[50vh] lg:h-[70vh]" />
+        <Skeleton className="w-full h-[50vh] lg:h-[70vh] bg-[#290030]" />
       </div>
-      <div className="mt-[30px] flex justify-between items-center">
-        <Skeleton className="w-full h-[240px]" />
-        <Skeleton className="w-full h-[240px]" />
+      <div className="mt-[24px] grid grid-cols-1 lg:grid-cols-2 gap-[24px]">
+        <Skeleton className="w-full h-[240px] bg-[#290030]" />
+        <Skeleton className="w-full h-[240px] bg-[#290030]" />
       </div>
-      <div className="mt-[30px]">
-        <Skeleton className="w-full h-[320px]" />
+      <div className="mt-[24px]">
+        <Skeleton className="w-full h-[320px] bg-[#290030]" />
       </div>
-      <div className="mt-[30px]">
-        <Skeleton className="w-full h-[320px]" />
+      <div className="mt-[24px]">
+        <Skeleton className="w-full h-[320px] bg-[#290030]" />
       </div>
-      <div className="mt-[30px]">
-        <Skeleton className="w-full h-[240px]" />
+      <div className="mt-[24px]">
+        <Skeleton className="w-full h-[240px] bg-[#290030]" />
       </div>
     </div>
   );

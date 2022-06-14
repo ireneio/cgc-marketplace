@@ -1,4 +1,4 @@
-import { useAppDispatch } from '@/store';
+import { useRouter } from 'next/router';
 
 interface BreadcrumbItem {
   text: string;
@@ -8,15 +8,14 @@ interface BreadcrumbItem {
 }
 interface Props {
   items: BreadcrumbItem[];
-  currentValue: string;
   onItemClick?: (value: string) => void | Promise<void>;
 }
 
 const Breadcrumb = ({ items, onItemClick }: Props) => {
-  const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const handleSideBarPathUpdate = (val: string) => {
-    dispatch({ type: 'SET_NAVIGATION_PATH', payload: val });
+    router.push(val);
   };
 
   return (
@@ -38,7 +37,11 @@ const Breadcrumb = ({ items, onItemClick }: Props) => {
                 style={{
                   textDecoration:
                     index === array.length - 1 ? 'none' : 'underline',
-                  color: index !== array.length - 1 ? '#FC1F8E' : '#AAAAAA',
+                  color: item.disabled
+                    ? '#290030'
+                    : index !== array.length - 1
+                    ? '#FC1F8E'
+                    : '#AAAAAA',
                   cursor: item.disabled
                     ? 'not-allowed'
                     : index !== array.length - 1
@@ -47,7 +50,7 @@ const Breadcrumb = ({ items, onItemClick }: Props) => {
                 }}
                 disabled={item.disabled}
                 onClick={() => {
-                  if (!item.disabled) {
+                  if (!item.disabled && index !== array.length - 1) {
                     handleSideBarPathUpdate(item.value);
                   }
                 }}

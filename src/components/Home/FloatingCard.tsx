@@ -78,7 +78,7 @@ const FloatingCard = ({
           <img
             src={bg}
             alt={title}
-            className="object-cover rounded-[5px] h-[20vh] w-full"
+            className="object-cover rounded-[5px] h-[25vh] w-full"
           />
         </div>
       )}
@@ -102,12 +102,12 @@ const FloatingCard = ({
         >
           <div
             style={{
-              width: isDefaultFloating ? 'auto' : '24rem',
-              height: isDefaultFloating ? 'auto' : '24rem',
+              width: isDefaultFloating ? 'auto' : '55vh',
+              height: isDefaultFloating ? 'auto' : '50vh',
             }}
             className="absolute border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden"
           >
-            <div className="relative flex items-start justify-center">
+            <div className="relative flex items-start justify-center h-[25vh]">
               {/* gif */}
               {/* <div
                 className="w-[300px] h-[170px] bg-cover bg-center bg-no-repeat"
@@ -117,33 +117,30 @@ const FloatingCard = ({
               ></div> */}
               {/* video */}
               <div
-                className="relative min-h-[170px]"
+                className="relative"
                 style={{
-                  width: isDefaultFloating ? '90vw' : 420,
-                  minHeight: isDefaultFloating ? 199 : 170,
+                  width: isDefaultFloating ? '90vw' : '55vh',
+                  height: isDefaultFloating ? 199 : '25vh',
                 }}
               >
-                <video muted width={420} autoPlay>
+                <video muted autoPlay>
                   <source src={bgOnHover} type="video/mp4" />
                 </video>
               </div>
             </div>
             <div
-              className="bg-[#13002B] pt-[20px] pb-[24px] absolute bottom-[0%] h-[170px]"
+              className="bg-[#13002B] pt-[20px] pb-[24px] h-[45%] relative"
               style={{ height: isDefaultFloating ? 170 : '' }}
             >
               <div className="absolute top-[-42px] pl-[12px]">
                 <img src={logo} alt={''} width={100} height={100} />
               </div>
-              <div className="px-[12px] py-[0px]">
+              <div className="px-[12px] py-[0px] h-[97%] relative">
                 <div className="font-normal text-[#FFFFFF] text-[14px]">
                   {title?.length > 75 ? title?.slice(0, 75) + '...' : title}
                 </div>
-                <div className="w-full absolute bottom-[48px] flex justify-between items-center pr-[24px]">
-                  <div
-                    className="text-[#FFFFFF] text-[12px] uppercase flex items-center pr-[12px] flex-wrap"
-                    style={{ flexBasis: '70%' }}
-                  >
+                <div className="absolute bottom-[24px] w-full flex justify-between items-center pr-[24px] mt-[24px]">
+                  <div className="text-[#FFFFFF] text-[12px] flex items-center pr-[12px] flex-wrap basis-[70%]">
                     {categories && categories.length ? (
                       categories.map((category, index) => {
                         return (
@@ -151,7 +148,7 @@ const FloatingCard = ({
                             key={index}
                             className="text-[12px] flex items-center"
                           >
-                            {category}
+                            {String(category).toLowerCase()}
                             {index !== categories.length - 1 && (
                               <span className="ml-[4px] mr-[4px] text-[#aaa] text-[12px]">
                                 •
@@ -174,26 +171,30 @@ const FloatingCard = ({
                   </div>
                 </div>
               </div>
-              <div className="absolute bottom-[32px] mt-[12px] h-[2px] w-full bg-[#290030]"></div>
-              <div className="grid gap-[12px] grid-cols-3 absolute bottom-[12px] left-0 right-0 w-full px-[12px] mt-[8px] mb-[-4px]">
+              <div className="bottom-[32px] mt-[12px] h-[2px] w-full bg-[#290030]"></div>
+              <div className="gap-[12px] grid-cols-3 bottom-[12px] left-0 right-0 w-full px-[12px] mt-[8px] mb-[-4px]">
                 {network && (
                   <div className="text-[10px] flex items-center">
                     <div className="text-[#9497AA]">Network:</div>
                     <div className="text-[#FC1F8E] ml-[3px]">{network}</div>
                   </div>
                 )}
-                <div className="text-[10px] flex items-center">
-                  <div className="text-[#9497AA]">M Cap:</div>
-                  <div className="text-[#FC1F8E] ml-[3px]">
-                    {getNumberWithCommas(Number(marketCap), 2)}
+                {marketCap !== null && (
+                  <div className="text-[10px] flex items-center">
+                    <div className="text-[#9497AA]">M Cap:</div>
+                    <div className="text-[#FC1F8E] ml-[3px]">
+                      {getNumberWithCommas(Number(marketCap), 2)}
+                    </div>
                   </div>
-                </div>
-                <div className="text-[10px] flex items-center">
-                  <div className="text-[#9497AA]">C Supply:</div>
-                  <div className="text-[#FC1F8E] ml-[3px]">
-                    {getNumberWithCommas(Number(coinSupply), 2)}
+                )}
+                {coinSupply !== null && (
+                  <div className="text-[10px] flex items-center">
+                    <div className="text-[#9497AA]">C Supply:</div>
+                    <div className="text-[#FC1F8E] ml-[3px]">
+                      {getNumberWithCommas(Number(coinSupply), 2)}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>

@@ -4,7 +4,6 @@ import DefaultLayout from '@/components/Layout/DefaultLayout';
 import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Divider from '@/components/Shared/Divider';
 import SelectGroup from '@/components/Shared/SelectGroup';
-import { useAppDispatch } from '@/store';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -19,14 +18,13 @@ interface LaunchpadItem {
 }
 
 const Launchpad = () => {
-  const dispatch = useAppDispatch();
   const router = useRouter();
   const [currentSelection, setCurrentSelection] = useState('Coming Soon');
   const [items] = useState<LaunchpadItem[]>(
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
       id: item,
       type: item % 2 === 0 ? 'nft' : 'token',
-      image: '/img/seoulstars-main.jpeg',
+      image: '/img/cgc_icon.png',
     })),
   );
   const [loading, setLoading] = useState(true);
@@ -49,22 +47,15 @@ const Launchpad = () => {
 
   return (
     <DefaultLayout>
-      <div className="mb-[12px]">
+      <div className="mb-[24px]">
         <Breadcrumb
           items={[
-            { text: 'Home', value: 'Home' },
-            { text: 'Launchpad', value: 'Launchpad' },
+            { text: 'Home', value: '/' },
+            { text: 'Launchpad', value: '/launchpad' },
           ]}
-          currentValue={'Launchpad'}
-          onItemClick={(val) => {
-            if (val === 'Home') {
-              dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
-              router.push('/').then();
-            }
-          }}
         />
       </div>
-      <div className="flex justify-between items-center mb-[28px]">
+      <div className="flex justify-between items-center mb-[24px]">
         <div className="text-[#FFFFFF] font-bold text-[20px]">Collections</div>
         <div>
           <SelectGroup
@@ -77,13 +68,10 @@ const Launchpad = () => {
           />
         </div>
       </div>
-      <div className="mb-[28px]">
+      <div className="mb-[24px]">
         <Divider />
       </div>
-      <div
-        className="grid"
-        style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(371px, 1fr))' }}
-      >
+      <div className="grid gap-[12px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cold-6 auto-rows-auto mb-[24px]">
         {!loading && !items.length && (
           <div className="text-[#FFFFFF] text-semibold">
             No Collections Found.
@@ -93,7 +81,7 @@ const Launchpad = () => {
           items.length &&
           items.map((item, index) => {
             return (
-              <div key={index} className="mb-[20px] cursor-pointer">
+              <div key={index} className="cursor-pointer">
                 <CollectionsCard
                   id={String(index)}
                   image={item.image}
@@ -105,7 +93,7 @@ const Launchpad = () => {
         {loading &&
           LOADING_ARR.map((item, index) => {
             return (
-              <div key={index} className="mb-[20px]">
+              <div key={index}>
                 <CollectionsCardLoading />
               </div>
             );

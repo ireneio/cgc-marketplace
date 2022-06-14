@@ -91,62 +91,49 @@ const LaunchpadNft = () => {
 
   return (
     <DefaultLayout>
-      {loading && <PageLoading />}
-      {!loading && (
-        <div>
-          <div className="mb-[12px]">
-            <Breadcrumb
-              items={[
-                { text: 'Home', value: 'Home' },
-                { text: 'Launchpad', value: 'Launchpad' },
-                { text: info.name, value: info.name },
-              ]}
-              currentValue={info.name}
-              onItemClick={(val) => {
-                if (val === 'Home') {
-                  dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
-                  router.push('/');
-                } else if (val === 'Launchpad') {
-                  dispatch({
-                    type: 'SET_NAVIGATION_PATH',
-                    payload: 'Launchpad',
-                  });
-                  router.push('/launchpad');
-                }
-              }}
-            />
-          </div>
-          <div className="flex items-center mb-[28px]">
-            <div className="text-[#FFFFFF] font-bold text-[20px]">
-              {info.name} [{info.symbol.toUpperCase()}]
+      <div className="mb-[24px]">
+        {loading && <PageLoading />}
+        {!loading && (
+          <div>
+            <div className="mb-[24px]">
+              <Breadcrumb
+                items={[
+                  { text: 'Home', value: '/' },
+                  { text: 'Launchpad', value: '/launchpad' },
+                  { text: info.name, value: '/launchpad' + info.name },
+                ]}
+              />
             </div>
-            <div className="ml-[20px] flex items-center">
-              {info.tags.map((tag, index) => {
-                return (
-                  <Tag key={index} className="mr-[20px]">
-                    {tag}
-                  </Tag>
-                );
-              })}
-            </div>
-          </div>
-          <div className="mb-[28px]">
-            <Divider />
-          </div>
-          <div className="flex flex-wrap">
-            <div style={{ flexBasis: '50%' }} className="flex-1">
-              <div className="max-w-[552px] mb-[30px]">
-                <ImageCarousel images={info.images} />
+            <div className="flex items-center mb-[24px]">
+              <div className="text-[#FFFFFF] font-bold text-[20px]">
+                {info.name} [{info.symbol.toUpperCase()}]
+              </div>
+              <div className="ml-[20px] flex flex-wrap items-center">
+                {info.tags.map((tag, index) => {
+                  return (
+                    <Tag key={index} className="mr-[20px]">
+                      {tag}
+                    </Tag>
+                  );
+                })}
               </div>
             </div>
-            <div style={{ flexBasis: '50%' }} className="pl-[30px] flex-1">
-              <NftInfoPanel info={info} />
-              <NftPresalePanel info={info} />
-              <NftPublicSalePanel info={info} />
+            <div className="mb-[24px]">
+              <Divider />
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-[24px]">
+              <div>
+                <ImageCarousel images={info.images} />
+              </div>
+              <div className="grid gap-y-[24px]">
+                <NftInfoPanel info={info} />
+                <NftPresalePanel info={info} />
+                <NftPublicSalePanel info={info} />
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </DefaultLayout>
   );
 };

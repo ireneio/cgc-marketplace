@@ -112,23 +112,10 @@ const MintNFT = () => {
           <div className="mb-[12px]">
             <Breadcrumb
               items={[
-                { text: 'Home', value: 'Home' },
-                { text: 'Launchpad', value: 'Launchpad' },
-                { text: info.name, value: info.name },
+                { text: 'Home', value: '/' },
+                { text: 'Launchpad', value: '/launchpad' },
+                { text: info.name, value: '/launchpad' + info.name },
               ]}
-              currentValue={info.name}
-              onItemClick={(val) => {
-                if (val === 'Home') {
-                  dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
-                  router.push('/');
-                } else if (val === 'Launchpad') {
-                  dispatch({
-                    type: 'SET_NAVIGATION_PATH',
-                    payload: 'Launchpad',
-                  });
-                  router.push('/launchpad');
-                }
-              }}
             />
           </div>
           <div className="flex items-center mb-[28px]">

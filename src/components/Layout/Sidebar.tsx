@@ -1,28 +1,22 @@
 import { useWindowHeight, useWindowWidth } from '@/hooks/window';
+import { SIDE_BAR_ITEMS } from '@/utils/cgcConsts';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-
-interface SidebarItem {
-  text: string;
-  value: string;
-  disabled?: boolean;
-  icon?: string;
-  children?: SidebarItem[];
-}
 interface Props {
-  items: SidebarItem[];
-  currentValue: string;
   onItemClick?: (value: string) => void | Promise<void>;
   rootClassName?: string;
 }
 
-const Sidebar = ({
-  items,
-  currentValue,
-  onItemClick,
-  rootClassName,
-}: Props) => {
+const Sidebar = ({ onItemClick, rootClassName }: Props) => {
+  const router = useRouter();
   const windowWidth = useWindowWidth();
   const windiwHeight = useWindowHeight();
+  const [currentValue, setCurrentValue] = useState('/');
+
+  useEffect(() => {
+    setCurrentValue(router.pathname);
+  }, [router.pathname]);
 
   return (
     <div
@@ -37,8 +31,8 @@ const Sidebar = ({
             : Number(windiwHeight) - 120 - 366,
       }}
     >
-      {items.map((item) => {
-        const isSelectedParent = currentValue.split('/')[0] === item.value;
+      {SIDE_BAR_ITEMS.map((item) => {
+        const isSelectedParent = currentValue === item.value;
         return (
           <div
             key={item.value}
@@ -79,10 +73,13 @@ const Sidebar = ({
               <div className="px-[38px]">
                 {item.children?.map((child) => {
                   const isSelectedChild =
-                    currentValue.split('/')[1] === child.value;
+                    (currentValue.split('/')[2] === child.value ||
+                      (currentValue.split('/').length === 2 &&
+                        child.value === '')) &&
+                    isSelectedParent;
                   return (
                     <div
-                      key={child.value}
+                      key={item.value + child.value}
                       className="flex items-center transition-all py-[6px]"
                       style={{
                         cursor: isSelectedChild

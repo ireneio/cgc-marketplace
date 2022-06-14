@@ -19,7 +19,7 @@ function removeConsole() {
   }
 }
 
-removeConsole();
+// removeConsole();
 
 function App({ Component, pageProps }: AppProps) {
   useEffect(() => {

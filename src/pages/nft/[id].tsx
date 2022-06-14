@@ -1,4 +1,3 @@
-import YourView from '@/components/Collection/YourView';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
 import ActionPanel from '@/components/Nft/ActionPanel';
 import AttributesPanel from '@/components/Nft/AttributesPanel';
@@ -17,6 +16,7 @@ import DetailPanel from '@/components/Nft/DetailPanel';
 import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
 import { LoginModal } from '@/components/Auth/LoginModal';
+import { useGetCollectionsBySlug, useGetNftByHash } from '@/hooks/collections';
 
 export interface NftInfo {
   id: string | number;
@@ -70,23 +70,24 @@ const Nft = () => {
     auctionEndDate: dayjs().toISOString(),
     saleEndDate: dayjs().toISOString(),
     attributes: [
-      { traitType: 'background', value: 'Mountains' },
-      { traitType: 'base', value: 'Mountains' },
-      { traitType: 'clothing', value: 'Mountains' },
-      { traitType: 'hats', value: 'Mountains' },
-      { traitType: 'accessory', value: 'Mountains' },
-      { traitType: 'rarity', value: 'Mountains' },
-      { traitType: 'traitType', value: 'Mountains' },
+      { traitType: 'background', value: '-' },
+      { traitType: 'base', value: '-' },
+      { traitType: 'clothing', value: '-' },
+      { traitType: 'hats', value: '-' },
+      { traitType: 'accessory', value: '-' },
+      { traitType: 'rarity', value: '-' },
+      { traitType: 'traitType', value: '-' },
     ],
-    royaltiesPercentage: 5,
+    royaltiesPercentage: 0,
     mintAddress: '',
     owner: '',
   });
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-  const [loading, setLoading] = useState(false);
   const [currentSelection] = useState<Selection>('Collection Item');
+  const { data: collections } = useGetCollectionsBySlug();
+  const { getData, data, loading, refresh } = useGetNftByHash();
 
   const breadCrumbItems = useMemo(() => {
     switch (currentSelection) {
@@ -151,8 +152,7 @@ const Nft = () => {
         router.push(`/collection/${metadata.slug}?tab=about`).then();
         return;
       case 'Explore/All':
-        dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Explore/All' });
-        router.push(`/`).then();
+        router.push('/explore').then();
         return;
     }
   };
@@ -178,7 +178,6 @@ const Nft = () => {
   };
 
   const getNftData = async () => {
-    setLoading(true);
     const response = await api.getNftListByHash(
       oAuthCtx.access_token,
       String(router.query.id),
@@ -210,31 +209,49 @@ const Nft = () => {
         price: '0',
       });
     }
-    setLoading(false);
   };
 
   const handleRefresh = async () => {
-    getNftData().then();
+    await refresh(metadata.slug);
   };
 
   useEffect(() => {
     if (router.query.id) {
       dispatch({ type: 'INIT_CART' });
-      setInfo((prev) => {
-        return {
-          ...prev,
-          id: String(router.query.id),
-        };
-      });
     }
   }, [dispatch, router]);
 
   useEffect(() => {
-    if (router.query.id) {
-      getCollectionData().then(() => {
-        getNftData().then();
+    if (data.length) {
+      const filter = data.filter(
+        (item: any) => item.tokenAddress === router.query.id,
+      );
+      if (!filter.length) return;
+      const item = filter[0];
+      const manifest = item?.splNftInfo?.data?.manifest;
+      setInfo({
+        id: item.id,
+        name: manifest?.name,
+        brand: manifest?.collection?.name,
+        image: manifest?.image,
+        description: manifest?.description,
+        attributes:
+          manifest?.attributes.map((item: any) => ({
+            traitType: item.trait_type,
+            value: item.value,
+          })) || [],
+        auctionEndDate: '',
+        saleEndDate: '',
+        royaltiesPercentage: 0,
+        mintAddress: item.tokenAddress,
+        owner: item?.splNftInfo?.walletAddress,
+        price: '0',
       });
     }
+  }, [data]);
+
+  useEffect(() => {
+    getData(String(router.query.id));
   }, [router.query.id]);
 
   return (
@@ -242,14 +259,8 @@ const Nft = () => {
       <div className="mb-[24px]">
         <Breadcrumb
           items={breadCrumbItems}
-          currentValue={currentSelection}
           onItemClick={(val) => {
-            if (val === 'Home') {
-              dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
-              router.push('/').then();
-            } else {
-              handleSelect(val as Selection);
-            }
+            handleSelect(val as Selection);
           }}
         />
       </div>
@@ -268,7 +279,6 @@ const Nft = () => {
       <div className="mb-[24px]">
         <Divider />
       </div>
-      {currentSelection === 'Your Items' && <YourView />}
       {currentSelection !== 'Your Items' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-[24px] pt-[12px]">
           <div className="flex items-center justify-between col-span-2">

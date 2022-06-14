@@ -26,7 +26,7 @@ const BasicInfoPanel = ({ info }: { info: CollectionInfo }) => {
               {dayjs(info.nextTokenSaleStartDate).format('DD MMM YYYY')}
             </div>
           </div>
-          <div className="flex items-center ml-[20px] mr-[12px] text-[14px]">
+          <div className="flex items-center ml-0 md:ml-[20px] mr-[12px] text-[14px]">
             <div>Raising</div>
             <div className="ml-[8px] font-semibold">
               ${getNumberWithUnits(info.raising)}
@@ -38,10 +38,11 @@ const BasicInfoPanel = ({ info }: { info: CollectionInfo }) => {
               onClick={() => handleLinkOpen('whitepaper')}
             >
               <img
-                src="/img/icon_link.svg"
-                width={12}
-                height={12}
+                src="/img/icon_paper.svg"
+                width={18}
+                height={18}
                 alt="whitepaper"
+                className="mt-[7px]"
               />
             </div>
             <div
@@ -70,7 +71,7 @@ const BasicInfoPanel = ({ info }: { info: CollectionInfo }) => {
               className="ml-[16px] cursor-pointer"
               onClick={() => handleLinkOpen('link')}
             >
-              <img src="/img/icon_link.png" width={16} height={16} alt="link" />
+              <img src="/img/icon_link.svg" width={16} height={16} alt="link" />
             </div>
           </div>
         </div>

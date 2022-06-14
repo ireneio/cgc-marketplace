@@ -53,10 +53,10 @@ const DropdownMenu = ({
       {!children && (
         <div
           style={style}
-          className="absolute bottom-[-265%] px-[2px] py-[2px] rounded-[5px] flex items-center justify-center"
+          className="absolute bottom-[-265%] px-[2px] py-[2px] rounded-[5px] flex items-center justify-center z-[102]"
         >
           <div
-            className="bg-[#181818] z-[3]"
+            className="bg-[#181818]"
             style={{ width: width ? width : 'inherit' }}
           >
             {items &&

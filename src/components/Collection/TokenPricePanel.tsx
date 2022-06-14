@@ -123,10 +123,10 @@ const TokenPricePanel = ({
         />
       </div>
       <div>
-        <div className="text-[#FFFFFF] font-semibold text-[14px] mb-[12px]">
+        <div className="text-[#FFFFFF] font-semibold text-[14px] mb-[8px]">
           {brandName} Token Price ({symbol})
         </div>
-        <div className="flex items-center mb-[14px]">
+        <div className="flex items-center mb-[8px]">
           <div className="font-bold text-[36px] text-[#FFFFFF]">${price}</div>
           <div className="ml-[14px]">
             <TickerText
@@ -136,106 +136,139 @@ const TokenPricePanel = ({
             />
           </div>
         </div>
-        <div className="flex items-center mb-[8px]">
-          <div className="font-bold text-[14px] text-[#FFFFFF]">
-            ${priceToBTC}
+        <div className="flex items-center mb-[24px]">
+          <div className="mr-[8px] text-[#AAAAAA]">Price Change (%):</div>
+          <div>
+            <DateViewSelector
+              onViewChange={(val) => setCurrentView(val)}
+              current={currentView}
+            />
           </div>
-          <div className="ml-[14px] text-[12px]">
+        </div>
+        {priceToBTC ||
+          (priceToBTC === 0 && (
+            <div className="flex items-center mb-[8px]">
+              <div className="font-bold text-[14px] text-[#FFFFFF] flex">
+                <span className="font-thin">{symbol}/BTC: </span>
+                <div className="w-[100px] ml-[8px] text-right">
+                  ${priceToBTC}
+                </div>
+              </div>
+              {/* <div className="ml-[8px] text-[12px]">
             <TickerText
               text={priceToBTCFluctuation}
               direction={priceToBTCFluctuation > 0 ? 'up' : 'down'}
               fontSize={12}
             />
-          </div>
-        </div>
-        <div className="flex items-center mb-[14px]">
-          <div className="font-bold text-[14px] text-[#FFFFFF]">
-            ${priceToETH}
-          </div>
-          <div className="ml-[14px] text-[12px]">
+          </div> */}
+            </div>
+          ))}
+        {priceToETH ||
+          (priceToETH === 0 && (
+            <div className="flex items-center mb-[8px]">
+              <div className="font-bold text-[14px] text-[#FFFFFF] flex">
+                <span className="font-thin">{symbol}/ETH: </span>
+                <div className="w-[100px] ml-[8px] text-right">
+                  ${priceToETH}
+                </div>
+              </div>
+              {/* <div className="ml-[8px] text-[12px]">
             <TickerText
               text={priceToETHFluctuation}
               direction={priceToETHFluctuation > 0 ? 'up' : 'down'}
               fontSize={12}
             />
+          </div> */}
+            </div>
+          ))}
+        <div className="mb-[24px]">
+          <div className="text-[#FFFFFF] text-[14px] font-normal flex mb-[8px]">
+            <span className="text-[#AAAAAA] w-[20px]">Low: </span>
+            <div className="w-[100px] ml-[8px] text-right">${low}</div>
           </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center mb-[24px] flex-wrap max-w-[800px]">
-          <div className="text-[#FFFFFF] text-[14px] font-semibold">
-            Low: ${low}
-          </div>
-          <div className="ml-0 lg:ml-[12px] basis-[100%] md:basis-auto mt-[12px] md:mt-0">
+          {/* <div className="ml-0 lg:ml-[12px] basis-[100%] md:basis-auto mt-[12px] md:mt-0">
             <ProgressBar
               width={221}
               percentage={(price / (low + high)) * 100}
               showIndicator
             />
+          </div> */}
+          <div className="text-[#FFFFFF] text-[14px] font-normal flex">
+            <span className="text-[#AAAAAA] w-[20px]">High: </span>
+            <div className="w-[100px] ml-[8px] text-right">${high}</div>
           </div>
-          <div className="text-[#FFFFFF] text-[14px] font-semibold ml-0 lg:ml-[12px] mt-[12px] lg:mt-0">
-            High: ${high}
-          </div>
-          <DateViewSelector
-            className="xl:ml-[24px] mt-[12px] md:mt-0 ml-0"
-            onViewChange={(val) => setCurrentView(val)}
-            current={currentView}
-          />
         </div>
         <div className="mb-[24px]">
           <Divider />
         </div>
         <div className="mb-[24px] grid gap-[24px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 2xl:grid-cols-5">
           <div>
-            <div className="text-[#FFFFFF] font-light text-[14px]">
+            <div className="text-[#AAAAAA] font-light text-[14px]">
               Market Cap
             </div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px]">
-              ${getNumberWithCommas(marketCap, 2)}
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px]">
+              {marketCap || marketCap === 0
+                ? `\$${getNumberWithCommas(marketCap, 2)}`
+                : 'N/A'}
             </div>
           </div>
           <div>
-            <div className="text-[#FFFFFF] font-light text-[14px]">
+            <div className="text-[#AAAAAA] font-light text-[14px]">
               Fully Diluted Market Cap
             </div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px]">
-              ${getNumberWithCommas(fullyDilutedMarketCap, 2)}
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px]">
+              {fullyDilutedMarketCap || fullyDilutedMarketCap === 0
+                ? `\$${getNumberWithCommas(fullyDilutedMarketCap, 2)}`
+                : 'N/A'}
             </div>
           </div>
           <div>
-            <div className="text-[#FFFFFF] font-light text-[14px]">
+            <div className="text-[#AAAAAA] font-light text-[14px]">
               Volume (24hr)
             </div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px]">
-              ${getNumberWithCommas(volume, 2)}
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px]">
+              {volume || volume === 0
+                ? `\$${getNumberWithCommas(volume, 2)}`
+                : 'N/A'}
             </div>
           </div>
           <div>
-            <div className="text-[#FFFFFF] font-light text-[14px]">
+            <div className="text-[#AAAAAA] font-light text-[14px]">
               Circulating Supply
             </div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px] flex">
-              <span>{getNumberWithCommas(circulatingSupply, 0)}</span>
-              <span className="ml-[4px]">{symbol}</span>
-              <span className="ml-auto font-light">
-                {circulatingSupplyPercentage}%
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex items-center">
+              <span>
+                {circulatingSupply || circulatingSupply === 0
+                  ? getNumberWithCommas(circulatingSupply, 0)
+                  : 'N/A'}
               </span>
+              {/* <span className="ml-[4px]">{symbol}</span> */}
+              {circulatingSupplyPercentage ||
+                (circulatingSupplyPercentage === 0 && (
+                  <span className="ml-[4px] mt-[1px] font-light text-[#EEEEEE] text-[14px]">
+                    ({circulatingSupplyPercentage}%)
+                  </span>
+                ))}
             </div>
-            <div className="mt-[6px]">
+            {/* <div className="mt-[6px]">
               <ProgressBar
                 width={221}
                 percentage={circulatingSupplyPercentage}
               />
-            </div>
+            </div> */}
           </div>
           <div>
-            <div className="text-[#FFFFFF] font-light text-[14px]">
+            <div className="text-[#AAAAAA] font-light text-[14px]">
               Max Supply
             </div>
-            <div className="mt-[4px] text-[#FFFFFF] font-semibold text-[14px]">
-              {getNumberWithCommas(totalSupply)}
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px]">
+              {totalSupply || totalSupply === 0
+                ? getNumberWithCommas(totalSupply, 0)
+                : 'N/A'}
             </div>
           </div>
         </div>
-        <div className="mb-[12px]">
+        <div className="mb-[24px]">
           <Divider />
         </div>
         <div className="flex">

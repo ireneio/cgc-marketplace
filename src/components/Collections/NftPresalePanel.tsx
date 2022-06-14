@@ -6,7 +6,7 @@ import Tag from '../Shared/Tag';
 
 const NftPresalePanel = ({ info }: { info: LaunchpadNftInfo }) => {
   return (
-    <Tag className="mt-[30px] px-[28px] py-[24px]">
+    <Tag className="px-[28px] py-[24px]">
       <div>
         <div className="text-[#FFFFFF] font-bold text-[16px] flex items-center">
           <div>Presale Whitelist</div>

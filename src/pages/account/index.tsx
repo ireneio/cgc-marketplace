@@ -96,16 +96,9 @@ const Account = ({
       <div className="mb-[24px]">
         <Breadcrumb
           items={[
-            { text: 'Home', value: 'Home' },
-            { text: 'cgPass', value: 'Account' },
+            { text: 'Home', value: '/' },
+            { text: 'cgPass', value: '/account?tab=wallet' },
           ]}
-          currentValue={'Account'}
-          onItemClick={(val) => {
-            if (val === 'Home') {
-              dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
-              router.push('/').then();
-            }
-          }}
         />
       </div>
       <div className="flex items-center mb-[24px] flex-wrap">

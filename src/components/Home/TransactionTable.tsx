@@ -3,7 +3,7 @@ import {
   getTrimmedAddressEllipsisMiddle,
 } from '@/utils/formatHelper';
 import dayjs from 'dayjs';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import DefaultTable from '../Shared/DefaultTable';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import ClipboardText from '../Shared/ClipboardText';
@@ -33,6 +33,14 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
       );
     });
   }, [headers]);
+
+  const handleGoExplorer = (hash: string, type: 'tx' | 'account') => {
+    if (type === 'tx') {
+      window.open(`https://solscan.io/tx/${hash}`, '_blank');
+    } else if (type === 'account') {
+      window.open(`https://solscan.io/account/${hash}`, '_blank');
+    }
+  };
 
   const _rows = useMemo(() => {
     return rows.map((row, rowIndex) => {
@@ -66,6 +74,7 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
               style={{
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
+              onClick={() => handleGoExplorer(col, 'tx')}
             >
               <ClipboardText copyValue={String(col)}>
                 <div className="w-[150px]">
@@ -94,6 +103,7 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
               style={{
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
+              onClick={() => handleGoExplorer(col, 'account')}
             >
               <ClipboardText copyValue={String(col)}>
                 <div className="w-[150px]">
@@ -110,6 +120,7 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
               style={{
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
+              onClick={() => handleGoExplorer(col, 'account')}
             >
               <ClipboardText copyValue={String(col)}>
                 <div className="w-[150px]">
@@ -119,6 +130,18 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
             </div>
           );
         } else if (colIndex === 5) {
+          return (
+            <div
+              key={colIndex}
+              className="text-[#FFFFFF] text-[14px] px-[10px] py-[12px]"
+              style={{
+                background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
+              }}
+            >
+              {getNumberWithCommas(String(col), 2)}
+            </div>
+          );
+        } else if (colIndex === 6) {
           return (
             <div
               key={colIndex}
@@ -140,7 +163,7 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
       {!loading && <DefaultTable rows={_rows} headers={_headers} />}
       {loading && (
         <div className="w-full flex items-center justify-center">
-          <img src="/img/spinner.svg" alt="spinner" />
+          <img src={'/img/spinner.svg'} alt="spinner" />
         </div>
       )}
     </div>

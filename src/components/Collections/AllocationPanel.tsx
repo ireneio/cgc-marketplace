@@ -59,17 +59,14 @@ const AllocationPanel = ({ info }: { info: CollectionInfo }) => {
   }, [data]);
 
   return (
-    <Tag className="mt-[30px] px-[28px] py-[24px]">
+    <Tag className="px-[28px] py-[24px]">
       <div>
         <div className="text-[#FFFFFF] font-bold text-[16px]">Allocation</div>
         <div className="mt-[14px]">
           <Divider />
         </div>
         <div className="mt-[24px] flex items-center flex-wrap">
-          <div
-            style={{ flexBasis: '25%' }}
-            className="relative w-[180px] h-[180px] flex justify-center items-center text-[#FFFFFF] mb-[24px]"
-          >
+          <div className="relative w-[180px] h-[180px] flex justify-center items-center text-[#FFFFFF] mb-[24px] basis-[100%] lg:basis-[25%]">
             <div className="absolute text-center top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
               <div className="text-[12px]">{currentSelected.name}</div>
               <div className="mt-[0px] font-bold text-[18px]">
@@ -80,10 +77,7 @@ const AllocationPanel = ({ info }: { info: CollectionInfo }) => {
               <Doughnut data={chartData} />
             </div>
           </div>
-          <div
-            style={{ flexBasis: '75%' }}
-            className="pl-[48px] grid grid-cols-3 gap-y-[12px]"
-          >
+          <div className="lg:pl-[48px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-[12px] basis-[100%] lg:basis-[75%]">
             {data.map((item, index) => {
               return (
                 <div

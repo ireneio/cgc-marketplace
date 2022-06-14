@@ -4,7 +4,7 @@ import Footer from './Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import seo from '../../data/seo';
-import { useAppDispatch, useAppSelector } from '@/store';
+import { useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import { useWindowWidth } from '@/hooks/window';
@@ -21,56 +21,12 @@ const DynamicSnackbar = dynamic(
   { ssr: false },
 );
 
-export const BASE_SIDEBAR_PATH = 'Home';
-export const SIDEBAR_PATH_STORAGE_KEY = 'navigation_path';
-
-const SIDE_BAR_ITEMS = [
-  {
-    text: 'Home',
-    value: 'Home',
-    icon: '/img/icon_home.svg',
-  },
-  {
-    text: 'Explore',
-    value: 'Explore',
-    icon: '/img/icon_explore.svg',
-    children: [
-      { text: 'All', value: 'All' },
-      // { text: 'Latest', value: 'Latest' },
-      // { text: 'Popular', value: 'Popular' },
-    ],
-  },
-  // { text: 'Sell', value: 'Sell', icon: '/img/icon_sell.png' },
-  {
-    text: 'Launchpad',
-    value: 'Launchpad',
-    icon: '/img/icon_launchpad.svg',
-  },
-  // {
-  //   text: 'Cart',
-  //   value: 'Cart',
-  //   icon: '/img/icon_cart.svg',
-  // },
-  // {
-  //   text: 'Transactions',
-  //   value: 'Transactions',
-  //   icon: '/img/icon_bar.png',
-  // },
-  // {
-  //   text: 'Latest Sales',
-  //   value: 'Latest Sales',
-  //   icon: '/img/icon_dollar.png',
-  // },
-];
-
 const sidebarAnimationVariants = {
   open: { x: 0 },
   close: { x: '-100%' },
 };
 
 const DefaultLayout = ({ children, title }: Props) => {
-  const dispatch = useAppDispatch();
-  const sideBarPath = useAppSelector((state) => state.layout.navigation.path);
   const snackbarShow = useAppSelector((state) => state.layout.snackbar.show);
   const snackbarText = useAppSelector((state) => state.layout.snackbar.text);
   const snackbarTitle = useAppSelector((state) => state.layout.snackbar.title);
@@ -79,46 +35,12 @@ const DefaultLayout = ({ children, title }: Props) => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
 
   const handleSideBarPathUpdate = (val: string) => {
-    if (val === 'Home' || val.includes('Explore')) {
-      dispatch({ type: 'SET_NAVIGATION_PATH', payload: val });
-      router.push('/').then();
-    } else if (val === 'Launchpad') {
+    if (val === 'Launchpad') {
       window.open('', '_blank');
+    } else {
+      router.push(val);
     }
   };
-
-  useEffect(() => {
-    let isPathValid = false;
-    let resultPath = '';
-    const savedPath = window.localStorage.getItem(SIDEBAR_PATH_STORAGE_KEY);
-    if (savedPath) {
-      const _path = JSON.parse(savedPath);
-      resultPath = _path;
-      const _arr = _path.split('/');
-      const _f = SIDE_BAR_ITEMS.find((item) => item.value === _arr[0]);
-      if (_f && _arr.length > 1 && _f.children && _f.children.length) {
-        const _fChild = _f.children?.find((item) => item.value === _arr[1]);
-        if (_fChild) {
-          isPathValid = true;
-        }
-      } else {
-        isPathValid = true;
-      }
-    }
-    if (isPathValid) {
-      // TODO
-      dispatch({ type: 'SET_NAVIGATION_PATH', payload: resultPath });
-      // handleSideBarPathUpdate(resultPath);
-    }
-  }, []);
-
-  // TODO temp:load sign in state from storage
-  // useEffect(() => {
-  //   const email = localStorage.getItem('email');
-  //   if (email) {
-  //     dispatch({ type: 'SET_USER_EMAIL', payload: JSON.parse(email) });
-  //   }
-  // }, []);
 
   return (
     <>
@@ -185,11 +107,7 @@ const DefaultLayout = ({ children, title }: Props) => {
             className="fixed top-[75px] w-[225px] flex-shrink-0 z-[100]"
             style={{ display: windowWidth < 768 ? 'none' : 'block' }}
           >
-            <Sidebar
-              items={SIDE_BAR_ITEMS}
-              currentValue={sideBarPath}
-              onItemClick={(value) => handleSideBarPathUpdate(value)}
-            />
+            <Sidebar onItemClick={(value) => handleSideBarPathUpdate(value)} />
           </div>
           <motion.div
             variants={sidebarAnimationVariants}
@@ -198,8 +116,6 @@ const DefaultLayout = ({ children, title }: Props) => {
             style={{ display: windowWidth < 768 ? 'block' : 'none' }}
           >
             <Sidebar
-              items={SIDE_BAR_ITEMS}
-              currentValue={sideBarPath}
               onItemClick={(value) => handleSideBarPathUpdate(value)}
               rootClassName={'static bg-[#13002B] w-[70vw] h-inherit'}
             />

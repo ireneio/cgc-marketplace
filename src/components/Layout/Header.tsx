@@ -13,7 +13,6 @@ const Header = () => {
   };
 
   const handleGoHomePage = () => {
-    dispatch({ type: 'SET_NAVIGATION_PATH', payload: 'Home' });
     router.push('/');
   };
 

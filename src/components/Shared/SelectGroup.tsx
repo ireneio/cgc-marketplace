@@ -30,7 +30,7 @@ const SelectGroup = ({ items, currentValue, onItemClick }: Props) => {
                 borderTopRightRadius: index === items.length - 1 ? '4px' : 0,
                 borderBottomRightRadius: index === items.length - 1 ? '4px' : 0,
                 background: item.disabled
-                  ? '#181818'
+                  ? '#290030'
                   : currentValue === item.value
                   ? 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)'
                   : '#13002B',

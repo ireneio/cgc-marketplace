@@ -1,58 +1,17 @@
-import { useAppDispatch, useAppSelector } from '@/store';
-import { useContext, useEffect, useState } from 'react';
+import { useAppDispatch } from '@/store';
+import { useEffect, useState } from 'react';
 import ButtonLink from '../Shared/ButtonLink';
-import LoadingNetflixCard from './FloatingCardLoading';
+import FloatingCardLoading from './FloatingCardLoading';
 import SectionTitle from '../Shared/SectionTitle';
 import Divider from '@/components/Shared/Divider';
-import { OAuthContext } from '@/contexts/OAuthProvider';
-import api from '@/utils/api';
 import FloatingCard from './FloatingCard';
 import { useRouter } from 'next/router';
-import { useWindowWidth } from '@/hooks/window';
+import { useGetCollections } from '@/hooks/collections';
 
 const AllCollections = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const sideBarPath = useAppSelector((state) => state.layout.navigation.path);
-  const collections = useAppSelector((state) => state.collection.collections);
-  const oAuthCtx = useContext(OAuthContext);
-  const [loading, setLoading] = useState(true);
-  const windowWidth = useWindowWidth();
-
-  const getCollections = async () => {
-    const response = await api.getCollectionList(oAuthCtx.access_token);
-    return response.map((item: any) => {
-      return {
-        ...item,
-        splashSrc: item.metadata.splashSrcUrl,
-        logoSrc: item.metadata.logoSrcUrl,
-        videoSrc: item.metadata.videoSrcUrl,
-        name: item.metadata.name,
-        slug: item.metadata.name.toLowerCase().split(' ').join('_'),
-        tags: item.tags.length ? item.tags.map((item: any) => item.tag) : [],
-        genre: [item.metadata.genre],
-        services: item.services,
-        description: item.metadata.description,
-        totalSupply: item?.nftCollectionStats?.totalSupply,
-        marketCap: item?.nftCollectionStats?.usdMarketCap,
-        network: 'SOL',
-      };
-    });
-  };
-
-  const initCollections = async () => {
-    setLoading(true);
-    const collections = await getCollections();
-    dispatch({ type: 'SET_COLLECTIONS', payload: collections });
-    const tid = setTimeout(() => {
-      setLoading(false);
-      clearTimeout(tid);
-    }, 800);
-  };
-
-  useEffect(() => {
-    initCollections().then();
-  }, []);
+  const { data, loading } = useGetCollections();
 
   const handleGoDetail = (slug: string) => {
     router.push(`/collection/${slug}`);
@@ -62,23 +21,21 @@ const AllCollections = () => {
 
   useEffect(() => {
     setCurrentHoverId('-1');
-  }, [sideBarPath, router.pathname]);
+  }, [router.pathname]);
 
   return (
     <div className="relative">
       <div className="flex justify-between items-center">
         <SectionTitle>all collections</SectionTitle>
       </div>
-      {sideBarPath === 'Explore/All' && (
-        <div className="mt-[24px] mb-[24px]">
-          <Divider />
-        </div>
-      )}
+      <div className="mt-[24px] mb-[24px]">
+        <Divider />
+      </div>
       <div className="hide-scrollbar">
         {!loading && (
           <div className="mt-[24px]">
             <div className="grid gap-[12px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cold-6">
-              {collections.map((collection: any, index) => {
+              {data.map((collection: any, index) => {
                 return (
                   <div
                     key={index}
@@ -111,24 +68,20 @@ const AllCollections = () => {
         )}
         {loading && (
           <div className="mt-[24px] grid gap-[12px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cold-6 auto-rows-auto">
-            {[0, 1, 2, 3, 4, 5].map((game, index) => {
+            {[0, 1, 2].map((game, index) => {
               return (
                 <div key={index}>
-                  <LoadingNetflixCard />
+                  <FloatingCardLoading />
                 </div>
               );
             })}
           </div>
         )}
         <div className="mt-[12px] flex justify-end">
-          {sideBarPath === 'Home' && (
+          {router.pathname === '/' && (
             <ButtonLink
               onClick={() => {
-                dispatch({
-                  type: 'SET_NAVIGATION_PATH',
-                  payload: 'Explore/All',
-                });
-                window.scroll(0, 0);
+                router.push('/explore');
               }}
             >
               see all
