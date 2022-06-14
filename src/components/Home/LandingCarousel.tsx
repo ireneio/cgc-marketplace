@@ -12,8 +12,6 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
   const [openFrame, setOpenFrame] = useState(false);
   const { loading } = useGetCollections();
 
-  console.log('loading', loading);
-
   const handlePlay = (href: string) => {
     console.log('handlePlay', name);
     setOpenFrame(true);
