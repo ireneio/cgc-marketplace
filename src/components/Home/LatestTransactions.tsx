@@ -50,7 +50,11 @@ const LatestTransactions = () => {
         }
         return acc;
       }, [])
-      .filter((item: any) => Number(item?.transaction?.amountToken) > 0 && Number(item?.transaction?.amountUsd) > 0)
+      .filter(
+        (item: any) =>
+          Number(item?.transaction?.amountToken) > 0 &&
+          Number(item?.transaction?.amountUsd) > 0,
+      )
       .sort((a: any, b: any) => {
         return b?.transaction?.block_time - a?.transaction?.block_time;
       })

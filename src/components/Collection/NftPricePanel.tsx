@@ -103,122 +103,91 @@ const NftPricePanel = ({
         <div className="mb-[8px] text-[#FFFFFF] font-bold text-[14px]">
           {name} NFT
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[24px] auto-rows-auto">
-          {(_volume || _volume === 0) && (
-            <div className="flex items-center justify-between">
-              <div className="text-[#FFFFFF] font-light text-[14px]">
-                Volume
-                <div>
-                  <DateViewSelector
-                    onViewChange={(val) => setCurrentViewVolume(val)}
-                    current={currentViewVolume}
-                  />
-                </div>
-              </div>
-              <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-                {_volume ? <div>${getNumberWithCommas(_volume)}</div> : <></>}
-              </div>
+        <div className="mb-[24px] grid gap-[24px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 2xl:grid-cols-5">
+          <div>
+            <div className="text-[#AAAAAA] font-light text-[14px]">Volume</div>
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px]">
+              {_volume || _volume === 0
+                ? `\$${getNumberWithCommas(_volume, 2)}`
+                : 'N/A'}
             </div>
-          )}
-          {(_change || _change === 0) && (
-            <div className="flex items-center justify-between">
-              <div className="text-[#FFFFFF] font-light text-[14px]">
-                Change
-                <div className="ml-auto">
-                  <DateViewSelector
-                    onViewChange={(val) => setCurrentViewChange(val)}
-                    current={currentViewChange}
-                  />
-                </div>
-              </div>
-              <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-                {_change ? <div>${getNumberWithCommas(_change)}</div> : <></>}
-              </div>
+            <div>
+              <DateViewSelector
+                onViewChange={(val) => setCurrentViewVolume(val)}
+                current={currentViewVolume}
+              />
             </div>
-          )}
-          {(_sales || _sales === 0) && (
-            <div className="flex items-center justify-between">
-              <div className="text-[#FFFFFF] font-light text-[14px]">
-                Sales
-                <div>
-                  <DateViewSelector
-                    onViewChange={(val) => setCurrentViewSales(val)}
-                    current={currentViewSales}
-                  />
-                </div>
-              </div>
-              <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-                {_sales ? <div>${getNumberWithCommas(_sales)}</div> : <></>}
-              </div>
+          </div>
+          <div>
+            <div className="text-[#AAAAAA] font-light text-[14px]">Change</div>
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px]">
+              {_change || _change === 0
+                ? `\$${getNumberWithCommas(_change, 2)}`
+                : 'N/A'}
             </div>
-          )}
-          {(_averagePrice || _averagePrice === 0) && (
-            <div className="flex items-center justify-between">
-              <div className="text-[#FFFFFF] font-light text-[14px]">
-                Average Price
-                <div>
-                  <DateViewSelector
-                    onViewChange={(val) => setCurrentViewAveragePrice(val)}
-                    current={currentViewAveragePrice}
-                  />
-                </div>
-              </div>
-              <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-                {_averagePrice ? (
-                  <div>${getNumberWithCommas(_averagePrice)}</div>
-                ) : (
-                  <></>
-                )}
-              </div>
+            <div>
+              <DateViewSelector
+                onViewChange={(val) => setCurrentViewChange(val)}
+                current={currentViewChange}
+              />
             </div>
-          )}
-          {(totalVolume || totalVolume === 0) && (
-            <div className="flex items-center justify-between">
-              <div className="text-[#FFFFFF] font-light text-[14px]">
-                Total Volume
-              </div>
-              <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-                {totalVolume ? (
-                  <div>${getNumberWithCommas(totalVolume)}</div>
-                ) : (
-                  <></>
-                )}
-              </div>
+          </div>
+          <div>
+            <div className="text-[#AAAAAA] font-light text-[14px]">Sales</div>
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px]">
+              {_sales || _sales === 0
+                ? `\$${getNumberWithCommas(_sales, 2)}`
+                : 'N/A'}
             </div>
-          )}
-          {totalSupply ||
-            (totalSupply === 0 && (
-              <div className="flex items-center justify-between">
-                <div className="text-[#FFFFFF] font-light text-[14px]">
-                  Total Supply
-                </div>
-                <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-                  {totalSupply ? (
-                    <div>{getNumberWithCommas(totalSupply)}</div>
-                  ) : (
-                    <></>
-                  )}
-                </div>
-              </div>
-            ))}
-          {(owners || owners === 0) && (
-            <div className="flex items-center justify-between">
-              <div className="text-[#FFFFFF] font-light text-[14px]">
-                Owners
-              </div>
-              <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-                {owners ? <div>{getNumberWithCommas(owners, 0)}</div> : <></>}
-              </div>
+            <div>
+              <DateViewSelector
+                onViewChange={(val) => setCurrentViewSales(val)}
+                current={currentViewSales}
+              />
             </div>
-          )}
-          {(count || count === 0) && (
-            <div className="flex items-center justify-between">
-              <div className="text-[#FFFFFF] font-light text-[14px]">Count</div>
-              <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-                {count ? <div>{getNumberWithCommas(count, 0)}</div> : <></>}
-              </div>
+          </div>
+          <div>
+            <div className="text-[#AAAAAA] font-light text-[14px]">
+              Average Price
             </div>
-          )}
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px]">
+              {_averagePrice || _averagePrice === 0
+                ? `\$${getNumberWithCommas(_averagePrice, 2)}`
+                : 'N/A'}
+            </div>
+            <div>
+              <DateViewSelector
+                onViewChange={(val) => setCurrentViewAveragePrice(val)}
+                current={currentViewAveragePrice}
+              />
+            </div>
+          </div>
+          <div>
+            <div className="text-[#AAAAAA] font-light text-[14px]">
+              Total Volume
+            </div>
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px]">
+              {totalVolume || totalVolume === 0
+                ? `\$${getNumberWithCommas(totalVolume, 2)}`
+                : 'N/A'}
+            </div>
+          </div>
+          <div>
+            <div className="text-[#AAAAAA] font-light text-[14px]">Owners</div>
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px]">
+              {owners || owners === 0
+                ? `${getNumberWithCommas(owners, 2)}`
+                : 'N/A'}
+            </div>
+          </div>
+          <div>
+            <div className="text-[#AAAAAA] font-light text-[14px]">Count</div>
+            <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px]">
+              {totalSupply || totalSupply === 0
+                ? getNumberWithCommas(totalSupply, 0)
+                : 'N/A'}
+            </div>
+          </div>
         </div>
       </div>
     </Tag>
