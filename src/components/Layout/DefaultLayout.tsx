@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Footer from './Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -7,7 +7,6 @@ import seo from '../../data/seo';
 import { useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
-import { useWindowWidth } from '@/hooks/window';
 import HeaderMobile from './HeaderMobile';
 import { motion } from 'framer-motion';
 
@@ -31,7 +30,6 @@ const DefaultLayout = ({ children, title }: Props) => {
   const snackbarText = useAppSelector((state) => state.layout.snackbar.text);
   const snackbarTitle = useAppSelector((state) => state.layout.snackbar.title);
   const router = useRouter();
-  const windowWidth = useWindowWidth();
   const [sideBarOpen, setSideBarOpen] = useState(false);
 
   const handleSideBarPathUpdate = (val: string) => {
@@ -93,12 +91,12 @@ const DefaultLayout = ({ children, title }: Props) => {
           show={snackbarShow}
           title={snackbarTitle}
         />
-        <div style={{ display: windowWidth < 768 ? 'none' : 'block' }}>
-          {/* <div className="hidden lg:block"> */}
+        {/* <div style={{ display: windowWidth < 768 ? 'none' : 'block' }}> */}
+        <div className="hidden lg:block">
           <Header />
         </div>
-        <div style={{ display: windowWidth < 768 ? 'block' : 'none' }}>
-          {/* <div className="lg:hidden"> */}
+        {/* <div style={{ display: windowWidth < 768 ? 'block' : 'none' }}> */}
+        <div className="lg:hidden">
           <HeaderMobile
             onNavOpen={() => setSideBarOpen((prev) => !prev)}
             navOpen={sideBarOpen}
@@ -106,8 +104,8 @@ const DefaultLayout = ({ children, title }: Props) => {
         </div>
         <div className="flex mt-[75px] relative">
           <div
-            className="fixed top-[75px] w-[225px] flex-shrink-0 z-[100]"
-            style={{ display: windowWidth < 768 ? 'none' : 'block' }}
+            className="fixed top-[75px] w-[225px] flex-shrink-0 z-[100] hidden lg:block"
+            // style={{ display: windowWidth < 768 ? 'none' : 'block' }}
           >
             <Sidebar onItemClick={(value) => handleSideBarPathUpdate(value)} />
           </div>
@@ -115,8 +113,8 @@ const DefaultLayout = ({ children, title }: Props) => {
             variants={sidebarAnimationVariants}
             initial={'close'}
             animate={sideBarOpen ? 'open' : 'close'}
-            className="fixed top-0 z-[100000]"
-            style={{ display: windowWidth < 768 ? 'block' : 'none' }}
+            className="fixed top-0 z-[100000] lg:hidden"
+            // style={{ display: windowWidth < 768 ? 'block' : 'none' }}
           >
             <Sidebar
               onItemClick={(value) => handleSideBarPathUpdate(value)}
@@ -131,14 +129,14 @@ const DefaultLayout = ({ children, title }: Props) => {
             ></div>
           )}
           <div
-            className="mx-auto"
-            style={{
-              width: windowWidth < 768 ? '100vw' : 'calc(100vw - 225px)',
-              minHeight: 'calc(100vh - 75px - 100px)',
-              marginLeft: windowWidth < 768 ? 0 : 225,
-              paddingRight: windowWidth < 768 ? 24 : 24,
-              paddingLeft: windowWidth < 768 ? 24 : 0,
-            }}
+            className="mx-auto w-[100vw] lg:w-[calc(100vw-225px)] min-h-[calc(100vh-75px-100px)] lg:ml-[225px] pr-[24px] pl-[24px] lg:pl-0"
+            // style={{
+            //   width: windowWidth < 768 ? '100vw' : 'calc(100vw - 225px)',
+            //   minHeight: 'calc(100vh - 75px - 100px)',
+            //   marginLeft: windowWidth < 768 ? 0 : 225,
+            //   paddingRight: windowWidth < 768 ? 24 : 24,
+            //   paddingLeft: windowWidth < 768 ? 24 : 0,
+            // }}
           >
             {children}
           </div>

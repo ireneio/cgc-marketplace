@@ -43,7 +43,13 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
   };
 
   const _rows = useMemo(() => {
+    if (!rows.length) {
+      return [];
+    }
     return rows.map((row, rowIndex) => {
+      if (!row.length) {
+        return [];
+      }
       return row.map((col, colIndex) => {
         if (colIndex === 0) {
           return (

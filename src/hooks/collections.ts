@@ -13,23 +13,28 @@ export const useGetCollections = () => {
   const getCollections = async () => {
     setLoading(true);
     const response = await api.getCollectionList(oAuthCtx.access_token);
-    const map = response.map((item: any) => {
-      return {
-        ...item,
-        splashSrc: item.metadata.splashSrcUrl,
-        logoSrc: item.metadata.logoSrcUrl,
-        videoSrc: item.metadata.videoSrcUrl,
-        name: item.metadata.name,
-        slug: item.metadata.name.toLowerCase().split(' ').join('_'),
-        tags: item.tags.length ? item.tags.map((item: any) => item.tag) : [],
-        genre: [item.metadata.genre, ...item.tags.slice(0, 2)],
-        services: item.services,
-        description: item.metadata.description,
-        totalSupply: item?.nftCollectionStats?.totalSupply || null,
-        marketCap: item?.nftCollectionStats?.usdMarketCap || null,
-        network: 'SOL',
-      };
-    });
+    const map =
+      response && response.length
+        ? response.map((item: any) => {
+            return {
+              ...item,
+              splashSrc: item.metadata.splashSrcUrl,
+              logoSrc: item.metadata.logoSrcUrl,
+              videoSrc: item.metadata.videoSrcUrl,
+              name: item.metadata.name,
+              slug: item.metadata.name.toLowerCase().split(' ').join('_'),
+              tags: item.tags.length
+                ? item.tags.map((item: any) => item.tag)
+                : [],
+              genre: [item.metadata.genre, ...item.tags.slice(0, 2)],
+              services: item.services,
+              description: item.metadata.description,
+              totalSupply: item?.nftCollectionStats?.totalSupply || null,
+              marketCap: item?.nftCollectionStats?.usdMarketCap || null,
+              network: 'SOL',
+            };
+          })
+        : [];
     dispatch({ type: 'SET_COLLECTIONS', payload: map });
     setItems(map);
     setLoading(false);

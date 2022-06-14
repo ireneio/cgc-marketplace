@@ -40,7 +40,7 @@ export const fetcher = (config: FetcherConfig) => {
         console.log(err);
         return {
           success: false,
-          message: err.response.data.message,
+          message: err.response.data?.message,
           data: {},
         };
       });

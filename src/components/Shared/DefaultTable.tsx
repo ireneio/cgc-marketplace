@@ -1,5 +1,6 @@
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+import { flatten } from 'lodash';
 
 interface Props {
   rows: React.ReactNode[][] | string[][] | number[][] | any[][];
@@ -22,12 +23,12 @@ const DefaultTable = ({ rows, headers }: Props) => {
           </Tr>
         </Thead>
         <Tbody>
-          {!rows.length && (
+          {!flatten(rows).length && (
             <Tr className="text-[#FFFFFF] text-[18px] w-full flex items-center justify-center">
-              No Data Available.
+              <Td>No Data Available.</Td>
             </Tr>
           )}
-          {rows.length &&
+          {flatten(rows).length > 0 &&
             rows.map((row, index) => {
               return (
                 <Tr key={index} style={{ padding: 0, margin: 0 }}>

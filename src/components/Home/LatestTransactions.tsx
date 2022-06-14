@@ -12,13 +12,13 @@ const PAGE_LIMIT = 10;
 const LatestTransactions = () => {
   const oAuthCtx = useContext(OAuthContext);
   const [currentPage, setCurrentPage] = useState(0);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [txList, setTxList] = useState<any[]>([]);
 
   const _txList = useMemo(() => {
     const startIdx = currentPage * PAGE_LIMIT;
     const endIdx = startIdx + PAGE_LIMIT;
-    return txList.length ? txList.slice(startIdx, endIdx) : [];
+    return txList.length ? txList.slice(startIdx, endIdx) : [[]];
   }, [txList, currentPage]);
 
   const getData = async () => {
@@ -28,6 +28,7 @@ const LatestTransactions = () => {
 
   const setData = async () => {
     const data = await getData();
+    if (!data.length) return;
     const transformed = data
       .map((token: any) => {
         return {
