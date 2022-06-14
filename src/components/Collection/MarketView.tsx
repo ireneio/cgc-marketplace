@@ -79,7 +79,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
   const itemCount = useMemo(() => {
     if (currentTab === 'All Items') {
       if (!currentCollection?.nftCollectionStats?.totalSupply) {
-        return 0;
+        return getNumberWithCommas(data.length, 0);
       }
       return getNumberWithCommas(
         currentCollection?.nftCollectionStats?.totalSupply,
