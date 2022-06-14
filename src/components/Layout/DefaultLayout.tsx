@@ -113,6 +113,7 @@ const DefaultLayout = ({ children, title }: Props) => {
           </div>
           <motion.div
             variants={sidebarAnimationVariants}
+            initial={'close'}
             animate={sideBarOpen ? 'open' : 'close'}
             className="fixed top-0 z-[100000]"
             style={{ display: windowWidth < 768 ? 'block' : 'none' }}
