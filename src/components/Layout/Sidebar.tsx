@@ -21,12 +21,6 @@ const Sidebar = ({ onItemClick, rootClassName }: Props) => {
         'overflow-auto px-[12px] py-[20px] bg-[#0C001C] shadow-xl hide-scrollbar relative z-[5] h-screen lg:h-[calc(100vh-120px-366px)]',
         rootClassName,
       )}
-      // style={{
-      //   height:
-      //     windowWidth < 768
-      //       ? Number(windiwHeight)
-      //       : Number(windiwHeight) - 120 - 366,
-      // }}
     >
       {SIDE_BAR_ITEMS.map((item) => {
         const isSelectedParent = currentValue === item.value;

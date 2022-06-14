@@ -91,11 +91,9 @@ const DefaultLayout = ({ children, title }: Props) => {
           show={snackbarShow}
           title={snackbarTitle}
         />
-        {/* <div style={{ display: windowWidth < 768 ? 'none' : 'block' }}> */}
         <div className="hidden lg:block">
           <Header />
         </div>
-        {/* <div style={{ display: windowWidth < 768 ? 'block' : 'none' }}> */}
         <div className="lg:hidden">
           <HeaderMobile
             onNavOpen={() => setSideBarOpen((prev) => !prev)}
@@ -103,10 +101,7 @@ const DefaultLayout = ({ children, title }: Props) => {
           />
         </div>
         <div className="flex mt-[75px] relative">
-          <div
-            className="fixed top-[75px] w-[225px] flex-shrink-0 z-[100] hidden lg:block"
-            // style={{ display: windowWidth < 768 ? 'none' : 'block' }}
-          >
+          <div className="fixed top-[75px] w-[225px] flex-shrink-0 z-[100] hidden lg:block">
             <Sidebar onItemClick={(value) => handleSideBarPathUpdate(value)} />
           </div>
           <motion.div
@@ -114,7 +109,6 @@ const DefaultLayout = ({ children, title }: Props) => {
             initial={'close'}
             animate={sideBarOpen ? 'open' : 'close'}
             className="fixed top-0 z-[100000] lg:hidden"
-            // style={{ display: windowWidth < 768 ? 'block' : 'none' }}
           >
             <Sidebar
               onItemClick={(value) => handleSideBarPathUpdate(value)}
@@ -128,16 +122,7 @@ const DefaultLayout = ({ children, title }: Props) => {
               onClick={() => setSideBarOpen(false)}
             ></div>
           )}
-          <div
-            className="mx-auto w-[100vw] lg:w-[calc(100vw-225px)] min-h-[calc(100vh-75px-100px)] lg:ml-[225px] pr-[24px] pl-[24px] lg:pl-0"
-            // style={{
-            //   width: windowWidth < 768 ? '100vw' : 'calc(100vw - 225px)',
-            //   minHeight: 'calc(100vh - 75px - 100px)',
-            //   marginLeft: windowWidth < 768 ? 0 : 225,
-            //   paddingRight: windowWidth < 768 ? 24 : 24,
-            //   paddingLeft: windowWidth < 768 ? 24 : 0,
-            // }}
-          >
+          <div className="mx-auto w-[100vw] lg:w-[calc(100vw-225px)] min-h-[calc(100vh-75px-100px)] lg:ml-[225px] pr-[24px] pl-[24px] lg:pl-0">
             {children}
           </div>
         </div>
