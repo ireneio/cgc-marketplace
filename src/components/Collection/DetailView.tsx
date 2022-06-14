@@ -49,7 +49,7 @@ const DetailView = () => {
         link: metadata.websiteUrl,
       },
       services: services.map((item: any) => item.name),
-      tags: tags.map((item: any) => item),
+      tags: tags.map((item: any) => String(item).toLowerCase()),
     };
   }, [metadata, services]);
 
