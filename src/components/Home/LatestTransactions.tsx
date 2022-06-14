@@ -81,15 +81,17 @@ const LatestTransactions = () => {
     <div>
       <div className="flex justify-between items-center flex-wrap">
         <SectionTitle>latest transactions</SectionTitle>
-        <div className="basis-[100%] md:basis-auto mt-[12px] md:mt-0">
-          <Pagination
-            totalPages={Math.ceil(txList.length / PAGE_LIMIT)}
-            currentPage={currentPage}
-            onPageChange={(val) => setCurrentPage(val)}
-            onPreviousPage={() => setCurrentPage((prev) => prev - 1)}
-            onNextPage={() => setCurrentPage((prev) => prev + 1)}
-          />
-        </div>
+        {_txList.length && (
+          <div className="basis-[100%] md:basis-auto mt-[12px] md:mt-0">
+            <Pagination
+              totalPages={Math.ceil(txList.length / PAGE_LIMIT)}
+              currentPage={currentPage}
+              onPageChange={(val) => setCurrentPage(val)}
+              onPreviousPage={() => setCurrentPage((prev) => prev - 1)}
+              onNextPage={() => setCurrentPage((prev) => prev + 1)}
+            />
+          </div>
+        )}
       </div>
       <div className="mt-[24px]">
         <TransactionTable
