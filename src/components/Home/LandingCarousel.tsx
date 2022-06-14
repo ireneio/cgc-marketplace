@@ -1,3 +1,4 @@
+import { useGetCollections } from '@/hooks/collections';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
@@ -9,6 +10,9 @@ import Skeleton from '../Shared/Skeleton';
 const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
   const router = useRouter();
   const [openFrame, setOpenFrame] = useState(false);
+  const { loading } = useGetCollections();
+
+  console.log('loading', loading);
 
   const handlePlay = (href: string) => {
     console.log('handlePlay', name);
@@ -17,16 +21,23 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
   };
 
   const handleMoreInfo = (name: string) => {
-    console.log('name', name);
-
     router.push(`/collection/${name}`).then();
   };
 
   return (
     <div>
-      {!carouselItems.length && (
+      {loading && (
         <div className="relative w-full">
           <Skeleton className="w-full h-[50vh] md:h-[80vh] bg-[#290030]" />
+        </div>
+      )}
+      {!loading && !carouselItems.length && (
+        <div className="relative w-full px-[24px] rounded-[5px] bg-[#290030]">
+          <img
+            src="/img/cgc_logo_white.png"
+            alt="cgc logo"
+            className="object-contain h-[50vh] md:h-[80vh]"
+          />
         </div>
       )}
       <Carousel

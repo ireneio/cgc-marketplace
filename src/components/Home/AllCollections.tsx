@@ -7,6 +7,7 @@ import Divider from '@/components/Shared/Divider';
 import FloatingCard from './FloatingCard';
 import { useRouter } from 'next/router';
 import { useGetCollections } from '@/hooks/collections';
+import EmptyListTextDisplay from '../Shared/EmptyListTextDisplay';
 
 const AllCollections = () => {
   const router = useRouter();
@@ -32,7 +33,10 @@ const AllCollections = () => {
         <Divider />
       </div>
       <div className="hide-scrollbar">
-        {!loading && (
+        {!loading && !data.length && (
+          <EmptyListTextDisplay>No Collections Available.</EmptyListTextDisplay>
+        )}
+        {!loading && data.length && (
           <div className="mt-[24px]">
             <div className="grid gap-[12px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cold-6">
               {data.map((collection: any, index) => {

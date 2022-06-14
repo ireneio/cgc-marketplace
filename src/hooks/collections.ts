@@ -37,11 +37,12 @@ export const useGetCollections = () => {
         : [];
     dispatch({ type: 'SET_COLLECTIONS', payload: map });
     setItems(map);
-    setLoading(false);
   };
 
   useEffect(() => {
-    getCollections().then();
+    getCollections()
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
   }, []);
 
   return {

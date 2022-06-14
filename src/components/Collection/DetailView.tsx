@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import Divider from '../Shared/Divider';
 import Tag from '../Shared/Tag';
 import DetailViewLoading from './DetailViewLoading';
@@ -19,7 +19,6 @@ const socials: Record<string, string | SocialTypes>[] = [
 ];
 
 const DetailView = () => {
-  // const [loading, setLoading] = useState(true);
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
