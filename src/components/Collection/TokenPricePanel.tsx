@@ -136,11 +136,14 @@ const TokenPricePanel = ({
             />
           </div>
         </div>
-        <div className="mb-[24px]">
-          <DateViewSelector
-            onViewChange={(val) => setCurrentView(val)}
-            current={currentView}
-          />
+        <div className="flex items-center mb-[24px]">
+          <div className="mr-[8px] text-[#AAAAAA]">Price Change %:</div>
+          <div>
+            <DateViewSelector
+              onViewChange={(val) => setCurrentView(val)}
+              current={currentView}
+            />
+          </div>
         </div>
         {priceToBTC ||
           (priceToBTC === 0 && (
