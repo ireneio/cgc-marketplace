@@ -18,58 +18,58 @@ const mobileCheck = () => {
   return check;
 };
 
-export const useWindowWidth = () => {
-  const [windowWidth, setWindowWidth] = useState(768);
-  const router = useRouter();
+// export const useWindowWidth = () => {
+//   const [windowWidth, setWindowWidth] = useState(768);
+//   const router = useRouter();
 
-  useEffect(() => {
-    const isMobile = mobileCheck();
-    if (isMobile) {
-      setWindowWidth(767);
-    }
-    if (window) {
-      const cb = () => {
-        setWindowWidth(window.innerWidth);
-      };
-      window.addEventListener('resize', cb);
-      // window.addEventListener('load', cb);
-      return () => {
-        window.removeEventListener('resize', cb);
-        // window.removeEventListener('load', cb);
-      };
-    }
-  });
+//   useEffect(() => {
+//     const isMobile = mobileCheck();
+//     if (isMobile) {
+//       setWindowWidth(767);
+//     }
+//     if (window) {
+//       const cb = () => {
+//         setWindowWidth(window.innerWidth);
+//       };
+//       window.addEventListener('resize', cb);
+//       // window.addEventListener('load', cb);
+//       return () => {
+//         window.removeEventListener('resize', cb);
+//         // window.removeEventListener('load', cb);
+//       };
+//     }
+//   });
 
-  useEffect(() => {
-    if (window) {
-      setWindowWidth(window.innerWidth);
-    }
-  }, [router.pathname]);
+//   useEffect(() => {
+//     if (window) {
+//       setWindowWidth(window.innerWidth);
+//     }
+//   }, [router.pathname]);
 
-  return windowWidth;
-};
+//   return windowWidth;
+// };
 
-export const useWindowHeight = () => {
-  const [windowHeight, setWindowHeight] = useState(0);
-  const router = useRouter();
+// export const useWindowHeight = () => {
+//   const [windowHeight, setWindowHeight] = useState(0);
+//   const router = useRouter();
 
-  useEffect(() => {
-    const cb = () => {
-      setWindowHeight(window.innerHeight);
-    };
-    window.addEventListener('resize', cb);
-    window.addEventListener('load', cb);
-    return () => {
-      window.removeEventListener('resize', cb);
-      window.removeEventListener('load', cb);
-    };
-  });
+//   useEffect(() => {
+//     const cb = () => {
+//       setWindowHeight(window.innerHeight);
+//     };
+//     window.addEventListener('resize', cb);
+//     window.addEventListener('load', cb);
+//     return () => {
+//       window.removeEventListener('resize', cb);
+//       window.removeEventListener('load', cb);
+//     };
+//   });
 
-  useEffect(() => {
-    if (window) {
-      setWindowHeight(window.innerHeight);
-    }
-  }, [router.pathname]);
+//   useEffect(() => {
+//     if (window) {
+//       setWindowHeight(window.innerHeight);
+//     }
+//   }, [router.pathname]);
 
-  return windowHeight;
-};
+//   return windowHeight;
+// };
