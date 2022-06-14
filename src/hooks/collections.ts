@@ -122,7 +122,11 @@ export const useGetNftByCollectionId = () => {
               brand: manifest?.collection?.name,
               name: manifest?.name,
               description: manifest?.description,
-              price: 0,
+              price:
+                item?.price ||
+                (item?.external_marketplace_listing &&
+                  item?.external_marketplace_listing.length &&
+                  item?.external_marketplace_listing[0].solPrice),
               tokenAddress: item?.tokenAddress,
               is_listed: item?.external_marketplace_listing?.length,
               external_marketplace_listing: item?.external_marketplace_listing,
