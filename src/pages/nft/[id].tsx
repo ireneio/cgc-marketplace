@@ -43,12 +43,15 @@ type Selection =
 
 const handleImageLoad = (e: any, image: string) => {
   e.target.classList.remove('blur');
-  e.target.src = image === 'undefined' ? '/img/cgc_icon.png' : image;
+  e.target.src = image === 'undefined' || !image ? '/img/cgc_icon.png' : image;
   e.target.style.width = '100%';
   e.target.style.height = 'auto';
 };
 
 const handleImageError = (e: any) => {
+  if (e.target.src === '/img/cgc_icon.png') {
+    return;
+  }
   e.target.src = '/img/cgc_icon.png';
 };
 
