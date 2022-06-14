@@ -1,4 +1,4 @@
-import { fetcher } from '../swr';
+import {fetcher} from '../swr';
 
 const api = {
   healthCheck: async () => {
@@ -25,7 +25,7 @@ const api = {
     password: string;
     walletAddress: string;
   }) => {
-    const response = await fetcher({
+    return await fetcher({
       url: '/api/user/register',
       method: 'post',
       data: {
@@ -34,18 +34,12 @@ const api = {
         walletAddress,
       },
     });
-
-    return response;
   },
-  getCollectionList: async (token: string) => {
-    const response = await fetcher({
+  getCollectionList: async () => {
+    return await fetcher({
       url: '/api/collection/list',
       method: 'get',
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
     });
-    return response.data;
   },
   getCollectionBySlug: async (token: string, slug: string) => {
     const response = await fetcher({

@@ -12,8 +12,8 @@ export const useGetCollections = () => {
 
   const getCollections = async () => {
     setLoading(true);
-    const response = await api.getCollectionList(oAuthCtx.access_token);
-    const map = response.map((item: any) => {
+    const response = await api.getCollectionList();
+    const map = response?.data.map((item: any) => {
       return {
         ...item,
         splashSrc: item.metadata.splashSrcUrl,
