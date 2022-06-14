@@ -74,7 +74,7 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
               style={{
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
-              onClick={() => handleGoExplorer(col, 'account')}
+              onClick={() => handleGoExplorer(col, 'tx')}
             >
               <ClipboardText copyValue={String(col)}>
                 <div className="w-[150px]">
@@ -103,7 +103,7 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
               style={{
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
-              onClick={() => handleGoExplorer(col, 'tx')}
+              onClick={() => handleGoExplorer(col, 'account')}
             >
               <ClipboardText copyValue={String(col)}>
                 <div className="w-[150px]">
@@ -120,7 +120,7 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
               style={{
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
-              onClick={() => handleGoExplorer(col, 'tx')}
+              onClick={() => handleGoExplorer(col, 'account')}
             >
               <ClipboardText copyValue={String(col)}>
                 <div className="w-[150px]">
