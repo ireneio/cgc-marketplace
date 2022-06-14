@@ -1,4 +1,3 @@
-import { useAppDispatch } from '@/store';
 import { useEffect, useState } from 'react';
 import ButtonLink from '../Shared/ButtonLink';
 import FloatingCardLoading from './FloatingCardLoading';
@@ -11,11 +10,10 @@ import EmptyListTextDisplay from '../Shared/EmptyListTextDisplay';
 
 const AllCollections = () => {
   const router = useRouter();
-  const dispatch = useAppDispatch();
   const { data, loading } = useGetCollections();
 
   const handleGoDetail = (slug: string) => {
-    // router.push(`/collection/${slug}`);
+    router.push(`/collection/${slug}`);
   };
 
   const [currentHoverId, setCurrentHoverId] = useState('-1');
