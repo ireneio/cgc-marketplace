@@ -172,8 +172,8 @@ const DetailView = () => {
                   brandName={metadata.name}
                   symbol={token?.symbol?.toUpperCase()}
                   price={token?.tokenActivePrice?.usdPrice}
-                  priceToBTC={0.000012345}
-                  priceToETH={0.0000012345}
+                  priceToBTC={token?.tokenActivePrice?.btcPrice}
+                  priceToETH={token?.tokenActivePrice?.ethPrice}
                   priceFluctuation={
                     token?.tokenStats[0]?.usdAthChangePercentage
                   }
