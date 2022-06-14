@@ -152,8 +152,8 @@ const NftPricePanel = ({
               </div>
             </div>
           )}
-          <div className="flex items-center justify-between">
-            {(_averagePrice || _averagePrice === 0) && (
+          {(_averagePrice || _averagePrice === 0) && (
+            <div className="flex items-center justify-between">
               <div className="text-[#FFFFFF] font-light text-[14px]">
                 Average Price
                 <div>
@@ -162,65 +162,65 @@ const NftPricePanel = ({
                     current={currentViewAveragePrice}
                   />
                 </div>
+              </div>
+              <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
+                {_averagePrice ? (
+                  <div>${getNumberWithCommas(_averagePrice)}</div>
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+          )}
+          {(totalVolume || totalVolume === 0) && (
+            <div className="flex items-center justify-between">
+              <div className="text-[#FFFFFF] font-light text-[14px]">
+                Total Volume
+              </div>
+              <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
+                {totalVolume ? (
+                  <div>${getNumberWithCommas(totalVolume)}</div>
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+          )}
+          {totalSupply ||
+            (totalSupply === 0 && (
+              <div className="flex items-center justify-between">
+                <div className="text-[#FFFFFF] font-light text-[14px]">
+                  Total Supply
+                </div>
                 <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-                  {_averagePrice ? (
-                    <div>${getNumberWithCommas(_averagePrice)}</div>
+                  {totalSupply ? (
+                    <div>{getNumberWithCommas(totalSupply)}</div>
                   ) : (
                     <></>
                   )}
                 </div>
               </div>
-            )}
-            {(totalVolume || totalVolume === 0) && (
-              <div className="flex items-center justify-between">
-                <div className="text-[#FFFFFF] font-light text-[14px]">
-                  Total Volume
-                </div>
-                <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-                  {totalVolume ? (
-                    <div>${getNumberWithCommas(totalVolume)}</div>
-                  ) : (
-                    <></>
-                  )}
-                </div>
+            ))}
+          {(owners || owners === 0) && (
+            <div className="flex items-center justify-between">
+              <div className="text-[#FFFFFF] font-light text-[14px]">
+                Owners
               </div>
-            )}
-            {totalSupply ||
-              (totalSupply === 0 && (
-                <div className="flex items-center justify-between">
-                  <div className="text-[#FFFFFF] font-light text-[14px]">
-                    Total Supply
-                  </div>
-                  <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-                    {totalSupply ? (
-                      <div>{getNumberWithCommas(totalSupply)}</div>
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                </div>
-              ))}
-            {(owners || owners === 0) && (
-              <div className="flex items-center justify-between">
-                <div className="text-[#FFFFFF] font-light text-[14px]">
-                  Owners
-                </div>
-                <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-                  {owners ? <div>{getNumberWithCommas(owners, 0)}</div> : <></>}
-                </div>
+              <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
+                {owners ? <div>{getNumberWithCommas(owners, 0)}</div> : <></>}
               </div>
-            )}
-            {(count || count === 0) && (
-              <div className="flex items-center justify-between">
-                <div className="text-[#FFFFFF] font-light text-[14px]">
-                  Count
-                </div>
-                <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
-                  {count ? <div>{getNumberWithCommas(count, 0)}</div> : <></>}
-                </div>
+            </div>
+          )}
+          {(count || count === 0) && (
+            <div className="flex items-center justify-between">
+              <div className="text-[#FFFFFF] font-light text-[14px]">
+                Count
               </div>
-            )}
-          </div>
+              <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
+                {count ? <div>{getNumberWithCommas(count, 0)}</div> : <></>}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </Tag>
