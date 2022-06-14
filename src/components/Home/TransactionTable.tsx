@@ -11,11 +11,11 @@ import ClipboardText from '../Shared/ClipboardText';
 dayjs.extend(relativeTime);
 interface Props {
   rows:
-  | React.ReactNode[][]
-  | string[][]
-  | number[][]
-  | Record<string, any>[][]
-  | any[][];
+    | React.ReactNode[][]
+    | string[][]
+    | number[][]
+    | Record<string, any>[][]
+    | any[][];
   headers: string[] | number[] | React.ReactNode[];
   loading?: boolean;
 }
