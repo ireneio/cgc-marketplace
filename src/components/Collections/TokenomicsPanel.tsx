@@ -12,42 +12,52 @@ const TokenomicsPanel = ({ info }: { info: CollectionInfo }) => {
           <Divider />
         </div>
         <div className="text-[#FFFFFF] text-[14px]">
-          <div className="mt-[14px]">Total Raised</div>
-          <div className="mt-[10px] font-bold">
+          <div className="mt-[14px] font-normal">Total Raised</div>
+          <div className="mt-[10px] font-semibold text-[18px]">
             ${getNumberWithCommas(info.totalRaised)}
           </div>
         </div>
-        <div className="text-[#FFFFFF] text-[14px]">
-          <div className="mt-[14px]">Initial Values</div>
-          <div className="mt-[10px] font-bold flex items-center">
-            <div>Market Cap:</div>
-            <div className="ml-[8px]">
-              ${getNumberWithCommas(info.marketCap)}
+        <div className="text-[#FFFFFF] text-[14px] mt-[14px]">
+          <div>Initial Values</div>
+          <div className="mt-[10px] font-semibold grid grid-cols-1 md:grid-cols-2 gap-[8px]">
+            <div className="flex items-center">
+              <div className="font-normal text-[#AAAAAA]">Market Cap:</div>
+              <div className="ml-[8px] text-[18px]">
+                ${getNumberWithCommas(info.marketCap)}
+              </div>
             </div>
-            <div className="ml-[18px]">FDMC:</div>
-            <div className="ml-[8px]">${getNumberWithCommas(info.fdmc)}</div>
+            <div className="flex items-center">
+              <div className="font-normal text-[#AAAAAA]">FDMC:</div>
+              <div className="ml-[8px] text-[18px]">
+                ${getNumberWithCommas(info.fdmc)}
+              </div>
+            </div>
           </div>
         </div>
-        <div className="text-[#FFFFFF] text-[14px]">
-          <div className="mt-[14px]">Total Allocation</div>
-          <div className="mt-[10px] font-bold flex items-center">
-            <div>Total Supply:</div>
-            <div className="ml-[8px]">
+        <div className="text-[#FFFFFF] text-[14px] mt-[14px]">
+          <div>Total Allocation</div>
+          <div className="mt-[10px] font-semibold flex items-center">
+            <div className="font-normal text-[#AAAAAA]">Total Supply:</div>
+            <div className="ml-[8px] text-[18px]">
               {getNumberWithCommas(info.totalSupply)}
             </div>
           </div>
-          <div className="mt-[2px] font-bold flex items-center">
-            <div>Private/Presale:</div>
-            <div className="ml-[8px]">
-              {getNumberWithCommas(info.preSale)} (
-              {((info.preSale / info.totalSupply) * 100).toFixed(2)}%)
+          <div className="mt-[4px] font-semibold flex items-center">
+            <div className="font-normal text-[#AAAAAA]">Private/Presale:</div>
+            <div className="ml-[8px] text-[18px]">
+              {getNumberWithCommas(info.preSale)}
+              <span className="text-[14px] ml-[4px] font-normal">
+                ({((info.preSale / info.totalSupply) * 100).toFixed(2)}%)
+              </span>
             </div>
           </div>
-          <div className="mt-[2px] font-bold flex items-center">
-            <div>Public Sale:</div>
-            <div className="ml-[8px]">
-              {getNumberWithCommas(info.publicSale)} (
-              {((info.publicSale / info.totalSupply) * 100).toFixed(2)}%)
+          <div className="mt-[4px] font-semibold flex items-center">
+            <div className="font-normal text-[#AAAAAA]">Public Sale:</div>
+            <div className="ml-[8px] text-[18px]">
+              {getNumberWithCommas(info.publicSale)}
+              <span className="text-[14px] ml-[4px] font-normal">
+                ({((info.publicSale / info.totalSupply) * 100).toFixed(2)}%)
+              </span>
             </div>
           </div>
         </div>

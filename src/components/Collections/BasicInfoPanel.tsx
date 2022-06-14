@@ -26,7 +26,7 @@ const BasicInfoPanel = ({ info }: { info: CollectionInfo }) => {
               {dayjs(info.nextTokenSaleStartDate).format('DD MMM YYYY')}
             </div>
           </div>
-          <div className="flex items-center ml-[20px] mr-[12px] text-[14px]">
+          <div className="flex items-center ml-0 md:ml-[20px] mr-[12px] text-[14px]">
             <div>Raising</div>
             <div className="ml-[8px] font-semibold">
               ${getNumberWithUnits(info.raising)}
