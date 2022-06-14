@@ -121,6 +121,7 @@ export const useGetNftByCollectionId = () => {
               image: manifest?.image,
               brand: manifest?.collection?.name,
               name: manifest?.name,
+              description: manifest?.description,
               price: 0,
               tokenAddress: item?.tokenAddress,
               collection_id: item?.collections[0]?.id,
@@ -130,6 +131,16 @@ export const useGetNftByCollectionId = () => {
                 ?.external_marketplace_listing.length
                 ? item?.external_marketplace_listing[0]?.logoSrcUrl
                 : '',
+              // attributes:
+              //   manifest?.attributes.map((item: any) => ({
+              //     traitType: item.trait_type,
+              //     value: item.value,
+              //   })) || [],
+              // auctionEndDate: '',
+              // saleEndDate: '',
+              // royaltiesPercentage: 0,
+              // mintAddress: item.tokenAddress,
+              // owner: item?.splNftInfo?.walletAddress,
             };
           })
         : [];

@@ -9,10 +9,6 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import { getBreadcrumbRoutes } from '@/utils/cgcConsts';
 import { LoginModal } from '@/components/Auth/LoginModal';
-import {
-  useGetCollectionsBySlug,
-  useGetNftByCollectionId,
-} from '@/hooks/collections';
 
 export type CollectionTabSelection =
   | 'About'

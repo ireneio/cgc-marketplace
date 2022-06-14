@@ -16,6 +16,10 @@ import DetailPanel from '@/components/Nft/DetailPanel';
 import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
 import { LoginModal } from '@/components/Auth/LoginModal';
+import {
+  useGetCollectionsBySlug,
+  useGetNftByCollectionId,
+} from '@/hooks/collections';
 
 export interface NftInfo {
   id: string | number;
@@ -69,23 +73,24 @@ const Nft = () => {
     auctionEndDate: dayjs().toISOString(),
     saleEndDate: dayjs().toISOString(),
     attributes: [
-      { traitType: 'background', value: 'Mountains' },
-      { traitType: 'base', value: 'Mountains' },
-      { traitType: 'clothing', value: 'Mountains' },
-      { traitType: 'hats', value: 'Mountains' },
-      { traitType: 'accessory', value: 'Mountains' },
-      { traitType: 'rarity', value: 'Mountains' },
-      { traitType: 'traitType', value: 'Mountains' },
+      { traitType: 'background', value: '-' },
+      { traitType: 'base', value: '-' },
+      { traitType: 'clothing', value: '-' },
+      { traitType: 'hats', value: '-' },
+      { traitType: 'accessory', value: '-' },
+      { traitType: 'rarity', value: '-' },
+      { traitType: 'traitType', value: '-' },
     ],
-    royaltiesPercentage: 5,
+    royaltiesPercentage: 0,
     mintAddress: '',
     owner: '',
   });
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-  const [loading, setLoading] = useState(false);
   const [currentSelection] = useState<Selection>('Collection Item');
+  const { data: collections } = useGetCollectionsBySlug();
+  const { getData, data, loading, refresh } = useGetNftByCollectionId();
 
   const breadCrumbItems = useMemo(() => {
     switch (currentSelection) {
@@ -210,33 +215,46 @@ const Nft = () => {
   };
 
   const handleRefresh = async () => {
-    setLoading(true);
-    getNftData().then(() => {
-      setLoading(false);
-    });
+    await refresh(metadata.slug);
   };
 
   useEffect(() => {
     if (router.query.id) {
       dispatch({ type: 'INIT_CART' });
-      setInfo((prev) => {
-        return {
-          ...prev,
-          id: String(router.query.id),
-        };
-      });
     }
   }, [dispatch, router]);
 
   useEffect(() => {
-    if (router.query.id) {
-      setLoading(true);
-      getCollectionData().then(() => {
-        getNftData().then(() => {
-          setLoading(false);
-        });
+    if (data.length) {
+      const filter = data.filter(
+        (item: any) => item.tokenAddress === router.query.id,
+      );
+      if (!filter.length) return;
+      const item = filter[0];
+      const manifest = item?.splNftInfo?.data?.manifest;
+      setInfo({
+        id: item.id,
+        name: manifest?.name,
+        brand: manifest?.collection?.name,
+        image: manifest?.image,
+        description: manifest?.description,
+        attributes:
+          manifest?.attributes.map((item: any) => ({
+            traitType: item.trait_type,
+            value: item.value,
+          })) || [],
+        auctionEndDate: '',
+        saleEndDate: '',
+        royaltiesPercentage: 0,
+        mintAddress: item.tokenAddress,
+        owner: item?.splNftInfo?.walletAddress,
+        price: '0',
       });
     }
+  }, [data]);
+
+  useEffect(() => {
+    getData(String(router.query.id));
   }, [router.query.id]);
 
   return (
