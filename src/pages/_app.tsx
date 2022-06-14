@@ -30,9 +30,9 @@ function App({ Component, pageProps }: AppProps) {
         clearTimeout(_tid);
       }, 200);
     };
-    window.addEventListener('load', cb);
+    // window.addEventListener('load', cb);
     return () => {
-      window.removeEventListener('load', cb);
+      // window.removeEventListener('load', cb);
     };
   }, []);
 
