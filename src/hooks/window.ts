@@ -6,15 +6,17 @@ export const useWindowWidth = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const cb = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    window.addEventListener('resize', cb);
-    window.addEventListener('load', cb);
-    return () => {
-      window.removeEventListener('resize', cb);
-      window.removeEventListener('load', cb);
-    };
+    if (window) {
+      const cb = () => {
+        setWindowWidth(window.innerWidth);
+      };
+      window.addEventListener('resize', cb);
+      window.addEventListener('load', cb);
+      return () => {
+        window.removeEventListener('resize', cb);
+        window.removeEventListener('load', cb);
+      };
+    }
   });
 
   useEffect(() => {
