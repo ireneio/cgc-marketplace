@@ -136,7 +136,7 @@ const FloatingCard = ({
                 <img src={logo} alt={''} width={100} height={100} />
               </div>
               <div className="px-[12px] py-[0px] h-[97%] relative">
-                <div className="font-normal text-[#FFFFFF] text-[14px]">
+                <div className="font-normal text-[#FFFFFF] text-[14px] 2xl:text-[24px]">
                   {title?.length > 75 ? title?.slice(0, 75) + '...' : title}
                 </div>
                 <div className="absolute bottom-[24px] w-full flex justify-between items-center pr-[24px] mt-[24px]">
@@ -146,7 +146,7 @@ const FloatingCard = ({
                         return (
                           <div
                             key={index}
-                            className="text-[12px] flex items-center"
+                            className="text-[12px] flex items-center 2xl:text-[22px]"
                           >
                             {String(category).toLowerCase()}
                             {index !== categories.length - 1 && (
@@ -172,7 +172,7 @@ const FloatingCard = ({
                 </div>
               </div>
               <div className="bottom-[32px] mt-[12px] h-[2px] w-full bg-[#290030]"></div>
-              <div className="gap-[12px] grid-cols-3 bottom-[12px] left-0 right-0 w-full px-[12px] mt-[8px] mb-[-4px]">
+              <div className="grid gap-[12px] grid-cols-3 w-full px-[12px] mt-[12px] mb-[-4px]">
                 {network && (
                   <div className="text-[10px] flex items-center">
                     <div className="text-[#9497AA]">Network:</div>
