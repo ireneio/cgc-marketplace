@@ -213,9 +213,7 @@ const NftPricePanel = ({
           )}
           {(count || count === 0) && (
             <div className="flex items-center justify-between">
-              <div className="text-[#FFFFFF] font-light text-[14px]">
-                Count
-              </div>
+              <div className="text-[#FFFFFF] font-light text-[14px]">Count</div>
               <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex">
                 {count ? <div>{getNumberWithCommas(count, 0)}</div> : <></>}
               </div>
