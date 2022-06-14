@@ -16,10 +16,7 @@ import DetailPanel from '@/components/Nft/DetailPanel';
 import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
 import { LoginModal } from '@/components/Auth/LoginModal';
-import {
-  useGetCollectionsBySlug,
-  useGetNftByCollectionId,
-} from '@/hooks/collections';
+import { useGetCollectionsBySlug, useGetNftByHash } from '@/hooks/collections';
 
 export interface NftInfo {
   id: string | number;
@@ -90,7 +87,7 @@ const Nft = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [currentSelection] = useState<Selection>('Collection Item');
   const { data: collections } = useGetCollectionsBySlug();
-  const { getData, data, loading, refresh } = useGetNftByCollectionId();
+  const { getData, data, loading, refresh } = useGetNftByHash();
 
   const breadCrumbItems = useMemo(() => {
     switch (currentSelection) {
