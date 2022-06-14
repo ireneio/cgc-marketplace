@@ -62,7 +62,7 @@ const RowCard = ({
       {imageLoaded && showExternalLogo && external_marketplace_listing_logo && (
         <div
           aria-label="external marketplace logo"
-          className="absolute z-[2] top-[8px] left-[8px] w-[24px] h-[24px] rounded-[50%] bg-[#3C3C3C]"
+          className="absolute z-[2] top-[8px] left-[8px] w-[24px] h-[24px] rounded-[50%] bg-[#290030]"
         >
           <img
             src={external_marketplace_listing_logo}
