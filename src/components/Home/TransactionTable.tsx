@@ -11,11 +11,11 @@ import ClipboardText from '../Shared/ClipboardText';
 dayjs.extend(relativeTime);
 interface Props {
   rows:
-    | React.ReactNode[][]
-    | string[][]
-    | number[][]
-    | Record<string, any>[][]
-    | any[][];
+  | React.ReactNode[][]
+  | string[][]
+  | number[][]
+  | Record<string, any>[][]
+  | any[][];
   headers: string[] | number[] | React.ReactNode[];
   loading?: boolean;
 }
@@ -33,6 +33,14 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
       );
     });
   }, [headers]);
+
+  const handleGoExplorer = (hash: string, type: 'tx' | 'account') => {
+    if (type === 'tx') {
+      window.open(`https://solscan.io/tx/${hash}`, '_blank');
+    } else if (type === 'account') {
+      window.open(`https://solscan.io/account/${hash}`, '_blank');
+    }
+  };
 
   const _rows = useMemo(() => {
     return rows.map((row, rowIndex) => {
@@ -66,6 +74,7 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
               style={{
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
+              onClick={() => handleGoExplorer(col, 'account')}
             >
               <ClipboardText copyValue={String(col)}>
                 <div className="w-[150px]">
@@ -94,6 +103,7 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
               style={{
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
+              onClick={() => handleGoExplorer(col, 'tx')}
             >
               <ClipboardText copyValue={String(col)}>
                 <div className="w-[150px]">
@@ -110,6 +120,7 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
               style={{
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
+              onClick={() => handleGoExplorer(col, 'tx')}
             >
               <ClipboardText copyValue={String(col)}>
                 <div className="w-[150px]">
