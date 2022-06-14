@@ -124,23 +124,12 @@ export const useGetNftByCollectionId = () => {
               description: manifest?.description,
               price: 0,
               tokenAddress: item?.tokenAddress,
-              collection_id: item?.collections[0]?.id,
               is_listed: item?.external_marketplace_listing?.length,
               external_marketplace_listing: item?.external_marketplace_listing,
               external_marketplace_listing_logo: item
                 ?.external_marketplace_listing.length
                 ? item?.external_marketplace_listing[0]?.logoSrcUrl
                 : '',
-              // attributes:
-              //   manifest?.attributes.map((item: any) => ({
-              //     traitType: item.trait_type,
-              //     value: item.value,
-              //   })) || [],
-              // auctionEndDate: '',
-              // saleEndDate: '',
-              // royaltiesPercentage: 0,
-              // mintAddress: item.tokenAddress,
-              // owner: item?.splNftInfo?.walletAddress,
             };
           })
         : [];

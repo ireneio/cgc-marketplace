@@ -3,7 +3,7 @@ import {
   getTrimmedAddressEllipsisMiddle,
 } from '@/utils/formatHelper';
 import dayjs from 'dayjs';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import DefaultTable from '../Shared/DefaultTable';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import ClipboardText from '../Shared/ClipboardText';
@@ -152,7 +152,7 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
       {!loading && <DefaultTable rows={_rows} headers={_headers} />}
       {loading && (
         <div className="w-full flex items-center justify-center">
-          <img src="/img/spinner.svg" alt="spinner" />
+          <img src={'/img/spinner.svg'} alt="spinner" />
         </div>
       )}
     </div>
