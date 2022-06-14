@@ -137,7 +137,7 @@ const TokenPricePanel = ({
           </div>
         </div>
         <div className="flex items-center mb-[24px]">
-          <div className="mr-[8px] text-[#AAAAAA]">Price Change %:</div>
+          <div className="mr-[8px] text-[#AAAAAA]">Price Change (%):</div>
           <div>
             <DateViewSelector
               onViewChange={(val) => setCurrentView(val)}
