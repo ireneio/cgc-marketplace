@@ -13,7 +13,7 @@ const AllCollections = () => {
   const { data, loading } = useGetCollections();
 
   const handleGoDetail = (slug: string) => {
-    // router.push(`/collection/${slug}`);
+    router.push(`/collection/${slug}`);
   };
 
   const [currentHoverId, setCurrentHoverId] = useState('-1');
