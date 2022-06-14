@@ -172,10 +172,10 @@ const Nft = () => {
   }, [dispatch, router]);
 
   useEffect(() => {
-    if (Object.keys(data).length) {
+    if (Object.keys(data).length && router.query.id) {
       setSlug(data?.brand.toLowerCase().split(' ').join('_'));
       setInfo({
-        id: data.id,
+        id: String(router.query.id),
         name: data?.name,
         brand: data?.brand,
         image: data?.image,
@@ -191,7 +191,7 @@ const Nft = () => {
         is_listed: data?.is_listed,
       });
     }
-  }, [data]);
+  }, [data, router]);
 
   useEffect(() => {
     getData(String(router.query.id));
