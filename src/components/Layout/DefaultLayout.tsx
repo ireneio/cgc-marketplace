@@ -93,12 +93,12 @@ const DefaultLayout = ({ children, title }: Props) => {
           show={snackbarShow}
           title={snackbarTitle}
         />
-        {/* <div style={{ display: windowWidth < 768 ? 'none' : 'block' }}> */}
-        <div className="hidden lg:block">
+        <div style={{ display: windowWidth < 768 ? 'none' : 'block' }}>
+          {/* <div className="hidden lg:block"> */}
           <Header />
         </div>
-        {/* <div style={{ display: windowWidth < 768 ? 'block' : 'none' }}> */}
-        <div className="lg:hidden">
+        <div style={{ display: windowWidth < 768 ? 'block' : 'none' }}>
+          {/* <div className="lg:hidden"> */}
           <HeaderMobile
             onNavOpen={() => setSideBarOpen((prev) => !prev)}
             navOpen={sideBarOpen}
@@ -106,16 +106,16 @@ const DefaultLayout = ({ children, title }: Props) => {
         </div>
         <div className="flex mt-[75px] relative">
           <div
-            className="fixed top-[75px] w-[225px] flex-shrink-0 z-[100] hidden lg:block"
-            // style={{ display: windowWidth < 768 ? 'none' : 'block' }}
+            className="fixed top-[75px] w-[225px] flex-shrink-0 z-[100]"
+            style={{ display: windowWidth < 768 ? 'none' : 'block' }}
           >
             <Sidebar onItemClick={(value) => handleSideBarPathUpdate(value)} />
           </div>
           <motion.div
             variants={sidebarAnimationVariants}
             animate={sideBarOpen ? 'open' : 'close'}
-            className="fixed top-0 z-[100000] lg:hidden"
-            // style={{ display: windowWidth < 768 ? 'block' : 'none' }}
+            className="fixed top-0 z-[100000]"
+            style={{ display: windowWidth < 768 ? 'block' : 'none' }}
           >
             <Sidebar
               onItemClick={(value) => handleSideBarPathUpdate(value)}
