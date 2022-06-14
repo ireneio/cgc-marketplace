@@ -128,7 +128,7 @@ export const useGetNftByCollectionId = () => {
               external_marketplace_listing: item?.external_marketplace_listing,
               external_marketplace_listing_logo: item
                 ?.external_marketplace_listing.length
-                ? item?.external_marketplace_listing[0]?.logoSrcUrl
+                ? item?.external_marketplace_listing[0]?.marketplace?.logoSrcUrl
                 : '',
             };
           })

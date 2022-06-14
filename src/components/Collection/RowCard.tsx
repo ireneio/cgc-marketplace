@@ -38,6 +38,7 @@ const RowCard = ({
   external_marketplace_listing_logo,
 }: Props) => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [showExternalLogo, setShowExternalLogo] = useState(true);
 
   const handleImageLoad = (e: any) => {
     e.target.classList.remove('blur');
@@ -58,12 +59,16 @@ const RowCard = ({
       style={{ borderColor: isAddedToCart ? '#F41786' : '#290030' }}
       onClick={() => onMoreInfo(id)}
     >
-      {imageLoaded && external_marketplace_listing_logo && (
-        <div className="absolute top-[24px] left-[24px] rounded-[50%] bg-[#3C3C3C]">
+      {imageLoaded && showExternalLogo && external_marketplace_listing_logo && (
+        <div
+          aria-label="external marketplace logo"
+          className="absolute z-[2] top-[8px] left-[8px] w-[24px] h-[24px] rounded-[50%] bg-[#3C3C3C]"
+        >
           <img
             src={external_marketplace_listing_logo}
-            className="rounded-[50%]"
+            className="rounded-[50%] w-[24px] h-auto object-cover"
             alt=""
+            onError={() => setShowExternalLogo(false)}
           />
         </div>
       )}

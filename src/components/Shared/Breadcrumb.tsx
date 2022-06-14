@@ -37,7 +37,11 @@ const Breadcrumb = ({ items, onItemClick }: Props) => {
                 style={{
                   textDecoration:
                     index === array.length - 1 ? 'none' : 'underline',
-                  color: index !== array.length - 1 ? '#FC1F8E' : '#AAAAAA',
+                  color: item.disabled
+                    ? '#290030'
+                    : index !== array.length - 1
+                    ? '#FC1F8E'
+                    : '#AAAAAA',
                   cursor: item.disabled
                     ? 'not-allowed'
                     : index !== array.length - 1
