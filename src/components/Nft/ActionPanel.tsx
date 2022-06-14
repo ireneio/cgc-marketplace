@@ -26,7 +26,7 @@ const ActionPanel = ({
         </div>
         <div className="flex items-center mt-[8px]">
           <div className="text-[24px] font-semibold text-[#FFFFFF]">
-            {info.price}
+            {info.price || '-'}
           </div>
           <div className="mt-[2px] ml-[6px]">
             <img
@@ -36,15 +36,19 @@ const ActionPanel = ({
               height={16}
             />
           </div>
-          <div className="ml-[8px] self-center mt-[4px] text-[#9497AA]">
-            (${info.price})
-          </div>
+          {info?.usdPrice && (
+            <div className="ml-[8px] self-center mt-[4px] text-[#9497AA]">
+              (${info?.usdPrice})
+            </div>
+          )}
         </div>
         <div className="mt-[34px] flex items-center flex-wrap">
           {!isItemAddedToCart && (
             <Button
               onClick={() => handleBuy()}
-              disabled={loading || !info.mintAddress}
+              disabled={
+                loading || !info.mintAddress || !info?.price || !info?.is_listed
+              }
             >
               Buy Now
             </Button>
@@ -59,7 +63,9 @@ const ActionPanel = ({
                 })
               }
               style={{ paddingLeft: 12, paddingRight: 12 }}
-              disabled={loading || !info.mintAddress}
+              disabled={
+                loading || !info.mintAddress || !info?.price || !info?.is_listed
+              }
             >
               {isItemAddedToCart(info?.mintAddress) ? (
                 'Remove From Cart'
@@ -77,7 +83,13 @@ const ActionPanel = ({
             <div className="ml-auto basis-[100%] lg:basis-auto mt-[12px] lg:mt-0">
               <Button
                 secondary
-                disabled={!info.auctionEndDate || loading || !info.mintAddress}
+                disabled={
+                  !info.auctionEndDate ||
+                  loading ||
+                  !info.mintAddress ||
+                  !info?.price ||
+                  !info?.is_listed
+                }
               >
                 Make Offer
               </Button>

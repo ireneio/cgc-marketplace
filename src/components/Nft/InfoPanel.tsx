@@ -30,7 +30,9 @@ const InfoPanel = ({ info }: { info: NftInfo }) => {
       <div className="mt-[14px] flex justify-between">
         <div className="text-[14px] text-[#FFFFFF]">Royalties</div>
         <div className="text-[14px] text-[#FFFFFF] font-semibold">
-          {info.royaltiesPercentage}%
+          {isNaN(info.royaltiesPercentage)
+            ? '-'
+            : info.royaltiesPercentage + '%'}
         </div>
       </div>
     </Tag>

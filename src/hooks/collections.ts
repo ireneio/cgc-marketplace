@@ -164,11 +164,11 @@ export const useGetNftByHash = () => {
   const dispatch = useAppDispatch();
   const oAuthCtx = useContext(OAuthContext);
   const [loading, setLoading] = useState(false);
-  const [items, setItems] = useState<any[]>([]);
+  const [items, setItems] = useState<Record<string, any>>({});
 
   const getData = (token: string) => async (hash: string) => {
     setLoading(true);
-    const response = await api.getNftListByHash(token, hash);
+    const response = await api.getNftListByTokenAddress(token, hash);
     if (response?.data) {
       dispatch({
         type: 'SET_CURRENT_COLLECTION_TOKEN_DATA',
@@ -176,25 +176,33 @@ export const useGetNftByHash = () => {
       });
     }
     const map =
-      response && response.length
-        ? response.map((item: any) => {
+      response && Object.keys(response).length
+        ? [response].map((item: any) => {
             const manifest = item?.splNftInfo?.data?.manifest;
             return {
               image: manifest?.image,
               brand: manifest?.collection?.name,
               name: manifest?.name,
               description: manifest?.description,
-              price: 0,
-              tokenAddress: item?.tokenAddress,
-              is_listed: item?.external_marketplace_listing?.length,
-              external_marketplace_listing: item?.external_marketplace_listing,
-              external_marketplace_listing_logo: item
-                ?.external_marketplace_listing.length
-                ? item?.external_marketplace_listing[0]?.logoSrcUrl
+              price: item?.nftListings?.length
+                ? item?.nftListings[0].solPrice
                 : '',
+              usdPrice: item?.nftListings?.length
+                ? item?.nftListings[0].usdPrice
+                : '',
+              tokenAddress: item?.tokenAddress,
+              walletAddress: item?.splNftInfo?.walletAddress,
+              is_listed: item?.nftListings?.length,
+              attributes:
+                manifest?.attributes.map((item: any) => ({
+                  traitType: item.trait_type,
+                  value: item.value,
+                })) || [],
+              royaltiesPercentage:
+                manifest?.properties?.seller_fee_basis_points / 100,
             };
-          })
-        : [];
+          })[0]
+        : {};
 
     setItems(map);
     setLoading(false);

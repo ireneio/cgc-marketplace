@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import Frame from '../Game/Frame';
+// import Frame from '../Game/Frame';
+import SolchicksGame from '../Game/SolchicksGame';
 import Button from '../Shared/Button';
 import Skeleton from '../Shared/Skeleton';
 
@@ -24,6 +25,11 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
 
   return (
     <div>
+      {/* {openFrame && (
+        <div className="absolute top-[30%] left-[50%] translate-x-[-50%] h-[50vh] w-[50vh]">
+          <SolchicksGame show={openFrame} />
+        </div>
+      )} */}
       {loading && (
         <div className="relative w-full">
           <Skeleton className="w-full h-[50vh] md:h-[80vh] bg-[#290030]" />
@@ -109,7 +115,6 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
           )}
         </Carousel>
       )}
-      {openFrame && <Frame />}
     </div>
   );
 };

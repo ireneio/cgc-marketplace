@@ -24,6 +24,7 @@ export interface NftInfo {
   brand: string;
   description: string;
   price: string | number;
+  usdPrice: string | number;
   image: string;
   auctionEndDate: string;
   saleEndDate: string;
@@ -31,6 +32,7 @@ export interface NftInfo {
   royaltiesPercentage: number;
   mintAddress: string;
   owner: string;
+  is_listed: boolean;
 }
 type Selection =
   | 'About'
@@ -66,6 +68,8 @@ const Nft = () => {
     brand: '-',
     description: '',
     price: '0',
+    usdPrice: '0',
+    is_listed: false,
     image: '/img/cgc_icon.png',
     auctionEndDate: dayjs().toISOString(),
     saleEndDate: dayjs().toISOString(),
@@ -86,7 +90,7 @@ const Nft = () => {
   const [openCart, setOpenCart] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [currentSelection] = useState<Selection>('Collection Item');
-  const { data: collections } = useGetCollectionsBySlug();
+  const { data: collections, setSlug } = useGetCollectionsBySlug();
   const { getData, data, loading, refresh } = useGetNftByHash();
 
   const breadCrumbItems = useMemo(() => {
@@ -157,60 +161,6 @@ const Nft = () => {
     }
   };
 
-  const getCollectionData = async () => {
-    const response = await api.getCollectionBySlug(
-      oAuthCtx.access_token,
-      String(router.query.slug),
-    );
-    if (response) {
-      dispatch({
-        type: 'SET_CURRENT_COLLECTION',
-        payload: {
-          ...response,
-          metadata: {
-            ...response.metadata,
-            slug: response.metadata.name.toLowerCase().split(' ').join('_'),
-            id: response.id,
-          },
-        },
-      });
-    }
-  };
-
-  const getNftData = async () => {
-    const response = await api.getNftListByHash(
-      oAuthCtx.access_token,
-      String(router.query.id),
-    );
-    if (response && response.length) {
-      const filter = response.filter(
-        (item: any) => item.tokenAddress === router.query.id,
-      );
-      if (!filter.length) return;
-      const item = filter[0];
-      const manifest = item?.splNftInfo?.data?.manifest;
-
-      setInfo({
-        id: item.id,
-        name: manifest?.name,
-        brand: manifest?.collection?.name,
-        image: manifest?.image,
-        description: manifest?.description,
-        attributes:
-          manifest?.attributes.map((item: any) => ({
-            traitType: item.trait_type,
-            value: item.value,
-          })) || [],
-        auctionEndDate: '',
-        saleEndDate: '',
-        royaltiesPercentage: 0,
-        mintAddress: item.tokenAddress,
-        owner: item?.splNftInfo?.walletAddress,
-        price: '0',
-      });
-    }
-  };
-
   const handleRefresh = async () => {
     await refresh(metadata.slug);
   };
@@ -222,30 +172,23 @@ const Nft = () => {
   }, [dispatch, router]);
 
   useEffect(() => {
-    if (data.length) {
-      const filter = data.filter(
-        (item: any) => item.tokenAddress === router.query.id,
-      );
-      if (!filter.length) return;
-      const item = filter[0];
-      const manifest = item?.splNftInfo?.data?.manifest;
+    if (Object.keys(data).length) {
+      setSlug(data?.brand.toLowerCase().split(' ').join('_'));
       setInfo({
-        id: item.id,
-        name: manifest?.name,
-        brand: manifest?.collection?.name,
-        image: manifest?.image,
-        description: manifest?.description,
-        attributes:
-          manifest?.attributes.map((item: any) => ({
-            traitType: item.trait_type,
-            value: item.value,
-          })) || [],
+        id: data.id,
+        name: data?.name,
+        brand: data?.brand,
+        image: data?.image,
+        description: data?.description,
+        attributes: data?.attributes,
         auctionEndDate: '',
         saleEndDate: '',
-        royaltiesPercentage: 0,
-        mintAddress: item.tokenAddress,
-        owner: item?.splNftInfo?.walletAddress,
-        price: '0',
+        royaltiesPercentage: data?.royaltiesPercentage,
+        mintAddress: data?.tokenAddress,
+        owner: data?.walletAddress,
+        price: data?.price,
+        usdPrice: data?.usdPrice,
+        is_listed: data?.is_listed,
       });
     }
   }, [data]);
@@ -301,7 +244,7 @@ const Nft = () => {
           </div>
           <div className="flex flex-wrap justify-between col-span-2">
             <div className="basis-[100%] md:basis-[48%]">
-              <div className="w-full mb-[24px] md:mb-0">
+              <div className="w-full mb-[24px]">
                 <img
                   src={info.image}
                   alt={info.name}
@@ -331,11 +274,11 @@ const Nft = () => {
               </div>
             </div>
           </div>
-          <div className="mt-[24px] col-span-2">
+          <div className="mb-[24px] col-span-2">
             <Divider />
           </div>
-          <div className="mt-[24px] col-span-2">
-            <div className="flex justify-between items-center flex-wrap">
+          <div className="col-span-2">
+            <div className="mb-[24px] flex justify-between items-center flex-wrap">
               <div className="text-[#FFFFFF] font-bold text-[20px]">
                 Transaction History
               </div>
@@ -349,7 +292,7 @@ const Nft = () => {
                 />
               </div>
             </div>
-            <div className="mt-[24px] mb-[48px]">
+            <div className="mb-[48px]">
               <HistoryTable
                 rows={[
                   [
