@@ -25,11 +25,11 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
 
   return (
     <div>
-      {/* {openFrame && (
+      {openFrame && (
         <div className="absolute top-[30%] left-[50%] translate-x-[-50%] h-[50vh] w-[50vh]">
           <SolchicksGame show={openFrame} />
         </div>
-      )} */}
+      )}
       {loading && (
         <div className="relative w-full">
           <Skeleton className="w-full h-[50vh] md:h-[80vh] bg-[#290030]" />
