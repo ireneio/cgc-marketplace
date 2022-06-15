@@ -1,5 +1,6 @@
 import { fetcher } from '@/utils/swr';
 import { flatten } from 'lodash';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
@@ -61,6 +62,43 @@ export const useGetTokenList = () => {
             row?.transaction?.amountUsd || '',
           ];
         });
+      setItems(_transformed);
+    }
+  }, [data]);
+
+  return {
+    refresh: mutate,
+    data: items,
+    loading: isValidating,
+    error,
+  };
+};
+
+export const useGetTokenBySlugV2 = () => {
+  const router = useRouter();
+  const [items, setItems] = useState<any[]>([]);
+  const [slug, setSlug] = useState('');
+  const { data, error, mutate, isValidating } = useSWR(
+    `/v2/api/token/list?slug=${slug}`,
+    fetcher.bind({
+      method: 'get',
+    }),
+    {
+      revalidateOnFocus: false,
+    },
+  );
+
+  useEffect(() => {
+    if (router.query.id) {
+      setSlug(String(router.query.id));
+    }
+  }, [router.query.id]);
+
+  useEffect(() => {
+    if (data?.success) {
+      const _data = data?.data;
+      if (!_data || !_data.length) return;
+      const _transformed = _data;
       setItems(_transformed);
     }
   }, [data]);

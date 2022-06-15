@@ -462,3 +462,49 @@ export const useGetNftByHashV2 = () => {
     error,
   };
 };
+
+export const useGetCarouselV2 = () => {
+  const [items, setItems] = useState<any[]>([]);
+  const [collectionId, setCollectionId] = useState('');
+  const { data, error, mutate, isValidating } = useSWR(
+    `/v2/api/carousel/list`,
+    fetcher.bind({
+      method: 'get',
+    }),
+    {
+      revalidateOnFocus: false,
+    },
+  );
+
+  useEffect(() => {
+    if (data?.success) {
+      const _data = data?.data;
+      const _transformed = _data.map((item: any) => {
+        const manifest = item?.splNftInfo?.data?.manifest;
+        const price =
+          item?.price ||
+          (item?.external_marketplace_listing &&
+            item?.external_marketplace_listing.length &&
+            item?.external_marketplace_listing[0].solPrice);
+        return {
+          image: manifest?.image,
+          brand: manifest?.collection?.name,
+          name: manifest?.name,
+          description: manifest?.description,
+          price,
+          tokenAddress: item?.tokenAddress,
+        };
+      });
+      setItems(_transformed);
+    }
+  }, [data]);
+
+  return {
+    setCollectionId,
+    collectionId,
+    refresh: mutate,
+    data: items,
+    loading: isValidating,
+    error,
+  };
+};

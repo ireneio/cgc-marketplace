@@ -8,6 +8,7 @@ import NftPricePanel from './NftPricePanel';
 import TokenPricePanel from './TokenPricePanel';
 import { getNumberWithCommas } from '@/utils/formatHelper';
 import { useGetCollectionsBySlugV2 } from '@/hooks/services_collections';
+import { useGetTokenBySlugV2 } from '@/hooks/services_token';
 
 type SocialTypes = 'discord' | 'twitter' | 'link';
 
@@ -19,6 +20,7 @@ const socials: Record<string, string | SocialTypes>[] = [
 
 const DetailView = () => {
   const { loading, data: currentCollection } = useGetCollectionsBySlugV2();
+  const { data: tokenList } = useGetTokenBySlugV2();
 
   const info = useMemo(() => {
     return {
@@ -157,8 +159,8 @@ const DetailView = () => {
               </div>
             </div>
           )}
-          {currentCollection?.tokens && currentCollection?.tokens.length
-            ? currentCollection?.tokens.map((token: any, idx: number) => {
+          {tokenList && tokenList.length
+            ? tokenList.map((token: any, idx: number) => {
                 return (
                   <div className="mb-[32px]" key={idx}>
                     <TokenPricePanel

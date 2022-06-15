@@ -12,6 +12,7 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
   const router = useRouter();
   // const [openFrame, setOpenFrame] = useState(false);
   const { loading } = useGetCollectionsV2();
+  // useGetCarouselV2();
 
   const handlePlay = (href: string) => {
     console.log('handlePlay', name);
