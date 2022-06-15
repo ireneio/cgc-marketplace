@@ -106,20 +106,20 @@ const Nft = () => {
       case 'Collection Item':
       default:
         return [
-          { text: 'Home', value: 'Home', disabled: loading || !metadata.name },
+          { text: 'Home', value: '/', disabled: loading || !metadata.name },
           {
             text: 'Explore',
-            value: 'Explore/All',
+            value: '/explore',
             disabled: loading || !metadata.slug,
           },
           {
             text: metadata?.name,
-            value: 'About',
+            value: `/collection/${metadata.slug}?tab=about`,
             disabled: loading || !metadata.slug,
           },
           {
             text: 'All Items',
-            value: 'All Items',
+            value: `/collection/${metadata.slug}?tab=all_items`,
             disabled: loading || !metadata.slug,
           },
           {

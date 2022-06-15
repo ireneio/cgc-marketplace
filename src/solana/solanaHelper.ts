@@ -1,5 +1,5 @@
 import { WalletContextState } from '@solana/wallet-adapter-react';
-import {Connection, PublicKey, Transaction} from '@solana/web3.js';
+import { Connection, PublicKey, Transaction } from '@solana/web3.js';
 
 export async function signSendAndConfirm(
   wallet: WalletContextState,
