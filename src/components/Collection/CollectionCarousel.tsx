@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Button from '../Shared/Button';
+import CarouselMask from '../Shared/CarouselMask';
 
 interface Item {
   id: string;
@@ -55,12 +56,13 @@ const CollectionCarousel = ({ carouselItems }: { carouselItems: Item[] }) => {
                 onClick={() => handleCarouselItemClick({ href })}
                 className="relative rounded-[5px] h-[50vh] lg:h-[70vh]"
               >
-                <div
+                {/* <div
                   className="absolute w-full h-full z-[2] opacity-[.62] rounded-[5px]"
                   style={{
                     background: `radial-gradient(61.02% 182.1% at 82.63% 36.94%, rgba(253, 32, 142, 0.075) 0%, rgba(167, 16, 124, 0.75) 61.36%, rgba(83, 1, 106, 0.75) 100%)`,
                   }}
-                />
+                /> */}
+                <CarouselMask />
                 <div className="w-full collection_video">
                   <video muted autoPlay loop className="w-full">
                     <source src={imageUrl} type="video/mp4" />

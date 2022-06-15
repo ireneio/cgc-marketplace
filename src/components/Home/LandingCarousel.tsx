@@ -6,6 +6,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 // import Frame from '../Game/Frame';
 import SolchicksGame from '../Game/SolchicksGame';
 import Button from '../Shared/Button';
+import CarouselMask from '../Shared/CarouselMask';
 import Skeleton from '../Shared/Skeleton';
 
 const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
@@ -72,12 +73,7 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
             ({ id, imageUrl, name, href, description, logo }) => {
               return (
                 <div key={id} className="relative rounded-[5px]">
-                  <div
-                    className="absolute w-full h-[50vh] md:h-[80vh] z-[2] opacity-[.62] rounded-[5px]"
-                    style={{
-                      background: `radial-gradient(61.02% 182.1% at 82.63% 36.94%, rgba(253, 32, 142, 0.075) 0%, rgba(167, 16, 124, 0.75) 61.36%, rgba(83, 1, 106, 0.75) 100%)`,
-                    }}
-                  />
+                  <CarouselMask />
                   <img
                     src={imageUrl}
                     className="bg-cover w-full h-[50vh] md:h-[80vh] bg-[#181818] aspect-w-1 aspect-h-1 rounded-[5px] overflow-hidden transform transition duration-500 hover:cursor-pointer object-cover"

@@ -38,7 +38,7 @@ const Breadcrumb = ({ items, onItemClick }: Props) => {
                   textDecoration:
                     index === array.length - 1 ? 'none' : 'underline',
                   color: item.disabled
-                    ? '#290030'
+                    ? '#9497AA'
                     : index !== array.length - 1
                     ? '#FC1F8E'
                     : '#AAAAAA',
