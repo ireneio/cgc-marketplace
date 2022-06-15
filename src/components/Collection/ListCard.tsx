@@ -20,6 +20,7 @@ interface Props extends Attr {
   selected?: boolean;
   external_marketplace_listing_logo?: string;
   type: 'list' | 'row';
+  hidePrice?: boolean;
 }
 
 const ListCard = ({
@@ -37,6 +38,7 @@ const ListCard = ({
   onLeftFn,
   tokenAddress,
   external_marketplace_listing_logo,
+  hidePrice,
 }: Props) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [showExternalLogo, setShowExternalLogo] = useState(true);
@@ -98,22 +100,26 @@ const ListCard = ({
         <div className="font-light text-[#9497AA] text-[12px] mt-[-1px]">
           <div className="tracking-wider">{brand}</div>
         </div>
-        <div className="flex justify-between items-center">
-          <div className="font-light text-[#9497AA] text-[14px] mt-[12px]">
-            Price
-          </div>
-          <div className="font-semibold text-[#FFFFFF] text-[24px] mt-[12px] flex items-center">
-            <div className="mt-[4px] mr-[4px]">
-              <img
-                src={'/img/icon_unit_sol.png'}
-                alt={'sol'}
-                width={12}
-                height={12}
-              />
+        {!hidePrice ? (
+          <div className="flex justify-between items-center">
+            <div className="font-light text-[#9497AA] text-[14px] mt-[12px]">
+              Price
             </div>
-            <div>{price}</div>
+            <div className="font-semibold text-[#FFFFFF] text-[24px] mt-[12px] flex items-center">
+              <div className="mt-[4px] mr-[4px]">
+                <img
+                  src={'/img/icon_unit_sol.png'}
+                  alt={'sol'}
+                  width={12}
+                  height={12}
+                />
+              </div>
+              <div>{price}</div>
+            </div>
           </div>
-        </div>
+        ) : (
+          <></>
+        )}
       </div>
       <div className="mt-[12px]">
         <Divider />
