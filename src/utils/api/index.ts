@@ -25,7 +25,7 @@ const api = {
     password: string;
     walletAddress: string;
   }) => {
-    const response = await fetcher({
+    return await fetcher({
       url: '/api/user/register',
       method: 'post',
       data: {
@@ -34,18 +34,25 @@ const api = {
         walletAddress,
       },
     });
-
-    return response;
   },
-  getCollectionList: async (token: string) => {
-    const response = await fetcher({
-      url: '/api/collection/list',
-      method: 'get',
-      headers: {
-        authorization: `Bearer ${token}`,
+  filterNFTsByCollection: async (
+    collection_id: string,
+    nftAccounts: Array<any>,
+  ) => {
+    return await fetcher({
+      url: '/api/nft/filterbycollection',
+      method: 'post',
+      data: {
+        collection_id: collection_id,
+        nfts: nftAccounts,
       },
     });
-    return response.data;
+  },
+  getCollectionList: async () => {
+    return await fetcher({
+      url: '/api/collection/list',
+      method: 'get',
+    });
   },
   getCollectionBySlug: async (token: string, slug: string) => {
     const response = await fetcher({

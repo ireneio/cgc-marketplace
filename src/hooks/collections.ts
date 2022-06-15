@@ -12,7 +12,7 @@ export const useGetCollections = () => {
 
   const getCollections = async () => {
     try {
-      const response = await api.getCollectionList(oAuthCtx.access_token);
+      const response = await api.getCollectionList();
       const map =
         response && response.length
           ? response.map((item: any) => {
