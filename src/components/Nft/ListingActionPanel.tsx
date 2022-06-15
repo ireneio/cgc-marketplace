@@ -49,13 +49,13 @@ const ListingActionPanel = ({
           <></>
         )}
         {info.is_listed ? (
-          <div className="mt-[24px] text-[#FFFFFF] text-[14px]">
+          <div className="mt-[24px] text-[#FFFFFF] text-[14px] w-[160px]">
             <Button onClick={() => handleUnlist()} disabled={loading}>
               Unlist
             </Button>
           </div>
         ) : (
-          <div className="mt-[24px] text-[#FFFFFF] text-[14px]">
+          <div className="mt-[24px] text-[#FFFFFF] text-[14px] w-[160px]">
             <Button onClick={() => handleList()} disabled={loading}>
               List Now
             </Button>
