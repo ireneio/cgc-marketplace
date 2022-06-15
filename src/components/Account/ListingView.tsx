@@ -1,9 +1,8 @@
 import {
-  useGetCollections,
-  useGetNftByCollectionId,
+  useGetCollectionsV2,
+  useGetNftByCollectionIdV2,
 } from '@/hooks/services_collections';
-import { useAppSelector } from '@/store';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
 import ListCard from '../Collection/ListCard';
 import ListCardLoading from '../Collection/ListCardLoading';
@@ -15,16 +14,13 @@ type SelectionView = 'Row' | 'List';
 const LOADING_ARR = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const ListingView = () => {
-  const router = useRouter();
-  // const metadata = useAppSelector(
-  //   (state) => state.collection.currentCollection.metadata,
-  // );
+  // const router = useRouter();
   const [, setRefresh] = useState(false);
   const [sidebar, setSidebar] = useState('All');
   const [listed] = useState([]);
   const [currentView, setCurrentView] = useState<SelectionView>('List');
-  const { data: collections } = useGetCollections();
-  const { loading } = useGetNftByCollectionId();
+  const { data: collections } = useGetCollectionsV2();
+  const { loading } = useGetNftByCollectionIdV2();
 
   const _collections = useMemo(() => {
     return collections.map((collection) => {

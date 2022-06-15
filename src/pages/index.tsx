@@ -3,11 +3,11 @@ import LandingCarousel from '@/components/Home/LandingCarousel';
 import LatestSales from '@/components/Home/LatestSales';
 import LatestTransactions from '@/components/Home/LatestTransactions';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
-import { useGetCollections } from '@/hooks/services_collections';
+import { useGetCollectionsV2 } from '@/hooks/services_collections';
 import { useMemo } from 'react';
 
 const Index = () => {
-  const { data } = useGetCollections();
+  const { data } = useGetCollectionsV2();
 
   const carouselItems = useMemo(() => {
     return data.slice(0, 5).map((collection: any) => {

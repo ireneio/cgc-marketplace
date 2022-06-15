@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import { getBreadcrumbRoutes } from '@/utils/cgcConsts';
 import { LoginModal } from '@/components/Auth/LoginModal';
-import { useGetCollectionsBySlug } from '@/hooks/services_collections';
+import { useGetCollectionsBySlugV2 } from '@/hooks/services_collections';
 
 export type CollectionTabSelection =
   | 'About'
@@ -28,7 +28,7 @@ const Collection = () => {
   const [currentSelection, setCurrentSelection] =
     useState<CollectionTabSelection>('About');
   const [loginModalOpen, setLoginModalOpen] = useState(false);
-  const { data } = useGetCollectionsBySlug();
+  const { data } = useGetCollectionsBySlugV2();
 
   const handleSelect = (value: CollectionTabSelection) => {
     if (value === 'Your Items') {

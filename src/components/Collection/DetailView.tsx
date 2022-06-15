@@ -7,7 +7,7 @@ import ItemCountPanel from './ItemCountPanel';
 import NftPricePanel from './NftPricePanel';
 import TokenPricePanel from './TokenPricePanel';
 import { getNumberWithCommas } from '@/utils/formatHelper';
-import { useGetCollectionsBySlug } from '@/hooks/services_collections';
+import { useGetCollectionsBySlugV2 } from '@/hooks/services_collections';
 
 type SocialTypes = 'discord' | 'twitter' | 'link';
 
@@ -18,7 +18,7 @@ const socials: Record<string, string | SocialTypes>[] = [
 ];
 
 const DetailView = () => {
-  const { loading, data: currentCollection } = useGetCollectionsBySlug();
+  const { loading, data: currentCollection } = useGetCollectionsBySlugV2();
 
   const info = useMemo(() => {
     return {

@@ -12,8 +12,8 @@ import { useInView } from 'react-intersection-observer';
 import { CollectionTabSelection } from '@/pages/collection/[id]';
 import { useCart } from '@/hooks/cart';
 import {
-  useGetCollectionsBySlug,
-  useGetNftByCollectionId,
+  useGetCollectionsBySlugV2,
+  useGetNftByCollectionIdV2,
 } from '@/hooks/services_collections';
 import EmptyListTextDisplay from '../Shared/EmptyListTextDisplay';
 import { initCart } from '@/store/reducers/cart';
@@ -42,8 +42,8 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
     data,
     loading,
     refresh: refreshCollection,
-  } = useGetNftByCollectionId();
-  const { data: currentCollection } = useGetCollectionsBySlug();
+  } = useGetNftByCollectionIdV2();
+  const { data: currentCollection } = useGetCollectionsBySlugV2();
 
   const _items = useMemo(() => {
     let arr = [...data];

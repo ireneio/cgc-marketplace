@@ -6,6 +6,11 @@ const api = {
     console.log('API Health: ', response);
     return response;
   },
+  healthCheckV2: async () => {
+    const response = await fetcher({ url: '/v2', method: 'get' });
+    console.log('API Health V2: ', response);
+    return response;
+  },
   login: async (email: string, password: string) => {
     return await fetcher({
       url: '/v1/api/user/login',

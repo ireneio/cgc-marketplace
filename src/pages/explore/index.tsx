@@ -4,13 +4,13 @@ import DefaultLayout from '@/components/Layout/DefaultLayout';
 import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Divider from '@/components/Shared/Divider';
 import SectionTitle from '@/components/Shared/SectionTitle';
-import { useGetCollections } from '@/hooks/services_collections';
+import { useGetCollectionsV2 } from '@/hooks/services_collections';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 
 const Explore = () => {
   const router = useRouter();
-  const { data, loading } = useGetCollections();
+  const { data, loading } = useGetCollectionsV2();
 
   const handleGoDetail = (slug: string) => {
     router.push(`/collection/${slug}`);
