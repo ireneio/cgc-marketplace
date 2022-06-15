@@ -1,9 +1,9 @@
-import { Attr } from '@/components/Collection/ListCard';
+import { CartAttr } from '@/hooks/cart';
 
 export const CART_STORAGE_KEY = 'CART_STORAGE_KEY';
 
 interface CartState {
-  cartItems: Attr[];
+  cartItems: CartAttr[];
 }
 
 const initialState: CartState = {
@@ -13,7 +13,7 @@ const initialState: CartState = {
 type Action =
   | {
       type: 'ADD_CART_ITEM';
-      payload: Attr;
+      payload: CartAttr;
     }
   | {
       type: 'REMOVE_CART_ITEM';

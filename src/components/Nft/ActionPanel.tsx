@@ -43,7 +43,7 @@ const ActionPanel = ({
           )}
         </div>
         <div className="mt-[34px] flex items-center flex-wrap">
-          {!isItemAddedToCart && (
+          {!isItemAddedToCart(info.mintAddress) && (
             <Button
               onClick={() => handleBuy()}
               disabled={
@@ -53,12 +53,13 @@ const ActionPanel = ({
               Buy Now
             </Button>
           )}
-          <div className={!isItemAddedToCart ? 'ml-[8px]' : ''}>
+          <div
+            className={!isItemAddedToCart(info?.mintAddress) ? 'ml-[8px]' : ''}
+          >
             <Button
               onClick={() =>
                 handleAddToCart({
                   ...info,
-                  isAddedToCart: isItemAddedToCart(info?.mintAddress),
                   tokenAddress: info.mintAddress,
                 })
               }
@@ -79,7 +80,7 @@ const ActionPanel = ({
               )}
             </Button>
           </div>
-          {!isItemAddedToCart && (
+          {!isItemAddedToCart(info?.mintAddress) && (
             <div className="ml-auto basis-[100%] lg:basis-auto mt-[12px] lg:mt-0">
               <Button
                 secondary

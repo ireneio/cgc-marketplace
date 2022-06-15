@@ -1,24 +1,25 @@
 import { useState } from 'react';
 import Divider from '../Shared/Divider';
-import Skeleton from '../Shared/Skeleton';
 
-export interface Attr {
+interface Attr {
   image: string;
   name: string;
   brand: string;
   price: string | number;
   id: string | number;
-  isAddedToCart: boolean;
   tokenAddress: string;
-  addBtnText?: string;
-  removeBtnText?: string;
 }
+
 interface Props extends Attr {
-  onAddToCart: (params: Attr) => void | Promise<void>;
-  onMoreInfo: (id: string | number) => void | Promise<void>;
-  addToCartLoading: boolean;
-  addToCartDisabled?: boolean;
+  onCardClick?: (id: string | number) => void | Promise<void>;
+  onRightFn?: (params: Attr) => void | Promise<void>;
+  onLeftFn?: (id: string | number) => void | Promise<void>;
+  rightBtnText: string;
+  rightBtnTextDisabled?: string;
+  rightBtnDisabled?: boolean;
+  selected?: boolean;
   external_marketplace_listing_logo?: string;
+  type: 'list' | 'row';
 }
 
 const ListCard = ({
@@ -27,14 +28,14 @@ const ListCard = ({
   brand,
   price,
   id,
-  isAddedToCart,
-  onAddToCart,
-  onMoreInfo,
-  addToCartLoading,
-  addToCartDisabled,
+  rightBtnText,
+  rightBtnTextDisabled,
+  rightBtnDisabled,
+  selected,
+  onCardClick,
+  onRightFn,
+  onLeftFn,
   tokenAddress,
-  addBtnText,
-  removeBtnText,
   external_marketplace_listing_logo,
 }: Props) => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -61,8 +62,8 @@ const ListCard = ({
   return (
     <div
       className="relative cursor-pointer rounded-[5px] w-full bg-[#13002B] border-[2px] border-solid border-[#290030] mx-auto"
-      style={{ borderColor: isAddedToCart ? '#F41786' : '#290030' }}
-      onClick={() => onMoreInfo(id)}
+      style={{ borderColor: selected ? '#F41786' : '#290030' }}
+      onClick={() => onCardClick && onCardClick(id)}
     >
       {imageLoaded && external_marketplace_listing_logo && showExternalLogo && (
         <div
@@ -119,9 +120,8 @@ const ListCard = ({
       </div>
       <div className="flex">
         <div
-          style={{ flexBasis: '30%' }}
-          className="hover:bg-[#290030] hover:text-[#FFFFFF] flex items-center justify-center cursor-pointer px-[18px] py-[18px] rounded-bl-[5px]"
-          onClick={() => onMoreInfo(id)}
+          className="hover:bg-[#290030] basis-[30%] hover:text-[#FFFFFF] flex items-center justify-center cursor-pointer px-[18px] py-[18px] rounded-bl-[5px]"
+          onClick={() => onLeftFn && onLeftFn(id)}
         >
           <img
             src={'/img/icon_misc.svg'}
@@ -130,62 +130,47 @@ const ListCard = ({
             height={16}
           />
         </div>
-        {addToCartDisabled && (
+        {!rightBtnDisabled && (
           <div
-            className="cursor-not-allowed text-[12px] flex items-center justify-center px-[18px] py-[18px] text-[#FFFFFF] rounded-br-[5px]"
-            style={{
-              background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
-              flexBasis: '70%',
-              opacity: 0.5,
-            }}
-          >
-            Not Listed
-          </div>
-        )}
-        {(!isAddedToCart || addToCartLoading) && !addToCartDisabled && (
-          <div
-            style={{ flexBasis: '70%' }}
-            className="hover:bg-[#290030] hover:text-[#FFFFFF] flex items-center justify-center cursor-pointer px-[18px] py-[18px] border-l-[1px] border-l-[#290030] rounded-br-[5px]"
+            className="hover:bg-[#290030] basis-[70%] hover:text-[#FFFFFF] flex items-center justify-center cursor-pointer px-[18px] py-[18px] border-l-[1px] border-l-[#290030] rounded-br-[5px]"
             onClick={(e) => {
               e.stopPropagation();
-              onAddToCart({
-                image,
-                name,
-                brand,
-                price,
-                id,
-                isAddedToCart,
-                tokenAddress,
-              });
+              onRightFn &&
+                onRightFn({
+                  image,
+                  name,
+                  brand,
+                  price,
+                  id,
+                  tokenAddress,
+                });
             }}
           >
             <div className="ml-[8px] text-[#FFFFFF] text-[12px]">
-              {addToCartLoading && <Skeleton className="w-[64px] h-[14px]" />}
-              {!addToCartLoading && addBtnText ? addBtnText : 'Add To Cart'}
+              {rightBtnText}
             </div>
           </div>
         )}
-        {isAddedToCart && !addToCartLoading && !addToCartDisabled && (
+        {rightBtnDisabled && (
           <div
-            className="cursor-pointer text-[12px] flex items-center justify-center px-[18px] py-[18px] text-[#FFFFFF] rounded-br-[5px]"
+            className="basis-[70%] cursor-pointer text-[12px] flex items-center justify-center px-[18px] py-[18px] text-[#FFFFFF] rounded-br-[5px]"
             style={{
               background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
-              flexBasis: '70%',
             }}
             onClick={(e) => {
               e.stopPropagation();
-              onAddToCart({
-                image,
-                name,
-                brand,
-                price,
-                id,
-                isAddedToCart,
-                tokenAddress,
-              });
+              onRightFn &&
+                onRightFn({
+                  image,
+                  name,
+                  brand,
+                  price,
+                  id,
+                  tokenAddress,
+                });
             }}
           >
-            {removeBtnText ? removeBtnText : 'Added To Cart'}
+            {rightBtnTextDisabled}
           </div>
         )}
       </div>

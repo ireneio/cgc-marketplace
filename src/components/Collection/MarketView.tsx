@@ -8,8 +8,6 @@ import Cart from './Cart';
 import Filter from './Filter';
 import ListCard from './ListCard';
 import ListCardLoading from './ListCardLoading';
-import RowCard from './RowCard';
-import RowCardLoading from './RowCardLoading';
 import { useInView } from 'react-intersection-observer';
 import { CollectionTabSelection } from '@/pages/collection/[id]';
 import { useCart } from '@/hooks/cart';
@@ -315,7 +313,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
                   key={index}
                   className="w-full flex flex-col relative overflow-hidden cursor-pointer"
                 >
-                  <RowCardLoading />
+                  <ListCardLoading />
                 </div>
               );
             })}
@@ -335,12 +333,21 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
                     brand={item.brand}
                     name={item.name}
                     price={item.price || ' '}
-                    isAddedToCart={isItemAddedToCart(item.tokenAddress)}
-                    onAddToCart={(params) => handleAddToCart(params)}
-                    onMoreInfo={() => handleMoreInfo(item.tokenAddress)}
-                    addToCartLoading={false}
-                    addToCartDisabled={!item.is_listed}
+                    selected={isItemAddedToCart(item.tokenAddress)}
+                    rightBtnText={'Add To Cart'}
+                    rightBtnDisabled={
+                      isItemAddedToCart(item.tokenAddress) || !item.is_listed
+                    }
+                    rightBtnTextDisabled={
+                      isItemAddedToCart(item.tokenAddress)
+                        ? 'Added To Cart'
+                        : 'Not Listed'
+                    }
+                    onLeftFn={() => handleMoreInfo(item.tokenAddress)}
+                    onRightFn={(params) => handleAddToCart(params)}
+                    onCardClick={() => handleMoreInfo(item.tokenAddress)}
                     tokenAddress={item.tokenAddress}
+                    type={'list'}
                     external_marketplace_listing_logo={
                       item.external_marketplace_listing_logo
                     }
@@ -359,18 +366,27 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
                   key={index}
                   className="w-full flex flex-col relative overflow-hidden cursor-pointer"
                 >
-                  <RowCard
+                  <ListCard
                     id={index}
                     image={item.image}
                     brand={item.brand}
                     name={item.name}
-                    price={item.price}
-                    isAddedToCart={isItemAddedToCart(item.tokenAddress)}
-                    onAddToCart={(params) => handleAddToCart(params)}
-                    onMoreInfo={() => handleMoreInfo(item.tokenAddress)}
-                    addToCartLoading={false}
-                    addToCartDisabled={!item.is_listed}
+                    price={item.price || ' '}
+                    selected={isItemAddedToCart(item.tokenAddress)}
+                    rightBtnText={'Add To Cart'}
+                    rightBtnDisabled={
+                      isItemAddedToCart(item.tokenAddress) || !item.is_listed
+                    }
+                    rightBtnTextDisabled={
+                      isItemAddedToCart(item.tokenAddress)
+                        ? 'Added To Cart'
+                        : 'Not Listed'
+                    }
+                    onLeftFn={() => handleMoreInfo(item.tokenAddress)}
+                    onRightFn={(params) => handleAddToCart(params)}
+                    onCardClick={() => handleMoreInfo(item.tokenAddress)}
                     tokenAddress={item.tokenAddress}
+                    type={'row'}
                     external_marketplace_listing_logo={
                       item.external_marketplace_listing_logo
                     }

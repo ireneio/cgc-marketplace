@@ -1,5 +1,13 @@
-import { Attr } from '@/components/Collection/ListCard';
 import { useAppDispatch, useAppSelector } from '@/store';
+
+export interface CartAttr {
+  image: string;
+  name: string;
+  brand: string;
+  price: string | number;
+  id: string | number;
+  tokenAddress: string;
+}
 
 export const useCart = () => {
   const dispatch = useAppDispatch();
@@ -7,11 +15,11 @@ export const useCart = () => {
 
   const isItemAddedToCart = (tokenAddress: string) => {
     return cartItems.find(
-      (item: Attr) => String(item.tokenAddress) === String(tokenAddress),
+      (item: CartAttr) => String(item.tokenAddress) === String(tokenAddress),
     );
   };
 
-  const handleAddToCart = (params: Attr) => {
+  const handleAddToCart = (params: CartAttr) => {
     if (isItemAddedToCart(params.tokenAddress)) {
       dispatch({
         type: 'REMOVE_CART_ITEM',
@@ -23,7 +31,7 @@ export const useCart = () => {
   };
 
   return {
-    handleAddToCart,
     isItemAddedToCart,
+    handleAddToCart,
   };
 };

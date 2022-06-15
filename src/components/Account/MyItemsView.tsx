@@ -1,18 +1,11 @@
 import { useCart } from '@/hooks/cart';
-import {
-  useGetCollections,
-  useGetNftByCollectionId,
-} from '@/hooks/services_collections';
 import { useAppDispatch, useAppSelector } from '@/store';
 import * as anchor from '@project-serum/anchor';
 import { useRouter } from 'next/router';
 import React, { useEffect, useMemo, useState } from 'react';
 import Button from '@/components/Shared/Button';
 import { getParsedNftAccountsByOwner } from '@/solana/getParsedNftAccountsByOwner';
-import ListCard from '../Collection/ListCard';
 import ListCardLoading from '../Collection/ListCardLoading';
-import RowCard from '../Collection/RowCard';
-import RowCardLoading from '../Collection/RowCardLoading';
 import SelectGroup from '../Shared/SelectGroup';
 import Menu from './Menu';
 import api from '@/utils/api';
@@ -56,7 +49,7 @@ const MyItemsView = () => {
   const [currentView, setCurrentView] = useState<SelectionView>('List');
   const [myItems, setMyItems] = useState([]);
   const [myItemLoading, setMyItemLoading] = useState(false);
-  const { handleAddToCart, isItemAddedToCart } = useCart();
+  const { handleAddToCart } = useCart();
 
   useEffect(() => {
     if (wallet) {
@@ -260,7 +253,7 @@ const MyItemsView = () => {
                           key={index}
                           className="w-full flex flex-col relative overflow-hidden cursor-pointer"
                         >
-                          <RowCardLoading />
+                          <ListCardLoading />
                         </div>
                       );
                     })}

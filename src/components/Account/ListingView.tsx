@@ -1,4 +1,3 @@
-import { useCart } from '@/hooks/cart';
 import {
   useGetCollections,
   useGetNftByCollectionId,
@@ -8,8 +7,6 @@ import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
 import ListCard from '../Collection/ListCard';
 import ListCardLoading from '../Collection/ListCardLoading';
-import RowCard from '../Collection/RowCard';
-import RowCardLoading from '../Collection/RowCardLoading';
 import SelectGroup from '../Shared/SelectGroup';
 import Menu from './Menu';
 
@@ -28,7 +25,6 @@ const ListingView = () => {
   const [currentView, setCurrentView] = useState<SelectionView>('List');
   const { data: collections } = useGetCollections();
   const { loading } = useGetNftByCollectionId();
-  const { handleAddToCart, isItemAddedToCart } = useCart();
 
   const _collections = useMemo(() => {
     return collections.map((collection) => {
@@ -166,7 +162,7 @@ const ListingView = () => {
                     key={index}
                     className="w-full flex flex-col relative overflow-hidden cursor-pointer"
                   >
-                    <RowCardLoading />
+                    <ListCardLoading />
                   </div>
                 );
               })}
@@ -186,13 +182,15 @@ const ListingView = () => {
                       brand={item.brand}
                       name={item.name}
                       price={item.price}
-                      isAddedToCart={isItemAddedToCart(item.tokenAddress)}
-                      onAddToCart={(params) => handleAddToCart(params)}
-                      onMoreInfo={() => handleMoreInfo(item.tokenAddress)}
-                      addToCartLoading={false}
-                      addToCartDisabled={false}
+                      // onLeftFn={(id) => {}}
+                      // onRightFn={(params) => {}}
+                      // onCardClick={(id) => {}}
+                      selected={false}
+                      rightBtnText={'Cancel Listing'}
+                      rightBtnDisabled={false}
+                      rightBtnTextDisabled={''}
                       tokenAddress={item.tokenAddress}
-                      addBtnText={'Cancel Listing'}
+                      type={'list'}
                     />
                   </div>
                 );
@@ -200,26 +198,28 @@ const ListingView = () => {
             </div>
           )}
           {currentView === 'Row' && !loading && (
-            <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 pb-6">
+            <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 xl:gap-x-8 pb-6">
               {listed.map((item: any, index) => {
                 return (
                   <div
                     key={index}
                     className="w-full flex flex-col relative overflow-hidden cursor-pointer"
                   >
-                    <RowCard
+                    <ListCard
                       id={index}
                       image={item.image}
                       brand={item.brand}
                       name={item.name}
                       price={item.price}
-                      isAddedToCart={isItemAddedToCart(item.tokenAddress)}
-                      onAddToCart={(params) => handleAddToCart(params)}
-                      onMoreInfo={() => handleMoreInfo(item.tokenAddress)}
-                      addToCartLoading={false}
-                      addToCartDisabled={false}
+                      // onLeftFn={(id) => {}}
+                      // onRightFn={(params) => {}}
+                      // onCardClick={(id) => {}}
+                      selected={false}
+                      rightBtnText={'Cancel Listing'}
+                      rightBtnDisabled={false}
+                      rightBtnTextDisabled={''}
                       tokenAddress={item.tokenAddress}
-                      addBtnText={'Cancel Listing'}
+                      type={'row'}
                     />
                   </div>
                 );

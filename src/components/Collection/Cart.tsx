@@ -1,16 +1,16 @@
+import { CartAttr } from '@/hooks/cart';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { getNumberWithCommas } from '@/utils/formatHelper';
 import { useMemo } from 'react';
 import Button from '../Shared/Button';
 import Divider from '../Shared/Divider';
 import Tag from '../Shared/Tag';
-import { Attr } from './ListCard';
 
 const Cart = ({ onClose }: { onClose?: () => void }) => {
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector((state) => state.cart.cartItems);
   const totalPrice = useMemo(() => {
-    return cartItems.reduce((acc: number, curr: Attr) => {
+    return cartItems.reduce((acc: number, curr: CartAttr) => {
       acc += Number(curr.price);
       return acc;
     }, 0);
@@ -75,7 +75,7 @@ const Cart = ({ onClose }: { onClose?: () => void }) => {
                   </div>
                 </div>
               )}
-              {cartItems.map((item: Attr, index: number) => {
+              {cartItems.map((item: CartAttr, index: number) => {
                 return (
                   <div key={index} className="mb-[12px]">
                     <div className="flex items-center">
