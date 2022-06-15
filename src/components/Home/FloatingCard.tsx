@@ -96,7 +96,7 @@ const FloatingCard = ({
             y: isDefaultFloating ? 0 : '-105px',
             zIndex: 100,
           }}
-          className="bg-[#13002B] rounded-[5px] cursor-pointer absolute"
+          className="bg-[#13002B] rounded-[5px] cursor-pointer absolute shadow-2xl"
           onMouseLeave={() => handleMouseOut()}
           style={{ position: isDefaultFloating ? 'static' : 'absolute' }}
         >
@@ -105,7 +105,7 @@ const FloatingCard = ({
               width: isDefaultFloating ? 'auto' : '25vw',
               // height: isDefaultFloating ? 'auto' : '50vh',
             }}
-            className="border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden"
+            className="rounded-[5px] transition-all bg-[#13002B] overflow-hidden"
           >
             <div className="relative flex items-start justify-center h-[55%]">
               {/* gif */}
