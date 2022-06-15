@@ -8,7 +8,7 @@ import NftPricePanel from './NftPricePanel';
 import TokenPricePanel from './TokenPricePanel';
 import { useAppSelector } from '@/store';
 import { getNumberWithCommas } from '@/utils/formatHelper';
-import { useGetCollectionsBySlug } from '@/hooks/collections';
+import { useGetCollectionsBySlug } from '@/hooks/services_collections';
 
 type SocialTypes = 'discord' | 'twitter' | 'link';
 

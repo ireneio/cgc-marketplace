@@ -11,11 +11,13 @@ import SelectGroup from '@/components/Shared/SelectGroup';
 import { useAppDispatch, useAppSelector } from '@/store';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import DetailPanel from '@/components/Nft/DetailPanel';
-import { OAuthContext } from '@/contexts/OAuthProvider';
 import { LoginModal } from '@/components/Auth/LoginModal';
-import { useGetCollectionsBySlug, useGetNftByHash } from '@/hooks/collections';
+import {
+  useGetCollectionsBySlug,
+  useGetNftByHash,
+} from '@/hooks/services_collections';
 import NftPageLoading from '@/components/Nft/NftPageLoading';
 import Skeleton from '@/components/Shared/Skeleton';
 
@@ -64,7 +66,6 @@ const Nft = () => {
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
-  const oAuthCtx = useContext(OAuthContext);
   const router = useRouter();
   const [info, setInfo] = useState<NftInfo>({
     id: '',
@@ -94,12 +95,8 @@ const Nft = () => {
   const [openCart, setOpenCart] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [currentSelection] = useState<Selection>('Collection Item');
-  const {
-    data: collections,
-    setSlug,
-    loading: collectionsLoading,
-  } = useGetCollectionsBySlug();
-  const { getData, data, loading, refresh } = useGetNftByHash();
+  const { setSlug, loading: collectionsLoading } = useGetCollectionsBySlug();
+  const { setTokenAddress, data, loading, refresh } = useGetNftByHash();
 
   const breadCrumbItems = useMemo(() => {
     switch (currentSelection) {
@@ -202,7 +199,7 @@ const Nft = () => {
   }, [data, router]);
 
   useEffect(() => {
-    getData(String(router.query.id));
+    setTokenAddress(String(router.query.id));
   }, [router.query.id]);
 
   return (

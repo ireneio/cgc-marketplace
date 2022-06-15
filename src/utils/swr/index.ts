@@ -50,10 +50,20 @@ export const fetcher = (config: FetcherConfig) => {
         method: 'get',
         url: config,
       })
-      .then((res) => res.data)
+      .then((res) => {
+        return {
+          success: true,
+          message: 'success',
+          data: res.data,
+        };
+      })
       .catch((err) => {
         console.log(err);
-        return null;
+        return {
+          success: false,
+          message: err.response.data?.message,
+          data: {},
+        };
       });
   }
 };

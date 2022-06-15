@@ -5,7 +5,7 @@ import SectionTitle from '../Shared/SectionTitle';
 import Divider from '@/components/Shared/Divider';
 import FloatingCard from './FloatingCard';
 import { useRouter } from 'next/router';
-import { useGetCollections } from '@/hooks/collections';
+import { useGetCollections } from '@/hooks/services_collections';
 import EmptyListTextDisplay from '../Shared/EmptyListTextDisplay';
 
 const AllCollections = () => {

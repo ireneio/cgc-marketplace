@@ -2,7 +2,7 @@ import { useCart } from '@/hooks/cart';
 import {
   useGetCollections,
   useGetNftByCollectionId,
-} from '@/hooks/collections';
+} from '@/hooks/services_collections';
 import { useAppDispatch, useAppSelector } from '@/store';
 import * as anchor from '@project-serum/anchor';
 import { useRouter } from 'next/router';
