@@ -122,8 +122,8 @@ const ListingActionPanel = ({
         )}
         <div className="text-[#AAAAAA] mt-[12px]">
           By Proceeding, You agree to our{' '}
-          <span className="underline">Terms</span> and{' '}
-          <span className="underline">Privacy</span>{' '}
+          <span className="underline cursor-pointer">Terms</span> and{' '}
+          <span className="underline cursor-pointer">Privacy</span>{' '}
         </div>
       </div>
     </Tag>
