@@ -8,7 +8,7 @@ export const useGetCollections = () => {
   const dispatch = useAppDispatch();
   const [items, setItems] = useState<any[]>([]);
   const { data, error, mutate, isValidating } = useSWR(
-    '/api/collection/list',
+    '/v1/api/collection/list',
     fetcher.bind({
       url: '/api/collection/list',
       method: 'get',
@@ -54,7 +54,7 @@ export const useGetCollectionsBySlug = () => {
   const [items, setItems] = useState<any[]>([]);
   const [slug, setSlug] = useState('');
   const { data, error, mutate, isValidating } = useSWR(
-    `/api/collection/list?slug=${slug}`,
+    `/v1/api/collection/list?slug=${slug}`,
     fetcher.bind({
       url: '/api/collection/list',
       method: 'get',
@@ -101,7 +101,7 @@ export const useGetNftByCollectionId = () => {
   const [items, setItems] = useState<any[]>([]);
   const [collectionId, setCollectionId] = useState('');
   const { data, error, mutate, isValidating } = useSWR(
-    `/api/nft/list?slug=${collectionId}`,
+    `/v1/api/nft/list?slug=${collectionId}`,
     fetcher.bind({
       url: '/api/collection/list',
       method: 'get',
@@ -165,7 +165,7 @@ export const useGetNftByHash = () => {
   });
   const [tokenAddress, setTokenAddress] = useState('');
   const { data, error, mutate, isValidating } = useSWR(
-    `/api/nft?tokenAddress=${tokenAddress}`,
+    `/v1/api/nft?tokenAddress=${tokenAddress}`,
     fetcher.bind({
       url: '/api/collection/list',
       method: 'get',

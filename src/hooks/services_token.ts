@@ -6,7 +6,7 @@ import useSWR from 'swr';
 export const useGetTokenList = () => {
   const [items, setItems] = useState<any[]>([]);
   const { data, error, mutate, isValidating } = useSWR(
-    `/api/token/list`,
+    `/v1/api/token/list`,
     fetcher.bind({
       method: 'get',
     }),
