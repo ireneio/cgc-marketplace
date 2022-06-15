@@ -292,7 +292,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
       </div>
       <div>
         {currentView === 'List' && loading && (
-          <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 xl:gap-x-8 pb-6">
+          <div className="grid grid-cols-2 gap-y-10 gap-x-6 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 xl:gap-x-8 pb-6">
             {LOADING_ARR.map((item, index) => {
               return (
                 <div
@@ -320,7 +320,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
           </div>
         )}
         {currentView === 'List' && !loading && (
-          <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 xl:gap-x-8 pb-6">
+          <div className="grid grid-cols-2 gap-y-10 gap-x-6 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 xl:gap-x-8 pb-6">
             {_items.map((item: any, index: number) => {
               return (
                 <div
