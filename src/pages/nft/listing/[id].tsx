@@ -124,28 +124,7 @@ const NftListing = () => {
   }, [metadata, info, loading]);
 
   const handleSelect = (value: Selection) => {
-    switch (value) {
-      case 'About':
-        router.push(`/collection/${metadata.slug}`).then();
-        return;
-      case 'All Items':
-        router.push(`/collection/${metadata.slug}?tab=all_items`).then();
-        return;
-      case 'My Items': {
-        if (!access_token) {
-          setLoginModalOpen(true);
-        } else {
-          router.push(`/account?tab=items`).then();
-        }
-        return;
-      }
-      case metadata.slug:
-        router.push(`/collection/${metadata.slug}?tab=about`).then();
-        return;
-      case 'Explore/All':
-        router.push('/explore').then();
-        return;
-    }
+    router.push(value);
   };
 
   const handleRefresh = async () => {
