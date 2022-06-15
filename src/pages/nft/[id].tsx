@@ -13,10 +13,11 @@ import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import DetailPanel from '@/components/Nft/DetailPanel';
-import api from '@/utils/api';
 import { OAuthContext } from '@/contexts/OAuthProvider';
 import { LoginModal } from '@/components/Auth/LoginModal';
 import { useGetCollectionsBySlug, useGetNftByHash } from '@/hooks/collections';
+import NftPageLoading from '@/components/Nft/NftPageLoading';
+import Skeleton from '@/components/Shared/Skeleton';
 
 export interface NftInfo {
   id: string | number;
@@ -93,7 +94,11 @@ const Nft = () => {
   const [openCart, setOpenCart] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [currentSelection] = useState<Selection>('Collection Item');
-  const { data: collections, setSlug } = useGetCollectionsBySlug();
+  const {
+    data: collections,
+    setSlug,
+    loading: collectionsLoading,
+  } = useGetCollectionsBySlug();
   const { getData, data, loading, refresh } = useGetNftByHash();
 
   const breadCrumbItems = useMemo(() => {
@@ -211,9 +216,16 @@ const Nft = () => {
         />
       </div>
       <div className="flex justify-between items-center mb-[16px] flex-wrap">
-        <div className="basis-[100%] lg:basis-auto text-[#FFFFFF] font-bold text-[24px]">
-          {info.brand} {info.name}
-        </div>
+        {!collectionsLoading && !loading && (
+          <div className="basis-[100%] lg:basis-auto text-[#FFFFFF] font-bold text-[24px]">
+            {info.brand} {info.name}
+          </div>
+        )}
+        {(collectionsLoading || loading) && (
+          <div className="basis-[100%] lg:basis-auto text-[#FFFFFF] font-bold text-[24px]">
+            <Skeleton className="h-[35px] w-[120px] bg-[#290030]" />
+          </div>
+        )}
         <div className="basis-[100%] lg:basis-auto mt-[12px] lg:mt-0">
           <SelectGroup
             items={selectGroupItems}
@@ -225,7 +237,10 @@ const Nft = () => {
       <div className="mb-[24px]">
         <Divider />
       </div>
-      {currentSelection !== 'Your Items' && (
+      {currentSelection !== 'Your Items' && (collectionsLoading || loading) && (
+        <NftPageLoading />
+      )}
+      {currentSelection !== 'Your Items' && !collectionsLoading && !loading && (
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-[24px] pt-[12px]">
           <div className="flex items-center justify-between col-span-2">
             <div className="flex items-center">
