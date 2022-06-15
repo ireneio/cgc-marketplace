@@ -20,6 +20,7 @@ import {
 } from '@/hooks/services_collections';
 import NftPageLoading from '@/components/Nft/NftPageLoading';
 import Skeleton from '@/components/Shared/Skeleton';
+import { initCart } from '@/store/reducers/cart';
 
 export interface NftInfo {
   id: string | number;
@@ -194,7 +195,7 @@ const Nft = () => {
 
   useEffect(() => {
     if (router.query.id) {
-      dispatch({ type: 'INIT_CART' });
+      dispatch(initCart());
     }
   }, [dispatch, router]);
 

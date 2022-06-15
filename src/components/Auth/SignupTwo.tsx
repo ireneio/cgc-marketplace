@@ -2,6 +2,7 @@ import { useAppDispatch } from '@/store';
 import { motion } from 'framer-motion';
 import Button from '../Shared/Button';
 import PrimaryGradientText from '../Catheon/PrimaryGradientText';
+import { showSnackbar } from '@/store/reducers/layout';
 
 const SignupTwo = ({
   onNextStep,
@@ -15,10 +16,7 @@ const SignupTwo = ({
   const dispatch = useAppDispatch();
 
   const handleResendLink = () => {
-    dispatch({
-      type: 'SHOW_SNACKBAR',
-      payload: { title: 'success', text: 'Link Sent!' },
-    });
+    dispatch(showSnackbar({ title: 'success', text: 'Link Sent!' }));
   };
   return (
     <motion.div initial={{ x: '-100%' }} animate={{ x: 0 }}>

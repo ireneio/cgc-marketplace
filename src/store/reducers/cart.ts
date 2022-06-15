@@ -1,4 +1,5 @@
 import { CartAttr } from '@/hooks/cart';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export const CART_STORAGE_KEY = 'CART_STORAGE_KEY';
 
@@ -10,66 +11,39 @@ const initialState: CartState = {
   cartItems: [],
 };
 
-type Action =
-  | {
-      type: 'ADD_CART_ITEM';
-      payload: CartAttr;
-    }
-  | {
-      type: 'REMOVE_CART_ITEM';
-      payload: string;
-    }
-  | {
-      type: 'CLEAR_CART';
-    }
-  | {
-      type: 'INIT_CART';
-    };
-
-export default function cartReducer(
-  state: CartState = initialState,
-  action: Action,
-) {
-  switch (action.type) {
-    case 'ADD_CART_ITEM':
+export const cartSlice = createSlice({
+  name: 'cart',
+  initialState,
+  reducers: {
+    addCartItem: (state, action: PayloadAction<CartAttr>) => {
       const _added = [...state.cartItems, action.payload];
       window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(_added));
-      return {
-        ...state,
-        cartItems: _added,
-      };
-    case 'REMOVE_CART_ITEM':
+      state.cartItems = _added;
+    },
+    removeCartItem: (state, action: PayloadAction<string>) => {
       const _removed = [
         ...state.cartItems.filter(
           (item) => String(item.tokenAddress) !== String(action.payload),
         ),
       ];
       window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(_removed));
-      return {
-        ...state,
-        cartItems: _removed,
-      };
-    case 'CLEAR_CART':
+      state.cartItems = _removed;
+    },
+    clearCart: (state) => {
       window.localStorage.removeItem(CART_STORAGE_KEY);
-      return {
-        ...state,
-        cartItems: [],
-      };
-    case 'INIT_CART':
+      state.cartItems = [];
+    },
+    initCart: (state) => {
       const cart = window.localStorage.getItem(CART_STORAGE_KEY);
       if (cart) {
         const _cart = JSON.parse(cart);
-        return {
-          ...state,
-          cartItems: _cart,
-        };
-      } else {
-        return {
-          ...state,
-          cartItems: [],
-        };
+        state.cartItems = _cart;
       }
-    default:
-      return state;
-  }
-}
+    },
+  },
+});
+
+export const { addCartItem, removeCartItem, clearCart, initCart } =
+  cartSlice.actions;
+
+export default cartSlice.reducer;

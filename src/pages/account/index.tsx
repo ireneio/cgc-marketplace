@@ -30,7 +30,6 @@ const Account = ({
 }: {
   setSavedPath: React.Dispatch<React.SetStateAction<SavedPathType>>;
 }) => {
-  const email = useAppSelector((state) => state.user.userInfo.email);
   const sidebarPath = useAppSelector((state) => state.layout.navigation.path);
   const router = useRouter();
   const wallet = useWallet();
@@ -106,7 +105,6 @@ const Account = ({
         </div>
         <div className="text-[#FFFFFF] ml-[34px]">
           <div className="font-bold text-[24px]">My cgPass</div>
-          <div className="text-[20px] mt-[2px]">{email}</div>
         </div>
         <div className="ml-auto basis-[100%] md:basis-auto mt-[24px] md:mt-0">
           <Button onClick={() => handleSignOut()}>Sign Out</Button>

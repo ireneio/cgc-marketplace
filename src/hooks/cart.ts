@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/store';
+import { addCartItem, removeCartItem } from '@/store/reducers/cart';
 
 export interface CartAttr {
   image: string;
@@ -14,19 +15,16 @@ export const useCart = () => {
   const cartItems = useAppSelector((state) => state.cart.cartItems);
 
   const isItemAddedToCart = (tokenAddress: string) => {
-    return cartItems.find(
+    return !!cartItems.find(
       (item: CartAttr) => String(item.tokenAddress) === String(tokenAddress),
     );
   };
 
   const handleAddToCart = (params: CartAttr) => {
     if (isItemAddedToCart(params.tokenAddress)) {
-      dispatch({
-        type: 'REMOVE_CART_ITEM',
-        payload: String(params.tokenAddress),
-      });
+      dispatch(removeCartItem(String(params.tokenAddress)));
     } else {
-      dispatch({ type: 'ADD_CART_ITEM', payload: params });
+      dispatch(addCartItem(params));
     }
   };
 

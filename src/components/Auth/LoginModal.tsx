@@ -13,6 +13,7 @@ import SignupOneNew from './SignUpOneNew';
 import SignUpTwoNew from './SignUpTwoNew';
 import SignupTwo from './SignupTwo';
 import { useWallet } from '@solana/wallet-adapter-react';
+import { showSnackbar } from '@/store/reducers/layout';
 
 type LoginModalProps = {
   isOpen: boolean;
@@ -83,32 +84,16 @@ export const LoginModal = ({
         response?.data.token_type,
         response?.data.id,
       );
-      dispatch({
-        type: 'SHOW_SNACKBAR',
-        payload: { title: 'info', text: 'Sign In Success!' },
-      });
+      dispatch(showSnackbar({ title: 'info', text: 'Sign In Success!' }));
       if (redirectPath) {
         router.replace(redirectPath).then();
       }
       setBtnLoading(false);
       setIsOpen(false);
     } else {
-      dispatch({
-        type: 'SHOW_SNACKBAR',
-        payload: { title: 'error', text: response.message },
-      });
+      dispatch(showSnackbar({ title: 'error', text: response.message }));
       setBtnLoading(false);
     }
-    /*dispatch({ type: 'SET_USER_EMAIL', payload: form.getValues('email') });
-    const tid = setTimeout(() => {
-      setIsOpen(false);
-      dispatch({
-        type: 'SHOW_SNACKBAR',
-        payload: { title: 'info', text: 'Sign In Success!' },
-      });
-      setBtnLoading(false);
-      clearTimeout(tid);
-    }, 1200);*/
   };
 
   const handleSignUpOne = async () => {
@@ -130,33 +115,30 @@ export const LoginModal = ({
 
   const handleSignUpThree = async () => {
     if (disableSignUp) {
-      dispatch({
-        type: 'SHOW_SNACKBAR',
-        payload: {
-          title: 'Alert',
+      dispatch(
+        showSnackbar({
+          title: 'error',
           text: 'Sorry, we are currently not accepting any cgPass signups.',
-        },
-      });
+        }),
+      );
       setIsOpen(false);
     }
     setBtnLoading(true);
     const result = await register();
     if (!result.success) {
-      dispatch({
-        type: 'SHOW_SNACKBAR',
-        payload: {
-          title: 'Alert',
+      dispatch(
+        showSnackbar({
+          title: 'error',
           text: result.message,
-        },
-      });
+        }),
+      );
     } else {
-      dispatch({
-        type: 'SHOW_SNACKBAR',
-        payload: {
-          title: 'Info',
+      dispatch(
+        showSnackbar({
+          title: 'info',
           text: 'Sign Up Success',
-        },
-      });
+        }),
+      );
       setIsOpen(false);
     }
     setBtnLoading(false);

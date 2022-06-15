@@ -1,4 +1,5 @@
 import { useAppDispatch } from '@/store';
+import { showSnackbar } from '@/store/reducers/layout';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const ClipboardText = ({
@@ -15,10 +16,7 @@ const ClipboardText = ({
   const dispatch = useAppDispatch();
 
   const handleCopySuccess = () => {
-    dispatch({
-      type: 'SHOW_SNACKBAR',
-      payload: { title: 'Success', text: 'Copied to Clipboard!' },
-    });
+    dispatch(showSnackbar({ title: 'Success', text: 'Copied to Clipboard!' }));
   };
 
   return (

@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import CatheonConnectButton from '../Catheon/CatheonConnectButton';
-import { useAppDispatch } from '@/store';
 import { useRouter } from 'next/router';
 
 const Header = () => {
-  const dispatch = useAppDispatch();
   const router = useRouter();
   const [search, setSearch] = useState('');
 

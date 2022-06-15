@@ -1,5 +1,5 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { BASE_SIDEBAR_PATH } from '@/utils/cgcConsts';
-import store from '..';
 
 interface LayoutState {
   navigation: {
@@ -25,52 +25,47 @@ const initialState: LayoutState = {
   },
 };
 
-type Action =
-  | {
-      type: 'SHOW_SNACKBAR';
-      payload: { title: string; text: string };
-    }
-  | {
-      type: 'CLOSE_SNACKBAR';
-    };
-
-export default function layoutReducer(
-  state: LayoutState = initialState,
-  action: Action,
-) {
-  switch (action.type) {
-    case 'SHOW_SNACKBAR':
+export const layoutSlice = createSlice({
+  name: 'layout',
+  initialState,
+  reducers: {
+    showSnackbar: (
+      state,
+      action: PayloadAction<{ text: string; title: string }>,
+    ) => {
       if (state.snackbar.timeoutId) {
         clearTimeout(state.snackbar.timeoutId);
       }
       const tid = setTimeout(() => {
         clearTimeout(tid);
-        store.dispatch({ type: 'CLOSE_SNACKBAR' });
-      }, 2500);
-
-      return {
-        ...state,
-        snackbar: {
-          text: action.payload.text,
-          title: action.payload.title,
-          show: true,
-          timeoutId: tid,
-        },
-      };
-    case 'CLOSE_SNACKBAR':
-      if (state.snackbar.timeoutId) {
-        clearTimeout(state.snackbar.timeoutId);
-      }
-      return {
-        ...state,
-        snackbar: {
+        state.snackbar = {
           title: '',
           text: '',
           show: false,
           timeoutId: null,
-        },
+        };
+      }, 2500);
+      state.snackbar = {
+        text: action.payload.text,
+        title: action.payload.title,
+        show: true,
+        timeoutId: tid,
       };
-    default:
-      return state;
-  }
-}
+    },
+    closeSnackbar: (state) => {
+      if (state.snackbar.timeoutId) {
+        clearTimeout(state.snackbar.timeoutId);
+      }
+      state.snackbar = {
+        title: '',
+        text: '',
+        show: false,
+        timeoutId: null,
+      };
+    },
+  },
+});
+
+export const { showSnackbar, closeSnackbar } = layoutSlice.actions;
+
+export default layoutSlice.reducer;

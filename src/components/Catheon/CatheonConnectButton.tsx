@@ -27,8 +27,6 @@ const CatheonConnectButton = () => {
     setDropdown(false);
     if (val === 'Account') {
       router.push('/account');
-    } else {
-      dispatch({ type: 'SET_USER_EMAIL', payload: '' });
     }
   };
 

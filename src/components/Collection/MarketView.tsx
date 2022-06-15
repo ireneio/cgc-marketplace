@@ -16,6 +16,7 @@ import {
   useGetNftByCollectionId,
 } from '@/hooks/services_collections';
 import EmptyListTextDisplay from '../Shared/EmptyListTextDisplay';
+import { initCart } from '@/store/reducers/cart';
 
 type SelectionView = 'Row' | 'List';
 
@@ -112,7 +113,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
   }, [currentCollection?.metadata, refresh]);
 
   const getCart = () => {
-    dispatch({ type: 'INIT_CART' });
+    dispatch(initCart());
   };
 
   useEffect(() => {

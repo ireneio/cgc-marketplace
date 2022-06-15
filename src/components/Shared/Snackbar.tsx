@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
 import { useAppDispatch } from '@/store';
+import { closeSnackbar } from '@/store/reducers/layout';
 
 const root = document.querySelector('#snackbar-root') as Element;
 const Snackbar = ({
@@ -43,7 +44,7 @@ const Snackbar = ({
                 </span>
                 <div
                   className="cursor-pointer mt-[0px]"
-                  onClick={() => dispatch({ type: 'CLOSE_SNACKBAR' })}
+                  onClick={() => dispatch(closeSnackbar())}
                 >
                   <img
                     src="/img/icon_purple_rounded_close.png"

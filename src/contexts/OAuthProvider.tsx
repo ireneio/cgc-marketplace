@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/store';
+import { setUserInfo } from '@/store/reducers/user';
 import React, { useCallback, useEffect, useState } from 'react';
 
 interface ICtx {
@@ -66,10 +67,10 @@ export const OAuthProvider = ({ children }: { children: React.ReactNode }) => {
         token_type: 'Bearer',
         id: value?.id,
       };
-      dispatch({ type: 'SET_USER_INFO', payload });
+      dispatch(setUserInfo(payload));
       setIsLoggedIn(true);
     } else {
-      dispatch({ type: 'SET_USER_INFO', payload: EMPTY_PAYLOAD });
+      dispatch(setUserInfo(EMPTY_PAYLOAD));
     }
   };
 
@@ -102,21 +103,25 @@ export const OAuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
     const result = JSON.stringify(payload);
     window.localStorage.setItem('auth', result.toString());
-    dispatch({ type: 'SET_USER_INFO', payload });
+    dispatch(setUserInfo(payload));
     setIsDoneGrant(true);
     setIsLoggedIn(true);
   };
 
   const logout = () => {
     window.localStorage.setItem('auth', '');
-    dispatch({ type: 'SET_USER_INFO', payload: EMPTY_PAYLOAD });
+    dispatch(setUserInfo(EMPTY_PAYLOAD));
     setIsLoggedIn(false);
   };
 
   return (
     <OAuthContext.Provider
       value={{
-        ...user,
+        access_token: user.access_token,
+        expired_at: user.expired_at,
+        refresh_token: user.refresh_token,
+        id: user.id,
+        token_type: user.token_type,
         getToken,
         authorized,
         successLogin,

@@ -13,6 +13,7 @@ import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { useProgram } from '@/solana/usePrograms';
 import { pubKeyToString } from '@/solana/solanaHelper';
 import { sleep } from '@/utils/helper';
+import { showSnackbar } from '@/store/reducers/layout';
 
 type SelectionView = 'Row' | 'List';
 
@@ -86,10 +87,7 @@ const MyItemsView = () => {
       });
       setCollections(results);
     } else {
-      dispatch({
-        type: 'SHOW_SNACKBAR',
-        payload: { title: 'error', text: response.message },
-      });
+      dispatch(showSnackbar({ title: 'error', text: response.message }));
     }
     setLoading(false);
   };

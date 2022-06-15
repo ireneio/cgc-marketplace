@@ -1,5 +1,6 @@
 import { CartAttr } from '@/hooks/cart';
 import { useAppDispatch, useAppSelector } from '@/store';
+import { removeCartItem } from '@/store/reducers/cart';
 import { getNumberWithCommas } from '@/utils/formatHelper';
 import { useMemo } from 'react';
 import Button from '../Shared/Button';
@@ -21,7 +22,7 @@ const Cart = ({ onClose }: { onClose?: () => void }) => {
   }, [totalPrice]);
 
   const handleRemoveItem = (tokenAddress: string) => {
-    dispatch({ type: 'REMOVE_CART_ITEM', payload: String(tokenAddress) });
+    dispatch(removeCartItem(String(tokenAddress)));
   };
 
   const handleBuy = async () => {
