@@ -20,7 +20,7 @@ const Snackbar = ({
     if (show) {
       return (
         <motion.div
-          className="fixed top-[30px] left-[50%] z-[100]"
+          className="fixed top-[30px] left-[50%] z-[99999]"
           animate={{ y: 0 }}
           initial={{ y: -1000, x: '-50%' }}
           transition={{ duration: 0.25, type: 'spring' }}

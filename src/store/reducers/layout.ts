@@ -1,10 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { BASE_SIDEBAR_PATH } from '@/utils/cgcConsts';
 
 interface LayoutState {
-  navigation: {
-    path: string;
-  };
   snackbar: {
     title: string;
     text: string;
@@ -14,9 +10,6 @@ interface LayoutState {
 }
 
 const initialState: LayoutState = {
-  navigation: {
-    path: BASE_SIDEBAR_PATH,
-  },
   snackbar: {
     title: 'Alert',
     text: '',
@@ -33,29 +26,30 @@ export const layoutSlice = createSlice({
       state,
       action: PayloadAction<{ text: string; title: string }>,
     ) => {
-      if (state.snackbar.timeoutId) {
-        clearTimeout(state.snackbar.timeoutId);
-      }
-      const tid = setTimeout(() => {
-        clearTimeout(tid);
-        state.snackbar = {
-          title: '',
-          text: '',
-          show: false,
-          timeoutId: null,
-        };
-      }, 2500);
+      // if (state.snackbar.timeoutId) {
+      //   clearTimeout(state.snackbar.timeoutId);
+      // }
+      // const tid = setTimeout(() => {
+      //   clearTimeout(tid);
+      //   state.snackbar = {
+      //     title: '',
+      //     text: '',
+      //     show: false,
+      //     timeoutId: null,
+      //   };
+      // }, 2500);
       state.snackbar = {
         text: action.payload.text,
         title: action.payload.title,
         show: true,
-        timeoutId: tid,
+        timeoutId: null,
+        // timeoutId: tid,
       };
     },
     closeSnackbar: (state) => {
-      if (state.snackbar.timeoutId) {
-        clearTimeout(state.snackbar.timeoutId);
-      }
+      // if (state.snackbar.timeoutId) {
+      //   clearTimeout(state.snackbar.timeoutId);
+      // }
       state.snackbar = {
         title: '',
         text: '',

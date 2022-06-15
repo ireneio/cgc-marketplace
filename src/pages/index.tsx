@@ -4,7 +4,6 @@ import LatestSales from '@/components/Home/LatestSales';
 import LatestTransactions from '@/components/Home/LatestTransactions';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
 import { useGetCollections } from '@/hooks/services_collections';
-import { useAppSelector } from '@/store';
 import { useMemo } from 'react';
 
 const Index = () => {
