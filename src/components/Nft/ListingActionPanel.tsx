@@ -63,7 +63,7 @@ const ListingActionPanel = ({
           <></>
         )}
         {!info.is_listed && isAuction && (
-          <div className="mt-[24px] text-[#FFFFFF] text-[14px] flex items-center">
+          <div className="mt-[24px] text-[#FFFFFF] text-[14px] flex flex-wrap items-center">
             <div>
               <DatePicker
                 selected={
@@ -80,7 +80,7 @@ const ListingActionPanel = ({
                 }
               />
             </div>
-            <div className="ml-[12px]">
+            <div className="mt-[24px] basis-[100%] xl:basis-[50%] xl:mt-0 xl:ml-[12px]">
               <DatePicker
                 selected={
                   watch('endDate') === '' ? null : new Date(watch('endDate'))
@@ -101,7 +101,7 @@ const ListingActionPanel = ({
             <Input
               id="price"
               {...register('price')}
-              className="w-[120px]"
+              className="w-[180px]"
               type="number"
               placeholder={isAuction ? 'Floor Price' : 'Price'}
             />

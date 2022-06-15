@@ -239,7 +239,7 @@ const NftListing = () => {
             </div>
           </div>
           <div className="flex flex-wrap justify-between col-span-2">
-            <div className="basis-[100%] md:basis-[48%]">
+            <div className="basis-[100%] lg:basis-[48%]">
               <div className="w-full mb-[24px]">
                 <img
                   src={info.image}
@@ -250,11 +250,11 @@ const NftListing = () => {
                   onLoad={(e) => handleImageLoad(e, info.image)}
                 />
               </div>
-              <div className="mb-[24px] md:mb-0">
+              <div className="mb-[24px] lg:mb-0">
                 <ListingInfoPanel info={info} />
               </div>
             </div>
-            <div className="basis-[100%] md:basis-[48%]">
+            <div className="basis-[100%] lg:basis-[48%]">
               <div className="mb-[24px]">
                 <DetailPanel info={info} />
               </div>
