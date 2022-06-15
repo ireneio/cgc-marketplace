@@ -17,6 +17,7 @@ import {
   useGetCollectionsBySlug,
   useGetNftByCollectionId,
 } from '@/hooks/collections';
+import EmptyListTextDisplay from '../Shared/EmptyListTextDisplay';
 
 type SelectionView = 'Row' | 'List';
 
@@ -374,9 +375,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
           </div>
         )}
         {!_items.length && !loading && (
-          <div className="text-[#FFFFFF] text-semibold">
-            No Items Available.
-          </div>
+          <EmptyListTextDisplay>No Items Available.</EmptyListTextDisplay>
         )}
       </div>
     </div>

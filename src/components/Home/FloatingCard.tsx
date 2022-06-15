@@ -1,7 +1,7 @@
 import { getNumberWithCommas } from '@/utils/formatHelper';
 import Button from '../Shared/Button';
 import { motion } from 'framer-motion';
-import { useWindowWidth } from '@/hooks/window';
+import { isMobile } from '@/hooks/window';
 
 interface Props {
   bg: string;
@@ -44,18 +44,18 @@ const FloatingCard = ({
   isFloatRight,
   isDefaultFloating,
 }: Props) => {
-  const windowWidth = useWindowWidth();
-
   const handleMouseOver = () => {
-    if (windowWidth > 768) {
-      onMouseOver && onMouseOver(id);
+    if (isMobile()) {
+      return;
     }
+    onMouseOver && onMouseOver(id);
   };
 
   const handleMouseOut = () => {
-    if (windowWidth > 768) {
-      onMouseLeave && onMouseLeave(id);
+    if (isMobile()) {
+      return;
     }
+    onMouseLeave && onMouseLeave(id);
   };
 
   return (
@@ -102,12 +102,12 @@ const FloatingCard = ({
         >
           <div
             style={{
-              width: isDefaultFloating ? 'auto' : '55vh',
-              height: isDefaultFloating ? 'auto' : '50vh',
+              width: isDefaultFloating ? 'auto' : '25vw',
+              // height: isDefaultFloating ? 'auto' : '50vh',
             }}
-            className="absolute border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden"
+            className="border-[2px] border-[#FC1F8E] rounded-[5px] transition-all bg-[#13002B] overflow-hidden"
           >
-            <div className="relative flex items-start justify-center h-[25vh]">
+            <div className="relative flex items-start justify-center h-[55%]">
               {/* gif */}
               {/* <div
                 className="w-[300px] h-[170px] bg-cover bg-center bg-no-repeat"
@@ -119,7 +119,7 @@ const FloatingCard = ({
               <div
                 className="relative"
                 style={{
-                  width: isDefaultFloating ? '90vw' : '55vh',
+                  width: isDefaultFloating ? '90vw' : '25vw',
                   height: isDefaultFloating ? 199 : '25vh',
                 }}
               >
@@ -132,21 +132,21 @@ const FloatingCard = ({
               className="bg-[#13002B] pt-[20px] pb-[24px] h-[45%] relative"
               style={{ height: isDefaultFloating ? 170 : '' }}
             >
-              <div className="absolute top-[-42px] pl-[12px]">
+              <div className="absolute top-[-24px] pl-[12px]">
                 <img src={logo} alt={''} width={100} height={100} />
               </div>
-              <div className="px-[12px] py-[0px] h-[97%] relative">
-                <div className="font-normal text-[#FFFFFF] text-[14px]">
+              <div className="px-[12px] py-[0px]">
+                <div className="font-normal text-[#FFFFFF] text-[14px] 2xl:text-[16px]">
                   {title?.length > 75 ? title?.slice(0, 75) + '...' : title}
                 </div>
-                <div className="absolute bottom-[24px] w-full flex justify-between items-center pr-[24px] mt-[24px]">
+                <div className="w-full flex justify-between items-center pr-[24px] mt-[12px]">
                   <div className="text-[#FFFFFF] text-[12px] flex items-center pr-[12px] flex-wrap basis-[70%]">
                     {categories && categories.length ? (
                       categories.map((category, index) => {
                         return (
                           <div
                             key={index}
-                            className="text-[12px] flex items-center"
+                            className="text-[12px] flex items-center 2xl:text-[16px]"
                           >
                             {String(category).toLowerCase()}
                             {index !== categories.length - 1 && (
@@ -171,8 +171,8 @@ const FloatingCard = ({
                   </div>
                 </div>
               </div>
-              <div className="bottom-[32px] mt-[12px] h-[2px] w-full bg-[#290030]"></div>
-              <div className="gap-[12px] grid-cols-3 bottom-[12px] left-0 right-0 w-full px-[12px] mt-[8px] mb-[-4px]">
+              <div className="mt-[16px] h-[2px] w-full bg-[#290030]"></div>
+              <div className="grid gap-x-[12px] grid-cols-3 grid-rows-1 w-full px-[12px] mt-[16px]">
                 {network && (
                   <div className="text-[10px] flex items-center">
                     <div className="text-[#9497AA]">Network:</div>

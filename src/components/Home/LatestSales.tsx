@@ -8,7 +8,7 @@ const LatestSales = () => {
   return (
     <div>
       <div className="flex justify-between items-center">
-        <SectionTitle> latest sales</SectionTitle>
+        <SectionTitle>latest sales</SectionTitle>
       </div>
       <div className="mt-[24px] flex overflow-auto pb-[24px] scollbar_thin">
         {items.map((game, index) => {

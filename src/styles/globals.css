@@ -189,6 +189,11 @@ body {
   height: 205px;
 }
 
+.force_card_height_portrait {
+  width: 205px;
+  height: 305px;
+}
+
 .no_line_break {
   overflow: hidden;
   text-overflow: ellipsis;

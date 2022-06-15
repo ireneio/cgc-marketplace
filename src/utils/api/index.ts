@@ -89,9 +89,9 @@ const api = {
     });
     return response.data;
   },
-  getNftListByHash: async (token: string, hash: string) => {
+  getNftListByTokenAddress: async (token: string, tokenAddress: string) => {
     const response = await fetcher({
-      url: `/api/nft?hash=${hash}`,
+      url: `/api/nft?tokenAddress=${tokenAddress}`,
       method: 'get',
       headers: {
         authorization: `Bearer ${token}`,

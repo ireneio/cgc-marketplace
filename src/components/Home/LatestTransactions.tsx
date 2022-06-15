@@ -12,13 +12,13 @@ const PAGE_LIMIT = 10;
 const LatestTransactions = () => {
   const oAuthCtx = useContext(OAuthContext);
   const [currentPage, setCurrentPage] = useState(0);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [txList, setTxList] = useState<any[]>([]);
 
   const _txList = useMemo(() => {
     const startIdx = currentPage * PAGE_LIMIT;
     const endIdx = startIdx + PAGE_LIMIT;
-    return txList.length ? txList.slice(startIdx, endIdx) : [];
+    return txList.length ? txList.slice(startIdx, endIdx) : [[]];
   }, [txList, currentPage]);
 
   const getData = async () => {
@@ -28,6 +28,7 @@ const LatestTransactions = () => {
 
   const setData = async () => {
     const data = await getData();
+    if (!data.length) return;
     const transformed = data
       .map((token: any) => {
         return {
@@ -49,6 +50,11 @@ const LatestTransactions = () => {
         }
         return acc;
       }, [])
+      .filter(
+        (item: any) =>
+          Number(item?.transaction?.amountToken) > 0 &&
+          Number(item?.transaction?.amountUsd) > 0,
+      )
       .sort((a: any, b: any) => {
         return b?.transaction?.block_time - a?.transaction?.block_time;
       })
@@ -80,15 +86,17 @@ const LatestTransactions = () => {
     <div>
       <div className="flex justify-between items-center flex-wrap">
         <SectionTitle>latest transactions</SectionTitle>
-        <div className="basis-[100%] md:basis-auto mt-[12px] md:mt-0">
-          <Pagination
-            totalPages={Math.ceil(txList.length / PAGE_LIMIT)}
-            currentPage={currentPage}
-            onPageChange={(val) => setCurrentPage(val)}
-            onPreviousPage={() => setCurrentPage((prev) => prev - 1)}
-            onNextPage={() => setCurrentPage((prev) => prev + 1)}
-          />
-        </div>
+        {_txList.length && (
+          <div className="basis-[100%] md:basis-auto mt-[12px] md:mt-0">
+            <Pagination
+              totalPages={Math.ceil(txList.length / PAGE_LIMIT)}
+              currentPage={currentPage}
+              onPageChange={(val) => setCurrentPage(val)}
+              onPreviousPage={() => setCurrentPage((prev) => prev - 1)}
+              onNextPage={() => setCurrentPage((prev) => prev + 1)}
+            />
+          </div>
+        )}
       </div>
       <div className="mt-[24px]">
         <TransactionTable

@@ -24,15 +24,15 @@ function removeConsole() {
 function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     api.healthCheck().then();
-    const cb = () => {
-      const _tid = setTimeout(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-        clearTimeout(_tid);
-      }, 200);
-    };
-    window.addEventListener('load', cb);
+    // const cb = () => {
+    //   const _tid = setTimeout(() => {
+    //     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    //     clearTimeout(_tid);
+    //   }, 200);
+    // };
+    // window.addEventListener('load', cb);
     return () => {
-      window.removeEventListener('load', cb);
+      // window.removeEventListener('load', cb);
     };
   }, []);
 
