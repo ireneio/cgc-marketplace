@@ -13,7 +13,6 @@ export const useGetCollections = () => {
   const getCollections = async () => {
     try {
       const response = await api.getCollectionList();
-      console.log(response);
       const map =
         response?.data && response.data.length
           ? response.data.map((item: any) => {
