@@ -98,7 +98,13 @@ const ListingActionPanel = ({
         )}
         {!info.is_listed ? (
           <div className="mt-[24px] text-[#FFFFFF] text-[14px] flex items-center">
-            <Input id="price" {...register('price')} className="w-[100px]" />
+            <Input
+              id="price"
+              {...register('price')}
+              className="w-[120px]"
+              type="number"
+              placeholder={isAuction ? 'Floor Price' : 'Price'}
+            />
             <div className="mt-[2px] ml-[6px]">
               <img
                 src="/img/icon_unit_sol.png"
@@ -124,6 +130,8 @@ const ListingActionPanel = ({
               disabled={
                 loading ||
                 !watch('price') ||
+                isNaN(Number(watch('price'))) ||
+                Number(watch('price')) <= 0 ||
                 (isAuction && (!watch('startDate') || !watch('endDate'))) ||
                 dayjs(watch('startDate')) > dayjs(watch('endDate'))
               }
