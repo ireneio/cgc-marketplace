@@ -91,7 +91,7 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
                     <div className="mt-[16px] drop-shadow-xl text-[18px] 2xl:text-[18px] text-left text-[#FFFFFF]">
                       {description?.slice(0, 150)}
                     </div>
-                    <div className="text-[#FFFFFF] flex mt-[16px]">
+                    <div className="text-[#FFFFFF] flex mt-[16px] items-center">
                       <Button onClick={() => handlePlay(href)}>Play</Button>
                       <div className="ml-[16px]">
                         <div
