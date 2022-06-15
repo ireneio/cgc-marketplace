@@ -13,6 +13,9 @@ export const useGetCollections = () => {
       url: '/api/collection/list',
       method: 'get',
     }),
+    {
+      revalidateOnFocus: false,
+    },
   );
 
   useEffect(() => {
@@ -59,6 +62,9 @@ export const useGetCollectionsBySlug = () => {
       url: '/api/collection/list',
       method: 'get',
     }),
+    {
+      revalidateOnFocus: false,
+    },
   );
 
   useEffect(() => {
@@ -106,6 +112,9 @@ export const useGetNftByCollectionId = () => {
       url: '/api/collection/list',
       method: 'get',
     }),
+    {
+      revalidateOnFocus: false,
+    },
   );
 
   useEffect(() => {
@@ -170,6 +179,9 @@ export const useGetNftByHash = () => {
       url: '/api/collection/list',
       method: 'get',
     }),
+    {
+      revalidateOnFocus: false,
+    },
   );
 
   useEffect(() => {

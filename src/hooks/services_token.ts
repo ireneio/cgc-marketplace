@@ -10,6 +10,9 @@ export const useGetTokenList = () => {
     fetcher.bind({
       method: 'get',
     }),
+    {
+      revalidateOnFocus: false,
+    },
   );
 
   useEffect(() => {

@@ -1,27 +1,26 @@
+import { LoginModal } from '@/components/Auth/LoginModal';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
-import ActionPanel from '@/components/Nft/ActionPanel';
 import AttributesPanel from '@/components/Nft/AttributesPanel';
-import CartSection from '@/components/Nft/CartSection';
+import DetailPanel from '@/components/Nft/DetailPanel';
 import HistoryTable from '@/components/Nft/HistoryTable';
-import InfoPanel from '@/components/Nft/InfoPanel';
+import ListingActionPanel from '@/components/Nft/ListingActionPanel';
+import ListingInfoPanel from '@/components/Nft/ListingInfoPanel';
+import NftPageLoading from '@/components/Nft/NftPageLoading';
 import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Divider from '@/components/Shared/Divider';
 import Pagination from '@/components/Shared/Pagination';
 import SelectGroup from '@/components/Shared/SelectGroup';
-import { useAppDispatch, useAppSelector } from '@/store';
-import dayjs from 'dayjs';
-import { useRouter } from 'next/router';
-import { useEffect, useMemo, useState } from 'react';
-import DetailPanel from '@/components/Nft/DetailPanel';
-import { LoginModal } from '@/components/Auth/LoginModal';
+import Skeleton from '@/components/Shared/Skeleton';
 import {
   useGetCollectionsBySlug,
   useGetNftByHash,
 } from '@/hooks/services_collections';
-import NftPageLoading from '@/components/Nft/NftPageLoading';
-import Skeleton from '@/components/Shared/Skeleton';
+import { useAppSelector } from '@/store';
+import dayjs from 'dayjs';
+import { useRouter } from 'next/router';
+import { useEffect, useMemo, useState } from 'react';
 
-export interface NftInfo {
+export interface NftListingInfo {
   id: string | number;
   name: string;
   brand: string;
@@ -36,12 +35,13 @@ export interface NftInfo {
   mintAddress: string;
   owner: string;
   is_listed: boolean;
+  transactionFee: number;
 }
 
 type Selection =
   | 'About'
   | 'All Items'
-  | 'Your Items'
+  | 'My Items'
   | 'Collection Item'
   | 'Explore/All';
 
@@ -59,16 +59,17 @@ const handleImageError = (e: any) => {
   e.target.src = '/img/cgc_icon.png';
 };
 
-const Nft = () => {
-  const dispatch = useAppDispatch();
-  const access_token = useAppSelector(
-    (state) => state.user.userInfo.access_token,
-  );
+const NftListing = () => {
+  const router = useRouter();
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
-  const router = useRouter();
-  const [info, setInfo] = useState<NftInfo>({
+  const access_token = useAppSelector(
+    (state) => state.user.userInfo.access_token,
+  );
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [info, setInfo] = useState<NftListingInfo>({
     id: '',
     name: '',
     brand: '-',
@@ -88,59 +89,39 @@ const Nft = () => {
       { traitType: 'rarity', value: '-' },
       { traitType: 'traitType', value: '-' },
     ],
-    royaltiesPercentage: 0,
+    royaltiesPercentage: NaN,
     mintAddress: '',
     owner: '',
+    transactionFee: NaN,
   });
-  const [loginModalOpen, setLoginModalOpen] = useState(false);
-  const [openCart, setOpenCart] = useState(false);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [currentSelection] = useState<Selection>('Collection Item');
   const { setSlug, loading: collectionsLoading } = useGetCollectionsBySlug();
   const { setTokenAddress, data, loading, refresh } = useGetNftByHash();
 
   const breadCrumbItems = useMemo(() => {
-    switch (currentSelection) {
-      case 'Collection Item':
-      default:
-        return [
-          { text: 'Home', value: '/', disabled: loading || !metadata.name },
-          {
-            text: 'Explore',
-            value: '/explore',
-            disabled: loading || !metadata.slug,
-          },
-          {
-            text: metadata?.name,
-            value: `/collection/${metadata.slug}?tab=about`,
-            disabled: loading || !metadata.slug,
-          },
-          {
-            text: 'All Items',
-            value: `/collection/${metadata.slug}?tab=all_items`,
-            disabled: loading || !metadata.slug,
-          },
-          {
-            text: info.name,
-            value: info.name,
-            disabled: loading || !metadata.slug,
-          },
-        ];
-    }
-  }, [metadata, currentSelection, info, loading]);
-
-  const selectGroupItems = useMemo(() => {
     return [
-      { text: 'About', value: 'About', disabled: !metadata.slug },
-      { text: 'All Items', value: 'All Items', disabled: !metadata.slug },
+      { text: 'Home', value: '/', disabled: loading || !metadata.name },
       {
-        text: 'Your Items',
-        value: 'Your Items',
-        disabled: !metadata.slug,
+        text: 'Explore',
+        value: '/explore',
+        disabled: loading || !metadata.slug,
       },
-      { text: '...', value: '...', disabled: !metadata.slug },
+      {
+        text: metadata?.name,
+        value: `/collection/${metadata.slug}?tab=about`,
+        disabled: loading || !metadata.slug,
+      },
+      {
+        text: 'My Items',
+        value: `/account?tab=items`,
+        disabled: loading || !metadata.slug,
+      },
+      {
+        text: info.name,
+        value: info.name,
+        disabled: loading || !metadata.slug,
+      },
     ];
-  }, [metadata]);
+  }, [metadata, info, loading]);
 
   const handleSelect = (value: Selection) => {
     switch (value) {
@@ -150,7 +131,7 @@ const Nft = () => {
       case 'All Items':
         router.push(`/collection/${metadata.slug}?tab=all_items`).then();
         return;
-      case 'Your Items': {
+      case 'My Items': {
         if (!access_token) {
           setLoginModalOpen(true);
         } else {
@@ -168,14 +149,12 @@ const Nft = () => {
   };
 
   const handleRefresh = async () => {
-    await refresh(metadata.slug);
+    await refresh();
   };
 
-  useEffect(() => {
-    if (router.query.id) {
-      dispatch({ type: 'INIT_CART' });
-    }
-  }, [dispatch, router]);
+  const handleSelectTab = (query: string) => {
+    router.push(`/account?tab=${query}`);
+  };
 
   useEffect(() => {
     if (Object.keys(data).length && router.query.id) {
@@ -195,6 +174,7 @@ const Nft = () => {
         price: data?.price,
         usdPrice: data?.usdPrice,
         is_listed: data?.is_listed,
+        transactionFee: NaN,
       });
     }
   }, [data, router]);
@@ -226,19 +206,24 @@ const Nft = () => {
         )}
         <div className="basis-[100%] lg:basis-auto mt-[12px] lg:mt-0">
           <SelectGroup
-            items={selectGroupItems}
-            currentValue={currentSelection}
-            onItemClick={(value) => handleSelect(value as Selection)}
+            items={[
+              { text: 'Wallets', value: 'wallet' },
+              { text: 'Profile', value: 'profile' },
+              { text: 'My Items', value: 'items' },
+              { text: 'Listed', value: 'listed' },
+              // { text: 'Offers', value: 'offers' },
+              // { text: 'Activities', value: 'activities' },
+            ]}
+            currentValue={'items'}
+            onItemClick={(value) => handleSelectTab(value)}
           />
         </div>
       </div>
       <div className="mb-[24px]">
         <Divider />
       </div>
-      {currentSelection !== 'Your Items' && (collectionsLoading || loading) && (
-        <NftPageLoading />
-      )}
-      {currentSelection !== 'Your Items' && !collectionsLoading && !loading && (
+      {(collectionsLoading || loading) && <NftPageLoading />}
+      {!collectionsLoading && !loading && (
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-[24px] pt-[12px]">
           <div className="flex items-center justify-between col-span-2">
             <div className="flex items-center">
@@ -252,11 +237,6 @@ const Nft = () => {
               </div>
               <div className="ml-[8px] text-[#FFFFFF] text-[14px]">1 Item</div>
             </div>
-            <CartSection
-              openCart={openCart}
-              onToggleCart={(val) => setOpenCart(val)}
-              disabled={loading}
-            />
           </div>
           <div className="flex flex-wrap justify-between col-span-2">
             <div className="basis-[100%] md:basis-[48%]">
@@ -271,7 +251,7 @@ const Nft = () => {
                 />
               </div>
               <div className="mb-[24px] md:mb-0">
-                <InfoPanel info={info} />
+                <ListingInfoPanel info={info} />
               </div>
             </div>
             <div className="basis-[100%] md:basis-[48%]">
@@ -279,11 +259,7 @@ const Nft = () => {
                 <DetailPanel info={info} />
               </div>
               <div className="mb-[24px]">
-                <ActionPanel
-                  info={info}
-                  onCartOpen={(val) => setOpenCart(val)}
-                  loading={loading}
-                />
+                <ListingActionPanel info={info} loading={loading} />
               </div>
               <div className="mb-[0px]">
                 <AttributesPanel info={info} />
@@ -348,4 +324,4 @@ const Nft = () => {
   );
 };
 
-export default Nft;
+export default NftListing;
