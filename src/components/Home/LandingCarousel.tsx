@@ -95,7 +95,7 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
                       <Button onClick={() => handlePlay(href)}>Play</Button>
                       <div className="ml-[16px]">
                         <div
-                          className="py-[8px] px-[24px] bg-[#000] bg-opacity-30 rounded-[5px] cursor-pointer hover:bg-transparent hover:underline"
+                          className="py-[8px] px-[24px] bg-[#000] bg-opacity-30 rounded-[5px] cursor-pointer hover:underline"
                           onClick={(e: any) => {
                             e.stopPropagation();
                             handleMoreInfo(name);
