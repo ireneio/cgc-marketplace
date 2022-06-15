@@ -163,52 +163,56 @@ const DetailView = () => {
               </div>
             </div>
           )}
-          {tokens.map((token: any, idx: number) => {
-            return (
-              <div className="mb-[32px]" key={idx}>
-                <TokenPricePanel
-                  brandImg={token?.iconSrcUrl}
-                  brandName={metadata.name}
-                  symbol={token?.symbol?.toUpperCase()}
-                  price={token?.tokenActivePrice?.usdPrice}
-                  priceToBTC={token?.tokenActivePrice?.btcPrice}
-                  priceToETH={token?.tokenActivePrice?.ethPrice}
-                  priceFluctuation={
-                    token?.tokenStats[0]?.usdAthChangePercentage
-                  }
-                  priceChangePercentage7d={
-                    token?.tokenStats[0]?.priceChangePercentage7d
-                  }
-                  priceChangePercentage30d={
-                    token?.tokenStats[0]?.priceChangePercentage30d
-                  }
-                  priceToBTCFluctuation={2.45}
-                  priceToETHFluctuation={2.45}
-                  lowDay={token?.tokenStats[0]?.usdLow24h}
-                  lowWeek={token?.tokenStats[0]?.usdLow24h}
-                  lowMonth={token?.tokenStats[0]?.usdLow24h}
-                  highDay={token?.tokenStats[0]?.usdHigh24h}
-                  highWeek={token?.tokenStats[0]?.usdHigh24h}
-                  highMonth={token?.tokenStats[0]?.usdHigh24h}
-                  marketCap={token?.tokenStats[0]?.usdMarketCap}
-                  fullyDilutedMarketCap={
-                    token?.tokenStats[0]?.usdFullyDilutedValuation
-                  }
-                  volume={token?.tokenStats[0]?.usdTotalVolume}
-                  circulatingSupply={token?.tokenStats[0]?.circulatingSupply}
-                  circulatingSupplyPercentage={Number(
-                    (
-                      (token?.tokenStats[0]?.circulatingSupply /
-                        token?.tokenStats[0]?.totalSupply) *
-                      100
-                    ).toFixed(2),
-                  )}
-                  totalSupply={token?.tokenStats[0]?.totalSupply}
-                  contractAddress={token?.tokenAddress}
-                />
-              </div>
-            );
-          })}
+          {tokens && tokens.length
+            ? tokens.map((token: any, idx: number) => {
+                return (
+                  <div className="mb-[32px]" key={idx}>
+                    <TokenPricePanel
+                      brandImg={token?.iconSrcUrl}
+                      brandName={metadata.name}
+                      symbol={token?.symbol?.toUpperCase()}
+                      price={token?.tokenActivePrice?.usdPrice}
+                      priceToBTC={token?.tokenActivePrice?.btcPrice}
+                      priceToETH={token?.tokenActivePrice?.ethPrice}
+                      priceFluctuation={
+                        token?.tokenStats[0]?.usdAthChangePercentage
+                      }
+                      priceChangePercentage7d={
+                        token?.tokenStats[0]?.priceChangePercentage7d
+                      }
+                      priceChangePercentage30d={
+                        token?.tokenStats[0]?.priceChangePercentage30d
+                      }
+                      priceToBTCFluctuation={2.45}
+                      priceToETHFluctuation={2.45}
+                      lowDay={token?.tokenStats[0]?.usdLow24h}
+                      lowWeek={token?.tokenStats[0]?.usdLow24h}
+                      lowMonth={token?.tokenStats[0]?.usdLow24h}
+                      highDay={token?.tokenStats[0]?.usdHigh24h}
+                      highWeek={token?.tokenStats[0]?.usdHigh24h}
+                      highMonth={token?.tokenStats[0]?.usdHigh24h}
+                      marketCap={token?.tokenStats[0]?.usdMarketCap}
+                      fullyDilutedMarketCap={
+                        token?.tokenStats[0]?.usdFullyDilutedValuation
+                      }
+                      volume={token?.tokenStats[0]?.usdTotalVolume}
+                      circulatingSupply={
+                        token?.tokenStats[0]?.circulatingSupply
+                      }
+                      circulatingSupplyPercentage={Number(
+                        (
+                          (token?.tokenStats[0]?.circulatingSupply /
+                            token?.tokenStats[0]?.totalSupply) *
+                          100
+                        ).toFixed(2),
+                      )}
+                      totalSupply={token?.tokenStats[0]?.totalSupply}
+                      contractAddress={token?.tokenAddress}
+                    />
+                  </div>
+                );
+              })
+            : []}
           <div className="mb-[32px] w-full lg:w-[70%] 2xl:w-[65%]">
             {nftCollectionStats ? (
               <NftPricePanel

@@ -64,9 +64,6 @@ const NftListing = () => {
   const metadata = useAppSelector(
     (state) => state.collection.currentCollection.metadata,
   );
-  const access_token = useAppSelector(
-    (state) => state.user.userInfo.access_token,
-  );
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [info, setInfo] = useState<NftListingInfo>({
@@ -124,7 +121,9 @@ const NftListing = () => {
   }, [metadata, info, loading]);
 
   const handleSelect = (value: Selection) => {
-    router.push(value);
+    if (info.name !== value) {
+      router.push(value);
+    }
   };
 
   const handleRefresh = async () => {
