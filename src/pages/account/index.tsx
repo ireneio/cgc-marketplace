@@ -30,7 +30,6 @@ const Account = ({
 }: {
   setSavedPath: React.Dispatch<React.SetStateAction<SavedPathType>>;
 }) => {
-  const sidebarPath = useAppSelector((state) => state.layout.navigation.path);
   const router = useRouter();
   const wallet = useWallet();
   const { signerAddress } = useEthereumProvider();
@@ -82,12 +81,8 @@ const Account = ({
   }, [router.query]);
 
   useEffect(() => {
-    if (sidebarPath) {
-      setSavedPath({ type: 'sidebar', sideBarValue: sidebarPath, path: '/' });
-    } else {
-      setSavedPath({ type: 'route', path: '/' });
-    }
-  }, [router.pathname, sidebarPath]);
+    setSavedPath({ type: 'route', path: '/' });
+  }, [router.pathname]);
 
   return (
     <DefaultLayout>
