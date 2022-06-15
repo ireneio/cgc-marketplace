@@ -124,7 +124,8 @@ const ListingActionPanel = ({
               disabled={
                 loading ||
                 !watch('price') ||
-                (isAuction && (!watch('startDate') || !watch('endDate')))
+                (isAuction && (!watch('startDate') || !watch('endDate'))) ||
+                dayjs(watch('startDate')) > dayjs(watch('endDate'))
               }
             >
               List Now
