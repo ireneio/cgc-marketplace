@@ -252,10 +252,14 @@ body {
 }
 
 .react-datepicker__month,
-.react-datepicker-time__header,
 .react-datepicker__day,
 .react-datepicker__time-list-item {
   color: #FFFFFF !important;
+}
+
+.react-datepicker__day-name,
+.react-datepicker-time__header {
+  color: #AAA !important;
 }
 
 .react-datepicker__day:hover,
@@ -271,4 +275,9 @@ body {
 .react-datepicker__day--disabled {
   color: #9497AA !important;
   cursor: not-allowed !important;
+}
+
+.react-datepicker__triangle::before,
+.react-datepicker__triangle::after {
+  border-bottom-color: #290030 !important;
 }

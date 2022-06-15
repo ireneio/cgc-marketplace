@@ -5,8 +5,11 @@ import Input from '../Shared/Input';
 import Select from '../Shared/Select';
 import Tag from '../Shared/Tag';
 import DatePicker from 'react-datepicker';
+import dayjs from 'dayjs';
 
 import 'react-datepicker/dist/react-datepicker.css';
+
+const maxAuctionEndDate = new Date(dayjs().add(30, 'days').toISOString());
 
 const ListingActionPanel = ({
   info,
@@ -66,6 +69,7 @@ const ListingActionPanel = ({
                 }
                 placeholderText="Start Date"
                 minDate={new Date()}
+                maxDate={maxAuctionEndDate}
                 showTimeSelect
                 onChange={(date: Date) =>
                   setValue('startDate', date.toISOString())
@@ -79,6 +83,7 @@ const ListingActionPanel = ({
                 }
                 placeholderText="End Date"
                 minDate={new Date()}
+                maxDate={maxAuctionEndDate}
                 showTimeSelect
                 onChange={(date: Date) =>
                   setValue('endDate', date.toISOString())
