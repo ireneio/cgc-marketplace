@@ -13,9 +13,10 @@ export const useGetCollections = () => {
   const getCollections = async () => {
     try {
       const response = await api.getCollectionList();
+      console.log(response);
       const map =
-        response && response.length
-          ? response.map((item: any) => {
+        response?.data && response.data.length
+          ? response.data.map((item: any) => {
               return {
                 ...item,
                 splashSrc: item.metadata.splashSrcUrl,
