@@ -96,7 +96,7 @@ const FloatingCard = ({
             y: isDefaultFloating ? 0 : '-105px',
             zIndex: 100,
           }}
-          className="bg-[#13002B] rounded-[5px] cursor-pointer absolute shadow-2xl"
+          className="bg-[#13002B] rounded-[5px] cursor-pointer absolute shadow-sm shadow-[#000]"
           onMouseLeave={() => handleMouseOut()}
           style={{ position: isDefaultFloating ? 'static' : 'absolute' }}
         >
