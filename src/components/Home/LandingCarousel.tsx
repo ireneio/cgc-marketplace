@@ -1,6 +1,6 @@
-import { useGetCollections } from '@/hooks/services_collections';
+import { useGetCollectionsV2 } from '@/hooks/services_collections';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+// import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 // import Frame from '../Game/Frame';
@@ -10,13 +10,14 @@ import Skeleton from '../Shared/Skeleton';
 
 const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
   const router = useRouter();
-  const [openFrame, setOpenFrame] = useState(false);
-  const { loading } = useGetCollections();
+  // const [openFrame, setOpenFrame] = useState(false);
+  const { loading } = useGetCollectionsV2();
+  // useGetCarouselV2();
 
   const handlePlay = (href: string) => {
     console.log('handlePlay', name);
-    setOpenFrame(true);
-    // window.open(href, 'popup');
+    // setOpenFrame(true);
+    window.open(href, 'popup');
   };
 
   const handleMoreInfo = (name: string) => {

@@ -12,8 +12,8 @@ import Pagination from '@/components/Shared/Pagination';
 import SelectGroup from '@/components/Shared/SelectGroup';
 import Skeleton from '@/components/Shared/Skeleton';
 import {
-  useGetCollectionsBySlug,
-  useGetNftByHash,
+  useGetCollectionsBySlugV2,
+  useGetNftByHashV2,
 } from '@/hooks/services_collections';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
@@ -91,8 +91,8 @@ const NftListing = () => {
     setSlug,
     loading: collectionsLoading,
     data: currentCollection,
-  } = useGetCollectionsBySlug();
-  const { setTokenAddress, data, loading, refresh } = useGetNftByHash();
+  } = useGetCollectionsBySlugV2();
+  const { setTokenAddress, data, loading, refresh } = useGetNftByHashV2();
 
   const breadCrumbItems = useMemo(() => {
     return [

@@ -15,8 +15,8 @@ import { useEffect, useMemo, useState } from 'react';
 import DetailPanel from '@/components/Nft/DetailPanel';
 import { LoginModal } from '@/components/Auth/LoginModal';
 import {
-  useGetCollectionsBySlug,
-  useGetNftByHash,
+  useGetCollectionsBySlugV2,
+  useGetNftByHashV2,
 } from '@/hooks/services_collections';
 import NftPageLoading from '@/components/Nft/NftPageLoading';
 import Skeleton from '@/components/Shared/Skeleton';
@@ -98,8 +98,8 @@ const Nft = () => {
     setSlug,
     loading: collectionsLoading,
     data: currentCollection,
-  } = useGetCollectionsBySlug();
-  const { setTokenAddress, data, loading, refresh } = useGetNftByHash();
+  } = useGetCollectionsBySlugV2();
+  const { setTokenAddress, data, loading, refresh } = useGetNftByHashV2();
 
   const breadCrumbItems = useMemo(() => {
     switch (currentSelection) {

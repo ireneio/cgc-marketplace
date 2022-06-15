@@ -30,13 +30,13 @@ const Snackbar = ({
               style={{
                 background: 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
               }}
-              className="px-[1px] py-[1px] flex items-center justify-center lg:rounded-full"
+              className="px-[1px] py-[1px] flex items-center justify-center rounded-[5px]"
             >
               <div
-                className="p-2 bg-[#13002B] items-center text-[#FFFFFF] leading-none lg:rounded-full flex lg:inline-flex shadow-lg"
+                className="p-2 bg-[#13002B] items-center text-[#FFFFFF] leading-none rounded-[5px] flex lg:inline-flex shadow-lg"
                 role="alert"
               >
-                <span className="flex rounded-full bg-[#290030] uppercase px-2 py-1 text-xs font-bold mr-3">
+                <span className="flex rounded-[5px] bg-[#290030] uppercase px-2 py-1 text-xs font-bold mr-3">
                   {title}
                 </span>
                 <span className="font-semibold mr-2 text-left flex-auto">

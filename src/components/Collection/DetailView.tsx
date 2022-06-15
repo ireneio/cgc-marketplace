@@ -7,7 +7,9 @@ import ItemCountPanel from './ItemCountPanel';
 import NftPricePanel from './NftPricePanel';
 import TokenPricePanel from './TokenPricePanel';
 import { getNumberWithCommas } from '@/utils/formatHelper';
-import { useGetCollectionsBySlug } from '@/hooks/services_collections';
+import { useGetCollectionsBySlugV2 } from '@/hooks/services_collections';
+import { useGetTokenBySlugV2 } from '@/hooks/services_token';
+import { BigNumber } from 'ethers';
 
 type SocialTypes = 'discord' | 'twitter' | 'link';
 
@@ -18,7 +20,8 @@ const socials: Record<string, string | SocialTypes>[] = [
 ];
 
 const DetailView = () => {
-  const { loading, data: currentCollection } = useGetCollectionsBySlug();
+  const { loading, data: currentCollection } = useGetCollectionsBySlugV2();
+  const { data: tokenList } = useGetTokenBySlugV2();
 
   const info = useMemo(() => {
     return {
@@ -157,8 +160,8 @@ const DetailView = () => {
               </div>
             </div>
           )}
-          {currentCollection?.tokens && currentCollection?.tokens.length
-            ? currentCollection?.tokens.map((token: any, idx: number) => {
+          {tokenList && tokenList.length
+            ? tokenList.map((token: any, idx: number) => {
                 return (
                   <div className="mb-[32px]" key={idx}>
                     <TokenPricePanel
@@ -177,8 +180,8 @@ const DetailView = () => {
                       priceChangePercentage30d={
                         token?.tokenStats[0]?.priceChangePercentage30d
                       }
-                      priceToBTCFluctuation={2.45}
-                      priceToETHFluctuation={2.45}
+                      // priceToBTCFluctuation={2.45}
+                      // priceToETHFluctuation={2.45}
                       lowDay={token?.tokenStats[0]?.usdLow24h}
                       lowWeek={token?.tokenStats[0]?.usdLow24h}
                       lowMonth={token?.tokenStats[0]?.usdLow24h}

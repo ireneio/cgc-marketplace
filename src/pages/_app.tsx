@@ -5,7 +5,7 @@ import { EthereumWalletProvider } from '@/contexts/EthereumWalletProvider';
 import { Provider as ReduxProvider } from 'react-redux';
 import store from '../store';
 import { useEffect } from 'react';
-import api from '@/utils/api';
+// import api from '@/utils/api';
 import { OAuthProvider } from '@/contexts/OAuthProvider';
 
 function removeConsole() {
@@ -23,7 +23,7 @@ function removeConsole() {
 
 function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    api.healthCheck().then();
+    // api.healthCheck().then();
     // const cb = () => {
     //   const _tid = setTimeout(() => {
     //     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
