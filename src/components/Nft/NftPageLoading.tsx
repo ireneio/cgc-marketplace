@@ -47,11 +47,11 @@ const NftPageLoading = () => {
       <div className="col-span-2">
         <div className="mb-[24px] flex justify-between items-center flex-wrap">
           <div className="text-[#FFFFFF] font-bold text-[20px]">
-            <Skeleton className="h-[20px] w-full" />
+            <Skeleton className="h-[20px] w-full bg-[#290030]" />
           </div>
         </div>
         <div className="mb-[48px]">
-          <Skeleton className="h-[200px] w-full" />
+          <Skeleton className="h-[200px] w-full bg-[#290030]" />
         </div>
       </div>
     </div>
