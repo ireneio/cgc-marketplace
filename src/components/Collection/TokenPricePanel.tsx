@@ -145,42 +145,36 @@ const TokenPricePanel = ({
             />
           </div>
         </div>
-        {priceToBTC ||
-          (priceToBTC === 0 && (
-            <div className="flex items-center mb-[8px]">
-              <div className="font-bold text-[14px] text-[#FFFFFF] flex">
-                <span className="font-thin">{symbol}/BTC: </span>
-                <div className="w-[100px] ml-[8px] text-right">
-                  ${priceToBTC}
-                </div>
-              </div>
-              {/* <div className="ml-[8px] text-[12px]">
+        {(priceToBTC || priceToBTC === 0) && (
+          <div className="flex items-center mb-[8px]">
+            <div className="font-bold text-[14px] text-[#FFFFFF] flex">
+              <span className="font-thin">{symbol}/BTC: </span>
+              <div className="w-[160px] ml-[8px] text-right">${priceToBTC}</div>
+            </div>
+            {/* <div className="ml-[8px] text-[12px]">
             <TickerText
               text={priceToBTCFluctuation}
               direction={priceToBTCFluctuation > 0 ? 'up' : 'down'}
               fontSize={12}
             />
           </div> */}
+          </div>
+        )}
+        {(priceToETH || priceToETH === 0) && (
+          <div className="flex items-center mb-[8px]">
+            <div className="font-bold text-[14px] text-[#FFFFFF] flex">
+              <span className="font-thin">{symbol}/ETH: </span>
+              <div className="w-[160px] ml-[8px] text-right">${priceToETH}</div>
             </div>
-          ))}
-        {priceToETH ||
-          (priceToETH === 0 && (
-            <div className="flex items-center mb-[8px]">
-              <div className="font-bold text-[14px] text-[#FFFFFF] flex">
-                <span className="font-thin">{symbol}/ETH: </span>
-                <div className="w-[100px] ml-[8px] text-right">
-                  ${priceToETH}
-                </div>
-              </div>
-              {/* <div className="ml-[8px] text-[12px]">
+            {/* <div className="ml-[8px] text-[12px]">
             <TickerText
               text={priceToETHFluctuation}
               direction={priceToETHFluctuation > 0 ? 'up' : 'down'}
               fontSize={12}
             />
           </div> */}
-            </div>
-          ))}
+          </div>
+        )}
         <div className="mb-[24px]">
           <div className="text-[#FFFFFF] text-[14px] font-normal flex mb-[8px]">
             <span className="text-[#AAAAAA] w-[20px]">Low: </span>

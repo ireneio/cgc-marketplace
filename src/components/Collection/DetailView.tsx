@@ -9,6 +9,7 @@ import TokenPricePanel from './TokenPricePanel';
 import { getNumberWithCommas } from '@/utils/formatHelper';
 import { useGetCollectionsBySlugV2 } from '@/hooks/services_collections';
 import { useGetTokenBySlugV2 } from '@/hooks/services_token';
+import { BigNumber } from 'ethers';
 
 type SocialTypes = 'discord' | 'twitter' | 'link';
 
