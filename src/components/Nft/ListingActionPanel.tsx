@@ -119,7 +119,14 @@ const ListingActionPanel = ({
           </div>
         ) : (
           <div className="mt-[24px] text-[#FFFFFF] text-[14px] w-[160px]">
-            <Button onClick={() => handleList()} disabled={loading}>
+            <Button
+              onClick={() => handleList()}
+              disabled={
+                loading ||
+                !watch('price') ||
+                (isAuction && (!watch('startDate') || !watch('endDate')))
+              }
+            >
               List Now
             </Button>
           </div>
