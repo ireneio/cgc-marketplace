@@ -213,8 +213,7 @@ export const useGetNftByHash = () => {
                 traitType: item.trait_type,
                 value: item.value,
               })) || [],
-            royaltiesPercentage:
-              manifest?.properties?.seller_fee_basis_points / 100,
+            royaltiesPercentage: manifest?.seller_fee_basis_points / 100,
           };
         })[0];
         setItems(_transformed);
