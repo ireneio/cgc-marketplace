@@ -64,9 +64,6 @@ const Nft = () => {
   const access_token = useAppSelector(
     (state) => state.user.userInfo.access_token,
   );
-  const metadata = useAppSelector(
-    (state) => state.collection.currentCollection.metadata,
-  );
   const router = useRouter();
   const [info, setInfo] = useState<NftInfo>({
     id: '',
@@ -96,7 +93,11 @@ const Nft = () => {
   const [openCart, setOpenCart] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [currentSelection] = useState<Selection>('Collection Item');
-  const { setSlug, loading: collectionsLoading } = useGetCollectionsBySlug();
+  const {
+    setSlug,
+    loading: collectionsLoading,
+    data: currentCollection,
+  } = useGetCollectionsBySlug();
   const { setTokenAddress, data, loading, refresh } = useGetNftByHash();
 
   const breadCrumbItems = useMemo(() => {
@@ -104,51 +105,69 @@ const Nft = () => {
       case 'Collection Item':
       default:
         return [
-          { text: 'Home', value: '/', disabled: loading || !metadata.name },
+          {
+            text: 'Home',
+            value: '/',
+            disabled: loading || !currentCollection?.metadata?.name,
+          },
           {
             text: 'Explore',
             value: '/explore',
-            disabled: loading || !metadata.slug,
+            disabled: loading || !currentCollection?.metadata?.slug,
           },
           {
-            text: metadata?.name,
-            value: `/collection/${metadata.slug}?tab=about`,
-            disabled: loading || !metadata.slug,
+            text: currentCollection?.metadata?.name,
+            value: `/collection/${currentCollection?.metadata?.slug}?tab=about`,
+            disabled: loading || !currentCollection?.metadata?.slug,
           },
           {
             text: 'All Items',
-            value: `/collection/${metadata.slug}?tab=all_items`,
-            disabled: loading || !metadata.slug,
+            value: `/collection/${currentCollection?.metadata?.slug}?tab=all_items`,
+            disabled: loading || !currentCollection?.metadata?.slug,
           },
           {
             text: info.name,
             value: info.name,
-            disabled: loading || !metadata.slug,
+            disabled: loading || !currentCollection?.metadata?.slug,
           },
         ];
     }
-  }, [metadata, currentSelection, info, loading]);
+  }, [currentCollection, currentSelection, info, loading]);
 
   const selectGroupItems = useMemo(() => {
     return [
-      { text: 'About', value: 'About', disabled: !metadata.slug },
-      { text: 'All Items', value: 'All Items', disabled: !metadata.slug },
+      {
+        text: 'About',
+        value: 'About',
+        disabled: !currentCollection?.metadata?.slug,
+      },
+      {
+        text: 'All Items',
+        value: 'All Items',
+        disabled: !currentCollection?.metadata?.slug,
+      },
       {
         text: 'Your Items',
         value: 'Your Items',
-        disabled: !metadata.slug,
+        disabled: !currentCollection?.metadata?.slug,
       },
-      { text: '...', value: '...', disabled: !metadata.slug },
+      {
+        text: '...',
+        value: '...',
+        disabled: !currentCollection?.metadata?.slug,
+      },
     ];
-  }, [metadata]);
+  }, [currentCollection]);
 
   const handleSelect = (value: Selection) => {
     switch (value) {
       case 'About':
-        router.push(`/collection/${metadata.slug}`).then();
+        router.push(`/collection/${currentCollection?.metadata.slug}`).then();
         return;
       case 'All Items':
-        router.push(`/collection/${metadata.slug}?tab=all_items`).then();
+        router
+          .push(`/collection/${currentCollection?.metadata.slug}?tab=all_items`)
+          .then();
         return;
       case 'Your Items': {
         if (!access_token) {
@@ -158,8 +177,10 @@ const Nft = () => {
         }
         return;
       }
-      case metadata.slug:
-        router.push(`/collection/${metadata.slug}?tab=about`).then();
+      case currentCollection?.metadata.slug:
+        router
+          .push(`/collection/${currentCollection?.metadata.slug}?tab=about`)
+          .then();
         return;
       case 'Explore/All':
         router.push('/explore').then();
@@ -168,7 +189,7 @@ const Nft = () => {
   };
 
   const handleRefresh = async () => {
-    await refresh(metadata.slug);
+    await refresh(currentCollection?.metadata.slug);
   };
 
   useEffect(() => {

@@ -27,12 +27,6 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const cartItems = useAppSelector((state) => state.cart.cartItems);
-  const metadata = useAppSelector(
-    (state) => state.collection.currentCollection.metadata,
-  );
-  const currentCollection = useAppSelector(
-    (state) => state.collection.currentCollection,
-  );
   const [currentView, setCurrentView] = useState<SelectionView>('List');
   const [currentFilter, setCurrentFilter] = useState<SelectionFilter>('');
   const [page, setPage] = useState(0);
@@ -48,7 +42,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
     loading,
     refresh: refreshCollection,
   } = useGetNftByCollectionId();
-  useGetCollectionsBySlug();
+  const { data: currentCollection } = useGetCollectionsBySlug();
 
   const _items = useMemo(() => {
     let arr = [...data];
@@ -110,12 +104,12 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
   };
 
   useEffect(() => {
-    if (collectionId === metadata.slug) {
+    if (collectionId === currentCollection?.metadata?.slug) {
       refreshCollection();
-    } else if (metadata.slug) {
-      setCollectionId(metadata.slug);
+    } else if (currentCollection?.metadata?.slug) {
+      setCollectionId(currentCollection?.metadata?.slug);
     }
-  }, [metadata, refresh]);
+  }, [currentCollection?.metadata, refresh]);
 
   const getCart = () => {
     dispatch({ type: 'INIT_CART' });

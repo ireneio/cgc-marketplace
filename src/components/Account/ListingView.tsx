@@ -16,9 +16,9 @@ const LOADING_ARR = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const ListingView = () => {
   const router = useRouter();
-  const metadata = useAppSelector(
-    (state) => state.collection.currentCollection.metadata,
-  );
+  // const metadata = useAppSelector(
+  //   (state) => state.collection.currentCollection.metadata,
+  // );
   const [, setRefresh] = useState(false);
   const [sidebar, setSidebar] = useState('All');
   const [listed] = useState([]);
@@ -39,9 +39,9 @@ const ListingView = () => {
     setCurrentView(value);
   };
 
-  const handleMoreInfo = (tokenAddress: string | number) => {
-    router.push(`/nft/${tokenAddress}?collection_id=${metadata.id}`).then();
-  };
+  // const handleMoreInfo = (tokenAddress: string | number) => {
+  //   router.push(`/nft/${tokenAddress}?collection_id=${metadata.id}`).then();
+  // };
 
   return (
     <div className="flex flex-wrap">

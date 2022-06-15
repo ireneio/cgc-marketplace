@@ -6,7 +6,6 @@ import CollectionCarousel from './CollectionCarousel';
 import ItemCountPanel from './ItemCountPanel';
 import NftPricePanel from './NftPricePanel';
 import TokenPricePanel from './TokenPricePanel';
-import { useAppSelector } from '@/store';
 import { getNumberWithCommas } from '@/utils/formatHelper';
 import { useGetCollectionsBySlug } from '@/hooks/services_collections';
 
@@ -19,53 +18,40 @@ const socials: Record<string, string | SocialTypes>[] = [
 ];
 
 const DetailView = () => {
-  const metadata = useAppSelector(
-    (state) => state.collection.currentCollection.metadata,
-  );
-  const services = useAppSelector(
-    (state) => state.collection.currentCollection.services,
-  );
-  const tags = useAppSelector(
-    (state) => state.collection.currentCollection.tags,
-  );
-  const tokens = useAppSelector(
-    (state) => state.collection.currentCollection.tokens,
-  );
-  const nftCollectionStats = useAppSelector(
-    (state) => state.collection.currentCollection.nftCollectionStats,
-  );
-  const { loading } = useGetCollectionsBySlug();
+  const { loading, data: currentCollection } = useGetCollectionsBySlug();
 
   const info = useMemo(() => {
     return {
-      title: metadata.name,
-      name: metadata.name,
-      id: metadata.id,
-      slug: metadata.slug,
-      description: metadata.description,
+      title: currentCollection?.metadata?.name,
+      name: currentCollection?.metadata?.name,
+      id: currentCollection?.metadata?.id,
+      slug: currentCollection?.metadata?.slug,
+      description: currentCollection?.metadata?.description,
       socialMedia: {
-        discord: metadata.discordUrl,
-        twitter: metadata.twitterUrl,
-        link: metadata.websiteUrl,
+        discord: currentCollection?.metadata.discordUrl,
+        twitter: currentCollection?.metadata.twitterUrl,
+        link: currentCollection?.metadata.websiteUrl,
       },
-      services: services.map((item: any) => item.name),
-      tags: tags.map((item: any) => String(item).toLowerCase()),
+      services: currentCollection?.services?.map((item: any) => item.name),
+      tags: currentCollection?.tags?.map((item: any) =>
+        String(item).toLowerCase(),
+      ),
     };
-  }, [metadata, services]);
+  }, [currentCollection]);
 
   const carouselItems = useMemo(() => {
     return [
       {
-        imageUrl: metadata.videoSrcUrl as string,
-        title: metadata.name as string,
-        description: metadata.description as string,
-        id: metadata.id as string,
+        imageUrl: currentCollection?.metadata.videoSrcUrl as string,
+        title: currentCollection?.metadata.name as string,
+        description: currentCollection?.metadata.description as string,
+        id: currentCollection?.metadata.id as string,
         href: '',
-        logo: metadata.logoSrcUrl as string,
-        name: metadata.name as string,
+        logo: currentCollection?.metadata.logoSrcUrl as string,
+        name: currentCollection?.metadata.name as string,
       },
     ];
-  }, [metadata]);
+  }, [currentCollection]);
 
   const handleLinkOpen = (type: 'discord' | 'twitter' | 'link') => {
     window.open(info.socialMedia[type], '_blank');
@@ -117,10 +103,10 @@ const DetailView = () => {
           <div className="mb-[32px]">
             <Divider />
           </div>
-          {(nftCollectionStats?.totalSupply ||
-            nftCollectionStats?.meListingCount ||
-            nftCollectionStats?.numOwners ||
-            nftCollectionStats?.usdTotalVolume) && (
+          {(currentCollection?.nftCollectionStats?.totalSupply ||
+            currentCollection?.nftCollectionStats?.meListingCount ||
+            currentCollection?.nftCollectionStats?.numOwners ||
+            currentCollection?.nftCollectionStats?.usdTotalVolume) && (
             <div>
               <div className="mb-[32px]">
                 <div className="text-[#FFFFFF] font-bold text-[20px]">
@@ -128,32 +114,40 @@ const DetailView = () => {
                 </div>
               </div>
               <div className="mb-[32px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[24px]">
-                {nftCollectionStats?.totalSupply && (
+                {currentCollection?.nftCollectionStats?.totalSupply && (
                   <ItemCountPanel
                     text="Items available"
-                    count={nftCollectionStats?.totalSupply || '-'}
+                    count={
+                      currentCollection?.nftCollectionStats?.totalSupply || '-'
+                    }
                   />
                 )}
-                {nftCollectionStats?.meListingCount && (
+                {currentCollection?.nftCollectionStats?.meListingCount && (
                   <ItemCountPanel
                     text="Items Listed"
-                    count={nftCollectionStats?.meListingCount || '-'}
+                    count={
+                      currentCollection?.nftCollectionStats?.meListingCount ||
+                      '-'
+                    }
                   />
                 )}
-                {nftCollectionStats?.numOwners && (
+                {currentCollection?.nftCollectionStats?.numOwners && (
                   <ItemCountPanel
                     text="Number of Owners"
-                    count={nftCollectionStats?.numOwners || '-'}
+                    count={
+                      currentCollection?.nftCollectionStats?.numOwners || '-'
+                    }
                   />
                 )}
-                {nftCollectionStats?.usdTotalVolume && (
+                {currentCollection?.nftCollectionStats?.usdTotalVolume && (
                   <ItemCountPanel
                     text="Total Volume"
                     count={
-                      nftCollectionStats?.usdTotalVolume
+                      currentCollection?.nftCollectionStats?.usdTotalVolume
                         ? '$' +
                           getNumberWithCommas(
-                            nftCollectionStats?.usdTotalVolume,
+                            currentCollection?.nftCollectionStats
+                              ?.usdTotalVolume,
                             2,
                           )
                         : '-'
@@ -163,13 +157,13 @@ const DetailView = () => {
               </div>
             </div>
           )}
-          {tokens && tokens.length
-            ? tokens.map((token: any, idx: number) => {
+          {currentCollection?.tokens && currentCollection?.tokens.length
+            ? currentCollection?.tokens.map((token: any, idx: number) => {
                 return (
                   <div className="mb-[32px]" key={idx}>
                     <TokenPricePanel
                       brandImg={token?.iconSrcUrl}
-                      brandName={metadata.name}
+                      brandName={currentCollection?.metadata.name}
                       symbol={token?.symbol?.toUpperCase()}
                       price={token?.tokenActivePrice?.usdPrice}
                       priceToBTC={token?.tokenActivePrice?.btcPrice}
@@ -214,33 +208,52 @@ const DetailView = () => {
               })
             : []}
           <div className="mb-[32px] w-full lg:w-[70%] 2xl:w-[65%]">
-            {nftCollectionStats ? (
+            {currentCollection?.nftCollectionStats ? (
               <NftPricePanel
-                name={metadata.name}
-                volume={nftCollectionStats?.usdMeTotalVolume}
-                volume7Days={nftCollectionStats?.usdSevenDayVolume}
-                volume30Days={nftCollectionStats?.usdThirtyDayVolume}
-                change={nftCollectionStats?.usdOneDayChange}
-                change7Days={nftCollectionStats?.usdSevenDayChange}
-                change30Days={nftCollectionStats?.usdThirtyDayChange}
-                sales={nftCollectionStats?.usdOneDaySales}
-                sales7Days={nftCollectionStats?.usdSevenDaySales}
-                sales30Days={nftCollectionStats?.usdThirtyDaySales}
-                averagePrice={nftCollectionStats?.usdAveragePrice}
-                averagePrice7Days={nftCollectionStats?.usdSevenDayAveragePrice}
-                averagePrice30Days={
-                  nftCollectionStats?.usdThirtyDayAveragePrice
+                name={currentCollection?.metadata.name}
+                volume={currentCollection?.nftCollectionStats?.usdMeTotalVolume}
+                volume7Days={
+                  currentCollection?.nftCollectionStats?.usdSevenDayVolume
                 }
-                totalVolume={nftCollectionStats?.usdTotalVolume}
-                totalSupply={nftCollectionStats?.totalSupply}
-                owners={nftCollectionStats?.numOwners}
-                count={nftCollectionStats?.count}
+                volume30Days={
+                  currentCollection?.nftCollectionStats?.usdThirtyDayVolume
+                }
+                change={currentCollection?.nftCollectionStats?.usdOneDayChange}
+                change7Days={
+                  currentCollection?.nftCollectionStats?.usdSevenDayChange
+                }
+                change30Days={
+                  currentCollection?.nftCollectionStats?.usdThirtyDayChange
+                }
+                sales={currentCollection?.nftCollectionStats?.usdOneDaySales}
+                sales7Days={
+                  currentCollection?.nftCollectionStats?.usdSevenDaySales
+                }
+                sales30Days={
+                  currentCollection?.nftCollectionStats?.usdThirtyDaySales
+                }
+                averagePrice={
+                  currentCollection?.nftCollectionStats?.usdAveragePrice
+                }
+                averagePrice7Days={
+                  currentCollection?.nftCollectionStats?.usdSevenDayAveragePrice
+                }
+                averagePrice30Days={
+                  currentCollection?.nftCollectionStats
+                    ?.usdThirtyDayAveragePrice
+                }
+                totalVolume={
+                  currentCollection?.nftCollectionStats?.usdTotalVolume
+                }
+                totalSupply={currentCollection?.nftCollectionStats?.totalSupply}
+                owners={currentCollection?.nftCollectionStats?.numOwners}
+                count={currentCollection?.nftCollectionStats?.count}
               />
             ) : (
               <div>
                 <Tag className="relative px-[18px] py-[24px]">
                   <div className="mb-[8px] text-[#FFFFFF] font-bold text-[14px]">
-                    {metadata?.name} NFT
+                    {currentCollection?.metadata?.name} NFT
                   </div>
                   Sorry, we could not retrieve any data at this moment in time.
                   Please try again later.{' '}

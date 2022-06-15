@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import { getBreadcrumbRoutes } from '@/utils/cgcConsts';
 import { LoginModal } from '@/components/Auth/LoginModal';
+import { useGetCollectionsBySlug } from '@/hooks/services_collections';
 
 export type CollectionTabSelection =
   | 'About'
@@ -24,12 +25,10 @@ const Collection = () => {
   const access_token = useAppSelector(
     (state) => state.user.userInfo.access_token,
   );
-  const metadata = useAppSelector(
-    (state) => state.collection.currentCollection.metadata,
-  );
   const [currentSelection, setCurrentSelection] =
     useState<CollectionTabSelection>('About');
   const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const { data } = useGetCollectionsBySlug();
 
   const handleSelect = (value: CollectionTabSelection) => {
     if (value === 'Your Items') {
@@ -44,12 +43,12 @@ const Collection = () => {
       return;
     }
     setCurrentSelection(value);
-    if (!metadata.slug) {
+    if (!data?.metadata?.slug) {
       return;
     }
     router
       .push(
-        `/collection/${metadata.slug}?tab=${value
+        `/collection/${data?.metadata?.slug}?tab=${value
           .split(' ')
           .join('_')
           .toLowerCase()}`,
@@ -58,31 +57,36 @@ const Collection = () => {
   };
 
   const breadcrumbItems = useMemo(() => {
-    return getBreadcrumbRoutes(currentSelection, metadata.name || '...').map(
-      (item) => ({
-        ...item,
-        disabled: !metadata.slug,
-      }),
-    );
-  }, [metadata, currentSelection]);
+    return getBreadcrumbRoutes(
+      currentSelection,
+      data?.metadata.name || '...',
+    ).map((item) => ({
+      ...item,
+      disabled: !data?.metadata?.slug,
+    }));
+  }, [data, currentSelection]);
 
   const selectGroupItems = useMemo(() => {
     return [
-      { text: 'About', value: 'About', disabled: !metadata.slug },
-      { text: 'All Items', value: 'All Items', disabled: !metadata.slug },
+      { text: 'About', value: 'About', disabled: !data?.metadata?.slug },
+      {
+        text: 'All Items',
+        value: 'All Items',
+        disabled: !data?.metadata?.slug,
+      },
       {
         text: 'Your Items',
         value: 'Your Items',
-        disabled: !metadata.slug,
+        disabled: !data?.metadata?.slug,
       },
       {
         text: 'Listed Items',
         value: 'Listed Items',
-        disabled: !metadata.slug,
+        disabled: !data?.metadata.slug,
       },
-      { text: '...', value: '...', disabled: !metadata.slug },
+      { text: '...', value: '...', disabled: !data?.metadata?.slug },
     ];
-  }, [metadata]);
+  }, [data]);
 
   useEffect(() => {
     if (router.query.tab) {
@@ -109,7 +113,7 @@ const Collection = () => {
       </div>
       <div className="flex justify-between items-center mb-[12px] max-w-full flex-wrap">
         <div className="basis-[100%] md:basis-[50%] text-[#FFFFFF] font-bold text-[24px]">
-          {metadata.name}
+          {data?.metadata?.name}
         </div>
         <div className="basis-[100%] lg:basis-auto mt-[12px] lg:mt-0">
           <SelectGroup

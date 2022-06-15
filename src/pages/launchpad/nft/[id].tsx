@@ -7,7 +7,7 @@ import DefaultLayout from '@/components/Layout/DefaultLayout';
 import Breadcrumb from '@/components/Shared/Breadcrumb';
 import Divider from '@/components/Shared/Divider';
 import Tag from '@/components/Shared/Tag';
-import { useAppDispatch } from '@/store';
+// import { useAppDispatch } from '@/store';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -41,7 +41,7 @@ export interface LaunchpadNftInfo {
 }
 
 const LaunchpadNft = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const router = useRouter();
   const [info] = useState<LaunchpadNftInfo>({
     name: 'Tank Metaverse',

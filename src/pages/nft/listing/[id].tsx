@@ -61,9 +61,6 @@ const handleImageError = (e: any) => {
 
 const NftListing = () => {
   const router = useRouter();
-  const metadata = useAppSelector(
-    (state) => state.collection.currentCollection.metadata,
-  );
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [info, setInfo] = useState<NftListingInfo>({
@@ -91,34 +88,42 @@ const NftListing = () => {
     owner: '',
     transactionFee: NaN,
   });
-  const { setSlug, loading: collectionsLoading } = useGetCollectionsBySlug();
+  const {
+    setSlug,
+    loading: collectionsLoading,
+    data: currentCollection,
+  } = useGetCollectionsBySlug();
   const { setTokenAddress, data, loading, refresh } = useGetNftByHash();
 
   const breadCrumbItems = useMemo(() => {
     return [
-      { text: 'Home', value: '/', disabled: loading || !metadata.name },
+      {
+        text: 'Home',
+        value: '/',
+        disabled: loading || !currentCollection?.metadata?.name,
+      },
       {
         text: 'Explore',
         value: '/explore',
-        disabled: loading || !metadata.slug,
+        disabled: loading || !currentCollection?.metadata?.slug,
       },
       {
-        text: metadata?.name,
-        value: `/collection/${metadata.slug}?tab=about`,
-        disabled: loading || !metadata.slug,
+        text: currentCollection?.metadata?.name,
+        value: `/collection/${currentCollection?.metadata?.slug}?tab=about`,
+        disabled: loading || !currentCollection?.metadata?.slug,
       },
       {
         text: 'My Items',
         value: `/account?tab=items`,
-        disabled: loading || !metadata.slug,
+        disabled: loading || !currentCollection?.metadata?.slug,
       },
       {
         text: info.name,
         value: info.name,
-        disabled: loading || !metadata.slug,
+        disabled: loading || !currentCollection?.metadata?.slug,
       },
     ];
-  }, [metadata, info, loading]);
+  }, [currentCollection, info, loading]);
 
   const handleSelect = (value: Selection) => {
     if (info.name !== value) {

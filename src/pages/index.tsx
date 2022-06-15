@@ -3,14 +3,15 @@ import LandingCarousel from '@/components/Home/LandingCarousel';
 import LatestSales from '@/components/Home/LatestSales';
 import LatestTransactions from '@/components/Home/LatestTransactions';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
+import { useGetCollections } from '@/hooks/services_collections';
 import { useAppSelector } from '@/store';
 import { useMemo } from 'react';
 
 const Index = () => {
-  const collections = useAppSelector((state) => state.collection.collections);
+  const { data } = useGetCollections();
 
   const carouselItems = useMemo(() => {
-    return collections.slice(0, 5).map((collection: any) => {
+    return data.slice(0, 5).map((collection: any) => {
       return {
         id: collection?.slug,
         title: collection?.name,
@@ -21,7 +22,7 @@ const Index = () => {
         href: 'https://solchicks-minigame-apr18.s3.us-west-2.amazonaws.com/index.html',
       };
     });
-  }, [collections]);
+  }, [data]);
 
   return (
     <DefaultLayout>

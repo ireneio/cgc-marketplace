@@ -1,11 +1,11 @@
-import { useAppDispatch } from '@/store';
+// import { useAppDispatch } from '@/store';
 import { fetcher } from '@/utils/swr';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
 export const useGetCollections = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const [items, setItems] = useState<any[]>([]);
   const { data, error, mutate, isValidating } = useSWR(
     '/v1/api/collection/list',
@@ -38,7 +38,7 @@ export const useGetCollections = () => {
           network: 'SOL',
         };
       });
-      dispatch({ type: 'SET_COLLECTIONS', payload: _transformed });
+      // dispatch({ type: 'SET_COLLECTIONS', payload: _transformed });
       setItems(_transformed);
     }
   }, [data]);
@@ -53,8 +53,27 @@ export const useGetCollections = () => {
 
 export const useGetCollectionsBySlug = () => {
   const router = useRouter();
-  const dispatch = useAppDispatch();
-  const [items, setItems] = useState<any[]>([]);
+  // const dispatch = useAppDispatch();
+  const [items, setItems] = useState<any>({
+    active: false,
+    contracts: [],
+    createdAt: '',
+    createdBy: '',
+    id: '',
+    name: '',
+    metadata: {
+      name: '',
+      slug: '',
+    },
+    nftCollectionStats: {},
+    services: [],
+    categories: [],
+    genre: [],
+    tags: [],
+    tokens: [],
+    updatedAt: '',
+    updatedBy: '',
+  });
   const [slug, setSlug] = useState('');
   const { data, error, mutate, isValidating } = useSWR(
     `/v1/api/collection/list?slug=${slug}`,
@@ -73,17 +92,17 @@ export const useGetCollectionsBySlug = () => {
       if (Object.keys(_data).length) {
         const _transformed = _data;
         setItems(_transformed);
-        dispatch({
-          type: 'SET_CURRENT_COLLECTION',
-          payload: {
-            ..._transformed,
-            metadata: {
-              ..._transformed.metadata,
-              slug: _transformed?.metadata?.slug,
-              id: _transformed.id,
-            },
-          },
-        });
+        // dispatch({
+        //   type: 'SET_CURRENT_COLLECTION',
+        //   payload: {
+        //     ..._transformed,
+        //     metadata: {
+        //       ..._transformed.metadata,
+        //       slug: _transformed?.metadata?.slug,
+        //       id: _transformed.id,
+        //     },
+        //   },
+        // });
       }
     }
   }, [data]);
@@ -158,7 +177,7 @@ export const useGetNftByCollectionId = () => {
 };
 
 export const useGetNftByHash = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const [items, setItems] = useState<Record<string, any>>({
     image: '',
     brand: '',
@@ -188,10 +207,10 @@ export const useGetNftByHash = () => {
     if (data?.success) {
       const _data = data?.data;
       if (Object.keys(_data).length) {
-        dispatch({
-          type: 'SET_CURRENT_COLLECTION_TOKEN_DATA',
-          payload: _data,
-        });
+        // dispatch({
+        //   type: 'SET_CURRENT_COLLECTION_TOKEN_DATA',
+        //   payload: _data,
+        // });
         const _transformed = [_data].map((item: any) => {
           const manifest = item?.splNftInfo?.data?.manifest;
           return {
