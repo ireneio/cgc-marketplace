@@ -15,7 +15,6 @@ import {
   useGetCollectionsBySlug,
   useGetNftByHash,
 } from '@/hooks/services_collections';
-import { useAppSelector } from '@/store';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';

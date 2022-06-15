@@ -11,7 +11,6 @@ import SelectGroup from '@/components/Shared/SelectGroup';
 import { useEthereumProvider } from '@/contexts/EthereumWalletProvider';
 import { OAuthContext } from '@/contexts/OAuthProvider';
 import withAuth, { SavedPathType } from '@/middlewares/withAuth';
-import { useAppSelector } from '@/store';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useMemo, useState } from 'react';

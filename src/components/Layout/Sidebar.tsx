@@ -2,6 +2,7 @@ import { SIDE_BAR_ITEMS } from '@/utils/cgcConsts';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
+
 interface Props {
   onItemClick?: (value: string) => void | Promise<void>;
   rootClassName?: string;

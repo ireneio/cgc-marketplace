@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Unity, useUnityContext, UnityContext } from 'react-unity-webgl';
+import React from 'react';
+import { Unity, UnityContext, useUnityContext } from 'react-unity-webgl';
 
 interface Vector2 {
   x: number;

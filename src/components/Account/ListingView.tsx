@@ -2,7 +2,6 @@ import {
   useGetCollections,
   useGetNftByCollectionId,
 } from '@/hooks/services_collections';
-import { useAppSelector } from '@/store';
 import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
 import ListCard from '../Collection/ListCard';

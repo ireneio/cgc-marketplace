@@ -1,4 +1,4 @@
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import { Table, Tbody, Td, Th, Thead, Tr } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import { flatten } from 'lodash';
 import EmptyListTextDisplay from './EmptyListTextDisplay';

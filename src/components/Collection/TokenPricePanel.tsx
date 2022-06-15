@@ -5,7 +5,6 @@ import {
 import { useMemo, useState } from 'react';
 import ClipboardText from '../Shared/ClipboardText';
 import Divider from '../Shared/Divider';
-import ProgressBar from '../Shared/ProgressBar';
 import Tag from '../Shared/Tag';
 import DateViewSelector, { DateTypes } from './DateViewSelector';
 import TickerText from './TickerText';

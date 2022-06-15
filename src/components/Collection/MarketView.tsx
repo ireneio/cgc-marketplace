@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/store';
 import { getNumberWithCommas } from '@/utils/formatHelper';
 import { useRouter } from 'next/router';
-import { useState, useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import DropdownMenu from '../Shared/DropdownMenu';
 import SelectGroup from '../Shared/SelectGroup';
 import Cart from './Cart';

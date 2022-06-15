@@ -1,8 +1,8 @@
 import { useCart } from '@/hooks/cart';
-import { useAppDispatch, useAppSelector } from '@/store';
+import { useAppDispatch } from '@/store';
 import * as anchor from '@project-serum/anchor';
 import { useRouter } from 'next/router';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@/components/Shared/Button';
 import { getParsedNftAccountsByOwner } from '@/solana/getParsedNftAccountsByOwner';
 import ListCardLoading from '../Collection/ListCardLoading';
@@ -12,7 +12,6 @@ import api from '@/utils/api';
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { useProgram } from '@/solana/usePrograms';
 import { pubKeyToString } from '@/solana/solanaHelper';
-import { sleep } from '@/utils/helper';
 import { showSnackbar } from '@/store/reducers/layout';
 
 type SelectionView = 'Row' | 'List';

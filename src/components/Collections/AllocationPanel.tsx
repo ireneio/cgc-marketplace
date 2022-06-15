@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Divider from '../Shared/Divider';
 import Tag from '../Shared/Tag';
 import { Doughnut } from 'react-chartjs-2';
-import { Chart, ArcElement } from 'chart.js';
+import { ArcElement, Chart } from 'chart.js';
 
 Chart.register(ArcElement);
 

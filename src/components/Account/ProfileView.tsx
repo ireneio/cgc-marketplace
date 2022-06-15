@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import Button from '../Shared/Button';
-import Input from '../Shared/Input';
 import EditProfileForm from './EditProfileForm';
 import Menu from './Menu';
 

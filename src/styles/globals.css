@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-
   /*noinspection ALL*/
   @font-face {
     font-family: 'CircularStd-Book';
@@ -34,7 +33,7 @@ body {
   height: 100%;
 }
 
-.wallet-solana>.wallet-adapter-button {
+.wallet-solana > .wallet-adapter-button {
   color: white !important;
   font-family: inherit !important;
   font-size: 16px !important;
@@ -48,7 +47,7 @@ body {
   background-color: #13002b !important;
 }
 
-.wallet-solana>.wallet-adapter-button:hover {
+.wallet-solana > .wallet-adapter-button:hover {
   background-color: transparent !important;
 }
 
@@ -108,11 +107,11 @@ body {
   box-sizing: border-box;
 }
 
-.switch-input:checked+.switch-label {
+.switch-input:checked + .switch-label {
   background: linear-gradient(180deg, #f41786 0%, #a713ed 100%);
 }
 
-.switch-input:checked+.switch-label::after {
+.switch-input:checked + .switch-label::after {
   left: 21px;
 }
 
@@ -128,7 +127,7 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #FFFFFF;
+  background: #ffffff;
 }
 
 /* Handle */
@@ -138,7 +137,7 @@ body {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #FC1F8E;
+  background: #fc1f8e;
 }
 
 .slick-list {
@@ -180,8 +179,8 @@ body {
   min-height: 56.25vw;
 }
 
-.custom_select>option {
-  color: #FFFFFF;
+.custom_select > option {
+  color: #ffffff;
 }
 
 .force_card_height {
@@ -219,12 +218,12 @@ body {
 .react-datepicker__time-list,
 .react-datepicker__month-container,
 .react-datepicker__input-container input {
-  background-color: #13002B !important;
+  background-color: #13002b !important;
 }
 
 .react-datepicker__current-month,
 .react-datepicker__day-name {
-  color: #FFF !important;
+  color: #fff !important;
 }
 
 .react-datepicker__navigation-icon {
@@ -237,8 +236,8 @@ body {
 }
 
 .react-datepicker__input-container input:focus {
-  outline-color: #FC1F8E !important;
-  border: 2px solid #FFFFFF !important;
+  outline-color: #fc1f8e !important;
+  border: 2px solid #ffffff !important;
 }
 
 .react-datepicker__month-container {
@@ -254,27 +253,27 @@ body {
 .react-datepicker__month,
 .react-datepicker__day,
 .react-datepicker__time-list-item {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
 .react-datepicker__day-name,
 .react-datepicker-time__header {
-  color: #AAA !important;
+  color: #aaa !important;
 }
 
 .react-datepicker__day:hover,
 .react-datepicker__time-list-item:hover {
-  background-color: #9497AA !important;
+  background-color: #9497aa !important;
 }
 
 .react-datepicker__day--selected,
 .react-datepicker__day--keyboard-selected,
 .react-datepicker__time-list-item--selected {
-  background-color: #FC1F8E !important;
+  background-color: #fc1f8e !important;
 }
 
 .react-datepicker__day--disabled {
-  color: #9497AA !important;
+  color: #9497aa !important;
   cursor: not-allowed !important;
 }
 
