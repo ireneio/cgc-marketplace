@@ -176,7 +176,7 @@ const NftPricePanel = ({
             <div className="text-[#AAAAAA] font-light text-[14px]">Owners</div>
             <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px]">
               {owners || owners === 0
-                ? `${getNumberWithCommas(owners, 2)}`
+                ? `${getNumberWithCommas(owners, 0)}`
                 : 'N/A'}
             </div>
           </div>
