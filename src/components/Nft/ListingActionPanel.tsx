@@ -2,7 +2,11 @@ import { NftListingInfo } from '@/pages/nft/listing/[id]';
 import { useForm } from 'react-hook-form';
 import Button from '../Shared/Button';
 import Input from '../Shared/Input';
+import Select from '../Shared/Select';
 import Tag from '../Shared/Tag';
+import DatePicker from 'react-datepicker';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 const ListingActionPanel = ({
   info,
@@ -11,12 +15,17 @@ const ListingActionPanel = ({
   info: NftListingInfo;
   loading: boolean;
 }) => {
-  const { register, getValues } = useForm({
+  const { register, getValues, setValue, watch } = useForm({
     mode: 'onChange',
     defaultValues: {
       price: '',
+      option: 'sell',
+      startDate: '',
+      endDate: '',
     },
   });
+
+  const isAuction = watch('option') === 'auction';
 
   const handleList = () => {
     // TODO
@@ -33,6 +42,51 @@ const ListingActionPanel = ({
         <div className="text-[18px]">
           {info.is_listed ? 'Listed' : 'Not Listed'}
         </div>
+        {!info.is_listed ? (
+          <div className="mt-[24px] text-[#FFFFFF] text-[14px] flex items-center">
+            <Select
+              options={[
+                { text: 'Sell', value: 'sell' },
+                { text: 'Auction', value: 'auction' },
+              ]}
+              onChange={(val) => setValue('option', val)}
+            ></Select>
+          </div>
+        ) : (
+          <></>
+        )}
+        {!info.is_listed && isAuction && (
+          <div className="mt-[24px] text-[#FFFFFF] text-[14px] flex items-center">
+            <div>
+              <DatePicker
+                selected={
+                  watch('startDate') === ''
+                    ? null
+                    : new Date(watch('startDate'))
+                }
+                placeholderText="Start Date"
+                minDate={new Date()}
+                showTimeSelect
+                onChange={(date: Date) =>
+                  setValue('startDate', date.toISOString())
+                }
+              />
+            </div>
+            <div className="ml-[12px]">
+              <DatePicker
+                selected={
+                  watch('endDate') === '' ? null : new Date(watch('endDate'))
+                }
+                placeholderText="End Date"
+                minDate={new Date()}
+                showTimeSelect
+                onChange={(date: Date) =>
+                  setValue('endDate', date.toISOString())
+                }
+              />
+            </div>
+          </div>
+        )}
         {!info.is_listed ? (
           <div className="mt-[24px] text-[#FFFFFF] text-[14px] flex items-center">
             <Input id="price" {...register('price')} className="w-[100px]" />

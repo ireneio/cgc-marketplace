@@ -9,9 +9,8 @@ interface Props {
 const Select = ({ options, onChange, value }: Props) => {
   return (
     <select
-      className="appearance-none block px-3 py-2 border-[2px] border-[#290030] rounded-md
-   shadow-sm focus:outline-none focus:ring-[#FC1F8E]
-   focus:border-[#FC1F8E] sm:text-sm font-circularstdbook bg-[#13002B] min-w-[120px]"
+      className="appearance-none block py-2.5 px-4 border-[2px] border-[#290030] rounded-md
+   shadow-sm sm:text-sm font-circularstdbook bg-[#13002B] min-w-[120px] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-[#FC1F8E] focus:border-white focus:placeholder-gray-400"
       // placeholder={placeholder}
       onChange={(e) => onChange && onChange(e.target.value)}
       value={value}
