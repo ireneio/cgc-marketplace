@@ -1,5 +1,5 @@
 import { WalletContextState } from '@solana/wallet-adapter-react';
-import { Connection, Transaction } from '@solana/web3.js';
+import {Connection, PublicKey, Transaction} from '@solana/web3.js';
 
 export async function signSendAndConfirm(
   wallet: WalletContextState,
@@ -14,3 +14,6 @@ export async function signSendAndConfirm(
   await connection.confirmTransaction(txid);
   return txid;
 }
+
+export const pubKeyToString = (key: PublicKey | null | string = ``) =>
+  typeof key === `string` ? key : key?.toBase58() || ``;

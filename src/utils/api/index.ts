@@ -1,4 +1,4 @@
-import {fetcher} from '../swr';
+import { fetcher } from '../swr';
 
 const api = {
   healthCheck: async () => {
@@ -32,6 +32,19 @@ const api = {
         email,
         password,
         walletAddress,
+      },
+    });
+  },
+  filterNFTsByCollection: async (
+    collection_id: string,
+    nftAccounts: Array<any>,
+  ) => {
+    return await fetcher({
+      url: '/api/nft/filterbycollection',
+      method: 'post',
+      data: {
+        collection_id: collection_id,
+        nfts: nftAccounts,
       },
     });
   },
