@@ -41,7 +41,7 @@ const Button = ({
           ? 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)'
           : 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
       }}
-      className={twMerge('rounded-[5px]  px-[1px] py-[1px] text-center')}
+      className={twMerge('rounded-[5px] px-[1px] py-[1px] text-center')}
     >
       <button
         className={twMerge(

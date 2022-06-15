@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import PrimaryGradientText from '../Catheon/PrimaryGradientText';
 // import Frame from '../Game/Frame';
 import SolchicksGame from '../Game/SolchicksGame';
 import Button from '../Shared/Button';
@@ -93,15 +94,15 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
                     <div className="text-[#FFFFFF] flex mt-[16px]">
                       <Button onClick={() => handlePlay(href)}>Play</Button>
                       <div className="ml-[16px]">
-                        <Button
-                          link
+                        <div
+                          className="py-[8px] px-[24px] bg-[#000] bg-opacity-30 rounded-[5px] cursor-pointer hover:bg-transparent hover:underline"
                           onClick={(e: any) => {
                             e.stopPropagation();
                             handleMoreInfo(name);
                           }}
                         >
                           More Info
-                        </Button>
+                        </div>
                       </div>
                     </div>
                   </div>

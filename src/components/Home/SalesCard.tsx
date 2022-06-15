@@ -25,9 +25,9 @@ const SalesCard = ({
   amount,
 }: Props) => {
   return (
-    <div className="w-[200px] shadow-lg rounded-[5px] border-solid border-[1px] border-[#FC1F8E] cursor-pointer hover:shadow-xl">
+    <div className="w-[200px] shadow-md shadow-black rounded-[5px] bg-[#290030] border-solid border-[#290030] border-[1px] cursor-pointer hover:shadow-xl">
       <div
-        className="w-full min-h-[200px] bg-[#181818] aspect-w-1 aspect-h-1 overflow-hidden
+        className="w-full min-h-[200px] aspect-w-1 aspect-h-1 overflow-hidden
               group-hover:opacity-75 lg:aspect-none
               rounded-t-[5px] transition ease-in duration-200 hover:cursor-pointer"
       >
