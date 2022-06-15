@@ -28,6 +28,10 @@ const ListingActionPanel = ({
     },
   });
 
+  const handleLink = (href: string) => {
+    window.open(href, '_blank');
+  };
+
   const isAuction = watch('option') === 'auction';
 
   const handleList = () => {
@@ -122,8 +126,23 @@ const ListingActionPanel = ({
         )}
         <div className="text-[#AAAAAA] mt-[12px]">
           By Proceeding, You agree to our{' '}
-          <span className="underline cursor-pointer">Terms</span> and{' '}
-          <span className="underline cursor-pointer">Privacy</span>{' '}
+          <span
+            className="underline cursor-pointer text-[#FFFFFF]"
+            onClick={() =>
+              handleLink('https://catheongaming.com/terms-of-service')
+            }
+          >
+            Terms
+          </span>{' '}
+          and{' '}
+          <span
+            className="underline cursor-pointer text-[#FFFFFF]"
+            onClick={() =>
+              handleLink('https://catheongaming.com/privacy-policy')
+            }
+          >
+            Privacy
+          </span>{' '}
         </div>
       </div>
     </Tag>
