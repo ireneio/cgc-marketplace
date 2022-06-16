@@ -14,13 +14,14 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import DetailPanel from '@/components/Nft/DetailPanel';
 import { LoginModal } from '@/components/Auth/LoginModal';
-import {
-  useGetCollectionsBySlugV2,
-  useGetNftByHashV2,
-} from '@/hooks/services_collections';
+import { useGetCollectionsBySlugV2 } from '@/hooks/services_collections';
 import NftPageLoading from '@/components/Nft/NftPageLoading';
 import Skeleton from '@/components/Shared/Skeleton';
 import { initCart } from '@/store/reducers/cart';
+import {
+  useGetNftByHashV2,
+  useGetNftTransactionsByHashV2,
+} from '@/hooks/services_nft';
 
 export interface NftInfo {
   id: string | number;
@@ -101,6 +102,12 @@ const Nft = () => {
     data: currentCollection,
   } = useGetCollectionsBySlugV2();
   const { setTokenAddress, data, loading, refresh } = useGetNftByHashV2();
+  const {
+    setTokenAddress: setTokenAddressTransaction,
+    data: dataTransaction,
+    loading: loadingTransaction,
+    refresh: refreshTransaction,
+  } = useGetNftTransactionsByHashV2();
 
   const breadCrumbItems = useMemo(() => {
     switch (currentSelection) {
@@ -235,145 +242,138 @@ const Nft = () => {
   }, [data, router]);
 
   useEffect(() => {
-    setTokenAddress(String(router.query.id));
+    if (router.query.id) {
+      const _tokenAddr = String(router.query.id);
+      setTokenAddress(_tokenAddr);
+      setTokenAddressTransaction(_tokenAddr);
+    }
   }, [router.query.id]);
 
   return (
     <DefaultLayout>
-      <div className="mb-[24px]">
-        <Breadcrumb
-          items={breadCrumbItems}
-          onItemClick={(val) => {
-            handleSelect(val as Selection);
-          }}
-        />
-      </div>
-      <div className="flex justify-between items-center mb-[16px] flex-wrap">
-        {!collectionsLoading && !loading && (
-          <div className="basis-[100%] lg:basis-auto text-[#FFFFFF] font-bold text-[24px]">
-            {info.brand} {info.name}
-          </div>
-        )}
-        {(collectionsLoading || loading) && (
-          <div className="basis-[100%] lg:basis-auto text-[#FFFFFF] font-bold text-[24px]">
-            <Skeleton className="h-[35px] w-[120px] bg-[#290030]" />
-          </div>
-        )}
-        <div className="basis-[100%] lg:basis-auto mt-[12px] lg:mt-0">
-          <SelectGroup
-            items={selectGroupItems}
-            currentValue={currentSelection}
-            onItemClick={(value) => handleSelect(value as Selection)}
+      <div className="mb-[48px]">
+        <div className="mb-[24px]">
+          <Breadcrumb
+            items={breadCrumbItems}
+            onItemClick={(val) => {
+              handleSelect(val as Selection);
+            }}
           />
         </div>
-      </div>
-      <div className="mb-[24px]">
-        <Divider />
-      </div>
-      {currentSelection !== 'Your Items' && (collectionsLoading || loading) && (
-        <NftPageLoading />
-      )}
-      {currentSelection !== 'Your Items' && !collectionsLoading && !loading && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-[24px] pt-[12px]">
-          <div className="flex items-center justify-between col-span-2">
-            <div className="flex items-center">
-              <div className="cursor-pointer" onClick={() => handleRefresh()}>
-                <img
-                  src={'/img/icon_refresh.svg'}
-                  alt="refresh"
-                  width={14}
-                  height={14}
-                />
-              </div>
-              <div className="ml-[8px] text-[#FFFFFF] text-[14px]">1 Item</div>
+        <div className="flex justify-between items-center mb-[16px] flex-wrap">
+          {!collectionsLoading && !loading && (
+            <div className="basis-[100%] lg:basis-auto text-[#FFFFFF] font-bold text-[24px]">
+              {info.brand} {info.name}
             </div>
-            <CartSection
-              openCart={openCart}
-              onToggleCart={(val) => setOpenCart(val)}
-              disabled={loading}
+          )}
+          {(collectionsLoading || loading) && (
+            <div className="basis-[100%] lg:basis-auto text-[#FFFFFF] font-bold text-[24px]">
+              <Skeleton className="h-[35px] w-[120px] bg-[#290030]" />
+            </div>
+          )}
+          <div className="basis-[100%] lg:basis-auto mt-[12px] lg:mt-0">
+            <SelectGroup
+              items={selectGroupItems}
+              currentValue={currentSelection}
+              onItemClick={(value) => handleSelect(value as Selection)}
             />
           </div>
-          <div className="flex flex-wrap justify-between col-span-2">
-            <div className="basis-[100%] lg:basis-[48%]">
-              <div className="w-full mb-[24px]">
-                <img
-                  src={info.image}
-                  alt={info.name}
-                  width="100%"
-                  className="rounded-[5px] blur"
-                  onError={(e) => handleImageError(e)}
-                  onLoad={(e) => handleImageLoad(e, info.image)}
-                />
+        </div>
+        <div className="mb-[24px]">
+          <Divider />
+        </div>
+        {currentSelection !== 'Your Items' &&
+          (collectionsLoading || loading) && <NftPageLoading />}
+        {currentSelection !== 'Your Items' && !collectionsLoading && !loading && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-[24px] pt-[12px]">
+            <div className="flex items-center justify-between col-span-2">
+              <div className="flex items-center">
+                <div className="cursor-pointer" onClick={() => handleRefresh()}>
+                  <img
+                    src={'/img/icon_refresh.svg'}
+                    alt="refresh"
+                    width={14}
+                    height={14}
+                  />
+                </div>
+                <div className="ml-[8px] text-[#FFFFFF] text-[14px]">
+                  1 Item
+                </div>
               </div>
-              <div className="mb-[24px] lg:mb-0">
-                <InfoPanel info={info} />
-              </div>
-            </div>
-            <div className="basis-[100%] lg:basis-[48%]">
-              <div className="mb-[24px]">
-                <DetailPanel info={info} />
-              </div>
-              <div className="mb-[24px]">
-                <ActionPanel
-                  info={info}
-                  onCartOpen={(val) => setOpenCart(val)}
-                  loading={loading}
-                />
-              </div>
-              <div className="mb-[0px]">
-                <AttributesPanel info={info} />
-              </div>
-            </div>
-          </div>
-          <div className="mb-[24px] col-span-2">
-            <Divider />
-          </div>
-          <div className="col-span-2">
-            <div className="mb-[24px] flex justify-between items-center flex-wrap">
-              <div className="text-[#FFFFFF] font-bold text-[20px]">
-                Transaction History
-              </div>
-              <div className="basis-[50%] md:basis[100%] mt-[12px] md:mt-0 flex justify-end">
-                <Pagination
-                  totalPages={15}
-                  currentPage={currentPage}
-                  onPageChange={(val) => setCurrentPage(val)}
-                  onPreviousPage={() => setCurrentPage((prev) => prev - 1)}
-                  onNextPage={() => setCurrentPage((prev) => prev + 1)}
-                />
-              </div>
-            </div>
-            <div className="mb-[48px]">
-              <HistoryTable
-                rows={[
-                  [
-                    'Listing',
-                    'AC95124da74ca921wdpk1134',
-                    'AC95124da74ca921wdpk1134',
-                    new Date().toISOString(),
-                    '12399999999.45678',
-                  ],
-                  [
-                    'Transfer',
-                    'AC95124da74ca921wdpk1134',
-                    'AC95124da74ca921wdpk1134',
-                    new Date().toISOString(),
-                    '12399999999.45678',
-                  ],
-                  [
-                    'Cancel',
-                    'AC95124da74ca921wdpk1134',
-                    'AC95124da74ca921wdpk1134',
-                    new Date().toISOString(),
-                    '12399999999.45678',
-                  ],
-                ]}
-                headers={['type', 'seller', 'buyer', 'time', 'price']}
+              <CartSection
+                openCart={openCart}
+                onToggleCart={(val) => setOpenCart(val)}
+                disabled={loading}
               />
             </div>
+            <div className="flex flex-wrap justify-between col-span-2">
+              <div className="basis-[100%] lg:basis-[48%]">
+                <div className="w-full mb-[24px]">
+                  <img
+                    src={info.image}
+                    alt={info.name}
+                    width="100%"
+                    className="rounded-[5px] blur"
+                    onError={(e) => handleImageError(e)}
+                    onLoad={(e) => handleImageLoad(e, info.image)}
+                  />
+                </div>
+                <div className="mb-[24px] lg:mb-0">
+                  <InfoPanel info={info} />
+                </div>
+              </div>
+              <div className="basis-[100%] lg:basis-[48%]">
+                <div className="mb-[24px]">
+                  <DetailPanel info={info} />
+                </div>
+                <div className="mb-[24px]">
+                  <ActionPanel
+                    info={info}
+                    onCartOpen={(val) => setOpenCart(val)}
+                    loading={loading}
+                  />
+                </div>
+                <div className="mb-[0px]">
+                  <AttributesPanel info={info} />
+                </div>
+              </div>
+            </div>
+            {dataTransaction.length ? (
+              <>
+                <div className="col-span-2">
+                  <Divider />
+                </div>
+                <div className="col-span-2">
+                  <div className="mb-[24px] flex justify-between items-center flex-wrap">
+                    <div className="text-[#FFFFFF] font-bold text-[20px]">
+                      Transaction History
+                    </div>
+                    <div className="basis-[50%] md:basis[100%] mt-[12px] md:mt-0 flex justify-end">
+                      <Pagination
+                        totalPages={15}
+                        currentPage={currentPage}
+                        onPageChange={(val) => setCurrentPage(val)}
+                        onPreviousPage={() =>
+                          setCurrentPage((prev) => prev - 1)
+                        }
+                        onNextPage={() => setCurrentPage((prev) => prev + 1)}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <HistoryTable
+                      rows={dataTransaction}
+                      headers={['type', 'seller', 'buyer', 'time', 'price']}
+                    />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
           </div>
-        </div>
-      )}
+        )}
+      </div>
       <LoginModal
         isOpen={loginModalOpen}
         setIsOpen={setLoginModalOpen}

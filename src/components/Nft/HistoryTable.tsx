@@ -21,6 +21,14 @@ interface Props {
 }
 
 const HistoryTable = ({ rows, headers }: Props) => {
+  const handleGoExplorer = (hash: string, type: 'tx' | 'account') => {
+    if (type === 'tx') {
+      window.open(`https://solscan.io/tx/${hash}`, '_blank');
+    } else if (type === 'account') {
+      window.open(`https://solscan.io/account/${hash}`, '_blank');
+    }
+  };
+
   const _headers = useMemo(() => {
     return headers.map((header, index) => {
       return (
@@ -48,7 +56,9 @@ const HistoryTable = ({ rows, headers }: Props) => {
             >
               <div
                 className="capitalize text-[#FFFFFF] tracking-widest"
-                style={{ color: col === 'Listing' ? '#3FFF8C' : '#FFFFFF' }}
+                style={{
+                  color: col === 'Listing or Cancel' ? '#3FFF8C' : '#FFFFFF',
+                }}
               >
                 {col}
               </div>
@@ -57,17 +67,38 @@ const HistoryTable = ({ rows, headers }: Props) => {
         } else if (colIndex === 1 || colIndex === 2) {
           return (
             <div
-              key={colIndex}
-              className="text-[#FC1F8E] text-[14px] px-[10px] py-[12px]"
               style={{
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
             >
-              <ClipboardText copyValue={col}>
-                <PrimaryGradientText>
-                  {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
-                </PrimaryGradientText>
-              </ClipboardText>
+              {col ? (
+                <ClipboardText copyValue={col}>
+                  <div
+                    key={colIndex}
+                    className="text-[#FC1F8E] text-[14px] px-[10px] py-[12px]"
+                    onClick={() => handleGoExplorer(col, 'account')}
+                  >
+                    <div className="w-[150px]">
+                      {getTrimmedAddressEllipsisMiddle(String(col), {
+                        length: 12,
+                      })}
+                    </div>
+                  </div>
+                </ClipboardText>
+              ) : (
+                <>
+                  <div
+                    key={colIndex}
+                    className="text-[#FC1F8E] text-[14px] px-[10px] py-[12px]"
+                  >
+                    <div className="w-[150px]">
+                      {getTrimmedAddressEllipsisMiddle(String(col), {
+                        length: 12,
+                      })}
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           );
         } else if (colIndex === 3) {
@@ -79,7 +110,7 @@ const HistoryTable = ({ rows, headers }: Props) => {
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
             >
-              {dayjs(String(col)).fromNow()}
+              {dayjs(col).fromNow()}
             </div>
           );
         } else if (colIndex === 4) {
@@ -91,7 +122,7 @@ const HistoryTable = ({ rows, headers }: Props) => {
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
             >
-              {getNumberWithCommas(String(col), 2)}
+              {col ? `$${getNumberWithCommas(String(col), 2)}` : '-'}
             </div>
           );
         }

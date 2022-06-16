@@ -11,10 +11,8 @@ import Divider from '@/components/Shared/Divider';
 import Pagination from '@/components/Shared/Pagination';
 import SelectGroup from '@/components/Shared/SelectGroup';
 import Skeleton from '@/components/Shared/Skeleton';
-import {
-  useGetCollectionsBySlugV2,
-  useGetNftByHashV2,
-} from '@/hooks/services_collections';
+import { useGetCollectionsBySlugV2 } from '@/hooks/services_collections';
+import { useGetNftByHashV2 } from '@/hooks/services_nft';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
