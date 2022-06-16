@@ -29,7 +29,7 @@ const Index = () => {
   return (
     <DefaultLayout>
       <div className="mt-[21px]">
-        {windowWidth < 768 ? (
+        {windowWidth <= 500 ? (
           <LandingCarouselMobile carouselItems={carouselItems} />
         ) : (
           <LandingCarousel carouselItems={carouselItems} />
