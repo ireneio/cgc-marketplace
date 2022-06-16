@@ -163,7 +163,6 @@ export const useGetNftTransactionsByHashV2 = () => {
           item?.amountUsd || '',
         ];
       });
-      console.log(_transformed);
       setItems(_transformed);
     }
   }, [data]);
