@@ -10,18 +10,20 @@ const LatestSales = () => {
       <div className="flex justify-between items-center">
         <SectionTitle>latest sales</SectionTitle>
       </div>
-      <div className="mt-[24px] flex overflow-auto pb-[24px] scollbar_thin">
+      <div className="mt-[24px] flex overflow-auto pb-[24px] scrollbar_thin">
         {items.map((game, index) => {
           return (
             <div key={index} className="mr-[28px]">
               <SalesCard
-                img={'/img/sales_sample_nft.png'}
-                title={'Wendingo #13 - The Alchemist'}
-                brand={'Kreechers'}
-                signature={'AC95124da74c130920980834'}
+                img={'/img/solchicks-641.png'}
+                title={'SolChicks #641'}
+                brand={'SolChicks'}
+                signature={
+                  '1djpsmYBoUzvhhaMP2j2pfoiGTwLgQ4kfF2a3uzdpNLx8kw3CXfRBbBVQTpBpDjG16mpYB99QUo8PhzXzdML9uk'
+                }
                 time={new Date().toISOString()}
-                from={'AC95124da74c130920980834'}
-                amount={'123.45678'}
+                from={'Hh8KHdiwYXCDxyVp8GkfHbQohzextaSAQvTJLAdd5B5G'}
+                amount={'245.68'}
               />
             </div>
           );

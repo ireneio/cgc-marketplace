@@ -66,6 +66,7 @@ body {
 .hide-scrollbar {
   -ms-overflow-style: none;
   /* IE and Edge */
+  /*noinspection CssUnknownProperty*/
   scrollbar-width: none;
   /* Firefox */
 }
@@ -115,7 +116,8 @@ body {
   left: 21px;
 }
 
-.scollbar_thin {
+.scrollbar_thin {
+  /*noinspection CssUnknownProperty*/
   scrollbar-width: thin;
 }
 

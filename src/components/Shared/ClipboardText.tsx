@@ -16,7 +16,7 @@ const ClipboardText = ({
   const dispatch = useAppDispatch();
 
   const handleCopySuccess = () => {
-    dispatch(showSnackbar({ title: 'Success', text: 'Copied to Clipboard!' }));
+    dispatch(showSnackbar({ title: 'Success', text: 'Copied to clipboard!' }));
   };
 
   return (

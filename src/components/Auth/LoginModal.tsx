@@ -84,7 +84,7 @@ export const LoginModal = ({
         response?.data.token_type,
         response?.data.id,
       );
-      dispatch(showSnackbar({ title: 'info', text: 'Sign In Success!' }));
+      dispatch(showSnackbar({ title: 'info', text: 'Sign-in successful!' }));
       if (redirectPath) {
         router.replace(redirectPath).then();
       }

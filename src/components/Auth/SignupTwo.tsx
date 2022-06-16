@@ -16,7 +16,7 @@ const SignupTwo = ({
   const dispatch = useAppDispatch();
 
   const handleResendLink = () => {
-    dispatch(showSnackbar({ title: 'success', text: 'Link Sent!' }));
+    dispatch(showSnackbar({ title: 'success', text: 'Link sent!' }));
   };
   return (
     <motion.div initial={{ x: '-100%' }} animate={{ x: 0 }}>

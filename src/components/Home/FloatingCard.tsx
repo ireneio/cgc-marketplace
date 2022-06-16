@@ -36,7 +36,6 @@ const FloatingCard = ({
   marketCap,
   coinSupply,
   onPlay,
-  // playDisabled,
   onCardClick,
   onMouseOver,
   onMouseLeave,
@@ -63,7 +62,6 @@ const FloatingCard = ({
       className="w-full"
       style={{
         height: isDefaultFloating ? 390 : 'auto',
-        // width: isDefaultFloating ? 390 : 196,
       }}
     >
       {currentHoverId !== id && !isDefaultFloating && (
@@ -80,6 +78,9 @@ const FloatingCard = ({
             alt={title}
             className="object-cover rounded-[5px] h-[25vh] w-full"
           />
+          <div className="absolute bottom-[10px] pl-[12px]">
+            <img src={logo} alt={''} width={150} />
+          </div>
         </div>
       )}
       {(currentHoverId === id || isDefaultFloating) && (
@@ -103,19 +104,10 @@ const FloatingCard = ({
           <div
             style={{
               width: isDefaultFloating ? 'auto' : '25vw',
-              // height: isDefaultFloating ? 'auto' : '50vh',
             }}
             className="rounded-[5px] transition-all bg-[#13002B] overflow-hidden"
           >
             <div className="relative flex items-start justify-center h-[55%]">
-              {/* gif */}
-              {/* <div
-                className="w-[300px] h-[170px] bg-cover bg-center bg-no-repeat"
-                style={{
-                  backgroundImage: `url(${bgOnHover})`,
-                }}
-              ></div> */}
-              {/* video */}
               <div
                 className="relative"
                 style={{
@@ -123,7 +115,10 @@ const FloatingCard = ({
                   height: isDefaultFloating ? 199 : '25vh',
                 }}
               >
-                <video muted autoPlay>
+                <div className="absolute bottom-3 pl-[12px] z-2">
+                  <img src={logo} alt={''} width={150} />
+                </div>
+                <video muted autoPlay loop>
                   <source src={bgOnHover} type="video/mp4" />
                 </video>
               </div>
@@ -132,12 +127,9 @@ const FloatingCard = ({
               className="bg-[#13002B] pt-[20px] pb-[24px] h-[45%] relative"
               style={{ height: isDefaultFloating ? 170 : '' }}
             >
-              <div className="absolute top-[-24px] pl-[12px]">
-                <img src={logo} alt={''} width={100} height={100} />
-              </div>
               <div className="px-[12px] py-[0px]">
                 <div className="font-normal text-[#FFFFFF] text-[14px] 2xl:text-[16px]">
-                  {title?.length > 75 ? title?.slice(0, 75) + '...' : title}
+                  {title?.length > 80 ? title?.slice(0, 80) + '...' : title}
                 </div>
                 <div className="w-full flex justify-between items-center pr-[24px] mt-[12px]">
                   <div className="text-[#FFFFFF] text-[12px] flex items-center pr-[12px] flex-wrap basis-[70%]">
@@ -164,14 +156,14 @@ const FloatingCard = ({
                   <div className="flex-shrink-0">
                     <Button
                       onClick={() => onPlay()}
-                      style={{ padding: '8px 24px', fontSize: 10 }}
+                      style={{ padding: '8px 24px', fontSize: 12 }}
                     >
                       Play
                     </Button>
                   </div>
                 </div>
               </div>
-              <div className="mt-[16px] h-[2px] w-full bg-[#290030]"></div>
+              <div className="mt-[16px] h-[2px] w-full bg-[#290030]" />
               <div className="grid gap-x-[12px] grid-cols-3 grid-rows-1 w-full px-[12px] mt-[16px]">
                 {network && (
                   <div className="text-[10px] flex items-center">
@@ -181,7 +173,7 @@ const FloatingCard = ({
                 )}
                 {marketCap !== null && (
                   <div className="text-[10px] flex items-center">
-                    <div className="text-[#9497AA]">M Cap:</div>
+                    <div className="text-[#9497AA]">Market Cap:</div>
                     <div className="text-[#FC1F8E] ml-[3px]">
                       {getNumberWithCommas(Number(marketCap), 2)}
                     </div>
@@ -189,9 +181,9 @@ const FloatingCard = ({
                 )}
                 {coinSupply !== null && (
                   <div className="text-[10px] flex items-center">
-                    <div className="text-[#9497AA]">C Supply:</div>
+                    <div className="text-[#9497AA]">Circulating Supply:</div>
                     <div className="text-[#FC1F8E] ml-[3px]">
-                      {getNumberWithCommas(Number(coinSupply), 2)}
+                      {getNumberWithCommas(Number(coinSupply), 0)}
                     </div>
                   </div>
                 )}

@@ -39,7 +39,7 @@ const LandingCarousel = ({ carouselItems }: { carouselItems: any[] }) => {
       {!loading && !carouselItems.length && (
         <div className="relative w-full px-[24px] rounded-[5px] bg-[#290030]">
           <img
-            src="/img/cgc_logo_white.png"
+            src={'/img/cgc_logo_white.png'}
             alt="cgc logo"
             className="object-contain h-[50vh] md:h-[80vh]"
           />

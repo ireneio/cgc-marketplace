@@ -32,7 +32,7 @@ const AllCollections = () => {
       </div>
       <div className="hide-scrollbar">
         {!loading && !data.length && (
-          <EmptyListTextDisplay>No Collections Available.</EmptyListTextDisplay>
+          <EmptyListTextDisplay>No collections available.</EmptyListTextDisplay>
         )}
         {!loading && data.length && (
           <div className="mt-[24px]">
