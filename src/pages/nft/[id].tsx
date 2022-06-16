@@ -43,6 +43,7 @@ type Selection =
   | 'About'
   | 'All Items'
   | 'Your Items'
+  | 'Listing Items'
   | 'Collection Item'
   | 'Explore/All';
 
@@ -153,6 +154,11 @@ const Nft = () => {
         disabled: !currentCollection?.metadata?.slug,
       },
       {
+        text: 'Listing Items',
+        value: 'Listing Items',
+        disabled: !currentCollection?.metadata?.slug,
+      },
+      {
         text: '...',
         value: '...',
         disabled: !currentCollection?.metadata?.slug,
@@ -178,6 +184,13 @@ const Nft = () => {
         }
         return;
       }
+      case 'Listing Items':
+        router
+          .push(
+            `/collection/${currentCollection?.metadata.slug}?tab=listed_items`,
+          )
+          .then();
+        return;
       case currentCollection?.metadata.slug:
         router
           .push(`/collection/${currentCollection?.metadata.slug}?tab=about`)
