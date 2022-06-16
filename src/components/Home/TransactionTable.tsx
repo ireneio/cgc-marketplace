@@ -75,16 +75,20 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
         } else if (colIndex === 1) {
           return (
             <div
-              className="text-[#FC1F8E] text-[14px] px-[10px] py-[12px]"
-              key={colIndex}
               style={{
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
-              onClick={() => handleGoExplorer(col, 'tx')}
             >
-              <ClipboardText copyValue={String(col)}>
-                <div className="w-[150px]">
-                  {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
+              <ClipboardText key={colIndex} copyValue={String(col)}>
+                <div
+                  className="text-[#FC1F8E] text-[14px] px-[10px] py-[12px]"
+                  onClick={() => handleGoExplorer(col, 'tx')}
+                >
+                  <div className="w-[150px]">
+                    {getTrimmedAddressEllipsisMiddle(String(col), {
+                      length: 12,
+                    })}
+                  </div>
                 </div>
               </ClipboardText>
             </div>
@@ -104,16 +108,20 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
         } else if (colIndex === 3) {
           return (
             <div
-              key={colIndex}
-              className="text-[#FC1F8E] text-[14px] px-[10px] py-[12px]"
               style={{
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
-              onClick={() => handleGoExplorer(col, 'account')}
             >
-              <ClipboardText copyValue={String(col)}>
-                <div className="w-[150px]">
-                  {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
+              <ClipboardText key={colIndex} copyValue={String(col)}>
+                <div
+                  className="text-[#FC1F8E] text-[14px] px-[10px] py-[12px]"
+                  onClick={() => handleGoExplorer(col, 'account')}
+                >
+                  <div className="w-[150px]">
+                    {getTrimmedAddressEllipsisMiddle(String(col), {
+                      length: 12,
+                    })}
+                  </div>
                 </div>
               </ClipboardText>
             </div>
@@ -121,16 +129,20 @@ const TransactionTable = ({ rows, headers, loading }: Props) => {
         } else if (colIndex === 4) {
           return (
             <div
-              key={colIndex}
-              className="text-[#FC1F8E] text-[14px] px-[10px] py-[12px]"
               style={{
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
-              onClick={() => handleGoExplorer(col, 'account')}
             >
-              <ClipboardText copyValue={String(col)}>
-                <div className="w-[150px]">
-                  {getTrimmedAddressEllipsisMiddle(String(col), { length: 12 })}
+              <ClipboardText key={colIndex} copyValue={String(col)}>
+                <div
+                  className="text-[#FC1F8E] text-[14px] px-[10px] py-[12px]"
+                  onClick={() => handleGoExplorer(col, 'account')}
+                >
+                  <div className="w-[150px]">
+                    {getTrimmedAddressEllipsisMiddle(String(col), {
+                      length: 12,
+                    })}
+                  </div>
                 </div>
               </ClipboardText>
             </div>

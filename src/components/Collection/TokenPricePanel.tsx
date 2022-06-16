@@ -91,7 +91,10 @@ const TokenPricePanel = ({
   }, [currentView, highDay, highWeek, highMonth]);
 
   const handleGoAddress = (value: string) => {
-    window.open(`https://solscan.io/token/${value}`, '_blank');
+    const tid = setTimeout(() => {
+      window.open(`https://solscan.io/token/${value}`, '_blank');
+      clearTimeout(tid);
+    });
   };
 
   const _priceFluctuation = useMemo(() => {
