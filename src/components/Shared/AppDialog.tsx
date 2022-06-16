@@ -48,7 +48,7 @@ const AppDialog = ({
             leaveTo="opacity-0 scale-95"
           >
             <div
-              className="login_dialog_parent relative inline-block my-12 overflow-hidden text-left align-middle transition-all
+              className="relative inline-block my-12 overflow-hidden text-left align-middle transition-all
             transform shadow-xl rounded-[5px] bg-[#13002B] font-circularstdbook"
             >
               <div
