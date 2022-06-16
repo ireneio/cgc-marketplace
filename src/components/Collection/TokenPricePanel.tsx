@@ -129,14 +129,18 @@ const TokenPricePanel = ({
           {brandName} Token Price ({symbol})
         </div>
         <div className="flex items-center mb-[8px]">
-          <div className="font-bold text-[36px] text-[#FFFFFF]">${price}</div>
-          <div className="ml-[14px]">
-            <TickerText
-              text={Number(getNumberWithCommas(_priceFluctuation, 2))}
-              direction={_priceFluctuation > 0 ? 'up' : 'down'}
-              fontSize={14}
-            />
+          <div className="font-bold text-[36px] text-[#FFFFFF]">
+            {price ? `$${Number(price).toFixed(10)}` : '-'}
           </div>
+          {price && (
+            <div className="ml-[14px]">
+              <TickerText
+                text={Number(getNumberWithCommas(_priceFluctuation, 2))}
+                direction={_priceFluctuation > 0 ? 'up' : 'down'}
+                fontSize={14}
+              />
+            </div>
+          )}
         </div>
         <div className="flex items-center mb-[24px]">
           <div className="mr-[8px] text-[#AAAAAA]">Price Change (%):</div>
@@ -182,10 +186,12 @@ const TokenPricePanel = ({
           </div>
         )}
         <div className="mb-[24px]">
-          <div className="text-[#FFFFFF] text-[14px] font-normal flex mb-[8px]">
-            <span className="text-[#AAAAAA] w-[20px]">Low: </span>
-            <div className="w-[100px] ml-[8px] text-right">${low}</div>
-          </div>
+          {low && (
+            <div className="text-[#FFFFFF] text-[14px] font-normal flex mb-[8px]">
+              <span className="text-[#AAAAAA] w-[20px]">Low: </span>
+              <div className="w-[100px] ml-[8px] text-right">${low}</div>
+            </div>
+          )}
           {/* <div className="ml-0 lg:ml-[12px] basis-[100%] md:basis-auto mt-[12px] md:mt-0">
             <ProgressBar
               width={221}
@@ -193,10 +199,12 @@ const TokenPricePanel = ({
               showIndicator
             />
           </div> */}
-          <div className="text-[#FFFFFF] text-[14px] font-normal flex">
-            <span className="text-[#AAAAAA] w-[20px]">High: </span>
-            <div className="w-[100px] ml-[8px] text-right">${high}</div>
-          </div>
+          {high && (
+            <div className="text-[#FFFFFF] text-[14px] font-normal flex">
+              <span className="text-[#AAAAAA] w-[20px]">High: </span>
+              <div className="w-[100px] ml-[8px] text-right">${high}</div>
+            </div>
+          )}
         </div>
         <div className="mb-[24px]">
           <Divider />
