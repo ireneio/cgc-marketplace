@@ -116,7 +116,7 @@ const ListCard = ({
                   height={12}
                 />
               </div>
-              <div>{price}</div>
+              <div className="h-[36px]">{price}</div>
             </div>
           </div>
         ) : (
