@@ -60,6 +60,7 @@ export const useGetCollectionsV2 = () => {
     }),
     {
       revalidateOnFocus: false,
+      revalidateOnMount: false,
     },
   );
 
@@ -185,6 +186,7 @@ export const useGetCollectionsBySlugV2 = () => {
     }),
     {
       revalidateOnFocus: false,
+      revalidateOnMount: false,
     },
   );
 
@@ -276,6 +278,7 @@ export const useGetNftByCollectionIdV2 = () => {
     }),
     {
       revalidateOnFocus: false,
+      revalidateOnMount: false,
     },
   );
 
@@ -320,7 +323,6 @@ export const useGetNftByCollectionIdV2 = () => {
 };
 
 export const useGetNftByHash = () => {
-  // const dispatch = useAppDispatch();
   const [items, setItems] = useState<Record<string, any>>({
     image: '',
     brand: '',
@@ -349,10 +351,6 @@ export const useGetNftByHash = () => {
     if (data?.success) {
       const _data = data?.data;
       if (Object.keys(_data).length) {
-        // dispatch({
-        //   type: 'SET_CURRENT_COLLECTION_TOKEN_DATA',
-        //   payload: _data,
-        // });
         const _transformed = [_data].map((item: any) => {
           const manifest = item?.splNftInfo?.data?.manifest;
           return {
@@ -392,7 +390,6 @@ export const useGetNftByHash = () => {
 };
 
 export const useGetNftByHashV2 = () => {
-  // const dispatch = useAppDispatch();
   const [items, setItems] = useState<Record<string, any>>({
     image: '',
     brand: '',
@@ -414,6 +411,7 @@ export const useGetNftByHashV2 = () => {
     }),
     {
       revalidateOnFocus: false,
+      revalidateOnMount: false,
     },
   );
 
@@ -421,10 +419,6 @@ export const useGetNftByHashV2 = () => {
     if (data?.success) {
       const _data = data?.data;
       if (Object.keys(_data).length) {
-        // dispatch({
-        //   type: 'SET_CURRENT_COLLECTION_TOKEN_DATA',
-        //   payload: _data,
-        // });
         const _transformed = [_data].map((item: any) => {
           const manifest = item?.splNftInfo?.data?.manifest;
           return {
@@ -473,6 +467,7 @@ export const useGetCarouselV2 = () => {
     }),
     {
       revalidateOnFocus: false,
+      revalidateOnMount: false,
     },
   );
 
