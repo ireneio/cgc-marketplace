@@ -172,7 +172,7 @@ const DetailView = () => {
                       priceToBTC={token?.tokenActivePrice?.btcPrice}
                       priceToETH={token?.tokenActivePrice?.ethPrice}
                       priceFluctuation={
-                        token?.tokenStats[0]?.usdAthChangePercentage
+                        token?.tokenStats[0]?.priceChangePercentage24h
                       }
                       priceChangePercentage7d={
                         token?.tokenStats[0]?.priceChangePercentage7d
@@ -214,7 +214,7 @@ const DetailView = () => {
             {currentCollection?.nftCollectionStats ? (
               <NftPricePanel
                 name={currentCollection?.metadata.name}
-                volume={currentCollection?.nftCollectionStats?.usdMeTotalVolume}
+                volume={currentCollection?.nftCollectionStats?.usdOneDayVolume}
                 volume7Days={
                   currentCollection?.nftCollectionStats?.usdSevenDayVolume
                 }
@@ -236,7 +236,7 @@ const DetailView = () => {
                   currentCollection?.nftCollectionStats?.usdThirtyDaySales
                 }
                 averagePrice={
-                  currentCollection?.nftCollectionStats?.usdAveragePrice
+                  currentCollection?.nftCollectionStats?.usdOneDayAveragePrice
                 }
                 averagePrice7Days={
                   currentCollection?.nftCollectionStats?.usdSevenDayAveragePrice
