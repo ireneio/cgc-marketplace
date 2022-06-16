@@ -7,7 +7,6 @@ import { useMemo } from 'react';
 import DefaultTable from '../Shared/DefaultTable';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import ClipboardText from '../Shared/ClipboardText';
-import PrimaryGradientText from '../Catheon/PrimaryGradientText';
 
 dayjs.extend(relativeTime);
 interface Props {
