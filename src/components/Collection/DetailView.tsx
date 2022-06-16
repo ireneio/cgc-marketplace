@@ -190,7 +190,12 @@ const DetailView = () => {
                       highMonth={token?.tokenStats[0]?.usdHigh24h}
                       marketCap={token?.tokenStats[0]?.usdMarketCap}
                       fullyDilutedMarketCap={
-                        token?.tokenStats[0]?.usdFullyDilutedValuation
+                        token?.tokenStats[0]?.usdFullyDilutedValuation ||
+                        (token?.tokenActivePrice?.usdPrice &&
+                          token?.tokenStats[0]?.totalSupply &&
+                          token?.tokenActivePrice?.usdPrice *
+                            token?.tokenStats[0]?.totalSupply) ||
+                        ''
                       }
                       volume={token?.tokenStats[0]?.usdTotalVolume}
                       circulatingSupply={
