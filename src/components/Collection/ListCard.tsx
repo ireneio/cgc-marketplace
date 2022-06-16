@@ -96,10 +96,10 @@ const ListCard = ({
         />
       </div>
       <div className="mt-[12px] px-[12px]">
-        <div className="text-[#FFFFFF] text-[18px] text-semibold">
+        <div className="text-[#FFFFFF] text-[18px] text-semibold single_line_ellipsis">
           {name || '-'}
         </div>
-        <div className="font-light text-[#9497AA] text-[12px] mt-[-1px]">
+        <div className="font-light text-[#9497AA] text-[12px] mt-[-1px] single_line_ellipsis">
           <div className="tracking-wider">{brand || '-'}</div>
         </div>
         {!hidePrice ? (

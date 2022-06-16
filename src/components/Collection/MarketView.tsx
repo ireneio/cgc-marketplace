@@ -42,6 +42,8 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
     data,
     loading,
     refresh: refreshCollection,
+    setFilter,
+    setLimit,
   } = useGetNftByCollectionIdV2();
   const { data: currentCollection } = useGetCollectionsBySlugV2();
 
@@ -85,10 +87,13 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
         0,
       );
     } else if (currentTab === 'Listed Items') {
-      const listed = data.filter(
-        (item: any) => item?.external_marketplace_listing?.length,
+      if (!currentCollection?.nftCollectionStats?.meListingCount) {
+        return getNumberWithCommas(data.length, 0);
+      }
+      return getNumberWithCommas(
+        currentCollection?.nftCollectionStats?.meListingCount,
+        0,
       );
-      return getNumberWithCommas(listed.length, 0);
     }
   }, [currentTab, data]);
 
@@ -119,6 +124,14 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
   useEffect(() => {
     getCart();
   }, []);
+
+  useEffect(() => {
+    if (router.query.tab && router.query.tab === 'listed_items') {
+      setFilter('external_listing');
+    } else if (router.query.tab && router.query.tab === 'all_items') {
+      setFilter('');
+    }
+  }, [router.query.tab]);
 
   return (
     <div className="mb-[24px]">

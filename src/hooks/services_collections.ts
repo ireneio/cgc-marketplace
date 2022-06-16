@@ -270,8 +270,10 @@ export const useGetNftByCollectionId = () => {
 export const useGetNftByCollectionIdV2 = () => {
   const [items, setItems] = useState<any[]>([]);
   const [collectionId, setCollectionId] = useState('');
+  const [limit, setLimit] = useState('200');
+  const [filter, setFilter] = useState('');
   const { data, error, mutate, isValidating } = useSWR(
-    `/v2/api/nft/list?slug=${collectionId}`,
+    `/v2/api/nft/list?slug=${collectionId}&filter=${filter}&limit=${limit}`,
     fetcher.bind({
       method: 'get',
     }),
@@ -313,6 +315,8 @@ export const useGetNftByCollectionIdV2 = () => {
 
   return {
     setCollectionId,
+    setLimit,
+    setFilter,
     collectionId,
     refresh: mutate,
     data: items,
