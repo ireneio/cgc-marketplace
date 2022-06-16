@@ -186,7 +186,6 @@ export const useGetCollectionsBySlugV2 = () => {
     }),
     {
       revalidateOnFocus: false,
-      revalidateOnMount: false,
     },
   );
 

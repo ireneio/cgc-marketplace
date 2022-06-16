@@ -23,6 +23,7 @@ import {
   useGetNftTransactionsByHashV2,
 } from '@/hooks/services_nft';
 
+const PAGE_LIMIT = 10;
 export interface NftInfo {
   id: string | number;
   name: string;
@@ -109,6 +110,14 @@ const Nft = () => {
     refresh: refreshTransaction,
   } = useGetNftTransactionsByHashV2();
 
+  const _dataTransaction = useMemo(() => {
+    const startIdx = currentPage * PAGE_LIMIT;
+    const endIdx = startIdx + PAGE_LIMIT;
+    return dataTransaction.length
+      ? dataTransaction.slice(startIdx, endIdx)
+      : [[]];
+  }, [dataTransaction, currentPage]);
+
   const breadCrumbItems = useMemo(() => {
     switch (currentSelection) {
       case 'Collection Item':
@@ -117,7 +126,7 @@ const Nft = () => {
           {
             text: 'Home',
             value: '/',
-            disabled: loading || !currentCollection?.metadata?.name,
+            disabled: loading || !currentCollection?.metadata?.slug,
           },
           {
             text: 'Explore',
@@ -326,16 +335,22 @@ const Nft = () => {
                 <div className="mb-[24px]">
                   <DetailPanel info={info} />
                 </div>
-                <div className="mb-[24px]">
+                <div
+                  style={{ marginBottom: info?.attributes?.length ? 24 : 0 }}
+                >
                   <ActionPanel
                     info={info}
                     onCartOpen={(val) => setOpenCart(val)}
                     loading={loading}
                   />
                 </div>
-                <div className="mb-[0px]">
-                  <AttributesPanel info={info} />
-                </div>
+                {info?.attributes?.length ? (
+                  <div className="mb-[0px]">
+                    <AttributesPanel info={info} />
+                  </div>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             {dataTransaction.length ? (
@@ -350,7 +365,9 @@ const Nft = () => {
                     </div>
                     <div className="basis-[50%] md:basis[100%] mt-[12px] md:mt-0 flex justify-end">
                       <Pagination
-                        totalPages={15}
+                        totalPages={Math.ceil(
+                          dataTransaction.length / PAGE_LIMIT,
+                        )}
                         currentPage={currentPage}
                         onPageChange={(val) => setCurrentPage(val)}
                         onPreviousPage={() =>
@@ -362,7 +379,7 @@ const Nft = () => {
                   </div>
                   <div>
                     <HistoryTable
-                      rows={dataTransaction}
+                      rows={_dataTransaction}
                       headers={['type', 'seller', 'buyer', 'time', 'price']}
                     />
                   </div>

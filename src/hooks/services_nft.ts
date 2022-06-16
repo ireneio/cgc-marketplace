@@ -102,9 +102,12 @@ export const useGetNftByHashV2 = () => {
         const _transformed = [_data].map((item: any) => {
           const manifest = item?.splNftInfo?.data?.manifest;
           return {
-            image: manifest?.image,
-            brand: manifest?.collection?.family,
-            name: manifest?.name,
+            image: manifest?.image || '',
+            brand:
+              manifest?.collection?.family ||
+              manifest?.symbol?.toLowerCase() ||
+              '',
+            name: manifest?.name || '',
             description: manifest?.description,
             price: item?.nftListings?.length
               ? item?.nftListings[0].solPrice
@@ -112,11 +115,11 @@ export const useGetNftByHashV2 = () => {
             usdPrice: item?.nftListings?.length
               ? item?.nftListings[0].usdPrice
               : '',
-            tokenAddress: item?.tokenAddress,
-            walletAddress: item?.splNftInfo?.walletAddress,
+            tokenAddress: item?.tokenAddress || '',
+            walletAddress: item?.splNftInfo?.walletAddress || '',
             is_listed: item?.nftListings?.length,
             attributes:
-              manifest?.attributes.map((item: any) => ({
+              manifest?.attributes?.map((item: any) => ({
                 traitType: item.trait_type,
                 value: item.value,
               })) || [],
