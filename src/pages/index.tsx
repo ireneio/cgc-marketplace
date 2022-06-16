@@ -1,13 +1,16 @@
 import AllCollections from '@/components/Home/AllCollections';
 import LandingCarousel from '@/components/Home/LandingCarousel';
+import LandingCarouselMobile from '@/components/Home/LandingCarouselMobile';
 import LatestSales from '@/components/Home/LatestSales';
 import LatestTransactions from '@/components/Home/LatestTransactions';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
 import { useGetCollectionsV2 } from '@/hooks/services_collections';
+import { isMobile, useWindowWidth } from '@/hooks/window';
 import { useMemo } from 'react';
 
 const Index = () => {
   const { data } = useGetCollectionsV2();
+  const windowWidth = useWindowWidth();
 
   const carouselItems = useMemo(() => {
     return data.slice(0, 5).map((collection: any) => {
@@ -26,7 +29,11 @@ const Index = () => {
   return (
     <DefaultLayout>
       <div className="mt-[21px]">
-        <LandingCarousel carouselItems={carouselItems} />
+        {windowWidth < 768 ? (
+          <LandingCarouselMobile carouselItems={carouselItems} />
+        ) : (
+          <LandingCarousel carouselItems={carouselItems} />
+        )}
       </div>
       <div className="mt-[32px]">
         <AllCollections />

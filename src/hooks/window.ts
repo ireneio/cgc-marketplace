@@ -1,5 +1,5 @@
-// import { useRouter } from 'next/router';
-// import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 export const isMobile = () => {
   let check = false;
@@ -18,36 +18,36 @@ export const isMobile = () => {
   return check;
 };
 
-// export const useWindowWidth = () => {
-//   const [windowWidth, setWindowWidth] = useState(768);
-//   const router = useRouter();
+export const useWindowWidth = () => {
+  const [windowWidth, setWindowWidth] = useState(768);
+  const router = useRouter();
 
-//   useEffect(() => {
-//     const isMobile = mobileCheck();
-//     if (isMobile) {
-//       setWindowWidth(767);
-//     }
-//     if (window) {
-//       const cb = () => {
-//         setWindowWidth(window.innerWidth);
-//       };
-//       window.addEventListener('resize', cb);
-//       // window.addEventListener('load', cb);
-//       return () => {
-//         window.removeEventListener('resize', cb);
-//         // window.removeEventListener('load', cb);
-//       };
-//     }
-//   });
+  useEffect(() => {
+    const _isMobile = isMobile();
+    if (_isMobile) {
+      setWindowWidth(767);
+    }
+    if (window) {
+      const cb = () => {
+        setWindowWidth(window.innerWidth);
+      };
+      window.addEventListener('resize', cb);
+      window.addEventListener('load', cb);
+      return () => {
+        window.removeEventListener('resize', cb);
+        window.removeEventListener('load', cb);
+      };
+    }
+  });
 
-//   useEffect(() => {
-//     if (window) {
-//       setWindowWidth(window.innerWidth);
-//     }
-//   }, [router.pathname]);
+  useEffect(() => {
+    if (window) {
+      setWindowWidth(window.innerWidth);
+    }
+  }, [router.pathname]);
 
-//   return windowWidth;
-// };
+  return windowWidth;
+};
 
 // export const useWindowHeight = () => {
 //   const [windowHeight, setWindowHeight] = useState(0);
