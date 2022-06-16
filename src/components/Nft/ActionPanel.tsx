@@ -1,5 +1,6 @@
 import { useCart } from '@/hooks/cart';
 import { NftInfo } from '@/pages/nft/[id]';
+import { getNumberWithCommas } from '@/utils/formatHelper';
 import Button from '../Shared/Button';
 import Tag from '../Shared/Tag';
 
@@ -26,7 +27,7 @@ const ActionPanel = ({
         </div>
         <div className="flex items-center mt-[8px]">
           <div className="text-[24px] font-semibold text-[#FFFFFF]">
-            {info.price || '-'}
+            {getNumberWithCommas(info.price, 2) || '-'}
           </div>
           <div className="mt-[2px] ml-[6px]">
             <img
@@ -38,7 +39,7 @@ const ActionPanel = ({
           </div>
           {info?.usdPrice && (
             <div className="ml-[8px] self-center mt-[4px] text-[#9497AA]">
-              (${info?.usdPrice})
+              (${getNumberWithCommas(info?.usdPrice, 2)})
             </div>
           )}
         </div>

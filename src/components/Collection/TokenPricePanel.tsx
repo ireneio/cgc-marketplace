@@ -150,8 +150,10 @@ const TokenPricePanel = ({
         {(priceToBTC || priceToBTC === 0) && (
           <div className="flex items-center mb-[8px]">
             <div className="font-bold text-[14px] text-[#FFFFFF] flex">
-              <span className="font-thin">{symbol}/BTC: </span>
-              <div className="w-[160px] ml-[8px] text-right">${priceToBTC}</div>
+              <span className="font-thin text-[#AAAAAA]">{symbol}/BTC: </span>
+              <div className="w-[160px] ml-[8px] text-right">
+                ${Number(priceToBTC)?.toFixed(10)}
+              </div>
             </div>
             {/* <div className="ml-[8px] text-[12px]">
             <TickerText
@@ -165,8 +167,10 @@ const TokenPricePanel = ({
         {(priceToETH || priceToETH === 0) && (
           <div className="flex items-center mb-[8px]">
             <div className="font-bold text-[14px] text-[#FFFFFF] flex">
-              <span className="font-thin">{symbol}/ETH: </span>
-              <div className="w-[160px] ml-[8px] text-right">${priceToETH}</div>
+              <span className="font-thin text-[#AAAAAA]">{symbol}/ETH: </span>
+              <div className="w-[160px] ml-[8px] text-right">
+                ${Number(priceToETH)?.toFixed(10)}
+              </div>
             </div>
             {/* <div className="ml-[8px] text-[12px]">
             <TickerText
