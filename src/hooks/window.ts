@@ -23,10 +23,6 @@ export const useWindowWidth = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const _isMobile = isMobile();
-    if (_isMobile) {
-      setWindowWidth(767);
-    }
     if (window) {
       const cb = () => {
         setWindowWidth(window.innerWidth);
