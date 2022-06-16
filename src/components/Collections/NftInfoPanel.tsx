@@ -46,7 +46,7 @@ const NftInfoPanel = ({ info }: { info: LaunchpadNftInfo }) => {
             </div>
             <div className="ml-[4px]">
               <img
-                src={'/img/icon_unit_sol.png'}
+                src={'/img/icon_unit_sol.svg'}
                 alt={'sol'}
                 width={14}
                 height={14}

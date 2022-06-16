@@ -61,7 +61,7 @@ const Pagination = ({
               : 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
         }}
       >
-        <img src="/img/chevron_left.png" alt="arrow left" />
+        <img src="/img/icon_chevron_left.svg" alt="arrow left" />
       </button>
       {pagesMap.map((item) => {
         return (
@@ -100,7 +100,7 @@ const Pagination = ({
               : 'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
         }}
       >
-        <img src="/img/chevron_right.png" alt="arrow right" />
+        <img src="/img/icon_chevron_right.svg" alt="arrow right" />
       </button>
     </div>
   );

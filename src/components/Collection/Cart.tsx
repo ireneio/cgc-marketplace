@@ -114,7 +114,7 @@ const Cart = ({ onClose }: { onClose?: () => void }) => {
                         </div>
                         <div className="mt-[1px] ml-[4px]">
                           <img
-                            src="/img/icon_unit_sol.png"
+                            src="/img/icon_unit_sol.svg"
                             alt="sol"
                             width={12}
                             height={12}
@@ -138,7 +138,7 @@ const Cart = ({ onClose }: { onClose?: () => void }) => {
                   </div>
                   <div className="mt-[4px] ml-[4px]">
                     <img
-                      src="/img/icon_unit_sol.png"
+                      src="/img/icon_unit_sol.svg"
                       alt="sol"
                       width={12}
                       height={12}

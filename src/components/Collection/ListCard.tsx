@@ -108,7 +108,7 @@ const ListCard = ({
             <div className="font-semibold text-[#FFFFFF] text-[24px] mt-[12px] flex items-center">
               <div className="mt-[4px] mr-[4px]">
                 <img
-                  src={'/img/icon_unit_sol.png'}
+                  src={'/img/icon_unit_sol.svg'}
                   alt={'sol'}
                   width={12}
                   height={12}

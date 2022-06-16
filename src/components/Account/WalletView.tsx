@@ -23,7 +23,7 @@ const WalletView = () => {
           {wallet.connected && (
             <div className="lg:colspan-2">
               <WalletCard
-                providerIcon="/img/logo_phantom.png"
+                providerIcon="/img/logo_phantom.svg"
                 provider="Phantom"
                 address={wallet.publicKey?.toString() || ''}
                 onEditClick={() => handleSolanaEdit()}

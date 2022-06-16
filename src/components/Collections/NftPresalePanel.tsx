@@ -38,7 +38,7 @@ const NftPresalePanel = ({ info }: { info: LaunchpadNftInfo }) => {
               <div className="mr-[6px]">{info.preSale.price}</div>
               <div>
                 <img
-                  src={'/img/icon_unit_sol.png'}
+                  src={'/img/icon_unit_sol.svg'}
                   alt={'sol'}
                   width={14}
                   height={14}

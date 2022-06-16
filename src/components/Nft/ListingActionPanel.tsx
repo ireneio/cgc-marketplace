@@ -107,7 +107,7 @@ const ListingActionPanel = ({
             />
             <div className="mt-[2px] ml-[6px]">
               <img
-                src="/img/icon_unit_sol.png"
+                src="/img/icon_unit_sol.svg"
                 alt="sol"
                 width={16}
                 height={16}
