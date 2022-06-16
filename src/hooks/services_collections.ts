@@ -60,7 +60,7 @@ export const useGetCollectionsV2 = () => {
     }),
     {
       revalidateOnFocus: false,
-      revalidateOnMount: false,
+      // revalidateOnMount: false,
     },
   );
 
