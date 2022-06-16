@@ -8,10 +8,6 @@ const ListingHintDialog = ({
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const Title = () => {
-    return <div></div>;
-  };
-
   const Content = () => {
     return (
       <div className="text-[#FFFFFF] py-[24px]">
@@ -32,12 +28,7 @@ const ListingHintDialog = ({
   };
 
   return (
-    <AppDialog
-      isOpen={isOpen}
-      setIsOpen={setIsOpen}
-      title={<Title />}
-      content={<Content />}
-    />
+    <AppDialog isOpen={isOpen} setIsOpen={setIsOpen} content={<Content />} />
   );
 };
 

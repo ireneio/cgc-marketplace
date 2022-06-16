@@ -2,11 +2,17 @@ import ListingHintDialog from '@/components/Nft/ListingHintDialog';
 import { useState } from 'react';
 
 const Test = () => {
-  const [dialogOpen, setDialogOpen] = useState(true);
+  const [listingHintDialog, setListingHintDialog] = useState(true);
 
   return (
     <div id="Test">
-      <ListingHintDialog isOpen={dialogOpen} setIsOpen={setDialogOpen} />
+      <button onClick={() => setListingHintDialog((prev) => !prev)}>
+        open ListingHintDialog
+      </button>
+      <ListingHintDialog
+        isOpen={listingHintDialog}
+        setIsOpen={setListingHintDialog}
+      />
     </div>
   );
 };

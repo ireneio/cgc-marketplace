@@ -9,7 +9,7 @@ const AppDialog = ({
 }: {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  title: React.ReactNode;
+  title?: React.ReactNode;
   content: React.ReactNode;
 }) => {
   return (
@@ -60,12 +60,16 @@ const AppDialog = ({
               >
                 <div className="relative flex items-center w-full justify-center bg-[#13002B]">
                   <div>
-                    <Dialog.Title
-                      as="h3"
-                      className="text-2xl font-bold leading-6 text-white pb-2 flex flex-col items-center"
-                    >
-                      {title}
-                    </Dialog.Title>
+                    {title ? (
+                      <Dialog.Title
+                        as="h3"
+                        className="text-2xl font-bold leading-6 text-white pb-2 flex flex-col items-center"
+                      >
+                        {title}
+                      </Dialog.Title>
+                    ) : (
+                      <></>
+                    )}
                     <div className="mt-0 px-[24px]">
                       <div className="min-h-full w-full flex flex-col justify-center overflow-hidden">
                         {content}
