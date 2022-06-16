@@ -178,3 +178,32 @@ export const useGetNftTransactionsByHashV2 = () => {
     error,
   };
 };
+
+export const useGetNftTransactionsV2 = () => {
+  const [items, setItems] = useState<Record<string, any>[]>([]);
+  const { data, error, mutate, isValidating } = useSWR(
+    `/v2/api/nft/transaction`,
+    fetcher.bind({
+      method: 'get',
+    }),
+    {
+      revalidateOnFocus: false,
+    },
+  );
+
+  useEffect(() => {
+    if (data?.success) {
+      const _data = data?.data;
+      if (!_data.length) return;
+      const _transformed = _data;
+      setItems(_transformed);
+    }
+  }, [data]);
+
+  return {
+    data: items,
+    loading: isValidating,
+    refresh: mutate,
+    error,
+  };
+};

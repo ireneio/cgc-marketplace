@@ -1,9 +1,31 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import SalesCard from './SalesCard';
 import SectionTitle from '../Shared/SectionTitle';
+import { useGetNftTransactionsV2 } from '@/hooks/services_nft';
+import dayjs from 'dayjs';
+import { useInView } from 'react-intersection-observer';
+import SalesCardLoading from './SalesCardLoading';
+import EmptyListTextDisplay from '../Shared/EmptyListTextDisplay';
+
+const LIMIT = 10;
 
 const LatestSales = () => {
   const [items] = useState([1, 2, 3, 4, 5]);
+  const { data, loading } = useGetNftTransactionsV2();
+  const [page, setPage] = useState(0);
+  const { inView, ref } = useInView();
+
+  const _data = useMemo(() => {
+    return data
+      .filter((nft: any) => nft?.nftEventId === 'buyNow')
+      .slice(0, page + LIMIT);
+  }, [data, inView, page]);
+
+  useEffect(() => {
+    if (inView) {
+      setPage((prev) => prev + LIMIT);
+    }
+  }, [inView]);
 
   return (
     <div>
@@ -11,23 +33,36 @@ const LatestSales = () => {
         <SectionTitle>latest sales</SectionTitle>
       </div>
       <div className="mt-[24px] flex overflow-auto pb-[24px] scrollbar_thin">
-        {items.map((game, index) => {
-          return (
-            <div key={index} className="mr-[28px]">
-              <SalesCard
-                img={'/img/solchicks-641.png'}
-                title={'SolChicks #641'}
-                brand={'SolChicks'}
-                signature={
-                  '1djpsmYBoUzvhhaMP2j2pfoiGTwLgQ4kfF2a3uzdpNLx8kw3CXfRBbBVQTpBpDjG16mpYB99QUo8PhzXzdML9uk'
-                }
-                time={new Date().toISOString()}
-                from={'Hh8KHdiwYXCDxyVp8GkfHbQohzextaSAQvTJLAdd5B5G'}
-                amount={'245.68'}
-              />
-            </div>
-          );
-        })}
+        {!loading && !data.length ? (
+          <EmptyListTextDisplay>No Items Available.</EmptyListTextDisplay>
+        ) : (
+          <></>
+        )}
+        {!loading
+          ? _data.map((tx, index) => {
+              return (
+                <div key={index} className="mr-[28px]">
+                  <SalesCard
+                    img={'/img/solchicks-641.png'}
+                    title={'SolChicks #641'}
+                    brand={'SolChicks'}
+                    signature={tx?.signature || ''}
+                    time={tx?.createdAt || ''}
+                    from={tx?.senderAddress || ''}
+                    to={tx?.recipientAddress || ''}
+                    amount={String(tx?.amountUsd) || ''}
+                  />
+                </div>
+              );
+            })
+          : [1, 2, 3, 4, 5].map((val, idx) => {
+              return (
+                <div key={idx} className="mr-[28px]">
+                  <SalesCardLoading />
+                </div>
+              );
+            })}
+        <div ref={ref}></div>
       </div>
     </div>
   );

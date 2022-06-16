@@ -1,7 +1,11 @@
 // import CrIcon from '@/public/img/cr.svg';
 import dayjs from 'dayjs';
-import { getNumberWithCommas, getTrimmedAddress } from '@/utils/formatHelper';
+import {
+  getNumberWithCommas,
+  getTrimmedAddressEllipsisMiddle,
+} from '@/utils/formatHelper';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import ClipboardText from '../Shared/ClipboardText';
 
 dayjs.extend(relativeTime);
 
@@ -12,6 +16,7 @@ interface Props {
   signature: string;
   time: string;
   from: string;
+  to: string;
   amount: string;
 }
 
@@ -22,12 +27,27 @@ const SalesCard = ({
   signature,
   time,
   from,
+  to,
   amount,
 }: Props) => {
+  const handleCardClick = () => {
+    // TODO
+    console.log('handleCardClick');
+  };
+
+  const handleGoExplorer = (hash: string, type: 'tx' | 'account') => {
+    if (type === 'tx') {
+      window.open(`https://solscan.io/tx/${hash}`, '_blank');
+    } else if (type === 'account') {
+      window.open(`https://solscan.io/account/${hash}`, '_blank');
+    }
+  };
+
   return (
-    <div className="w-[200px] shadow-md shadow-black rounded-[5px] bg-[#290030] border-solid border-[#290030] border-[1px] cursor-pointer hover:shadow-xl">
+    <div className="w-[200px] shadow-md shadow-black rounded-[5px] bg-[#290030] border-solid border-[#290030] border-[1px] hover:shadow-xl">
       <div
-        className="w-full min-h-[200px] aspect-w-1 aspect-h-1 overflow-hidden
+        onClick={() => handleCardClick()}
+        className="cursor-pointer w-full min-h-[200px] aspect-w-1 aspect-h-1 overflow-hidden
               group-hover:opacity-75 lg:aspect-none
               rounded-t-[5px] transition ease-in duration-200 hover:cursor-pointer"
       >
@@ -38,38 +58,64 @@ const SalesCard = ({
         />
       </div>
       <div className="px-[16px] py-[8px] bg-[#13002B]">
-        <div className="text-[20px] font-bold text-[#FFFFFF]">{title}</div>
-        <div className="mt-[4px] text-[#FC1F8E] text-[14px] flex justify-start">
+        <div className="text-[20px] font-bold text-[#FFFFFF] single_line_ellipsis">
+          {title}
+        </div>
+        <div className="mt-[4px] font-light text-[#9497AA] text-[12px] flex justify-start single_line_ellipsis">
           <div>{brand}</div>
           <div className="ml-[2px]">{/* <CrIcon /> */}</div>
         </div>
       </div>
       <div className="mt-[4px] px-[16px] py-[8px] bg-[#290030] rounded-b-[5px]">
-        <div className="flex items-center">
-          <div className="text-[#9497AA] text-[14px]">Signature:</div>
-          <div className="ml-[6px] text-[#FC1F8E] text-[14px]">
-            {getTrimmedAddress(signature, { length: 12 })}
-          </div>
+        <div className="flex items-center justify-between">
+          <div className="text-[#9497AA] text-[14px]">Signature</div>
+          <ClipboardText copyValue={signature}>
+            <div
+              className="ml-[6px] text-[#FC1F8E] text-[14px]"
+              onClick={() => handleGoExplorer(signature, 'tx')}
+            >
+              {getTrimmedAddressEllipsisMiddle(signature, { length: 4 })}
+            </div>
+          </ClipboardText>
         </div>
-        <div className="flex items-center mt-[6px]">
-          <div className="text-[#9497AA] text-[14px]">Time:</div>
+        <div className="flex items-center mt-[6px] justify-between">
+          <div className="text-[#9497AA] text-[14px]">Time</div>
           <div className="ml-[6px] text-[#FFFFFF] text-[14px]">
             {dayjs(time).fromNow()}
           </div>
         </div>
-        <div className="flex items-center mt-[6px]">
-          <div className="text-[#9497AA] text-[14px]">From:</div>
-          <div className="ml-[6px] text-[#FC1F8E] text-[14px]">
-            {getTrimmedAddress(from, { length: 12 })}
-          </div>
-          {/* <div>
-          // copy
-        </div> */}
+        <div className="flex items-center mt-[6px] justify-between">
+          <div className="text-[#9497AA] text-[14px]">From</div>
+          <ClipboardText copyValue={from}>
+            <div
+              className="ml-[6px] text-[#FC1F8E] text-[14px]"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleGoExplorer(signature, 'account');
+              }}
+            >
+              {getTrimmedAddressEllipsisMiddle(from, { length: 6 })}
+            </div>
+          </ClipboardText>
         </div>
-        <div className="flex items-center mt-[6px]">
-          <div className="text-[#9497AA] text-[14px]">Amount ($USD):</div>
+        <div className="flex items-center mt-[6px] justify-between">
+          <div className="text-[#9497AA] text-[14px]">To</div>
+          <ClipboardText copyValue={to}>
+            <div
+              className="ml-[6px] text-[#FC1F8E] text-[14px]"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleGoExplorer(signature, 'account');
+              }}
+            >
+              {getTrimmedAddressEllipsisMiddle(to, { length: 6 })}
+            </div>
+          </ClipboardText>
+        </div>
+        <div className="flex items-center mt-[6px] justify-between">
+          <div className="text-[#9497AA] text-[14px]">Amount ($USD)</div>
           <div className="ml-[6px] text-[#FFFFFF] text-[14px]">
-            {getNumberWithCommas(amount)}
+            {amount || amount === '0' ? getNumberWithCommas(amount, 2) : '-'}
           </div>
         </div>
       </div>
