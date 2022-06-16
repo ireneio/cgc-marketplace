@@ -2,9 +2,9 @@ export function getNumberWithCommas(val: string | number, decimals?: number) {
   if (isNaN(Number(val))) {
     return '';
   }
-  return Number(val)
-    .toFixed(decimals || decimals === 0 ? decimals : 2)
-    .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+  return Number(
+    Number(val).toFixed(decimals || decimals === 0 ? decimals : 2),
+  ).toLocaleString();
 }
 
 type UnitTypes = 'usd' | 'bnb' | '%' | 'orbs' | 'sol';
