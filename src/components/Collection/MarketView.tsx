@@ -339,7 +339,10 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
                         : 'Not Listed'
                     }
                     onLeftFn={() => handleMoreInfo(item.tokenAddress)}
-                    onRightFn={(params) => handleAddToCart(params)}
+                    onRightFn={(params) => {
+                      item.is_listed && handleAddToCart(params);
+                      !item.is_listed && handleMoreInfo(item.tokenAddress);
+                    }}
                     onCardClick={() => handleMoreInfo(item.tokenAddress)}
                     tokenAddress={item.tokenAddress}
                     type={'list'}

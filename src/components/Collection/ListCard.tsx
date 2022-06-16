@@ -82,7 +82,7 @@ const ListCard = ({
       )}
       <div className="w-inherit bg-contain bg-center bg-no-repeat h-auto min-h-[170px]">
         {!imageLoaded && (
-          <div className="w-full flex justify-center items-center h-[170px]">
+          <div className="w-full flex justify-center items-center aspect-square object-contain">
             <img src="/img/spinner.svg" alt="spinner" />
           </div>
         )}
@@ -91,14 +91,16 @@ const ListCard = ({
           alt={name}
           height={150}
           onError={(e) => handleImageError(e)}
-          className="blur rounded-t-[5px] w-full h-auto force_card_height"
+          className="blur rounded-t-[5px] aspect-square object-cover"
           onLoad={(e) => handleImageLoad(e, image)}
         />
       </div>
       <div className="mt-[12px] px-[12px]">
-        <div className="text-[#FFFFFF] text-[18px] text-semibold">{name}</div>
+        <div className="text-[#FFFFFF] text-[18px] text-semibold">
+          {name || '-'}
+        </div>
         <div className="font-light text-[#9497AA] text-[12px] mt-[-1px]">
-          <div className="tracking-wider">{brand}</div>
+          <div className="tracking-wider">{brand || '-'}</div>
         </div>
         {!hidePrice ? (
           <div className="flex justify-between items-center">
