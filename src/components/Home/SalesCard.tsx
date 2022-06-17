@@ -17,6 +17,7 @@ interface Props {
   time: string;
   from: string;
   to: string;
+  tokenAddress: string;
   amount: string;
 }
 
@@ -28,6 +29,7 @@ const SalesCard = ({
   time,
   from,
   to,
+  tokenAddress,
   amount,
 }: Props) => {
   const handleCardClick = () => {
@@ -35,11 +37,13 @@ const SalesCard = ({
     console.log('handleCardClick');
   };
 
-  const handleGoExplorer = (hash: string, type: 'tx' | 'account') => {
+  const handleGoExplorer = (hash: string, type: 'tx' | 'account' | 'token') => {
     if (type === 'tx') {
       window.open(`https://solscan.io/tx/${hash}`, '_blank');
     } else if (type === 'account') {
       window.open(`https://solscan.io/account/${hash}`, '_blank');
+    } else if (type === 'token') {
+      window.open(`https://solscan.io/token/${hash}`, '_blank');
     }
   };
 
@@ -59,15 +63,26 @@ const SalesCard = ({
       </div>
       <div className="px-[16px] py-[8px] bg-[#13002B]">
         <div className="text-[20px] font-bold text-[#FFFFFF] single_line_ellipsis">
-          {title}
+          {title || '...'}
         </div>
         <div className="mt-[4px] font-light text-[#9497AA] text-[12px] flex justify-start single_line_ellipsis">
-          <div>{brand}</div>
+          <div>{brand || '-'}</div>
           <div className="ml-[2px]">{/* <CrIcon /> */}</div>
         </div>
       </div>
       <div className="mt-[4px] px-[16px] py-[8px] bg-[#290030] rounded-b-[5px]">
         <div className="flex items-center justify-between">
+          <div className="text-[#9497AA] text-[14px]">Address</div>
+          <ClipboardText copyValue={tokenAddress}>
+            <div
+              className="ml-[6px] text-[#FC1F8E] text-[14px]"
+              onClick={() => handleGoExplorer(tokenAddress, 'token')}
+            >
+              {getTrimmedAddressEllipsisMiddle(tokenAddress, { length: 4 })}
+            </div>
+          </ClipboardText>
+        </div>
+        <div className="flex items-center mt-[6px] justify-between">
           <div className="text-[#9497AA] text-[14px]">Signature</div>
           <ClipboardText copyValue={signature}>
             <div
@@ -81,7 +96,7 @@ const SalesCard = ({
         <div className="flex items-center mt-[6px] justify-between">
           <div className="text-[#9497AA] text-[14px]">Time</div>
           <div className="ml-[6px] text-[#FFFFFF] text-[14px]">
-            {dayjs(time).fromNow()}
+            {dayjs(Number(time) * 1000).fromNow()}
           </div>
         </div>
         <div className="flex items-center mt-[6px] justify-between">

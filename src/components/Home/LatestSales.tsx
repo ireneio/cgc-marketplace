@@ -16,6 +16,9 @@ const LatestSales = () => {
   const _data = useMemo(() => {
     return data
       .filter((nft: any) => nft?.nftEventType === 'buyNow')
+      .sort((a, b) => {
+        return b.blockTime - a.blockTime;
+      })
       .slice(0, page + LIMIT);
   }, [data, inView, page]);
 
@@ -41,13 +44,14 @@ const LatestSales = () => {
               return (
                 <div key={index} className="mr-[28px]">
                   <SalesCard
-                    img={'/img/solchicks-641.png'}
-                    title={'SolChicks #641'}
-                    brand={'SolChicks'}
+                    img={tx?.image || '/img/cgc_icon.png'}
+                    title={tx?.id || ''}
+                    brand={tx?.collection || '-'}
                     signature={tx?.signature || ''}
-                    time={tx?.createdAt || ''}
+                    time={tx?.block_time?.toString() || ''}
                     from={tx?.senderAddress || ''}
                     to={tx?.recipientAddress || ''}
+                    tokenAddress={tx?.tokenAddress || ''}
                     amount={String(tx?.amountUsd) || ''}
                   />
                 </div>
