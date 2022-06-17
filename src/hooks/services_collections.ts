@@ -67,23 +67,27 @@ export const useGetCollectionsV2 = () => {
   useEffect(() => {
     if (data?.success) {
       const _data = data?.data;
-      const _transformed = _data.map((item: any) => {
-        return {
-          ...item,
-          splashSrc: item.metadata.splashSrcUrl,
-          logoSrc: item.metadata.logoSrcUrl,
-          videoSrc: item.metadata.videoSrcUrl,
-          name: item.metadata.name,
-          slug: item.metadata.name.toLowerCase().split(' ').join('_'),
-          tags: item.tags.length ? item.tags.map((item: any) => item.tag) : [],
-          genre: [item.metadata.genre, ...item.tags.slice(0, 2)],
-          services: item.services,
-          description: item.metadata.description,
-          totalSupply: item?.nftCollectionStats?.totalSupply || null,
-          marketCap: item?.nftCollectionStats?.usdMarketCap || null,
-          network: 'SOL',
-        };
-      });
+      const _transformed = _data
+        .filter((item: any) => item.active)
+        .map((item: any) => {
+          return {
+            ...item,
+            splashSrc: item.metadata.splashSrcUrl,
+            logoSrc: item.metadata.logoSrcUrl,
+            videoSrc: item.metadata.videoSrcUrl,
+            name: item.metadata.name,
+            slug: item.metadata.name.toLowerCase().split(' ').join('_'),
+            tags: item.tags.length
+              ? item.tags.map((item: any) => item.tag)
+              : [],
+            genre: [item.metadata.genre, ...item.tags.slice(0, 2)],
+            services: item.services,
+            description: item.metadata.description,
+            totalSupply: item?.nftCollectionStats?.totalSupply || null,
+            marketCap: item?.nftCollectionStats?.usdMarketCap || null,
+            network: 'SOL',
+          };
+        });
       // dispatch({ type: 'SET_COLLECTIONS', payload: _transformed });
       setItems(_transformed);
     }

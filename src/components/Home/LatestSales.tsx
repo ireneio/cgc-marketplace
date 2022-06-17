@@ -45,7 +45,7 @@ const LatestSales = () => {
                 <div key={index} className="mr-[28px]">
                   <SalesCard
                     img={tx?.image || '/img/cgc_icon.png'}
-                    title={tx?.id || ''}
+                    title={tx?.name || ''}
                     brand={tx?.collection || '-'}
                     signature={tx?.signature || ''}
                     time={tx?.block_time?.toString() || ''}
