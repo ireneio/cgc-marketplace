@@ -54,7 +54,7 @@ const Cart = ({ onClose }: { onClose?: () => void }) => {
                 onClick={() => onClose && onClose()}
               >
                 <img
-                  src="/img/icon_double_chevron_left.png"
+                  src="/img/icon_double_chevron_left.svg"
                   alt="cart"
                   width={16}
                   height={16}
