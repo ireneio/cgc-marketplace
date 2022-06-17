@@ -19,7 +19,7 @@ export function getNumberWithUnit(val: string | number, options?: UnitOptions) {
     const { type, decimals } = options;
     switch (type) {
       case 'orbs':
-        return getNumberWithCommas(val, decimals) + ' OEBS';
+        return getNumberWithCommas(val, decimals) + ' ORBS';
       case '%':
         return getNumberWithCommas(val, decimals) + '%';
       case 'bnb':
@@ -36,17 +36,6 @@ export function getNumberWithUnit(val: string | number, options?: UnitOptions) {
 
 interface TrimmedAddressOptions {
   length: number;
-}
-
-export function getTrimmedAddress(
-  val: string,
-  options?: TrimmedAddressOptions,
-) {
-  if (options) {
-    const { length } = options;
-    return val.substring(0, length - 1) + '...';
-  }
-  return val.substring(0, 5) + '...';
 }
 
 export function getTrimmedAddressEllipsisMiddle(

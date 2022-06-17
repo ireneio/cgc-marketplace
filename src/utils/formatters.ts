@@ -39,48 +39,6 @@ export function getNumberWithUnit(val: string | number, options?: UnitOptions) {
   return '$' + getNumberWithCommas(val);
 }
 
-interface TrimmedAddressOptions {
-  length: number;
-}
-
-export function getTrimmedAddress(
-  val: string,
-  options?: TrimmedAddressOptions,
-) {
-  if (options) {
-    const { length } = options;
-    return val.substring(0, length - 1) + '...';
-  }
-  return val.substring(0, 5) + '...';
-}
-
-export function getTrimmedAddressEllipsisMiddle(
-  val: string,
-  options?: TrimmedAddressOptions,
-) {
-  if (!val) return '...';
-  if (options) {
-    const { length } = options;
-    return (
-      val.substring(0, length - 1) +
-      '...' +
-      val.substring(val.length - 4, val.length)
-    );
-  }
-  return (
-    val.substring(0, 5) + '...' + val.substring(val.length - 4, val.length)
-  );
-}
-
-export function sortAlphabetical(x: string, y: string) {
-  if (x.toLowerCase() !== y.toLowerCase()) {
-    x = x.toLowerCase();
-    y = y.toLowerCase();
-  }
-  return x > y ? 1 : x < y ? -1 : 0;
-  // or return x.localeCompare(y);
-}
-
 export function getNumberWithUnits(num: number, digits?: number) {
   const _formatter = Intl.NumberFormat('en', { notation: 'compact' });
   return _formatter.format(num);

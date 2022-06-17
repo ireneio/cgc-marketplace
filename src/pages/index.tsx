@@ -6,7 +6,7 @@ import LatestTransactions from '@/components/Home/LatestTransactions';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
 import { useGetCollectionsV2 } from '@/hooks/services_collections';
 import { useGetNftTransactionsV2 } from '@/hooks/services_nft';
-import { isMobile, useWindowWidth } from '@/hooks/window';
+import { useWindowWidth } from '@/hooks/window';
 import { useMemo } from 'react';
 
 const Index = () => {
@@ -44,8 +44,8 @@ const Index = () => {
         <LatestSales />
       </div>
       <div
-        className="mt-[37px] mb-[48px]"
-        style={{ marginTop: latestSales.length > 10 ? 37 : 32 }}
+        className="mt-[48px] mb-[48px]"
+        style={{ marginTop: latestSales.length > 10 ? 56 : 32 }}
       >
         <LatestTransactions />
       </div>

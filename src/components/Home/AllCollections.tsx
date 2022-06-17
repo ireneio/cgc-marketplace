@@ -15,7 +15,7 @@ const AllCollections = () => {
   const { data, loading } = useGetCollectionsV2();
 
   const handleGoDetail = (slug: string) => {
-    router.push(`/collection/${slug}`);
+    router.push(`/collection/${slug}`).then();
   };
 
   const [currentHoverId, setCurrentHoverId] = useState('-1');
@@ -29,9 +29,11 @@ const AllCollections = () => {
       <div className="flex justify-between items-center">
         <SectionTitle>all collections</SectionTitle>
       </div>
-      <div className="mt-[24px] mb-[24px]">
-        <Divider />
-      </div>
+      {router.pathname != '/' && (
+        <div className="mt-[24px] mb-[24px]">
+          <Divider />
+        </div>
+      )}
       {windowWidth < 500 ? (
         <div className="mt-[24px] flex overflow-auto pb-[24px] scrollbar_thin">
           {loading ? (
