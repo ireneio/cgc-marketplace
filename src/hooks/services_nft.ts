@@ -101,6 +101,7 @@ export const useGetNftByHashV2 = () => {
       if (Object.keys(_data).length) {
         const _transformed = [_data].map((item: any) => {
           const manifest = item?.splNftInfo?.data?.manifest;
+          const isListed = item?.externalNftListings?.length;
           return {
             image: manifest?.image || '',
             brand:
@@ -109,15 +110,11 @@ export const useGetNftByHashV2 = () => {
               '',
             name: manifest?.name || '',
             description: manifest?.description,
-            price: item?.nftListings?.length
-              ? item?.nftListings[0].solPrice
-              : '',
-            usdPrice: item?.nftListings?.length
-              ? item?.nftListings[0].usdPrice
-              : '',
+            price: isListed ? item?.externalNftListings[0].solPrice : '',
+            usdPrice: isListed ? item?.externalNftListings[0].usdPrice : '',
             tokenAddress: item?.tokenAddress || '',
             walletAddress: item?.splNftInfo?.walletAddress || '',
-            is_listed: item?.nftListings?.length,
+            is_listed: isListed,
             attributes:
               manifest?.attributes?.map((item: any) => ({
                 traitType: item.trait_type,

@@ -38,28 +38,28 @@ const LatestSales = () => {
         )}
         {!loading
           ? _data.map((tx, index) => {
-            return (
-              <div key={index} className="mr-[28px]">
-                <SalesCard
-                  img={'/img/solchicks-641.png'}
-                  title={'SolChicks #641'}
-                  brand={'SolChicks'}
-                  signature={tx?.signature || ''}
-                  time={tx?.createdAt || ''}
-                  from={tx?.senderAddress || ''}
-                  to={tx?.recipientAddress || ''}
-                  amount={String(tx?.amountUsd) || ''}
-                />
-              </div>
-            );
-          })
+              return (
+                <div key={index} className="mr-[28px]">
+                  <SalesCard
+                    img={'/img/solchicks-641.png'}
+                    title={'SolChicks #641'}
+                    brand={'SolChicks'}
+                    signature={tx?.signature || ''}
+                    time={tx?.createdAt || ''}
+                    from={tx?.senderAddress || ''}
+                    to={tx?.recipientAddress || ''}
+                    amount={String(tx?.amountUsd) || ''}
+                  />
+                </div>
+              );
+            })
           : [1, 2, 3, 4, 5].map((val, idx) => {
-            return (
-              <div key={idx} className="mr-[28px]">
-                <SalesCardLoading />
-              </div>
-            );
-          })}
+              return (
+                <div key={idx} className="mr-[28px]">
+                  <SalesCardLoading />
+                </div>
+              );
+            })}
         <div ref={ref}></div>
       </div>
     </div>
