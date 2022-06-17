@@ -215,7 +215,7 @@ const TokenPricePanel = ({
               Market Cap
             </div>
             <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px]">
-              {marketCap || marketCap === 0
+              {marketCap && marketCap > 0
                 ? `\$${getNumberWithCommas(marketCap, 2)}`
                 : 'N/A'}
             </div>
@@ -225,7 +225,7 @@ const TokenPricePanel = ({
               Fully Diluted Market Cap
             </div>
             <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px]">
-              {fullyDilutedMarketCap || fullyDilutedMarketCap === 0
+              {fullyDilutedMarketCap && fullyDilutedMarketCap > 0
                 ? `\$${getNumberWithCommas(fullyDilutedMarketCap, 2)}`
                 : 'N/A'}
             </div>
@@ -235,7 +235,7 @@ const TokenPricePanel = ({
               Volume (24hr)
             </div>
             <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px]">
-              {volume || volume === 0
+              {volume && volume > 0
                 ? `\$${getNumberWithCommas(volume, 2)}`
                 : 'N/A'}
             </div>
@@ -246,31 +246,24 @@ const TokenPricePanel = ({
             </div>
             <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px] flex items-center">
               <span>
-                {circulatingSupply || circulatingSupply === 0
+                {circulatingSupply && circulatingSupply > 0
                   ? getNumberWithCommas(circulatingSupply, 0)
                   : 'N/A'}
               </span>
-              {/* <span className="ml-[4px]">{symbol}</span> */}
-              {circulatingSupplyPercentage ||
-                (circulatingSupplyPercentage === 0 && (
+              {circulatingSupplyPercentage &&
+                circulatingSupplyPercentage > 0 && (
                   <span className="ml-[4px] mt-[1px] font-light text-[#EEEEEE] text-[14px]">
                     ({circulatingSupplyPercentage}%)
                   </span>
-                ))}
+                )}
             </div>
-            {/* <div className="mt-[6px]">
-              <ProgressBar
-                width={221}
-                percentage={circulatingSupplyPercentage}
-              />
-            </div> */}
           </div>
           <div>
             <div className="text-[#AAAAAA] font-light text-[14px]">
               Max Supply
             </div>
             <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px]">
-              {totalSupply || totalSupply === 0
+              {totalSupply && totalSupply > 0
                 ? getNumberWithCommas(totalSupply, 0)
                 : 'N/A'}
             </div>
@@ -285,13 +278,6 @@ const TokenPricePanel = ({
             <ClipboardText copyValue={contractAddress}>
               <div
                 className="mt-[4px] cursor-pointer hover:underline text-[#FC1F8E]"
-                // style={{
-                //   background:
-                //     'linear-gradient(180deg, #F41786 0%, #A713ED 100%)',
-                //   backgroundClip: 'text',
-                //   WebkitBackgroundClip: 'text',
-                //   WebkitTextFillColor: 'transparent',
-                // }}
                 onClick={() => handleGoAddress(contractAddress)}
               >
                 <div className="hidden xl:block">{contractAddress}</div>

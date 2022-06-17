@@ -4,7 +4,7 @@ export function getNumberWithCommas(val: string | number, decimals?: number) {
   }
   return Number(
     Number(val).toFixed(decimals || decimals === 0 ? decimals : 2),
-  ).toLocaleString();
+  ).toLocaleString(undefined, { minimumFractionDigits: decimals });
 }
 
 type UnitTypes = 'usd' | 'bnb' | '%' | 'orbs' | 'sol';

@@ -173,7 +173,7 @@ const FloatingCard = ({
                 )}
                 {marketCap !== null && (
                   <div className="text-[10px] flex items-center">
-                    <div className="text-[#9497AA]">Market Cap:</div>
+                    <div className="text-[#9497AA]">M Cap:</div>
                     <div className="text-[#FC1F8E] ml-[3px]">
                       {getNumberWithCommas(Number(marketCap), 2)}
                     </div>
@@ -181,7 +181,7 @@ const FloatingCard = ({
                 )}
                 {coinSupply !== null && (
                   <div className="text-[10px] flex items-center">
-                    <div className="text-[#9497AA]">Circulating Supply:</div>
+                    <div className="text-[#9497AA]">C Supply:</div>
                     <div className="text-[#FC1F8E] ml-[3px]">
                       {getNumberWithCommas(Number(coinSupply), 0)}
                     </div>
