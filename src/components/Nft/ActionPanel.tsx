@@ -27,16 +27,20 @@ const ActionPanel = ({
         </div>
         <div className="flex items-center mt-[8px]">
           <div className="text-[24px] font-semibold text-[#FFFFFF]">
-            {getNumberWithCommas(info.price, 2) || '-'}
+            {info.price && info.price > 0
+              ? getNumberWithCommas(info.price, 2)
+              : 'N/A'}
           </div>
-          <div className="mt-[2px] ml-[6px]">
-            <img
-              src={'/img/icon_unit_sol.svg'}
-              alt={'sol'}
-              width={16}
-              height={16}
-            />
-          </div>
+          {info.price && info.price > 0 && (
+            <div className="mt-[2px] ml-[6px]">
+              <img
+                src={'/img/icon_unit_sol.svg'}
+                alt={'sol'}
+                width={16}
+                height={16}
+              />
+            </div>
+          )}
           {info?.usdPrice && (
             <div className="ml-[8px] self-center mt-[4px] text-[#9497AA]">
               (${getNumberWithCommas(info?.usdPrice, 2)})

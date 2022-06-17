@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Divider from '../Shared/Divider';
+import { getNumberWithCommas } from '@/utils/formatters';
 
 interface Attr {
   image: string;
@@ -83,7 +84,7 @@ const ListCard = ({
       <div className="w-inherit bg-contain bg-center bg-no-repeat h-auto min-h-[170px]">
         {!imageLoaded && (
           <div className="w-full flex justify-center items-center aspect-square object-contain">
-            <img src="/img/spinner.svg" alt="spinner" />
+            <img src={'/img/spinner.svg'} alt="spinner" />
           </div>
         )}
         <img
@@ -108,15 +109,19 @@ const ListCard = ({
               Price
             </div>
             <div className="font-semibold text-[#FFFFFF] text-[24px] mt-[12px] flex items-center">
-              <div className="mt-[4px] mr-[4px]">
-                <img
-                  src={'/img/icon_unit_sol.svg'}
-                  alt={'sol'}
-                  width={12}
-                  height={12}
-                />
+              {price && price > 0 && (
+                <div className="mt-[4px] mr-[4px]">
+                  <img
+                    src={'/img/icon_unit_sol.svg'}
+                    alt={'sol'}
+                    width={12}
+                    height={12}
+                  />
+                </div>
+              )}
+              <div className="h-[36px]">
+                {price && price > 0 ? getNumberWithCommas(price, 1) : 'N/A'}
               </div>
-              <div className="h-[36px]">{price}</div>
             </div>
           </div>
         ) : (

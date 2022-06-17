@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-
   /*noinspection ALL*/
   @font-face {
     font-family: 'CircularStd-Book';
@@ -34,7 +33,7 @@ body {
   height: 100%;
 }
 
-.wallet-solana>.wallet-adapter-button {
+.wallet-solana > .wallet-adapter-button {
   color: white !important;
   font-family: inherit !important;
   font-size: 16px !important;
@@ -48,7 +47,7 @@ body {
   background-color: #13002b !important;
 }
 
-.wallet-solana>.wallet-adapter-button:hover {
+.wallet-solana > .wallet-adapter-button:hover {
   background-color: transparent !important;
 }
 
@@ -109,11 +108,11 @@ body {
   box-sizing: border-box;
 }
 
-.switch-input:checked+.switch-label {
+.switch-input:checked + .switch-label {
   background: linear-gradient(180deg, #f41786 0%, #a713ed 100%);
 }
 
-.switch-input:checked+.switch-label::after {
+.switch-input:checked + .switch-label::after {
   left: 21px;
 }
 
@@ -182,7 +181,7 @@ body {
   min-height: 56.25vw;
 }
 
-.custom_select>option {
+.custom_select > option {
   color: #ffffff;
 }
 

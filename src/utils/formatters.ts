@@ -8,9 +8,6 @@ export function getNumberWithCommas(val: string | number, decimals?: number) {
     return result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
   return '0';
-  // return parseFloat(String(val))
-  //   .toFixed(decimals || 2)
-  //   .toLocaleString();
 }
 
 type UnitTypes = 'usd' | 'bnb' | '%' | 'obrs' | 'sol';
