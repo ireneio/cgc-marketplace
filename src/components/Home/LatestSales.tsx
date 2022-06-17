@@ -35,7 +35,7 @@ const LatestSales = () => {
       </div>
       <div className="mt-[24px] flex overflow-auto pb-[24px] scrollbar_thin">
         {!loading && !data.length ? (
-          <EmptyListTextDisplay>No Items Available.</EmptyListTextDisplay>
+          <EmptyListTextDisplay>No items available.</EmptyListTextDisplay>
         ) : (
           <></>
         )}
@@ -64,7 +64,7 @@ const LatestSales = () => {
                 </div>
               );
             })}
-        <div ref={ref}></div>
+        <div ref={ref} />
       </div>
     </div>
   );

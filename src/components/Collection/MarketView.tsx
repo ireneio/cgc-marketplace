@@ -43,7 +43,6 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
     loading,
     refresh: refreshCollection,
     setFilter,
-    setLimit,
   } = useGetNftByCollectionIdV2();
   const { data: currentCollection } = useGetCollectionsBySlugV2();
 
@@ -366,7 +365,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
                 </div>
               );
             })}
-            <div ref={ref}></div>
+            <div ref={ref} />
           </div>
         )}
         {currentView === 'Row' && !loading && (
@@ -405,11 +404,11 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
                 </div>
               );
             })}
-            <div ref={ref}></div>
+            <div ref={ref} />
           </div>
         )}
         {!_items.length && !loading && (
-          <EmptyListTextDisplay>No Items Available.</EmptyListTextDisplay>
+          <EmptyListTextDisplay>No items available.</EmptyListTextDisplay>
         )}
       </div>
     </div>
