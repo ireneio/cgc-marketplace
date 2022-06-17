@@ -5,12 +5,14 @@ import LatestSales from '@/components/Home/LatestSales';
 import LatestTransactions from '@/components/Home/LatestTransactions';
 import DefaultLayout from '@/components/Layout/DefaultLayout';
 import { useGetCollectionsV2 } from '@/hooks/services_collections';
+import { useGetNftTransactionsV2 } from '@/hooks/services_nft';
 import { isMobile, useWindowWidth } from '@/hooks/window';
 import { useMemo } from 'react';
 
 const Index = () => {
-  const { data } = useGetCollectionsV2();
   const windowWidth = useWindowWidth();
+  const { data } = useGetCollectionsV2();
+  const { data: latestSales } = useGetNftTransactionsV2();
 
   const carouselItems = useMemo(() => {
     return data.slice(0, 5).map((collection: any) => {
@@ -41,7 +43,10 @@ const Index = () => {
       <div className="mt-[32px]">
         <LatestSales />
       </div>
-      <div className="mt-[32px] mb-[48px]">
+      <div
+        className="mt-[37px] mb-[48px]"
+        style={{ marginTop: latestSales.length > 10 ? 37 : 32 }}
+      >
         <LatestTransactions />
       </div>
     </DefaultLayout>

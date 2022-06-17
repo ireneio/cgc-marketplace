@@ -53,7 +53,7 @@ const LatestSales = () => {
                 </div>
               );
             })
-          : [1, 2, 3, 4, 5].map((val, idx) => {
+          : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((val, idx) => {
               return (
                 <div key={idx} className="mr-[28px]">
                   <SalesCardLoading />
