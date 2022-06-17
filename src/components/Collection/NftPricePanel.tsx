@@ -28,7 +28,6 @@ const NftPricePanel = ({
   totalVolume,
   totalSupply,
   owners,
-  count,
   volume,
   volume7Days,
   volume30Days,
@@ -103,7 +102,7 @@ const NftPricePanel = ({
         <div className="mb-[8px] text-[#FFFFFF] font-bold text-[14px]">
           {name} NFT
         </div>
-        <div className="mb-[24px] grid gap-[24px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 2xl:grid-cols-5">
+        <div className="grid gap-[24px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 2xl:grid-cols-5">
           <div>
             <div className="text-[#AAAAAA] font-light text-[14px]">Volume</div>
             <div className="mt-[4px] text-[#FFFFFF] font-normal text-[18px]">
