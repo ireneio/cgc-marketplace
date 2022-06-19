@@ -101,7 +101,7 @@ export const useGetNftByHashV2 = () => {
       if (Object.keys(_data).length) {
         const _transformed = [_data].map((item: any) => {
           const manifest = item?.splNftInfo?.data?.manifest;
-          const isListed = item?.externalNftListings?.length;
+          const isListed = item?.external_marketplace_listing?.length;
           return {
             image: manifest?.image || '',
             brand:
@@ -110,8 +110,12 @@ export const useGetNftByHashV2 = () => {
               '',
             name: manifest?.name || '',
             description: manifest?.description,
-            price: isListed ? item?.externalNftListings[0].solPrice : '',
-            usdPrice: isListed ? item?.externalNftListings[0].usdPrice : '',
+            price: isListed
+              ? item?.external_marketplace_listing[0].solPrice
+              : '',
+            usdPrice: isListed
+              ? item?.external_marketplace_listing[0].usdPrice
+              : '',
             tokenAddress: item?.tokenAddress || '',
             walletAddress: item?.splNftInfo?.walletAddress || '',
             is_listed: isListed,

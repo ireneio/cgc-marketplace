@@ -69,10 +69,10 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
   }, [data, page, currentTab]);
 
   useEffect(() => {
-    if (currentTab === 'All Items' && _items.length === 0) {
+    if (inView && _items.length === data.length && currentTab === 'All Items') {
       setFilter('');
     }
-  }, [_items, currentTab]);
+  }, [inView, _items]);
 
   useEffect(() => {
     if (inView) {
