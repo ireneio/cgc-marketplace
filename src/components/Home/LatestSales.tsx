@@ -5,6 +5,7 @@ import { useGetNftTransactionsV2 } from '@/hooks/services_nft';
 import { useInView } from 'react-intersection-observer';
 import SalesCardLoading from './SalesCardLoading';
 import EmptyListTextDisplay from '../Shared/EmptyListTextDisplay';
+import dayjs from 'dayjs';
 
 const LIMIT = 10;
 
@@ -17,7 +18,9 @@ const LatestSales = () => {
     return data
       .filter((nft: any) => nft?.nftEventType === 'buyNow')
       .sort((a, b) => {
-        return b.blockTime - a.blockTime;
+        return (
+          dayjs(b.block_time * 1000).unix() - dayjs(a.block_time * 1000).unix()
+        );
       })
       .slice(0, page + LIMIT);
   }, [data, inView, page]);
