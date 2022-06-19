@@ -163,7 +163,7 @@ export const useGetNftTransactionsByHashV2 = () => {
           item?.recipientAddress ? 'Transfer' : 'Listing or Cancel',
           item?.senderAddress || '',
           item?.recipientAddress || '',
-          item?.createdAt || '',
+          item?.block_time || '',
           item?.amountUsd || '',
         ];
       });

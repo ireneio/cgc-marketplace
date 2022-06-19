@@ -109,7 +109,7 @@ const HistoryTable = ({ rows, headers }: Props) => {
                 background: rowIndex % 2 === 0 ? '#290030' : 'transparent',
               }}
             >
-              {dayjs(col).fromNow()}
+              {dayjs(Number(col) * 1000).fromNow()}
             </div>
           );
         } else if (colIndex === 4) {
