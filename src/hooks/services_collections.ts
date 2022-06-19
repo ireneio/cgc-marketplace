@@ -307,9 +307,10 @@ export const useGetNftByCollectionIdV2 = () => {
           ? item?.external_marketplace_listing[0]?.marketplace?.logoSrcUrl
           : '';
         return {
+          id: item.id,
           image: manifest?.image,
           brand: manifest?.collection?.name,
-          name: manifest?.name,
+          name: manifest?.name || '',
           description: manifest?.description,
           price,
           usdPrice,

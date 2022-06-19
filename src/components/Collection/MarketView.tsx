@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/store';
-import { getNumberWithCommas } from '@/utils/formatHelper';
+import { getNumberWithCommas, sortAlphabetical } from '@/utils/formatHelper';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import DropdownMenu from '../Shared/DropdownMenu';
@@ -50,6 +50,14 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
     let arr = [...data];
     if (currentTab === 'Listed Items') {
       arr = arr.filter((item) => item?.external_marketplace_listing?.length);
+    } else if (currentTab === 'All Items') {
+      arr = arr.sort((a, b) => {
+        if (!isNaN(Number(a.name))) {
+          return Number(b.name) - Number(a.name);
+        } else {
+          return sortAlphabetical(b.name, a.name);
+        }
+      });
     }
     return arr.slice(0, page + 19).map((item: any) => {
       return {
@@ -58,6 +66,12 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
       };
     });
   }, [data, page, currentTab]);
+
+  useEffect(() => {
+    if (currentTab === 'All Items' && _items.length === 0) {
+      setFilter('');
+    }
+  }, [_items, currentTab]);
 
   useEffect(() => {
     if (inView) {
@@ -128,7 +142,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
     if (router.query.tab && router.query.tab === 'listed_items') {
       setFilter('external_listing');
     } else if (router.query.tab && router.query.tab === 'all_items') {
-      setFilter('');
+      setFilter('external_listing');
     }
   }, [router.query.tab]);
 
