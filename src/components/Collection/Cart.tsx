@@ -18,8 +18,11 @@ const Cart = ({ onClose }: { onClose?: () => void }) => {
   }, [cartItems]);
 
   const totalPriceToUSD = useMemo(() => {
-    return totalPrice;
-  }, [totalPrice]);
+    return cartItems.reduce((acc: number, curr: CartAttr) => {
+      acc += Number(curr.priceUsd);
+      return acc;
+    }, 0);
+  }, [cartItems]);
 
   const handleRemoveItem = (tokenAddress: string) => {
     dispatch(removeCartItem(String(tokenAddress)));
@@ -108,17 +111,22 @@ const Cart = ({ onClose }: { onClose?: () => void }) => {
                           {item.brand.toUpperCase()}
                         </div>
                       </div>
-                      <div className="ml-auto flex items-center">
-                        <div className="text-[#FFFFFF] text-[14px] font-semibold">
-                          {item.price}
+                      <div className="ml-auto">
+                        <div className="flex items-center justify-end">
+                          <div className="text-[#FFFFFF] text-[14px] font-semibold">
+                            {item.price}
+                          </div>
+                          <div className="ml-[4px]">
+                            <img
+                              src="/img/icon_unit_sol.svg"
+                              alt="sol"
+                              width={12}
+                              height={12}
+                            />
+                          </div>
                         </div>
-                        <div className="mt-[1px] ml-[4px]">
-                          <img
-                            src="/img/icon_unit_sol.svg"
-                            alt="sol"
-                            width={12}
-                            height={12}
-                          />
+                        <div className="text-[14px] text-[#9497AA] text-right mt-[-4px]">
+                          (${getNumberWithCommas(item.priceUsd, 2)})
                         </div>
                       </div>
                     </div>
@@ -132,7 +140,7 @@ const Cart = ({ onClose }: { onClose?: () => void }) => {
                 You Pay
               </div>
               <div>
-                <div className="flex items-center">
+                <div className="flex items-center justify-end">
                   <div className="text-[#FFFFFF] text-[24px] font-semibold">
                     {getNumberWithCommas(totalPrice)}
                   </div>
@@ -146,7 +154,7 @@ const Cart = ({ onClose }: { onClose?: () => void }) => {
                   </div>
                 </div>
                 <div className="text-[14px] text-[#9497AA] text-right mt-[-4px]">
-                  (${getNumberWithCommas(totalPriceToUSD)})
+                  (${getNumberWithCommas(totalPriceToUSD, 2)})
                 </div>
               </div>
             </div>

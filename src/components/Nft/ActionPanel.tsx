@@ -66,6 +66,7 @@ const ActionPanel = ({
                 handleAddToCart({
                   ...info,
                   tokenAddress: info.mintAddress,
+                  priceUsd: info.usdPrice,
                 })
               }
               style={{ paddingLeft: 12, paddingRight: 12 }}

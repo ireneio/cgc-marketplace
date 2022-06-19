@@ -352,7 +352,8 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
                     }
                     onLeftFn={() => handleMoreInfo(item.tokenAddress)}
                     onRightFn={(params) => {
-                      item.is_listed && handleAddToCart(params);
+                      item.is_listed &&
+                        handleAddToCart({ ...params, priceUsd: item.usdPrice });
                       !item.is_listed && handleMoreInfo(item.tokenAddress);
                     }}
                     onCardClick={() => handleMoreInfo(item.tokenAddress)}
@@ -393,7 +394,9 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
                         : 'Not Listed'
                     }
                     onLeftFn={() => handleMoreInfo(item.tokenAddress)}
-                    onRightFn={(params) => handleAddToCart(params)}
+                    onRightFn={(params) =>
+                      handleAddToCart({ ...params, priceUsd: item.usdPrice })
+                    }
                     onCardClick={() => handleMoreInfo(item.tokenAddress)}
                     tokenAddress={item.tokenAddress}
                     type={'row'}

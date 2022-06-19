@@ -6,6 +6,7 @@ export interface CartAttr {
   name: string;
   brand: string;
   price: string | number;
+  priceUsd: string | number;
   id: string | number;
   tokenAddress: string;
 }

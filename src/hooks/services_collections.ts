@@ -297,6 +297,11 @@ export const useGetNftByCollectionIdV2 = () => {
           (item?.external_marketplace_listing &&
             item?.external_marketplace_listing.length &&
             item?.external_marketplace_listing[0].solPrice);
+        const usdPrice =
+          item?.price ||
+          (item?.external_marketplace_listing &&
+            item?.external_marketplace_listing.length &&
+            item?.external_marketplace_listing[0].usdPrice);
         const external_marketplace_listing_logo = item
           ?.external_marketplace_listing.length
           ? item?.external_marketplace_listing[0]?.marketplace?.logoSrcUrl
@@ -307,6 +312,7 @@ export const useGetNftByCollectionIdV2 = () => {
           name: manifest?.name,
           description: manifest?.description,
           price,
+          usdPrice,
           tokenAddress: item?.tokenAddress,
           is_listed: item?.external_marketplace_listing?.length,
           external_marketplace_listing: item?.external_marketplace_listing,
