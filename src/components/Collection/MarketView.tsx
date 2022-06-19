@@ -48,6 +48,7 @@ const MarketView = ({ currentTab }: { currentTab: CollectionTabSelection }) => {
 
   const _items = useMemo(() => {
     let arr = [...data];
+    arr = arr.filter((item) => item.image);
     if (currentTab === 'Listed Items') {
       arr = arr.filter((item) => item?.external_marketplace_listing?.length);
     } else if (currentTab === 'All Items') {
