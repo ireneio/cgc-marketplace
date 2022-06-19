@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Divider from '../Shared/Divider';
-import { getNumberWithCommas } from '@/utils/formatters';
+import { getNumberWithCommas } from '@/utils/formatHelper';
 
 interface Attr {
   image: string;
